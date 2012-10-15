@@ -55,6 +55,9 @@ Abstract:
 
  --*/
 
+#ifndef __GUID_H__
+#define __GUID_H__
+
 #define EFI_TEST_ISCSIINITIATORNAMEBBTESTFUNCTION_ASSERTION_001_GUID \
   { 0xed92f3eb, 0xdda4, 0x4c65, 0xb3, 0x9f, 0x6c, 0x90, 0xfb, 0x2e, 0x77, 0xf9}
 
@@ -95,3 +98,4 @@ extern EFI_GUID gIScsiInitiatorNameBBTestConformanceAssertionGuid005;
 
 extern EFI_GUID gIScsiInitiatorNameBBTestConformanceAssertionGuid006;
 
+#endif /* __GUID_H__ */
