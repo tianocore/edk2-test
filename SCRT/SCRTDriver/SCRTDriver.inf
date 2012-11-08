@@ -88,6 +88,12 @@ COMPONENT_TYPE       = RT_DRIVER
   Arm/Dump.c
   Arm/Debug.c
 
+[sources.Aarch64]
+  Aarch64/Io.c
+  Aarch64/Io.h
+  Aarch64/Dump.c
+  Aarch64/Debug.c
+
 [sources.common]
   Guid.h
   Guid.c
@@ -111,9 +117,8 @@ COMPONENT_TYPE       = RT_DRIVER
   EfiCommonLib
   EfiGuidLib
 
-[libraries.ARM]
+[libraries.ARM, libraries.Aarch64]
   CompilerIntrinsicsLib
-
 
 [nmake.common]
   IMAGE_ENTRY_POINT=InitializeSCRTDriver
