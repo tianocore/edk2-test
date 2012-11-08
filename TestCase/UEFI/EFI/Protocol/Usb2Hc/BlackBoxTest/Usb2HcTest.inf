@@ -86,6 +86,9 @@ COMPONENT_TYPE       = BS_DRIVER
 [sources.ARM]
   ipf/TimerInterrupt.c
 
+[sources.Aarch64]
+  ipf/TimerInterrupt.c
+
 [includes.common]
   .
   $(EDK_SOURCE)/Foundation
