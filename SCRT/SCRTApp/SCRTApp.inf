@@ -61,7 +61,12 @@ COMPONENT_TYPE       = APPLICATION
   Arm/VirtualMemory.c
   Arm/GoVirtual.asm | RVCT
   Arm/GoVirtual.S | GCC
-  
+
+[sources.Aarch64]
+  Aarch64/VirtualMemory.c
+  Aarch64/GoVirtual.asm | RVCT
+  Aarch64/GoVirtual.S | GCC
+
 [sources.ia32]
   ia32/VirtualMemory.c
   ia32/GoVirtual.asm
@@ -86,7 +91,7 @@ COMPONENT_TYPE       = APPLICATION
   Debug.h
   ParseResult.c
 
-[sources.ARM]
+[sources.ARM, sources.Aarch64]
   Print.c
   String.c
 
@@ -120,7 +125,7 @@ COMPONENT_TYPE       = APPLICATION
   EfiDriverLib
   PrintLib
 
-[libraries.ARM]
+[libraries.ARM, libraries.Aarch64]
   CompilerIntrinsicsLib
 
 [nmake.common]
