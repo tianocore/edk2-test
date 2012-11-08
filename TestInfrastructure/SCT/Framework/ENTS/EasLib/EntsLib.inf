@@ -95,7 +95,11 @@ COMPONENT_TYPE  = LIBRARY
 [sources.Arm]
   Arm/EfiLibPlat.h
   Arm/InitPlat.c
-  
+
+[sources.Aarch64]
+  Aarch64/EfiLibPlat.h
+  Aarch64/InitPlat.c
+
 [includes.common]
   .
   $(EDK_SOURCE)/Foundation
