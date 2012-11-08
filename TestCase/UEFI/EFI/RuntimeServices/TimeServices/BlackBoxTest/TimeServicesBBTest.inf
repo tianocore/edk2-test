@@ -89,7 +89,7 @@ COMPONENT_TYPE       = BS_DRIVER
   EfiTestUtilityLib
   EdkFrameworkGuidLib
 
-[libraries.ARM]
+[libraries.ARM, libraries.Aarch64]
   EfiCommonLib
 
 [nmake.common]
