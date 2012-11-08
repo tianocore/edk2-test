@@ -111,6 +111,9 @@ COMPONENT_TYPE       = LIBRARY
 [includes.ARM]
   $(EDK_SOURCE)/Foundation/Library/Dxe/Include
 
+[includes.AARCH64]
+  $(EDK_SOURCE)/Foundation/Library/Dxe/Include
+
 [includes.IPF]
   $(EDK_SOURCE)/Foundation/Library/Dxe/Include
 
