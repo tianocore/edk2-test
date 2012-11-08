@@ -81,7 +81,7 @@ COMPONENT_TYPE       = APPLICATION
 [libraries.common]
   EfiShellLib
 
-[libraries.ARM]
+[libraries.ARM, libraries.AARCH64]
   CompilerIntrinsicsLib
 
 [nmake.common]
