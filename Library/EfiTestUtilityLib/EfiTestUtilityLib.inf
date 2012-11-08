@@ -84,6 +84,10 @@ COMPONENT_TYPE  = LIBRARY
   Arm/efilibplat.h
   Arm/initplat.c
 
+[sources.Aarch64]
+  Aarch64/efilibplat.h
+  Aarch64/initplat.c
+
 [sources.ia32]
   ia32/EfiLibPlat.h
   ia32/initplat.c
