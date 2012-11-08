@@ -1,45 +1,45 @@
 #!/bin/bash
-# The material contained herein is not a license, either      
-# expressly or impliedly, to any intellectual property owned  
-# or controlled by any of the authors or developers of this   
-# material or to any contribution thereto. The material       
+# The material contained herein is not a license, either
+# expressly or impliedly, to any intellectual property owned
+# or controlled by any of the authors or developers of this
+# material or to any contribution thereto. The material
 # contained herein is provided on an "AS IS" basis and, to the
 # maximum extent permitted by applicable law, this information
-# is provided AS IS AND WITH ALL FAULTS, and the authors and  
-# developers of this material hereby disclaim all other       
-# warranties and conditions, either express, implied or       
-# statutory, including, but not limited to, any (if any)      
+# is provided AS IS AND WITH ALL FAULTS, and the authors and
+# developers of this material hereby disclaim all other
+# warranties and conditions, either express, implied or
+# statutory, including, but not limited to, any (if any)
 # implied warranties, duties or conditions of merchantability,
-# of fitness for a particular purpose, of accuracy or         
-# completeness of responses, of results, of workmanlike       
-# effort, of lack of viruses and of lack of negligence, all   
-# with regard to this material and any contribution thereto.  
+# of fitness for a particular purpose, of accuracy or
+# completeness of responses, of results, of workmanlike
+# effort, of lack of viruses and of lack of negligence, all
+# with regard to this material and any contribution thereto.
 # Designers must not rely on the absence or characteristics of
-# any features or instructions marked "reserved" or           
-# "undefined." The Unified EFI Forum, Inc. reserves any       
+# any features or instructions marked "reserved" or
+# "undefined." The Unified EFI Forum, Inc. reserves any
 # features or instructions so marked for future definition and
-# shall have no responsibility whatsoever for conflicts or    
+# shall have no responsibility whatsoever for conflicts or
 # incompatibilities arising from future changes to them. ALSO,
 # THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,
-# QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR          
-# NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY      
-# CONTRIBUTION THERETO.                                       
-#                                                             
+# QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR
+# NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY
+# CONTRIBUTION THERETO.
+#
 # IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR
-# ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR   
-# THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST    
-# PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,      
-# CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER 
+# ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR
+# THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST
+# PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,
+# CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER
 # UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY
-# WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS     
-# DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
-# THE POSSIBILITY OF SUCH DAMAGES.                            
-#                                                             
+# WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS
+# DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
+# THE POSSIBILITY OF SUCH DAMAGES.
+#
 # Copyright 2006 - 2012 Unified EFI, Inc. All
-# Rights Reserved, subject to all existing rights in all      
-# matters included within this Test Suite, to which United    
-# EFI, Inc. makes no claim of right.                          
-#                                                             
+# Rights Reserved, subject to all existing rights in all
+# matters included within this Test Suite, to which United
+# EFI, Inc. makes no claim of right.
+#
 # Copyright (c) 2011, 2012 ARM Ltd. All rights reserved.<BR>
 #
 
@@ -77,7 +77,9 @@ PrintUsage() {
 	#Print Help
 	#
 	echo "Usage:"
-	echo "    SctPkg/BuildSct.sh <toolchain name (RVCT or ARMGCC or GCC)>"
+	echo "    $0 <architecture (ARM OR AARCH64)> \
+<toolchain name (RVCT or ARMGCC or GCC)> \
+[build type (RELEASE OR DEBUG, DEFAULT: DEBUG)]"
 }
 
 #Iterate through the SCT package dependency list and check if they exist in the current directory
@@ -86,7 +88,7 @@ do
     if [ ! -d `pwd`/$name]
     then
     echo "Couldn't build SCT:"
-    echo The director `pwd`/$name does not exist.
+    echo The directory `pwd`/$name does not exist.
     exit -1
     fi
 done
@@ -96,10 +98,10 @@ export EDK_SOURCE=`pwd`/EdkCompatibilityPkg
 
 # Setup workspace if it is not set
 #
-if [ -z "$WORKSPACE" ]
+if [ -z "${WORKSPACE:-}" ]
 then
   echo Initializing workspace
-# Uses an external BaseTools project 
+# Uses an external BaseTools project
 # Uses the BaseTools in edk2
   export EDK_TOOLS_PATH=`pwd`/BaseTools
   source ./edksetup.sh $EDK_TOOLS_PATH
@@ -115,14 +117,22 @@ echo Could not Run the edksetup.sh script
         exit -1
 fi
 
+if [ "${1}" != "ARM" -a "${1}" != "AARCH64" ]; then
+    echo "Couldn't build SCT:"
+    echo "Unknown target architecture $1."
+    PrintUsage
+    exit -1
+fi
+SCT_TARGET_ARCH=${1}
+
 #
 # Pick a default tool type for a given OS
 #
 case `uname` in
-   Linux*)  
-   	case ${1} in 
+   Linux*)
+	case ${2} in
 		RVCT | rvct)
-			TARGET_TOOLS=RVCTLINUX 
+			TARGET_TOOLS=RVCTLINUX
 		;;
 
 		ARMGCC | armgcc)
@@ -130,18 +140,22 @@ case `uname` in
 		;;
 		
 		GCC | gcc)
-		gcc_version=$(${GCC47_ARM_PREFIX}gcc -v 2>&1 | tail -1 | awk '{print $3}')
-		case $gcc_version in
-			4.6.*)
-				TARGET_TOOLS=GCC46
-				;;
-			4.[789].*)
-				TARGET_TOOLS=GCC47
-				;;
-			*)
-				TARGET_TOOLS=GCC47
-				;;
-		esac
+			if [ "$SCT_TARGET_ARCH" == "ARM" ]; then
+				gcc_version=$(${GCC47_ARM_PREFIX}gcc -v 2>&1 | tail -1 | awk '{print $3}')
+			else
+				gcc_version=$(${GCC47_AARCH64_PREFIX}gcc -v 2>&1 | tail -1 | awk '{print $3}')
+			fi
+			case $gcc_version in
+				4.6.*)
+					TARGET_TOOLS=GCC46
+					;;
+				4.[789].*)
+					TARGET_TOOLS=GCC47
+					;;
+				*)
+					TARGET_TOOLS=GCC47
+					;;
+			esac
 		;;
 
 		*)
@@ -150,23 +164,23 @@ case `uname` in
 			exit -1
 		;;
 	esac
-   ;;	
+   ;;
    CYGWIN*)
-   	case ${1} in 
+	case ${2} in
 		RVCT | rvct)
-			TARGET_TOOLS=RVCT31CYGWIN  
+			TARGET_TOOLS=RVCT31CYGWIN
 		;;
 
 		ARMGCC | armgcc)
 			TARGET_TOOLS=ARMGCCCYGWIN
 		;;
-		
+
 		*)
 			echo "Couldn't build SCT:"
 			PrintUsage
 			exit -1
-		;;		
-	esac	
+		;;
+	esac
    ;;
    *)
      echo "Couldn't build SCT:"
@@ -177,8 +191,8 @@ case `uname` in
 esac
 
 SCT_BUILD=DEBUG
-if [ "$2" = "RELEASE" -o "$2" = "DEBUG" ]; then
-  SCT_BUILD=$2
+if [ "$3" = "RELEASE" -o "$3" = "DEBUG" ]; then
+  SCT_BUILD=$3
   shift
 fi
 
@@ -209,24 +223,57 @@ case `uname -m` in
 	x86_32)
 		cp SctPkg/Tools/Bin/GenBin_lin_32 $DEST_DIR/GenBin
 	;;
-	
+
 	*)
 		cp SctPkg/Tools/Bin/GenBin_lin_32 $DEST_DIR/GenBin
 	;;
 
 esac
 
-# Copy shell sources to EdkCompatibility Pkg
-if [ ! -d $EDK_SOURCE/Other/Maintained/Application/Shell ]
-then
-	echo Checking out EFI shell source...
-	svn co --non-interactive --trust-server-cert https://gcc-shell.svn.sourceforge.net/svnroot/gcc-shell/trunk/GccShellPkg  $EDK_SOURCE/Other/Maintained/Application/Shell
+# SCT needs the shell sources.
+# First we'll try to use EdkShell. We need:
+#   - EdkShell sources. They will be checked out from the official svn repo
+#     if not found locally.
+#   - The patch on EdkShell sources adding architectural support.
+# If the patch is not present, we'll fallback to GccShell.
+if [ -f $WORKSPACE/EdkShellPkg/ShellR64.patch ]; then
+  EDKSHELL_REVISION=-r64
+  EDKSHELL_PATCH=$WORKSPACE/EdkShellPkg/ShellR64.patch
+elif [ -f $WORKSPACE/EdkShellPkg/ShellR61.patch ]; then
+  EDKSHELL_REVISION=-r61
+  EDKSHELL_PATCH=$WORKSPACE/EdkShellPkg/ShellR61.patch
+else
+  echo "Couldn't find a patch for EdkShell, falling back to GccShellPkg"
+fi
+
+if [ ! -d $EDK_SOURCE/Other/Maintained/Application/Shell ]; then
+    if [ -n "${EDKSHELL_PATCH:-}" -a -f $EDKSHELL_PATCH ]; then
+      # Checkout EdkShell sources to EdkCompatibility Pkg
+      echo "Checking out EdkShell sources..."
+      svn co --non-interactive --trust-server-cert https://svn.code.sf.net/p/efi-shell/code/trunk/Shell \
+        $EDK_SOURCE/Other/Maintained/Application/Shell $EDKSHELL_REVISION
+
+      echo "Patching EdkShell sources to add support for $SCT_TARGET_ARCH platform..."
+      echo "Using patch file $EDKSHELL_PATCH"
+      cd $EDK_SOURCE/Other/Maintained/Application/Shell
+      patch -N -p0 < $EDKSHELL_PATCH
+      if [ $? -ne 0 ]; then
+        echo "Couldn't apply patch."
+        exit 1
+      fi
+      cd -
+    else  # We do not have the patch for EdkShell
+      # Checkout GccShell sources to EdkCompatibility Pkg
+	echo "Checking out EFI shell source..."
+	svn co --non-interactive --trust-server-cert https://gcc-shell.svn.sourceforge.net/svnroot/gcc-shell/trunk/GccShellPkg \
+	    $EDK_SOURCE/Other/Maintained/Application/Shell
+    fi
 fi
 
 #
 # Build the SCT package
 #
-build -p SctPkg/UEFI/UEFI_SCT.dsc -a ARM -t $TARGET_TOOLS -b $SCT_BUILD $2 $3 $4 $5 $6 $7 $8
+build -p SctPkg/UEFI/UEFI_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
 
 #Check if there is any error
 status=$?
@@ -256,7 +303,7 @@ cd Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}
 #
 #Run a script to generate Sct binary for ARM
 #
-../../../SctPkg/CommonGenFramework.sh uefi_sct ARM InstallSctArm.efi
+../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH InstallSctArm.efi
 
 status=$?
 if test $status -ne 0
