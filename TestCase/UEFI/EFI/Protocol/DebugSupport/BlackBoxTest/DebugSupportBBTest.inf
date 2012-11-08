@@ -92,12 +92,18 @@ COMPONENT_TYPE       = BS_DRIVER
   Arm/DebugSupportBBTestExceptionCallbackFunction.c
   Arm/DebugSupportBBTestCacheFunction.c
 
+[sources.Aarch64]
+  Aarch64/PlatformIsa.c
+  Aarch64/DebugSupportBBTestExceptionCallbackFunction.c
+  Aarch64/DebugSupportBBTestCacheFunction.c
+
 [includes.common]
   .
   $(EDK_SOURCE)/Foundation
   $(EDK_SOURCE)/Foundation/Efi
   $(EDK_SOURCE)/Foundation/Include
   $(EDK_SOURCE)/Foundation/Efi/Include
+  $(EDK_SOURCE)/Foundation/Efi/Protocol/DebugSupport
   $(EDK_SOURCE)/Foundation/Framework/Include
   $(EDK_SOURCE)/Foundation/Include/IndustryStandard
   $(EDK_SOURCE)/Foundation/Library/Dxe/Include
