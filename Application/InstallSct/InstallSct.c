@@ -423,7 +423,7 @@ BackupTests (
     Status = DirFileExist (TmpName, &Exist);
     if (EFI_ERROR (Status)) {
       FreePool (TmpName);
-      return Status;
+      continue;
     }
 
     if (!Exist) {
@@ -570,7 +570,7 @@ BackupStartups (
     Status = DirFileExist (TmpName, &Exist);
     if (EFI_ERROR (Status)) {
       FreePool (TmpName);
-      return Status;
+      continue;
     }
 
     if (!Exist) {
