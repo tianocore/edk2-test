@@ -77,7 +77,7 @@ PrintUsage() {
 	#Print Help
 	#
 	echo "Usage:"
-	echo "    SctPkg/BuildSct.sh <toolchain name (RVCT or ARMGCC)>"
+	echo "    SctPkg/BuildSct.sh <toolchain name (RVCT or ARMGCC or GCC)>"
 }
 
 #Iterate through the SCT package dependency list and check if they exist in the current directory
@@ -129,6 +129,21 @@ case `uname` in
 			TARGET_TOOLS=ARMGCC
 		;;
 		
+		GCC | gcc)
+		gcc_version=$(${GCC47_ARM_PREFIX}gcc -v 2>&1 | tail -1 | awk '{print $3}')
+		case $gcc_version in
+			4.6.*)
+				TARGET_TOOLS=GCC46
+				;;
+			4.[789].*)
+				TARGET_TOOLS=GCC47
+				;;
+			*)
+				TARGET_TOOLS=GCC47
+				;;
+		esac
+		;;
+
 		*)
 			echo "Couldn't build SCT:"
 			PrintUsage
