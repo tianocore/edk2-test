@@ -987,8 +987,10 @@ BBTestMediaInfoCheckAutoTest (
   //
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
   EFI_STATUS                           Status;
+#ifndef EFIARM
   EFI_BLOCK_IO_PROTOCOL                *BlockIo;
   EFI_TEST_ASSERTION                   AssertionType;
+#endif
 
   //
   // Get the Standard Library Interface

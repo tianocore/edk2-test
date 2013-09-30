@@ -657,7 +657,7 @@ Returns:
   // Send assertion to remotion computer if the network 
   // record assertion utility installed.
   //
-  NetRecordAssertion(Type, EventId, Buffer);
+  NetRecordAssertion((NET_EFI_TEST_ASSERTION) Type, EventId, Buffer);
   
   //
   // write key file detail line

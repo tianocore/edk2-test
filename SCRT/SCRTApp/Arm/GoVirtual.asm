@@ -66,7 +66,5 @@ JumpToTestFunc
 
 	//Jump to Virtual function
 	blx r2
-
-
-
-
+  
+  END

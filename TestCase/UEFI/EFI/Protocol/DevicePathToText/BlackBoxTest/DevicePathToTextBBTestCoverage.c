@@ -513,7 +513,6 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   ((ACPI_EXTENDED_HID_DEVICE_PATH_WITH_STR *)pDeviceNode1)->HidUidCidStr[0] = '\0';
   ((ACPI_EXTENDED_HID_DEVICE_PATH_WITH_STR *)pDeviceNode1)->HidUidCidStr[1] = '2';
   ((ACPI_EXTENDED_HID_DEVICE_PATH_WITH_STR *)pDeviceNode1)->HidUidCidStr[2] = '\0';
-  ((ACPI_EXTENDED_HID_DEVICE_PATH_WITH_STR *)pDeviceNode1)->HidUidCidStr[3] = '\0';
 
   Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
   pDeviceNode2 = SctConvertTextToDeviceNode(Text);

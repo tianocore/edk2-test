@@ -141,7 +141,7 @@ PlatformOverrideDriver1DriverLoaded (
   IN EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN EFI_HANDLE                             ControllerHandle,
   IN EFI_DEVICE_PATH_PROTOCOL               *DriverImagePath,
-  IN EFI_HANDLE                             *DriverImageHandle
+  IN EFI_HANDLE                             DriverImageHandle
   );
 
 EFI_STATUS
@@ -509,7 +509,7 @@ PlatformOverrideDriver1DriverLoaded (
   IN EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN EFI_HANDLE                             ControllerHandle,
   IN EFI_DEVICE_PATH_PROTOCOL               *DriverImagePath,
-  IN EFI_HANDLE                             *DriverImageHandle
+  IN EFI_HANDLE                             DriverImageHandle
   )
 {
   EFI_STATUS                              Status;
@@ -541,7 +541,7 @@ PlatformOverrideDriver1DriverLoaded (
     return EFI_NOT_FOUND;
   }
 
-  PrivateData->DriverImageHandle[Index] = *DriverImageHandle;
+  PrivateData->DriverImageHandle[Index] = DriverImageHandle;
 
   return EFI_SUCCESS;
 }
