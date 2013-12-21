@@ -184,10 +184,8 @@ SctPkg/Library/NetLib/Network/NetLib.inf
   EdkCompatibilityPkg/Foundation/Library/CompilerStub/CompilerStubLib.inf
   EdkCompatibilityPkg/Foundation/Library/EdkIIGlueLib/Library/BaseLib/BaseLib.inf
 
-[Libraries.Arm]
-  ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[Libraries.Aarch64]
+[Libraries.Arm, Libraries.Aarch64]
+  EdkCompatibilityPkg/Foundation/Library/CompilerStub/CompilerStubLib.inf
   ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 ###############################################################################
