@@ -91,9 +91,6 @@ COMPONENT_TYPE       = BS_DRIVER
   EfiTestLib
   EfiTestUtilityLib
   
-[libraries.arm, libraries.aarch64]
-  EfiTestUtilityDupLib
-
 [nmake.common]
   IMAGE_ENTRY_POINT = InitializeEfiCompliantBbTest
 
