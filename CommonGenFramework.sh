@@ -208,7 +208,7 @@ then
 	cp $ProcessorType/UsbIoTest.efi                            $Framework/Test/ > NUL
 	cp $ProcessorType/Usb2HcTest.efi                           $Framework/Test/ > NUL
 	cp $ProcessorType/AuthenticationBBTest.efi                 $Framework/Test/ > NUL
-	cp $ProcessorType/HashBBTest.efi                           $Framework/Test/ > NUL
+#	cp $ProcessorType/HashBBTest.efi                           $Framework/Test/ > NUL
 	cp $ProcessorType/TapeBBTest.efi                           $Framework/Test/ > NUL
 	cp $ProcessorType/AcpiTableProtocolBBTest.efi              $Framework/Test/ > NUL
 	cp $ProcessorType/SimpleTextInputExBBTest.efi              $Framework/Test/ > NUL
