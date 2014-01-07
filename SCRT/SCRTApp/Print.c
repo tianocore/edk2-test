@@ -57,6 +57,15 @@ Module Name:
 #include "Print.h"
 
 UINTN
+EFIAPI
+VSPrint (
+  OUT CHAR16        *StartOfBuffer,
+  IN  UINTN         StrLen,
+  IN  CONST CHAR16  *Format,
+  IN  VA_LIST       Marker
+  );
+
+UINTN
 ASPrint (
   OUT CHAR8         *Buffer,
   IN  UINTN         BufferSize,
