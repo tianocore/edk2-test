@@ -80,6 +80,11 @@ PrintUsage (
   );
 
 EFI_STATUS
+GetSystemInformation (
+  VOID
+  );
+
+EFI_STATUS
 GetDestination (
   OUT SCT_FILE_VOLUME **SctFileVolume
   );
@@ -112,6 +117,8 @@ InstallSct (
 {
   EFI_STATUS       Status;
   SCT_FILE_VOLUME *SctFileVolume;
+  UINTN            Index;
+  CHAR16          *FsName;
 
   //
   // Initialize library
@@ -121,7 +128,7 @@ InstallSct (
   //
   // Check parameters
   //
-  if (SI->Argc != 1) {
+  if (SI->Argc > 3) {
     PrintUsage ();
     return EFI_SUCCESS;
   }
@@ -132,16 +139,71 @@ InstallSct (
   // Get the destination directory
   //
   Print (L"\nGather system information ...\n");
-
-  Status = GetDestination (&SctFileVolume);
+  Status = GetSystemInformation ();
   if (EFI_ERROR (Status)) {
     return Status;
   }
 
   //
+  // If the file system has not been given in the command line then request it
+  //
+  if (SI->Argc == 1) {
+    Status = GetDestination (&SctFileVolume);
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+  } else {
+    // The file system must be the last argument
+    FsName = SI->Argv[SI->Argc - 1];
+
+    // Allocate new SctFileVolume
+    SctFileVolume = AllocatePool (sizeof(SctFileVolume));
+
+    // Save the filename
+    CopyMem (SctFileVolume->Name, FsName, StrSize (FsName));
+
+    // Ensure it is valid file system and it has enough free space
+    Status = GetFreeSpace (SctFileVolume);
+    if (Status == EFI_NOT_FOUND) {
+      Print (L"'%s' is not a valid file system.\n", FsName);
+      PrintUsage ();
+      FreePool (SctFileVolume);
+      return Status;
+    } else if (EFI_ERROR (Status)) {
+      Print (L"Fail to get free space from file system '%s'.\n", FsName);
+      FreePool (SctFileVolume);
+      return Status;
+    } else if (SctFileVolume->FreeSpace < INSTALL_SCT_FREE_SPACE) {
+      FreePool (SctFileVolume);
+      Print (L"The given file system '%s' is not big enough to install SCT (require %d MB).\n",
+          FsName, INSTALL_SCT_FREE_SPACE_MB);
+      return EFI_VOLUME_FULL;
+    }
+
+    //
+    // Check the policy on existing SCT
+    //
+
+    // If not defined then SCT should not have been installed
+    mBackupPolicy = BACKUP_POLICY_NONE;
+
+    for (Index = 1; Index < SI->Argc - 1; Index++) {
+      if (StrCmp (SI->Argv[Index], L"-b") == 0) {
+        mBackupPolicy = BACKUP_POLICY_BACKUP_ALL;
+      } else if (StrCmp (SI->Argv[Index], L"-r") == 0) {
+        mBackupPolicy = BACKUP_POLICY_REMOVE_ALL;
+      } else {
+        Print (L"'%s' is not a valid option.\n", SI->Argv[Index]);
+        PrintUsage ();
+        return Status;
+      }
+    }
+  }
+
+  //
   // Remove or backup the existing tests
   //
-  Print (L"\nBackup the existing tests ...\n");
+  Print (L"\nCheck if SCT already installed ...\n");
 
   Status = BackupSct ();
   if (EFI_ERROR (Status)) {
@@ -164,6 +226,10 @@ InstallSct (
   Status = InstallStartup (SctFileVolume);
   if (EFI_ERROR (Status)) {
     return Status;
+  }
+
+  if (SI->Argc > 1) {
+    FreePool (SctFileVolume);
   }
 
   //
@@ -189,22 +255,25 @@ PrintUsage (
     L"Notes: Make sure the shell commands CP, DEL, MKDIR, MV, and LS are enabled.\n"
     L"       They are used in this installation.\n"
     L"\n"
-    L"Usage: Install%s\n"
+    L"Usage: Install%s [[options] file_system]\n"
+    L"  options:\n"
+    L"    -b: automatically backup all the existing SCT on any file system.\n"
+    L"    -r: automatically delete all the existing SCT on any file system.\n"
+    L"    if none of these options are given InstallSct would return an error\n"
+    L"    if it has already been installed.\n"
+    L"  file_system: name of the filesystem where to install SCT (optional)\n"
     L"\n",
     INSTALL_SCT_PLATFORM_SHORT_NAME
     );
 }
 
-
 EFI_STATUS
-GetDestination (
-  OUT SCT_FILE_VOLUME **SctFileVolume
+GetSystemInformation (
+  VOID
   )
 {
-
   EFI_STATUS      Status;
   UINTN           Index;
-  CHAR16          InputBuffer[4];
 
   //
   // 1. Search each FS% file system
@@ -234,7 +303,6 @@ GetDestination (
     mFsCount++;
   }
 
-  
   //
   // 2. Search each fsnt% file system
   //
@@ -262,6 +330,15 @@ GetDestination (
 
     mFsCount++;
   }
+}
+
+EFI_STATUS
+GetDestination (
+  OUT SCT_FILE_VOLUME **SctFileVolume
+  )
+{
+  UINTN           Index;
+  CHAR16          InputBuffer[4];
   
   //
   // Print system information
@@ -337,7 +414,6 @@ BackupSct (
 {
   EFI_STATUS  Status;
   CHAR16      *TmpName;
-  BOOLEAN     Exist;
   UINTN       Index;
 
   // Go through the list of the File System and backup/remove existing SCT
