@@ -40,8 +40,9 @@
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>
+  Portions copyright (c) 2014, ARM Ltd. All rights reserved.
+
 --*/
 /*++
 
@@ -64,10 +65,10 @@ EFI_HANDLE    gImageHandle  = NULL_HANDLE;
 BACKUP_POLICY mBackupPolicy = BACKUP_POLICY_UNDEFINED;
 
 //
-// indicates whether SCT runs in NT32 emulater 
+// Supported Filesystems on the platform
 // 
-static FileVolumeState  ExistFs[INSTALL_SCT_MAX_FILE_SYSTEM];
-static UINT64           FreeSpaces[SCAN_SCT_MAX_FILE_SYSTEM][VOLUMETYPENUM];
+STATIC SCT_FILE_VOLUME mFs[INSTALL_SCT_MAX_FILE_SYSTEM];
+STATIC UINTN           mFsCount = 0;
 
 //
 // Internal function declarations
@@ -80,27 +81,22 @@ PrintUsage (
 
 EFI_STATUS
 GetDestination (
-  OUT CHAR16            **DirName
+  OUT SCT_FILE_VOLUME **SctFileVolume
   );
 
 EFI_STATUS
-BackupTests (
-  IN CHAR16             *DirName
-  );
-
-EFI_STATUS
-BackupStartups (
-  IN CHAR16             *DirName
+BackupSct (
+  VOID
   );
 
 EFI_STATUS
 InstallTest (
-  IN CHAR16             *DirName
+  IN OUT SCT_FILE_VOLUME *SctFileVolume
   );
 
 EFI_STATUS
 InstallStartup (
-  IN CHAR16             *DirName
+  IN OUT SCT_FILE_VOLUME *SctFileVolume
   );
 
 //
@@ -114,8 +110,8 @@ InstallSct (
   IN EFI_SYSTEM_TABLE   *SystemTable
   )
 {
-  EFI_STATUS  Status;
-  CHAR16      *DirName;
+  EFI_STATUS       Status;
+  SCT_FILE_VOLUME *SctFileVolume;
 
   //
   // Initialize library
@@ -137,7 +133,7 @@ InstallSct (
   //
   Print (L"\nGather system information ...\n");
 
-  Status = GetDestination (&DirName);
+  Status = GetDestination (&SctFileVolume);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -147,18 +143,8 @@ InstallSct (
   //
   Print (L"\nBackup the existing tests ...\n");
 
-  Status = BackupTests (DirName);
+  Status = BackupSct ();
   if (EFI_ERROR (Status)) {
-    FreePool (DirName);
-    return Status;
-  }
-
-  //
-  // Remove or backup the startup files
-  //
-  Status = BackupStartups (DirName);
-  if (EFI_ERROR (Status)) {
-    FreePool (DirName);
     return Status;
   }
 
@@ -167,22 +153,18 @@ InstallSct (
   //
   Print (L"\nInstalling...\n");
 
-  Status = InstallTest (DirName);
+  Status = InstallTest (SctFileVolume);
   if (EFI_ERROR (Status)) {
-    FreePool (DirName);
     return Status;
   }
 
   //
   // Install the startup file
   //
-  Status = InstallStartup (DirName);
+  Status = InstallStartup (SctFileVolume);
   if (EFI_ERROR (Status)) {
-    FreePool (DirName);
     return Status;
   }
-
-  FreePool (DirName);
 
   //
   // Done
@@ -216,18 +198,14 @@ PrintUsage (
 
 EFI_STATUS
 GetDestination (
-  OUT CHAR16            **DirName
+  OUT SCT_FILE_VOLUME **SctFileVolume
   )
 {
 
   EFI_STATUS      Status;
   UINTN           Index;
-  CHAR16          *FsName;
-  UINTN           MaxExistIndex;
   CHAR16          InputBuffer[4];
 
-  MaxExistIndex = 0;
-  
   //
   // 1. Search each FS% file system
   //
@@ -240,36 +218,20 @@ GetDestination (
     //
     // Create FS% name of file system
     //
-    
-    FsName = PoolPrint (L"FS%x", Index);
-   
-    if (FsName == NULL) {
-      return EFI_OUT_OF_RESOURCES;
-    }
+    SPrint (mFs[mFsCount].Name, 0, L"FS%x", Index);
 
     //
     // Get free space
     //
-    Status = GetFreeSpace (FsName, &FreeSpaces[Index][NONE_NT32]);
+    Status = GetFreeSpace (&mFs[mFsCount]);
     if (EFI_ERROR (Status)) {
-      FreePool (FsName);
       continue;
     }
 
-    ExistFs[MaxExistIndex].FileVoluemIndex = Index;
-    ExistFs[MaxExistIndex].VolType = NONE_NT32;
-    MaxExistIndex ++;
-    //
-    // Print system information
-    //
-    Print (
-      L"  %d: %s: (Free Space: %d MB)\n",
-      MaxExistIndex,
-      FsName,
-      (UINTN) DivU64x32 (FreeSpaces[Index][NONE_NT32], INSTALL_SCT_1M, NULL)
-      );
+    // The file system exists, we check if SCT has already been installed
+    CheckForInstalledSct (&mFs[mFsCount]);
 
-    FreePool (FsName);
+    mFsCount++;
   }
 
   
@@ -285,36 +247,32 @@ GetDestination (
     //
     // Create fsnt% name of file system
     //
-    FsName = PoolPrint (L"fsnt%x", Index);
-    
-    if (FsName == NULL) {
-      return EFI_OUT_OF_RESOURCES;
-    }
+    SPrint (mFs[mFsCount].Name, 0, L"fsnt%x", Index);
   
     //
     // Get free space
     //
-    Status = GetFreeSpace (FsName, &FreeSpaces[Index][NT32]);
+    Status = GetFreeSpace (&mFs[mFsCount]);
     if (EFI_ERROR (Status)) {
-      FreePool (FsName);
       continue;
     }
+
+    // The file system exists, we check if SCT has already been installed
+    CheckForInstalledSct (&mFs[mFsCount]);
+
+    mFsCount++;
+  }
   
-    ExistFs[MaxExistIndex].FileVoluemIndex = Index;
-    ExistFs[MaxExistIndex].VolType = NT32;
-    MaxExistIndex ++;
-  
-    //
-    // Print system information
-    //
+  //
+  // Print system information
+  //
+  for (Index = 0; Index < mFsCount; Index ++) {
     Print (
       L"  %d: %s: (Free Space: %d MB)\n",
-      MaxExistIndex,
-      FsName,
-      (UINTN) DivU64x32 (FreeSpaces[Index][NT32], INSTALL_SCT_1M, NULL)
+      Index + 1,
+      mFs[Index].Name,
+      (UINTN) DivU64x32 (mFs[Index].FreeSpace, INSTALL_SCT_1M, NULL)
       );
-  
-    FreePool (FsName);
   }
 
   Print (
@@ -348,34 +306,21 @@ GetDestination (
     // Convert the input to an index
     //
     Index = Atoi(InputBuffer) - 1;
-    if (Index >= MaxExistIndex) {
-      Print (L"  Only 1 to %d is valid.\n", MaxExistIndex);
+    if (Index >= mFsCount) {
+      Print (L"  Only 1 to %d is valid.\n", mFsCount);
       continue;
     }
 
     //
     // Check the free space
     //
-    if (FreeSpaces[ExistFs[Index].FileVoluemIndex][ExistFs[Index].VolType] < (UINT64) INSTALL_SCT_FREE_SPACE) {
+    if (mFs[Index].FreeSpace < (UINT64) INSTALL_SCT_FREE_SPACE) {
       Print (L"  Free space is not enough.\n");
       continue;
+    } else {
+      *SctFileVolume = &mFs[Index];
+      break;
     }
-
-    break;
-  }
-
-  //
-  // Create the destination directory
-  //
-  if (ExistFs[Index].VolType == NT32) {
-    *DirName = PoolPrint (L"fsnt%x:\\SCT", ExistFs[Index].FileVoluemIndex);
-  }
-  else {
-    *DirName = PoolPrint (L"FS%x:\\SCT", ExistFs[Index].FileVoluemIndex);
-  }
-  
-  if (*DirName == NULL) {
-    return EFI_OUT_OF_RESOURCES;
   }
   
   //
@@ -386,107 +331,56 @@ GetDestination (
 
 
 EFI_STATUS
-BackupTests (
-  IN CHAR16             *DirName
+BackupSct (
+  VOID
   )
 {
   EFI_STATUS  Status;
-  UINTN       Index;
   CHAR16      *TmpName;
   BOOLEAN     Exist;
-
-  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
-    //
-    // Create the potential existing directory name
-    //
-    if (Index < SCAN_SCT_MAX_FILE_SYSTEM) {
-      TmpName = PoolPrint (L"FS%x:\\SCT", Index);
-    }
-    else {
-      TmpName = PoolPrint (L"fsnt%x:\\SCT", Index - SCAN_SCT_MAX_FILE_SYSTEM);
-    }
-   
-    if (TmpName == NULL) {
-      return EFI_OUT_OF_RESOURCES;
-    }
-
-    //
-    // Exist or not?
-    //
-    Status = DirFileExist (TmpName, &Exist);
-    if (EFI_ERROR (Status)) {
-      FreePool (TmpName);
-      continue;
-    }
-
-    if (!Exist) {
-      FreePool (TmpName);
-      continue;
-    }
-
-    Status = ProcessExistingSctFile ("test", TmpName);
-    if (EFI_ERROR (Status)) {
-      FreePool (TmpName);
-      return Status;
-    }
-
-    FreePool (TmpName);
-  }
-
-  //
-  // Done
-  //
-  return EFI_SUCCESS;
-}
-
-
-EFI_STATUS
-BackupStartups (
-  IN CHAR16             *DirName
-  )
-{
-  EFI_STATUS  Status;
   UINTN       Index;
-  CHAR16      *TmpName;
-  BOOLEAN     Exist;
 
-  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
+  // Go through the list of the File System and backup/remove existing SCT
+  for (Index = 0; Index < mFsCount; Index++) {
     //
-    // Create the existing startup script
+    // Check for 'SCT' folder
     //
-    if (Index < SCAN_SCT_MAX_FILE_SYSTEM) {
-      TmpName = PoolPrint (L"FS%x:\\startup.nsh", Index);
-    }
-    else {
-      TmpName = PoolPrint (L"fsnt%x:\\startup.nsh", Index - SCAN_SCT_MAX_FILE_SYSTEM);
-    }
-    
+    if (mFs[Index].IsSctPresent & SCT_FOLDER) {
+      // Generate the filename
+      TmpName = PoolPrint (L"%s:\\SCT", mFs[Index].Name);
+      if (TmpName == NULL) {
+        return EFI_OUT_OF_RESOURCES;
+      }
 
-    if (TmpName == NULL) {
-      return EFI_OUT_OF_RESOURCES;
-    }
+      // Decide whether the file needs to be removed/backup
+      Status = ProcessExistingSctFile (L"test", TmpName);
+      if (EFI_ERROR (Status)) {
+        FreePool (TmpName);
+        return Status;
+      }
 
-    //
-    // Exist or not?
-    //
-    Status = DirFileExist (TmpName, &Exist);
-    if (EFI_ERROR (Status)) {
       FreePool (TmpName);
-      continue;
     }
 
-    if (!Exist) {
+    //
+    // Check for 'SCT' folder
+    //
+    if (mFs[Index].IsSctPresent & SCT_STARTUP) {
+      // Generate the filename
+      TmpName = PoolPrint (L"%s:\\startup.nsh", mFs[Index].Name);
+      if (TmpName == NULL) {
+        return EFI_OUT_OF_RESOURCES;
+      }
+
+      // Decide whether the file needs to be removed/backup
+      Status = ProcessExistingSctFile (L"startup script", TmpName);
+      if (EFI_ERROR (Status)) {
+        FreePool (TmpName);
+        return Status;
+      }
+
       FreePool (TmpName);
-      continue;
     }
-
-    Status = ProcessExistingSctFile ("startup script", TmpName);
-    if (EFI_ERROR (Status)) {
-      FreePool (TmpName);
-      return Status;
-    }
-
-    FreePool (TmpName);
   }
 
   //
@@ -498,10 +392,16 @@ BackupStartups (
 
 EFI_STATUS
 InstallTest (
-  IN CHAR16             *DirName
+  IN OUT SCT_FILE_VOLUME *SctFileVolume
   )
 {
   EFI_STATUS  Status;
+  CHAR16*     DirName;
+
+  DirName = PoolPrint (L"%s:\\SCT", SctFileVolume->Name);
+  if (DirName == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
 
   //
   // Copy the EFI SCT Harness
@@ -515,6 +415,8 @@ InstallTest (
     return Status;
   }
 
+  FreePool (DirName);
+
   //
   // Done
   //
@@ -524,42 +426,19 @@ InstallTest (
 
 EFI_STATUS
 InstallStartup (
-  IN CHAR16             *DirName
+  IN OUT SCT_FILE_VOLUME *SctFileVolume
   )
 {
   EFI_STATUS  Status;
-  CHAR16      *FsName;
   CHAR16      *FileName;
-  UINTN       Index;
-  UINTN       Length;
-
-  //
-  // Split to the file system name
-  //
-  FsName = StrDuplicate (DirName);
-  if (FsName == NULL) {
-    return EFI_OUT_OF_RESOURCES;
-  }
-
-  Length   = StrLen (DirName);
-
-  for (Index = 0; Index < Length; Index ++) {
-    if (FsName[Index] == L':') {
-      FsName[Index] = L'\0';
-      break;
-    }
-  }
 
   //
   // Create the startup file name
   //
-  FileName = PoolPrint (L"%s:\\Startup.nsh", FsName);
+  FileName = PoolPrint (L"%s:\\Startup.nsh", SctFileVolume->Name);
   if (FileName == NULL) {
-    FreePool (FsName);
     return EFI_OUT_OF_RESOURCES;
   }
-
-  FreePool (FsName);
 
   //
   // Copy the startup script file

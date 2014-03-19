@@ -40,8 +40,9 @@
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+  Portions copyright (c) 2014, ARM Ltd. All rights reserved.
+
 --*/
 /*++
 
@@ -63,8 +64,7 @@ Abstract:
 
 EFI_STATUS
 GetFreeSpace (
-  IN CHAR16             *FsName,
-  OUT UINT64            *FreeSpace
+  IN OUT SCT_FILE_VOLUME *FileVolume
   )
 {
   EFI_STATUS                        Status;
@@ -77,7 +77,7 @@ GetFreeSpace (
   //
   // Get the device path of file system
   //
-  DevicePath = (EFI_DEVICE_PATH_PROTOCOL *) ShellGetMap (FsName);
+  DevicePath = (EFI_DEVICE_PATH_PROTOCOL *) ShellGetMap (FileVolume->Name);
   if (DevicePath == NULL) {
     return EFI_NOT_FOUND;
   }
@@ -125,7 +125,7 @@ GetFreeSpace (
     return Status;
   }
 
-  *FreeSpace = SystemInfo->FreeSpace;
+  FileVolume->FreeSpace = SystemInfo->FreeSpace;
 
   FreePool (SystemInfo);
   RootFs->Close (RootFs);
@@ -136,7 +136,7 @@ GetFreeSpace (
   return EFI_SUCCESS;
 }
 
-
+STATIC
 EFI_STATUS
 DirFileExist (
   IN CHAR16             *Name,
@@ -327,6 +327,7 @@ BackupDirFile (
 {
   EFI_STATUS  Status;
   CHAR16      *CmdLine;
+
   CHAR16      *PathName;
   CHAR16      *FileName;
   CHAR16      *TmpName;
@@ -590,4 +591,58 @@ ProcessExistingSctFile (
   }
 
   return Status;
+}
+
+EFI_STATUS
+CheckForInstalledSct (
+  IN OUT SCT_FILE_VOLUME *FileVolume
+  )
+{
+  EFI_STATUS  Status;
+  CHAR16      *TmpName;
+  BOOLEAN     Exist;
+
+  FileVolume->IsSctPresent = 0;
+
+  //
+  // Check for 'SCT' folder
+  //
+  TmpName = PoolPrint (L"%s:\\SCT", FileVolume->Name);
+  if (TmpName == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  // Exist or not?
+  Status = DirFileExist (TmpName, &Exist);
+  if (EFI_ERROR (Status)) {
+    FreePool (TmpName);
+    return Status;
+  }
+
+  if (Exist) {
+    FileVolume->IsSctPresent |= SCT_FOLDER;
+  }
+  FreePool (TmpName);
+
+  //
+  // Check for SCT startup script
+  //
+  TmpName = PoolPrint (L"%s:\\startup.nsh", FileVolume->Name);
+  if (TmpName == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  // Exist or not?
+  Status = DirFileExist (TmpName, &Exist);
+  if (EFI_ERROR (Status)) {
+    FreePool (TmpName);
+    return Status;
+  }
+
+  if (Exist) {
+    FileVolume->IsSctPresent |= SCT_STARTUP;
+  }
+  FreePool (TmpName);
+
+  return EFI_SUCCESS;
 }

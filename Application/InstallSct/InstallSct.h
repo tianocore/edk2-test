@@ -66,6 +66,7 @@ Abstract:
 #include "EfiShellLib.h"
 #include "InstallSctDef.h"
 #include "InstallSctSupport.h"
+
 //
 // Global definitions
 //
@@ -87,17 +88,6 @@ typedef enum {
   BACKUP_POLICY_REMOVE,
   BACKUP_POLICY_REMOVE_ALL,
 } BACKUP_POLICY;
-
-enum VolumeType {
-  NONE_NT32,
-  NT32,
-  VOLUMETYPENUM
-};
-
-typedef struct {
-  UINTN FileVoluemIndex;
-  enum VolumeType VolType;
-}FileVolumeState;
 
 //
 // Global variables
