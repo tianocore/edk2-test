@@ -362,7 +362,7 @@ BackupDirFile (
     // Create the backup file name
     //
     TmpName = PoolPrint (
-                L"\"%s\\bak%d.%s\"",
+                L"\"%s\\%s.bak%d\"",
                 PathName,
                 Index,
                 FileName
@@ -398,7 +398,7 @@ BackupDirFile (
   // Create command line to backup it
   //
   CmdLine = PoolPrint (
-              L"MV \"%s\" \"%s\\bak%d.%s\"",
+              L"MV \"%s\" \"%s\\%s.bak%d\"",
               Name,
               PathName,
               Index,
