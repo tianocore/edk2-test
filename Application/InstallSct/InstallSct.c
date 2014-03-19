@@ -60,7 +60,8 @@ Abstract:
 // Global variables
 //
 
-EFI_HANDLE gImageHandle = NULL_HANDLE;
+EFI_HANDLE    gImageHandle  = NULL_HANDLE;
+BACKUP_POLICY mBackupPolicy = BACKUP_POLICY_UNDEFINED;
 
 //
 // indicates whether SCT runs in NT32 emulater 
@@ -393,13 +394,6 @@ BackupTests (
   UINTN       Index;
   CHAR16      *TmpName;
   BOOLEAN     Exist;
-  CHAR16      *Prompt;
-  CHAR16      InputBuffer[2];
-
-  //
-  // Initialize the input buffer
-  //
-  InputBuffer[0] = L'\0';
 
   for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
     //
@@ -412,7 +406,6 @@ BackupTests (
       TmpName = PoolPrint (L"fsnt%x:\\SCT", Index - SCAN_SCT_MAX_FILE_SYSTEM);
     }
    
-    
     if (TmpName == NULL) {
       return EFI_OUT_OF_RESOURCES;
     }
@@ -431,94 +424,10 @@ BackupTests (
       continue;
     }
 
-    //
-    // Exist. Need to remove or backup
-    //
-    if (StriCmp (InputBuffer, L"a") == 0) {
-      //
-      // Backup all
-      //
-      Status = BackupDirFile (TmpName);
-      if (EFI_ERROR (Status)) {
-        FreePool (TmpName);
-        return Status;
-      }
-
+    Status = ProcessExistingSctFile ("test", TmpName);
+    if (EFI_ERROR (Status)) {
       FreePool (TmpName);
-      continue;
-    } else if (StriCmp (InputBuffer, L"l") == 0) {
-      //
-      // Remove all
-      //
-      Status = RemoveDirFile (TmpName);
-      if (EFI_ERROR (Status)) {
-        FreePool (TmpName);
-        return Status;
-      }
-
-      FreePool (TmpName);
-      continue;
-    }
-
-    //
-    // User must input a selection
-    //
-    while (TRUE) {
-      //
-      // User input his selection
-      //
-      Prompt = PoolPrint (
-                 L"Found the existing test '%s'.\n"
-                 L"Select (B)ackup, Backup (A)ll, (R)emove, Remove A(l)l. 'q' to exit:",
-                 TmpName
-                 );
-      if (Prompt == NULL) {
-        FreePool (TmpName);
-        return EFI_OUT_OF_RESOURCES;
-      }
-
-      Input (
-        Prompt,
-        InputBuffer,
-        2
-        );
-
-      FreePool (Prompt);
-      Print (L"\n");
-
-      //
-      // Deal with the user input
-      //
-      if (StriCmp (InputBuffer, L"q") == 0) {
-        FreePool (TmpName);
-        return EFI_ABORTED;
-      }
-
-      if ((StriCmp (InputBuffer, L"b") == 0) ||
-          (StriCmp (InputBuffer, L"a") == 0)) {
-        //
-        // Backup or Backup All
-        //
-        Status = BackupDirFile (TmpName);
-        if (EFI_ERROR (Status)) {
-          FreePool (TmpName);
-          return Status;
-        }
-
-        break;
-      } else if ((StriCmp (InputBuffer, L"r") == 0) ||
-                 (StriCmp (InputBuffer, L"l") == 0)) {
-        //
-        // Remove or Remove All
-        //
-        Status = RemoveDirFile (TmpName);
-        if (EFI_ERROR (Status)) {
-          FreePool (TmpName);
-          return Status;
-        }
-
-        break;
-      }
+      return Status;
     }
 
     FreePool (TmpName);
@@ -540,13 +449,6 @@ BackupStartups (
   UINTN       Index;
   CHAR16      *TmpName;
   BOOLEAN     Exist;
-  CHAR16      *Prompt;
-  CHAR16      InputBuffer[2];
-
-  //
-  // Initialize the input buffer
-  //
-  InputBuffer[0] = L'\0';
 
   for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
     //
@@ -578,94 +480,10 @@ BackupStartups (
       continue;
     }
 
-    //
-    // Exist. Need to remove or backup
-    //
-    if (StriCmp (InputBuffer, L"a") == 0) {
-      //
-      // Backup all
-      //
-      Status = BackupDirFile (TmpName);
-      if (EFI_ERROR (Status)) {
-        FreePool (TmpName);
-        return Status;
-      }
-
+    Status = ProcessExistingSctFile ("startup script", TmpName);
+    if (EFI_ERROR (Status)) {
       FreePool (TmpName);
-      continue;
-    } else if (StriCmp (InputBuffer, L"l") == 0) {
-      //
-      // Remove all
-      //
-      Status = RemoveDirFile (TmpName);
-      if (EFI_ERROR (Status)) {
-        FreePool (TmpName);
-        return Status;
-      }
-
-      FreePool (TmpName);
-      continue;
-    }
-
-    //
-    // User must input a selection
-    //
-    while (TRUE) {
-      //
-      // User input his selection
-      //
-      Prompt = PoolPrint (
-                 L"Found the existing startup script '%s'.\n"
-                 L"Select (B)ackup, Backup (A)ll, (R)emove, Remove A(l)l. 'q' to exit:",
-                 TmpName
-                 );
-      if (Prompt == NULL) {
-        FreePool (TmpName);
-        return EFI_OUT_OF_RESOURCES;
-      }
-
-      Input (
-        Prompt,
-        InputBuffer,
-        2
-        );
-
-      FreePool (Prompt);
-      Print (L"\n");
-
-      //
-      // Deal with user input
-      //
-      if (StriCmp (InputBuffer, L"q") == 0) {
-        FreePool (TmpName);
-        return EFI_ABORTED;
-      }
-
-      if ((StriCmp (InputBuffer, L"b") == 0) ||
-          (StriCmp (InputBuffer, L"a") == 0)) {
-        //
-        // Backup or Backup All
-        //
-        Status = BackupDirFile (TmpName);
-        if (EFI_ERROR (Status)) {
-          FreePool (TmpName);
-          return Status;
-        }
-
-        break;
-      } else if ((StriCmp (InputBuffer, L"r") == 0) ||
-                 (StriCmp (InputBuffer, L"l") == 0)) {
-        //
-        // Remove or Remove All
-        //
-        Status = RemoveDirFile (TmpName);
-        if (EFI_ERROR (Status)) {
-          FreePool (TmpName);
-          return Status;
-        }
-
-        break;
-      }
+      return Status;
     }
 
     FreePool (TmpName);

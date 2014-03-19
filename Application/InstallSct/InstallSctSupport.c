@@ -277,7 +277,7 @@ CreateDir (
   return EFI_SUCCESS;
 }
 
-
+STATIC
 EFI_STATUS
 RemoveDirFile (
   IN CHAR16             *Name
@@ -319,7 +319,7 @@ RemoveDirFile (
   return EFI_SUCCESS;
 }
 
-
+STATIC
 EFI_STATUS
 BackupDirFile (
   IN CHAR16             *Name
@@ -507,4 +507,87 @@ CopyDirFile (
   // Done
   //
   return EFI_SUCCESS;
+}
+
+EFI_STATUS
+ProcessExistingSctFile (
+  IN  CHAR16*         Name,
+  IN  CHAR16*         FileName
+  )
+{
+  EFI_STATUS  Status;
+  CHAR16      *Prompt;
+  CHAR16      InputBuffer[2];
+
+  // If it is not a 'ALL' policy then we need to get the user input
+  if ((mBackupPolicy != BACKUP_POLICY_BACKUP_ALL) &&
+      (mBackupPolicy != BACKUP_POLICY_REMOVE_ALL)) {
+    //
+    // Initialize the input buffer
+    //
+    InputBuffer[0] = L'\0';
+
+    //
+    // User input his selection
+    //
+    Prompt = PoolPrint (
+               L"Found the existing %s '%s'.\n"
+               L"Select (B)ackup, Backup (A)ll, (R)emove, Remove A(l)l. 'q' to exit:",
+               Name, FileName
+               );
+    if (Prompt == NULL) {
+      return EFI_OUT_OF_RESOURCES;
+    }
+
+    //
+    // User must input a selection
+    //
+    while (TRUE) {
+      Input (
+        Prompt,
+        InputBuffer,
+        2
+        );
+      Print (L"\n");
+
+      //
+      // Deal with the user input
+      //
+      if (StriCmp (InputBuffer, L"q") == 0) {
+        mBackupPolicy = BACKUP_POLICY_UNDEFINED;
+        break;
+      } else if (StriCmp (InputBuffer, L"b") == 0) {
+        mBackupPolicy = BACKUP_POLICY_BACKUP;
+        break;
+      } else if (StriCmp (InputBuffer, L"a") == 0) {
+        mBackupPolicy = BACKUP_POLICY_BACKUP_ALL;
+        break;
+      } else if (StriCmp (InputBuffer, L"r") == 0) {
+        mBackupPolicy = BACKUP_POLICY_REMOVE;
+        break;
+      } else if (StriCmp (InputBuffer, L"l") == 0) {
+        mBackupPolicy = BACKUP_POLICY_REMOVE_ALL;
+        break;
+      }
+    }
+
+    FreePool (Prompt);
+  }
+
+  switch (mBackupPolicy) {
+  case BACKUP_POLICY_BACKUP:
+  case BACKUP_POLICY_BACKUP_ALL:
+    Status = BackupDirFile (FileName);
+    break;
+
+  case BACKUP_POLICY_REMOVE:
+  case BACKUP_POLICY_REMOVE_ALL:
+    Status = RemoveDirFile (FileName);
+    break;
+
+  default:
+    Status = EFI_ABORTED;
+  }
+
+  return Status;
 }

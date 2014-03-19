@@ -79,6 +79,14 @@ Abstract:
 
 #define INSTALL_SCT_STARTUP_FILE        L"SctStartup.nsh"
 
+typedef enum {
+  BACKUP_POLICY_UNDEFINED = 0,
+  BACKUP_POLICY_NONE,
+  BACKUP_POLICY_BACKUP,
+  BACKUP_POLICY_BACKUP_ALL,
+  BACKUP_POLICY_REMOVE,
+  BACKUP_POLICY_REMOVE_ALL,
+} BACKUP_POLICY;
 
 enum VolumeType {
   NONE_NT32,
@@ -95,7 +103,8 @@ typedef struct {
 // Global variables
 //
 
-extern EFI_HANDLE gImageHandle;
+extern EFI_HANDLE    gImageHandle;
+extern BACKUP_POLICY mBackupPolicy;
 
 //
 // External functions

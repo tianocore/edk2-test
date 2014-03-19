@@ -80,20 +80,16 @@ CreateDir (
   );
 
 EFI_STATUS
-RemoveDirFile (
-  IN CHAR16             *Name
-  );
-
-EFI_STATUS
-BackupDirFile (
-  IN CHAR16             *Name
-  );
-
-EFI_STATUS
 CopyDirFile (
   IN CHAR16             *SrcName,
   IN CHAR16             *DstName,
   IN BOOLEAN            Recursive
+  );
+
+EFI_STATUS
+ProcessExistingSctFile (
+  IN  CHAR16*         Name,
+  IN  CHAR16*         FileName
   );
 
 #endif
