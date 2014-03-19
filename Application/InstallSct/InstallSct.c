@@ -65,8 +65,8 @@ EFI_HANDLE gImageHandle = NULL_HANDLE;
 //
 // indicates whether SCT runs in NT32 emulater 
 // 
-static FileVolumeState  ExistFs[INSTALL_SCT_MAX_FILE_SYSTEM*2];
-static UINT64           FreeSpaces[INSTALL_SCT_MAX_FILE_SYSTEM][VOLUMETYPENUM];
+static FileVolumeState  ExistFs[INSTALL_SCT_MAX_FILE_SYSTEM];
+static UINT64           FreeSpaces[SCAN_SCT_MAX_FILE_SYSTEM][VOLUMETYPENUM];
 
 //
 // Internal function declarations
@@ -230,7 +230,7 @@ GetDestination (
   //
   // 1. Search each FS% file system
   //
-  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
+  for (Index = 0; Index < SCAN_SCT_MAX_FILE_SYSTEM; Index ++) {
     //
     // NOTE: Here the file system name is hard coded. I don't know how to find
     // all file system names via a shell service.
@@ -275,7 +275,7 @@ GetDestination (
   //
   // 2. Search each fsnt% file system
   //
-  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
+  for (Index = 0; Index < SCAN_SCT_MAX_FILE_SYSTEM; Index ++) {
     //
     // NOTE: Here the file system name is hard coded. I don't know how to find
     // all file system names via a shell service.
@@ -401,15 +401,15 @@ BackupTests (
   //
   InputBuffer[0] = L'\0';
 
-  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM*2; Index ++) {
+  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
     //
     // Create the potential existing directory name
     //
-    if (Index < INSTALL_SCT_MAX_FILE_SYSTEM) {
+    if (Index < SCAN_SCT_MAX_FILE_SYSTEM) {
       TmpName = PoolPrint (L"FS%x:\\SCT", Index);
     }
     else {
-      TmpName = PoolPrint (L"fsnt%x:\\SCT", Index - INSTALL_SCT_MAX_FILE_SYSTEM);
+      TmpName = PoolPrint (L"fsnt%x:\\SCT", Index - SCAN_SCT_MAX_FILE_SYSTEM);
     }
    
     
@@ -548,15 +548,15 @@ BackupStartups (
   //
   InputBuffer[0] = L'\0';
 
-  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM*2; Index ++) {
+  for (Index = 0; Index < INSTALL_SCT_MAX_FILE_SYSTEM; Index ++) {
     //
     // Create the existing startup script
     //
-    if (Index < INSTALL_SCT_MAX_FILE_SYSTEM) {
+    if (Index < SCAN_SCT_MAX_FILE_SYSTEM) {
       TmpName = PoolPrint (L"FS%x:\\startup.nsh", Index);
     }
     else {
-      TmpName = PoolPrint (L"fsnt%x:\\startup.nsh", Index - INSTALL_SCT_MAX_FILE_SYSTEM);
+      TmpName = PoolPrint (L"fsnt%x:\\startup.nsh", Index - SCAN_SCT_MAX_FILE_SYSTEM);
     }
     
 

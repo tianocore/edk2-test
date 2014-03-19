@@ -73,7 +73,8 @@ Abstract:
 #define INSTALL_SCT_1M                  (1024 * 1024)
 #define INSTALL_SCT_FREE_SPACE          (1024 * 1024 * 100)
 
-#define INSTALL_SCT_MAX_FILE_SYSTEM     0xF
+#define SCAN_SCT_MAX_FILE_SYSTEM        0xF
+#define INSTALL_SCT_MAX_FILE_SYSTEM     (SCAN_SCT_MAX_FILE_SYSTEM * 2)
 #define INSTALL_SCT_MAX_BACKUP          0xF
 
 #define INSTALL_SCT_STARTUP_FILE        L"SctStartup.nsh"
