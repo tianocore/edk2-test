@@ -1901,6 +1901,11 @@ IsValidResourceDescrptor (
       //
       switch (Ptr->ResType) {
         case ACPI_ADDRESS_SPACE_TYPE_MEM :
+          if (Ptr->AddrSpaceGranularity != 32 && Ptr->AddrSpaceGranularity != 64) {
+            return FALSE;
+          } 
+          break;
+  
         case ACPI_ADDRESS_SPACE_TYPE_IO  :
           break;
 

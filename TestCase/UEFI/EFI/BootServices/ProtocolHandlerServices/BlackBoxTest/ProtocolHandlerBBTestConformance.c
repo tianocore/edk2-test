@@ -126,6 +126,35 @@ BBTestInstallProtocolInterfaceConsistencyTest (
   }
 
   //
+  // Checkpoint 0:
+  // InstallProtocolInterface should not succeed
+  // with NULL Handle
+  //
+  Status = gtBS->InstallProtocolInterface (
+                   NULL,
+                   &mTestProtocol1Guid,
+                   EFI_NATIVE_INTERFACE,
+                   &TestProtocol1Instance
+                   );
+
+  if (Status == EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gProtocolHandlerBBTestConformanceAssertionGuid008,
+                 L"BS.InstallProtocolInterface - ConsistencyTestCheckpoint0",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
   // Checkpoint 1:
   // 3.1.2.1    InstallProtocolInterface should not succeed
   // with an invalid interface type
@@ -1028,6 +1057,34 @@ BBTestInstallMultipleProtocolInterfacesConsistencyTest (
   //
   CreateVendorDevicePath (&DevicePath1, mVendorDevicePath1Guid);
   CreateVendorDevicePath (&DevicePath2, mVendorDevicePath1Guid);
+
+  //
+  // Checkpoint 0:
+  // InstallMultipleProtocolInterfaces should not succeed
+  // with an NULL Handle
+  //
+  Status = gtBS->InstallMultipleProtocolInterfaces (
+                   NULL,
+                   &mTestNoInterfaceProtocol1Guid, NULL,
+                   &gEfiDevicePathProtocolGuid, DevicePath2,
+                   NULL
+                   );
+
+  if (Status == EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gProtocolHandlerBBTestConformanceAssertionGuid009,
+                 L"BS.InstallMultipleProtocolInterfaces - ConsistencyTestCheckpoint0",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
 
   //
   // Install a vendor device path onto a new handle. ## destroy before leave

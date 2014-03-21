@@ -109,7 +109,7 @@ Abstract:
 #include EFI_PROTOCOL_DEFINITION (HiiFont)
 #include EFI_PROTOCOL_DEFINITION (AuthenticationInfo)
 
-
+extern EFI_GUID gGlobalVariableGuid;
 
 //
 // Module definitions
@@ -1078,6 +1078,9 @@ CheckBootFromNetworkProtocols (
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
 
+  UINTN               DataSize;
+  UINT8               Data;  
+
   //
   // Check the PXE_BASE_CODE protocol
   //
@@ -1141,24 +1144,22 @@ CheckBootFromNetworkProtocols (
   }
 
   //
-  // Check the BIS protocol
+  // Check the SetupMode variable value
   //
-  Status = gtBS->LocateProtocol (
-                   &gEfiBisProtocolGuid,
+  DataSize = 1;   
+  Status = gtRT->GetVariable (
+                   L"SetupMode",
+                   &gGlobalVariableGuid,
                    NULL,
-                   &Interface
+                   &DataSize,
+                   &Data
                    );
-  if (!EFI_ERROR (Status)) {
+  
+  if ((!EFI_ERROR (Status)) && (Data == 0)) {
     ValueC = TRUE;
   } else {
     ValueC = FALSE;
   }
-
-  //
-  // BIS protocol indicates the ability to validate a boot image received
-  // through a network device. UEFI forum may think it is not one of platform
-  // specific elements. So here we skip the check to this protocol.
-  //
 
   AssertionType = NeedTwoOrWarning (ValueA, ValueB);
 
@@ -1213,7 +1214,7 @@ CheckBootFromNetworkProtocols (
       Status = IniFile->GetString (
                           IniFile,
                           SECTION_NAME_PLATFORM_SPECIFIC,
-                          L"BIStoValidateBootImage",
+                          L"ValidateBootImageThruNet",
                           String,
                           &MaxLength
                           );

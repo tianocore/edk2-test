@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -537,7 +537,7 @@ BBTestExtractConfigConformanceTestCheckpoint4 (
                               );
   
   if ( ((EFI_INVALID_PARAMETER == Status) && (EfiStrnCmp (Progress, L"&Jack&Rons&Nash&Mary", 20) == 0)) ||
-    ((EFI_NOT_FOUND == Status) && (Progress != NULL)) ) {
+    ((EFI_NOT_FOUND == Status) && (Progress == Request)) ) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;

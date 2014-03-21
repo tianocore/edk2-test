@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1170,14 +1170,32 @@ Routine Description:
       // Walk through each instance need to be tested
       //
       for (HandleIndex = ExecuteInfo->Index; HandleIndex < NoHandles; HandleIndex++) {
-        Status = BS->HandleProtocol (
-                       HandleBuffer[HandleIndex],
-                       Guid,
-                       &Interface
-                       );
-        if (EFI_ERROR (Status)) {
-          EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Handle protocol - %r", Status));
-          return Status;
+        //
+        // Add one new logic to filter the SerialIo Protocol
+        //
+        if (CompareGuid (Guid, &gEfiSerialIoProtocolGuid) == 0) {
+          Status = BS->OpenProtocol (
+                         HandleBuffer[HandleIndex],
+                         Guid,
+                         &Interface,
+                         HandleBuffer[HandleIndex],
+		                 NULL,
+		                 0x00000020    //EXCLUSIVE
+                         );
+          if (EFI_ERROR (Status)) {
+            EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Open protocol - %r", Status));
+            return Status;
+          }
+        } else {
+          Status = BS->HandleProtocol (
+                         HandleBuffer[HandleIndex],
+                         Guid,
+                         &Interface
+                         );
+          if (EFI_ERROR (Status)) {
+            EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Handle protocol - %r", Status));
+            return Status;
+          }
         }
   
         if (InterfaceFilter != NULL) {
@@ -1215,7 +1233,19 @@ Routine Description:
           ExecuteInfo->State = EFI_SCT_LOG_STATE_UNKNOWN;
           ExecuteInfo->Iteration++;
         }
-  
+
+		if (CompareGuid (Guid, &gEfiSerialIoProtocolGuid) == 0) {
+          Status = BS->CloseProtocol (
+                         HandleBuffer[HandleIndex],
+                         Guid,
+                         HandleBuffer[HandleIndex],
+		                 NULL
+                         );
+          if (EFI_ERROR (Status)) {
+            EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Close protocol - %r", Status));
+            return Status;
+          }
+        }
         ExecuteInfo->Iteration = 0;
         ExecuteInfo->Index ++;
       }

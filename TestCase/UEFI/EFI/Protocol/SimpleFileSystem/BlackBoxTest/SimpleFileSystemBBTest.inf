@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2006 - 2013 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -67,7 +67,12 @@ COMPONENT_TYPE       = BS_DRIVER
   SimpleFileSystemBBTestConformance.c
   SimpleFileSystemBBTestStress_Auto.c
   SimpleFileSystemBBTestStress_Manual.c
-
+  SimpleFileSystemExBBTestConformance.c
+  SimpleFileSystemExBBTestFunction_ReadEx.c
+  SimpleFileSystemExBBTestFunction_WriteEx.c
+  SimpleFileSystemExBBTestFunction_FlushEx.c
+  SimpleFileSystemExBBTestFunction_OpenEx.c
+  
 [sources.IA32]
   SimpleFileSystemProtocol.c
 

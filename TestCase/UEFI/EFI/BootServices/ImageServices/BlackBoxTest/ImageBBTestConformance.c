@@ -57,6 +57,13 @@ Abstract:
 
 #include "Misc.h"
 
+#define TEST_VENDOR1_GUID                         \
+  { 0xF6FAB04F, 0xACAF, 0x4af3, { 0xB9, 0xFA, 0xDC, 0xF9, 0x7F, 0xB4, 0x42, 0x6F } }
+
+#define MAX_BUFFER_SIZE  10
+
+EFI_GUID gTestVendor1Guid = TEST_VENDOR1_GUID;
+
 /**
  *  @brief Entrypoint for gtBS->LoadImage() Consistency Test.
  *         4 check points will be tested.
@@ -814,6 +821,9 @@ BBTestExitBootServicesConsistencyTest (
   UINTN                                MapKey;
 
   UINTN                                Numbers;
+  UINTN                                DataSize;
+  UINT8                                Data[MAX_BUFFER_SIZE];
+  EFI_STATUS                           ReturnStatus;
 
   //
   // Init
@@ -848,6 +858,25 @@ BBTestExitBootServicesConsistencyTest (
     return Status;
   }
 
+  DataSize = MAX_BUFFER_SIZE;
+  Status = gtRT->GetVariable (
+                 L"ExitBootServicesTestVariable",             // VariableName
+                 &gTestVendor1Guid,                           // VendorGuid
+                 NULL,                                        // Attributes
+                 &DataSize,                                   // DataSize
+                 &ReturnStatus                                // Data
+                 );
+
+  if (Status == EFI_SUCCESS) {
+    goto CheckResult;
+  }
+
+  //
+  // Print out some information to avoid the user thought it is an error
+  //
+  Print (L"System will cold reset after 2 second. please run this test again...");
+  gtBS->Stall (2000000);
+
   //
   // Checkpoint 1:
   // 3.5.2.1  ExitBootServices should not succeed with an invalid MapKey
@@ -874,25 +903,57 @@ BBTestExitBootServicesConsistencyTest (
 
   MapKey += MapKey;
 
-  Status = gtBS->ExitBootServices (
-                   mImageHandle,
-                   MapKey
-                   );
-  if (Status == EFI_INVALID_PARAMETER) {
+  ReturnStatus = gtBS->ExitBootServices (
+                         mImageHandle,
+                         MapKey
+                         );
+  if (ReturnStatus == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
+  
+  Status = gtRT->SetVariable (
+                     L"ExitBootServicesTestVariable",                                                           // VariableName
+                     &gTestVendor1Guid,                                                                         // VendorGuid
+                     EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS, // Attributes
+                     sizeof(EFI_STATUS),                        // DataSize
+                     &ReturnStatus                              // Data
+                     );
+
+  //reset system
+  gtRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
+  
+
+  // get var to get the status
+CheckResult:
+
+  if (ReturnStatus == EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
                  gConsistencyTestAssertionGuid009,
                  L"BS.ExitBootServices - ConsistencyTestCheckpoint1",
-                 L"%a:%d:Status - %r",
+                 L"%a:%d: the Status is - %r, expected status is %r",
                  __FILE__,
                  (UINTN)__LINE__,
-                 Status
+                 ReturnStatus,
+                 EFI_INVALID_PARAMETER
                  );
+
+  Status = gtRT->SetVariable (
+                     L"ExitBootServicesTestVariable",                                                           // VariableName
+                     &gTestVendor1Guid,                                                                         // VendorGuid
+                     EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS, // Attributes
+                     0,                               // DataSize
+                     Data                             // Data
+                     );
+  
 
   Status = ImageTestCheckForCleanEnvironment (&Numbers);
   if (EFI_ERROR(Status)) {

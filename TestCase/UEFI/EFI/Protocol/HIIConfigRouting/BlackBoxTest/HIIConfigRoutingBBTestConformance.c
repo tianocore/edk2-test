@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -711,7 +711,8 @@ BBTestExtractConfigConformanceTestCheckpoint4(
                                &Results
                                );
 
-  if ( EFI_INVALID_PARAMETER != Status || Progress[0] != *(Pointer - 1) ) {
+  if ( (EFI_INVALID_PARAMETER != Status) || 
+  	(Progress[0] != *(Pointer - 1) && Progress[0] != *Request)) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1229,7 +1230,7 @@ BBTestConfigToBlockConformanceTestCheckpoint4(
                                &Progress
                                );
 
-  if ( EFI_DEVICE_ERROR != Status) {
+  if ( EFI_BUFFER_TOO_SMALL != Status || BlockSize != 9) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1238,7 +1239,7 @@ BBTestConfigToBlockConformanceTestCheckpoint4(
                  StandardLib,
                  AssertionType,
                  gHIIConfigRoutingBBTestConformanceAssertionGuid019,
-                 L"HII_CONFIG_ROUTING_PROTOCOL.ConfigToBlock - ConfigToBlock() returns EFI_DEVICE_ERROR with Block being not large enough.",
+                 L"HII_CONFIG_ROUTING_PROTOCOL.ConfigToBlock - ConfigToBlock() returns EFI_BUFFER_TOO_SMALL with Block being not large enough.",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,

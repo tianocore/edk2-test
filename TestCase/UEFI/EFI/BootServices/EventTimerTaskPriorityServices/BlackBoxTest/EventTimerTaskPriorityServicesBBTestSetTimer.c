@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -93,6 +93,11 @@ BBTestSetTimer_Func_Sub4 (
 
 EFI_STATUS
 BBTestSetTimer_Func_Sub5 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  );
+
+EFI_STATUS
+BBTestSetTimer_Func_Sub6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
@@ -192,6 +197,12 @@ BBTestSetTimer_Func (
   // SetTimer() returns EFI_SUCCESS with TriggerTime being 0.
   //
   BBTestSetTimer_Func_Sub5 (StandardLib);
+
+  //
+  // SetTimer() with type of TimerPeriodic, the notify function will be invoked
+  // more than once.
+  //
+  BBTestSetTimer_Func_Sub6 (StandardLib);
 
   //
   // Done
@@ -705,6 +716,73 @@ BBTestSetTimer_Func_Sub5 (
                  AssertionType,
                  gEventTimerTaskPriorityServicesBBTestSetTimerAssertionGuid009,
                  L"BS.SetTimer - Set with special trigger time.",
+                 L"%a:%d:Status - %r, Count - %d",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 Buffer[1]
+                 );
+
+  //
+  // Close the event
+  //
+  gtBS->CloseEvent (Event);
+
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+BBTestSetTimer_Func_Sub6 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  )
+{
+  EFI_STATUS          Status;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_EVENT           Event;
+  UINTN               Buffer[2];
+
+  //
+  // Create an event
+  //
+  Buffer[0] = 0;  // Max
+  Buffer[1] = 0;  // Used
+  Status = gtBS->CreateEvent (
+                   EFI_EVENT_TIMER | EFI_EVENT_NOTIFY_SIGNAL,
+                   EFI_TPL_NOTIFY,
+                   NotifyFunction,
+                   Buffer,
+                   &Event
+                   );
+  if (EFI_ERROR (Status)) {
+    EFI_TEST_GENERIC_FAILURE (L"BS.SetTimer - Create event", Status);
+    return Status;
+  }
+
+  //
+  // Set timer as periodic timer
+  //
+  Status = gtBS->SetTimer (
+                   Event,
+                   TimerPeriodic,
+                   0           // the timer event will be signaled on the every timer tick
+                   );
+
+  gtBS->Stall (1000000);              // 1 seconds
+
+  if ((Status == EFI_SUCCESS) && (Buffer[1] > 1)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEventTimerTaskPriorityServicesBBTestSetTimerAssertionGuid002,
+                 L"BS.SetTimer - Set TimerPeriodic timer.",
                  L"%a:%d:Status - %r, Count - %d",
                  __FILE__,
                  (UINTN)__LINE__,

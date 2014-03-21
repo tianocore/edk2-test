@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2006 - 2013 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -178,6 +178,7 @@ SctPkg/TestCase/UEFI/IHV/Protocol/BusSpecificDriverOverride/BlackBoxTest/IhvBusS
 SctPkg/TestCase/UEFI/IHV/Protocol/ComponentName2/BlackBoxTest/IhvComponentName2BBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/DevicePath/BlackBoxTest/IhvDevicePathBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/DiskIo/BlackBoxTest/IhvDiskIoBBTest.inf
+SctPkg/TestCase/UEFI/IHV/Protocol/DiskIo2/BlackBoxTest/IhvDiskIo2BBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/DriverBinding/BlackBoxTest/IhvDriverBindingBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/DriverDiagnostics2/BlackBoxTest/IhvDriverDiagnostics2BBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/Ebc/BlackBoxTest/IhvEbcBBTest.inf
@@ -203,6 +204,7 @@ SctPkg/TestCase/UEFI/IHV/Protocol/AbsolutePointer/BlackBoxTest/IhvAbsolutePointe
 SctPkg/TestCase/UEFI/IHV/Protocol/PlatformToDriverConfiguration/BlackBoxTest/IhvPlatformToDriverConfigurationBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/StorageSecurityCommand/BlackBoxTest/IhvStorageSecurityCommandBBTest.inf
 
+SctPkg/TestCase/UEFI/IHV/Protocol/AdapterInfo/BlackBoxTest/IhvAdapterInfoBBTest.inf
 #
 # Dependency files for UEFI/IHV Test
 #

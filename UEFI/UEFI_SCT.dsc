@@ -253,6 +253,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/DevicePathUtilities/BlackBoxTest/DevicePathUti
 SctPkg/TestCase/UEFI/EFI/Protocol/DevicePathToText/BlackBoxTest/DevicePathToTextBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/DevicePathFromText/BlackBoxTest/DevicePathFromTextBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/DiskIo/BlackBoxTest/DiskIoBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/DiskIo2/BlackBoxTest/DiskIo2BBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/Ebc/BlackBoxTest/EbcBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/LoadedImage/BlackBoxTest/LoadedImageBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/LoadFile/BlackBoxTest/LoadFileBBTest.inf
@@ -297,6 +298,11 @@ SctPkg/TestCase/UEFI/EFI/Protocol/PlatformToDriverConfiguration/BlackBoxTest/Pla
 SctPkg/TestCase/UEFI/EFI/Protocol/FirmwareManagement/BlackBoxTest/FirmwareManagementBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/AtaPassThru/BlackBoxTest/AtaPassThruBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/StorageSecurityCommand/BlackBoxTest/StorageSecurityCommandBBTest.inf
+
+
+SctPkg/TestCase/UEFI/EFI/Protocol/AdapterInfo/BlackBoxTest/AdapterInfoProtocolBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/TimeStamp/BlackBoxTest/TimeStampProtocolBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/RandomNumber/BlackBoxTest/RandomNumberBBTest.inf
 
 #
 # Dependency files for UEFI/EFI Compliant Test

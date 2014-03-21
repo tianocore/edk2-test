@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -2133,6 +2133,21 @@ SetVariableConfTestSub2 (
   UINTN                 DataIndex;
   UINT8                 Data[MAX_BUFFER_SIZE];
 
+  UINTN                 Index;
+  UINTN                 SubIndex;
+  UINTN                 SubIndex1;
+  EFI_TPL               OldTpl;
+  EFI_STATUS            ReturnedStatus;
+  UINTN                 DataSize;
+  EFI_TPL               TplArray[] = {EFI_TPL_APPLICATION, EFI_TPL_CALLBACK};
+  UINT32                Attributes;
+  UINT32                AttributesArray[] = {
+    EFI_VARIABLE_BOOTSERVICE_ACCESS,
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+    EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS
+  };
+
   if (LoggingLib != NULL) {
     LoggingLib->EnterFunction (
                   LoggingLib,
@@ -2208,6 +2223,118 @@ SetVariableConfTestSub2 (
                  (UINTN)__LINE__,
                  Status,      EFI_INVALID_PARAMETER
                  );
+
+  //
+  // for each TPL less than or equal to TPL_CALLBACK do
+  //
+  for (Index = 0; Index < 2; Index++) {
+    //
+    // For each Attributes of BA, NV|BA, BA|RA and NV|BA|RA do
+    //
+    for (SubIndex = 0; SubIndex < 4; SubIndex++) {
+      //
+      // Insert a variable firstly
+      //
+      for (DataIndex = 0; DataIndex < 10; DataIndex++) {
+        Data[DataIndex] = (UINT8)DataIndex;
+      }
+
+      Attributes = AttributesArray[SubIndex];
+      Status = RT->SetVariable (
+                     L"TestVariable",             // VariableName
+                     &gTestVendor1Guid,           // VendorGuid
+                     Attributes,                  // Attributes
+                     10,                          // DataSize
+                     Data                         // Data
+                     );
+      if (EFI_ERROR(Status)) {
+        StandardLib->RecordAssertion (
+                       StandardLib,
+                       EFI_TEST_ASSERTION_WARNING,
+                       gTestGenericFailureGuid,
+                       L"RT.SetVariable - Cannot insert a variable",
+                       L"%a:%d:Status - %r",
+                       __FILE__,
+                       (UINTN)__LINE__,
+                       Status
+                       );
+
+        continue;
+      }
+
+      for (DataIndex = 0; DataIndex < 10; DataIndex++) {
+        Data[DataIndex] = 10 - (UINT8)DataIndex;
+      }	  
+
+      for (SubIndex1 = 0; SubIndex1 < 4; SubIndex1++) {
+        if (Attributes != AttributesArray[SubIndex1]) {
+          OldTpl = gtBS->RaiseTPL (TplArray[Index]);
+
+          ReturnedStatus = RT->SetVariable (
+                                 L"TestVariable",             // VariableName
+                                 &gTestVendor1Guid,           // VendorGuid
+                                 AttributesArray[SubIndex1],   // Attributes
+                                 10,                          // DataSize
+                                 Data                         // Data
+                                 );
+
+          gtBS->RestoreTPL (OldTpl);
+
+          if (ReturnedStatus == EFI_INVALID_PARAMETER) {
+            Result = EFI_TEST_ASSERTION_PASSED;
+          } else {
+            Result = EFI_TEST_ASSERTION_FAILED;
+          }
+
+          DataSize = MAX_BUFFER_SIZE; 
+          RT->GetVariable (
+                L"TestVariable",             // VariableName
+                &gTestVendor1Guid,           // VendorGuid
+                NULL,                        // Attributes
+                &DataSize,                   // DataSize
+                Data                         // Data
+                );
+
+          if (DataSize != 10) {
+            Result = EFI_TEST_ASSERTION_FAILED;
+          } else {
+            for (DataIndex = 0; DataIndex < 10; DataIndex++) {
+              if (Data[DataIndex] != (UINT8)DataIndex) {
+                Result = EFI_TEST_ASSERTION_FAILED;
+			    break;
+			  }
+            }
+          }
+          //
+          // Record assertion
+          //
+          StandardLib->RecordAssertion (
+                         StandardLib,
+                         Result,
+                         gVariableServicesBbTestConformanceAssertionGuid017,
+                         L"RT.SetVariable - With different Attributes",
+                         L"%a:%d:Status - %r, Expected - %r",
+                         __FILE__,
+                         (UINTN)__LINE__,
+                         ReturnedStatus,
+                         EFI_INVALID_PARAMETER
+                         );
+		  
+        }
+      }
+
+      if (Status == EFI_SUCCESS) {
+        RT->SetVariable (
+              L"TestVariable",             // VariableName
+              &gTestVendor1Guid,           // VendorGuid
+              AttributesArray[SubIndex],   // Attributes
+              0,                           // DataSize
+              Data                         // Data
+              );
+      }
+	  
+    }
+  }
 
   //
   // Trace ...

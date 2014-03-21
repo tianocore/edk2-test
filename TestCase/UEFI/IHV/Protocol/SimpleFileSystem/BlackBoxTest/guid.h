@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -245,6 +245,52 @@ extern EFI_GUID gSimpleFileSystemConformanceTestAssertionGuid037;
 { 0x33218d68, 0x5245, 0x4bab, 0x9c, 0x1d, 0xc, 0x4b, 0xca, 0xd9, 0x4, 0x87 }
 
 extern EFI_GUID gSimpleFileSystemConformanceTestAssertionGuid038;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_001_GUID \
+{ 0xad02d93d, 0xf2e8, 0x4f25, 0x93, 0xce, 0x94, 0x6, 0x77, 0xb6, 0xe1, 0xb2}
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid001;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_002_GUID \
+{ 0xcab7c260, 0xa290, 0x4845, 0xb7, 0x3, 0xb1, 0x9f, 0xed, 0xf9, 0x84, 0xeb } 
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid002;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_003_GUID \
+{ 0x33273ae, 0x2471, 0x4c08, 0xb0, 0x8d, 0xeb, 0xd9, 0xdd, 0xbd, 0x57, 0x81 } 
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid003;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_004_GUID \
+{ 0xc51c0c6d, 0xdfc6, 0x4ea7, 0xb4, 0x36, 0x83, 0xae, 0x3a, 0x3f, 0x49, 0xd2 } 
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid004;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_005_GUID \
+{ 0xc9af9973, 0x76af, 0x4701, 0x88, 0xc0, 0xff, 0x61, 0xe, 0x37, 0x74, 0xa }
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid005;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_006_GUID \
+{ 0xa056bcff, 0xdb0b, 0x4733, 0x88, 0x9a, 0xb1, 0xca, 0x52, 0xac, 0x58, 0xe9 } 
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid006;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_007_GUID \
+{ 0xce7774fa, 0xd04c, 0x45a6, 0xb7, 0xb, 0xcd, 0x91, 0xa2, 0x76, 0xf9, 0x15 } 
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid007;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_008_GUID \
+{ 0x864c9887, 0x7205, 0x4e15, 0xad, 0x9f, 0x7a, 0x94, 0xec, 0xf0, 0xc2, 0xd8 }
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid008;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_009_GUID \
+{ 0x12bc7ab7, 0x4ac5, 0x4cf3, 0xa5, 0x54, 0x6b, 0x34, 0xc9, 0x5d, 0xc, 0xea }
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid009;
+
 
 #define EFI_TEST_SIMPLEFILESYSTEMEXTENSIVETEST_AUTO_ASSERTION_001_GUID \
 { 0xf92366e8, 0xc59d, 0x4764, 0x99, 0x1a, 0xe0, 0xb8, 0xc8, 0x81, 0xd4, 0xdf }
@@ -1385,3 +1431,354 @@ extern EFI_GUID gSimpleFileSystemBBTestFunctionAssertionGuid177;
 { 0x384840cd, 0x9a3f, 0x44c3, 0x87, 0xd8, 0xcd, 0xd9, 0xab, 0xd2, 0x17, 0x96 }
 
 extern EFI_GUID gSimpleFileSystemBBTestFunctionAssertionGuid178;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_001_GUID \
+{ 0xce038e00, 0x833c, 0x4b2e, 0x9e, 0x50, 0x79, 0xed, 0xc, 0x74, 0xf2, 0x50 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid001;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_002_GUID \
+{ 0x5857ebf, 0xc920, 0x474a, 0x97, 0x4d, 0x85, 0x8d, 0x83, 0x98, 0x81, 0x6f } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid002;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_003_GUID \
+{ 0x858ccc86, 0x9739, 0x437e, 0x82, 0xff, 0x29, 0x8a, 0x34, 0x7f, 0xc4, 0x45 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid003;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_004_GUID \
+{ 0xccb9106f, 0x79ee, 0x4ec1, 0x98, 0xa5, 0x16, 0x8d, 0xe1, 0xa6, 0xb8, 0xf3 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid004;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_005_GUID \
+{ 0xd01cdf69, 0x1b1b, 0x42fc, 0x92, 0x3f, 0x1d, 0xc1, 0x90, 0x92, 0x3, 0xc7 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid005;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_006_GUID \
+{ 0x5241cbf, 0xf260, 0x41d7, 0xb1, 0x93, 0x3b, 0x27, 0x7f, 0x72, 0x12, 0x4c } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid006;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_007_GUID \
+{ 0xcfbb86c0, 0xc6c6, 0x40ca, 0x8e, 0xc8, 0xd, 0x76, 0xd0, 0xef, 0x50, 0xe7 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid007;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_008_GUID \
+{ 0xe8e8665c, 0xa44f, 0x491b, 0xb7, 0xe0, 0x56, 0x9, 0xc2, 0xbc, 0x20, 0xee } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid008;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_009_GUID \
+{ 0x77c1f80, 0xa887, 0x417d, 0xa9, 0xd6, 0xd9, 0x54, 0xca, 0xb, 0x94, 0x7b }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid009;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_010_GUID \
+{ 0xf75bdc5a, 0xfd02, 0x444d, 0x9b, 0xb1, 0xda, 0x70, 0x2e, 0x2a, 0x86, 0x13 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid010;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_011_GUID \
+{ 0xc105380e, 0x4c6d, 0x4e49, 0x8d, 0xe8, 0x1a, 0xc, 0xc0, 0x77, 0x3e, 0xdc } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid011;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_012_GUID \
+{ 0x67e49003, 0xf68c, 0x44bd, 0xb6, 0xee, 0xa5, 0xc8, 0x1, 0x6, 0xe7, 0xc1 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid012;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_013_GUID \
+{ 0xbe6ccb33, 0x351f, 0x488c,  0x86, 0x42, 0x65, 0x47, 0xa1, 0x35, 0x79, 0xc } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid013;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_014_GUID \
+{ 0xaaacd7f, 0xeb8b, 0x4e91, 0x9b, 0xcd, 0x30, 0x57, 0xe6, 0x10, 0x57, 0x69 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid014;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_015_GUID \
+{ 0x4c7ec69e, 0x9615, 0x4274, 0xa0, 0x99, 0xb1, 0xd3, 0x48, 0x88, 0xd6, 0x70 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid015;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_016_GUID \
+{ 0x3186ac5, 0xb4b2, 0x4d2d, 0xa8, 0x67, 0xb9, 0x10, 0xdd, 0x1f, 0x64, 0xad } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid016;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_017_GUID \
+{ 0x31473e47, 0xa40d, 0x43a0, 0xb7, 0xb8, 0x91, 0xd3, 0x29, 0x41, 0x75, 0x9d } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid017;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_018_GUID \
+{ 0x55702a2c, 0xeef, 0x4ded, 0xa6, 0xd9, 0x2f, 0xd7, 0x9a, 0xbb, 0x88, 0x5f } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid018;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_019_GUID \
+{ 0x258a6597, 0xd2ef, 0x4711, 0xa9, 0x89, 0xaa, 0xf0, 0xf9, 0x6f, 0x1, 0xc } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid019;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_020_GUID \
+{ 0xafd40ec9, 0x5027, 0x42a8,  0xb0, 0x2c, 0xc, 0xb5, 0x80, 0x86, 0xd7, 0x9c } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid020;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_021_GUID \
+{ 0x6aa8b399, 0x1b2f, 0x48d7, 0xa5, 0x34, 0x56, 0xc9, 0x68, 0xd6, 0xae, 0x11 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid021;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_022_GUID \
+{ 0xac3897ad, 0xd9c1, 0x4442, 0x84, 0x4b, 0x5c, 0xa1, 0x5c, 0x32, 0x80, 0xb } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid022;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_023_GUID \
+{ 0x3b9ed07d, 0xa0ea, 0x4719,  0xa2, 0xc9, 0xad, 0x54, 0x57, 0xc1, 0x5a, 0x73 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid023;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_024_GUID \
+{ 0x93ebe8a5, 0xf66b, 0x4532,  0x95, 0x77, 0x51, 0xe9, 0xdc, 0xda, 0xb6, 0x81 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid024;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_025_GUID \
+{ 0xb6cff935, 0x32ef, 0x4865, 0x9e, 0xd9, 0x9, 0x62, 0x87, 0xf2, 0x2a, 0x66 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid025;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_026_GUID \
+{ 0x5e767a63, 0x577a, 0x4628,  0xb6, 0xe9, 0x91, 0xb7, 0xd9, 0xaa, 0x5, 0xcb } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid026;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_027_GUID \
+{ 0x611a8daf, 0x274c, 0x4bd5,  0xa7, 0xba, 0xc1, 0x85, 0x43, 0xd3, 0x7f, 0x74 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid027;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_028_GUID \
+{ 0xa6985e4, 0xfe17, 0x4740, 0x95, 0x7a, 0xe9, 0xc0, 0x5b, 0x45, 0x2, 0xe0 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid028;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_029_GUID \
+{ 0xc61f052, 0x2ae3, 0x4219, 0xad, 0x79, 0x4b, 0xdd, 0x95, 0xc1, 0x78, 0xc3 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid029;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_030_GUID \
+{ 0x41087c41, 0xb9a9, 0x4943,  0xb8, 0x22, 0x9f, 0x9b, 0x41, 0x78, 0xa6, 0x49 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid030;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_031_GUID \
+{ 0x6277ccac, 0x481c, 0x4cb2, 0xac, 0x96, 0x89, 0x96, 0x79, 0xf2, 0xa9, 0x19 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid031;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_032_GUID \
+{ 0x518c70d5, 0x4070, 0x4b81, 0x9d, 0xb3, 0xcb, 0x20, 0xd6, 0x7f, 0x11, 0x1c }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid032;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_033_GUID \
+{ 0x44fa0576, 0x8cd, 0x48c2, 0x9b, 0x71, 0x5f, 0x63, 0xc2, 0xb3, 0x97, 0x10 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid033;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_034_GUID \
+{ 0xef745935, 0x937, 0x4b11, 0xa7, 0xca, 0x65, 0xaf, 0xb, 0xf0, 0x45, 0x44 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid034;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_035_GUID \
+{ 0x3c64e927, 0x68e7, 0x4668, 0xae, 0xa8, 0xc2, 0xc7, 0xdc, 0x15, 0xc, 0x3f } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid035;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_036_GUID \
+{ 0x233a928b, 0x8f5d, 0x483a, 0xab, 0x3, 0x2d, 0x3, 0xf1, 0xa3, 0xdc, 0x26 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid036;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_037_GUID \
+{ 0x959a9093, 0xa975, 0x42a9, 0x9b, 0x83, 0x32, 0x4a, 0x79, 0xca, 0x2f, 0x1b }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid037;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_038_GUID \
+{ 0x43ad5688, 0xbc02, 0x4870, 0xb8, 0x85, 0x2, 0x86, 0xdd, 0x54, 0xb2, 0x76 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid038;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_039_GUID \
+{ 0x90908639, 0x141f, 0x4632, 0x85, 0xca, 0x7d, 0x6e, 0x83, 0xe5, 0x57, 0x47 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid039;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_040_GUID \
+{ 0x8eb7f8cc, 0x6d0d, 0x4c10, 0xbd, 0x94, 0xdc, 0x32, 0x7d, 0x2e, 0x6d, 0x3d } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid040;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_041_GUID \
+{ 0x3431780c, 0x56da, 0x4628, 0x86, 0xa2, 0xa3, 0x8, 0xf2, 0xe9, 0x88, 0x27 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid041;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_042_GUID \
+{ 0x7d9eacf0, 0x167, 0x4ef7, 0xa7, 0xf2, 0x31, 0xb5, 0x3e, 0xc4, 0xcb, 0x8a }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid042;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_043_GUID \
+{ 0xf9dad61f, 0xfc35, 0x4fd6, 0x86, 0xb, 0x7b, 0x8b, 0x2e, 0xbf, 0x89, 0x63 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid043;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_044_GUID \
+{ 0xf87622cf, 0x13c6, 0x412e, 0x86, 0xa6, 0x8e, 0x7f, 0xf2, 0x63, 0xa, 0x8e } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid044;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_045_GUID \
+{ 0xbfc2a163, 0xe8d5, 0x45df, 0x8f, 0x6b, 0x1, 0xa, 0xee, 0x48, 0x89, 0xc0 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid045;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_046_GUID \
+{ 0x8ffd05e8, 0xaa76, 0x4fcb, 0x93, 0xe4, 0x19, 0xa2, 0xc, 0x2b, 0xa9, 0x4 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid046;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_047_GUID \
+{ 0x41fe9684, 0x113b, 0x415f, 0xaf, 0xbf, 0xee, 0x48, 0x10, 0x8a, 0x70, 0xc2 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid047;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_048_GUID \
+{ 0xd5c326a3, 0x7ad, 0x490e, 0x9b, 0xdc, 0xa8, 0xe3, 0x4d, 0x7a, 0xae, 0x8a }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid048;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_049_GUID \
+{ 0x55825138, 0x793d, 0x4aaa, 0xab, 0xcc, 0x4d, 0x4a, 0xbd, 0xb2, 0x17, 0xef }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid049;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_050_GUID \
+{ 0xa4a53615, 0x7939, 0x4dcf, 0xbf, 0xb6, 0xc7, 0x4e, 0xe3, 0x3e, 0x93, 0x30 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid050;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_051_GUID \
+{ 0x4014c563, 0x7c95, 0x4323, 0xa2, 0xd1, 0xbb, 0x94, 0x26, 0x74, 0xc9, 0xa3 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid051;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_052_GUID \
+{ 0x5a646037, 0xbe58, 0x41d8, 0xb4, 0x91, 0x84, 0x3, 0xb9, 0xf8, 0xa7, 0x44 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid052;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_053_GUID \
+{ 0xa398b24a, 0x568f, 0x4762, 0xb1, 0xcb, 0x52, 0x25, 0xa7, 0xe, 0x2f, 0x1f }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid053;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_054_GUID \
+{ 0xbab0c3fc, 0x8630, 0x43bf, 0x97, 0x88, 0x6d, 0x96, 0xcd, 0x3a, 0x6e, 0x7c }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid054;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_055_GUID \
+{ 0xffc5787b, 0x29a5, 0x4704, 0x84, 0xd9, 0xd8, 0xb6, 0x6e, 0x62, 0x9c, 0xc2 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid055;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_056_GUID \
+{ 0xe9d202ed, 0x2e34, 0x4686, 0x9a, 0xe3, 0x9b, 0x41, 0x5b, 0xaa, 0xbc, 0x72 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid056;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_057_GUID \
+{ 0x3c57480f, 0xc2f3, 0x4cee, 0xab, 0xef, 0x54, 0x8d, 0x69, 0x56, 0xae, 0x89 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid057;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_058_GUID \
+{ 0x5850bc3c, 0x1b0f, 0x4bda, 0x9e, 0x3c, 0x9c, 0x17, 0xf1, 0x9d, 0xf7, 0x53 } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid058;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_059_GUID \
+{ 0x13ce6d88, 0xd770, 0x470f, 0xb7, 0x3d, 0x60, 0x25, 0x18, 0xc2, 0xd2, 0xbf } 
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid059;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_060_GUID \
+{ 0xc2535525, 0xbe07, 0x4980, 0xb9, 0x46, 0x7f, 0x87, 0x9, 0xe2, 0x12, 0xbe }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid060;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_061_GUID \
+{ 0x7b0dcc35, 0xc3ea, 0x43cc, 0xac, 0xa9, 0x6a, 0x60, 0x1c, 0x3d, 0xe5, 0x45 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid061;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_062_GUID \
+{ 0x8a6ef609, 0xe8dc, 0x40a2, 0xb4, 0x18, 0xd0, 0xa4, 0xdf, 0x4d, 0x3f, 0xa3 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid062;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_063_GUID \
+{ 0x5cfc5d39, 0x197c, 0x48dd, 0x9c, 0x7f, 0x98, 0x51, 0x64, 0x96, 0x79, 0xe7 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid063;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_064_GUID \
+{ 0x1f3f5ccf, 0xdc02, 0x4200, 0x81, 0xd0, 0x2, 0x34, 0x32, 0x60, 0xf2, 0xe5 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid064;
+
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_065_GUID \
+{ 0x83351bef, 0x2368, 0x442e, 0x89, 0xe6, 0xd2, 0xd5, 0xe9, 0xaf, 0x4a, 0x40 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid065;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_066_GUID \
+{ 0x1e8c1e14, 0x47d8, 0x4a23, 0xb2, 0xd6, 0x4b, 0xe0, 0x99, 0xf4, 0xa5, 0xdf }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid066;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_067_GUID \
+{ 0x70486db6, 0x12f9, 0x4f6e, 0xa3, 0xf2, 0xed, 0xb4, 0x21, 0x27, 0x45, 0xbc }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid067;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXBBTESTFUNCTION_ASSERTION_068_GUID \
+{ 0x69996cd2, 0xf087, 0x42e9, 0xb7, 0xf6, 0x7c, 0x4, 0x18, 0x76, 0x36, 0xd7 }
+
+extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid068;
+
+
+

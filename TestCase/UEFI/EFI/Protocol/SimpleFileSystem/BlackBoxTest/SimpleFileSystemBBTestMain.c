@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -178,6 +178,47 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestSetInfoBasicTest
   },
+ 
+  {
+    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0112,
+    L"OpenEx_Func",
+    L"Function Test for OpenEx",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestOpenExBasicTest
+  },
+
+  {
+    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0113,
+    L"ReadEx_Func",
+    L"Function Test for ReadEx",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestReadExBasicTest
+  },
+  
+  {
+    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0114,
+    L"WriteEx_Func",
+    L"Function Test for WriteEx",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestWriteExBasicTest
+  },
+  
+  {
+    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0115,
+    L"FlushEx_Func",
+    L"Function Test for FlushEx",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestFlushExBasicTest
+  },
+  
   {
    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0201,
     L"Open_Conf",
@@ -187,6 +228,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestOpenConformanceTest
   },
+  
   {
    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0202,
     L"Delete_Conf",
@@ -250,6 +292,43 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestSetInfoConformanceTest
   },
+  {
+   SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0209,
+    L"OpenEx_Conf",
+    L"Conformance Test for OpenEx",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestOpenExConformanceTest
+  }, 
+  {
+   SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0210,
+    L"WriteEx_Conf",
+    L"Conformance Test for WriteEx",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestWriteExConformanceTest
+   }, 
+   {
+    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0211,
+     L"FlushEx_Conf",
+     L"Conformance Test for FlushEx",
+     EFI_TEST_LEVEL_MINIMAL,
+     gSupportProtocolGuid1,
+     EFI_TEST_CASE_AUTO,
+     BBTestFlushExConformanceTest
+   }, 
+   {
+    SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0212,
+     L"ReadEx_Conf",
+     L"Conformance Test for ReadEx",
+     EFI_TEST_LEVEL_MINIMAL,
+     gSupportProtocolGuid1,
+     EFI_TEST_CASE_AUTO,
+     BBTestReadExConformanceTest
+   }, 
+
 
 #ifdef EFI_TEST_EXHAUSTIVE
   {

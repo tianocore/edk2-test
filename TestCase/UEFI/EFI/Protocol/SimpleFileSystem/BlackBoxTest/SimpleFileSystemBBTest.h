@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2013 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -123,6 +123,24 @@ extern EFI_HANDLE   mImageHandle;
 
 #define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0111 \
  {0xeba448e7, 0x59e6, 0x474a, {0x87, 0x5e, 0x56, 0xdd, 0xee, 0x9e, 0x3b, 0xfe} }
+//////////////////////////////////////////////////////////////////////////////
+//
+// Entry GUIDs for FunctionEx Test
+//
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0112 \
+{0x7e68498e, 0x343b, 0x4b61, { 0x8e, 0x3f, 0xfa, 0xe2, 0x85, 0xd9, 0x19, 0xf5 } }
+
+
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0113 \
+{0xc54b642d, 0x4d3e, 0x4897, { 0x9d, 0xd5, 0x1f, 0x72, 0x21, 0x65, 0xe0, 0xe } }
+
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0114 \
+{0x44b63e71, 0x6a74, 0x4a23, { 0x9c, 0x2d, 0xed, 0x33, 0x3d, 0xd5, 0xdd, 0xe2 } }
+
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0115 \
+{0xb2af35d8, 0x8e2b, 0x48b1, { 0xa3, 0xfc, 0xb4, 0xc6, 0x7d, 0x80, 0xf9, 0x9d } }
+
+
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -149,8 +167,21 @@ extern EFI_HANDLE   mImageHandle;
 #define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0207 \
  {0x8b16c09d, 0x5321, 0x4a63, {0xb1, 0x68, 0x8e, 0x59, 0x59, 0xa, 0x43, 0x6d} }
 
- #define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0208 \
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0208 \
  {0x44bec963, 0xdabd, 0x43e1, {0xb3, 0x8a, 0x95, 0x5a, 0xba, 0x3b, 0x18, 0xff} }
+ 
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0209 \
+ {0x614cf090, 0xe3a6, 0x49b6, { 0xaf, 0x93, 0x31, 0xba, 0xba, 0x7, 0x61, 0xb4 } }
+
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0210 \
+ {0xbffe42d6, 0xce26, 0x4b63, { 0x86, 0x9, 0x51, 0xe6, 0x9a, 0x16, 0x68, 0xa1 } }
+
+
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0211 \
+ {0xb2ef8d8c, 0x3662, 0x462f, { 0x90, 0x11, 0xcd, 0xdd, 0x5d, 0xc0, 0x3c, 0x6b } }
+
+#define SIMPLE_FILE_SYSTEM_PROTOCOL_TEST_ENTRY_GUID0212 \
+{ 0xb877944f, 0x7d05, 0x427f, { 0xbb, 0x9c, 0xbc, 0xcf, 0x78, 0x7, 0x34, 0x88 } }
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -319,6 +350,54 @@ BBTestGetInfoBasicTest (
 //
 EFI_STATUS
 BBTestSetInfoBasicTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// Checkpoint functionExs for basic tests
+//
+
+//
+// TDS 5.1.12
+//
+EFI_STATUS
+BBTestOpenExBasicTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// TDS 5.1.13
+//
+EFI_STATUS
+BBTestReadExBasicTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// TDS 5.1.14
+//
+EFI_STATUS
+BBTestWriteExBasicTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// TDS 5.1.15
+//
+EFI_STATUS
+BBTestFlushExBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
@@ -625,6 +704,52 @@ BBTestSetInfoConformanceTest (
   );
 
 //
+// TDS 5.2.9
+//
+EFI_STATUS
+BBTestOpenExConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// TDS 5.2.10
+//
+EFI_STATUS
+BBTestWriteExConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+
+//
+// TDS 5.2.11
+//
+EFI_STATUS
+BBTestFlushExConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// TDS 5.2.12
+//
+EFI_STATUS
+BBTestReadExConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+
+//
 // Checkpoint functions for Conformance tests
 //
 
@@ -836,6 +961,8 @@ BBTestSetInfoConformanceTestCheckpoint8 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
+
+
 
 //
 // Automatic Extensive test functions
