@@ -66,6 +66,7 @@ Abstract:
 #include "EfiShellLib.h"
 #include "InstallSctDef.h"
 #include "InstallSctSupport.h"
+
 //
 // Global definitions
 //
@@ -73,28 +74,27 @@ Abstract:
 #define INSTALL_SCT_1M                  (1024 * 1024)
 #define INSTALL_SCT_FREE_SPACE          (1024 * 1024 * 100)
 
-#define INSTALL_SCT_MAX_FILE_SYSTEM     0xF
+#define SCAN_SCT_MAX_FILE_SYSTEM        0xF
+#define INSTALL_SCT_MAX_FILE_SYSTEM     (SCAN_SCT_MAX_FILE_SYSTEM * 2)
 #define INSTALL_SCT_MAX_BACKUP          0xF
 
 #define INSTALL_SCT_STARTUP_FILE        L"SctStartup.nsh"
 
-
-enum VolumeType {
-  NONE_NT32,
-  NT32,
-  VOLUMETYPENUM
-};
-
-typedef struct {
-  UINTN FileVoluemIndex;
-  enum VolumeType VolType;
-}FileVolumeState;
+typedef enum {
+  BACKUP_POLICY_UNDEFINED = 0,
+  BACKUP_POLICY_NONE,
+  BACKUP_POLICY_BACKUP,
+  BACKUP_POLICY_BACKUP_ALL,
+  BACKUP_POLICY_REMOVE,
+  BACKUP_POLICY_REMOVE_ALL,
+} BACKUP_POLICY;
 
 //
 // Global variables
 //
 
-extern EFI_HANDLE gImageHandle;
+extern EFI_HANDLE    gImageHandle;
+extern BACKUP_POLICY mBackupPolicy;
 
 //
 // External functions

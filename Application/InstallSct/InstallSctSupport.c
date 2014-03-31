@@ -40,8 +40,9 @@
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+  Portions copyright (c) 2014, ARM Ltd. All rights reserved.
+
 --*/
 /*++
 
@@ -63,8 +64,7 @@ Abstract:
 
 EFI_STATUS
 GetFreeSpace (
-  IN CHAR16             *FsName,
-  OUT UINT64            *FreeSpace
+  IN OUT SCT_FILE_VOLUME *FileVolume
   )
 {
   EFI_STATUS                        Status;
@@ -77,7 +77,7 @@ GetFreeSpace (
   //
   // Get the device path of file system
   //
-  DevicePath = (EFI_DEVICE_PATH_PROTOCOL *) ShellGetMap (FsName);
+  DevicePath = (EFI_DEVICE_PATH_PROTOCOL *) ShellGetMap (FileVolume->Name);
   if (DevicePath == NULL) {
     return EFI_NOT_FOUND;
   }
@@ -125,7 +125,7 @@ GetFreeSpace (
     return Status;
   }
 
-  *FreeSpace = SystemInfo->FreeSpace;
+  FileVolume->FreeSpace = SystemInfo->FreeSpace;
 
   FreePool (SystemInfo);
   RootFs->Close (RootFs);
@@ -136,7 +136,7 @@ GetFreeSpace (
   return EFI_SUCCESS;
 }
 
-
+STATIC
 EFI_STATUS
 DirFileExist (
   IN CHAR16             *Name,
@@ -277,7 +277,7 @@ CreateDir (
   return EFI_SUCCESS;
 }
 
-
+STATIC
 EFI_STATUS
 RemoveDirFile (
   IN CHAR16             *Name
@@ -319,7 +319,7 @@ RemoveDirFile (
   return EFI_SUCCESS;
 }
 
-
+STATIC
 EFI_STATUS
 BackupDirFile (
   IN CHAR16             *Name
@@ -327,6 +327,7 @@ BackupDirFile (
 {
   EFI_STATUS  Status;
   CHAR16      *CmdLine;
+
   CHAR16      *PathName;
   CHAR16      *FileName;
   CHAR16      *TmpName;
@@ -506,5 +507,142 @@ CopyDirFile (
   //
   // Done
   //
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+ProcessExistingSctFile (
+  IN  CHAR16*         Name,
+  IN  CHAR16*         FileName
+  )
+{
+  EFI_STATUS  Status;
+  CHAR16      *Prompt;
+  CHAR16      InputBuffer[2];
+
+  // If it is not a 'ALL' policy then we need to get the user input
+  if ((mBackupPolicy != BACKUP_POLICY_BACKUP_ALL) &&
+      (mBackupPolicy != BACKUP_POLICY_REMOVE_ALL)) {
+    //
+    // Initialize the input buffer
+    //
+    InputBuffer[0] = L'\0';
+
+    //
+    // User input his selection
+    //
+    Prompt = PoolPrint (
+               L"Found the existing %s '%s'.\n"
+               L"Select (B)ackup, Backup (A)ll, (R)emove, Remove A(l)l. 'q' to exit:",
+               Name, FileName
+               );
+    if (Prompt == NULL) {
+      return EFI_OUT_OF_RESOURCES;
+    }
+
+    //
+    // User must input a selection
+    //
+    while (TRUE) {
+      Input (
+        Prompt,
+        InputBuffer,
+        2
+        );
+      Print (L"\n");
+
+      //
+      // Deal with the user input
+      //
+      if (StriCmp (InputBuffer, L"q") == 0) {
+        mBackupPolicy = BACKUP_POLICY_UNDEFINED;
+        break;
+      } else if (StriCmp (InputBuffer, L"b") == 0) {
+        mBackupPolicy = BACKUP_POLICY_BACKUP;
+        break;
+      } else if (StriCmp (InputBuffer, L"a") == 0) {
+        mBackupPolicy = BACKUP_POLICY_BACKUP_ALL;
+        break;
+      } else if (StriCmp (InputBuffer, L"r") == 0) {
+        mBackupPolicy = BACKUP_POLICY_REMOVE;
+        break;
+      } else if (StriCmp (InputBuffer, L"l") == 0) {
+        mBackupPolicy = BACKUP_POLICY_REMOVE_ALL;
+        break;
+      }
+    }
+
+    FreePool (Prompt);
+  }
+
+  switch (mBackupPolicy) {
+  case BACKUP_POLICY_BACKUP:
+  case BACKUP_POLICY_BACKUP_ALL:
+    Status = BackupDirFile (FileName);
+    break;
+
+  case BACKUP_POLICY_REMOVE:
+  case BACKUP_POLICY_REMOVE_ALL:
+    Status = RemoveDirFile (FileName);
+    break;
+
+  default:
+    Status = EFI_ABORTED;
+  }
+
+  return Status;
+}
+
+EFI_STATUS
+CheckForInstalledSct (
+  IN OUT SCT_FILE_VOLUME *FileVolume
+  )
+{
+  EFI_STATUS  Status;
+  CHAR16      *TmpName;
+  BOOLEAN     Exist;
+
+  FileVolume->IsSctPresent = 0;
+
+  //
+  // Check for 'SCT' folder
+  //
+  TmpName = PoolPrint (L"%s:\\SCT", FileVolume->Name);
+  if (TmpName == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  // Exist or not?
+  Status = DirFileExist (TmpName, &Exist);
+  if (EFI_ERROR (Status)) {
+    FreePool (TmpName);
+    return Status;
+  }
+
+  if (Exist) {
+    FileVolume->IsSctPresent |= SCT_FOLDER;
+  }
+  FreePool (TmpName);
+
+  //
+  // Check for SCT startup script
+  //
+  TmpName = PoolPrint (L"%s:\\startup.nsh", FileVolume->Name);
+  if (TmpName == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  // Exist or not?
+  Status = DirFileExist (TmpName, &Exist);
+  if (EFI_ERROR (Status)) {
+    FreePool (TmpName);
+    return Status;
+  }
+
+  if (Exist) {
+    FileVolume->IsSctPresent |= SCT_STARTUP;
+  }
+  FreePool (TmpName);
+
   return EFI_SUCCESS;
 }

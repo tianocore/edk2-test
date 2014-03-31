@@ -58,20 +58,22 @@ Abstract:
 #ifndef _EFI_INSTALL_SCT_SUPPORT_H_
 #define _EFI_INSTALL_SCT_SUPPORT_H_
 
+#define SCT_FOLDER    (1 << 0)
+#define SCT_STARTUP   (1 << 1)
+
+typedef struct {
+  CHAR16 Name[10];
+  UINT64 FreeSpace;
+  UINTN  IsSctPresent;
+} SCT_FILE_VOLUME;
+
 //
 // External functions
 //
 
 EFI_STATUS
 GetFreeSpace (
-  IN CHAR16             *FsName,
-  OUT UINT64            *FreeSpace
-  );
-
-EFI_STATUS
-DirFileExist (
-  IN CHAR16             *Name,
-  OUT BOOLEAN           *Exist
+  IN OUT SCT_FILE_VOLUME *FileVolume
   );
 
 EFI_STATUS
@@ -80,20 +82,21 @@ CreateDir (
   );
 
 EFI_STATUS
-RemoveDirFile (
-  IN CHAR16             *Name
-  );
-
-EFI_STATUS
-BackupDirFile (
-  IN CHAR16             *Name
-  );
-
-EFI_STATUS
 CopyDirFile (
   IN CHAR16             *SrcName,
   IN CHAR16             *DstName,
   IN BOOLEAN            Recursive
+  );
+
+EFI_STATUS
+ProcessExistingSctFile (
+  IN  CHAR16*         Name,
+  IN  CHAR16*         FileName
+  );
+
+EFI_STATUS
+CheckForInstalledSct (
+  IN OUT SCT_FILE_VOLUME *FileVolume
   );
 
 #endif
