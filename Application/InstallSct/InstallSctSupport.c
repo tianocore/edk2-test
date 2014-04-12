@@ -362,7 +362,7 @@ BackupDirFile (
     // Create the backup file name
     //
     TmpName = PoolPrint (
-                L"\"%s\\bak%d.%s\"",
+                L"\"%s\\%s.bak%d\"",
                 PathName,
                 Index,
                 FileName
@@ -398,7 +398,7 @@ BackupDirFile (
   // Create command line to backup it
   //
   CmdLine = PoolPrint (
-              L"MV \"%s\" \"%s\\bak%d.%s\"",
+              L"MV \"%s\" \"%s\\%s.bak%d\"",
               Name,
               PathName,
               Index,
@@ -522,7 +522,8 @@ ProcessExistingSctFile (
 
   // If it is not a 'ALL' policy then we need to get the user input
   if ((mBackupPolicy != BACKUP_POLICY_BACKUP_ALL) &&
-      (mBackupPolicy != BACKUP_POLICY_REMOVE_ALL)) {
+      (mBackupPolicy != BACKUP_POLICY_REMOVE_ALL) &&
+      (mBackupPolicy != BACKUP_POLICY_NONE)) {
     //
     // Initialize the input buffer
     //
@@ -585,6 +586,11 @@ ProcessExistingSctFile (
   case BACKUP_POLICY_REMOVE_ALL:
     Status = RemoveDirFile (FileName);
     break;
+
+  case BACKUP_POLICY_NONE:
+    Print (L"Error: An instance of SCT (%s) has been found. "
+           L"Please remove or backup it before to install a new one.\n",
+           FileName);
 
   default:
     Status = EFI_ABORTED;
