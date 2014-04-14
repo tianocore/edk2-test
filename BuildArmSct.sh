@@ -256,7 +256,7 @@ if [ ! -d $EDK_SOURCE/Other/Maintained/Application/Shell ]; then
       echo "Patching EdkShell sources to add support for $SCT_TARGET_ARCH platform..."
       echo "Using patch file $EDKSHELL_PATCH"
       cd $EDK_SOURCE/Other/Maintained/Application/Shell
-      patch -N -p0 < $EDKSHELL_PATCH
+      patch -N -p1 < $EDKSHELL_PATCH
       if [ $? -ne 0 ]; then
         echo "Couldn't apply patch."
         exit 1
