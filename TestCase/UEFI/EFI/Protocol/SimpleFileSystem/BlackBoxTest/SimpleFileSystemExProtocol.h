@@ -584,8 +584,8 @@ typedef struct _EFI_FILE_PROTOCOL {
   EFI_FILE_WRITE_EX       WriteEx;
   EFI_FILE_FLUSH_EX       FlushEx;
 }EFI_FILE_PROTOCOL;
-struct _EFI_FILE_PROTOCOL *EFI_FILE_PROTOCOL_HANDLE;
 
+typedef struct _EFI_FILE_PROTOCOL *EFI_FILE_PROTOCOL_HANDLE;
 
 //
 // File information types

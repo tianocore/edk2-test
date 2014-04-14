@@ -330,6 +330,7 @@ GetSystemInformation (
 
     mFsCount++;
   }
+  return EFI_SUCCESS;
 }
 
 EFI_STATUS
