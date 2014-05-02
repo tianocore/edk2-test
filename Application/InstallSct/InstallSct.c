@@ -157,7 +157,7 @@ InstallSct (
     FsName = SI->Argv[SI->Argc - 1];
 
     // Allocate new SctFileVolume
-    SctFileVolume = AllocatePool (sizeof(SctFileVolume));
+    SctFileVolume = AllocatePool (sizeof (SCT_FILE_VOLUME));
 
     // Save the filename
     CopyMem (SctFileVolume->Name, FsName, StrSize (FsName));
