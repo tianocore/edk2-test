@@ -2250,7 +2250,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
                  (UINTN)__LINE__,
                  Status
                  );
-
+  
   FileHandle->Delete (FileHandle);
 
   return EFI_SUCCESS;
@@ -2578,7 +2578,7 @@ BBTestSetInfoConformanceTestCheckpoint3 (
     gtBS->FreePool (SystemInfo);
     SystemInfo = NULL;
   }
-  
+
   //
   // init
   //

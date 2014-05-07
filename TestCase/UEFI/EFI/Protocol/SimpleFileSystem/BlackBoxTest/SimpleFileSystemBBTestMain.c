@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -53,6 +53,8 @@ Abstract:
 
 --*/
 #include "SimpleFileSystemBBTest.h"
+
+EFI_EVENT TimerEvent = NULL;
 
 //
 // global variable for this test driver's image handle
@@ -440,6 +442,8 @@ InitializeBBTestSimpleFileSystem (
 
   mImageHandle = ImageHandle;
 
+  gtBS->CreateEvent (EFI_EVENT_TIMER, 0, NULL, NULL, &TimerEvent);
+
   return EfiInitAndInstallBBTestInterface (
            &ImageHandle,
            &gBBTestProtocolField,
@@ -459,6 +463,8 @@ BBTestSimpleFileSystemUnload (
   IN EFI_HANDLE       ImageHandle
   )
 {
+  gtBS->CloseEvent (TimerEvent);
+  
   return EfiUninstallAndFreeBBTestInterface (
            ImageHandle,
            gBBTestProtocolInterface
