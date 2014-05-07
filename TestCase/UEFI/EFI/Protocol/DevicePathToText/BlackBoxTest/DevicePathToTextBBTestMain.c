@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -181,6 +181,34 @@ extern EFI_GUID mEfiDevicePathMessagingSASGuid;
 
 #define IS_HYPHEN(a)         ((a) == L'-')
 #define IS_NULL(a)           ((a) == L'\0')
+
+STATIC
+CHAR16 *
+TrimHexStr (
+  IN CHAR16  *Str
+  )
+{
+  //
+  // skip preceeding white space
+  //
+  while (*Str && *Str == ' ') {
+    Str += 1;
+  }
+  //
+  // skip preceeding zeros
+  //
+  while (*Str && *Str == '0') {
+    Str += 1;
+  }
+  //
+  // skip preceeding character 'x'
+  //
+  if (*Str && (*Str == 'x' || *Str == 'X')) {
+    Str += 1;
+  }
+
+  return Str;
+}
 
 STATIC
 EFI_STATUS 
@@ -327,6 +355,20 @@ StrToGuid (
 }
 
 STATIC
+VOID
+Xtoi64 (
+  IN CHAR16  *Str,
+  IN UINT64  *Data
+  )
+{
+  UINTN  Length;
+
+  *Data = 0;
+  Length = sizeof (UINT64);
+  HexStringToBuf ((UINT8 *) Data, &Length, TrimHexStr (Str), NULL);
+}
+
+STATIC
 EFI_STATUS
 UnicodeToAscii (
   IN CHAR16                       *UnicodeStr,
@@ -346,6 +388,31 @@ UnicodeToAscii (
   *AsciiStr = '\0';
 
   return EFI_SUCCESS;
+}
+
+STATIC
+VOID
+EUI64StrToUInt64 (
+  IN  CHAR16 *EUIStr, 
+  OUT UINT64 *EUIdValue
+  )
+{
+  CHAR16  *EUIStrPart[8];
+  UINT64  EUId[8];
+  UINT8   Index;
+  UINT64  Sum;
+
+  for (Index = 0; Index < 8; Index++) {
+    EUIStrPart[Index] = SplitStr (&EUIStr, L'-');
+	Xtoi64(EUIStrPart[Index], &EUId[Index]);
+  }
+
+  Sum = EUId[0];
+  for (Index = 1; Index < 8; Index++) {
+    Sum = LShiftU64(Sum, 8);
+	Sum = Sum + EUId[Index];
+  }
+  *EUIdValue = Sum;
 }
 
 STATIC
@@ -3198,6 +3265,42 @@ InValidText:
   return NULL;
 }
 
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildNVMeDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS            Status;
+  CHAR16                *ParamIdentifierStr;
+  CHAR16                *ParamIdentifierVal;
+  NVME_DEVICE_PATH      *NVMe;
+
+  NVMe = (NVME_DEVICE_PATH *) CreateDeviceNode (0x3, 0x17, sizeof (NVME_DEVICE_PATH));
+  if (NVMe == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"NSID", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    NVMe->NamespaceId = (UINT32) StrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"EUI", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+	EUI64StrToUInt64 (ParamIdentifierVal, &NVMe->EUId);
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) NVMe;
+InValidText:
+  FreePool(NVMe);
+  return NULL;
+}
+
 STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   L"PciRoot",
   BuildPciRootDeviceNode,
@@ -3273,6 +3376,8 @@ STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   BuildSASDeviceNode,
   L"SasEx",
   BuildSASExDeviceNode,
+  L"NVMe",
+  BuildNVMeDeviceNode,
   L"Uart",
   BuildUartDeviceNode,
   L"UsbClass",

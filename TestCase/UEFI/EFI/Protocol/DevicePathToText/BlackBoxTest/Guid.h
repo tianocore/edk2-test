@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -355,3 +355,11 @@ extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid122;
   }
 
 extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid123;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_124_GUID \
+  { \
+    0x21e74335, 0x50c9, 0x4deb, 0x8a, 0x9d, 0xf4, 0x2, 0x97, 0xfc, 0xa2, 0x26 \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid124;
+

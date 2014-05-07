@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -745,6 +745,29 @@ BBTestDevicePathNodeConformanceAutoTest (
                     (UINTN)SubType,
                     (UINTN)Length
                     );
+    }
+    //
+    // Add a new checkpoint for NVM Express Namespace Device Path
+    // Check Messaging Device Path: NVM Express Namespace Device Path
+    //
+    else if ((Type == 3) && (SubType == 23)) {
+      if (Length  ==16) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid047,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - NVM Express Namespace Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );  
     }
     //
     // Assertion Point 3.1.2.23

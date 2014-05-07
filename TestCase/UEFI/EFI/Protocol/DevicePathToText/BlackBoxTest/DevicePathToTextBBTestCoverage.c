@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1606,6 +1606,42 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   if (Text != NULL) {
     FreePool (Text);
   }
+
+  //
+  // NVMe(0xAB124BEF,AB-CD-EF-01-23-45-67-89)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x17, 16);  
+  ((NVME_DEVICE_PATH *)pDeviceNode1)->NamespaceId = 0xAB124BEF;
+  ((NVME_DEVICE_PATH *)pDeviceNode1)->EUId        = 0xABCDEF0123456789;
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (EfiCompareMem (pDeviceNode2, pDeviceNode1, DevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid124,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: NVMe(0xAB124BEF,AB-CD-EF-01-23-45-67-89)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    FreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    FreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    FreePool (Text);
+  }  
 
   return EFI_SUCCESS;
 }

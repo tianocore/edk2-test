@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -300,6 +300,32 @@ StrToGuid (
 
   return EFI_SUCCESS;
 }
+
+STATIC
+VOID
+EUI64StrToUInt64 (
+  IN  CHAR16 *EUIStr, 
+  OUT UINT64 *EUIdValue
+  )
+{
+  CHAR16  *EUIStrPart[8];
+  UINT64  EUId[8];
+  UINT8   Index;
+  UINT64  Sum;
+
+  for (Index = 0; Index < 8; Index++) {
+    EUIStrPart[Index] = SplitStr (&EUIStr, L'-');
+	Xtoi64(EUIStrPart[Index], &EUId[Index]);
+  }
+
+  Sum = EUId[0];
+  for (Index = 1; Index < 8; Index++) {
+    Sum = LShiftU64(Sum, 8);
+	Sum = Sum + EUId[Index];
+  }
+  *EUIdValue = Sum;
+}
+
 
 STATIC
 EFI_DEVICE_PATH_PROTOCOL *
@@ -1490,6 +1516,34 @@ CreateiScsiDeviceNode (
   iSCSI->NetworkProtocol  = (UINT16) EfiStrCmp (ProtocolStr, L"TCP");
 
   return (EFI_DEVICE_PATH_PROTOCOL *) iSCSI;
+}
+
+#define NVMeNodeType    3
+#define NVMeNodeSubType 23
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateNVMEDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16              *NSIDStr;
+  CHAR16              *EUIStr;
+  NVME_DEVICE_PATH    *NVMe;
+
+  NSIDStr = SplitStr (&TextDeviceNode, L',');
+  EUIStr  = SplitStr (&TextDeviceNode, L',');
+  NVMe  = (NVME_DEVICE_PATH *) CreateDeviceNode (
+                                 NVMeNodeType,
+                                 NVMeNodeSubType,
+                                 sizeof (NVME_DEVICE_PATH)
+                                 );
+
+  NVMe->NamespaceId = (UINT32) StrToUInt (NSIDStr);
+
+  EUI64StrToUInt64 (EUIStr, &NVMe->EUId);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) NVMe;
 }
 
 #define HdNodeType     4
@@ -2843,6 +2897,35 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 __FILE__,
                 (UINTN)__LINE__
                 );
+
+
+  //
+  // NVMe(0xAB124BEF,AB-CD-EF-01-23-45-67-89)
+  //
+ 
+  StrCpy (text, L"0xAB124BEF,AB-CD-EF-01-23-45-67-89");
+  pDevicePath = CreateNVMEDeviceNode(text);
+
+  StrCpy (text, L"NVMe(0xAB124BEF,AB-CD-EF-01-23-45-67-89)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (EfiCompareMem (pDevicePath, pReDevicePath, DevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  FreePool (pDevicePath);
+  FreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid131,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert NVMe(0xAB124BEF,AB-CD-EF-01-23-45-67-89)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
 
   return EFI_SUCCESS;
 }
