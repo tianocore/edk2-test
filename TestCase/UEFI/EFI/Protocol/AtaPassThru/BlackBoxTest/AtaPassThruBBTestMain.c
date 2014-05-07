@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -325,7 +325,7 @@ GetInvalidPort(
     if (*InvalidPort == 0xFFFF){
       return EFI_UNSUPPORTED;
     }
-    *InvalidPort += 1;	
+    *InvalidPort += 32;	
 
     return EFI_SUCCESS;	
   }
@@ -403,7 +403,7 @@ GetInvalidPortMultiplierPort(
 	  return EFI_UNSUPPORTED;
     }
 
-    *InvalidPortMultiplierPort += 1;	
+    *InvalidPortMultiplierPort += 16;	
 
     return EFI_SUCCESS;	
   }
