@@ -1,0 +1,113 @@
+================================================================================
+                                 HOW TO BUILD
+================================================================================
+Build UEFI SCT Agent:  
+  1. Setup Build Environment
+     1) Install Microsoft Windows XP or Windows 7 in build machine.
+     2) Install Microsoft Visual Studio 2005 in build machine.
+
+  2. Build Directory
+     1) Extract UefiSctEdkII-Dev.zip to the UEFI SCT directory, for example, 
+        extract to C:\UefiSct. After this step, one folder named as SctPkg will 
+        be generated.
+     2) Download BaseTools binary stable version - BaseTools(Binaries).zip from 
+        http://sourceforge.net/projects/edk2-buildtools/files/BuildTools_Source_Packages/BaseTools(Windows)_UDK2010.SR1.UP1.zip
+        Extract BaseTools(Windows)_UDK2010.SR1.UP1.zip to C:\UefiSct, then two 
+        folders named as BaseTools and Conf, one batch file named as edksetup.bat 
+        will be located in C:\UefiSct
+     3) Download EdkCompatibilityPkg stable version - EdkCompatibilityPkg 0.90.zip from
+        http://sourceforge.net/projects/edk2/files/EDK II Releases/EDK II Core (v 0.90)/
+        and extract to C:\UefiSct, then one folder named as EdkCompatibilityPkg 
+        will be located in C:\UefiSct
+     4) Check out one Shell stable version - Efi-Shell-Dev-Snapshot-20091214.zip 
+        from http://sourceforge.net/projects/efi-shell/files/Releases/Development Snapshots/
+        and extract it to C:\UefiSct\EdkCompatibilityPkg\Other\Maintained\Application
+
+  3. Build Step
+     1) Run Visual Studio 2005 Command Prompt to go to the command line environment. 
+        Let's make UEFI SCT X64 tip as an example.
+     2) Execute follow commands in turn. 
+        cd C:\UefiSct
+        edksetup.bat
+        set efi_source=C:\UefiSct
+        set edk_source=C:\UefiSct\EdkCompatibilityPkg
+        copy SctPkg\Tools\Bin\GenBin.exe BaseTools\Bin\Win32\ 
+        build -p SctPkg\UEFI\UEFI_SCT.dsc -t VS2005 -a X64
+        cd Build\UefiSct\DEBUG_VS2005
+        ..\..\..\SctPkg\CommonGenFramework.bat uefi_sct X64 InstallX64.efi
+     3) The target subdirectory named as SctPackageX64 which includes test cases 
+        and UEFI SCT applications will be generated and located at
+        C:\UefiSct\Build\UefiSct\DEBUG_VS2005
+
+Notice: The example shows the build process of X64 only. For other architecture, 
+        please change the keyword, X64, in build step to IA32 or IPF. 
+        The keyword, VS2005, need be changed to VS2005x86 in Win7(X64). 
+
+Build SCRT:
+  SCRT build process is integrated into UEFI SCT Agent build process. After UEFI
+  SCT agent build successfully, SCRT utility is located at
+  C:\UefiSct\Build\UefiSct\DEBUG_VS2005\SctPackageX64\X64\SCRT
+  or
+  C:\UefiSct\Build\UefiSct\DEBUG_VS2005\SctPackageIPF\IPF\SCRT
+  or 
+  C:\UefiSct\Build\UefiSct\DEBUG_VS2005\SctPackageIA32\Ia32\SCRT
+  
+Build IHV SCT Agent:
+  Compared with the build process of UEFI SCT, to support IHV SCT, only several 
+  mini-changes need be updated for IHV SCT build.
+
+  Build Step
+    1) Run Visual Studio 2005 Command Prompt to go to the command line environment. 
+       Let's make IHV SCT X64 tip as an example.
+    2) Execute follow commands in turn. 
+       cd C:\UefiSct
+       edksetup.bat
+       set efi_source=C:\UefiSct
+       set edk_source= C:\UefiSct\EdkCompatibilityPkg
+       copy SctPkg\Tools\Bin\GenBin.exe BaseTools\Bin\Win32\
+       build -p SctPkg\UEFI\IHV_SCT.dsc -t VS2005 -a X64 
+       cd Build\IHVSct\DEBUG_VS2005
+       ..\..\..\SctPkg\CommonGenFramework.bat ihv_sct X64 InstallX64.efi
+    3) The target subdirectory named as SctPackageX64 which includes test cases 
+       and UEFI SCT applications will be generated and located at
+       C:\UefiSct\Build\IHVSct\DEBUG_VS2005 
+
+
+Build EMS :
+  Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 
+  after this step, a subdirectory named as Ems is generated.
+  The Ems package will need to be built based on three third-party libraries: 
+  Tcl-Tk, Winpcap and Libnet. Default Ems packages use ActiveTcl8.4.19.5-threaded, 
+  winpcap3.0 and co-released libnet for building. The corresponding Makefile 
+  library includes files and linked .lib files that need to be changed if higher 
+  version libraries are used.
+  
+  1. Setup Build Environment
+     1) Install Microsoft Windows XP in build machine.
+     2) Download ActiveTCL8.4.19.5 from http://downloads.activestate.com/ActiveTcl/releases/8.4.19.5/ActiveTcl8.4.19.5.294332-win32-ix86-threaded.exe
+        and install it into C:\Tcl
+     3) Copy all *.lib from C:\Tcl\Lib to C:\UefiSct\Ems\Lib\Tcl\Lib 
+     4) Copy C:\Tcl\Include folder to C:\UefiSct\Ems\Lib\Tcl
+     5) Download the 3.0-WinPcap.exe from http://www.winpcap.org/archive/3.0-WinPcap.exe and install it to system
+     6) Download the 3.0-WpdPack.zip from http://www.winpcap.org/archive/3.0-WpdPack.zip and extract it to C:\WpdPack
+     7) Copy C:\WpdPack\Include folder into C:\UefiSct\Ems\Lib\WpdPack
+     8) Copy C:\WpdPack\Lib folder into C:\UefiSct\Ems\Lib\WpdPack
+
+  2. Build Step
+     1) Run Visual Studio 2005 Command Prompt to go to the command line environment. 
+     2) Execute follow commands in turn. 
+         a) cd C:\UefiSct\Ems\src
+         b) set ems_dir=C:\UefiSct\Ems
+         c) nmake
+     3) an Ems.exe executable file will be generated under the bin directory.
+
+  Notice:
+  1. When running UEFI SCT remote validation, user needs to keep the test 
+     topology environment clean. users could use one switch(hub) or one network 
+     cable to connect the EFI target machine and management host machine, but 
+     don't connect the switch(hub) to public network or other LANs.
+  2. If you want to run UEFI SCT with local execution usage, you need to make 
+     sure the "\Sct\.passive.mode" file is removed.
+  3. The passive mode of the UEFI SCT depends on network stacks.
+  4. Make sure TCP/IP6 network stack is installed in Windows XP if you want to 
+     validate EFI IPv6 Network Stack. EMS remote validation test requires them.
