@@ -56,12 +56,6 @@ Abstract:
 
 #include "SimpleFileSystemExProtocol.h"
 
-EFI_EVENT              TimerEvent;
-
-
-
-
-
 //
 //checkpoint 
 //
