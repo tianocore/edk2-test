@@ -1,0 +1,37 @@
+One X64 Desktop/Laptop pre-installed with Windows 7 and VS2008
+
+Prepare the build environment
+1. Download the UDK2014(UDK2014.Complete.MyWorkSpace.zip) from following link and extract it
+   http://tianocore.github.io/udk2014.html
+2. Extract UDK2014.MyWorkSpace.zip to c:\MyWorkSpace
+3. Extract BaseTools(Windows).zip to c:\MyWorkSpace
+4. Copy SctPkg to c:\MyWorkSpace
+
+
+Build Instructions
+1. Open the Visual Studio 2008 Command Prompt
+2. Execute "edksetup.bat"
+3. copy SctPkg\Tools\Bin\GenBin.exe BaseTools\Bin\Win32\
+4. Execute "build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2008x86"
+5. Execute "cd c:\MyWorkSpace\Build\UefiSct\DEBUG_VS2008x86"
+6. Execute "..\..\..\SctPkg\CommonGenFramework.bat uefi_sct X64 InstallX64.efi"
+7. The target subdirectory named as SctPackageX64 which includes test cases and UEFI SCT 
+   applications will be generated and located at C:\MyWorkSpace\Build\UefiSct\DEBUG_VS2008x86
+   
+Please feel free to contact eric.jin@intel.com if you meet issue or you want to contribute 
+the build instrctuion on Linux/Gcc environment.
+
+
+Build UEFI Shell
+1. Please replace the 3 files. The new files are provided in "ShellPkg Patch" folder.
+		a) ShellPkg\Application\Shell\Shell.c
+		b) ShellPkg\Application\Shell\ShellProtocol.c
+		c) ShellPkg\Application\Shell\ShellProtocol.h
+2. Execute "edksetup.bat"
+3. Execute "build -p ShellPkg\ShellPkg.dsc -a X64 -t VS2008x86"
+4. The shell.efi will be generated and located at C:WorkSpace\Build\Shell\DEBUG_VS2008x86\X64
+
+
+
+
+
