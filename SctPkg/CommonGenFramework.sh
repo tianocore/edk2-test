@@ -35,11 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2006 - 2014 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
+# Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>
 # Copyright (c) 2011, 2012 ARM Ltd All rights reserved. 
 #
 #
@@ -235,8 +236,8 @@ then
 	# *********************************************
 	
 	cp $ProcessorType/SerialMonitor.efi                $Framework/Ents/Support/ > NUL
-	cp $ProcessorType/MNPMonitor.efi                   $Framework/Ents/Support/ > NUL
-	cp $ProcessorType/IP4Monitor.efi                   $Framework/Ents/Support/ > NUL
+	cp $ProcessorType/ManagedNetworkMonitor.efi        $Framework/Ents/Support/ > NUL
+	cp $ProcessorType/IP4NetworkMonitor.efi            $Framework/Ents/Support/ > NUL
 	cp $ProcessorType/Eftp.efi                         $Framework/Ents/Support/ > NUL
 	
 	cp $ProcessorType/BootService_ENTSTest.efi         $Framework/Ents/Test/    > NUL
