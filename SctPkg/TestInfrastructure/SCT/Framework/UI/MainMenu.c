@@ -295,8 +295,8 @@ Returns:
   Status = AddSimpleMenuItem (
              EFI_ITEM_HAVE_SUBITEMS,
              L"Help",
-             L"UEFI2.4A Self Certification Test is a toolkit to check an UEFI2.4A "
-             L"implementation is UEFI2.4A Specification compliant or not.",
+             L"UEFI2.4B Self Certification Test is a toolkit to check an UEFI2.4B "
+             L"implementation is UEFI2.4B Specification compliant or not.",
              (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
              Page
              );

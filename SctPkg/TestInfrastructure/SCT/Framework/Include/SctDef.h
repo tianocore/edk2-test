@@ -72,7 +72,7 @@ Abstract:
 #elif (EFI_SPECIFICATION_VERSION == 0x0002001F)
 #define EFI_SCT_NAME                        L"UEFI2.3.1C Self Certification Test"
 #elif (EFI_SPECIFICATION_VERSION == 0x00020028)
-#define EFI_SCT_NAME                        L"UEFI2.4A Self Certification Test"
+#define EFI_SCT_NAME                        L"UEFI2.4B Self Certification Test(SCT2)"
 #endif
 
 #define EFI_SCT_SHORT_NAME                  L"SCT"
