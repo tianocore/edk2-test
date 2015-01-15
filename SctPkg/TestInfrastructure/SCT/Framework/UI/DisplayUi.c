@@ -1826,6 +1826,8 @@ Returns:
   //
   //set default Console Attribute and clear the screen
   //
+  tST->ConOut->Reset (tST->ConOut, TRUE);
+  
   tST->ConOut->SetAttribute (tST->ConOut, EFI_BACKGROUND_BLACK | EFI_WHITE);
   tST->ConOut->ClearScreen (tST->ConOut);
 
