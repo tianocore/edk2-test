@@ -52,6 +52,19 @@
 #include <Protocol/EfiShellEnvironment2.h>
 #include <Protocol/EfiShellParameters.h>
 
+typedef struct  {
+  EFI_SHELL_GET_FILE_INFO                   GetFileInfo;
+  EFI_SHELL_SET_FILE_INFO                   SetFileInfo;
+  EFI_SHELL_READ_FILE                       ReadFile;
+  EFI_SHELL_WRITE_FILE                      WriteFile;
+  EFI_SHELL_CLOSE_FILE                      CloseFile;
+  EFI_SHELL_DELETE_FILE                     DeleteFile;
+  EFI_SHELL_GET_FILE_POSITION               GetFilePosition;
+  EFI_SHELL_SET_FILE_POSITION               SetFilePosition;
+  EFI_SHELL_FLUSH_FILE                      FlushFile;
+  EFI_SHELL_GET_FILE_SIZE                   GetFileSize;
+} FILE_HANDLE_FUNCTION_MAP;
+
 // If we're running in the UEFI shell environment, ShellInitialize (in
 // UefiShellLib.c) will populate gEfiShellProtocol. Otherwise, it will populate
 // mEfiShellInterface.
@@ -62,6 +75,7 @@ EFI_SHELL_INTERFACE           *mEfiShellInterface;
 EFI_SHELL_PROTOCOL            *gEfiShellProtocol;
 EFI_SHELL_PARAMETERS_PROTOCOL *gEfiShellParametersProtocol;
 EFI_HANDLE                    mEfiShellEnvironment2Handle;
+FILE_HANDLE_FUNCTION_MAP      FileFunctionMap;
 
 // Shadowed Arguments to workaround difference Argv[0] on the two shells
 // Only populated when using the old shell
@@ -972,4 +986,243 @@ Routine Description:
 
   SctFreePool (Mapping);
   return Status;
+}
+
+EFI_STATUS
+EFIAPI
+SctShellOpenFileByDevicePath(
+  IN OUT EFI_DEVICE_PATH_PROTOCOL     **FilePath,
+  OUT EFI_HANDLE                      *DeviceHandle,
+  OUT SHELL_FILE_HANDLE               *FileHandle,
+  IN UINT64                           OpenMode,
+  IN UINT64                           Attributes
+  )
+{
+  CHAR16                          *FileName;
+  EFI_STATUS                      Status;
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL *EfiSimpleFileSystemProtocol;
+  EFI_FILE_PROTOCOL               *Handle1;
+  EFI_FILE_PROTOCOL               *Handle2;
+  CHAR16                          *FnafPathName;
+  UINTN                           PathLen;
+
+  if (FilePath == NULL || FileHandle == NULL || DeviceHandle == NULL) {
+    return (EFI_INVALID_PARAMETER);
+  }
+
+  //
+  // which shell interface should we use
+  //
+  if (gEfiShellProtocol != NULL) {
+    //
+    // use UEFI Shell 2.0 method.
+    //
+    FileName = gEfiShellProtocol->GetFilePathFromDevicePath(*FilePath);
+    if (FileName == NULL) {
+      return (EFI_INVALID_PARAMETER);
+    }
+    Status = SctShellOpenFileByName(FileName, FileHandle, OpenMode, Attributes);
+    SctFreePool(FileName);
+    return (Status);
+  }
+
+
+  //
+  // use old shell method.
+  //
+  Status = tBS->LocateDevicePath (&gEfiSimpleFileSystemProtocolGuid,
+                                  FilePath,
+                                  DeviceHandle);
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+  Status = tBS->OpenProtocol(*DeviceHandle,
+                             &gEfiSimpleFileSystemProtocolGuid,
+                             (VOID**)&EfiSimpleFileSystemProtocol,
+                             gImageHandle,
+                             NULL,
+                             EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+  Status = EfiSimpleFileSystemProtocol->OpenVolume(EfiSimpleFileSystemProtocol, &Handle1);
+  if (EFI_ERROR (Status)) {
+    FileHandle = NULL;
+    return Status;
+  }
+
+  //
+  // go down directories one node at a time.
+  //
+  while (!SctIsDevicePathEnd (*FilePath)) {
+    //
+    // For file system access each node should be a file path component
+    //
+    if (SctDevicePathType    (*FilePath) != MEDIA_DEVICE_PATH ||
+        SctDevicePathSubType (*FilePath) != MEDIA_FILEPATH_DP
+       ) {
+      FileHandle = NULL;
+      return (EFI_INVALID_PARAMETER);
+    }
+    //
+    // Open this file path node
+    //
+    Handle2  = Handle1;
+    Handle1 = NULL;
+
+    //
+    // File Name Alignment Fix (FNAF)
+    // Handle2->Open may be incapable of handling a unaligned CHAR16 data.
+    // The structure pointed to by FilePath may be not CHAR16 aligned.
+    // This code copies the potentially unaligned PathName data from the
+    // FilePath structure to the aligned FnafPathName for use in the
+    // calls to Handl2->Open.
+    //
+
+    //
+    // Determine length of PathName, in bytes.
+    //
+    PathLen = SctDevicePathNodeLength (*FilePath) - SIZE_OF_FILEPATH_DEVICE_PATH;
+
+    //
+    // Allocate memory for the aligned copy of the string Extra allocation is to allow for forced alignment
+    // Copy bytes from possibly unaligned location to aligned location
+    //
+    FnafPathName = SctAllocateCopyPool(PathLen, (UINT8 *)((FILEPATH_DEVICE_PATH*)*FilePath)->PathName);
+    if (FnafPathName == NULL) {
+      return EFI_OUT_OF_RESOURCES;
+    }
+
+    //
+    // Try to test opening an existing file
+    //
+    Status = Handle2->Open (
+                          Handle2,
+                          &Handle1,
+                          FnafPathName,
+                          OpenMode &~EFI_FILE_MODE_CREATE,
+                          0
+                         );
+
+    //
+    // see if the error was that it needs to be created
+    //
+    if ((EFI_ERROR (Status)) && (OpenMode != (OpenMode &~EFI_FILE_MODE_CREATE))) {
+      Status = Handle2->Open (
+                            Handle2,
+                            &Handle1,
+                            FnafPathName,
+                            OpenMode,
+                            Attributes
+                           );
+    }
+
+    //
+    // Free the alignment buffer
+    //
+    SctFreePool(FnafPathName);
+
+    //
+    // Close the last node
+    //
+    Handle2->Close (Handle2);
+
+    if (EFI_ERROR(Status)) {
+      return (Status);
+    }
+
+    //
+    // Get the next node
+    //
+    *FilePath = SctNextDevicePathNode (*FilePath);
+  }
+
+  //
+  // This is a weak spot since if the undefined SHELL_FILE_HANDLE format changes this must change also!
+  //
+  *FileHandle = (VOID*)Handle1;
+  return (EFI_SUCCESS);
+}
+
+EFI_STATUS
+EFIAPI
+SctShellOpenFileByName(
+  IN CONST CHAR16               *FileName,
+  OUT SHELL_FILE_HANDLE         *FileHandle,
+  IN UINT64                     OpenMode,
+  IN UINT64                     Attributes
+  )
+{
+  EFI_HANDLE                    DeviceHandle;
+  EFI_DEVICE_PATH_PROTOCOL      *FilePath;
+  EFI_STATUS                    Status;
+  EFI_FILE_INFO                 *FileInfo;
+
+  //
+  // ASSERT if FileName is NULL
+  //
+  ASSERT(FileName != NULL);
+
+  if (FileName == NULL) {
+    return (EFI_INVALID_PARAMETER);
+  }
+
+  if (gEfiShellProtocol != NULL) {
+    if ((OpenMode & EFI_FILE_MODE_CREATE) == EFI_FILE_MODE_CREATE && (Attributes & EFI_FILE_DIRECTORY) == EFI_FILE_DIRECTORY) {
+      return SctShellCreateDirectory(FileName, FileHandle);
+    }
+    //
+    // Use UEFI Shell 2.0 method
+    //
+    Status = gEfiShellProtocol->OpenFileByName(FileName,
+                                               FileHandle,
+                                               OpenMode);
+    if (SctStrCmp(FileName, L"NUL") != 0 && !EFI_ERROR(Status) && ((OpenMode & EFI_FILE_MODE_CREATE) != 0)){
+      FileInfo = FileFunctionMap.GetFileInfo(*FileHandle);
+      ASSERT(FileInfo != NULL);
+      FileInfo->Attribute = Attributes;
+      Status = FileFunctionMap.SetFileInfo(*FileHandle, FileInfo);
+      SctFreePool(FileInfo);
+    }
+    return (Status);
+  }
+  //
+  // Using EFI Shell version
+  // this means convert name to path and call that function
+  // since this will use EFI method again that will open it.
+  //
+  ASSERT(mEfiShellEnvironment2 != NULL);
+  FilePath = mEfiShellEnvironment2->NameToPath ((CHAR16*)FileName);
+  if (FilePath != NULL) {
+    return (SctShellOpenFileByDevicePath(&FilePath,
+                                      &DeviceHandle,
+                                      FileHandle,
+                                      OpenMode,
+                                      Attributes));
+  }
+  return (EFI_DEVICE_ERROR);
+}
+
+EFI_STATUS
+EFIAPI
+SctShellCreateDirectory(
+  IN CONST CHAR16             *DirectoryName,
+  OUT SHELL_FILE_HANDLE       *FileHandle
+  )
+{
+  if (gEfiShellProtocol != NULL) {
+    //
+    // Use UEFI Shell 2.0 method
+    //
+    return (gEfiShellProtocol->CreateFile(DirectoryName,
+                          EFI_FILE_DIRECTORY,
+                          FileHandle
+                         ));
+  } else {
+    return (SctShellOpenFileByName(DirectoryName,
+                                FileHandle,
+                                EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE,
+                                EFI_FILE_DIRECTORY
+                               ));
+  }
 }

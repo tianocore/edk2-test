@@ -179,7 +179,7 @@ Returns:
     //
     // Open the Configuration file
     //  
-    Status = SctOpenFileByName (
+    Status = SctShellOpenFileByName (
                InfFileName,
                &FileHandle,
                EFI_FILE_MODE_READ,

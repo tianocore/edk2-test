@@ -35,11 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2012 Unified EFI, Inc. All
+  Copyright 2006 - 2014 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
+  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
 
 --*/
@@ -51,6 +52,7 @@
 
 #include EFI_PROTOCOL_DEFINITION (SimpleFileSystem)
 #include EDK_PROTOCOL_DEFINITION (FileInfo)
+#include <Library/UefiBootServicesTableLib.h>
 
 
 //
@@ -750,6 +752,34 @@ SctGetFilesystemDevicePath (
   OUT EFI_DEVICE_PATH_PROTOCOL  **DevicePath,
   OUT CHAR16                    **RemainingFilePath OPTIONAL
   );
+
+
+EFI_STATUS
+EFIAPI
+SctShellOpenFileByDevicePath(
+  IN OUT EFI_DEVICE_PATH_PROTOCOL     **FilePath,
+  OUT EFI_HANDLE                      *DeviceHandle,
+  OUT SHELL_FILE_HANDLE               *FileHandle,
+  IN UINT64                           OpenMode,
+  IN UINT64                           Attributes
+  );
+
+EFI_STATUS
+EFIAPI
+SctShellOpenFileByName(
+  IN CONST CHAR16               *FileName,
+  OUT SHELL_FILE_HANDLE         *FileHandle,
+  IN UINT64                     OpenMode,
+  IN UINT64                     Attributes
+  );
+
+EFI_STATUS
+EFIAPI
+SctShellCreateDirectory(
+  IN CONST CHAR16             *DirectoryName,
+  OUT SHELL_FILE_HANDLE       *FileHandle
+  );
+
 //
 // String API
 //
