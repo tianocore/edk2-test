@@ -55,16 +55,15 @@
 #
 #--*/
 
+
+
 [defines]
-  INF_VERSION          = 0x00010005
-  BASE_NAME            = IhvSimpleFileSystemBBTest
-  FILE_GUID            = 09A28B6C-B99E-4b98-8DF3-35771D52CFB4
-  MODULE_TYPE          = UEFI_DRIVER
-  VERSION_STRING       = 1.0
-  ENTRY_POINT          = InitializeBBTestSimpleFileSystem
+BASE_NAME            = IhvSimpleFileSystemBBTest
+FILE_GUID            = 39E91E5F-B218-4f80-ADDC-37C0003C5326
+COMPONENT_TYPE       = BS_DRIVER
 
 [sources.common]
-  guid.c
+  Guid.c
   SimpleFileSystemBBTestMain.c
   SimpleFileSystemBBTestFunction.c
   SimpleFileSystemBBTestConformance.c
@@ -76,22 +75,20 @@
   SimpleFileSystemExBBTestFunction_FlushEx.c
   SimpleFileSystemExBBTestFunction_OpenEx.c
 
-[Packages]
-  MdePkg/MdePkg.dec
-  SctPkg/SctPkg.dec
-  SctPkg/UEFI/UEFI.dec
+[includes.common]
+  .
+  $(WORKSPACE)/SctPkg
+  $(WORKSPACE)/SctPkg/UEFI
+  $(WORKSPACE)/SctPkg/Include
+  $(WORKSPACE)/MdePkg/Include
 
-[LibraryClasses]
-  UefiDriverEntryPoint
+[libraries.common]
   SctLib
+  SctGuidLib
   EfiTestLib
+  BaseDebugLibNull
+  CompilerIntrinsicsLib
 
-[Guids]
-  gBlackBoxEfiFileInfoGuid
-  gBlackBoxEfiFileSystemInfoGuid
-  gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid
+[nmake.common]
+  IMAGE_ENTRY_POINT=InitializeBBTestSimpleFileSystem
 
-[Protocols]
-  gBlackBoxEfiSimpleFileSystemProtocolGuid
-  gBlackBoxEfiBlockIoProtocolGuid
-  gEfiDevicePathProtocolGuid

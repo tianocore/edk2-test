@@ -70,6 +70,8 @@
   DriverBindingBBTestFunction.c
   guid.c
   guid.h
+  Print.c
+  Print.h
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -80,6 +82,7 @@
   UefiDriverEntryPoint
   SctLib
   EfiTestLib
+
 
 [Protocols]
   gEfiDevicePathProtocolGuid

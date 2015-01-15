@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
-# Rights Reserved, subject to all existing rights in all      
+# Copyright 2006 - 2014 Unified EFI, Inc. All
+# Rights Reserved, subjct to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -56,12 +56,9 @@
 #--*/
 
 [defines]
-  INF_VERSION          = 0x00010005
-  BASE_NAME            = IhvSimpleTextInputExBBTest
-  FILE_GUID            = 2C92BF78-9C4F-4d72-AD7D-89A072D0701A
-  MODULE_TYPE          = UEFI_DRIVER
-  VERSION_STRING       = 1.0
-  ENTRY_POINT          = InitializeSimpleTextInputExBBTest
+BASE_NAME            = IhvSimpleTextInputExBBTest
+FILE_GUID            = 2C92BF78-9C4F-4d72-AD7D-89A072D0701A
+COMPONENT_TYPE       = BS_DRIVER
 
 [sources.common]
   SimpleTextInputExBBTestConformance.c
@@ -69,16 +66,19 @@
   SimpleTextInputExBBTestMain.c
   Guid.c
 
-[Packages]
-  MdePkg/MdePkg.dec
-  SctPkg/SctPkg.dec
-  SctPkg/UEFI/UEFI.dec
+[includes.common]
+  .
+  $(WORKSPACE)/SctPkg
+  $(WORKSPACE)/SctPkg/UEFI
+  $(WORKSPACE)/SctPkg/Include
+  $(WORKSPACE)/MdePkg/Include
 
-[LibraryClasses]
-  UefiDriverEntryPoint
+[libraries.common]
   SctLib
+  SctGuidLib
   EfiTestLib
+  BaseDebugLibNull
+  CompilerIntrinsicsLib
 
-[Protocols]
-  gEfiDevicePathProtocolGuid
-  gBlackBoxEfiSimpleTextInputExProtocolGuid
+[nmake.common]
+  IMAGE_ENTRY_POINT=InitializeSimpleTextInputExBBTest

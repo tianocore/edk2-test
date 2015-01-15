@@ -57,11 +57,16 @@ Abstract:
 #ifndef _SIMPLE_FILE_SYSTEM_TEST_H
 #define _SIMPLE_FILE_SYSTEM_TEST_H
 
-
+#include <Base.h>
 #include "SctLib.h"
 #include <Library/EfiTestLib.h>
+#include <UEFI/Protocol/BlockIo.h>
 #include <UEFI/Protocol/SimpleFileSystem.h>
-#include "guid.h"
+#include <UEFI/Guid/FileInfo.h>
+#include <UEFI/Guid/FileSystemInfo.h>
+#include <UEFI/Guid/FileSystemVolumeLabelInfo.h>
+#include <Protocol/DevicePath.h>
+#include "Guid.h"
 
 //----------------------------------//
 //
@@ -89,6 +94,41 @@ Abstract:
 extern EFI_TPL TplArray [TPL_ARRAY_SIZE];
 
 extern EFI_HANDLE   mImageHandle;
+
+#if EFI_FILE_HANDLE_REVISION >= 0x00020000
+
+extern EFI_EVENT       TimerEvent;
+
+//
+//
+//
+typedef struct {
+  UINTN                             Signature;
+  EFI_FILE                          *FileIo;
+  EFI_FILE_IO_TOKEN                 FileIoToken;
+  EFI_TPL                           Tpl;
+  UINT64                            SetPosition;
+  UINT64                            PositionAfterRead;
+  UINTN                             ReadLength;
+  SCT_LIST_ENTRY                    ListEntry;
+  EFI_STATUS                        StatusAsync;
+  EFI_TEST_ASSERTION                AssertionType;
+} FileIo_Task;
+
+//
+// record every  SimpleFileSystem Async Read Directory call status
+//
+typedef struct {
+  UINTN                             Signature;
+  EFI_FILE                          *FileIo;
+  EFI_FILE_IO_TOKEN                 FileIoToken;
+  EFI_TPL                           Tpl;
+  UINTN                             Index;
+  SCT_LIST_ENTRY                    ListEntry;
+  EFI_STATUS                        StatusAsync;
+  EFI_TEST_ASSERTION                AssertionType;
+} FileIoDir_Task;
+#endif
 
 //////////////////////////////////////////////////////////////////////////////
 //

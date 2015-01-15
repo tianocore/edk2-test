@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -60,9 +60,11 @@ Abstract:
 
 
 #include "Efi.h"
+#include "SctLib.h"
 #include <Library/EfiTestLib.h>
 #include <UEFI/Protocol/DriverBinding.h>
 #include "guid.h"
+#include "Print.h"
 
 #include EFI_TEST_PROTOCOL_DEFINITION(TestProfileLibrary)
 
@@ -79,6 +81,10 @@ Abstract:
 #define EFI_DRIVER_BINDING_PROTOCOL_TEST_ENTRY_GUID0101   \
   { 0x50de666c, 0xee1a, 0x4f22, 0x94, 0xca, 0x92, 0xd4, 0xaf, 0xad, 0xd2, 0x58 }
 
+#define SYSTEMLOG 0
+#define CASELOG   1
+#define SYSTEMKEY 2
+#define CASEKEY   3
 
 //
 // functions declaration

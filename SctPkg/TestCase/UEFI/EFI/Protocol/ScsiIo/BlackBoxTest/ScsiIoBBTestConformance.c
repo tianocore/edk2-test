@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -265,6 +265,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
   EFI_SCSI_IO_SCSI_REQUEST_PACKET            Packet;
   UINT8                                      Cdb[6];
   UINT8                                      *Data;
+  UINT8                                      *Data1;
   EFI_EVENT                                  Event;
 
   //
@@ -292,7 +293,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
 
   ScsiIo = (EFI_SCSI_IO_PROTOCOL *)ClientInterface;
   Data = SctAllocatePool (ScsiIo->IoAlign + 96);
-
+/*
   //
   // Assertion Point 3.2.3.2.1
   // Call ExecuteScsiCommand() with too long InTransferLength.
@@ -343,7 +344,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
                  Status,
                  Packet.InTransferLength
                  );
-  
+*/
   //
   // Create Event
   //
@@ -368,7 +369,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
                    );
     return Status;
   }
-
+/*
   EnterEvent = 0;
   
   SctZeroMem (&Packet, sizeof (EFI_SCSI_IO_SCSI_REQUEST_PACKET));
@@ -413,7 +414,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
                  Status,
                  Packet.InTransferLength
                  );
-
+*/
   //
   // Assertion Point 3.2.3.2.2
   // Call ExecuteScsiCommand() with invalid parameter.
@@ -466,13 +467,117 @@ BBTestExecuteScsiCommandConformanceAutoTest (
                  Status
                  );
 
+
+  SctFreePool (Data);
+
+  //
+  // Assertion Point 3.2.3.2.1
+  // Call ExecuteScsiCommand() with too long InTransferLength.
+  //
+
+  Data1 = NULL;
+  Data1 = SctAllocateZeroPool ((UINTN)ScsiIo->IoAlign + 0xFFFFFFFF);
+  if (NULL == Data1)
+  	return EFI_OUT_OF_RESOURCES;
+  
+  //
+  // Initialize the Request Packet.
+  //
+  SctZeroMem (&Packet, sizeof (EFI_SCSI_IO_SCSI_REQUEST_PACKET));
+  SctZeroMem (Cdb, 6);
+  SctZeroMem (Data1, ScsiIo->IoAlign + 0xFFFFFFFF);
+
+  // Set to OP_INQUIRY.
+  Cdb[0] = 0x12;
+  Cdb[1] = 0x00;
+  Cdb[4] = 96;
+
+  Packet.Timeout           = EfiScsiStallSeconds (2);
+  Packet.Cdb               = Cdb;
+  Packet.CdbLength         = 6;
+  if((ScsiIo->IoAlign == 0) || (ScsiIo->IoAlign == 1)){
+    Packet.InDataBuffer = Data1;
+  } else {
+    Packet.InDataBuffer = (VOID *)(((UINTN)Data1 + ScsiIo->IoAlign - 1) &
+		                  ~((UINTN)(ScsiIo->IoAlign - 1)));
+  }
+  Packet.InTransferLength  = 0xFFFFFFFF;
+  Packet.OutDataBuffer     = NULL;
+  Packet.OutTransferLength = 0;
+  Packet.DataDirection     = EFI_SCSI_IO_DATA_DIRECTION_READ;
+  
+  Status = ScsiIo->ExecuteScsiCommand (ScsiIo, &Packet, NULL);
+
+  if ( (Status == EFI_BAD_BUFFER_SIZE) || (Status == EFI_SUCCESS) ) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gScsiIoBBTestConformanceAssertionGuid004,
+                 L"EFI_SCSI_IO_PROTOCOL.ExecuteScsiCommand - Call ExecuteScsiCommand() with with too long InTransferLength",
+                 L"%a:%d:Status - %r, The max length is %d",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 Packet.InTransferLength
+                 );
+
+  EnterEvent = 0;
+  
+  SctZeroMem (&Packet, sizeof (EFI_SCSI_IO_SCSI_REQUEST_PACKET));
+  SctZeroMem (Cdb, 6);
+  SctZeroMem (Data1, ScsiIo->IoAlign + 0xFFFFFFFF);
+
+  // Set to OP_INQUIRY.
+  Cdb[0] = 0x12;
+  Cdb[1] = 0x00;
+  Cdb[4] = 96;
+
+  Packet.Timeout           = EfiScsiStallSeconds (2);
+  Packet.Cdb               = Cdb;
+  Packet.CdbLength         = 6;
+  if((ScsiIo->IoAlign == 0) || (ScsiIo->IoAlign == 1)){
+    Packet.InDataBuffer = Data1;
+  } else {
+    Packet.InDataBuffer = (VOID *)(((UINTN)Data1 + ScsiIo->IoAlign - 1) &
+		                  ~((UINTN)(ScsiIo->IoAlign - 1)));
+  }
+  Packet.InTransferLength  = 0xFFFFFFFF;
+  Packet.OutDataBuffer     = NULL;
+  Packet.OutTransferLength = 0;
+  Packet.DataDirection     = EFI_SCSI_IO_DATA_DIRECTION_READ;
+  
+  Status = ScsiIo->ExecuteScsiCommand (ScsiIo, &Packet, Event);
+
+  if ( (Status == EFI_BAD_BUFFER_SIZE) || (Status == EFI_SUCCESS) ) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gScsiIoBBTestConformanceAssertionGuid006,
+                 L"EFI_SCSI_IO_PROTOCOL.ExecuteScsiCommand - Call ExecuteScsiCommand() with with too long InTransferLength",
+                 L"%a:%d:Status - %r, The max length is %d",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 Packet.InTransferLength
+                 ); 
+
   // Close the event
   Status = gtBS->CloseEvent (Event);
   if (EFI_ERROR(Status)) {
     return EFI_UNSUPPORTED;
   }
 
-  SctFreePool (Data);
+  SctFreePool(Data1);
 
   return EFI_SUCCESS;
 }

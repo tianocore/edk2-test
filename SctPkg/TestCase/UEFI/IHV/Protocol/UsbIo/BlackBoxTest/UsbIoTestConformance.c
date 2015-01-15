@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1439,10 +1439,11 @@ UsbControlTransferConformanceSubTest4 (
   IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL    *LoggingLib
   )
 {
-  EFI_STATUS              Status;
-  EFI_TEST_ASSERTION      Result;
-  EFI_USB_DEVICE_REQUEST  Request;
-  UINT32                  UsbStatus;
+  EFI_STATUS                 Status;
+  EFI_TEST_ASSERTION         Result;
+  EFI_USB_DEVICE_REQUEST     Request;
+  UINT32                     UsbStatus;
+  EFI_USB_DEVICE_DESCRIPTOR  DevDesc;
 
   if (LoggingLib != NULL) {
     LoggingLib->EnterFunction (
@@ -1455,19 +1456,19 @@ UsbControlTransferConformanceSubTest4 (
   //
   // Build a Bulk-Only Mass Storage Reset Request
   //
-  Request.RequestType = 0x21;
-  Request.Request     = 0xFF;
-  Request.Value       = 0;
+  Request.RequestType = 0x80;
+  Request.Request     = 0x6;
+  Request.Value       = 0x100;
   Request.Index       = 0;
-  Request.Length      = 0;
+  Request.Length      = sizeof(EFI_USB_DEVICE_DESCRIPTOR);
 
   Status = UsbIo->UsbControlTransfer (
                     UsbIo,
                     &Request,
-                    EfiUsbNoData,
+                    EfiUsbDataIn,
                     0,            //Timeout is 0
-                    NULL,
-                    0,
+                    &DevDesc,
+                    sizeof(EFI_USB_DEVICE_DESCRIPTOR),
                     &UsbStatus  
                     );
 

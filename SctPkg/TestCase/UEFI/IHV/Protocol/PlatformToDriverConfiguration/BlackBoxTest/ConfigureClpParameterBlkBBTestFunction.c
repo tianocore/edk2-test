@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Byosoft Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Byosoft Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -115,7 +115,8 @@ ParseCLPCommandLine(
 	CommandVerbLength++;
     }
 
-    gtBS->CopyMem (VOID*)CLPCmd->CLPCmdVerb,
+    gtBS->CopyMem(
+	              (VOID*)CLPCmd->CLPCmdVerb,
                      (VOID*)(EfiClpParameterBlock->CLPCommand),
                      sizeof(UINT8) * CommandVerbLength
                      );
@@ -139,7 +140,8 @@ ParseCLPCommandLine(
 	CommandOptionLength++;
     }
 
-    gtBS->CopyMem (VOID*)CLPCmd->CLPCmdOption,
+    gtBS->CopyMem(
+	              (VOID*)CLPCmd->CLPCmdOption,
                      (VOID*)(EfiClpParameterBlock->CLPCommand+CommandVerbLength),
                      sizeof(UINT8) * CommandOptionLength
                      );
@@ -162,7 +164,8 @@ ParseCLPCommandLine(
 	CLPCmdStr++;
 	CommandTargetLength++;
     }
-   gtBS->CopyMem (VOID*)CLPCmd->CLPCmdTarget,
+   gtBS->CopyMem(
+	              (VOID*)CLPCmd->CLPCmdTarget,
                      (VOID*)(EfiClpParameterBlock->CLPCommand+CommandVerbLength+CommandOptionLength),
                      sizeof(UINT8) * CommandTargetLength
                      );
@@ -264,7 +267,7 @@ BBTestCLPCommandAutoTest (
   *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -349,7 +352,7 @@ BBTestCLPCommandAutoTest (
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPCommand is correct.
     //
 
-   Status = gtBS->AllocatePool (EfiBootServicesData,sizeof(CLP_CMD),&CLPCmd);
+   Status = gtBS->AllocatePool (EfiBootServicesData,sizeof(CLP_CMD),(VOID **)&CLPCmd);
    if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -382,7 +385,7 @@ BBTestCLPCommandAutoTest (
 			  Index = Num_CLPCmdVerb;
 			  Index1=Num_CLPCmdOption;
 			  break;
-		   }else if ((Index==2||Index >=6&&Index<=11)&&(Index1 ==7||Index1 ==8)){
+		   }else if ((Index == 2 || (Index >= 6 && Index <= 11)) && (Index1 == 7 || Index1 == 8)){
                        AssertionType = EFI_TEST_ASSERTION_PASSED;
                        Index = Num_CLPCmdVerb;
 			  Index1=Num_CLPCmdOption;
@@ -521,7 +524,7 @@ BBTestCLPReturnStringAutoTest (
   *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -635,7 +638,7 @@ BBTestCLPReturnStringAutoTest (
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPReturnString is correct.
     //
 
-   Status = gtBS->AllocatePool (EfiBootServicesData,sizeof(CLP_CMD),&CLPCmd);
+   Status = gtBS->AllocatePool (EfiBootServicesData,sizeof(CLP_CMD),(VOID **)&CLPCmd);
    if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -794,7 +797,7 @@ BBTestCLPCmdStatusAutoTest (
   *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -1014,7 +1017,7 @@ BBTestCLPErrorValueAutoTest (
   *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -1275,7 +1278,7 @@ BBTestCLPMessageCodeAutoTest (
   *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -192,7 +192,17 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestSetCursorPositionConformanceAutoTest
   },
-
+/*  
+  {
+    SIMPLE_TEXT_OUTPUT_PROTOCOL_SETATTRIBUTE_CONFORMANCE_AUTO_GUID,
+    L"SetAttribute_Conf",
+    L"Auto Conformance Test of SetAttribute",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    BBTestSetAttributeConformanceAutoTest
+  },
+*/
 #ifdef EFI_TEST_EXHAUSTIVE
   {
     SIMPLE_TEXT_OUTPUT_PROTOCOL_RESET_FUNCTION_MANUAL_GUID,

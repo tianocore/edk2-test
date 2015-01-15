@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2006 - 2014 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -55,30 +55,32 @@
 #
 #--*/
 
+
 [defines]
-  INF_VERSION          = 0x00010005
-  BASE_NAME            = IhvSimpleTextOutBBTest
-  FILE_GUID            = 5A4F05F1-880B-43e2-872F-49AF48E8BCAD
-  MODULE_TYPE          = UEFI_DRIVER
-  VERSION_STRING       = 1.0
-  ENTRY_POINT          = InitializeBBTestSimpleTextOutput
+BASE_NAME            = IhvSimpleTextOutBBTest
+FILE_GUID            = 5A4F05F1-880B-43e2-872F-49AF48E8BCAD
+COMPONENT_TYPE       = BS_DRIVER
 
 [sources.common]
-  SimpleTextOutBBTestMain_uefi.c
-  SimpleTextOutBBTestFunction_uefi.c
-  SimpleTextOutBBTestConformance_uefi.c
-  guid_uefi.c
+ SimpleTextOutBBTestMain_uefi.c
+ SimpleTextOutBBTestFunction_uefi.c
+ SimpleTextOutBBTestConformance_uefi.c
+ Guid_uefi.c
 
-[Packages]
-  MdePkg/MdePkg.dec
-  SctPkg/SctPkg.dec
-  SctPkg/UEFI/UEFI.dec
+[includes.common]
+  .
+  $(WORKSPACE)/SctPkg
+  $(WORKSPACE)/SctPkg/UEFI
+  $(WORKSPACE)/SctPkg/Include
+  $(WORKSPACE)/SctPkg/Include/Legacy
+  $(WORKSPACE)/MdePkg/Include
 
-[LibraryClasses]
-  UefiDriverEntryPoint
+[libraries.common]
   SctLib
+  SctGuidLib
   EfiTestLib
+  BaseDebugLibNull
+  CompilerIntrinsicsLib
 
-[Protocols]
-  gBlackBoxEfiGraphicsOutputProtocolGuid
-  gEfiDevicePathProtocolGuid
+[nmake.common]
+  IMAGE_ENTRY_POINT=InitializeBBTestSimpleTextOutput

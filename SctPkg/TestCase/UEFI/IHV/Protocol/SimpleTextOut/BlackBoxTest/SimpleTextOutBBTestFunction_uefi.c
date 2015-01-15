@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -56,7 +56,6 @@ Abstract:
 --*/
 
 
-#include "SctLib.h"
 #include "SimpleTextOutBBTestMain_uefi.h"
 
 
@@ -978,7 +977,7 @@ BBTestOutputStringFunctionAutoTest (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    (Column * Row + 2) * sizeof (CHAR16),
-                   &LongStr
+                   (VOID **)&LongStr
                    );
   for (Index = 0; Index < Column * Row + 1; Index++){
     LongStr[Index]=L'a';
@@ -1617,7 +1616,7 @@ BBTestOutputStringFunctionManualTest (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    (Column * Row + 2) * sizeof (CHAR16),
-                   &LongStr
+                   (VOID **)&LongStr
                    );
   for (Index = 0; Index < Column * Row + 1; Index++){
     LongStr[Index]=L'a';
@@ -2433,7 +2432,7 @@ BBTestQueryModeFunctionAutoTest (
   // Backup Mode
   //
   BackupMode (SimpleOut, &ModeOrg);
-  BackupMode (SimpleOut, &ModeExpected);
+  //BackupMode (SimpleOut, &ModeExpected);
 
   //
   // Assertion Points 4.1.5.2.1
@@ -2444,7 +2443,7 @@ BBTestQueryModeFunctionAutoTest (
   // For all available mode , perform test
   //
   for (Index = 0; Index < (UINTN)SimpleOut->Mode->MaxMode; Index++) {
-
+    BackupMode (SimpleOut, &ModeExpected);
     Status = SimpleOut->QueryMode (SimpleOut, Index, &Column, &Row);
 
     //
@@ -4509,7 +4508,7 @@ BBTestSetCursorPositionFunctionAutoTest (
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
-                     gSimpleTextOutputFunctionTestAssertionGuid095,
+                     gSimpleTextOutputFunctionTestAssertionGuid096,
                      L"EFI_SIMPLE_TEXT_OUT_PROTOCOL.SetCursorPosition - SetCursorPosition() with valid position",
                      L"%a:%d: Status = %r, check summary for all position. Mode = %d",
                      __FILE__,

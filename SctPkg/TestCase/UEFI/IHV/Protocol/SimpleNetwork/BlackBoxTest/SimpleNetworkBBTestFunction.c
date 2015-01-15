@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -364,7 +364,7 @@ BBTestInitializeFunctionTest (
   }
 
   Status = SnpInterface->Initialize (SnpInterface, 32, 32);
-  if ((Status == EFI_UNSUPPORTED) || (Status == EFI_SUCCESS) && (SnpInterface->Mode->State == EfiSimpleNetworkInitialized)) {
+  if ((Status == EFI_UNSUPPORTED) || ((Status == EFI_SUCCESS) && (SnpInterface->Mode->State == EfiSimpleNetworkInitialized))) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -484,7 +484,7 @@ BBTestResetFunctionTest (
   // Call Reset() function with ExtendedVerification is FALSE.
   //
   SctSetMem (&Mode, sizeof (EFI_SIMPLE_NETWORK_MODE), 0x0);
-  EfiCommonLibCopyMem (&Mode, SnpInterface->Mode, sizeof (EFI_SIMPLE_NETWORK_MODE));
+  SctCopyMem (&Mode, SnpInterface->Mode, sizeof (EFI_SIMPLE_NETWORK_MODE));
 
   SctSetMem (&StatisticsTable1, sizeof (EFI_NETWORK_STATISTICS), 0x0);
   StatisticsSize1 = sizeof (EFI_NETWORK_STATISTICS);
@@ -503,8 +503,8 @@ BBTestResetFunctionTest (
   if ((Mode.State != SnpInterface->Mode->State) ||
       (Mode.ReceiveFilterMask != SnpInterface->Mode->ReceiveFilterMask) ||
       (Mode.ReceiveFilterSetting != SnpInterface->Mode->ReceiveFilterSetting) ||
-      SctCompareMem (Mode.CurrentAddress), &(SnpInterface->Mode->CurrentAddress), sizeof (EFI_MAC_ADDRESS)) ||
-      SctCompareMem (Mode.PermanentAddress), &(SnpInterface->Mode->PermanentAddress), sizeof (EFI_MAC_ADDRESS))) {
+      SctCompareMem (&(Mode.CurrentAddress), &(SnpInterface->Mode->CurrentAddress), sizeof (EFI_MAC_ADDRESS)) ||
+      SctCompareMem (&(Mode.PermanentAddress), &(SnpInterface->Mode->PermanentAddress), sizeof (EFI_MAC_ADDRESS))) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
 
@@ -778,7 +778,7 @@ BBTestReceiveFilterFunctionTest (
   }
 
   SctSetMem (&Mode, sizeof (EFI_SIMPLE_NETWORK_MODE), 0x0);
-  EfiCommonLibCopyMem (&Mode, SnpInterface->Mode, sizeof (EFI_SIMPLE_NETWORK_MODE));
+  SctCopyMem (&Mode, SnpInterface->Mode, sizeof (EFI_SIMPLE_NETWORK_MODE));
 
   if (SupportedFilter != 0) {
     //

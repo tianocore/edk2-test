@@ -282,7 +282,25 @@ BBTestRunDiagnosticsFuncTestCheckpoint1 (
           AssertionType = EFI_TEST_ASSERTION_PASSED;
         } else if (EFI_UNSUPPORTED == Status) {
           AssertionType = EFI_TEST_ASSERTION_WARNING;
-        } else {
+        } else if (EFI_NOT_READY == Status) {
+          Status = DriverDiagnostics2->RunDiagnostics (
+                                      DriverDiagnostics2,
+                                      ControllerHandleBuffer[Index],
+                                      NULL,
+                                      3,
+                                      Language,
+                                      &ErrorType,
+                                      &BufferSize,
+                                      &Buffer
+                                      );
+		  if (EFI_SUCCESS == Status) {
+		  	AssertionType = EFI_TEST_ASSERTION_PASSED;
+		  } else if (EFI_ACCESS_DENIED == Status) {
+            AssertionType = EFI_TEST_ASSERTION_WARNING;
+		  } else {
+		  	AssertionType = EFI_TEST_ASSERTION_FAILED;
+          }
+		} else {
           AssertionType = EFI_TEST_ASSERTION_FAILED;
         }
         StandardLib->RecordAssertion (
@@ -324,6 +342,24 @@ BBTestRunDiagnosticsFuncTestCheckpoint1 (
           AssertionType = EFI_TEST_ASSERTION_PASSED;
         } else if (EFI_UNSUPPORTED == Status) {
           AssertionType = EFI_TEST_ASSERTION_WARNING;
+        } else if (EFI_NOT_READY == Status) {
+          Status = DriverDiagnostics2->RunDiagnostics (
+                                      DriverDiagnostics2,
+                                      ControllerHandleBuffer[Index],
+                                      NULL,
+                                      3,
+                                      Language,
+                                      &ErrorType,
+                                      &BufferSize,
+                                      &Buffer
+                                      );
+		  if (EFI_SUCCESS == Status) {
+		  	AssertionType = EFI_TEST_ASSERTION_PASSED;
+		  } else if (EFI_ACCESS_DENIED == Status) {
+            AssertionType = EFI_TEST_ASSERTION_WARNING;
+		  } else {
+		  	AssertionType = EFI_TEST_ASSERTION_FAILED;
+          }		  
         } else {
           AssertionType = EFI_TEST_ASSERTION_FAILED;
         }
@@ -541,6 +577,24 @@ BBTestRunDiagnosticsFuncTestCheckpoint2 (
             AssertionType = EFI_TEST_ASSERTION_PASSED;
           } else if ( (EFI_UNSUPPORTED == Status) || (EFI_DEVICE_ERROR == Status) || (EFI_ACCESS_DENIED == Status) ) {
             AssertionType = EFI_TEST_ASSERTION_WARNING;
+          } else if (EFI_NOT_READY == Status) {
+            Status = DriverDiagnostics2->RunDiagnostics (
+                                      DriverDiagnostics2,
+                                      ControllerHandleBuffer[Index],
+                                      ChildControllerHandleBuffer[ChildIndex],
+                                      3,
+                                      Language,
+                                      &ErrorType,
+                                      &BufferSize,
+                                      &Buffer
+                                      );
+		    if (EFI_SUCCESS == Status) {
+		  	  AssertionType = EFI_TEST_ASSERTION_PASSED;
+		    } else if (EFI_ACCESS_DENIED == Status || EFI_DEVICE_ERROR == Status) {
+              AssertionType = EFI_TEST_ASSERTION_WARNING;
+		    } else {
+		  	  AssertionType = EFI_TEST_ASSERTION_FAILED;
+            }				
           } else {
             AssertionType = EFI_TEST_ASSERTION_FAILED;
           }
@@ -611,6 +665,24 @@ BBTestRunDiagnosticsFuncTestCheckpoint2 (
             AssertionType = EFI_TEST_ASSERTION_PASSED;
           } else if ( (EFI_UNSUPPORTED == Status) || (EFI_DEVICE_ERROR == Status) || (EFI_ACCESS_DENIED == Status) ) {
             AssertionType = EFI_TEST_ASSERTION_WARNING;
+          } else if (EFI_NOT_READY == Status) {
+            Status = DriverDiagnostics2->RunDiagnostics (
+                                      DriverDiagnostics2,
+                                      ControllerHandleBuffer[Index],
+                                      ChildControllerHandleBuffer[ChildIndex],
+                                      3,
+                                      Language,
+                                      &ErrorType,
+                                      &BufferSize,
+                                      &Buffer
+                                      );
+		    if (EFI_SUCCESS == Status) {
+		  	  AssertionType = EFI_TEST_ASSERTION_PASSED;
+		    } else if (EFI_ACCESS_DENIED == Status || EFI_DEVICE_ERROR == Status) {
+              AssertionType = EFI_TEST_ASSERTION_WARNING;
+		    } else {
+		  	  AssertionType = EFI_TEST_ASSERTION_FAILED;
+            }			
           } else {
             AssertionType = EFI_TEST_ASSERTION_FAILED;
           }

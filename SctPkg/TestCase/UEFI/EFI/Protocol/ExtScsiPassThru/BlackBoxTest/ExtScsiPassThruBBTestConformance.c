@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -970,6 +970,7 @@ BBTestPassThruConformanceAutoTest (
   UINTN                                      StringLength;
   UINT8								         InvalidTarget[TARGET_MAX_BYTES];
   UINT64                                     InvalidLun;
+  UINT8                                      *Data1;
 
   //
   // Get the Standard Library Interface
@@ -1037,7 +1038,7 @@ BBTestPassThruConformanceAutoTest (
                    );
   	return EFI_UNSUPPORTED;
   }
-
+/*
   //
   // Assertion Point 4.6.2.1
   // Call PassThru() with too long InTransferLength.
@@ -1092,7 +1093,7 @@ BBTestPassThruConformanceAutoTest (
                  Lun,
                  Packet.InTransferLength
                  );
-
+*/
   //
   // Assertion Point 4.6.2.3
   // Call PassThru() with invalid parameter.
@@ -1250,7 +1251,7 @@ BBTestPassThruConformanceAutoTest (
   }
 
   EnterEvent = 0;
-
+/*
   BufToUHexString (Target2, &StringLength, Target, TARGET_MAX_BYTES);
   
   //
@@ -1300,7 +1301,7 @@ BBTestPassThruConformanceAutoTest (
                  Lun,
                  Packet.InTransferLength
                  );
-
+*/
   //
   // Assertion Point 4.6.2.3
   // Call PassThru() with invalid parameter.
@@ -1432,14 +1433,129 @@ BBTestPassThruConformanceAutoTest (
                  Status
                  );
 
+  //Free Date
+  SctFreePool(Data);
+
+  BufToUHexString (Target2, &StringLength, Target, TARGET_MAX_BYTES);
+
+  Data1 = NULL;
+  Data1 = SctAllocateZeroPool ((UINTN)ExtScsiPassThru->Mode->IoAlign + 0xFFFFFFFF);
+  if (NULL == Data1)
+  	return EFI_OUT_OF_RESOURCES;
+  
+  //
+  // Initialize the Request Packet.
+  //
+  SctZeroMem (&Packet, sizeof (EFI_EXT_SCSI_PASS_THRU_SCSI_REQUEST_PACKET));
+  SctZeroMem (Cdb, 6);
+  SctZeroMem (Data1, ExtScsiPassThru->Mode->IoAlign + 0xFFFFFFFF);
+
+  // Set to OP_INQUIRY.
+  Cdb[0] = 0x12;
+  Cdb[1] = (UINT8)(((UINT8)Lun << 5) & 0xE0);
+  Cdb[4] = 96;
+
+  Packet.Timeout           = EfiScsiStallSeconds (2);
+  Packet.Cdb               = Cdb;
+  Packet.CdbLength         = 6;
+  if ((ExtScsiPassThru->Mode->IoAlign == 0) || (ExtScsiPassThru->Mode->IoAlign == 1)){
+    Packet.InDataBuffer = Data1;
+  } else {
+    Packet.InDataBuffer = (VOID *)(((UINTN)Data1 + ExtScsiPassThru->Mode->IoAlign - 1) &
+                          ~((UINTN)(ExtScsiPassThru->Mode->IoAlign - 1)));
+  }
+  Packet.InTransferLength  = 0xFFFFFFFF;
+  Packet.OutDataBuffer     = NULL;
+  Packet.OutTransferLength = 0;
+  Packet.DataDirection     = EFI_EXT_SCSI_DATA_DIRECTION_READ;
+
+  Status = ExtScsiPassThru->PassThru (ExtScsiPassThru, TargetAddr, Lun, &Packet, Event);
+
+  if ( (Status == EFI_BAD_BUFFER_SIZE) || (Status == EFI_SUCCESS) ) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gExtScsiPassThruBBTestConformanceAssertionGuid017,
+                 L"EFI_EXT_SCSI_PASS_THRU_PROTOCOL.PassThru - Call PassThru() with with too long InTransferLength",
+                 L"%a:%d:Status - %r, Target - %s, Lun - 0x%lX, The max length is %d\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 Target2,
+                 Lun,
+                 Packet.InTransferLength
+                 );
+
   // Close the event
   Status = gtBS->CloseEvent (Event);
   if (EFI_ERROR(Status)) {
     return EFI_UNSUPPORTED;
   }
 
-  //Free Date
-  SctFreePool (Data);
+
+  //
+  // Assertion Point 4.6.2.1
+  // Call PassThru() with too long InTransferLength.
+  //
+
+  BufToUHexString (Target2, &StringLength, Target, TARGET_MAX_BYTES);
+  
+  //
+  // Initialize the Request Packet.
+  //
+  SctZeroMem (&Packet, sizeof (EFI_EXT_SCSI_PASS_THRU_SCSI_REQUEST_PACKET));
+  SctZeroMem (Cdb, 6);
+  SctZeroMem (Data1, ExtScsiPassThru->Mode->IoAlign + 0xFFFFFFFF);
+
+  // Set to OP_INQUIRY.
+  Cdb[0] = 0x12;
+  Cdb[1] = (UINT8)(((UINT8)Lun << 5) & 0xE0);
+  Cdb[4] = 96;
+
+  Packet.Timeout           = EfiScsiStallSeconds (2);
+  Packet.Cdb               = Cdb;
+  Packet.CdbLength         = 6;
+  if ((ExtScsiPassThru->Mode->IoAlign == 0) || (ExtScsiPassThru->Mode->IoAlign == 1)){
+    Packet.InDataBuffer = Data1;
+  } else {
+    Packet.InDataBuffer = (VOID *)(((UINTN)Data1 + ExtScsiPassThru->Mode->IoAlign - 1) &
+                          ~((UINTN)(ExtScsiPassThru->Mode->IoAlign - 1)));
+  }
+  Packet.InTransferLength  = 0xFFFFFFFF;
+  Packet.OutDataBuffer     = NULL;
+  Packet.OutTransferLength = 0;
+  Packet.DataDirection     = EFI_EXT_SCSI_DATA_DIRECTION_READ;
+
+  Status = ExtScsiPassThru->PassThru (ExtScsiPassThru, TargetAddr, Lun, &Packet, NULL);
+
+  if ( (Status == EFI_BAD_BUFFER_SIZE) || (Status == EFI_SUCCESS) ) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gExtScsiPassThruBBTestConformanceAssertionGuid013,
+                 L"EFI_EXT_SCSI_PASS_THRU_PROTOCOL.PassThru - Call PassThru() with with too long InTransferLength",
+                 L"%a:%d:Status - %r, Target - %s, Lun - 0x%lX, The max length is %d\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 Target2,
+                 Lun,
+                 Packet.InTransferLength
+                 );
+
+
+
+  SctFreePool(Data1);
   
   return EFI_SUCCESS;
 }

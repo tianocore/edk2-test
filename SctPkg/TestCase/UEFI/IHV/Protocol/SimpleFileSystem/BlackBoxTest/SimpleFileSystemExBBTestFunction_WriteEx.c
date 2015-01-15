@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -54,6 +54,8 @@ Abstract:
 --*/
 
 
+#define EFI_FILE_HANDLE_REVISION 0x00020000
+
 #include "SimpleFileSystemBBTest.h"
 
 //
@@ -61,20 +63,20 @@ Abstract:
 //
 typedef struct {
   UINTN                             Signature;
-  EFI_FILE_PROTOCOL                 *FileIo;
+  EFI_FILE                          *FileIo;
   EFI_FILE_IO_TOKEN               	FileIoToken;
   EFI_TPL                           Tpl;
   UINT64                            SetPosition;
   UINT64                            PositionAfterWrite;
   UINTN                             WriteLength;
-  EFI_LIST_ENTRY                    ListEntry;     
+  SCT_LIST_ENTRY                    ListEntry;     
   EFI_STATUS                        StatusAsync;
   EFI_TEST_ASSERTION                AssertionType;
 } FileIoWrite_Task;
 
 EFI_STATUS
 InternalGetInfoFileIo2 (
-  EFI_FILE_PROTOCOL      *FileHandle,
+  EFI_FILE               *FileHandle,
   VOID                   **InfoBuffer,
   UINTN                  *BufferSize,
   EFI_GUID               *InfoId
@@ -82,7 +84,7 @@ InternalGetInfoFileIo2 (
 
 EFI_STATUS
 InternalSetFileSizeFileIo2 (
-  EFI_FILE_PROTOCOL      *FileHandle,
+  EFI_FILE               *FileHandle,
   UINT64                 FileSize
   );
 
@@ -118,26 +120,26 @@ BBTestWriteExBasicTestCheckpoint4 (
 //
 // Async Write File Queue
 //
-EFI_LIST_ENTRY  AsyncWriteExecuteListHead = INITIALIZE_LIST_HEAD_VARIABLE(AsyncWriteExecuteListHead);
-EFI_LIST_ENTRY  AsyncWriteFinishListHead  = INITIALIZE_LIST_HEAD_VARIABLE(AsyncWriteFinishListHead);
-EFI_LIST_ENTRY  AsyncWriteFailListHead    = INITIALIZE_LIST_HEAD_VARIABLE(AsyncWriteFailListHead);
+SCT_LIST_ENTRY  AsyncWriteExecuteListHead = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncWriteExecuteListHead);
+SCT_LIST_ENTRY  AsyncWriteFinishListHead  = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncWriteFinishListHead);
+SCT_LIST_ENTRY  AsyncWriteFailListHead    = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncWriteFailListHead);
 
 //
 // Async Write File lock
 //
-FLOCK  gAsyncWriteQueueLock = EFI_INITIALIZE_LOCK_VARIABLE (EFI_TPL_CALLBACK);
+SCT_LOCK  gAsyncWriteQueueLock = SCT_INITIALIZE_LOCK_VARIABLE (TPL_CALLBACK);
 
 //
 // Async Write Multi Files Queue
 //
-EFI_LIST_ENTRY  AsyncWriteMultiExecuteListHead = INITIALIZE_LIST_HEAD_VARIABLE(AsyncWriteMultiExecuteListHead);
-EFI_LIST_ENTRY  AsyncWriteMultiFinishListHead  = INITIALIZE_LIST_HEAD_VARIABLE(AsyncWriteMultiFinishListHead);
-EFI_LIST_ENTRY  AsyncWriteMultiFailListHead    = INITIALIZE_LIST_HEAD_VARIABLE(AsyncWriteMultiFailListHead);
+SCT_LIST_ENTRY  AsyncWriteMultiExecuteListHead = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncWriteMultiExecuteListHead);
+SCT_LIST_ENTRY  AsyncWriteMultiFinishListHead  = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncWriteMultiFinishListHead);
+SCT_LIST_ENTRY  AsyncWriteMultiFailListHead    = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncWriteMultiFailListHead);
 
 //
 // Async Write Multi Files lock
 //
-FLOCK  gAsyncWriteMultiQueueLock = EFI_INITIALIZE_LOCK_VARIABLE (EFI_TPL_CALLBACK);
+SCT_LOCK  gAsyncWriteMultiQueueLock = SCT_INITIALIZE_LOCK_VARIABLE (TPL_CALLBACK);
 
 
 //
@@ -169,10 +171,10 @@ EFIAPI FileIoWriteOneFileNotifyFunc (
   // Remove entity from WriteExecuteListHead &  add entity to WriteFinishListHead
   // All FileIoWriteOneFile Notify function run at Call Back level only once, So no locks required
   //
-  AcquireLock(&gAsyncWriteQueueLock);
-  RemoveEntryList(&FileIoEntity->ListEntry);
-  InsertTailList(&AsyncWriteFinishListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncWriteQueueLock);
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  SctRemoveEntryList(&FileIoEntity->ListEntry);
+  SctInsertTailList(&AsyncWriteFinishListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncWriteQueueLock);
 
   return EFI_SUCCESS;
 }
@@ -189,7 +191,7 @@ EFIAPI FileIoWriteOneFileNotifyFunc (
 STATIC
 EFI_STATUS
 FileIoAsyncWriteOneFile(
-  IN EFI_FILE_PROTOCOL                 *FileIo,
+  IN EFI_FILE                          *FileIo,
   IN EFI_TPL                           Tpl,
   IN UINT64                            SetPosition,
   IN UINTN                             WriteLength,
@@ -218,8 +220,8 @@ FileIoAsyncWriteOneFile(
   // FileIoToken initialization
   //
   Status = gtBS->CreateEvent (
-                   EFI_EVENT_NOTIFY_SIGNAL,
-                   EFI_TPL_CALLBACK,
+                   EVT_NOTIFY_SIGNAL,
+                   TPL_CALLBACK,
                    FileIoWriteOneFileNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
@@ -246,9 +248,9 @@ FileIoAsyncWriteOneFile(
     return Status;
   }
 
-  AcquireLock(&gAsyncWriteQueueLock);
-  InsertTailList(&AsyncWriteExecuteListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncWriteQueueLock);
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  SctInsertTailList(&AsyncWriteExecuteListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncWriteQueueLock);
   
   //
   // Async WriteEx Call
@@ -261,10 +263,10 @@ FileIoAsyncWriteOneFile(
   gtBS->RestoreTPL (OldTpl);
   
   if (EFI_ERROR (Status)) {
-    AcquireLock(&gAsyncWriteQueueLock);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    InsertTailList(&AsyncWriteFailListHead, &FileIoEntity->ListEntry);    
-    ReleaseLock(&gAsyncWriteQueueLock);
+    SctAcquireLock (&gAsyncWriteQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctInsertTailList(&AsyncWriteFailListHead, &FileIoEntity->ListEntry);    
+    SctReleaseLock (&gAsyncWriteQueueLock);
   }
 
   //
@@ -306,10 +308,10 @@ EFIAPI FileIoWriteMultiFilesNotifyFunc (
   // Remove entity from WriteMultiExecuteListHead &  add entity to WriteMultiFinishListHead
   // All FileIoWriteMultiFiles Notify function run at Call Back level only once, So no locks required
   //
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  RemoveEntryList(&FileIoEntity->ListEntry);
-  InsertTailList(&AsyncWriteMultiFinishListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  SctRemoveEntryList(&FileIoEntity->ListEntry);
+  SctInsertTailList(&AsyncWriteMultiFinishListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
   return EFI_SUCCESS;
 }
 
@@ -324,7 +326,7 @@ EFIAPI FileIoWriteMultiFilesNotifyFunc (
 STATIC
 EFI_STATUS
 FileIoAsyncWriteMultiFiles (
-  IN EFI_FILE_PROTOCOL                 *FileIo,
+  IN EFI_FILE                          *FileIo,
   IN UINT64                            SetPosition,
   IN UINTN                             WriteLength,
   OUT UINT8                            *Buffer
@@ -351,8 +353,8 @@ FileIoAsyncWriteMultiFiles (
   // FileIoToken initialization
   //
   Status = gtBS->CreateEvent (
-                   EFI_EVENT_NOTIFY_SIGNAL,
-                   EFI_TPL_CALLBACK,
+                   EVT_NOTIFY_SIGNAL,
+                   TPL_CALLBACK,
                    FileIoWriteMultiFilesNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
@@ -377,9 +379,9 @@ FileIoAsyncWriteMultiFiles (
     return Status;
   }
 
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  InsertTailList(&AsyncWriteMultiExecuteListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  SctInsertTailList(&AsyncWriteMultiExecuteListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
   
   //
   // Async WriteEx Call
@@ -390,10 +392,10 @@ FileIoAsyncWriteMultiFiles (
                      );
   
   if (EFI_ERROR (Status)) {
-    AcquireLock(&gAsyncWriteMultiQueueLock);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    InsertTailList(&AsyncWriteMultiFailListHead, &FileIoEntity->ListEntry);    
-    ReleaseLock(&gAsyncWriteMultiQueueLock);
+    SctAcquireLock (&gAsyncWriteMultiQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctInsertTailList(&AsyncWriteMultiFailListHead, &FileIoEntity->ListEntry);    
+    SctReleaseLock (&gAsyncWriteMultiQueueLock);
   }
 
   //
@@ -479,10 +481,10 @@ BBTestWriteExBasicTestCheckpoint1 (
   )
 {
   EFI_STATUS                Status;
-  EFI_FILE_PROTOCOL         *Root;
+  EFI_FILE                  *Root;
   UINTN                     TplIndex;
   CHAR16                    FileName[100];
-  EFI_FILE_PROTOCOL         *FileHandle;
+  EFI_FILE                  *FileHandle;
   UINT64                    FileSize;
   UINT8                     *Buffer;
   UINTN                     BufferSize;
@@ -493,7 +495,7 @@ BBTestWriteExBasicTestCheckpoint1 (
   UINTN                     Index;
   UINTN                     IndexI;
   UINTN                     WaitIndex;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoWrite_Task          *FileIoEntity;
   UINT8                     BufferRead[100];
 
@@ -505,7 +507,7 @@ BBTestWriteExBasicTestCheckpoint1 (
   FileHandle   = NULL;
   FileSize     = 200;
   
-  EfiStrCpy (FileName, L"BBTestWriteExBasicTestCheckpoint1_File");
+  SctStrCpy (FileName, L"BBTestWriteExBasicTestCheckpoint1_File");
 
   Status = SimpleFileSystem->OpenVolume (SimpleFileSystem, &Root);
   if (EFI_ERROR (Status)) {
@@ -622,18 +624,18 @@ BBTestWriteExBasicTestCheckpoint1 (
     }
   }
   
-  Print (L" ================== Async WriteEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async WriteEx call finshed ================== \n\n");
 
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Write events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Write events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
     
-  AcquireLock(&gAsyncWriteQueueLock);
-  while (!IsListEmpty(&AsyncWriteExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncWriteQueueLock);
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  while (!SctIsListEmpty(&AsyncWriteExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncWriteQueueLock);
     
     gtBS->WaitForEvent (                   
             1,
@@ -642,24 +644,24 @@ BBTestWriteExBasicTestCheckpoint1 (
             );
     IndexI++;
   
-    Print (L".");
-    AcquireLock(&gAsyncWriteQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncWriteQueueLock);
   }
-  ReleaseLock(&gAsyncWriteQueueLock);
+  SctReleaseLock (&gAsyncWriteQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");
+  SctPrint (L"\n");
  
   //
   // clear all File IO events from gWriteFinishQueue 
   // gWriteFinshQueue is handled first since we use File IO Write to do Write buffer validation 
   // Here no logs should be wrote to this file device to keep data intact
   //
-  AcquireLock(&gAsyncWriteQueueLock);
-  if (!IsListEmpty(&AsyncWriteFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncWriteFinishListHead); ; ListEntry = GetNextNode(&AsyncWriteFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  if (!SctIsListEmpty(&AsyncWriteFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncWriteFinishListHead); ; ListEntry = SctGetNextNode(&AsyncWriteFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncWriteQueueLock);
+      SctReleaseLock (&gAsyncWriteQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -760,25 +762,25 @@ BBTestWriteExBasicTestCheckpoint1 (
       }else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
 	  }
-      AcquireLock(&gAsyncWriteQueueLock);
+      SctAcquireLock (&gAsyncWriteQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncWriteFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncWriteFinishListHead, ListEntry)) {
          break;
       }
     }
   }
-  ReleaseLock(&gAsyncWriteQueueLock);
+  SctReleaseLock (&gAsyncWriteQueueLock);
   
   //
   // Record All Finished Write case results
   //
-  AcquireLock(&gAsyncWriteQueueLock);
-  while (!IsListEmpty(&AsyncWriteFinishListHead)) {
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  while (!SctIsListEmpty(&AsyncWriteFinishListHead)) {
     FileIoEntity = CR(AsyncWriteFinishListHead.ForwardLink, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncWriteQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncWriteQueueLock);
 
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -802,18 +804,18 @@ BBTestWriteExBasicTestCheckpoint1 (
     }
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
-    AcquireLock(&gAsyncWriteQueueLock);
+    SctAcquireLock (&gAsyncWriteQueueLock);
   }
-  ReleaseLock(&gAsyncWriteQueueLock);
+  SctReleaseLock (&gAsyncWriteQueueLock);
 
   //
   // If WriteFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncWriteQueueLock);
-  while(!IsListEmpty(&AsyncWriteFailListHead)) {
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  while(!SctIsListEmpty(&AsyncWriteFailListHead)) {
     FileIoEntity = CR(AsyncWriteFailListHead.ForwardLink, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncWriteQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncWriteQueueLock);
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
@@ -837,19 +839,19 @@ BBTestWriteExBasicTestCheckpoint1 (
      gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
      gtBS->FreePool(FileIoEntity);
        
-     AcquireLock(&gAsyncWriteQueueLock);
+     SctAcquireLock (&gAsyncWriteQueueLock);
   }
-  ReleaseLock(&gAsyncWriteQueueLock);  
+  SctReleaseLock (&gAsyncWriteQueueLock);  
   
   //
   // If WriteExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncWriteQueueLock);
-  if (!IsListEmpty(&AsyncWriteExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncWriteExecuteListHead); ; ListEntry = GetNextNode(&AsyncWriteExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncWriteQueueLock);
+  if (!SctIsListEmpty(&AsyncWriteExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncWriteExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncWriteExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncWriteQueueLock);
+      SctReleaseLock (&gAsyncWriteQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -864,13 +866,13 @@ BBTestWriteExBasicTestCheckpoint1 (
                      FileIoEntity->Tpl
                      );
 
-      AcquireLock(&gAsyncWriteQueueLock);
-      if (IsNodeAtEnd(&AsyncWriteExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncWriteQueueLock);
+      if (SctIsNodeAtEnd(&AsyncWriteExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncWriteQueueLock);
+  SctReleaseLock (&gAsyncWriteQueueLock);
 
   FileHandle->Delete(FileHandle);  
   Root->Close(Root);
@@ -888,10 +890,10 @@ BBTestWriteExBasicTestCheckpoint2 (
 {
   EFI_STATUS                Status;
   EFI_STATUS                WriteExStatus;
-  EFI_FILE_PROTOCOL         *Root;
+  EFI_FILE                  *Root;
   UINTN                     TplIndex;
   CHAR16                    FileName[100];
-  EFI_FILE_PROTOCOL         *FileHandle;
+  EFI_FILE                  *FileHandle;
   UINT64                    FileSize;
   UINT8                     BufferWrite[200];
   UINT8                     BufferRead[200];
@@ -915,7 +917,7 @@ BBTestWriteExBasicTestCheckpoint2 (
   FileSize     = 200;
   BufferSize   = 200;
   WriteContent = 0x31;
-  EfiStrCpy (FileName, L"BBTestWriteExBasicTestCheckpoint2_File");
+  SctStrCpy (FileName, L"BBTestWriteExBasicTestCheckpoint2_File");
 
   Status = SimpleFileSystem->OpenVolume (SimpleFileSystem, &Root);
   if (EFI_ERROR (Status)) {
@@ -1088,7 +1090,7 @@ BBTestWriteExBasicTestCheckpoint2 (
             // file size grows
             //
             FileInfo = NULL;
-            Status = InternalGetInfoFileIo2 (FileHandle, &FileInfo, &InfoSize, &gEfiFileInfoGuid);
+            Status = InternalGetInfoFileIo2 (FileHandle, &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
             if (EFI_ERROR (Status)) {
               StandardLib->RecordAssertion (
                              StandardLib,
@@ -1203,9 +1205,9 @@ BBTestWriteExBasicTestCheckpoint3 (
   )
 {
   EFI_STATUS                Status;
-  EFI_FILE_PROTOCOL         *Root;
+  EFI_FILE                  *Root;
   CHAR16                    FileName[3][100];
-  EFI_FILE_PROTOCOL         *FileHandle[3];
+  EFI_FILE                  *FileHandle[3];
   UINT64                    FileSize;
   UINT8                     *Buffer[3];
   UINTN                     BufferSize;
@@ -1214,7 +1216,7 @@ BBTestWriteExBasicTestCheckpoint3 (
   UINTN                     Index;
   UINTN                     IndexI;
   UINTN                     WaitIndex;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoWrite_Task          *FileIoEntity;
   UINT8                     BufferRead[200];
   EFI_FILE_INFO             *FileInfo;
@@ -1226,9 +1228,9 @@ BBTestWriteExBasicTestCheckpoint3 (
   FileInfo     = NULL;
   FileSize     = 200;
   BufferSize   = 300;
-  EfiStrCpy (FileName[0], L"BBTestWriteExBasicTestCheckpoint3_File1");
-  EfiStrCpy (FileName[1], L"BBTestWriteExBasicTestCheckpoint3_File2");
-  EfiStrCpy (FileName[2], L"BBTestWriteExBasicTestCheckpoint3_File3");
+  SctStrCpy (FileName[0], L"BBTestWriteExBasicTestCheckpoint3_File1");
+  SctStrCpy (FileName[1], L"BBTestWriteExBasicTestCheckpoint3_File2");
+  SctStrCpy (FileName[2], L"BBTestWriteExBasicTestCheckpoint3_File3");
   
   Status = SimpleFileSystem->OpenVolume (SimpleFileSystem, &Root);
   if (EFI_ERROR (Status)) {
@@ -1368,18 +1370,18 @@ BBTestWriteExBasicTestCheckpoint3 (
     }
   }
   
-  Print (L" ================== Async WriteEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async WriteEx call finshed ================== \n\n");
   
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Write events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Write events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  while (!IsListEmpty(&AsyncWriteMultiExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  while (!SctIsListEmpty(&AsyncWriteMultiExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncWriteMultiQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -1388,24 +1390,24 @@ BBTestWriteExBasicTestCheckpoint3 (
             );
     IndexI++;
   
-    Print (L".");
-    AcquireLock(&gAsyncWriteMultiQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncWriteMultiQueueLock);
   }
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");
+  SctPrint (L"\n");
  
   //
   // clear all File IO events from gWriteFinishQueue 
   // gWriteFinshQueue is handled first since we use File IO Write to do Write buffer validation 
   // Here no logs should be wrote to this file device to keep data intact
   //
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  if (!IsListEmpty(&AsyncWriteMultiFinishListHead)) {
-    for (ListEntry = GetFirstNode(&AsyncWriteMultiFinishListHead); ; ListEntry = GetNextNode(&AsyncWriteMultiFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  if (!SctIsListEmpty(&AsyncWriteMultiFinishListHead)) {
+    for (ListEntry = SctGetFirstNode(&AsyncWriteMultiFinishListHead); ; ListEntry = SctGetNextNode(&AsyncWriteMultiFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncWriteMultiQueueLock);
+      SctReleaseLock (&gAsyncWriteMultiQueueLock);
 
       FileIoEntity->AssertionType = EFI_TEST_ASSERTION_PASSED;;
       //
@@ -1422,7 +1424,7 @@ BBTestWriteExBasicTestCheckpoint3 (
             // file size grows
             //
             FileInfo = NULL;
-            Status = InternalGetInfoFileIo2 (FileIoEntity->FileIo, &FileInfo, &InfoSize, &gEfiFileInfoGuid);
+            Status = InternalGetInfoFileIo2 (FileIoEntity->FileIo, &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
             if (EFI_ERROR (Status)) {
               StandardLib->RecordAssertion (
                              StandardLib,
@@ -1502,25 +1504,25 @@ BBTestWriteExBasicTestCheckpoint3 (
       } else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncWriteMultiQueueLock);
+      SctAcquireLock (&gAsyncWriteMultiQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncWriteMultiFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncWriteMultiFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
     
   //
   // Record All Finished Write case results
   //
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  while (!IsListEmpty(&AsyncWriteMultiFinishListHead)) {
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  while (!SctIsListEmpty(&AsyncWriteMultiFinishListHead)) {
     FileIoEntity = CR(AsyncWriteMultiFinishListHead.ForwardLink, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncWriteMultiQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncWriteMultiQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1543,19 +1545,19 @@ BBTestWriteExBasicTestCheckpoint3 (
     }
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
-    AcquireLock(&gAsyncWriteMultiQueueLock);
+    SctAcquireLock (&gAsyncWriteMultiQueueLock);
   }
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
 
 
   //
   // If WriteMultiFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  while(!IsListEmpty(&AsyncWriteMultiFailListHead)) {
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  while(!SctIsListEmpty(&AsyncWriteMultiFailListHead)) {
     FileIoEntity = CR(AsyncWriteMultiFailListHead.ForwardLink, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncWriteMultiQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncWriteMultiQueueLock);
         
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1580,20 +1582,20 @@ BBTestWriteExBasicTestCheckpoint3 (
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
          
-    AcquireLock(&gAsyncWriteMultiQueueLock);
+    SctAcquireLock (&gAsyncWriteMultiQueueLock);
   }
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
       
     
   //
   // If WriteMultiExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncWriteMultiQueueLock);
-  if (!IsListEmpty(&AsyncWriteMultiExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncWriteMultiExecuteListHead); ; ListEntry = GetNextNode(&AsyncWriteMultiExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncWriteMultiQueueLock);
+  if (!SctIsListEmpty(&AsyncWriteMultiExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncWriteMultiExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncWriteMultiExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoWrite_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncWriteMultiQueueLock);
+      SctReleaseLock (&gAsyncWriteMultiQueueLock);
       
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -1608,13 +1610,13 @@ BBTestWriteExBasicTestCheckpoint3 (
                      (UINTN)FileIoEntity->SetPosition
                      );
 
-      AcquireLock(&gAsyncWriteMultiQueueLock);
-      if (IsNodeAtEnd(&AsyncWriteMultiExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncWriteMultiQueueLock);
+      if (SctIsNodeAtEnd(&AsyncWriteMultiExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncWriteMultiQueueLock);
+  SctReleaseLock (&gAsyncWriteMultiQueueLock);
      
   for (Index = 0; Index < 3; Index++){
     if ( FileHandle[Index] != NULL){
@@ -1640,9 +1642,9 @@ BBTestWriteExBasicTestCheckpoint4 (
 {
   EFI_STATUS                Status;
   EFI_STATUS                WriteStatus;
-  EFI_FILE_PROTOCOL         *Root;
+  EFI_FILE                  *Root;
   CHAR16                    FileName[3][100];
-  EFI_FILE_PROTOCOL         *FileHandle[3];
+  EFI_FILE                  *FileHandle[3];
   UINT64                    FileSize;
   UINTN                     BufferSize;
   UINT64                    SetPosition[3] = {0, 100, 200};
@@ -1663,9 +1665,9 @@ BBTestWriteExBasicTestCheckpoint4 (
   BufferSize         = 200;
   PositionAfterWrite = 0;
 
-  EfiStrCpy (FileName[0], L"BBTestWriteExBasicTestCheckpoint4_File1");
-  EfiStrCpy (FileName[1], L"BBTestWriteExBasicTestCheckpoint4_File2");
-  EfiStrCpy (FileName[2], L"BBTestWriteExBasicTestCheckpoint4_File3");
+  SctStrCpy (FileName[0], L"BBTestWriteExBasicTestCheckpoint4_File1");
+  SctStrCpy (FileName[1], L"BBTestWriteExBasicTestCheckpoint4_File2");
+  SctStrCpy (FileName[2], L"BBTestWriteExBasicTestCheckpoint4_File3");
   
   Status = SimpleFileSystem->OpenVolume (SimpleFileSystem, &Root);
   if (EFI_ERROR (Status)) {
@@ -1845,7 +1847,7 @@ BBTestWriteExBasicTestCheckpoint4 (
           // file size grows
           //
           FileInfo = NULL;
-          Status = InternalGetInfoFileIo2 (FileHandle[Index], &FileInfo, &InfoSize, &gEfiFileInfoGuid);
+          Status = InternalGetInfoFileIo2 (FileHandle[Index], &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
                            StandardLib,
@@ -1954,7 +1956,7 @@ BBTestWriteExBasicTestCheckpoint4 (
 
 EFI_STATUS
 InternalGetInfoFileIo2 (
-  EFI_FILE_PROTOCOL      *FileHandle,
+  EFI_FILE               *FileHandle,
   VOID                   **InfoBuffer,
   UINTN                  *BufferSize,
   EFI_GUID               *InfoId
@@ -2021,7 +2023,7 @@ Done:
 
 EFI_STATUS
 InternalSetFileSizeFileIo2 (
-  EFI_FILE_PROTOCOL      *FileHandle,
+  EFI_FILE               *FileHandle,
   UINT64                 FileSize
   )
 {
@@ -2029,13 +2031,13 @@ InternalSetFileSizeFileIo2 (
   UINTN         BufferSize;
   EFI_STATUS    Status;
 
-  Status = InternalGetInfoFileIo2 (FileHandle, &InfoBuffer, &BufferSize, &gEfiFileInfoGuid);
+  Status = InternalGetInfoFileIo2 (FileHandle, &InfoBuffer, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     return Status;
   }
 
   InfoBuffer->FileSize = FileSize;
-  Status = FileHandle->SetInfo (FileHandle, &gEfiFileInfoGuid, BufferSize, InfoBuffer);
+  Status = FileHandle->SetInfo (FileHandle, &gBlackBoxEfiFileInfoGuid, BufferSize, InfoBuffer);
 
   gtBS->FreePool (InfoBuffer);
 

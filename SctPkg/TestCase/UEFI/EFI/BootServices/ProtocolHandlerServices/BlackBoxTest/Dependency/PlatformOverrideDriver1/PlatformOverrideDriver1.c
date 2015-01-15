@@ -78,6 +78,8 @@ typedef struct {
   //
   // It is used to save the original platform driver override protocol
   //
+
+  EFI_HANDLE                                OrigHandle;
   EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL     *OrigPlatformOverride;
 } PLATFORM_OVERRIDE_PRIVATE_DATA;
 
@@ -267,8 +269,8 @@ PlatformOverrideDriver1BindingStart (
   EFI_STATUS                            Status;
   PLATFORM_OVERRIDE_PRIVATE_DATA        *PrivateData;
   VOID                                  *ProtInstance;
-  UINTN                                 BufferSize;
-  EFI_HANDLE                            Buffer;
+  UINTN                                 HandleCount;
+  EFI_HANDLE                            *HandleBuffer;
 
   PrivateData = PLATFORM_OVERRIDE_PRIVATE_DATA_FROM_DRIVER_BINDING (This);
 
@@ -291,16 +293,16 @@ PlatformOverrideDriver1BindingStart (
   //
   // Install or reinstall the platform driver override protocol
   //
-  BufferSize = sizeof (EFI_HANDLE);
-  Buffer     = NULL;
+  //BufferSize = sizeof (EFI_HANDLE);
+  //Buffer     = NULL;
 
-  Status = gtBS->LocateHandle (
-                  ByProtocol,
-                  &gEfiPlatformDriverOverrideProtocolGuid,
-                  NULL,
-                  &BufferSize,
-                  &Buffer
-                  );
+  Status = gtBS->LocateHandleBuffer (
+                   ByProtocol,
+                   &gEfiPlatformDriverOverrideProtocolGuid,
+                   NULL,
+                   &HandleCount,
+                   &HandleBuffer
+                   );
   if (EFI_ERROR (Status) && (Status != EFI_NOT_FOUND)) {
     //
     // Only one platform driver override protocol can exist on a platform. So
@@ -310,51 +312,70 @@ PlatformOverrideDriver1BindingStart (
   }
 
   if (Status == EFI_SUCCESS) {
-    //
+
+	//
     // The protocol exists, then reinstall it
     //
     Status = gtBS->HandleProtocol (
-                    Controller,
-                    &gEfiPlatformDriverOverrideProtocolGuid,
-                    &PrivateData->OrigPlatformOverride
-                    );
+                     HandleBuffer[0],
+                     &gEfiPlatformDriverOverrideProtocolGuid,
+                     &PrivateData->OrigPlatformOverride
+                     );
     if (EFI_ERROR (Status)) {
       return Status;
     }
 
     Status = gtBS->ReinstallProtocolInterface (
-                    Controller,
-                    &gEfiPlatformDriverOverrideProtocolGuid,
-                    PrivateData->OrigPlatformOverride,
-                    &PrivateData->PlatformOverride
-                    );
+                     HandleBuffer[0],
+                     &gEfiPlatformDriverOverrideProtocolGuid,
+                     PrivateData->OrigPlatformOverride,
+                     &PrivateData->PlatformOverride
+                     );
     if (EFI_ERROR (Status)) {
       return Status;
     }
+
+	PrivateData->OrigHandle = HandleBuffer[0];
+
+    //
+    // Install the driver's protocol
+    //
+    Status = gtBS->InstallProtocolInterface (
+                     HandleBuffer,
+                     &mPlatformOverrideDriver1Guid,
+                     EFI_NATIVE_INTERFACE,
+                     NULL
+                     );
+
+    gtBS->FreePool( HandleBuffer);
+
   } else {
     //
     // The protocol does not exist, then install it
     //
     Status = gtBS->InstallProtocolInterface (
-                    &Controller,
-                    &gEfiPlatformDriverOverrideProtocolGuid,
-                    EFI_NATIVE_INTERFACE,
-                    &PrivateData->PlatformOverride
-                    );
+                     &Controller,
+                     &gEfiPlatformDriverOverrideProtocolGuid,
+                     EFI_NATIVE_INTERFACE,
+                     &PrivateData->PlatformOverride
+                     );
     if (EFI_ERROR (Status)) {
       return Status;
     }
+
+    //
+    // Install the driver's protocol
+    //
+    Status = gtBS->InstallProtocolInterface (
+                     &Controller,
+                     &mPlatformOverrideDriver1Guid,
+                     EFI_NATIVE_INTERFACE,
+                     NULL
+                     );
+
+
   }
 
-  //
-  // Install the driver's protocol
-  //
-  Status = gtBS->InstallProtocolInterface (
-                  &Controller,
-                  &mPlatformOverrideDriver1Guid,
-                  EFI_NATIVE_INTERFACE,
-                  NULL
-                  );
 
   return Status;
 }
@@ -379,11 +400,25 @@ PlatformOverrideDriver1BindingStop (
     // The original protocol exists, then reinstall it back
     //
     gtBS->ReinstallProtocolInterface (
-            Controller,
+            PrivateData->OrigHandle,
             &gEfiPlatformDriverOverrideProtocolGuid,
             &PrivateData->PlatformOverride,
             PrivateData->OrigPlatformOverride
             );
+
+    gtBS->UninstallProtocolInterface (
+            PrivateData->OrigHandle,
+            &mPlatformOverrideDriver1Guid,
+            NULL
+            );
+
+    gtBS->CloseProtocol (
+            PrivateData->OrigHandle,
+            &mTestNoInterfaceProtocol1Guid,
+            This->DriverBindingHandle,
+            Controller
+            );
+
   } else {
     //
     // The original protocol does not exist, then uninstall it
@@ -393,20 +428,22 @@ PlatformOverrideDriver1BindingStop (
             &gEfiPlatformDriverOverrideProtocolGuid,
             &PrivateData->PlatformOverride
             );
-  }
 
-  gtBS->UninstallProtocolInterface (
+
+    gtBS->UninstallProtocolInterface (
             Controller,
             &mPlatformOverrideDriver1Guid,
             NULL
             );
 
-  gtBS->CloseProtocol (
+    gtBS->CloseProtocol (
             Controller,
             &mTestNoInterfaceProtocol1Guid,
             This->DriverBindingHandle,
             Controller
             );
+
+  }
 
   return EFI_SUCCESS;
 }

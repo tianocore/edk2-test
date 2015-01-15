@@ -55,37 +55,30 @@
 #
 #--*/
 
+
+
 [defines]
-BASE_NAME            = IhvAdapterInfoBBTest
-FILE_GUID            = 56fe9f1-157b-42d3-b112-83971c83da19 
-COMPONENT_TYPE       = BS_DRIVER
-
-
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = IhvAdapterInfoBBTest
+  FILE_GUID            = 56fe9f1-157b-42d3-b112-83971c83da19
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeAdapterInfoBBTest
 
 [sources.common]
   AdapterInfoBBTestConformance.c
   AdapterInfoBBTestFunction.c
   AdapterInfoBBTestMain.c
-  Guid.c
+  guid.c
 
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
 
-[includes.common]
-  .
-  $(EDK_SOURCE)/Foundation
-  $(EDK_SOURCE)/Foundation/Efi
-  $(EDK_SOURCE)/Foundation/Include
-  $(EDK_SOURCE)/Foundation/Efi/Include
-  $(EDK_SOURCE)/Foundation/Framework/Include
-  $(EDK_SOURCE)/Foundation/Include/IndustryStandard
-  $(EDK_SOURCE)/Foundation/Library/Dxe/Include
-  $(WORKSPACE)/
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/Library/EfiTestLib
-
-[libraries.common]
-  EfiProtocolLib
-  TestProtocolLib
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SctLib
   EfiTestLib
 
-[nmake.common]
-  IMAGE_ENTRY_POINT=InitializeAdapterInfoBBTest
+[Protocols]

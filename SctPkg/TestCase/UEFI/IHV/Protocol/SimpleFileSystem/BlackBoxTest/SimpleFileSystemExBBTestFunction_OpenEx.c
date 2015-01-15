@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 -2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 
@@ -55,6 +55,8 @@ Abstract:
 --*/
 
 
+#define EFI_FILE_HANDLE_REVISION 0x00020000
+
 #include "SimpleFileSystemBBTest.h"
 
 #define VALID_DIRECTORY_ATTRIBUTES_INDEX_FOR_CREATE    8   // zero-based
@@ -68,12 +70,12 @@ Abstract:
 //
 typedef struct {
   UINTN                             Signature;
-  EFI_FILE_PROTOCOL                 *FileIo;
+  EFI_FILE                          *FileIo;
   EFI_FILE_IO_TOKEN                 FileIoToken;
   EFI_TPL                           Tpl;
   CHAR16                            *Name;
   UINT64                            OpenMode;
-  EFI_LIST_ENTRY                    ListEntry;     
+  SCT_LIST_ENTRY                    ListEntry;     
   EFI_STATUS                        StatusAsync;
   EFI_TEST_ASSERTION                AssertionType;
 } FileIoOpenFile_Task;
@@ -125,40 +127,40 @@ UINT64 ValidAttributesForCreateFileIo2[] = {
 //
 // Async Open File Queue
 //
-EFI_LIST_ENTRY  AsyncOpenFileExecuteListHead = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenFileExecuteListHead);
-EFI_LIST_ENTRY  AsyncOpenFileFinishListHead  = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenFileFinishListHead);
-EFI_LIST_ENTRY  AsyncOpenFileFailListHead    = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenFileFailListHead);
+SCT_LIST_ENTRY  AsyncOpenFileExecuteListHead = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenFileExecuteListHead);
+SCT_LIST_ENTRY  AsyncOpenFileFinishListHead  = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenFileFinishListHead);
+SCT_LIST_ENTRY  AsyncOpenFileFailListHead    = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenFileFailListHead);
 
 //
 // Async Open File lock
 //
-FLOCK  gAsyncOpenFileQueueLock = EFI_INITIALIZE_LOCK_VARIABLE (EFI_TPL_CALLBACK);
+SCT_LOCK  gAsyncOpenFileQueueLock = SCT_INITIALIZE_LOCK_VARIABLE (TPL_CALLBACK);
 
 //
 // Async Open Dir Queue
 //
-EFI_LIST_ENTRY  AsyncOpenDirExecuteListHead = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenDirExecuteListHead);
-EFI_LIST_ENTRY  AsyncOpenDirFinishListHead  = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenDirFinishListHead);
-EFI_LIST_ENTRY  AsyncOpenDirFailListHead    = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenDirFailListHead);
+SCT_LIST_ENTRY  AsyncOpenDirExecuteListHead = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenDirExecuteListHead);
+SCT_LIST_ENTRY  AsyncOpenDirFinishListHead  = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenDirFinishListHead);
+SCT_LIST_ENTRY  AsyncOpenDirFailListHead    = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenDirFailListHead);
 
 
 
 //
 // Sync Create File Queue for Async Open 
 //
-EFI_LIST_ENTRY  SyncCreateFileListHead = INITIALIZE_LIST_HEAD_VARIABLE(SyncCreateFileListHead);
+SCT_LIST_ENTRY  SyncCreateFileListHead = INITIALIZE_SCT_LIST_HEAD_VARIABLE(SyncCreateFileListHead);
 
 //
 // Async Open Existing File Queue
 //
-EFI_LIST_ENTRY  AsyncOpenExistingFileExecuteListHead = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenExistingFileExecuteListHead);
-EFI_LIST_ENTRY  AsyncOpenExistingFileFinishListHead  = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenExistingFileFinishListHead);
-EFI_LIST_ENTRY  AsyncOpenExistingFileFailListHead    = INITIALIZE_LIST_HEAD_VARIABLE(AsyncOpenExistingFileFailListHead);
+SCT_LIST_ENTRY  AsyncOpenExistingFileExecuteListHead = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenExistingFileExecuteListHead);
+SCT_LIST_ENTRY  AsyncOpenExistingFileFinishListHead  = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenExistingFileFinishListHead);
+SCT_LIST_ENTRY  AsyncOpenExistingFileFailListHead    = INITIALIZE_SCT_LIST_HEAD_VARIABLE(AsyncOpenExistingFileFailListHead);
 
 //
 // Async Open File lock
 //
-FLOCK  gAsyncOpenExistingFileQueueLock = EFI_INITIALIZE_LOCK_VARIABLE (EFI_TPL_CALLBACK);
+SCT_LOCK  gAsyncOpenExistingFileQueueLock = SCT_INITIALIZE_LOCK_VARIABLE (TPL_CALLBACK);
 
 //
 // some private functions declaration
@@ -172,7 +174,7 @@ ComposeFileNameArrayFileIo2 (
 
 EFI_STATUS
 InternalGetInfoFileIo2 (
-  EFI_FILE_PROTOCOL      *FileHandle,
+  EFI_FILE               *FileHandle,
   VOID                   **InfoBuffer,
   UINTN                  *BufferSize,
   EFI_GUID               *InfoId
@@ -185,7 +187,7 @@ InternalGetInfoFileIo2 (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -194,7 +196,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -203,7 +205,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -212,7 +214,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -222,7 +224,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -232,7 +234,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -241,7 +243,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                              *Root,
+  EFI_FILE                                       *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -251,7 +253,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                              *Root,
+  EFI_FILE                                       *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -261,7 +263,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -272,7 +274,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -282,7 +284,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -291,7 +293,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -302,7 +304,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -313,7 +315,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -323,7 +325,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -333,7 +335,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -342,7 +344,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -351,7 +353,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -361,7 +363,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -371,7 +373,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -410,10 +412,10 @@ EFIAPI FileIoOpenFileNotifyFunc (
   // Remove entity from OpenFileExecuteListHead &  add entity to OpenFileFinishListHead
   // All FileIoOpenFile Notify function run at Call Back level only once, So no locks required
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  RemoveEntryList(&FileIoEntity->ListEntry);
-  InsertTailList(&AsyncOpenFileFinishListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  SctRemoveEntryList(&FileIoEntity->ListEntry);
+  SctInsertTailList(&AsyncOpenFileFinishListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 }
 
 /**
@@ -427,7 +429,7 @@ EFIAPI FileIoOpenFileNotifyFunc (
 STATIC
 EFI_STATUS
 FileIoAsyncOpenFile (
-  IN EFI_FILE_PROTOCOL                 *Root,
+  IN EFI_FILE                          *Root,
   IN EFI_TPL                           Tpl,
   IN CHAR16                            *PureStrPointer,
   IN UINT64                            Attribute
@@ -458,8 +460,8 @@ FileIoAsyncOpenFile (
   // FileIoToken initialization
   //
   Status = gtBS->CreateEvent (
-                   EFI_EVENT_NOTIFY_SIGNAL,
-                   EFI_TPL_CALLBACK,
+                   EVT_NOTIFY_SIGNAL,
+                   TPL_CALLBACK,
                    FileIoOpenFileNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
@@ -475,9 +477,9 @@ FileIoAsyncOpenFile (
   FileIoEntity->Name                   = PureStrPointer;
 
 
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  InsertTailList(&AsyncOpenFileExecuteListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  SctInsertTailList(&AsyncOpenFileExecuteListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // Async OpenEx Call
@@ -496,10 +498,10 @@ FileIoAsyncOpenFile (
   gtBS->RestoreTPL (OldTpl);
   
   if (EFI_ERROR (Status)) {
-    AcquireLock(&gAsyncOpenFileQueueLock);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    InsertTailList(&AsyncOpenFileFailListHead, &FileIoEntity->ListEntry);    
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctInsertTailList(&AsyncOpenFileFailListHead, &FileIoEntity->ListEntry);    
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
   }
 
   //
@@ -527,10 +529,10 @@ EFIAPI FileIoOpenDirNotifyFunc (
   // Remove entity from OpenDirExecuteListHead &  add entity to OpenDirFinishListHead
   // All FileIoOpenDir Notify function run at Call Back level only once, So no locks required
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  RemoveEntryList(&FileIoEntity->ListEntry);
-  InsertTailList(&AsyncOpenDirFinishListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  SctRemoveEntryList(&FileIoEntity->ListEntry);
+  SctInsertTailList(&AsyncOpenDirFinishListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 }
 
 
@@ -547,7 +549,7 @@ EFIAPI FileIoOpenDirNotifyFunc (
 STATIC
 EFI_STATUS
 FileIoAsyncOpenDir (
-  IN EFI_FILE_PROTOCOL                 *Root,
+  IN EFI_FILE                          *Root,
   IN EFI_TPL                           Tpl,
   IN CHAR16                            *PureStrPointer,
   IN CHAR16                            *StrPointer,
@@ -593,8 +595,8 @@ FileIoAsyncOpenDir (
   // FileIoToken initialization
   //
   Status = gtBS->CreateEvent (
-                   EFI_EVENT_NOTIFY_SIGNAL,
-                   EFI_TPL_CALLBACK,
+                   EVT_NOTIFY_SIGNAL,
+                   TPL_CALLBACK,
                    FileIoOpenDirNotifyFunc,
                    FileIoOpenDirEntity,
                    &FileIoOpenDirEntity->FileIoToken.Event
@@ -614,8 +616,8 @@ FileIoAsyncOpenDir (
   }
 
   Status = gtBS->CreateEvent (
-                   EFI_EVENT_NOTIFY_SIGNAL,
-                   EFI_TPL_CALLBACK,
+                   EVT_NOTIFY_SIGNAL,
+                   TPL_CALLBACK,
                    FileIoOpenFileNotifyFunc,
                    FileIoOpenFileEntity,
                    &FileIoOpenFileEntity->FileIoToken.Event
@@ -643,13 +645,13 @@ FileIoAsyncOpenDir (
   FileIoOpenFileEntity->FileIoToken.Status    = EFI_NOT_READY;
   FileIoOpenFileEntity->Name                  = StrPointer;
 
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  InsertTailList(&AsyncOpenDirExecuteListHead, &FileIoOpenDirEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  SctInsertTailList(&AsyncOpenDirExecuteListHead, &FileIoOpenDirEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  InsertTailList(&AsyncOpenFileExecuteListHead, &FileIoOpenFileEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  SctInsertTailList(&AsyncOpenFileExecuteListHead, &FileIoOpenFileEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // Async OpenEx Call---Open Dir
@@ -668,10 +670,10 @@ FileIoAsyncOpenDir (
   gtBS->RestoreTPL (OldTpl);
   
   if (EFI_ERROR (Status)) {
-    AcquireLock(&gAsyncOpenFileQueueLock);
-    RemoveEntryList(&FileIoOpenDirEntity->ListEntry);
-    InsertTailList(&AsyncOpenDirFailListHead, &FileIoOpenDirEntity->ListEntry);    
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoOpenDirEntity->ListEntry);
+    SctInsertTailList(&AsyncOpenDirFailListHead, &FileIoOpenDirEntity->ListEntry);    
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
     FileIoOpenDirEntity->StatusAsync        = Status;
     return Status;
   }
@@ -697,10 +699,10 @@ FileIoAsyncOpenDir (
   gtBS->RestoreTPL (OldTpl);
   
   if (EFI_ERROR (Status)) {
-    AcquireLock(&gAsyncOpenFileQueueLock);
-    RemoveEntryList(&FileIoOpenFileEntity->ListEntry);
-    InsertTailList(&AsyncOpenFileFailListHead, &FileIoOpenFileEntity->ListEntry);    
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoOpenFileEntity->ListEntry);
+    SctInsertTailList(&AsyncOpenFileFailListHead, &FileIoOpenFileEntity->ListEntry);    
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
     FileIoOpenFileEntity->StatusAsync = Status;
     return Status;
   }
@@ -779,7 +781,7 @@ BBTestOpenExBasicTestCheckpoint1 (
   )
 {
   EFI_STATUS                Status;
-  EFI_FILE_PROTOCOL         *Root = NULL;
+  EFI_FILE                  *Root = NULL;
   CHAR16                    *PureFileNameArray;
   UINT32                    Count;
 
@@ -992,7 +994,7 @@ Done:
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -1008,7 +1010,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   CHAR16                    *PureStrPointer;
   UINT32                    MaxAttributesIndex;
   UINT32                    MaxNameIndex;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
 
   ListEntry    = NULL;
@@ -1038,17 +1040,17 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
       }
     }
   }
-  Print (L" ================== Async OpenEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async OpenEx call finshed ================== \n\n");
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -1057,23 +1059,23 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
             );
     IndexI++;
   
-    Print (L".");
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
 
   //
   // clear all File IO events from gOpenFileFinishQueue 
   // gOpenFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -1089,25 +1091,25 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
        
-      AcquireLock(&gAsyncOpenFileQueueLock);
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1130,18 +1132,18 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
     
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // If OpenFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1165,19 +1167,19 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
        
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // If OpenFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -1192,13 +1194,13 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   return EFI_SUCCESS;
 }
@@ -1207,7 +1209,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -1222,7 +1224,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
   UINT32                    MaxNameIndex;
   EFI_TEST_ASSERTION        AssertionType;
   EFI_FILE_IO_TOKEN         FileIoTokenSync;
-  EFI_FILE_PROTOCOL         *FileHandle;
+  EFI_FILE                  *FileHandle;
   EFI_TPL                   OldTpl; 
   //
   // Sync Token Init
@@ -1297,7 +1299,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -1319,7 +1321,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   UINT32                    MaxAttributesIndex;
   UINT32                    MaxNameIndex;
   UINT32                    MaxFileName;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoOpenFileEntity;
   FileIoOpenFile_Task       *FileIoOpenDirEntity;
 
@@ -1370,11 +1372,11 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   
   for (Loop = 0; Loop < MaxFileName; Loop++) {
     
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     PureStrPointer += MAX_STRING_LENGTH;
     StrPointer += MAX_STRING_LENGTH;
@@ -1405,20 +1407,20 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
       }
     }
   }
-  Print (L" ================== Async OpenEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async OpenEx call finshed ================== \n\n");
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
         
-  AcquireLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
   
-  while (!IsListEmpty(&AsyncOpenFileExecuteListHead) 
-         && !IsListEmpty(&AsyncOpenDirExecuteListHead) 
+  while (!SctIsListEmpty(&AsyncOpenFileExecuteListHead) 
+         && !SctIsListEmpty(&AsyncOpenDirExecuteListHead) 
          && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
         
     gtBS->WaitForEvent (                   
             1,
@@ -1427,23 +1429,23 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
             );
     IndexI++;
   
-    Print (L".");
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
     
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
   
   //
   // clear all File IO events from gOpenDirFinishQueue 
   // gOpenDirQueue is handled first since we use File IO openex to do open dir. 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenDirFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenDirFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenDirFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenDirFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenDirFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenDirFinishListHead, ListEntry)) {
       FileIoOpenDirEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -1459,26 +1461,26 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
         FileIoOpenDirEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
          
-      AcquireLock(&gAsyncOpenFileQueueLock);
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenDirFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenDirFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // clear all File IO events from gOpenFileFinishQueue 
   // gOpenDirQueue is handled first since we use File IO openex to do open dir. 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
       FileIoOpenFileEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
       //
       // Check & record every File Io execution entity status 
       //
@@ -1493,25 +1495,25 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
         FileIoOpenFileEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
          
-      AcquireLock(&gAsyncOpenFileQueueLock);
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // Record All Finished Open File case results
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
     FileIoOpenFileEntity = CR(AsyncOpenFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoOpenFileEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoOpenFileEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1538,18 +1540,18 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
       FileIoOpenFileEntity = NULL;
     }
     
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 
   //
   // Record All Finished Open Dir case results
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenDirFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenDirFinishListHead)) {
     FileIoOpenDirEntity = CR(AsyncOpenDirFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoOpenDirEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoOpenDirEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
      
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1576,18 +1578,18 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
       FileIoOpenDirEntity = NULL;
     }
     
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // If OpenFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenFileFailListHead)) {
     FileIoOpenFileEntity = CR(AsyncOpenFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoOpenFileEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoOpenFileEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
         
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1608,18 +1610,18 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
       gtBS->FreePool(FileIoOpenFileEntity);
       FileIoOpenFileEntity = NULL;
     }    
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // If OpenDirFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenDirFailListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenDirFailListHead)) {
     FileIoOpenDirEntity = CR(AsyncOpenDirFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoOpenDirEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoOpenDirEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
         
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1640,19 +1642,19 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
       gtBS->FreePool(FileIoOpenDirEntity);
       FileIoOpenDirEntity = NULL;
     }    
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
     
   //
   // If OpenFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
       FileIoOpenFileEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -1667,22 +1669,22 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
                      FileIoOpenFileEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   //
   // If OpenDirExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenDirExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenDirExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenDirExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenDirExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenDirExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenDirExecuteListHead, ListEntry)) {
       FileIoOpenDirEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -1697,13 +1699,13 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
                      FileIoOpenDirEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenDirExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenDirExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 
   if (FileNameArray){
     gtBS->FreePool (FileNameArray);
@@ -1718,14 +1720,14 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *FileHandle;
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *FileHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    DirAttributesIndex;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
@@ -1792,11 +1794,11 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
 
   MaxFileName = FixedNameCount + TPL_ARRAY_SIZE + MaxNameIndex + MaxDirAttributesIndex + MaxAttributesIndex;
   for (Loop = 0; Loop < MaxFileName; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     PureStrPointer += MAX_STRING_LENGTH;
     StrPointer += MAX_STRING_LENGTH;
@@ -1930,13 +1932,13 @@ Done:
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   EFI_STATUS                Status;
@@ -1949,7 +1951,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
   UINT32                    MaxAttributesIndex;
   UINT32                    MaxNameIndex;
   EFI_TEST_ASSERTION        AssertionType;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
 
   ListEntry    = NULL;
@@ -2030,17 +2032,17 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
       }
     } 
   }   
-  Print (L" ================== Async OpenEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async OpenEx call finshed ================== \n\n");
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -2049,23 +2051,23 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
             );
     IndexI++;
   
-    Print (L".");
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
  
   //
   // clear all File IO events from gOpenFileFinishQueue 
   // gOpenFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -2083,25 +2085,25 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
       
-      AcquireLock(&gAsyncOpenFileQueueLock);
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2127,19 +2129,19 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;
     }
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
     
     
   //
   // If OpenFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2161,20 +2163,20 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
        FileIoEntity = NULL;
      }
        
-     AcquireLock(&gAsyncOpenFileQueueLock);
+     SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     
   //
   // If OpenFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -2189,13 +2191,13 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   if (DirHandle != NULL) {
     Status = DirHandle->Delete (DirHandle);
@@ -2208,14 +2210,14 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *FileHandle;
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *FileHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    FileNameIndex;
@@ -2356,14 +2358,14 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    FileNameIndex;
@@ -2380,7 +2382,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxAttributesIndex;
   UINT32                    MaxNameIndex;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
 
   FileIoEntity = NULL;
@@ -2424,12 +2426,12 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   PureStrPointer = PureFileNameArray;
   
   for (Loop = 0; Loop < 10; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
     StrPointer += MAX_STRING_LENGTH;
   }
   
@@ -2543,17 +2545,17 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
     }
   }
   
-  Print (L" ================== Async OpenEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async OpenEx call finshed ================== \n\n");
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -2562,23 +2564,23 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
     
   //
   // clear all File IO events from gOpenFileFinishQueue 
   // gOpenFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
       
       //
       // Check & record every File Io execution entity status 
@@ -2596,25 +2598,25 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
       
-      AcquireLock(&gAsyncOpenFileQueueLock);
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
     
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2636,19 +2638,19 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
     }
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
       
       
   //
   // If OpenFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2665,20 +2667,20 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
      gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
      gtBS->FreePool(FileIoEntity);
        
-     AcquireLock(&gAsyncOpenFileQueueLock);
+     SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
         
       
   //
   // If OpenFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -2693,13 +2695,13 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
     
   if (DirHandle2 != NULL) {
     Status = DirHandle2->Delete (DirHandle2);
@@ -2721,15 +2723,15 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *FileHandle;
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *FileHandle;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    FileNameIndex;
@@ -2790,12 +2792,12 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
   PureStrPointer = PureFileNameArray;
   
   for (Loop = 0; Loop < 10; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
     StrPointer += MAX_STRING_LENGTH;
   }
   
@@ -2968,14 +2970,14 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    FileNameIndex;
@@ -2992,7 +2994,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxAttributesIndex;
   UINT32                    MaxNameIndex;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
 
   ListEntry    = NULL;
@@ -3045,24 +3047,24 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
     //
     // "\" + subdir1
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
     //
     // "\" + subdir1 + "\" + subdir2
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\" + subdir2 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
@@ -3070,7 +3072,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
     // "\" + subdir1 + "\" + subdir2 + "\" + filename
     //
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
 
     StrPointer += MAX_STRING_LENGTH;
     
@@ -3182,17 +3184,17 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
       }
     }    
   }      
-  Print (L" ================== Async OpenEx call finshed ================== \n\n");
+  SctPrint (L" ================== Async OpenEx call finshed ================== \n\n");
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -3201,23 +3203,23 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
     
   //
   // clear all File IO events from gOpenFileFinishQueue 
   // gOpenFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -3234,25 +3236,25 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
       
-      AcquireLock(&gAsyncOpenFileQueueLock);
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
     
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3278,19 +3280,19 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;
     }
-    AcquireLock(&gAsyncOpenFileQueueLock);
+    SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
       
       
   //
   // If OpenFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3311,20 +3313,20 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
       FileIoEntity = NULL;
     }
 
-     AcquireLock(&gAsyncOpenFileQueueLock);
+     SctAcquireLock (&gAsyncOpenFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
         
       
   //
   // If OpenFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenFileQueueLock);
+      SctReleaseLock (&gAsyncOpenFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -3339,13 +3341,13 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenFileQueueLock);
+  SctReleaseLock (&gAsyncOpenFileQueueLock);
 
   if (DirHandle2 != NULL) {
     Status = DirHandle2->Delete (DirHandle2);
@@ -3369,15 +3371,15 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 {
-  EFI_FILE_PROTOCOL         *FileHandle;
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *FileHandle;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    FileNameIndex; 
@@ -3447,24 +3449,24 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
     //
     // "\" + subdir1
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
     //
     // "\" + subdir1 + "\" + subdir2
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\" + subdir2 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
@@ -3472,7 +3474,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
     // "\" + subdir1 + "\" + subdir2 + "\" + filename
     //
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
 
     StrPointer += MAX_STRING_LENGTH;
     
@@ -3661,10 +3663,10 @@ EFIAPI FileIoOpenExistingFileNotifyFunc  (
   // Remove entity from OpenExistingFileExecuteListHead &  add entity to OpenExistingFileFinishListHead
   // All FileIoOpenExistingFile Notify function run at Call Back level only once, So no locks required
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  RemoveEntryList(&FileIoEntity->ListEntry);
-  InsertTailList(&AsyncOpenExistingFileFinishListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  SctRemoveEntryList(&FileIoEntity->ListEntry);
+  SctInsertTailList(&AsyncOpenExistingFileFinishListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 }
 
 /**
@@ -3678,7 +3680,7 @@ EFIAPI FileIoOpenExistingFileNotifyFunc  (
 STATIC
 EFI_STATUS
 FileIoAsyncOpenExistingFile (
-  IN EFI_FILE_PROTOCOL                 *Root,
+  IN EFI_FILE                          *Root,
   IN EFI_TPL                           Tpl,
   IN CHAR16                            *PureStrPointer,
   IN UINT64                            Attribute,
@@ -3708,8 +3710,8 @@ FileIoAsyncOpenExistingFile (
   // FileIoToken initialization
   //
   Status = gtBS->CreateEvent (
-                   EFI_EVENT_NOTIFY_SIGNAL,
-                   EFI_TPL_CALLBACK,
+                   EVT_NOTIFY_SIGNAL,
+                   TPL_CALLBACK,
                    FileIoOpenExistingFileNotifyFunc ,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
@@ -3729,9 +3731,9 @@ FileIoAsyncOpenExistingFile (
   FileIoEntity->OpenMode               = OpenMode;
 
   
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  InsertTailList(&AsyncOpenExistingFileExecuteListHead, &FileIoEntity->ListEntry);
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  SctInsertTailList(&AsyncOpenExistingFileExecuteListHead, &FileIoEntity->ListEntry);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   //
   // Async OpenEx Call
@@ -3749,10 +3751,10 @@ FileIoAsyncOpenExistingFile (
   gtBS->RestoreTPL (OldTpl);
   
   if (EFI_ERROR (Status)) {
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    InsertTailList(&AsyncOpenExistingFileFailListHead, &FileIoEntity->ListEntry);    
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctInsertTailList(&AsyncOpenExistingFileFailListHead, &FileIoEntity->ListEntry);    
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   }
 
   //
@@ -3773,7 +3775,7 @@ BBTestOpenExBasicTestCheckpoint2 (
   )
 {
   EFI_STATUS                Status;
-  EFI_FILE_PROTOCOL         *Root = NULL;
+  EFI_FILE                  *Root = NULL;
   CHAR16                    *PureFileNameArray;
   UINT32                    Count;
 
@@ -3984,7 +3986,7 @@ Done:
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -4012,7 +4014,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   UINT32                    MaxAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
 
   ListEntry    = NULL;
@@ -4060,11 +4062,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4072,9 +4074,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
             return Status;
           } 
 
@@ -4110,11 +4112,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4122,9 +4124,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 		  
             if (CreateFileEntity != NULL){
               gtBS->FreePool(CreateFileEntity);
@@ -4136,7 +4138,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
 		  //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
 
           //
           // enlarge file size
@@ -4145,7 +4147,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -4159,11 +4161,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4171,9 +4173,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -4187,7 +4189,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
 
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -4203,11 +4205,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                            Status
                            );
 			
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4215,9 +4217,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -4239,36 +4241,36 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
-  Print (L" ================ Start to do Async OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Async OpenFile call ================ \n\n");
 
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     FileIoAsyncOpenExistingFile (
       Root,
       FileIoEntity->Tpl,
@@ -4277,21 +4279,21 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
       FileIoEntity->OpenMode
       ); 
     
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
-  Print (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
+  SctPrint (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -4300,22 +4302,22 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");     
+  SctPrint (L"\n");     
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -4330,7 +4332,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -4374,7 +4376,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -4404,25 +4406,25 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
       }else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -4458,18 +4460,18 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;
     }
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   //
   // If OpenExistingFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenExistingFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenExistingFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -4500,20 +4502,20 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;   
     }  
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
           
         
   //
   // If OpenExistingFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -4529,13 +4531,13 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   return EFI_SUCCESS;
 }
@@ -4544,7 +4546,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
@@ -4571,7 +4573,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
   EFI_TPL                   OldTpl;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_FILE_IO_TOKEN         FileIoTokenSync;
  
@@ -4623,11 +4625,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4635,9 +4637,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);		  	
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);		  	
             return Status;
           } 
 
@@ -4673,11 +4675,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4685,9 +4687,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (CreateFileEntity != NULL){
               gtBS->FreePool(CreateFileEntity);
@@ -4699,7 +4701,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
 
           //
           // enlarge file size
@@ -4708,7 +4710,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -4722,11 +4724,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4734,9 +4736,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -4750,7 +4752,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
 
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -4766,11 +4768,11 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -4778,9 +4780,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -4802,35 +4804,35 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
    
-  Print (L" ================ Start to do Sync OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Sync OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {  
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {  
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Sync OpenEx Call
       //
@@ -4850,23 +4852,23 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
         break;
       }
     } 
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
-  Print (L" ================== Sync OpenExisting File call finshed ================== \n\n");
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
+  SctPrint (L" ================== Sync OpenExisting File call finshed ================== \n\n");
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
       //
       // Check & record every File Io execution entity status 
       //
@@ -4879,7 +4881,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -4926,7 +4928,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -4955,25 +4957,25 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
       }else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
 
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);   
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
+    SctRemoveEntryList(&FileIoEntity->ListEntry);   
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
     StandardLib->RecordAssertion (
                    StandardLib,
                    FileIoEntity->AssertionType,
@@ -5008,9 +5010,9 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
       FileIoEntity = NULL;
     }
 
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);	
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);	
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   return EFI_SUCCESS;
 }
@@ -5020,13 +5022,13 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    Loop;
@@ -5054,7 +5056,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TEST_ASSERTION        AssertionType;
 
@@ -5099,12 +5101,12 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   PureStrPointer = PureFileNameArray;
 
   for (Loop = 0; Loop < 10; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
     StrPointer += MAX_STRING_LENGTH;
   }
   
@@ -5171,11 +5173,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                            &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5183,9 +5185,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle != NULL) {
               DirHandle->Delete(DirHandle);
@@ -5232,11 +5234,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                            PureStrPointer,
                            StrPointer
                            );
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5244,9 +5246,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle != NULL) {
               DirHandle->Delete(DirHandle);
@@ -5266,7 +5268,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
 		  
           //
           // enlarge file size
@@ -5275,7 +5277,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -5289,11 +5291,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5301,9 +5303,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -5324,7 +5326,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
         
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -5340,11 +5342,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                            Status
                            );
 			
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5352,9 +5354,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -5383,35 +5385,35 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
-  Print (L" ================ Start to do Async OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Async OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     Status = FileIoAsyncOpenExistingFile (
                       Root,
                       FileIoEntity->Tpl,
@@ -5420,21 +5422,21 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                       FileIoEntity->OpenMode
                       ); 
     
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
      
-  Print (L" ================== Async OpenExisting File call finshed ================== \n\n");
+  SctPrint (L" ================== Async OpenExisting File call finshed ================== \n\n");
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -5443,23 +5445,23 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
     
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
       //
       // Check & record every File Io execution entity status 
@@ -5474,7 +5476,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -5518,7 +5520,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -5549,25 +5551,25 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
       } else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -5598,19 +5600,19 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
     }
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
         
         
   //
   // If OpenExistingFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenExistingFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenExistingFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -5633,20 +5635,20 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
        FileIoEntity = NULL;
      }
        
-     AcquireLock(&gAsyncOpenExistingFileQueueLock);
+     SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
           
         
   //
   // If OpenExistingFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -5662,14 +5664,14 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
   
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   if (DirHandle != NULL){
     DirHandle->Delete(DirHandle);
@@ -5688,13 +5690,13 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    Loop;
@@ -5720,7 +5722,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TEST_ASSERTION        AssertionType;
   EFI_TPL                   OldTpl;
@@ -5773,12 +5775,12 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   PureStrPointer = PureFileNameArray;
 
   for (Loop = 0; Loop < 10; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
     StrPointer += MAX_STRING_LENGTH;
   }
   
@@ -5847,11 +5849,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                            &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5859,9 +5861,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
             if (DirHandle != NULL) {
               DirHandle->Delete(DirHandle);
@@ -5904,11 +5906,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5916,9 +5918,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
             if (DirHandle != NULL){
               DirHandle->Delete(DirHandle);
@@ -5938,7 +5940,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
 
           //
           // enlarge file size
@@ -5948,7 +5950,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -5962,11 +5964,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                            Status
                            );
         
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -5974,9 +5976,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -5997,7 +5999,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
         
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -6013,11 +6015,11 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                            Status
                            );
             
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -6025,9 +6027,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -6056,35 +6058,35 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
    
-  Print (L" ================ Start to do Sync OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Sync OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {      
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {      
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Sync OpenEx Call
       //
@@ -6105,23 +6107,23 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
       // Last list node handled
       //
       
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
         break;
       }
     } 
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
-  Print (L" ================== Sync OpenExisting File call finshed ================== \n\n");  
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
+  SctPrint (L" ================== Sync OpenExisting File call finshed ================== \n\n");  
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
       //
       // Check & record every File Io execution entity status 
@@ -6135,7 +6137,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -6179,7 +6181,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -6214,21 +6216,21 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);     
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);     
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -6262,9 +6264,9 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;
     }
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock); 
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock); 
 
 
   if (DirHandle != NULL){
@@ -6284,13 +6286,13 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    MaxDirAttributesIndex;
@@ -6315,7 +6317,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   UINT32                    MaxNameIndex;
   EFI_TEST_ASSERTION        AssertionType;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
 
   ListEntry    = NULL;
@@ -6393,11 +6395,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                            &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -6405,9 +6407,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle != NULL) {
               DirHandle->Delete(DirHandle);
@@ -6448,11 +6450,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -6460,9 +6462,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle != NULL){
               DirHandle->Delete(DirHandle);
@@ -6478,7 +6480,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
 		  //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
 
           //
           // enlarge file size
@@ -6487,7 +6489,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -6501,11 +6503,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -6513,9 +6515,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -6528,7 +6530,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
 
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -6544,11 +6546,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                            Status
                            );
             
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -6556,9 +6558,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -6579,35 +6581,35 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
-  Print (L" ================ Start to do Async OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Async OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     Status = FileIoAsyncOpenExistingFile (
                     DirHandle,
                     FileIoEntity->Tpl,
@@ -6615,21 +6617,21 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                     0,
                     FileIoEntity->OpenMode
                     );
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
-  Print (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
+  SctPrint (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
 
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -6638,23 +6640,23 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
     
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -6669,7 +6671,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -6713,7 +6715,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -6744,25 +6746,25 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
       } else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -6797,18 +6799,18 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;
     }
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   //
   // If OpenExistingFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenExistingFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenExistingFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -6830,19 +6832,19 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
        FileIoEntity = NULL;
      }
 
-     AcquireLock(&gAsyncOpenExistingFileQueueLock);
+     SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
           
   //
   // If OpenExistingFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -6858,14 +6860,14 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
   
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   if (DirHandle != NULL) {
     DirHandle->Delete (DirHandle);
@@ -6880,13 +6882,13 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle;
+  EFI_FILE                  *DirHandle;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    MaxDirAttributesIndex;
@@ -6909,7 +6911,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   UINT32                    MaxNameIndex;
   EFI_TEST_ASSERTION        AssertionType;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TPL                   OldTpl;
   EFI_FILE_IO_TOKEN         FileIoTokenSync;
@@ -6994,11 +6996,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                            &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7006,9 +7008,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle != NULL){
               DirHandle->Delete(DirHandle);
@@ -7049,11 +7051,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7061,9 +7063,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
 			if (DirHandle != NULL){
               DirHandle->Delete(DirHandle);
@@ -7079,7 +7081,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
 		  //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);
 
           //
           // enlarge file size
@@ -7088,7 +7090,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -7102,11 +7104,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7114,9 +7116,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -7129,7 +7131,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
 
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -7145,11 +7147,11 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7157,9 +7159,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
             
             if (FileInfo != NULL){
               gtBS->FreePool(FileInfo);
@@ -7179,34 +7181,34 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
-  Print (L" ================ Start to do Sync OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Sync OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);   
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);   
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
       //
       // Sync OpenEx Call
@@ -7228,24 +7230,24 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock); 
-      if (IsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock); 
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
         break;
       }
     }  
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
-  Print (L" ================== Sync OpenExisting File call finshed ================== \n\n");  
+  SctPrint (L" ================== Sync OpenExisting File call finshed ================== \n\n");  
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock); 
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock); 
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -7259,7 +7261,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -7303,7 +7305,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -7337,22 +7339,22 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);   
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);   
 
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -7388,9 +7390,9 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
       FileIoEntity = NULL;
     }
     
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);  
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);  
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   if (DirHandle != NULL) {
     DirHandle->Delete (DirHandle);
@@ -7405,14 +7407,14 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    Loop;
@@ -7440,7 +7442,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TEST_ASSERTION        AssertionType;
 
@@ -7485,12 +7487,12 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   PureStrPointer = PureFileNameArray;
   
   for (Loop = 0; Loop < 10; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
     StrPointer += MAX_STRING_LENGTH;
   }
   
@@ -7605,11 +7607,11 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                            &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7617,9 +7619,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);            
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);            
 
             if (DirHandle2 != NULL) {
               DirHandle2->Delete (DirHandle2);
@@ -7666,11 +7668,11 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7678,9 +7680,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (CreateFileEntity != NULL){
               gtBS->FreePool(CreateFileEntity);
@@ -7705,7 +7707,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
 
           //
           // enlarge file size
@@ -7715,7 +7717,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -7729,11 +7731,11 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7741,9 +7743,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle2 != NULL) {
               DirHandle2->Delete (DirHandle2);
@@ -7770,7 +7772,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
         
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -7786,11 +7788,11 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -7798,9 +7800,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
             if (DirHandle2 != NULL) {
               DirHandle2->Delete (DirHandle2);
@@ -7833,35 +7835,35 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
    
-  Print (L" ================ Start to do Async OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Async OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     Status = FileIoAsyncOpenExistingFile (
                     DirHandle1,
                     FileIoEntity->Tpl,
@@ -7870,21 +7872,21 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                     FileIoEntity->OpenMode
                     );
 
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
-  Print (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
+  SctPrint (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
  
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -7893,23 +7895,23 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
     
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       //
       // Check & record every File Io execution entity status 
@@ -7924,7 +7926,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -7968,7 +7970,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -7999,25 +8001,25 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
       } else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -8052,19 +8054,19 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
       gtBS->FreePool(FileIoEntity);
       FileIoEntity = NULL;
     }
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
         
         
   //
   // If OpenExistingFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenExistingFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenExistingFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -8085,20 +8087,20 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
        gtBS->FreePool(FileIoEntity);
        FileIoEntity = NULL;
      }
-     AcquireLock(&gAsyncOpenExistingFileQueueLock);
+     SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
           
         
   //
   // If OpenExistingFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -8114,14 +8116,14 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
   
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   if (DirHandle2 != NULL){
     DirHandle2->Delete(DirHandle2);
@@ -8145,14 +8147,14 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    Loop;
@@ -8178,7 +8180,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TEST_ASSERTION        AssertionType;
   EFI_TPL                   OldTpl;
@@ -8230,12 +8232,12 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   PureStrPointer = PureFileNameArray;
 
   for (Loop = 0; Loop < 10; Loop++) {
-    EfiStrCpy (StrPointer, PureStrPointer);
-    FileNameLength = EfiStrLen (PureStrPointer);
+    SctStrCpy (StrPointer, PureStrPointer);
+    FileNameLength = SctStrLen (PureStrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
     StrPointer += MAX_STRING_LENGTH;
   }
   
@@ -8351,11 +8353,11 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                            &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -8363,9 +8365,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);    
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);    
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -8414,11 +8416,11 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -8426,9 +8428,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);    
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);    
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -8452,7 +8454,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
 
           //
           // enlarge file size
@@ -8462,7 +8464,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -8476,10 +8478,10 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                            Status
                            );
 
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -8487,9 +8489,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);    
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);    
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -8514,7 +8516,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
         
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -8530,10 +8532,10 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                            Status
                            );
 
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -8541,9 +8543,9 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);    
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);    
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -8576,34 +8578,34 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
-  Print (L" ================ Start to do Sync OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Sync OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);     
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);     
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
       //
@@ -8626,23 +8628,23 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock); 
-      if (IsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock); 
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
         break;
       }
     } 
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
-  Print (L" ================== Sync OpenExisting File call finshed ================== \n\n");   
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
+  SctPrint (L" ================== Sync OpenExisting File call finshed ================== \n\n");   
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
       //
       // Check & record every File Io execution entity status 
@@ -8656,7 +8658,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -8700,7 +8702,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -8735,22 +8737,22 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -8809,14 +8811,14 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    Loop;
@@ -8844,7 +8846,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TEST_ASSERTION        AssertionType;
 
@@ -8903,24 +8905,24 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
     //
     // "\" + subdir1
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
     //
     // "\" + subdir1 + "\" + subdir2
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\" + subdir2 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
@@ -8928,7 +8930,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
     // "\" + subdir1 + "\" + subdir2 + "\" + filename
     //
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
 
     StrPointer += MAX_STRING_LENGTH;
     
@@ -9058,11 +9060,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9070,9 +9072,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);   
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);   
 
             if (DirHandle2 != NULL) {
               Status = DirHandle1->Delete (DirHandle1);
@@ -9121,11 +9123,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9133,9 +9135,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);   
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);   
 
             if (DirHandle2 != NULL) {
               Status = DirHandle1->Delete (DirHandle1);
@@ -9159,7 +9161,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
 
           //
           // enlarge file size
@@ -9168,7 +9170,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -9182,11 +9184,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9194,9 +9196,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);   
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);   
 
             if (DirHandle2 != NULL) {
               Status = DirHandle1->Delete (DirHandle1);
@@ -9222,7 +9224,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
         
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -9238,11 +9240,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9250,9 +9252,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock);   
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock);   
 
             if (DirHandle2 != NULL) {
               Status = DirHandle1->Delete (DirHandle1);
@@ -9285,35 +9287,35 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
    
-  Print (L" ================ Start to do Async OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Async OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     Status = FileIoAsyncOpenExistingFile (
                     DirHandle2,
                     FileIoEntity->Tpl,
@@ -9323,22 +9325,22 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                     );
 
 
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock); 
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock); 
 
-  Print (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
+  SctPrint (L" ================== Async OpenExisting File call finshed ================== \n\n"); 
   
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  Print (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead) && IndexI < 120) {
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     gtBS->WaitForEvent (                   
             1,
@@ -9347,23 +9349,23 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
             );
     IndexI++;
     
-    Print (L".");
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctPrint (L".");
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
-  Print(L"\n");    
+  SctPrint (L"\n");    
     
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileFinishListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 
       //
       // Check & record every File Io execution entity status 
@@ -9378,7 +9380,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -9422,7 +9424,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -9453,25 +9455,25 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
       } else {
         FileIoEntity->AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileFinishListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&AsyncOpenExistingFileFinishListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFinishListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -9501,18 +9503,18 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
     }
     gtBS->CloseEvent(FileIoEntity->FileIoToken.Event);
     gtBS->FreePool(FileIoEntity);
-    AcquireLock(&gAsyncOpenExistingFileQueueLock);
+    SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
          
   //
   // If OpenExistingFileFailListHead is not empty, which means some Async Calls are wrong 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while(!IsListEmpty(&AsyncOpenExistingFileFailListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while(!SctIsListEmpty(&AsyncOpenExistingFileFailListHead)) {
     FileIoEntity = CR(AsyncOpenExistingFileFailListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -9531,20 +9533,20 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
 
      gtBS->FreePool(FileIoEntity);
        
-     AcquireLock(&gAsyncOpenExistingFileQueueLock);
+     SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
           
         
   //
   // If OpenExistingFileExecuteList is not empty, which means some token events havn't been signaled yet
   // Be careful, All the entities in Execution List should NOT be freed here!
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
-    for(ListEntry = GetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = GetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&AsyncOpenExistingFileExecuteListHead)) {
+    for(ListEntry = SctGetFirstNode(&AsyncOpenExistingFileExecuteListHead); ; ListEntry = SctGetNextNode(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -9560,14 +9562,14 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
                      FileIoEntity->Name
                      );
   
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&AsyncOpenExistingFileExecuteListHead, ListEntry)) {
         break;
       }
     }
   }
   
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
   
   if (DirHandle2 != NULL){
     DirHandle2->Delete(DirHandle2);
@@ -9589,14 +9591,14 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
 EFI_STATUS
 BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
-  EFI_FILE_PROTOCOL                     *Root,
+  EFI_FILE                              *Root,
   CHAR16                                *PureFileNameArray,
   UINT32                                FixedNameCount,
   BOOLEAN                               IsStress
   )
 { 
-  EFI_FILE_PROTOCOL         *DirHandle1;
-  EFI_FILE_PROTOCOL         *DirHandle2;
+  EFI_FILE                  *DirHandle1;
+  EFI_FILE                  *DirHandle2;
   UINT32                    AttributesIndex;
   UINT32                    NameIndex;
   UINT32                    Loop;
@@ -9622,7 +9624,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   UINT32                    MaxDirAttributesIndex;
   UINT32                    MaxNameIndex;
   FileIoOpenFile_Task       *CreateFileEntity;
-  EFI_LIST_ENTRY            *ListEntry;
+  SCT_LIST_ENTRY            *ListEntry;
   FileIoOpenFile_Task       *FileIoEntity;
   EFI_TEST_ASSERTION        AssertionType;
   EFI_TPL                   OldTpl;
@@ -9684,24 +9686,24 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
     //
     // "\" + subdir1
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
     //
     // "\" + subdir1 + "\" + subdir2
     //
-    EfiStrCat (StrPointer, PureStrPointer);
+    SctStrCat (StrPointer, PureStrPointer);
 
     //
     // "\" + subdir1 + "\" + subdir2 + "\"
     //
-    FileNameLength = EfiStrLen (StrPointer);
+    FileNameLength = SctStrLen (StrPointer);
     StrPointer[FileNameLength] = '\\';
     StrPointer[FileNameLength + 1] = 0;
 
@@ -9709,7 +9711,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
     // "\" + subdir1 + "\" + subdir2 + "\" + filename
     //
     PureStrPointer1 = PureStrPointer + Loop * MAX_STRING_LENGTH; 
-    EfiStrCat (StrPointer, PureStrPointer1);
+    SctStrCat (StrPointer, PureStrPointer1);
 
     StrPointer += MAX_STRING_LENGTH;
     
@@ -9837,11 +9839,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9849,9 +9851,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock); 
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock); 
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -9898,11 +9900,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9910,9 +9912,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock); 
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock); 
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -9936,7 +9938,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
           //
           // Add CreateFileEntity to SyncReadDataList
           //
-          InsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
+          SctInsertTailList(&SyncCreateFileListHead, &CreateFileEntity->ListEntry);        
 
           //
           // enlarge file size
@@ -9945,7 +9947,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                      CreateFileEntity->FileIo,
                      &FileInfo,
                      &InfoBufferSize,
-                     &gEfiFileInfoGuid
+                     &gBlackBoxEfiFileInfoGuid
                      );
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
@@ -9959,11 +9961,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -9971,9 +9973,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock); 
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock); 
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -9998,7 +10000,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
         
           Status = CreateFileEntity->FileIo->SetInfo (
                                                CreateFileEntity->FileIo,
-                                               &gEfiFileInfoGuid,
+                                               &gBlackBoxEfiFileInfoGuid,
                                                InfoBufferSize,
                                                FileInfo
                                                );
@@ -10014,11 +10016,11 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                            Status
                            );
 
-            AcquireLock(&gAsyncOpenExistingFileQueueLock);
-            while (!IsListEmpty(&SyncCreateFileListHead)) {
+            SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+            while (!SctIsListEmpty(&SyncCreateFileListHead)) {
               FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-              RemoveEntryList(&FileIoEntity->ListEntry);
-              ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+              SctRemoveEntryList(&FileIoEntity->ListEntry);
+              SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 			
               FileIoEntity->FileIo->Delete (FileIoEntity->FileIo);
 
@@ -10026,9 +10028,9 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                 gtBS->FreePool(FileIoEntity);
                 FileIoEntity = NULL;
               }
-              AcquireLock(&gAsyncOpenExistingFileQueueLock);
+              SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
             }
-            ReleaseLock(&gAsyncOpenExistingFileQueueLock); 
+            SctReleaseLock (&gAsyncOpenExistingFileQueueLock); 
 
             if (DirHandle1 != NULL){
               DirHandle1->Delete(DirHandle1);
@@ -10061,34 +10063,34 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   //
   // Close File in the SyncCreateFileListHead
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
 	  
       FileIoEntity->FileIo->Close (FileIoEntity->FileIo);
       FileIoEntity->FileIo = NULL;
         
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
       //
       // Last list node handled
       //
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }    
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
    
-  Print (L" ================ Start to do Sync OpenFile call ================ \n\n");
+  SctPrint (L" ================ Start to do Sync OpenFile call ================ \n\n");
   // 
   // do Asyn Open File call basing on read data result 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
       //
       // Sync OpenEx Call
@@ -10108,24 +10110,24 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead,ListEntry)) {
         break;
       }
     }  
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
 
-  Print (L" ================== Sync OpenExisting File call finshed ================== \n\n"); 
+  SctPrint (L" ================== Sync OpenExisting File call finshed ================== \n\n"); 
   //
   // clear all File IO events from gOpenExistingFileFinishQueue 
   // gOpenExistingFileQueue is handled first since we use File IO openex to do open file 
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  if (!IsListEmpty(&SyncCreateFileListHead)) {
-    for(ListEntry = GetFirstNode(&SyncCreateFileListHead); ; ListEntry = GetNextNode(&SyncCreateFileListHead, ListEntry)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  if (!SctIsListEmpty(&SyncCreateFileListHead)) {
+    for(ListEntry = SctGetFirstNode(&SyncCreateFileListHead); ; ListEntry = SctGetNextNode(&SyncCreateFileListHead, ListEntry)) {
       FileIoEntity = CR(ListEntry, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);
-      ReleaseLock(&gAsyncOpenExistingFileQueueLock);  
+      SctReleaseLock (&gAsyncOpenExistingFileQueueLock);  
 
       //
       // Check & record every File Io execution entity status 
@@ -10139,7 +10141,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                    FileIoEntity->FileIo,
                    &FileInfo,
                    &InfoBufferSize,
-                   &gEfiFileInfoGuid
+                   &gBlackBoxEfiFileInfoGuid
                    );
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
@@ -10183,7 +10185,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
         
         Status = FileIoEntity->FileIo->SetInfo (
                                          FileIoEntity->FileIo,
-                                         &gEfiFileInfoGuid,
+                                         &gBlackBoxEfiFileInfoGuid,
                                          InfoBufferSize,
                                          FileInfo
                                          );
@@ -10217,21 +10219,21 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
       //
       // Last list node handled
       //
-      AcquireLock(&gAsyncOpenExistingFileQueueLock);
-      if (IsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
+      SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+      if (SctIsNodeAtEnd(&SyncCreateFileListHead, ListEntry)) {
         break;
       }
     }
   }
-  ReleaseLock(&gAsyncOpenExistingFileQueueLock);    
+  SctReleaseLock (&gAsyncOpenExistingFileQueueLock);    
   //
   // Record All Finished Open case results
   //
-  AcquireLock(&gAsyncOpenExistingFileQueueLock);
-  while (!IsListEmpty(&SyncCreateFileListHead)) {
+  SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
+  while (!SctIsListEmpty(&SyncCreateFileListHead)) {
     FileIoEntity = CR(SyncCreateFileListHead.ForwardLink, FileIoOpenFile_Task, ListEntry, FILEIOENTITY_SIGNATURE);   
-    RemoveEntryList(&FileIoEntity->ListEntry);
-    ReleaseLock(&gAsyncOpenExistingFileQueueLock);
+    SctRemoveEntryList(&FileIoEntity->ListEntry);
+    SctReleaseLock (&gAsyncOpenExistingFileQueueLock);
     
     StandardLib->RecordAssertion (
                    StandardLib,

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -814,6 +814,697 @@ BBTestSetInfoBasicTest (
   return EFI_SUCCESS;
 }
 
+VOID
+ReadOnlyFileCheck (
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  EFI_FILE                              *Root, 
+  CHAR16                                *FileName,
+  EFI_FILE_INFO                         *FileInfo
+  )
+{
+  EFI_TEST_ASSERTION    AssertionType;
+  EFI_STATUS            Status, Status1, Status2, Status3;
+  EFI_FILE              *FileHandle;
+  EFI_FILE_INFO         Info;
+  UINTN                 InfoSize;
+  UINT8                 *Buffer;
+  UINT8                 *FileBuf;
+  UINTN                 FileBufSize;
+  UINT64                Position;
+  UINT8                 Buf[10];
+  UINTN                 Size;
+  UINT8                 Index;
+
+  EFI_GUID              UnsupportedInfoType =
+                              {0x986dcfe, 0x90b8, 0x46bb, 0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b};
+
+  Status1 = Root->Open (
+                    Root,
+                    &FileHandle,
+                    FileName,
+                    EFI_FILE_MODE_READ|EFI_FILE_MODE_WRITE,
+                    0
+                    );
+ 
+  Status2 = Root->Open (
+                    Root,
+                    &FileHandle,
+                    FileName,
+                    EFI_FILE_MODE_READ|EFI_FILE_MODE_WRITE|EFI_FILE_MODE_CREATE,
+                    0
+                    );
+  if (Status1 == EFI_WRITE_PROTECTED && Status2 == EFI_WRITE_PROTECTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid009,
+                   L"ReadOnly System - Open File with invalid mode",
+                   L"%a:%d: ReadOnly System: Open File should be failed, Status1 - %r, Status2 - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status1,
+                   Status2
+                  );
+
+
+  Status = Root->Open (
+                   Root,
+                   &FileHandle,
+                   L"InvalidName",
+                   EFI_FILE_MODE_READ,
+                   0
+                   );
+  if (Status == EFI_NOT_FOUND) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid010,
+                   L"ReadOnly System - Open File with InvalidName",
+                   L"%a:%d: ReadOnly System: Open File should be failed, Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                  );
+
+  
+  Status = Root->Open (
+                   Root,
+                   &FileHandle,
+                   FileName,
+                   EFI_FILE_MODE_READ,
+                   0
+                   );
+
+  if (Status == EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid011,
+                   L"ReadOnly System - Open File with read mode",
+                   L"%a:%d: ReadOnly System: Open File should be success, Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                  );
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    return;
+  }  
+
+  //
+  // retrieve unsupported info type for the file
+  //
+  InfoSize = sizeof (UINT8);
+  Status = FileHandle->GetInfo (FileHandle, &UnsupportedInfoType, &InfoSize, &Info);
+  if (Status == EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid012,
+                 L"ReadOnly System - GetInfo with unsupported GUID",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );  
+
+  InfoSize = sizeof (UINT8);
+  Status = FileHandle->GetInfo (FileHandle, &gBlackBoxEfiFileInfoGuid, &InfoSize, &Info);
+  if (Status == EFI_BUFFER_TOO_SMALL) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid013,
+                 L"ReadOnly System - GetInfo with small buffer size",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 ); 
+  
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    return;
+  }
+
+  Buffer = NULL;
+  Status = gtBS->AllocatePool (
+                     EfiBootServicesData,
+                     InfoSize,
+                     (VOID**)&Buffer
+                     );
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"Allocate Pool fail",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    return;
+  }
+
+  Status = FileHandle->GetInfo (FileHandle, &gBlackBoxEfiFileInfoGuid, &InfoSize, (VOID*)Buffer);
+  if (Status == EFI_SUCCESS && InfoSize == FileInfo->Size) {
+  	if (SctCompareMem (Buffer, FileInfo, InfoSize) != 0) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }  else {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    }
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid014,
+                 L"ReadOnly System - GetInfo with correct paremeters, the outputs should be correct",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 ); 
+  
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+    return;
+  }
+
+  Status1 = FileHandle->SetInfo (FileHandle, &gBlackBoxEfiFileInfoGuid, InfoSize, (VOID*)Buffer);
+  Status2 = FileHandle->SetInfo (FileHandle, &UnsupportedInfoType, InfoSize, (VOID*)Buffer);
+
+  if (Status1 == EFI_WRITE_PROTECTED && Status2 == EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid015,
+                 L"ReadOnly System - SetInfo, the returned status should be EFI_WRITE_PROTECTED and EFI_UNSUPPORTED",
+                 L"%a:%d: Status1 - %r, Status2 - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status1,
+                 Status2
+                 ); 
+  
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+    return;
+  }  
+
+  Status = FileHandle->GetPosition (FileHandle, &Position);
+  if (Status == EFI_SUCCESS && Position >= 0 && Position <= FileInfo->FileSize) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid016,
+                 L"ReadOnly System - GetPosition, the returned status should be EFI_SUCCESS and Position is one reasonable value",
+                 L"%a:%d: Status - %r, Position - %d",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 Position
+                 );   
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+    return;
+  }
+
+  Status = FileHandle->Write (FileHandle, &InfoSize, (VOID*)Buffer);
+  if (Status == EFI_WRITE_PROTECTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid017,
+                 L"ReadOnly System - Write, the returned status should be EFI_WRITE_PROTECTED",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+    return;
+  }
+
+
+  Status = FileHandle->Flush (FileHandle);
+  if (Status == EFI_WRITE_PROTECTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid018,
+                 L"ReadOnly System - Flush, the returned status should be EFI_WRITE_PROTECTED",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+    return;
+  }  
+
+  FileBufSize = (UINTN)FileInfo->FileSize;
+
+  Status = gtBS->AllocatePool (
+                     EfiBootServicesData,
+                     FileBufSize,
+                     (VOID**)&FileBuf
+                     );
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"Allocate Pool fail",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    SctFreePool(Buffer);
+    return;
+  }  
+  
+  Status1 = FileHandle->SetPosition (FileHandle, 0);
+  Status2 = FileHandle->Read (FileHandle, &FileBufSize, FileBuf);
+  Status3 = FileHandle->GetPosition (FileHandle, &Position);
+
+  if (Status1 == EFI_SUCCESS && Status2 == EFI_SUCCESS && Status3 == EFI_SUCCESS && 
+  	FileBufSize == FileInfo->FileSize && Position == FileBufSize) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+	if (FileBufSize > 20) {
+      Size = 10;
+      FileHandle->SetPosition (FileHandle, 0);
+	  FileHandle->Read (FileHandle, &Size, Buf);
+      for (Index = 0; Index < 10 ; Index++) {
+	  	if (Buf[Index] != FileBuf[Index])
+          break;
+      }
+      if (Index != 10) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      FileHandle->Read (FileHandle, &Size, Buf);
+      for (Index = 0; Index < 10 ; Index++) {
+	  	if (Buf[Index] != FileBuf[Index + 10])
+          break;
+      }
+      if (Index != 10) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      FileHandle->SetPosition (FileHandle, Position - 10);
+	  FileHandle->Read (FileHandle, &Size, Buf);
+      for (Index = 0; Index < 10 ; Index++) {
+	  	if (Buf[Index] != FileBuf[Index + Position - 10])
+          break;
+      }
+      if (Index != 10) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid019,
+                 L"ReadOnly System - Read/SetPosition, the operation should be correct",
+                 L"%a:%d: ",
+                 __FILE__,
+                 (UINTN)__LINE__
+                 );
+  
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+	SctFreePool(FileBuf);
+    return;
+  }  
+
+  Status = FileHandle->Delete (FileHandle);
+  if (Status == EFI_WARN_DELETE_FAILURE) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } 
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid020,
+                 L"ReadOnly System - Delete, the returned status should be EFI_WARN_DELETE_FAILURE",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    SctFreePool(Buffer);
+	SctFreePool(FileBuf);
+    return;
+  }  
+
+
+  Status1 = Root->Open (
+                   Root,
+                   &FileHandle,
+                   FileName,
+                   EFI_FILE_MODE_READ,
+                   0
+                   );
+
+  Status2 = FileHandle->Close (FileHandle);
+  if (Status1 == EFI_SUCCESS && Status2 == EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid021,
+                 L"ReadOnly System - Close, the returned status should be EFI_SUCCESS",
+                 L"%a:%d: Status2 - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status2
+                 );  
+
+  SctFreePool(Buffer);
+  SctFreePool(FileBuf);
+
+  return;
+}
+
+
+
+VOID
+BBTestReadOnlyTestCheckPoints (
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib, 
+  EFI_FILE                              *Root, 
+  EFI_FILE_SYSTEM_INFO                  *SystemInfo,
+  EFI_FILE_SYSTEM_VOLUME_LABEL_INFO     *VolumeInfo,
+  EFI_FILE_INFO                         *FileInfo
+  )
+{
+  EFI_TEST_ASSERTION    AssertionType;
+  UINTN                 BufSize;
+  EFI_FILE_INFO         *Info;
+  EFI_STATUS            Status, Status1, Status2;
+  BOOLEAN               File;
+  BOOLEAN               Dir;
+  CHAR16                *FileName;
+  CHAR16                *DirName;
+  UINT64                Position;
+/*
+  if (SystemInfo->ReadOnly && (FileInfo->Attribute & EFI_FILE_READ_ONLY) != 0 ) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid001,
+                   L"ReadOnly System - checkpoint1",
+                   L"%a:%d: ReadOnly System: ReadOnly attribute should be aligned in SystemInfo and FileInfo. ReadOnly - %d, Attribute - 0x%x",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   SystemInfo->ReadOnly,
+                   FileInfo->Attribute
+                  );
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    return;
+  }
+*/
+  Status = Root->SetPosition (Root, 1);
+  if (Status != EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  }	
+  
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid002,
+                   L"ReadOnly System: Dir SetPosition 1 fail",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  if (Status != EFI_UNSUPPORTED) {
+	return;
+  }
+
+
+  Status = Root->SetPosition (Root, 0);
+  if (Status != EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  }	
+  
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid003,
+                   L"ReadOnly System: Dir SetPosition 0 Success",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  if (Status != EFI_SUCCESS) {
+	return;
+  }
+
+  Status = Root->GetPosition (Root, &Position);
+  if (Status != EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  }	
+	
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid004,
+                   L"ReadOnly System: Dir GetPosition should be unsupported",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  if (Status != EFI_UNSUPPORTED) {
+	return;
+  }
+  
+
+  Status1 = Root->SetInfo (Root, &gBlackBoxEfiFileSystemInfoGuid, (UINTN)(SystemInfo->Size), (VOID*)SystemInfo);
+  Status2 = Root->SetInfo (Root, &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid, SctStrLen(VolumeInfo->VolumeLabel), (VOID*)VolumeInfo);
+  if (Status1 == EFI_WRITE_PROTECTED && Status2 == EFI_WRITE_PROTECTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid005,
+                   L"ReadOnly System: Dir SetInfo should return EFI_WRITE_PROTECTED",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status1,
+                   Status2
+                   );
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    return;
+  }
+
+
+  //To find one file in system.
+
+  BufSize = SIZE_OF_EFI_FILE_INFO + 1024;
+
+  Status = gtBS->AllocatePool (
+                   EfiBootServicesData,
+                   BufSize,
+                   (VOID**)&Info
+                   );
+  if (Status != EFI_SUCCESS ) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"Allocate Pool fail",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    return;    
+  }
+ 
+
+  Status = Root->Write (Root, &BufSize, (VOID*)Info);
+  if (Status == EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gReadOnlyFileSystemBBTestAssertionGuid006,
+                   L"ReadOnly System: Dir Write should be unsupported",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  if (Status != EFI_UNSUPPORTED) {
+    SctFreePool(Info);
+	return;
+  }
+
+
+  BufSize = SIZE_OF_EFI_FILE_INFO;
+  Status  = Root->Read (Root, &BufSize, Info);
+  if (Status != EFI_BUFFER_TOO_SMALL) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  }
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid007,
+                 L"ReadOnly System: Dir Read should be EFI_BUFFER_TOO_SMALL with the limited buffer size",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (Status != EFI_BUFFER_TOO_SMALL) {
+    SctFreePool(Info);
+	return;
+  }
+  
+
+  File = FALSE;
+  Dir  = FALSE;
+
+  do {
+    BufSize = SIZE_OF_EFI_FILE_INFO + 1024;
+    Status  = Root->Read (Root, &BufSize, Info);
+    if (EFI_ERROR (Status)) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_FAILED,
+                     gTestGenericFailureGuid,
+                     L"Read fail",
+                     L"%a:%d: Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
+      break;  
+	}
+
+    if (Info->Attribute & EFI_FILE_DIRECTORY) {
+      Dir = TRUE;
+	  DirName = Info->FileName;
+ 
+//      ReadOnlyDirCheck(StandardLib, Root, DirName);
+	  
+	} else {
+	  FileName = Info->FileName;
+	  if (File == FALSE)
+	  	ReadOnlyFileCheck(StandardLib, Root, FileName, Info);
+      File = TRUE;
+	}
+
+    if (BufSize == 0)
+      break;
+
+  } while (File == FALSE || Dir == FALSE);
+/*
+  Status = Root->Close (Root);
+  if (Status != EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  }
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gReadOnlyFileSystemBBTestAssertionGuid008,
+                 L"ReadOnly System: Dir Close should be EFI_SUCCESS",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+*/  
+  SctFreePool (Info);
+  return;
+}
+
 EFI_STATUS
 BBTestOpenVolumeBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1016,6 +1707,15 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
                      TplArray[Index]
                     );
     }
+
+    //
+    // insert the checkpoints for read-only system
+	//
+    if (SystemInfo->ReadOnly) {
+      BBTestReadOnlyTestCheckPoints (StandardLib, Root, SystemInfo, VolumeLabel, FileInfo);
+	}    
+
+
     //
     // could not delete root directory
     //

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -194,8 +194,8 @@ InitializeBBTestEbcProtocol (
   //
   // Get Pei Protocols
   //
-  SctGetPeiProtocol (&gBlackBoxEfiPeiFlushInstructionCacheGuid, &gEfiPeiFlushInstructionCache);
-  SctGetPeiProtocol (&gBlackBoxEfiPeiPeCoffLoaderGuid, &gEfiPeiPeCoffLoader);
+  SctGetPeiProtocol (&gEfiPeiFlushInstructionCacheGuid, &gEfiPeiFlushInstructionCache);
+  SctGetPeiProtocol (&gEfiPeiPeCoffLoaderGuid, &gEfiPeiPeCoffLoader);
 
   //
   // Use profile lib at here just for less effect on the current system. It is
@@ -285,7 +285,7 @@ ReadEbcDriver (
   //
   DevicePath = gDevicePath;
   Status = gtBS->LocateDevicePath (
-                   &gEfiSimpleFileSystemProtocolGuid,
+                   &gBlackBoxEfiSimpleFileSystemProtocolGuid,
                    &DevicePath,
                    &DeviceHandle
                    );
@@ -298,7 +298,7 @@ ReadEbcDriver (
   //
   Status = gtBS->HandleProtocol (
                    DeviceHandle,
-                   &gEfiSimpleFileSystemProtocolGuid,
+                   &gBlackBoxEfiSimpleFileSystemProtocolGuid,
                    (VOID*)&Vol
                    );
   if ( EFI_ERROR ( Status ) ) {
@@ -336,7 +336,7 @@ ReadEbcDriver (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    FileInfoSize,
-                   &FileInfo
+                   (VOID **)&FileInfo
                    );
   if ( EFI_ERROR ( Status ) ) {
     Handle->Close( Handle );
@@ -357,7 +357,7 @@ ReadEbcDriver (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    FileInfoSize,
-                   &FileInfo
+                   (VOID **)&FileInfo
                    );
   if ( EFI_ERROR ( Status ) ) {
     Handle->Close( Handle );
@@ -379,7 +379,7 @@ ReadEbcDriver (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    FileSize,
-                   &FileBuffer
+                   (VOID **)&FileBuffer
                    );
   if ( EFI_ERROR ( Status ) ) {
     Handle->Close( Handle );
@@ -434,7 +434,7 @@ Returns:
     }
   }
 
-  EfiCommonLibCopyMem (Buffer, (CHAR8 *)FHand->Source + Offset, *ReadSize);
+  SctCopyMem (Buffer, (CHAR8 *)FHand->Source + Offset, *ReadSize);
   return EFI_SUCCESS;
 }
 
@@ -485,10 +485,10 @@ LoadEbcDriver (
   //
   // Create the dummy image handle
   //
-  EfiCommonLibZeroMem (&DummyImageProtocol, sizeof (DummyImageProtocol));
+  SctZeroMem (&DummyImageProtocol, sizeof (DummyImageProtocol));
   Status = gtBS->InstallProtocolInterface (
                    &gDummyImageHandle,
-                   &gEfiLoadedImageProtocolGuid,
+                   &gBlackBoxEfiLoadedImageProtocolGuid,
                    EFI_NATIVE_INTERFACE,
                    &DummyImageProtocol
                    );
@@ -499,8 +499,8 @@ LoadEbcDriver (
   //
   // Init FHand and ImageContext
   //
-  EfiCommonLibZeroMem (&FHand, sizeof (IMAGE_FILE_HANDLE));
-  EfiCommonLibZeroMem (&ImageContext, sizeof (ImageContext));
+  SctZeroMem (&FHand, sizeof (IMAGE_FILE_HANDLE));
+  SctZeroMem (&ImageContext, sizeof (ImageContext));
   FHand.Signature = IMAGE_FILE_HANDLE_SIGNATURE;
   Status = ReadEbcDriver (&FHand.Source, &FHand.SourceSize);
   if ( EFI_ERROR(Status) ) {
@@ -602,7 +602,7 @@ UnloadEbcDriver ()
 
   Status = gtBS->UninstallProtocolInterface (
                    gDummyImageHandle,
-                   &gEfiLoadedImageProtocolGuid,
+                   &gBlackBoxEfiLoadedImageProtocolGuid,
                    NULL
                    );
 

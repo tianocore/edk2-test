@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -56,7 +56,6 @@ Abstract:
 --*/
 
 
-#include "SctLib.h"
 #include "SimpleTextOutBBTestMain_uefi.h"
 
 EFI_EVENT              TimerEvent;
@@ -194,7 +193,17 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestSetCursorPositionConformanceAutoTest
   },
-
+/*
+  {
+    SIMPLE_TEXT_OUTPUT_PROTOCOL_SETATTRIBUTE_CONFORMANCE_AUTO_GUID,
+    L"SetAttribute_Conf",
+    L"Auto Conformance Test of SetAttribute",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestSetAttributeConformanceAutoTest
+  },
+*/
 #ifdef EFI_TEST_EXHAUSTIVE
   {
     SIMPLE_TEXT_OUTPUT_PROTOCOL_RESET_FUNCTION_MANUAL_GUID,
@@ -365,7 +374,7 @@ static EFI_GRAPHICS_OUTPUT_BLT_PIXEL mEfiColors[16] = {
 UINTN
 _IPrint (
   IN EFI_GRAPHICS_OUTPUT_PROTOCOL            *GraphicsOutput,
-  IN EFI_SIMPLE_TEXT_OUT_PROTOCOL     *Sto,
+  IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL  *Sto,
   IN UINTN                            X,
   IN UINTN                            Y,
   IN EFI_GRAPHICS_OUTPUT_BLT_PIXEL                    *Foreground,
@@ -405,7 +414,7 @@ _IPrint (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    sizeof (EFI_GRAPHICS_OUTPUT_BLT_PIXEL) * HorizontalResolution * GLYPH_HEIGHT,
-                   &LineBuffer
+                   (VOID **)&LineBuffer
                    );
 
   if (EFI_ERROR (Status)) {
@@ -495,7 +504,7 @@ PrintXY (
 {
   EFI_HANDLE                          Handle;
   EFI_GRAPHICS_OUTPUT_PROTOCOL        *GraphicsOutput;
-  EFI_SIMPLE_TEXT_OUT_PROTOCOL        *Sto;
+  EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL     *Sto;
   EFI_STATUS                          Status;
 
 
@@ -741,7 +750,7 @@ AutoJudgeUga (
  */
 EFI_STATUS
 RestoreMode (
-  IN EFI_SIMPLE_TEXT_OUT_PROTOCOL         *SimpleOut,
+  IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL      *SimpleOut,
   IN EFI_SIMPLE_TEXT_OUTPUT_MODE          *SavedMode,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -823,7 +832,7 @@ RestoreMode (
  */
 VOID
 BackupMode (
-  IN EFI_SIMPLE_TEXT_OUT_PROTOCOL         *SimpleOut,
+  IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL      *SimpleOut,
   IN EFI_SIMPLE_TEXT_OUTPUT_MODE          *SavedMode
   )
 {
@@ -847,7 +856,7 @@ BackupMode (
 */
 EFI_STATUS
 LocateDevicePathFromSimpleTextOut (
-  IN EFI_SIMPLE_TEXT_OUT_PROTOCOL         *SimpleOut,
+  IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL      *SimpleOut,
   IN EFI_DEVICE_PATH_PROTOCOL             **DevicePath,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -856,7 +865,7 @@ LocateDevicePathFromSimpleTextOut (
 
   UINTN                                   NoHandles, Index;
   EFI_HANDLE                              *HandleBuffer;
-  EFI_SIMPLE_TEXT_OUT_PROTOCOL            *OtherSimpleOut;
+  EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL         *OtherSimpleOut;
 
   //
   // Locate the Handle that the SimpleTextOutput interface is bound to
@@ -938,7 +947,7 @@ LocateDevicePathFromSimpleTextOut (
 
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
-                   &gEfiDevicePathProtocolGuid,
+                   &gBlackBoxEfiDevicePathProtocolGuid,
                    DevicePath
                    );
 
@@ -957,7 +966,7 @@ LocateDevicePathFromSimpleTextOut (
 */
 EFI_STATUS
 LocateGopFromSimpleTextOut (
-  IN EFI_SIMPLE_TEXT_OUT_PROTOCOL         *SimpleOut,
+  IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL      *SimpleOut,
   IN EFI_GRAPHICS_OUTPUT_PROTOCOL           **GraphicsOutput,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -966,7 +975,7 @@ LocateGopFromSimpleTextOut (
 
   UINTN                                   NoHandles, Index;
   EFI_HANDLE                              *HandleBuffer;
-  EFI_SIMPLE_TEXT_OUT_PROTOCOL            *OtherSimpleOut;
+  EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL         *OtherSimpleOut;
 
   //
   // Locate the Handle that the SimpleTextOutput interface is bound to
