@@ -35,11 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2012 Unified EFI, Inc. All
+  Copyright 2006 - 2014 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
+  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
 
 --*/
@@ -174,8 +175,8 @@ SctCloseFile (
   IN EFI_FILE_HANDLE     FileHandle
   )
 {
-  //TODO: Fixme
-  return EFI_UNSUPPORTED;
+  ASSERT (FileHandle != NULL);
+  return FileHandle->Close (FileHandle);
 }
 
 EFI_STATUS
@@ -185,8 +186,8 @@ SctReadFile (
   OUT VOID                *Buffer
   )
 {
-  //TODO: Fixme
-  return EFI_UNSUPPORTED;
+  ASSERT (FileHandle != NULL);
+  return FileHandle->Read (FileHandle, ReadSize, Buffer);
 }
 
 EFI_STATUS
@@ -196,8 +197,12 @@ SctWriteFile (
   OUT VOID              *Buffer
   )
 {
-  //TODO: Fixme
-  return EFI_UNSUPPORTED;
+  ASSERT (FileHandle != NULL);
+  return FileHandle->Write (
+                      FileHandle,
+                      BufferSize,
+                      Buffer
+                      );
 }
 
 EFI_STATUS
@@ -205,8 +210,8 @@ SctFlushFile (
   IN EFI_FILE_HANDLE FileHandle
   )
 {
-  //TODO: Fixme
-  return EFI_UNSUPPORTED;
+  ASSERT (FileHandle != NULL);
+  return FileHandle->Flush (FileHandle);
 }
 
 /*++
