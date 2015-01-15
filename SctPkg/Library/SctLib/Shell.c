@@ -419,7 +419,28 @@ SctShellGetExecutionBreak (
   IN VOID
   )
 {
-  return TRUE; //TODO: Implement me...
+  //
+  // Check for UEFI Shell 2.0 protocols
+  //
+  if (gEfiShellProtocol != NULL) {
+
+    //
+    // We are using UEFI Shell 2.0; see if the event has been triggered
+    //
+    if (tBS->CheckEvent(gEfiShellProtocol->ExecutionBreak) != EFI_SUCCESS) {
+      return (FALSE);
+    }
+    return (TRUE);
+  }
+
+  //
+  // using EFI Shell; call the function to check
+  //
+  if (mEfiShellEnvironment2 != NULL) {
+    return (mEfiShellEnvironment2->GetExecutionBreak());
+  }
+
+  return (FALSE);
 }
 
 EFI_STATUS
