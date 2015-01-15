@@ -1158,6 +1158,18 @@ Routine Description:
   
         if (InterfaceFilter != NULL) {
           if (InterfaceFilter (Interface, gFT->SupportHandle, Guid) == FALSE) {
+            if (SctCompareGuid (Guid, &gEfiSerialIoProtocolGuid) == 0) {
+              Status = tBS->CloseProtocol (
+                             HandleBuffer[HandleIndex],
+                             Guid,
+                             HandleBuffer[HandleIndex],
+    		                     NULL
+                             );
+              if (EFI_ERROR (Status)) {
+                EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Close protocol - %r", Status));
+                return Status;
+              }
+            }
             ExecuteInfo->Iteration = 0;
   	        continue;
           }
