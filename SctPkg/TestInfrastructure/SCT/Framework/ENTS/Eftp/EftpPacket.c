@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -757,13 +757,17 @@ Returns:
   //
   P = Packet->Rrq.Filename;
 
-  P = NetAsciiStrCpy (P, Filename);
-  P = NetAsciiStrCpy (P, Mode);
+  NetAsciiStrCpy (P, Filename);
+  P = P + NetAsciiStrLen (Filename) + 1;
+  NetAsciiStrCpy (P, Mode);
+  P = P + NetAsciiStrLen (Mode) + 1;
 
   if (NOption != 0 && OptionList != NULL) {
     for (Index = 0; Index < NOption; ++Index) {
-      P = NetAsciiStrCpy (P, OptionList[Index].OptionStr);
-      P = NetAsciiStrCpy (P, OptionList[Index].ValueStr);
+      NetAsciiStrCpy (P, OptionList[Index].OptionStr);
+      P = P + NetAsciiStrLen (OptionList[Index].OptionStr) + 1;
+      NetAsciiStrCpy (P, OptionList[Index].ValueStr);
+      P = P + NetAsciiStrLen (OptionList[Index].ValueStr) + 1;
     }
   }
 
