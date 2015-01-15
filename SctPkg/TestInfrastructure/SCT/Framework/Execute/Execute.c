@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -269,7 +269,7 @@ Returns:
   }
 
 FUNC_EXIT:
-	
+  
   //
   // 5. Remove verbose state file when test case all finished
   // 
@@ -657,7 +657,7 @@ Routine Description:
     // Send assertion to remotion computer in passive mode to inform case end.
     //
     if (gFT->Operations & EFI_SCT_OPERATIONS_PASSIVEMODE) {
-      SctSPrint (DescBuff, 256, L"PASS(%d) WARN(%d) FAIL(%d)\n", ExecuteInfo->TestCase->Passes, ExecuteInfo->TestCase->Warnings, ExecuteInfo->TestCase->Failures);
+      SctSPrint (DescBuff, 256, L"PASS(%d) WARN(%d) FAIL(%d)\n", (UINTN)ExecuteInfo->TestCase->Passes, (UINTN)ExecuteInfo->TestCase->Warnings, (UINTN)ExecuteInfo->TestCase->Failures);
       Status = NetRecordAssertion(NET_EFI_TEST_ASSERTION_CASE_OVER, ExecuteInfo->TestCase->Guid, DescBuff);
       if (EFI_ERROR (Status)) {
         EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"NetRecordAssertion - %r", Status));

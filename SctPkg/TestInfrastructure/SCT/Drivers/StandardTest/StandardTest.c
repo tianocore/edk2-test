@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
   Portions of Copyright (c) 2013 - 2014, ARM Ltd. All rights reserved.<BR>
    
 --*/
@@ -1111,16 +1111,15 @@ Returns:
     tRT->GetTime (CurrentTime, NULL);
 
   } else {
-    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER,
-        L"%s"
-        L"%s\n"
-        L"Revision 0x%08x\n"
-        L"Test Entry Point GUID: %g\n"
-        L"Test Support Library GUIDs: \n",
-        DashLine,
-        Private->EntryName,
-        Private->TestRevision,
-        &Private->EntryId);
+    StslWriteLogFile (Private, DashLine);
+    
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"%s\n", Private->EntryName);
+    StslWriteLogFile (Private, Buffer);
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Revision 0x%08x\n", Private->TestRevision);
+    StslWriteLogFile (Private, Buffer);
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Entry Point GUID: %g\n", &Private->EntryId);
+    StslWriteLogFile (Private, Buffer);
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Support Library GUIDs: \n");
     StslWriteLogFile (Private, Buffer);
 
     Guid = Private->SupportProtocols;
@@ -1130,31 +1129,27 @@ Returns:
       Guid ++;
     }
 
-    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER,
-        L"%s"
-        L"%s\n"
-        L"Test Configuration #%d\n"
-        L"%s"
-        L"%s\n"
-        L"%s",
-        DashLine,
-        Private->BiosId,
-        Private->ConfigurationNumber,
-        DashLine,
-        Private->EntryDescription,
-        DashLine);
+    StslWriteLogFile (Private, DashLine);
+    
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"%s\n", Private->BiosId);
     StslWriteLogFile (Private, Buffer);
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Configuration #%d\n", Private->ConfigurationNumber);
+    StslWriteLogFile (Private, Buffer);
+    
+    StslWriteLogFile (Private, DashLine);
+    
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"%s\n", Private->EntryDescription);
+    StslWriteLogFile (Private, Buffer);
+    
+    StslWriteLogFile (Private, DashLine);
 
     StslWriteLogFileName (Private);
-
     CurrentTime = &Private->StartTime;
     tRT->GetTime (CurrentTime, NULL);
-    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER,
-        L"Test Started: %t\n"
-        L"%s",
-        CurrentTime,
-        DashLine);
+    SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Started: %t\n", CurrentTime);
     StslWriteLogFile (Private, Buffer);
+
+    StslWriteLogFile (Private, DashLine);
 
     //
     // Write key file header line
@@ -1248,29 +1243,25 @@ Returns:
     SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER,
             L"\n%s: [NOT SUPPORTED]\n", Private->EntryName);
   }
-
   StslWriteLogFile (Private, Buffer);
+  
   SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER,
       L"  Passes........... %d\n"
       L"  Warnings......... %d\n"
       L"  Errors........... %d\n",
-      Private->PassCount,
-      Private->WarningCount,
-      Private->FailCount);
+      (UINTN)Private->PassCount,
+      (UINTN)Private->WarningCount,
+      (UINTN)Private->FailCount);
   StslWriteLogFile (Private, Buffer);
 
-  SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER,
-      L"%s" // -------------------------------------
-      L"%s\n"
-      L"Revision 0x%08x\n"
-      L"Test Entry Point GUID: %g\n"
-      L"%s", // -------------------------------------
-      DashLine,
-      Private->BiosId,
-      Private->TestRevision,
-      &Private->EntryId,
-      DashLine);
+  StslWriteLogFile (Private, DashLine);
+  SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"%s\n", Private->BiosId);
   StslWriteLogFile (Private, Buffer);
+  SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Revision 0x%08x\n", Private->TestRevision);
+  StslWriteLogFile (Private, Buffer);
+  SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Entry Point GUID: %g\n", &Private->EntryId);
+  StslWriteLogFile (Private, Buffer);
+  StslWriteLogFile (Private, DashLine);
 
   StslWriteLogFileName (Private);
 
