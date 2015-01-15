@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -58,6 +58,20 @@ Module Name:
 extern CHAR16                *gVarName;
 extern CHAR16                *gTestRecordName;
 extern EFI_RUNTIME_SERVICES  *VRT;
+
+VOID
+MemZero (
+ VOID       *Addr,
+ UINTN      Size
+ )
+{
+  volatile UINT8   *Pointer;
+  Pointer = (UINT8*)Addr;
+  
+  while (Size-- != 0) {
+    *(Pointer++) = 0;
+  }
+}
 
 VOID
 InitVariableRecord (
@@ -84,7 +98,7 @@ Returns:
 
   VariableAttr = (EFI_VARIABLE_RUNTIME_ACCESS|EFI_VARIABLE_NON_VOLATILE|EFI_VARIABLE_BOOTSERVICE_ACCESS);
 
-  SctZeroMem (&TestRecord,sizeof(TEST_RECORD));
+  MemZero(&TestRecord,sizeof(TEST_RECORD));
   TestRecord.Request.TestData = (UINT16)ConfigData->InfoData;
   
   //
@@ -275,7 +289,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.SetVariable = 1;
     SetVariableRecord(&TestPoint);
   }
@@ -370,7 +384,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.GetVariable = 1;
     SetVariableRecord(&TestPoint);
   }
@@ -485,7 +499,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.GetNextVariable = 1;
     SetVariableRecord(&TestPoint);
   }
@@ -520,7 +534,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.QueryVariable = 1;
     SetVariableRecord(&TestPoint);    
   }
@@ -582,7 +596,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.GetTime = 1;
     SetVariableRecord(&TestPoint);        
   }
@@ -639,7 +653,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.SetTime = 1;
     SetVariableRecord(&TestPoint);            
   }
@@ -671,14 +685,21 @@ Returns:
       EFI_SUCCESS
       );
     //
-    // Set the system wakeup alarm clock time to 1 hour later.
+    // Set the system wakeup alarm clock time for testing.
     //
-    Port80(0x72);    
-    Time.Hour += 1;
-    Status = VRT->SetWakeupTime (
-                    TRUE,
-                    &Time
-                    );
+    Port80(0x72);
+    if (Time.Hour == 23 ){
+      Status = VRT->SetWakeupTime (
+                      FALSE,
+                      NULL
+                      );
+    } else {
+      Time.Hour += 1;
+      Status = VRT->SetWakeupTime (
+                      TRUE,
+                      &Time
+                      );
+    }
 
     if (EFI_SUCCESS == Status) 
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -688,7 +709,7 @@ Returns:
     RecordAssertion (
       AssertionType,
       gSCRTAssertionGuid72,
-      "RT.SetWakeupTime - Set Wakeup time in 1 hour later from now on, should be EFI_SUCCESS",
+      "RT.SetWakeupTime - Set Wakeup time for testing, should be EFI_SUCCESS",
       "%a:%d:Status - %r, Expected - %r",
       __FILE__,
       __LINE__,
@@ -699,7 +720,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.SetWakeupTime = 1;
     SetVariableRecord(&TestPoint);        
   }
@@ -733,7 +754,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.GetWakeupTime = 1;
     SetVariableRecord(&TestPoint);        
   }
@@ -816,7 +837,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.QueryCapsule = 1;
     SetVariableRecord(&TestPoint);            
   }
@@ -853,7 +874,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.UpdateCapsule = 1;
     SetVariableRecord(&TestPoint);            
   }
@@ -915,7 +936,7 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.GetNextCount = 1;
     SetVariableRecord(&TestPoint);            
   }
@@ -948,11 +969,11 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.ColdReset = 1;
     SetVariableRecord(&TestPoint);              
     Port80(0xC1);
-    SctAPrint ("RT.ResetSystem - Machine should Cold Reset!");
+    Printf ("RT.ResetSystem - Machine should Cold Reset!");
     //
     // Call shutdown to complete the test.
     //
@@ -976,11 +997,11 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.WarmReset = 1;
     SetVariableRecord(&TestPoint);              
     Port80(0xC2);
-    SctAPrint ("RT.ResetSystem - Machine should Warm Reset!");
+    Printf ("RT.ResetSystem - Machine should Warm Reset!");
     //
     // Call shutdown to complete the test.
     //
@@ -1004,11 +1025,11 @@ Returns:
     //
     // Record this step result.
     //
-    SctZeroMem (&TestPoint,sizeof(TEST_RECORD));
+    MemZero(&TestPoint,sizeof(TEST_RECORD));
     TestPoint.Result.BitMap.ShutDown = 1;
     SetVariableRecord(&TestPoint);              
     Port80(0xC3); 
-    SctAPrint ("RT.ResetSystem - Machine should Shutdown!");
+    Printf ("RT.ResetSystem - Machine should Shutdown!");
     //
     // Call shutdown to complete the test.
     //

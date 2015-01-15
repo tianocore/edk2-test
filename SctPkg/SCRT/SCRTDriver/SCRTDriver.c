@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -208,9 +208,9 @@ Returns:
   // Parse runtime hand off data
   //
   ConsumeHandOff(HandOffAddr, &ConfigData);
-  SctAPrint ("BitMap = 0x%x\n", ConfigData.InfoData);
+  Printf("BitMap = 0x%x\n", ConfigData.InfoData);
   if (ConfigData.BitMap.Signature != CONFIGURE_INFO_SIGNATURE) {
-    SctAPrint ("Find Configuration Data Corrupted, Hang!!\n");
+    Printf ("Find Configuration Data Corrupted, Hang!!\n");
     return EFI_COMPROMISED_DATA;
   } 
   //
@@ -219,23 +219,23 @@ Returns:
   DumpRuntimeTable();
 
   InitVariableRecord(&ConfigData);
-  SctAPrint ("==================Variable Services Test Start==================\n\n");
+  Printf ("==================Variable Services Test Start==================\n\n");
   EfiVariableTestVirtual(&ConfigData);
-  SctAPrint ("===================Variable Services Test End===================\n\n\n");
+  Printf ("===================Variable Services Test End===================\n\n\n");
 
-  SctAPrint ("====================Time Services Test Start====================\n\n");
+  Printf ("====================Time Services Test Start====================\n\n");
   EfiTimeTestVirtual(&ConfigData);
-  SctAPrint ("=====================Time Services Test End=====================\n\n\n");
+  Printf ("=====================Time Services Test End=====================\n\n\n");
 
-  SctAPrint ("==================Capsule Services Test Start===================\n\n");
+  Printf ("==================Capsule Services Test Start===================\n\n");
   EfiCapsuleTestVirtual(&ConfigData);
-  SctAPrint ("===================Capsule Services Test End====================\n\n\n");
+  Printf ("===================Capsule Services Test End====================\n\n\n");
 
-  SctAPrint ("====================Misc Services Test Start====================\n\n");
+  Printf ("====================Misc Services Test Start====================\n\n");
   EfiMiscTestVirtual(&ConfigData);
-  SctAPrint ("=====================Misc Services Test End=====================\n\n\n");
+  Printf ("=====================Misc Services Test End=====================\n\n\n");
 
-  SctAPrint ("===================Reset Services Test Start=================\n\n");
+  Printf ("===================Reset Services Test Start=================\n\n");
   EfiResetTestVirtual(&ConfigData);
 
   return EFI_SUCCESS;
