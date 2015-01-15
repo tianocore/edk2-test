@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006-2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -157,6 +157,7 @@ Returns:
 
   Target->Iterations = Iterations;
   Target->Passes     = EFI_SCT_TEST_CASE_INVALID;
+  Target->Warnings   = EFI_SCT_TEST_CASE_INVALID;
   Target->Failures   = EFI_SCT_TEST_CASE_INVALID;
 
   //
@@ -320,6 +321,7 @@ Returns:
       }
 
       if ((TestCase->Passes   == EFI_SCT_TEST_CASE_INVALID) ||
+          (TestCase->Warnings == EFI_SCT_TEST_CASE_INVALID) ||
           (TestCase->Failures == EFI_SCT_TEST_CASE_INVALID)) {
         *TestState = EFI_SCT_TEST_STATE_READY;
         return EFI_SUCCESS;
@@ -495,6 +497,58 @@ Returns:
   return 0;
 }
 
+UINT32
+GetTestCaseWarnings (
+  IN EFI_GUID                     *Guid
+  )
+/*++
+
+Routine Description:
+
+  Get the number of warning assertions of a test case.
+
+Arguments:
+
+  Guid        - GUID of the test case.
+
+Returns:
+
+  UINT32      - The number of warning assertions.
+
+--*/
+{
+  SCT_LIST_ENTRY      *Link;
+  EFI_SCT_TEST_CASE   *TestCase;
+
+  //
+  // Check parameters
+  //
+  if (Guid == NULL) {
+    return 0;
+  }
+
+  //
+  // Walk through all test cases
+  //
+  for (Link = gFT->TestCaseList.ForwardLink; Link != &gFT->TestCaseList; Link = Link->ForwardLink) {
+    TestCase = CR (Link, EFI_SCT_TEST_CASE, Link, EFI_SCT_TEST_CASE_SIGNATURE);
+
+    if (SctCompareGuid (&TestCase->Guid, Guid) == 0) {
+      if ((TestCase->Warnings != EFI_SCT_TEST_CASE_INVALID) &&
+          (TestCase->Warnings != EFI_SCT_TEST_CASE_RUNNING)) {
+        return TestCase->Warnings;
+      } else {
+        return 0;
+      }
+    }
+  }
+
+  //
+  // Not found
+  //
+  return 0;
+}
+
 
 UINT32
 GetTestCaseFailures (
@@ -599,6 +653,7 @@ Returns:
       if ((Order == EFI_SCT_TEST_CASE_INVALID) ||
           (Order >  TempTestCase->Order      )) {
         if ((TempTestCase->Passes   == EFI_SCT_TEST_CASE_RUNNING) ||
+            (TempTestCase->Warnings == EFI_SCT_TEST_CASE_RUNNING) ||
             (TempTestCase->Failures == EFI_SCT_TEST_CASE_RUNNING)) {
           Order  = TempTestCase->Order;
           Target = TempTestCase;
@@ -672,6 +727,7 @@ Returns:
       if ((Order == EFI_SCT_TEST_CASE_INVALID) ||
           (Order >  TempTestCase->Order      )) {
         if ((TempTestCase->Passes   == EFI_SCT_TEST_CASE_INVALID) ||
+            (TempTestCase->Warnings == EFI_SCT_TEST_CASE_INVALID) ||
             (TempTestCase->Failures == EFI_SCT_TEST_CASE_INVALID)) {
           Order  = TempTestCase->Order;
           Target = TempTestCase;
@@ -712,8 +768,9 @@ GetTestCaseRemainNum (
     TestCase = CR (Link, EFI_SCT_TEST_CASE, Link, EFI_SCT_TEST_CASE_SIGNATURE);
 
     if ((TestCase->Order != EFI_SCT_TEST_CASE_INVALID) &&
-		(TestCase->Passes   == EFI_SCT_TEST_CASE_INVALID) &&
-		(TestCase->Failures == EFI_SCT_TEST_CASE_INVALID)) {
+        (TestCase->Passes   == EFI_SCT_TEST_CASE_INVALID) &&
+        (TestCase->Warnings == EFI_SCT_TEST_CASE_INVALID) &&
+        (TestCase->Failures == EFI_SCT_TEST_CASE_INVALID)) {
       (*Remain)++;
     }
   }
@@ -818,6 +875,7 @@ Returns:
 
     if (TestCase->Order != EFI_SCT_TEST_CASE_INVALID) {
       TestCase->Passes   = EFI_SCT_TEST_CASE_INVALID;
+      TestCase->Warnings = EFI_SCT_TEST_CASE_INVALID;
       TestCase->Failures = EFI_SCT_TEST_CASE_INVALID;
     }
   }
@@ -858,6 +916,7 @@ Returns:
     TestCase->Order      = EFI_SCT_TEST_CASE_INVALID;
     TestCase->Iterations = EFI_SCT_TEST_CASE_INVALID;
     TestCase->Passes     = EFI_SCT_TEST_CASE_INVALID;
+    TestCase->Warnings   = EFI_SCT_TEST_CASE_INVALID;
     TestCase->Failures   = EFI_SCT_TEST_CASE_INVALID;
   }
 

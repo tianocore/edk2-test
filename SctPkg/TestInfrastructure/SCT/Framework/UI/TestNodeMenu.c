@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1013,6 +1013,7 @@ Returns:
   UINTN           Attrib;
   UINTN           Order;
   UINTN           Passes;
+  UINTN           Warnings;
   UINTN           Failures;
   EFI_STATUS      Status;
   EFI_MENU_PAGE   *Page;
@@ -1103,7 +1104,7 @@ Returns:
       if (SctStrLen (Buffer) > (X1 - X0 - 7)) {
         Buffer [X1 - X0 - 7] = L'\0';
       }
-      Status = TestPrintAt (X0, Y1 - 3, Buffer);
+      Status = TestPrintAt (X0, Y1 - 4, Buffer);
     }
 
     Passes = 0;
@@ -1113,6 +1114,19 @@ Returns:
       Buffer[0] = L'\0';
       SctStrCat (Buffer, L"Pass:");
       SctSPrint (Buffer, MAX_STRING_LEN, L"%s  %d", Buffer, Passes);
+      if (SctStrLen (Buffer) > (X1 - X0 - 7)) {
+        Buffer [X1 - X0 - 7] = L'\0';
+      }
+      Status = TestPrintAt (X0, Y1 - 3, Buffer);
+    }
+
+    Warnings = 0;
+    if (MenuItem->Context != NULL) {
+      TestNode = (EFI_SCT_TEST_NODE*)MenuItem->Context;
+      Warnings = CalculateWarningNumber(TestNode);
+      Buffer[0] = L'\0';
+      SctStrCat (Buffer, L"Warning:");
+      SctSPrint (Buffer, MAX_STRING_LEN, L"%s  %d", Buffer, Warnings);
       if (SctStrLen (Buffer) > (X1 - X0 - 7)) {
         Buffer [X1 - X0 - 7] = L'\0';
       }
@@ -1240,6 +1254,64 @@ Routine Description:
   }
 
   return PassedNumber;
+}
+
+UINTN
+CalculateTotalWarningNumber (
+  SCT_LIST_ENTRY                  *Root
+  )
+/*++
+
+Routine Description:
+
+  Calculate the total warning number.
+
+--*/
+{
+  UINTN            WarningNumber;
+  EFI_SCT_TEST_NODE *SubNode;
+  SCT_LIST_ENTRY    *TempLink;
+
+  WarningNumber = 0;
+
+  if (!SctIsListEmpty (Root)) {
+    for (TempLink = Root->ForwardLink; TempLink != Root; TempLink = TempLink->ForwardLink) {
+      SubNode = CR (TempLink, EFI_SCT_TEST_NODE, Link, EFI_SCT_TEST_NODE_SIGNATURE);
+      WarningNumber += CalculateWarningNumber (SubNode);
+    }
+  }
+
+  return WarningNumber;
+}
+
+UINTN
+CalculateWarningNumber (
+  EFI_SCT_TEST_NODE               *TestNode
+  )
+/*++
+
+Routine Description:
+
+  Calculate the warning number of this test node.
+
+--*/
+{
+  UINTN             WarningNumber;
+  EFI_SCT_TEST_NODE *SubNode;
+  SCT_LIST_ENTRY    *TempLink;
+
+  WarningNumber = 0;
+
+  if (!SctIsListEmpty (&TestNode->Child)) {
+    for (TempLink = (&TestNode->Child)->ForwardLink; TempLink != &TestNode->Child; TempLink = TempLink->ForwardLink) {
+      SubNode = CR (TempLink, EFI_SCT_TEST_NODE, Link, EFI_SCT_TEST_NODE_SIGNATURE);
+      WarningNumber += CalculateWarningNumber (SubNode);
+    }
+  } else {
+    WarningNumber = GetTestCaseWarnings (&TestNode->Guid);
+  }
+
+  return WarningNumber;
 }
 
 UINTN
