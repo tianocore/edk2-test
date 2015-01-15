@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -4267,13 +4267,27 @@ GetBarAttributes_Func (
   //
   //found a Bar.
   //
-  BarIndex = 0;
+  BarIndex = REGNUM;
 
   for (Index = 0; Index < REGNUM; Index++) {
     if (PciIoDevice->BarHasEffect[Index]) {
       BarIndex = (UINT8)Index;
       break;
     }
+  }
+
+  if (BarIndex == REGNUM) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gTestGenericFailureGuid,
+                   L"EFI_PCI_IO_PROTOCOL.SetBarAttributes - Not found a valid Bar.",
+                   L"%a:%d",
+                   __FILE__,
+                   (UINTN)__LINE__
+                   );
+
+    return EFI_SUCCESS;
   }
 
   BarOriginalAttributes = 0;
