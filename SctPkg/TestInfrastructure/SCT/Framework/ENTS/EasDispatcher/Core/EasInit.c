@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -61,9 +61,10 @@ EFI_NETWORK_TEST_FRAMEWORK_TABLE  *gEasFT = NULL;
 
 EFI_STATUS
 AttachNetworkTestFrameworkTable (
-  IN EFI_HANDLE         ImageHandle,
-  IN EFI_SYSTEM_TABLE   *SystemTable,
-  IN CHAR16             *MonitorName
+  IN EFI_HANDLE                ImageHandle,
+  IN EFI_SYSTEM_TABLE          *SystemTable,
+  IN EFI_DEVICE_PATH_PROTOCOL  *DevicePath,
+  IN CHAR16                    *FilePath
   );
 
 EFI_STATUS
@@ -103,9 +104,11 @@ EntsDetachTestFiles (
 
 EFI_STATUS
 InitResources (
-  IN EFI_HANDLE         ImageHandle,
-  IN EFI_SYSTEM_TABLE   *SystemTable,
-  IN CHAR16             *MonitorName
+  IN EFI_HANDLE                ImageHandle,
+  IN EFI_SYSTEM_TABLE          *SystemTable,
+  IN EFI_DEVICE_PATH_PROTOCOL  *DevicePath,
+  IN CHAR16                    *FilePath,
+  IN CHAR16                    *MonitorName
   )
 /*++
 
@@ -117,6 +120,8 @@ Arguments:
 
   ImageHandle - The image handle.
   SystemTable - The system table.
+  DevicePath  - The device path of the image handle.
+  FilePath    - The file path of the image handle.
   MonitorName - Monitor name for Communication layer, current we define the 
                 following three types: Mnp  Ip4  Serial
 
@@ -135,8 +140,9 @@ Returns:
   //
   Status = AttachNetworkTestFrameworkTable (
              ImageHandle, 
-             SystemTable, 
-             MonitorName
+             SystemTable,
+             DevicePath,
+             FilePath
              );
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG (
@@ -178,7 +184,7 @@ Returns:
   Status = EntsAttachMonitor (MonitorName);
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Fail to Attach NetworkTest monitor - %r", Status));
-	goto AttachMonitorError;
+    goto AttachMonitorError;
   }
 
   EFI_ENTS_DEBUG((EFI_ENTS_D_TRACE, L"EntsAttachMonitor"));
@@ -190,7 +196,7 @@ Returns:
   Status = EntsAttachTestFiles ();
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"%s: Cannot intiailize NetworkTest test files - %r", EFI_ENTS_SHORT_NAME, Status));
-	goto AttachTestFilesError;
+    goto AttachTestFilesError;
   }
 
   EFI_ENTS_DEBUG((EFI_ENTS_D_TRACE, L"EntsAttachTestFiles"));
@@ -267,9 +273,10 @@ Returns:
 
 EFI_STATUS
 AttachNetworkTestFrameworkTable (
-  IN EFI_HANDLE         ImageHandle,
-  IN EFI_SYSTEM_TABLE   *SystemTable,
-  IN CHAR16             *MonitorName
+  IN EFI_HANDLE                ImageHandle,
+  IN EFI_SYSTEM_TABLE          *SystemTable,
+  IN EFI_DEVICE_PATH_PROTOCOL  *DevicePath,
+  IN CHAR16                    *FilePath
   )
 /*++
 
@@ -281,8 +288,8 @@ Arguments:
 
   ImageHandle           - The image handle.
   SystemTable           - The system table.
-  MonitorName           - Monitor name for Communication layer, current we 
-                          define the following three types: Mnp  Ip4  Serial
+  DevicePath            - The device path of the image handle.
+  FilePath              - The file path of the image handle.
 
 Returns:
 
@@ -292,8 +299,6 @@ Returns:
 --*/
 {
   EFI_STATUS                Status;
-  EFI_DEVICE_PATH_PROTOCOL  *DevicePath;
-  CHAR16                    *FilePath;
 
   //
   // Allocate memory for Framework Table
@@ -318,19 +323,9 @@ Returns:
                 (VOID **)&gEasFT->Cmd
                 );
   if (EFI_ERROR (Status)) {
-    tBS->FreePool (gEasFT->Cmd);
-    return Status;
+    goto AttachFail;
   }
-
-  Status = GetImageDevicePath (
-            ImageHandle,
-            &DevicePath,
-            &FilePath
-            );
-  if (EFI_ERROR (Status)) {
-	goto AttachFail;
-  }
-
+  
   gEasFT->Signature                 = EFI_NETWORK_TEST_FRAMEWORK_TABLE_SIGNATURE;
   gEasFT->Version                   = EFI_NETWORK_TEST_FRAMEWORK_TABLE_VERSION;
   gEasFT->ImageHandle               = ImageHandle;
@@ -353,7 +348,6 @@ Returns:
   return EFI_SUCCESS;
 
 AttachFail:
-  tBS->FreePool (gEasFT->Cmd);
   tBS->FreePool (gEasFT);
   gEasFT = NULL;
   return Status;
@@ -383,18 +377,7 @@ Returns:
   if (gEasFT == NULL) {
     return EFI_SUCCESS;
   }
-  //
-  // Free the items of Framework Table
-  //
-  if (gEasFT->DevicePath != NULL) {
-    tBS->FreePool (gEasFT->DevicePath);
-    gEasFT->DevicePath = NULL;
-  }
-
-  if (gEasFT->FilePath != NULL) {
-    tBS->FreePool (gEasFT->FilePath);
-    gEasFT->FilePath = NULL;
-  }
+  
   //
   // Free Command
   //
@@ -632,7 +615,7 @@ Returns:
   Status          = EntsMonitorInterface->InitMonitor (EntsMonitorInterface);
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Fail to InitMonitor - %r", Status));
-	goto AttachErr;
+    goto AttachErr;
   }
 
   return EFI_SUCCESS;

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -368,7 +368,6 @@ DoPassiveModeOperations (
 
   case EFI_SCT_OPERATIONS_CONTINUE | EFI_SCT_OPERATIONS_PASSIVEMODE:
   case EFI_SCT_OPERATIONS_CONTINUE | EFI_SCT_OPERATIONS_PASSIVEMODE  | EFI_SCT_OPERATIONS_VERBOSE:
-  		
     Status = NetAssertionUtilityInstall();
     if (EFI_ERROR(Status)) {
       EFI_SCT_DEBUG((EFI_SCT_D_ERROR, L"NetAssertionUtilityInstall fail - %r", Status));
@@ -384,7 +383,7 @@ DoPassiveModeOperations (
     }
     EFI_SCT_DEBUG((EFI_SCT_D_TRACE, L"Do SctContinueExecute Begin"));
     Status = SctContinueExecute ();
-	EFI_SCT_DEBUG((EFI_SCT_D_TRACE, L"Do SctContinueExecute End"));
+    EFI_SCT_DEBUG((EFI_SCT_D_TRACE, L"Do SctContinueExecute End"));
     if (EFI_ERROR (Status)) {
       EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Operation CONTINUE - %r", Status));
     }
@@ -422,7 +421,7 @@ DoPassiveModeOperations (
 
     EFI_SCT_DEBUG((EFI_SCT_D_TRACE, L"PassiveTestContextDelete success"));
 
-	break;
+    break;
 
   case EFI_SCT_OPERATIONS_REPORT | EFI_SCT_OPERATIONS_PASSIVEMODE:
 //    Status = NetAssertionUtilityInstall();
@@ -443,6 +442,7 @@ DoPassiveModeOperations (
 //    NetAssertionUtilityUninstall();
 
     break;
+    
   case EFI_SCT_OPERATIONS_PASSIVEMODE:
   case EFI_SCT_OPERATIONS_PASSIVEMODE | EFI_SCT_OPERATIONS_VERBOSE:
     //
