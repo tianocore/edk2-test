@@ -551,7 +551,7 @@ InternalRecursiveCopy (
     }
 
     // Open source file
-    Status = DstDir->Open (
+    Status = SrcDir->Open (
                        SrcDir,
                        &SubCopySrc,
                        FileInfo->FileName,
@@ -573,7 +573,7 @@ InternalRecursiveCopy (
                         );
     if (EFI_ERROR (Status)) {
       break;
-  }
+    }
 
     if (FileInfo->Attribute & EFI_FILE_DIRECTORY) {
       //
