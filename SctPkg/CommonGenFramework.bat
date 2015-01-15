@@ -40,7 +40,7 @@
 @REM matters included within this Test Suite, to which United    
 @REM EFI, Inc. makes no claim of right.                          
 @REM                                                             
-@REM Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR> 
+@REM Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR> 
 @REM
 @REM
 @echo %DEBUG% OFF
@@ -211,8 +211,8 @@ rem Copy ENTS binary
 rem *********************************************
 
 copy %ProcessorType%\SerialMonitor.efi                %Framework%\Ents\Support\ > NUL
-copy %ProcessorType%\MNPMonitor.efi                   %Framework%\Ents\Support\ > NUL
-copy %ProcessorType%\IP4Monitor.efi                   %Framework%\Ents\Support\ > NUL
+copy %ProcessorType%\ManagedNetworkMonitor.efi        %Framework%\Ents\Support\ > NUL
+copy %ProcessorType%\IP4NetworkMonitor.efi            %Framework%\Ents\Support\ > NUL
 copy %ProcessorType%\Eftp.efi                         %Framework%\Ents\Support\ > NUL
 
 copy %ProcessorType%\BootService_ENTSTest.efi         %Framework%\Ents\Test\    > NUL
