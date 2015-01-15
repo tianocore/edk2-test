@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -126,34 +126,7 @@ BBTestInstallProtocolInterfaceConsistencyTest (
     return Status;
   }
 
-  //
-  // Checkpoint 0:
-  // InstallProtocolInterface should not succeed
-  // with NULL Handle
-  //
-  Status = gtBS->InstallProtocolInterface (
-                   NULL,
-                   &mTestProtocol1Guid,
-                   EFI_NATIVE_INTERFACE,
-                   &TestProtocol1Instance
-                   );
 
-  if (Status == EFI_INVALID_PARAMETER) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
-
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gProtocolHandlerBBTestConformanceAssertionGuid008,
-                 L"BS.InstallProtocolInterface - ConsistencyTestCheckpoint0",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
 
   //
   // Checkpoint 1:
@@ -1079,7 +1052,7 @@ BBTestInstallMultipleProtocolInterfacesConsistencyTest (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gProtocolHandlerBBTestConformanceAssertionGuid009,
+                 gProtocolHandlerBBTestConformanceAssertionGuid008,
                  L"BS.InstallMultipleProtocolInterfaces - ConsistencyTestCheckpoint0",
                  L"%a:%d:Status - %r",
                  __FILE__,

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -110,6 +110,8 @@ EFI_GUID gVariableServicesBbTestConformanceAssertionGuid018 = EFI_TEST_VARIABLES
 EFI_GUID gVariableServicesBbTestConformanceAssertionGuid019 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_019_GUID;
 
 EFI_GUID gVariableServicesBbTestConformanceAssertionGuid020 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_020_GUID;
+
+EFI_GUID gVariableServicesBbTestConformanceAssertionGuid021 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_021_GUID;
 
 EFI_GUID gVariableServicesBbTestFunctionAssertionGuid001 = EFI_TEST_VARIABLESERVICESBBTESTFUNCTION_ASSERTION_001_GUID;
 

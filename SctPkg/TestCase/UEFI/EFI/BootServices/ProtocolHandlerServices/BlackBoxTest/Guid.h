@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -6300,11 +6300,6 @@ extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid006;
 extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid007;
 
 #define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_008_GUID \
-{ 0xc26310d4, 0x745d, 0x4c7f, 0xa3, 0x7a, 0xe3, 0x9e, 0xc0, 0x45, 0x7e, 0xf5 }
-
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid008;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_009_GUID \
 { 0x4242e59c, 0x7370, 0x4a87, 0x83, 0x8c, 0x66, 0xdf, 0xf0, 0x66, 0xe0, 0x1e }
 
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid009;
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid008;

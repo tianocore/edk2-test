@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1781,4 +1781,107 @@ extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid067;
 extern EFI_GUID gSimpleFileSystemExBBTestFunctionAssertionGuid068;
 
 
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_001_GUID \
+{ 0xad3516c1, 0xbf24, 0x4923, 0xb8, 0x84, 0x53, 0x8b, 0x4, 0x2f, 0xb8, 0x25 }
 
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid001;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_002_GUID \
+{ 0x5b704b82, 0xe081, 0x4c4a, 0x9d, 0x65, 0x71, 0x0, 0x79, 0xd1, 0x1f, 0x64 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid002;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_003_GUID \
+{ 0xd9cbe15a, 0x956a, 0x4e54, 0xa3, 0x50, 0xdf, 0x53, 0xdc, 0x7d, 0xe2, 0x5b }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid003;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_004_GUID \
+{ 0xa8aadad0, 0x8545, 0x4098, 0x8a, 0x34, 0x2a, 0x3, 0xc2, 0x2b, 0xc0, 0xf6 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid004;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_005_GUID \
+{ 0xb20660fc, 0xb957, 0x49d7, 0x8d, 0x93, 0x5c, 0x3f, 0x73, 0x6e, 0xd5, 0xf5 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid005;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_006_GUID \
+{ 0x4d6b761, 0xdeac, 0x4801, 0xb7, 0x39, 0xdb, 0x81, 0x8f, 0x46, 0xcf, 0x11 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid006;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_007_GUID \
+{ 0xbe5cddad, 0x2d54, 0x463e, 0xaf, 0xde, 0x68, 0x1c, 0xb9, 0x8, 0xa8, 0xa0 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid007;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_008_GUID \
+{ 0x6950775, 0xa32a, 0x421e, 0x8f, 0xce, 0xd8, 0xb4, 0xc1, 0x43, 0x17, 0xd1 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid008;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_009_GUID \
+{ 0xd529dfd8, 0x23cb, 0x4548, 0xa2, 0x81, 0x6f, 0x59, 0x1f, 0x9c, 0x54, 0x8d }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid009;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_010_GUID \
+{ 0xb0091f09, 0x6121, 0x40e8, 0x93, 0x1d, 0xea, 0x6b, 0xa4, 0x6b, 0xbb, 0x9 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid010;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_011_GUID \
+{ 0xa42a8e9c, 0x4a31, 0x4b0a, 0xab, 0x2e, 0x7f, 0xd4, 0x2d, 0x42, 0x45, 0xf1 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid011;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_012_GUID \
+{ 0x7dc8d79, 0x8349, 0x4e9e, 0x9b, 0xa4, 0x72, 0x68, 0x92, 0xd, 0x2e, 0x35 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid012;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_013_GUID \
+{ 0x54afc2f4, 0x26bd, 0x4161, 0x90, 0x5e, 0xd9, 0x24, 0xd1, 0x34, 0x24, 0x27 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid013;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_014_GUID \
+{ 0xabaea718, 0xe1f9, 0x4edc, 0x98, 0xb2, 0x47, 0x18, 0xe4, 0xf7, 0x6b, 0x70 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid014;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_015_GUID \
+{ 0x68a6c62b, 0xc1e0, 0x44d0, 0xba, 0xdb, 0x8, 0x85, 0x63, 0x37, 0x3f, 0xd7 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid015;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_016_GUID \
+{ 0x2f83c19f, 0xc757, 0x4975, 0xa5, 0xea, 0x6a, 0x4e, 0xab, 0xa7, 0xce, 0x48 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid016;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_017_GUID \
+{ 0x3c0a4e4a, 0x43f4, 0x4b24, 0xb7, 0x64, 0xd8, 0x3c, 0x18, 0x63, 0xab, 0x81 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid017;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_018_GUID \
+{ 0xece0ade2, 0x27e, 0x4c21, 0x91, 0x50, 0x33, 0x3c, 0x3e, 0x47, 0xea, 0xb }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid018;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_019_GUID \
+{ 0x5ee32a7f, 0xa63, 0x4803, 0x8a, 0xe8, 0x1, 0x9c, 0x7, 0x2a, 0xed, 0xb1 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid019;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_020_GUID \
+{ 0x3f8b11ec, 0x6b9e, 0x440c, 0x92, 0xb, 0xb5, 0x63, 0xf3, 0xfd, 0x2b, 0xa7 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid020;
+
+#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_021_GUID \
+{ 0x141fefb, 0xcb29, 0x451b, 0xb2, 0x7c, 0x5c, 0x81, 0x51, 0x77, 0x34, 0x97 }
+
+extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid021;

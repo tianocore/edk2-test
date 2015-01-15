@@ -217,8 +217,8 @@ BBTestGetInfoFunctionTestCheckpoint1 (
   if (Status == EFI_UNSUPPORTED || Status == EFI_DEVICE_ERROR) {
     StandardLib->RecordAssertion (
                    StandardLib,
-                   EFI_TEST_ASSERTION_WARNING,
-                   gFunctionTestAssertionGuid001,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
                    L"RANDOM_NAME_PROTOCOL.GetInfo - GetInfo() is not supported or EFI_DEVICE_ERROR",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -232,7 +232,7 @@ BBTestGetInfoFunctionTestCheckpoint1 (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
-                   L"Could not return the correct RNGAlgorithmListSize",
+                   L"RANDOM_NAME_PROTOCOL.GetInfo - GetInfo() could not return the correct RNGAlgorithmListSize",
                    L"%a:%d: Status - %r",
                    __FILE__,
                    (UINTN)__LINE__,
@@ -345,7 +345,7 @@ BBTestGetRNGFunctionTestCheckpoint1 (
   if (Status == EFI_UNSUPPORTED || Status == EFI_DEVICE_ERROR) {
     StandardLib->RecordAssertion (
                    StandardLib,
-                   EFI_TEST_ASSERTION_WARNING,
+                   EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
                    L"RANDOM_NAME_PROTOCOL.GetInfo - GetInfo() is not supported or EFI_DEVICE_ERROR",
                    L"%a:%d: Status - %r",

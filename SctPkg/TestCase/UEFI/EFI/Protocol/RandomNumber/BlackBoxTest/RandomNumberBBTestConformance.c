@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -190,7 +190,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_WARNING,
-                   gTestGenericFailureGuid,
+                   gConformanceTestAssertionGuid001,
                    L"RANDOM_NAME_PROTOCOL.GetInfo - GetInfo() is not supported or EFI_DEVICE_ERROR",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -251,7 +251,7 @@ BBTestGetRNGConformanceTestCheckpoint1 (
   if (Status == EFI_UNSUPPORTED || Status == EFI_DEVICE_ERROR) {
     StandardLib->RecordAssertion (
                    StandardLib,
-                   EFI_TEST_ASSERTION_WARNING,
+                   EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
                    L"RANDOM_NAME_PROTOCOL.GetInfo - GetInfo() is not supported or EFI_DEVICE_ERROR",
                    L"%a:%d: Status - %r",
