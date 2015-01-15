@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2014 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -145,7 +145,7 @@ Returns:
   ConfInfo.InfoData = 0;
 
   SctShellApplicationInit (ImageHandle, SystemTable);
-  
+
   Status = SctShellFilterNullArgs ();
   if (EFI_ERROR (Status)) {
     return Status;
@@ -167,8 +167,10 @@ Returns:
     return EFI_INVALID_PARAMETER;
   } else {
     SctStrCpy (InfFileName, Argv[2]);
+    if (SctStrCmp(Argv[1], L"-g") == 0) {
+      GenLogFlag = TRUE;
+    }
   }
-
 
   if (GenLogFlag) {
     SCRTLogProcess(InfFileName);
@@ -332,25 +334,23 @@ Returns:
                       (VOID *) &DescriptorVersion
                       );
         if (Status == EFI_BUFFER_TOO_SMALL) {
-        	MemoryMapSize += 1024;
-            Status = tBS->AllocatePool (
+          MemoryMapSize += 1024;
+          Status = tBS->AllocatePool (
                         EfiRuntimeServicesData,
                         MemoryMapSize,
                         (VOID **)&MemoryMap
                         );
           if (!EFI_ERROR (Status)) {
-
-          Status = tBS->GetMemoryMap (
-                        &MemoryMapSize,
-                        MemoryMap,
-                        &MapKey,
-                        (VOID *) &DescriptorSize,
-                        (VOID *) &DescriptorVersion
-                        );
-          }
-          else{
-        	  MemoryMapSize = 0;
-        	   MemoryMap = NULL;
+            Status = tBS->GetMemoryMap (
+                          &MemoryMapSize,
+                          MemoryMap,
+                          &MapKey,
+                          (VOID *) &DescriptorSize,
+                          (VOID *) &DescriptorVersion
+                          );
+          } else{
+            MemoryMapSize = 0;
+            MemoryMap = NULL;
           }
         }
         if(!(EFI_ERROR (Status))){
