@@ -72,7 +72,7 @@
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
   OUTPUT_DIRECTORY               = Build/UefiSct
-  SUPPORTED_ARCHITECTURES        = IA32|X64|IPF|ARM|AARCH64
+  SUPPORTED_ARCHITECTURES        = IA32|X64|ARM|AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   
@@ -102,8 +102,6 @@
   MSFT:*_*_X64_APP_FLAGS   = /D EFI_SPECIFICATION_VERSION=0x00020028  /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
   MSFT:*_*_X64_PP_FLAGS    = /D EFI_SPECIFICATION_VERSION=0x00020028  /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
 
-  MSFT:*_*_IPF_CC_FLAGS    = /Od /D TIANO_RELEASE_VERSION=0x00080006 /D EFI64
-
   GCC:*_*_IA32_CC_FLAGS     = -D EFI32 $(GCC_VER_MACRO)
   GCC:*_*_IA32_VFRPP_FLAGS  = -D EFI32 $(GCC_VER_MACRO)
   GCC:*_*_IA32_APP_FLAGS    = -D EFI32 $(GCC_VER_MACRO)
@@ -114,11 +112,6 @@
   GCC:*_*_X64_APP_FLAGS    = -D EFIX64 $(GCC_VER_MACRO)
   GCC:*_*_X64_PP_FLAGS     = -D EFIX64 $(GCC_VER_MACRO)
   GCC:*_*_X64_ASM_FLAGS    = -DEFIX64
-
-  GCC:*_*_IPF_CC_FLAGS     = -D EFI64 $(GCC_VER_MACRO)
-  GCC:*_*_IPF_VFRPP_FLAGS  = -D EFI64 $(GCC_VER_MACRO)
-  GCC:*_*_IPF_APP_FLAGS    = -D EFI64 $(GCC_VER_MACRO)
-  GCC:*_*_IPF_PP_FLAGS     = -D EFI64 $(GCC_VER_MACRO)
 
   #TODO: OM - fixme RVCT:*_*_ARM_CC_FLAGS = -D EFIARM $(GCC_VER_MACRO)
   *_*_ARM_CC_FLAGS = -D EFIARM
@@ -165,13 +158,6 @@
 [Libraries.AARCH64]
   ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
-[Libraries.IPF]
-  EdkCompatibilityPkg/Foundation/Cpu/Itanium/CpuIa64Lib/CpuIA64Lib.inf
-
-[Libraries.IPF,Libraries.IA32,Libraries.X64]
-  EdkCompatibilityPkg/Foundation/Library/CompilerStub/CompilerStubLib.inf
-  EdkCompatibilityPkg/Foundation/Library/EdkIIGlueLib/Library/BaseLib/BaseLib.inf
-
 [LibraryClasses.common]
   UefiApplicationEntryPoint|MdePkg/Library/UefiApplicationEntryPoint/UefiApplicationEntryPoint.inf
   UefiDriverEntryPoint|MdePkg/Library/UefiDriverEntryPoint/UefiDriverEntryPoint.inf
@@ -192,9 +178,6 @@
 
 [LibraryClasses.AARCH64]
   NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[LibraryClasses.IA32]
-  NULL|EdkCompatibilityPkg/Foundation/Library/CompilerStub/CompilerStubLib.inf
 
 ###############################################################################
 #

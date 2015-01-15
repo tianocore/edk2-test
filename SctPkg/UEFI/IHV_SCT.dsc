@@ -72,7 +72,7 @@
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
   OUTPUT_DIRECTORY               = Build/IHVSct
-  SUPPORTED_ARCHITECTURES        = IA32|X64|IPF
+  SUPPORTED_ARCHITECTURES        = IA32|X64
   BUILD_TARGETS                  = DEBUG
   SKUID_IDENTIFIER               = DEFAULT
 
@@ -98,7 +98,6 @@
   MSFT:*_*_X64_APP_FLAGS   = /D EFI_SPECIFICATION_VERSION=0x00020028  /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
   MSFT:*_*_X64_PP_FLAGS    = /D EFI_SPECIFICATION_VERSION=0x00020028  /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
 
-  MSFT:*_*_IPF_CC_FLAGS    = /Od /D TIANO_RELEASE_VERSION=0x00080006 /D EFI64
 
 [Libraries]
   SctPkg/Library/SctLib/SctLib.inf
@@ -115,12 +114,7 @@
 [Libraries.AARCH64]
   ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
-[Libraries.IPF]
-  EdkCompatibilityPkg/Foundation/Cpu/Itanium/CpuIa64Lib/CpuIA64Lib.inf
-
-[Libraries.IPF,Libraries.IA32,Libraries.X64]
-  EdkCompatibilityPkg/Foundation/Library/CompilerStub/CompilerStubLib.inf
-  EdkCompatibilityPkg/Foundation/Library/EdkIIGlueLib/Library/BaseLib/BaseLib.inf
+[Libraries.IA32,Libraries.X64]
 
 [LibraryClasses.common]
   UefiApplicationEntryPoint|MdePkg/Library/UefiApplicationEntryPoint/UefiApplicationEntryPoint.inf
@@ -144,7 +138,6 @@
   NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 [LibraryClasses.IA32]
-  NULL|EdkCompatibilityPkg/Foundation/Library/CompilerStub/CompilerStubLib.inf
 
 ###############################################################################
 #
