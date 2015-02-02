@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -988,7 +988,7 @@ ReadOnlyFileCheck (
 
   Status = FileHandle->GetInfo (FileHandle, &gBlackBoxEfiFileInfoGuid, &InfoSize, (VOID*)Buffer);
   if (Status == EFI_SUCCESS && InfoSize == FileInfo->Size) {
-  	if (SctCompareMem (Buffer, FileInfo, InfoSize) != 0) {
+    if (SctCompareMem (Buffer, FileInfo, InfoSize) != 0) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }  else {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1134,14 +1134,14 @@ ReadOnlyFileCheck (
   Status3 = FileHandle->GetPosition (FileHandle, &Position);
 
   if (Status1 == EFI_SUCCESS && Status2 == EFI_SUCCESS && Status3 == EFI_SUCCESS && 
-  	FileBufSize == FileInfo->FileSize && Position == FileBufSize) {
+    FileBufSize == FileInfo->FileSize && Position == FileBufSize) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-	if (FileBufSize > 20) {
+    if (FileBufSize > 20) {
       Size = 10;
       FileHandle->SetPosition (FileHandle, 0);
-	  FileHandle->Read (FileHandle, &Size, Buf);
+      FileHandle->Read (FileHandle, &Size, Buf);
       for (Index = 0; Index < 10 ; Index++) {
-	  	if (Buf[Index] != FileBuf[Index])
+        if (Buf[Index] != FileBuf[Index])
           break;
       }
       if (Index != 10) {
@@ -1150,7 +1150,7 @@ ReadOnlyFileCheck (
 
       FileHandle->Read (FileHandle, &Size, Buf);
       for (Index = 0; Index < 10 ; Index++) {
-	  	if (Buf[Index] != FileBuf[Index + 10])
+        if (Buf[Index] != FileBuf[Index + 10])
           break;
       }
       if (Index != 10) {
@@ -1158,9 +1158,9 @@ ReadOnlyFileCheck (
       }
 
       FileHandle->SetPosition (FileHandle, Position - 10);
-	  FileHandle->Read (FileHandle, &Size, Buf);
+      FileHandle->Read (FileHandle, &Size, Buf);
       for (Index = 0; Index < 10 ; Index++) {
-	  	if (Buf[Index] != FileBuf[Index + Position - 10])
+        if (Buf[Index] != FileBuf[Index + Position - 10])
           break;
       }
       if (Index != 10) {
@@ -1183,7 +1183,7 @@ ReadOnlyFileCheck (
   
   if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
     SctFreePool(Buffer);
-	SctFreePool(FileBuf);
+    SctFreePool(FileBuf);
     return;
   }  
 
@@ -1206,7 +1206,7 @@ ReadOnlyFileCheck (
                  );
   if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
     SctFreePool(Buffer);
-	SctFreePool(FileBuf);
+    SctFreePool(FileBuf);
     return;
   }  
 
@@ -1303,7 +1303,7 @@ BBTestReadOnlyTestCheckPoints (
                    Status
                    );
   if (Status != EFI_UNSUPPORTED) {
-	return;
+    return;
   }
 
 
@@ -1312,7 +1312,7 @@ BBTestReadOnlyTestCheckPoints (
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-  }	
+  }
   
   StandardLib->RecordAssertion (
                    StandardLib,
@@ -1325,7 +1325,7 @@ BBTestReadOnlyTestCheckPoints (
                    Status
                    );
   if (Status != EFI_SUCCESS) {
-	return;
+    return;
   }
 
   Status = Root->GetPosition (Root, &Position);
@@ -1333,8 +1333,8 @@ BBTestReadOnlyTestCheckPoints (
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-  }	
-	
+  }
+
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -1346,7 +1346,7 @@ BBTestReadOnlyTestCheckPoints (
                    Status
                    );
   if (Status != EFI_UNSUPPORTED) {
-	return;
+    return;
   }
   
 
@@ -1419,22 +1419,22 @@ BBTestReadOnlyTestCheckPoints (
                    );
   if (Status != EFI_UNSUPPORTED) {
     SctFreePool(Info);
-	return;
+    return;
   }
 
 
   BufSize = SIZE_OF_EFI_FILE_INFO;
   Status  = Root->Read (Root, &BufSize, Info);
-  if (Status != EFI_BUFFER_TOO_SMALL) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
+  if (Status == EFI_BUFFER_TOO_SMALL || (Status == EFI_SUCCESS && BufSize == 0)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
                  gReadOnlyFileSystemBBTestAssertionGuid007,
-                 L"ReadOnly System: Dir Read should be EFI_BUFFER_TOO_SMALL with the limited buffer size",
+                 L"ReadOnly System: Dir Read should be EFI_BUFFER_TOO_SMALL with the limited buffer size or EFI_SUCCESS when no dirs and files",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -1442,7 +1442,7 @@ BBTestReadOnlyTestCheckPoints (
                  );
   if (Status != EFI_BUFFER_TOO_SMALL) {
     SctFreePool(Info);
-	return;
+    return;
   }
   
 
@@ -1464,43 +1464,26 @@ BBTestReadOnlyTestCheckPoints (
                      Status
                      );
       break;  
-	}
+    }
 
     if (Info->Attribute & EFI_FILE_DIRECTORY) {
       Dir = TRUE;
-	  DirName = Info->FileName;
- 
-//      ReadOnlyDirCheck(StandardLib, Root, DirName);
-	  
-	} else {
-	  FileName = Info->FileName;
-	  if (File == FALSE)
-	  	ReadOnlyFileCheck(StandardLib, Root, FileName, Info);
+      DirName = Info->FileName;
+
+      //ReadOnlyDirCheck(StandardLib, Root, DirName);
+
+    } else {
+      FileName = Info->FileName;
+      if (File == FALSE)
+        ReadOnlyFileCheck(StandardLib, Root, FileName, Info);
       File = TRUE;
-	}
+    }
 
     if (BufSize == 0)
       break;
 
   } while (File == FALSE || Dir == FALSE);
-/*
-  Status = Root->Close (Root);
-  if (Status != EFI_SUCCESS) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid008,
-                 L"ReadOnly System: Dir Close should be EFI_SUCCESS",
-                 L"%a:%d: Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
-*/  
+ 
   SctFreePool (Info);
   return;
 }
