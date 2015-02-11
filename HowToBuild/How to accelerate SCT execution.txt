@@ -1,7 +1,7 @@
 Some tips to accelerate SCT execution
 1. Always execute SCT on HDD, SSD is preferred.
 2. Execute the SCT on platform release build image if it is possible.
-3. Tuning the platform boot performance. Many reboot may occurc in the SCT execution.
+3. Tuning the platform boot performance. Many reboot may occur in the SCT execution.
 4. "-v" parameter could accelerate the execution about 70-80%, "sct -a -v".
 
 Expect the tips could help you. If you have other experience on acceleration, please feel free to contact eric.jin@intel.com
