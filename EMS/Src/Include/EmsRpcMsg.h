@@ -1,0 +1,197 @@
+/*++
+  The material contained herein is not a license, either        
+  expressly or impliedly, to any intellectual property owned    
+  or controlled by any of the authors or developers of this     
+  material or to any contribution thereto. The material         
+  contained herein is provided on an "AS IS" basis and, to the  
+  maximum extent permitted by applicable law, this information  
+  is provided AS IS AND WITH ALL FAULTS, and the authors and    
+  developers of this material hereby disclaim all other         
+  warranties and conditions, either express, implied or         
+  statutory, including, but not limited to, any (if any)        
+  implied warranties, duties or conditions of merchantability,  
+  of fitness for a particular purpose, of accuracy or           
+  completeness of responses, of results, of workmanlike         
+  effort, of lack of viruses and of lack of negligence, all     
+  with regard to this material and any contribution thereto.    
+  Designers must not rely on the absence or characteristics of  
+  any features or instructions marked "reserved" or             
+  "undefined." The Unified EFI Forum, Inc. reserves any         
+  features or instructions so marked for future definition and  
+  shall have no responsibility whatsoever for conflicts or      
+  incompatibilities arising from future changes to them. ALSO,  
+  THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,  
+  QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR            
+  NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY        
+  CONTRIBUTION THERETO.                                         
+                                                                
+  IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR  
+  ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR     
+  THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST      
+  PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,        
+  CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER   
+  UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY  
+  WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS       
+  DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
+  THE POSSIBILITY OF SUCH DAMAGES.                              
+                                                                
+  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Rights Reserved, subject to all existing rights in all        
+  matters included within this Test Suite, to which United      
+  EFI, Inc. makes no claim of right.                            
+                                                                
+  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+   
+--*/
+/*++
+
+Module Name:
+  
+    EmsRpcMsg.h
+    
+Abstract:
+
+    Incude header files for EMS RPC functions
+
+--*/
+
+#ifndef __EMS_MSG_H__
+#define __EMS_MSG_H__
+
+#include <sys/types.h>
+#include "EmsTypes.h"
+#include <errno.h>
+
+#define MSG_PRI_NORMAL  1
+#define MSG_PRI_URGENT  2
+#define MSG_BUF_SIZE    100
+
+#ifndef WAIT_FOREVER
+#define WAIT_FOREVER  0xFFFFFFFF
+#endif
+//
+// Data Structure: message send buffer
+//
+typedef struct _MSG_QUEUE {
+  INT8              *Message;
+  UINT32            Length;
+  UINT32            Priority;
+  struct _MSG_QUEUE *Next;
+} MSG_QUEUE;
+
+//
+// Prototype of function
+//
+INT32
+EmsMsgQCreate (
+  VOID_P
+  )
+/*++
+
+Routine Description:
+
+  create an EMS message queue
+
+Arguments:
+
+  None.
+
+Returns:
+
+  1
+
+--*/
+;
+
+INT32
+EmsMsgQDelete (
+  VOID_P
+  )
+/*++
+
+Routine Description:
+
+  delete an EMS message queue
+
+Arguments:
+
+  None.
+
+Returns:
+
+  0
+
+--*/
+;
+
+INT32
+EmsMsgQSend (
+  INT8  *Buf,
+  INT32 Length,
+  INT32 Priority
+  )
+/*++
+
+Routine Description:
+
+  sent a message to an EMS message queue
+
+Arguments:
+
+  Buf       - raw data in message.
+  Length    - message Length
+  Priority  - The Priority of the message
+
+Returns:
+
+  If succeed, return 0, else return -1
+
+--*/
+;
+
+INT32
+EmsMsgQReceive (
+  INT8  *Buf,
+  UINT32 Length
+  )
+/*++
+
+Routine Description:
+
+  receive message from an EMS message queue
+
+Arguments:
+
+  Buf     - Buffer to receive message
+  Length  - the Length of input Buffer
+
+Returns:
+
+   If succeed, return message Length (not include reserved mtype), 
+   else return -1
+
+--*/
+;
+
+INT32
+EmsMsgQEmpty (
+  VOID_P
+  )
+/*++
+
+Routine Description:
+
+  Empty an EMS message queue
+
+Arguments:
+
+  None.
+
+Returns:
+
+  0
+
+--*/
+;
+
+#endif

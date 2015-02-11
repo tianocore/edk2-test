@@ -1,0 +1,299 @@
+#
+# The material contained herein is not a license, either      
+# expressly or impliedly, to any intellectual property owned  
+# or controlled by any of the authors or developers of this   
+# material or to any contribution thereto. The material       
+# contained herein is provided on an "AS IS" basis and, to the
+# maximum extent permitted by applicable law, this information
+# is provided AS IS AND WITH ALL FAULTS, and the authors and  
+# developers of this material hereby disclaim all other       
+# warranties and conditions, either express, implied or       
+# statutory, including, but not limited to, any (if any)      
+# implied warranties, duties or conditions of merchantability,
+# of fitness for a particular purpose, of accuracy or         
+# completeness of responses, of results, of workmanlike       
+# effort, of lack of viruses and of lack of negligence, all   
+# with regard to this material and any contribution thereto.  
+# Designers must not rely on the absence or characteristics of
+# any features or instructions marked "reserved" or           
+# "undefined." The Unified EFI Forum, Inc. reserves any       
+# features or instructions so marked for future definition and
+# shall have no responsibility whatsoever for conflicts or    
+# incompatibilities arising from future changes to them. ALSO,
+# THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,
+# QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR          
+# NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY      
+# CONTRIBUTION THERETO.                                       
+#                                                             
+# IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR
+# ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR   
+# THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST    
+# PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,      
+# CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER 
+# UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY
+# WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS     
+# DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
+# THE POSSIBILITY OF SUCH DAMAGES.                            
+#                                                             
+# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Rights Reserved, subject to all existing rights in all      
+# matters included within this Test Suite, to which United    
+# EFI, Inc. makes no claim of right.                          
+#                                                             
+# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+#
+#
+if {[info exist IP6_INC] == 1} {
+  return
+}
+set IP6_INC 1
+
+Include EfiUtil/EfiInclude.tcl
+Include Include/EntsProtocolTest.inc.tcl
+Include Include/EfiBootService.inc.tcl
+Include MNP/Include/Mnp.inc.tcl
+Include SNP/Include/Snp.inc.tcl
+Include IP6/Include/Ip6Define.tcl
+Include IP6Config/Include/Ip6Config.inc.tcl
+
+Include Include/GenericAssertionGuid.tcl
+Include IP6/Include/Ip6AssertionGuid.tcl
+
+
+###################################################################
+# Function Declaration
+###################################################################
+Func Ip6ServiceBinding->CreateChild {
+  POINTER
+  POINTER
+}
+
+Func Ip6ServiceBinding->DestroyChild {
+  UINTN
+  POINTER
+}
+
+Func Ip6->GetModeData {
+  POINTER
+  POINTER
+  POINTER
+  POINTER
+}
+
+Func Ip6->Configure {
+  POINTER
+  POINTER
+}
+
+Func Ip6->Groups {
+  BOOLEAN
+  POINTER
+  POINTER
+}
+
+Func Ip6->Routes {
+  BOOLEAN
+  POINTER
+  UINT8
+  POINTER
+  POINTER
+}
+
+Func Ip6->Neighbors {
+  BOOLEAN
+  POINTER
+  POINTER
+  UINT32
+  BOOLEAN
+  POINTER
+}
+
+Func Ip6->Transmit {
+  POINTER
+  POINTER
+}
+
+Func Ip6->Receive {
+  POINTER
+  POINTER
+}
+
+Func Ip6->Cancel {
+  POINTER
+  POINTER
+}
+
+Func Ip6->Poll {
+  POINTER
+}
+
+#**********************************************
+# EFI_IP6_CONFIG_DATA 
+#**********************************************
+Struct EFI_IP6_CONFIG_DATA {
+  UINT8              DefaultProtocol;
+  BOOLEAN            AcceptAnyProtocol;
+  BOOLEAN            AcceptIcmpErrors;
+  BOOLEAN            AcceptPromiscuous;
+  EFI_IPv6_ADDRESS   DestinationAddress;
+  EFI_IPv6_ADDRESS   StationAddress;
+  UINT8              TrafficClass;
+  UINT8              HopLimit;
+  UINT32             FlowLabel;
+  UINT32             ReceiveTimeout;
+  UINT32             TransmitTimeout;
+}
+
+#**********************************************
+# EFI_IP6_ADDRESS_INFO
+#**********************************************
+Struct EFI_IP6_ADDRESS_INFO {
+  EFI_IPv6_ADDRESS        Address;
+  UINT8                   PrefixLength;
+}
+
+#**********************************************
+# EFI_IP6_ROUTE_TABLE 
+#**********************************************
+Struct EFI_IP6_ROUTE_TABLE {
+  EFI_IPv6_ADDRESS        Gateway;
+  EFI_IPv6_ADDRESS        Destination;
+  UINT8                   PrefixLength;
+}
+
+#**********************************************
+# EFI_IP6_NEIGHBOR_CACHE 
+#**********************************************
+Struct EFI_IP6_NEIGHBOR_CACHE {
+  EFI_IPv6_ADDRESS        Neighbor;
+  EFI_MAC_ADDRESS         LinkAddress;
+  UINTN                   State;
+}
+
+#**********************************************
+# EFI_IP6_ICMP_TYPE 
+#**********************************************
+Struct EFI_IP6_ICMP_TYPE {
+  UINT8                Type;
+  UINT8                Code;
+}
+
+#**********************************************
+# EFI_IP6_MODE_DATA 
+#**********************************************
+Struct EFI_IP6_MODE_DATA {
+  BOOLEAN               IsStarted;
+  UINT32                MaxPacketSize;
+  EFI_IP6_CONFIG_DATA   ConfigData;
+  BOOLEAN               IsConfigured;
+  UINT32                AddressCount;  
+  POINTER               AddressList;
+  UINT32                GroupCount;
+  POINTER               GroupTable;
+  UINT32                RouteCount;
+  POINTER               RouteTable;
+  UINT32                NeighborCount;
+  POINTER               NeighborCache;
+  UINT32                PrefixCount;
+  POINTER               PrefixTable;
+  UINT32                IcmpTypeCount;
+  POINTER               IcmpTypeList;  
+}
+
+#**********************************************
+# EFI_IP6_HEADER 
+#**********************************************
+Pack 1
+Struct EFI_IP6_HEADER {
+  UINT32              Version_TrafficClass_FlowLabel;
+  UINT16              PayloadLength;
+  UINT8               NextHeader;
+  UINT8               HopLimit;  
+  EFI_IPv6_ADDRESS    SourceAddress;
+  EFI_IPv6_ADDRESS    DestinationAddress;
+}
+Pack
+
+#**********************************************
+# EFI_IP6_FRAGMENT_DATA 
+#**********************************************
+Struct EFI_IP6_FRAGMENT_DATA {
+  UINT32        FragmentLength;
+  POINTER       FragmentBuffer;
+}
+
+#**********************************************
+# EFI_IP6_RECEIVE_DATA 
+#**********************************************
+Struct EFI_IP6_RECEIVE_DATA {
+  EFI_TIME               TimeStamp;
+  UINTN                  RecycleSignal;
+  UINT32                 HeaderLength;
+  POINTER                Header;
+  UINT32                 DataLength;
+  UINT32                 FragmentCount;  
+  EFI_IP6_FRAGMENT_DATA  FragmentTable;
+}
+
+Struct EFI_IP6_RECEIVE_DATA_P4 {
+  EFI_TIME               TimeStamp;
+  UINTN                  RecycleSignal;
+  UINT32                 HeaderLength;
+  POINTER                Header;
+  UINT32                 DataLength;
+  UINT32                 FragmentCount;  
+  EFI_IP6_FRAGMENT_DATA  FragmentTable(4);
+}
+
+#**********************************************
+# EFI_IP6_OVERRIDE_DATA 
+#**********************************************
+Struct EFI_IP6_OVERRIDE_DATA {
+  UINT8                  Protocol;
+  UINT8                  HopLimit;
+  UINT32                 FlowLabel;
+}
+
+#**********************************************
+# EFI_IP6_TRANSMIT_DATA 
+#**********************************************
+Struct EFI_IP6_TRANSMIT_DATA {
+  EFI_IPv6_ADDRESS       DestinationAddress;
+  POINTER                OverrideData;
+  UINT32                 ExtHdrsLength;
+  POINTER                ExtHdrs;
+  UINT8                  NextHeader;
+  UINT32                 DataLength;
+  UINT32                 FragmentCount;
+  EFI_IP6_FRAGMENT_DATA  FragmentTable;
+}
+
+Struct EFI_IP6_TRANSMIT_DATA_P2 {
+  EFI_IPv6_ADDRESS       DestinationAddress;
+  POINTER                OverrideData;
+  UINT32                 ExtHdrsLength;
+  POINTER                ExtHdrs;
+  UINT8                  NextHeader;
+  UINT32                 DataLength;
+  UINT32                 FragmentCount;
+  EFI_IP6_FRAGMENT_DATA  FragmentTable(2);
+}
+
+Struct EFI_IP6_TRANSMIT_DATA_P4 {
+  EFI_IPv6_ADDRESS       DestinationAddress;
+  POINTER                OverrideData;
+  UINT32                 ExtHdrsLength;
+  POINTER                ExtHdrs;
+  UINT32                 DataLength;
+  UINT32                 FragmentCount;
+  EFI_IP6_FRAGMENT_DATA  FragmentTable(4);
+}
+
+#**********************************************
+# EFI_IP6_COMPLETION_TOKEN 
+#**********************************************
+Struct EFI_IP6_COMPLETION_TOKEN {
+  UINTN                   Event;
+  UINTN                   Status;
+  POINTER                 Packet;
+}
