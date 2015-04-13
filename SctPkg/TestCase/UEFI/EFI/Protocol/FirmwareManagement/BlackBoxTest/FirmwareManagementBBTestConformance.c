@@ -3201,6 +3201,7 @@ BBTestSetPackageInfoConformanceTestCheckpoint1 (
   //
 
   gtBS->FreePool (PackageVersionName);
+  PackageVersionName = NULL;
   TestNameLength = PackageVersionNameMaxLen + 1;
   Status = gtBS->AllocatePool (
                   EfiBootServicesData,
