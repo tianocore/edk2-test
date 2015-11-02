@@ -1,0 +1,506 @@
+#
+# The material contained herein is not a license, either      
+# expressly or impliedly, to any intellectual property owned  
+# or controlled by any of the authors or developers of this   
+# material or to any contribution thereto. The material       
+# contained herein is provided on an "AS IS" basis and, to the
+# maximum extent permitted by applicable law, this information
+# is provided AS IS AND WITH ALL FAULTS, and the authors and  
+# developers of this material hereby disclaim all other       
+# warranties and conditions, either express, implied or       
+# statutory, including, but not limited to, any (if any)      
+# implied warranties, duties or conditions of merchantability,
+# of fitness for a particular purpose, of accuracy or         
+# completeness of responses, of results, of workmanlike       
+# effort, of lack of viruses and of lack of negligence, all   
+# with regard to this material and any contribution thereto.  
+# Designers must not rely on the absence or characteristics of
+# any features or instructions marked "reserved" or           
+# "undefined." The Unified EFI Forum, Inc. reserves any       
+# features or instructions so marked for future definition and
+# shall have no responsibility whatsoever for conflicts or    
+# incompatibilities arising from future changes to them. ALSO,
+# THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,
+# QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR          
+# NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY      
+# CONTRIBUTION THERETO.                                       
+#                                                             
+# IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR
+# ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR   
+# THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST    
+# PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,      
+# CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER 
+# UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY
+# WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS     
+# DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
+# THE POSSIBILITY OF SUCH DAMAGES.                            
+#                                                             
+# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Rights Reserved, subject to all existing rights in all      
+# matters included within this Test Suite, to which United    
+# EFI, Inc. makes no claim of right.                          
+#                                                             
+# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+#
+#
+################################################################################
+CaseLevel         FUNCTION
+CaseAttribute     AUTO
+CaseVerboseLevel  DEFAULT
+
+#
+# test case Name, category, description, GUID...
+#
+CaseGuid          97D11D8A-FFE9-411c-8C83-846FE84E11E5
+CaseName          CnntOpening.Func1.Case7
+CaseCategory      TCP
+CaseDescription   {This item is to test the [EUT] correctly establishes the    \
+                   TCP connection through simultaneous open. This connection   \
+                   should not affect any previously established connection.}
+################################################################################
+
+Include TCP4/include/Tcp4.inc.tcl
+
+proc CleanUpEutEnvironmentBegin {} {
+  global RST
+ 
+  UpdateTcpSendBuffer TCB_CNNT1 -c $RST
+  SendTcpPacket TCB_CNNT1
+ 
+  UpdateTcpSendBuffer TCB_CNNT2 -c $RST
+  SendTcpPacket TCB_CNNT2
+ 
+  DestroyTcb
+  DelEntryInArpCache
+
+  Tcp4ServiceBinding->DestroyChild "@R_Tcp4Handle_Cnnt1, &@R_Status"
+  GetAck
+ 
+  Tcp4ServiceBinding->DestroyChild "@R_Tcp4Handle_Cnnt2, &@R_Status"
+  GetAck
+}
+
+proc CleanUpEutEnvironmentEnd {} {
+  EndLogPacket
+  EndScope _TCP4_RFC_COMPATIBILITY_
+  EndLog
+}
+
+#
+# Begin log ...
+#
+BeginLog
+
+#
+# BeginScope on OS.
+#
+BeginScope _TCP4_RFC_COMPATIBILITY_
+
+BeginLogPacket CnntOpening.Func1.Case7 "host $DEF_EUT_IP_ADDR and host         \
+                                             $DEF_ENTS_IP_ADDR"
+
+#
+# Parameter Definition
+# R_ represents "Remote EFI Side Parameter"
+# L_ represents "Local OS Side Parameter"
+#
+UINTN                            R_Status
+UINTN                            R_Tcp4Handle_Cnnt1
+UINTN                            R_Tcp4Handle_Cnnt2
+UINTN                            R_Context_Cnnt1
+UINTN                            R_Context_Cnnt2
+
+EFI_TCP4_ACCESS_POINT            R_Configure_AccessPoint_Cnnt1
+EFI_TCP4_CONFIG_DATA             R_Configure_Tcp4ConfigData_Cnnt1
+EFI_TCP4_ACCESS_POINT            R_Configure_AccessPoint_Cnnt2
+EFI_TCP4_CONFIG_DATA             R_Configure_Tcp4ConfigData_Cnnt2
+
+EFI_TCP4_COMPLETION_TOKEN        R_Connect_CompletionToken_Cnnt1
+EFI_TCP4_CONNECTION_TOKEN        R_Connect_ConnectionToken_Cnnt1
+EFI_TCP4_COMPLETION_TOKEN        R_Connect_CompletionToken_Cnnt2
+EFI_TCP4_CONNECTION_TOKEN        R_Connect_ConnectionToken_Cnnt2
+
+#
+# Initialization of TCB related on OS side.
+#
+CreateTcb TCB_CNNT1 $DEF_ENTS_IP_ADDR $DEF_ENTS_PRT $DEF_EUT_IP_ADDR $DEF_EUT_PRT
+
+set R_CNNT2_PRT [expr $DEF_EUT_PRT+1]
+CreateTcb TCB_CNNT2 $DEF_ENTS_IP_ADDR $DEF_ENTS_PRT $DEF_EUT_IP_ADDR $R_CNNT2_PRT
+
+LocalEther  $DEF_ENTS_MAC_ADDR
+RemoteEther $DEF_EUT_MAC_ADDR
+LocalIp     $DEF_ENTS_IP_ADDR
+RemoteIp    $DEF_EUT_IP_ADDR
+
+#
+# Add an entry in ARP cache.
+#
+AddEntryInArpCache
+
+#
+# Create Tcp4 Child.
+#
+Tcp4ServiceBinding->CreateChild "&@R_Tcp4Handle_Cnnt1, &@R_Status"
+GetAck
+SetVar     [subst $ENTS_CUR_CHILD]  @R_Tcp4Handle_Cnnt1
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "Tcp4SBP.CreateChild - Create Child 1."                        \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+#
+# Configure TCP instance.
+#
+SetVar R_Configure_AccessPoint_Cnnt1.UseDefaultAddress      FALSE
+SetIpv4Address R_Configure_AccessPoint_Cnnt1.StationAddress $DEF_EUT_IP_ADDR
+SetIpv4Address R_Configure_AccessPoint_Cnnt1.SubnetMask     $DEF_EUT_MASK
+SetVar R_Configure_AccessPoint_Cnnt1.StationPort            $DEF_EUT_PRT
+SetIpv4Address R_Configure_AccessPoint_Cnnt1.RemoteAddress  $DEF_ENTS_IP_ADDR
+SetVar R_Configure_AccessPoint_Cnnt1.RemotePort             $DEF_ENTS_PRT
+SetVar R_Configure_AccessPoint_Cnnt1.ActiveFlag             TRUE
+
+SetVar R_Configure_Tcp4ConfigData_Cnnt1.TypeOfService       0
+SetVar R_Configure_Tcp4ConfigData_Cnnt1.TimeToLive          128
+SetVar R_Configure_Tcp4ConfigData_Cnnt1.AccessPoint         @R_Configure_AccessPoint_Cnnt1
+SetVar R_Configure_Tcp4ConfigData_Cnnt1.ControlOption       0
+
+Tcp4->Configure {&@R_Configure_Tcp4ConfigData_Cnnt1, &@R_Status}
+GetAck
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "Tcp4.Configure - Configure Child 1."                          \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+#
+# Call Tcp4.Connect for an active TCP instance.
+#
+BS->CreateEvent "$EVT_NOTIFY_SIGNAL, $EFI_TPL_CALLBACK, 1, &@R_Context_Cnnt1,  \
+                 &@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+GetAck
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "BS.CreateEvent."                                              \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+SetVar R_Connect_ConnectionToken_Cnnt1.CompletionToken @R_Connect_CompletionToken_Cnnt1
+
+Tcp4->Connect {&@R_Connect_ConnectionToken_Cnnt1, &@R_Status}
+GetAck
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "Tcp4.Connect - Open an active connection."                    \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+#
+# Handles the three-way handshake.
+#
+ReceiveTcpPacket TCB_CNNT1 5
+
+if { ${TCB_CNNT1.received} == 1 } {
+  if { ${TCB_CNNT1.r_f_syn} != 1 } {
+    set assert fail
+    puts "EUT doesn't send out SYN segment correctly."
+    RecordAssertion $assert $GenericAssertionGuid                              \
+                    "EUT doesn't send out SYN segment correctly."
+
+    CleanUpEutEnvironmentBegin
+    BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+    GetAck
+    CleanUpEutEnvironmentEnd
+    return
+  } else {
+    if { ${TCB_CNNT1.r_seq} != 0 } {
+      set assert fail
+      puts "The sequence number in EUT's SYN segment is not correct."
+      RecordAssertion $assert $GenericAssertionGuid                            \
+                      "The sequence number in EUT's SYN segment is not correct."
+
+      CleanUpEutEnvironmentBegin
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+      GetAck
+      CleanUpEutEnvironmentEnd
+      return
+    }
+  }
+} else {
+  set assert fail
+  puts "EUT doesn't send out any segment."
+  RecordAssertion $assert $GenericAssertionGuid                                \
+                  "EUT doesn't send out any segment."
+
+  CleanUpEutEnvironmentBegin
+  BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+  GetAck
+  CleanUpEutEnvironmentEnd
+  return
+}
+
+set L_TcpFlag [expr $SYN | $ACK]
+UpdateTcpSendBuffer TCB_CNNT1 -c $L_TcpFlag
+SendTcpPacket TCB_CNNT1
+
+ReceiveTcpPacket TCB_CNNT1 5
+
+if { ${TCB_CNNT1.received} == 1 } {
+  if { ${TCB_CNNT1.r_f_ack} != 1 } {
+    set assert fail
+    RecordAssertion $assert $GenericAssertionGuid                              \
+                    "EUT doesn't send out ACK segment correctly."
+
+    CleanUpEutEnvironmentBegin
+    BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+    GetAck
+    CleanUpEutEnvironmentEnd
+    return
+  } else {
+    if { ${TCB_CNNT1.r_ack} != 1 } {
+      set assert fail
+      puts "The Acknowledgment Number in EUT's ACK segment is not correct."
+      RecordAssertion $assert $GenericAssertionGuid                            \
+                      "The Acknowledgment Number in EUT's ACK segment is not correct."
+
+      CleanUpEutEnvironmentBegin
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+      GetAck
+      CleanUpEutEnvironmentEnd
+      return
+    }
+  }
+} else {
+  set assert fail
+  RecordAssertion $assert $GenericAssertionGuid                                \
+                  "EUT doesn't send out any segment."
+
+  CleanUpEutEnvironmentBegin
+  BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+  GetAck
+  CleanUpEutEnvironmentEnd
+  return
+}
+
+#
+# Check the Token.Status to verify the connection has been established.
+#
+while {1 > 0} {
+  Stall 1
+  GetVar R_Connect_ConnectionToken_Cnnt1.CompletionToken.Status
+ 
+  if { ${R_Connect_ConnectionToken_Cnnt1.CompletionToken.Status} != $EFI_INCOMPATIBLE_VERSION} {
+    if { ${R_Connect_ConnectionToken_Cnnt1.CompletionToken.Status} != $EFI_SUCCESS} {
+      set assert fail
+      puts "Three-way handshake for active connection failed."
+      RecordAssertion $assert $GenericAssertionGuid                            \
+                      "Three-way handshake for active connection failed."      \
+                      "ReturnStatus - ${R_Connect_ConnectionToken_Cnnt1.CompletionToken.Status},\
+                       ExpectedStatus - $EFI_SUCCESS"
+
+      CleanUpEutEnvironmentBegin
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+      GetAck
+      CleanUpEutEnvironmentEnd
+      return
+    } else {
+      break
+    }
+  }
+}
+
+
+#
+# After Connection1 established, begin the second connection
+#
+Tcp4ServiceBinding->CreateChild "&@R_Tcp4Handle_Cnnt2, &@R_Status"
+GetAck
+SetVar     [subst $ENTS_CUR_CHILD]  @R_Tcp4Handle_Cnnt2
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "Tcp4SBP.CreateChild - Create Child 2."                        \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+#
+# Configure TCP instance.
+#
+SetVar R_Configure_AccessPoint_Cnnt2.UseDefaultAddress      FALSE
+SetIpv4Address R_Configure_AccessPoint_Cnnt2.StationAddress $DEF_EUT_IP_ADDR
+SetIpv4Address R_Configure_AccessPoint_Cnnt2.SubnetMask     $DEF_EUT_MASK
+SetVar R_Configure_AccessPoint_Cnnt2.StationPort            $R_CNNT2_PRT
+SetIpv4Address R_Configure_AccessPoint_Cnnt2.RemoteAddress  $DEF_ENTS_IP_ADDR
+SetVar R_Configure_AccessPoint_Cnnt2.RemotePort             $DEF_ENTS_PRT
+SetVar R_Configure_AccessPoint_Cnnt2.ActiveFlag             TRUE
+
+SetVar R_Configure_Tcp4ConfigData_Cnnt2.TypeOfService       0
+SetVar R_Configure_Tcp4ConfigData_Cnnt2.TimeToLive          128
+SetVar R_Configure_Tcp4ConfigData_Cnnt2.AccessPoint         @R_Configure_AccessPoint_Cnnt2
+SetVar R_Configure_Tcp4ConfigData_Cnnt2.ControlOption       0
+
+Tcp4->Configure {&@R_Configure_Tcp4ConfigData_Cnnt2, &@R_Status}
+GetAck
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "Tcp4.Configure - Configure Child 2."                          \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+#
+# Call Tcp4.Connect for an active TCP instance.
+#
+BS->CreateEvent "$EVT_NOTIFY_SIGNAL, $EFI_TPL_CALLBACK, 1, &@R_Context_Cnnt2,  \
+                 &@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+GetAck
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $GenericAssertionGuid                                  \
+                "BS.CreateEvent."                                              \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+SetVar R_Connect_ConnectionToken_Cnnt2.CompletionToken @R_Connect_CompletionToken_Cnnt2
+SetVar R_Connect_ConnectionToken_Cnnt2.CompletionToken.Status $EFI_INCOMPATIBLE_VERSION
+
+Tcp4->Connect {&@R_Connect_ConnectionToken_Cnnt2, &@R_Status}
+GetAck
+set assert [VerifyReturnStatus R_Status $EFI_SUCCESS]
+RecordAssertion $assert $Tcp4CnntOpeningFunc1AssertionGuid007                  \
+                "Tcp4.Connect - Open an active connection."                    \
+                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_SUCCESS"
+
+#
+# Handles the three-way handshake.
+#
+ReceiveTcpPacket TCB_CNNT2 5
+
+if { ${TCB_CNNT2.received} == 1 } {
+  if { ${TCB_CNNT2.r_f_syn} != 1 } {
+    set assert fail
+    puts "EUT doesn't send out SYN segment correctly."
+    RecordAssertion $assert $GenericAssertionGuid                              \
+                    "EUT doesn't send out SYN segment correctly."
+
+    CleanUpEutEnvironmentBegin
+    BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+    GetAck
+    BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+    GetAck
+    CleanUpEutEnvironmentEnd
+    return
+  } else {
+    if { ${TCB_CNNT2.r_seq} != 0 } {
+      set assert fail
+      puts "The sequence number in EUT's SYN segment is not correct."
+      RecordAssertion $assert $GenericAssertionGuid                            \
+                      "The sequence number in EUT's SYN segment is not correct."
+
+      CleanUpEutEnvironmentBegin
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+      GetAck
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+      GetAck
+      CleanUpEutEnvironmentEnd
+      return
+    }
+  }
+} else {
+  set assert fail
+  puts "EUT doesn't send out any segment."
+  RecordAssertion $assert $GenericAssertionGuid                                \
+                  "EUT doesn't send out any segment."
+
+  CleanUpEutEnvironmentBegin
+  BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+  GetAck
+  BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+  GetAck
+  CleanUpEutEnvironmentEnd
+  return
+}
+
+UpdateTcpSendBuffer TCB_CNNT2 -c $SYN
+SendTcpPacket TCB_CNNT2
+
+ReceiveTcpPacket TCB_CNNT2 5
+
+if { ${TCB_CNNT2.received} == 1 } {
+  if { ${TCB_CNNT2.r_f_syn} != 1 || ${TCB_CNNT2.r_f_ack} != 1 } {
+    set assert fail
+    RecordAssertion $assert $GenericAssertionGuid                              \
+                    "EUT doesn't send out SYN/ACK segment correctly."
+
+    CleanUpEutEnvironmentBegin
+    BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+    GetAck
+    BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+    GetAck
+    CleanUpEutEnvironmentEnd
+    return
+  } else {
+    if { ${TCB_CNNT2.r_seq} != 0 || ${TCB_CNNT2.r_ack} != 1} {
+      set assert fail
+      puts "The sequence number or acknowledge number in EUT's SYN/ACK segment \
+            is not correct."
+      RecordAssertion $assert $GenericAssertionGuid                            \
+                      "The sequence number or acknowledge number in EUT's SYN/ACK\
+                       segment is not correct."
+
+      CleanUpEutEnvironmentBegin
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+      GetAck
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+      GetAck
+      CleanUpEutEnvironmentEnd
+      return
+    }
+  }
+} else {
+  set assert fail
+  RecordAssertion $assert $GenericAssertionGuid                                \
+                  "EUT doesn't send out any segment."
+
+  CleanUpEutEnvironmentBegin
+  BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+  GetAck
+  BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+  GetAck
+  CleanUpEutEnvironmentEnd
+  return
+}
+
+set L_AckNum [expr ${TCB_CNNT2.r_isn} + 1]
+UpdateTcpSendBuffer TCB_CNNT2 -a $L_AckNum -c $ACK
+SendTcpPacket TCB_CNNT2
+
+#
+# Check the Token.Status to verify the connection has been established.
+#
+while {1 > 0} {
+  Stall 1
+  GetVar R_Connect_ConnectionToken_Cnnt2.CompletionToken.Status
+ 
+  if { ${R_Connect_ConnectionToken_Cnnt2.CompletionToken.Status} != $EFI_INCOMPATIBLE_VERSION} {
+    if { ${R_Connect_ConnectionToken_Cnnt2.CompletionToken.Status} != $EFI_SUCCESS} {
+      set assert fail
+      puts "Three-way handshake for active connection failed."
+      RecordAssertion $assert $GenericAssertionGuid                            \
+                      "Three-way handshake for active connection failed."      \
+                      "ReturnStatus - ${R_Connect_ConnectionToken_Cnnt2.CompletionToken.Status},\
+                       ExpectedStatus - $EFI_SUCCESS"
+
+      CleanUpEutEnvironmentBegin
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+      GetAck
+      BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+      GetAck
+      CleanUpEutEnvironmentEnd
+      return
+    } else {
+      break
+    }
+  }
+}
+
+#
+# Clean up the environment on EUT side.
+#
+CleanUpEutEnvironmentBegin
+BS->CloseEvent "@R_Connect_CompletionToken_Cnnt1.Event, &@R_Status"
+GetAck
+BS->CloseEvent "@R_Connect_CompletionToken_Cnnt2.Event, &@R_Status"
+GetAck
+CleanUpEutEnvironmentEnd
