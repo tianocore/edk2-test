@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
 # THE POSSIBILITY OF SUCH DAMAGES.
 #
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2006 - 2015 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all
 # matters included within this Test Suite, to which United
 # EFI, Inc. makes no claim of right.
 #
-# Copyright (c) 2011, 2012 ARM Ltd. All rights reserved.<BR>
+# Copyright (c) 2011, 2015 ARM Ltd. All rights reserved.<BR>
 #
 
 SctpackageDependencyList=(EdkCompatibilityPkg SctPkg BaseTools)
@@ -234,9 +234,20 @@ build -p SctPkg/UEFI/UEFI_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_B
 status=$?
 if test $status -ne 0
 then
-echo Could not build SCT package
+echo Could not build the UEFI SCT package
         exit -1
 fi
+
+build -p SctPkg/UEFI/IHV_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
+
+# Check if there is any error
+status=$?
+if test $status -ne 0
+then
+echo Could not build the IHV SCT package
+        exit -1
+fi
+
 
 #
 # If the argument is clean, then don't have to generate Sct binary.
@@ -256,15 +267,29 @@ done
 cd Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}
 
 #
-# Run a script to generate Sct binary for ARM
+# Run a script to generate Sct binary for the target architecture
 #
-../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH InstallSctArm.efi
+../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH InstallSct$SCT_TARGET_ARCH.efi
 
 status=$?
 if test $status -ne 0
 then
-echo Could not generate SCT binary
+echo Could not generate UEFI SCT binary
      exit -1
 else
-echo The SCT binary "SctPackageARM" is located at "$EFI_SOURCE/Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}"
+echo The SCT binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}"
+fi
+
+
+cd Build/IvhSct/${SCT_BUILD}_${TARGET_TOOLS}
+
+../../../SctPkg/CommonGenFramework.sh hv_sct $SCT_TARGET_ARCH InstallSct$SCT_TARGET_ARCH.efi
+
+status=$?
+if test $status -ne 0
+then
+echo Could not generate IHV SCT binary
+     exit -1
+else
+echo The SCT binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}"
 fi
