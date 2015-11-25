@@ -61,18 +61,20 @@ Abstract:
 //
 // Global definitions
 //
-#if (EFI_SPECIFICATION_VERSION == 0x0001000A)
+#if (EFI_SPECIFICATION_VERSION == EFI_1_10_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"EFI Self Certification Test"
-#elif (EFI_SPECIFICATION_VERSION == 0x00020000)
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_00_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.0 Self Certification Test"
-#elif (EFI_SPECIFICATION_VERSION == 0x0002000A)
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_10_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.1 Self Certification Test"
-#elif (EFI_SPECIFICATION_VERSION == 0x0002001E)
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_30_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.3 Self Certification Test"
-#elif (EFI_SPECIFICATION_VERSION == 0x0002001F)
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_31_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.3.1C Self Certification Test"
-#elif (EFI_SPECIFICATION_VERSION == 0x00020028)
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_40_SYTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.4B Self Certification Test(SCT2)"
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_50_SYSTEM_TABLE_REVISION)
+#define EFI_SCT_NAME                        L"UEFI2.5 Self Certification Test(SCT2)"
 #endif
 
 #define EFI_SCT_SHORT_NAME                  L"SCT"
