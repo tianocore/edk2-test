@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -71,7 +71,7 @@ Abstract:
 //
 
 #define EFI_TSL_INIT_INTERFACE_GUID       \
-  { 0x625c0828, 0xa47d, 0x493d, 0xb7, 0x97, 0x97, 0x85, 0x55, 0x72, 0xdb, 0xc8 }
+  { 0x625c0828, 0xa47d, 0x493d, { 0xb7, 0x97, 0x97, 0x85, 0x55, 0x72, 0xdb, 0xc8 }}
 
 #define EFI_TSL_INIT_INTERFACE_REVISION   0x00010000
 

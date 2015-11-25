@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -340,7 +340,7 @@ Returns:
 // summarized in the test report by the EFI SCT Suite.
 //
 #define TEST_GENERIC_FAILURE_GUID         \
-  { 0x6a8caa83, 0xb9da, 0x46c7, 0x98, 0xf6, 0xd4, 0x96, 0x9d, 0xab, 0xda, 0xa0 }
+  { 0x6a8caa83, 0xb9da, 0x46c7, { 0x98, 0xf6, 0xd4, 0x96, 0x9d, 0xab, 0xda, 0xa0 }}
 
 extern EFI_GUID gTestGenericFailureGuid;
 
@@ -350,7 +350,7 @@ extern EFI_GUID gTestGenericFailureGuid;
 // and then use a tool to do the replacement.
 //
 #define TEST_DUMMY_GUID                   \
-  { 0xece4bdd5, 0x8177, 0x448b, 0x82, 0x03, 0x2d, 0x11, 0x0c, 0x1c, 0x20, 0xb8 }
+  { 0xece4bdd5, 0x8177, 0x448b, { 0x82, 0x03, 0x2d, 0x11, 0x0c, 0x1c, 0x20, 0xb8 }}
 
 extern EFI_GUID gTestDummyGuid;
 

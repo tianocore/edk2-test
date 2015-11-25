@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -95,7 +95,7 @@ Abstract:
 
 EFI_GUID mEfiUnknownDeviceGuid = UNKNOWN_DEVICE_GUID;
 
-STATIC EFI_GUID mNullGuid = { 0,0,0,0,0,0,0,0,0,0,0 };
+STATIC EFI_GUID mNullGuid = { 0,0,0, { 0,0,0,0,0,0,0,0 }};
 
 STATIC EFI_GUID mPcAnsiProtocol    = DEVICE_PATH_MESSAGING_PC_ANSI;
 STATIC EFI_GUID mVt100Protocol     = DEVICE_PATH_MESSAGING_VT_100;
@@ -107,19 +107,19 @@ STATIC EFI_GUID mVt100Protocol     = DEVICE_PATH_MESSAGING_VT_100;
 //
 
 #define SHELL_INTERFACE_PROTOCOL \
-  { 0x47c7b223, 0xc42a, 0x11d2, 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }
+  { 0x47c7b223, 0xc42a, 0x11d2, { 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }}
 
 #define ENVIRONMENT_VARIABLE_ID  \
-  { 0x47c7b224, 0xc42a, 0x11d2, 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }
+  { 0x47c7b224, 0xc42a, 0x11d2, { 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }}
 
 #define DEVICE_PATH_MAPPING_ID  \
-  { 0x47c7b225, 0xc42a, 0x11d2, 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }
+  { 0x47c7b225, 0xc42a, 0x11d2, { 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }}
 
 #define PROTOCOL_ID_ID  \
-  { 0x47c7b226, 0xc42a, 0x11d2, 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }
+  { 0x47c7b226, 0xc42a, 0x11d2, { 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }}
 
 #define ALIAS_ID  \
-  { 0x47c7b227, 0xc42a, 0x11d2, 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }
+  { 0x47c7b227, 0xc42a, 0x11d2, { 0x8e, 0x57, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b }}
 
 static EFI_GUID ShellInterfaceProtocol = SHELL_INTERFACE_PROTOCOL;
 static EFI_GUID SEnvId                 = ENVIRONMENT_VARIABLE_ID;

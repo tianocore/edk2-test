@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -92,7 +92,7 @@ EFI_UNICODE_COLLATION_PROTOCOL  *EntsUnicodeInterface = &EntsLibStubUnicodeInter
 // EFI IDs
 //
 EFI_GUID                        tEfiGlobalVariable  = EFI_GLOBAL_VARIABLE_GUID;
-EFI_GUID                        tNullGuid           = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+EFI_GUID                        tNullGuid           = { 0, 0, 0, { 0, 0, 0, 0, 0, 0, 0, 0 }};
 
 //
 // Protocol IDs

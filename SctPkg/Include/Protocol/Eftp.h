@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -62,12 +62,12 @@ Abstract:
 
 #define EFI_EFTP_SERVICE_BINDING_PROTOCOL_GUID \
   { \
-    0x67739d1a, 0x065c, 0x4b90, 0x90, 0xfb, 0xca, 0x4a, 0xab, 0x4c, 0x46, 0xc1 \
+    0x67739d1a, 0x065c, 0x4b90, { 0x90, 0xfb, 0xca, 0x4a, 0xab, 0x4c, 0x46, 0xc1 } \
   }
 
 #define EFI_EFTP_PROTOCOL_GUID \
   { \
-    0x53228ef0, 0x04eb, 0x46bd, 0x99, 0xe2, 0x7d, 0x09, 0x4e, 0x8f, 0x8e, 0x5d \
+    0x53228ef0, 0x04eb, 0x46bd, { 0x99, 0xe2, 0x7d, 0x09, 0x4e, 0x8f, 0x8e, 0x5d } \
   }
 
 typedef struct _EFI_EFTP_PROTOCOL EFI_EFTP_PROTOCOL;

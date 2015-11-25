@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -123,7 +123,7 @@ STATIC EFI_MANAGED_NETWORK_CONFIG_DATA     EntsMnpConfigDataTemplate = {
 // CompareGuid is added for IPsec only.
 
 #define EFI_IPSEC_CONFIG_PROTOCOL_GUID \
-  {0xce5e5929, 0xc7a3, 0x4602, 0xad, 0x9e, 0xc9, 0xda, 0xf9, 0x4e, 0xbf, 0xcf}
+  {0xce5e5929, 0xc7a3, 0x4602, { 0xad, 0x9e, 0xc9, 0xda, 0xf9, 0x4e, 0xbf, 0xcf }}
 
 EFI_GUID EfiIPsecConfigProtocolGuid = EFI_IPSEC_CONFIG_PROTOCOL_GUID;
 
