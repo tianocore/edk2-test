@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++         
@@ -67,8 +67,8 @@ Abstract:
 #define EFI_ACPI_TABLE_PROTOCOL_GUID \
   { 0xffe06bdd, 0x6107, 0x46a6, 0x7b, 0xb2, 0x5a, 0x9c, 0x7e, 0xc5, 0x27, 0x5c }
 
-typedef struct _EFI_ACPI_TABLE_PROTOCOL EFI_ACPI_TABLE_PROTOCOL;;
-
+typedef struct _EFI_ACPI_TABLE_PROTOCOL EFI_ACPI_TABLE_PROTOCOL;
+/*
 typedef struct {
   UINT32  Signature;
   UINT32  Length;
@@ -80,7 +80,7 @@ typedef struct {
   UINT32  CreatorId;
   UINT32  CreatorRevision;
 } EFI_ACPI_DESCRIPTION_HEADER;
-
+*/
 typedef
 EFI_STATUS
 (EFIAPI *EFI_ACPI_TABLE_INSTALL_ACPI_TABLE) (
