@@ -35,12 +35,13 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2012 Unified EFI, Inc. All
+  Copyright 2006 - 2015 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
+  Copyright (c) 2015, Intel Corporation. All rights reserved.
 
 --*/
 
@@ -55,12 +56,12 @@ typedef struct {
   UINT8                           LegacyDriveLetter;
 } UNKNOWN_DEVICE_VENDOR_DEVICE_PATH;
 
-STATIC CONST EFI_DEVICE_PATH_PROTOCOL mEndInstanceDevicePath[] = {
-    END_DEVICE_PATH_TYPE, END_INSTANCE_DEVICE_PATH_SUBTYPE, END_DEVICE_PATH_LENGTH, 0
+STATIC CONST EFI_DEVICE_PATH_PROTOCOL mEndInstanceDevicePath = {
+    END_DEVICE_PATH_TYPE, END_INSTANCE_DEVICE_PATH_SUBTYPE, { END_DEVICE_PATH_LENGTH, 0 }
 };
 
-STATIC CONST EFI_DEVICE_PATH_PROTOCOL mEndDevicePath[] = {
-    END_DEVICE_PATH_TYPE, END_ENTIRE_DEVICE_PATH_SUBTYPE, END_DEVICE_PATH_LENGTH, 0
+STATIC CONST EFI_DEVICE_PATH_PROTOCOL mEndDevicePath = {
+    END_DEVICE_PATH_TYPE, END_ENTIRE_DEVICE_PATH_SUBTYPE, { END_DEVICE_PATH_LENGTH, 0 }
 };
 
 STATIC
@@ -401,7 +402,7 @@ SctAppendDevicePath (
 
       SctCopyMem (
         DstPos,
-        (VOID *) mEndInstanceDevicePath,
+        &mEndInstanceDevicePath,
         sizeof(EFI_DEVICE_PATH_PROTOCOL)
         );
       DstPos += sizeof(EFI_DEVICE_PATH_PROTOCOL);
@@ -413,7 +414,7 @@ SctAppendDevicePath (
     // Change last end marker
     //
     DstPos -= sizeof(EFI_DEVICE_PATH_PROTOCOL);
-    SctCopyMem (DstPos, mEndDevicePath, sizeof(EFI_DEVICE_PATH_PROTOCOL));
+    SctCopyMem (DstPos, &mEndDevicePath, sizeof(EFI_DEVICE_PATH_PROTOCOL));
   }
 
   return Dst;
@@ -1162,37 +1163,37 @@ struct {
   UINT8   SubType;
   VOID    (*Function)(SCT_POOL_PRINT *, VOID *);
 } mDevPathTable[] = {
-  HARDWARE_DEVICE_PATH,   HW_PCI_DP,                        _DevPathPci,
-  HARDWARE_DEVICE_PATH,   HW_PCCARD_DP,                     _DevPathPccard,
-  HARDWARE_DEVICE_PATH,   HW_MEMMAP_DP,                     _DevPathMemMap,
-  HARDWARE_DEVICE_PATH,   HW_VENDOR_DP,                     _DevPathVendor,
-  HARDWARE_DEVICE_PATH,   HW_CONTROLLER_DP,                 _DevPathController,
-  ACPI_DEVICE_PATH,       ACPI_DP,                          _DevPathAcpi,
-  ACPI_DEVICE_PATH,       ACPI_EXTENDED_DP,                 _DevPathExtendedAcpi,
-  MESSAGING_DEVICE_PATH,  MSG_ATAPI_DP,                     _DevPathAtapi,
-  MESSAGING_DEVICE_PATH,  MSG_SCSI_DP,                      _DevPathScsi,
-  MESSAGING_DEVICE_PATH,  MSG_FIBRECHANNEL_DP,              _DevPathFibre,
-  MESSAGING_DEVICE_PATH,  MSG_1394_DP,                      _DevPath1394,
-  MESSAGING_DEVICE_PATH,  MSG_USB_DP,                       _DevPathUsb,
-  MESSAGING_DEVICE_PATH,  MSG_USB_CLASS_DP,                 _DevPathUsbClass,
-  MESSAGING_DEVICE_PATH,  MSG_I2O_DP,                       _DevPathI2O,
-  MESSAGING_DEVICE_PATH,  MSG_MAC_ADDR_DP,                  _DevPathMacAddr,
-  MESSAGING_DEVICE_PATH,  MSG_IPv4_DP,                      _DevPathIPv4,
-  MESSAGING_DEVICE_PATH,  MSG_IPv6_DP,                      _DevPathIPv6,
-  MESSAGING_DEVICE_PATH,  MSG_INFINIBAND_DP,                _DevPathInfiniBand,
-  MESSAGING_DEVICE_PATH,  MSG_UART_DP,                      _DevPathUart,
-  MESSAGING_DEVICE_PATH,  MSG_VENDOR_DP,                    _DevPathVendor,
-  MEDIA_DEVICE_PATH,      MEDIA_HARDDRIVE_DP,               _DevPathHardDrive,
-  MEDIA_DEVICE_PATH,      MEDIA_CDROM_DP,                   _DevPathCDROM,
-  MEDIA_DEVICE_PATH,      MEDIA_VENDOR_DP,                  _DevPathVendor,
-  MEDIA_DEVICE_PATH,      MEDIA_FILEPATH_DP,                _DevPathFilePath,
-  MEDIA_DEVICE_PATH,      MEDIA_PROTOCOL_DP,                _DevPathMediaProtocol,
+  { HARDWARE_DEVICE_PATH,   HW_PCI_DP,                        _DevPathPci },
+  { HARDWARE_DEVICE_PATH,   HW_PCCARD_DP,                     _DevPathPccard },
+  { HARDWARE_DEVICE_PATH,   HW_MEMMAP_DP,                     _DevPathMemMap },
+  { HARDWARE_DEVICE_PATH,   HW_VENDOR_DP,                     _DevPathVendor },
+  { HARDWARE_DEVICE_PATH,   HW_CONTROLLER_DP,                 _DevPathController },
+  { ACPI_DEVICE_PATH,       ACPI_DP,                          _DevPathAcpi },
+  { ACPI_DEVICE_PATH,       ACPI_EXTENDED_DP,                 _DevPathExtendedAcpi },
+  { MESSAGING_DEVICE_PATH,  MSG_ATAPI_DP,                     _DevPathAtapi },
+  { MESSAGING_DEVICE_PATH,  MSG_SCSI_DP,                      _DevPathScsi },
+  { MESSAGING_DEVICE_PATH,  MSG_FIBRECHANNEL_DP,              _DevPathFibre },
+  { MESSAGING_DEVICE_PATH,  MSG_1394_DP,                      _DevPath1394 },
+  { MESSAGING_DEVICE_PATH,  MSG_USB_DP,                       _DevPathUsb },
+  { MESSAGING_DEVICE_PATH,  MSG_USB_CLASS_DP,                 _DevPathUsbClass },
+  { MESSAGING_DEVICE_PATH,  MSG_I2O_DP,                       _DevPathI2O },
+  { MESSAGING_DEVICE_PATH,  MSG_MAC_ADDR_DP,                  _DevPathMacAddr },
+  { MESSAGING_DEVICE_PATH,  MSG_IPv4_DP,                      _DevPathIPv4 },
+  { MESSAGING_DEVICE_PATH,  MSG_IPv6_DP,                      _DevPathIPv6 },
+  { MESSAGING_DEVICE_PATH,  MSG_INFINIBAND_DP,                _DevPathInfiniBand },
+  { MESSAGING_DEVICE_PATH,  MSG_UART_DP,                      _DevPathUart },
+  { MESSAGING_DEVICE_PATH,  MSG_VENDOR_DP,                    _DevPathVendor },
+  { MEDIA_DEVICE_PATH,      MEDIA_HARDDRIVE_DP,               _DevPathHardDrive },
+  { MEDIA_DEVICE_PATH,      MEDIA_CDROM_DP,                   _DevPathCDROM },
+  { MEDIA_DEVICE_PATH,      MEDIA_VENDOR_DP,                  _DevPathVendor },
+  { MEDIA_DEVICE_PATH,      MEDIA_FILEPATH_DP,                _DevPathFilePath },
+  { MEDIA_DEVICE_PATH,      MEDIA_PROTOCOL_DP,                _DevPathMediaProtocol },
 #if (EFI_SPECIFICATION_VERSION < 0x00020000)
-  MEDIA_DEVICE_PATH,      MEDIA_FV_FILEPATH_DP,             _DevPathFvFilePath,
+  { MEDIA_DEVICE_PATH,      MEDIA_FV_FILEPATH_DP,             _DevPathFvFilePath },
 #endif
-  BBS_DEVICE_PATH,        BBS_BBS_DP,                       _DevPathBssBss,
-  END_DEVICE_PATH_TYPE,   END_INSTANCE_DEVICE_PATH_SUBTYPE, _DevPathEndInstance,
-  0,                      0,                          NULL
+  { BBS_DEVICE_PATH,        BBS_BBS_DP,                       _DevPathBssBss },
+  { END_DEVICE_PATH_TYPE,   END_INSTANCE_DEVICE_PATH_SUBTYPE, _DevPathEndInstance },
+  { 0,                      0,                          NULL }
 };
 
 /*++

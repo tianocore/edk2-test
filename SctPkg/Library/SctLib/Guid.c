@@ -131,44 +131,44 @@ struct {
   EFI_GUID        *Guid;
   CHAR16          *GuidName;
 } KnownGuids[] = {
-  &mNullGuid,                  L"G0",
-  &gEfiGlobalVariableGuid,         L"Efi",
+  { &mNullGuid,                  L"G0" },
+  { &gEfiGlobalVariableGuid,         L"Efi" },
 
-  &gEfiVariableStoreProtocolGuid,     L"varstore",
-  &gEfiDevicePathProtocolGuid,        L"dpath",
-  &gEfiLoadedImageProtocolGuid,       L"image",
-  &gEfiSimpleTextInProtocolGuid,      L"txtin",
-  &gEfiSimpleTextOutProtocolGuid,     L"txtout",
-  &gEfiBlockIoProtocolGuid,           L"blkio",
-  &gEfiDiskIoProtocolGuid,            L"diskio",
-  &gEfiSimpleFileSystemProtocolGuid,  L"fs",
-  &gEfiLoadFileProtocolGuid,          L"load",
-  &gEfiDeviceIoProtocolGuid,          L"DevIo",
+  { &gEfiVariableStoreProtocolGuid,     L"varstore" },
+  { &gEfiDevicePathProtocolGuid,        L"dpath" },
+  { &gEfiLoadedImageProtocolGuid,       L"image" },
+  { &gEfiSimpleTextInProtocolGuid,      L"txtin" },
+  { &gEfiSimpleTextOutProtocolGuid,     L"txtout" },
+  { &gEfiBlockIoProtocolGuid,           L"blkio" },
+  { &gEfiDiskIoProtocolGuid,            L"diskio" },
+  { &gEfiSimpleFileSystemProtocolGuid,  L"fs" },
+  { &gEfiLoadFileProtocolGuid,          L"load" },
+  { &gEfiDeviceIoProtocolGuid,          L"DevIo" },
 
-  &gEfiFileInfoGuid,                   L"GenFileInfo",
-  &gEfiFileSystemInfoGuid,            L"FileSysInfo",
+  { &gEfiFileInfoGuid,                   L"GenFileInfo" },
+  { &gEfiFileSystemInfoGuid,            L"FileSysInfo" },
 
-  &gEfiUnicodeCollationProtocolGuid,  L"UnicodeCollation",
-  &gEfiSerialIoProtocolGuid,          L"serialio",
-  &gEfiSimpleNetworkProtocolGuid,     L"net",
-  &gEfiNetworkInterfaceIdentifierProtocolGuid,    L"nii",
-  &gEfiPxeBaseCodeProtocolGuid,       L"pxebc",
-  &gEfiPxeBaseCodeCallbackProtocolGuid,       L"pxecb",
+  { &gEfiUnicodeCollationProtocolGuid,  L"UnicodeCollation" },
+  { &gEfiSerialIoProtocolGuid,          L"serialio" },
+  { &gEfiSimpleNetworkProtocolGuid,     L"net" },
+  { &gEfiNetworkInterfaceIdentifierProtocolGuid,    L"nii" },
+  { &gEfiPxeBaseCodeProtocolGuid,       L"pxebc" },
+  { &gEfiPxeBaseCodeCallbackProtocolGuid,       L"pxecb" },
 
-  &mPcAnsiProtocol,            L"PcAnsi",
-  &mVt100Protocol,             L"Vt100",
-  &mEfiUnknownDeviceGuid,             L"Unknown Device",
+  { &mPcAnsiProtocol,            L"PcAnsi" },
+  { &mVt100Protocol,             L"Vt100" },
+  { &mEfiUnknownDeviceGuid,             L"Unknown Device" },
 
-  &gEfiPartTypeSystemPartGuid,    L"ESP",
-  &gEfiPartTypeLegacyMbrGuid,          L"GPT MBR",
+  { &gEfiPartTypeSystemPartGuid,    L"ESP" },
+  { &gEfiPartTypeLegacyMbrGuid,          L"GPT MBR" },
 
-  &ShellInterfaceProtocol,    L"ShellInt",
-  &SEnvId,                    L"SEnv",
-  &SProtId,                   L"ShellProtId",
-  &SMapId,                    L"ShellDevPathMap",
-  &SAliasId,                  L"ShellAlias",
+  { &ShellInterfaceProtocol,    L"ShellInt" },
+  { &SEnvId,                    L"SEnv" },
+  { &SProtId,                   L"ShellProtId" },
+  { &SMapId,                    L"ShellDevPathMap" },
+  { &SAliasId,                  L"ShellAlias" },
 
-  NULL
+  { NULL, NULL }
 };
 
 SCT_LIST_ENTRY          GuidList;
