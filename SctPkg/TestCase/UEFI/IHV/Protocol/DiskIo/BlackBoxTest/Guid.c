@@ -56,7 +56,7 @@ Abstract:
 --*/
 
 #include "Efi.h"
-#include "guid.h"
+#include "Guid.h"
 
 
 EFI_GUID gDiskIoCombinationTestAssertionGuid001 = EFI_TEST_DISKIOCOMBINATIONTEST_ASSERTION_001_GUID;
