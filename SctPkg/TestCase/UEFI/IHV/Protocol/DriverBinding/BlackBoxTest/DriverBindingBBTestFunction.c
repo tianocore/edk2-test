@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -57,7 +57,7 @@ Abstract:
 
 #include "SctLib.h"
 #include "DriverBindingBBTest.h"
-#include "..\..\..\..\..\..\TestInfrastructure\SCT\Drivers\StandardTest\StandardTest.h"
+#include "../../../../../../TestInfrastructure/SCT/Drivers/StandardTest/StandardTest.h"
 
 CHAR16 *DashLine = L"------------------------------------------------------------\r\n";
 #define IS_LEAP(y) (((((y) % 4) == 0) && (((y) % 100) != 0)) || (((y) % 400) == 0))
