@@ -35,19 +35,20 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Byosoft Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010, Byosoft Corporation. All rights reserved.
+  Copyright (c) 2015, Intel Corporation. All rights reserved.
    
 --*/
 /*++
 
 Module Name:
 
-  guid.c
+  Guid.c
 
 Abstract:
 
@@ -56,7 +57,7 @@ Abstract:
 --*/
 
 #include "Efi.h"
-#include "guid.h"
+#include "Guid.h"
 
 
 EFI_GUID gAbsolutePointerBBTestConformanceAssertionGuid001 = EFI_TEST_ABSOLUTEPOINTERBBTESTCONFORMANCE_ASSERTION_001_GUID;
