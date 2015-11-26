@@ -35,13 +35,13 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2006 - 2015 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2011, 2012, ARM Ltd. All rights reserved.<BR>  
-#
+# Copyright (c) 2011, 2012, ARM Ltd. All rights reserved.
+# Copyright (c) 2015, Intel Corporation. All rights reserved.
 #
 #/*++
 #
@@ -58,7 +58,7 @@
 
 BASE_NAME=Ebc_EbcDriver
 SOURCE_DIR=$(WORKSPACE)/SctPkg/TestCase/UEFI/IHV/Protocol/Ebc/BlackBoxTest/Dependency/EbcDriverBin
-GENBIN=$(EDK_TOOLS_PATH)/Bin/Win32/GenBin
+GENBIN=GenBin
 DEPENDECY=$(SOURCE_DIR)/EbcDriver.ini
 UNAME = $(shell uname)
 
