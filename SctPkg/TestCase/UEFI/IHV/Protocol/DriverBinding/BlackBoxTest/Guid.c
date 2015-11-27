@@ -35,19 +35,19 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
 
  Module Name:
 
-     guid.c
+     Guid.c
 
  Abstract:
 
@@ -56,7 +56,7 @@
  --*/
 
 #include "Efi.h"
-#include "guid.h"
+#include "Guid.h"
 
 
 EFI_GUID gDriverBindingBBTestFunctionAssertionGuid001 = EFI_TEST_DRIVERBINDINGBBTESTFUNCTION_ASSERTION_001_GUID;

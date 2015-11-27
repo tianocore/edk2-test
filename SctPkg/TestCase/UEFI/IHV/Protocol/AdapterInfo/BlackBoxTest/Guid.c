@@ -35,58 +35,67 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
 
-Module Name:
+ Module Name:
 
-  guid.h
+   Guid.c
 
-Abstract:
+ Abstract:
 
-  GUIDs auto-generated for EFI test assertion.
+   GUIDs auto-generated for EFI test assertion.
 
 --*/
+#include "Efi.h"
+#include "Guid.h"
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid001 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_001_GUID;
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid002 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_002_GUID;
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid003 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_003_GUID;
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid004 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_004_GUID;
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid005 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_005_GUID;
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid006 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_006_GUID;
+
+EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid007 = EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_007_GUID;
 
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_001_GUID \
-{ 0xe6351da7, 0x8e29, 0x451b, 0xb1, 0x16, 0xda, 0x93, 0x29, 0x97, 0x0f, 0x17 }
+EFI_GUID gAdapterInfoBBTestFunctionAssertionGuid001 = EFI_TEST_ADAPTER_INFO_BBTESTFUNCTION_ASSERTION_001_GUID;
 
-extern EFI_GUID gConformanceTestAssertionGuid001;
+EFI_GUID gAdapterInfoBBTestFunctionAssertionGuid002 = EFI_TEST_ADAPTER_INFO_BBTESTFUNCTION_ASSERTION_002_GUID;
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_003_GUID \
-{ 0xf98940fb, 0x1ae6, 0x42a8, 0x95, 0xb3, 0xd3, 0x90, 0x84, 0x17, 0x2e, 0xb7 }
+EFI_GUID gAdapterInfoBBTestFunctionAssertionGuid003 = EFI_TEST_ADAPTER_INFO_BBTESTFUNCTION_ASSERTION_003_GUID;
 
-extern EFI_GUID gConformanceTestAssertionGuid003;
+EFI_GUID gAdapterInfoBBTestFunctionAssertionGuid004 = EFI_TEST_ADAPTER_INFO_BBTESTFUNCTION_ASSERTION_004_GUID;
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_004_GUID \
-{ 0xe348a9ee, 0x10fc, 0x4487, 0x8c, 0x1a, 0xfc, 0xa8, 0x11, 0xd7, 0xbb, 0x24 }
+EFI_GUID gAdapterInfoBBTestFunctionAssertionGuid005 = EFI_TEST_ADAPTER_INFO_BBTESTFUNCTION_ASSERTION_005_GUID;
 
-extern EFI_GUID gConformanceTestAssertionGuid004;
+EFI_GUID gAdapterInfoBBTestFunctionAssertionGuid006 = EFI_TEST_ADAPTER_INFO_BBTESTFUNCTION_ASSERTION_006_GUID;
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_005_GUID \
-{ 0x1f03e17d, 0x3f3c, 0x45ab, 0x93, 0xf5, 0xd3, 0xde, 0x3e, 0xc3, 0xe3, 0xcc }
 
-extern EFI_GUID gConformanceTestAssertionGuid005;
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_006_GUID \
-{ 0x7a73befe, 0xb271, 0x486f, 0x9b, 0x0e, 0x97, 0x3c, 0x5e, 0x80, 0x64, 0xd9 }
+EFI_GUID gEfiAdapterInfoMediaStateGuid              = EFI_ADAPTER_INFO_MEDIA_STATE_GUID;
 
-extern EFI_GUID gConformanceTestAssertionGuid006;
+EFI_GUID gEfiAdapterInfoSanMacAddressGuid           = EFI_ADAPTER_INFO_SAN_MAC_ADDRESS_GUID;
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_007_GUID \
-{ 0xaeab03a7, 0xfa56, 0x4e97, 0x8e, 0x1c, 0xc3, 0x35, 0xb4, 0xa4, 0xb4, 0x1c }
 
-extern EFI_GUID gConformanceTestAssertionGuid007;
+EFI_GUID gEfiAdapterInfoNetworkBootGuid             = EFI_ADAPTER_INFO_NETWORK_BOOT_GUID;
 
-#define EFI_TEST_CONFORMANCETEST_ASSERTION_008_GUID \
-{ 0xf8d9425c, 0x4bc8, 0x44a9, 0xa4, 0x33, 0x9a, 0x2c, 0x01, 0xec, 0x58, 0x27 }
 
-extern EFI_GUID gConformanceTestAssertionGuid008;
+EFI_GUID gEfiUnSupportedGuid                        = EFI_UNSUPPORTED_GUID;
+
+
+
+

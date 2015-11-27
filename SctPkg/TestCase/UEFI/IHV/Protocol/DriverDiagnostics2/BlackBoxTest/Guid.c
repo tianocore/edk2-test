@@ -35,19 +35,19 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Byosoft Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
 
 Module Name:
 
-  guid.h
+  Guid.c
 
 Abstract:
 
@@ -55,14 +55,28 @@ Abstract:
 
 --*/
 
+#include "Efi.h"
+#include "Guid.h"
 
-#define EFI_TEST_DRIVERSUPPORTEDEFIVERSIONTEST_ASSERTION_001_GUID \
-{ 0x9b72180d, 0x155c, 0x4b7a, 0xbb, 0xa8, 0x99, 0x83, 0x7b, 0x2f, 0x9d, 0xf8 }
 
-extern EFI_GUID gDriverSupportedEfiVersionTestAssertionGuid001;
+EFI_GUID gConformanceTestAssertionGuid001 = EFI_TEST_CONFORMANCETEST_ASSERTION_001_GUID;
 
-#define EFI_TEST_DRIVERSUPPORTEDEFIVERSIONTEST_ASSERTION_002_GUID \
-{ 0xac1951b1, 0x7243, 0x40a9, 0xa0, 0x1, 0x9d, 0x9d, 0x6e, 0x44, 0x8f, 0x5a }
+EFI_GUID gConformanceTestAssertionGuid002 = EFI_TEST_CONFORMANCETEST_ASSERTION_002_GUID;
 
-extern EFI_GUID gDriverSupportedEfiVersionTestAssertionGuid002;
+EFI_GUID gConformanceTestAssertionGuid003 = EFI_TEST_CONFORMANCETEST_ASSERTION_003_GUID;
 
+EFI_GUID gConformanceTestAssertionGuid004 = EFI_TEST_CONFORMANCETEST_ASSERTION_004_GUID;
+
+EFI_GUID gConformanceTestAssertionGuid005 = EFI_TEST_CONFORMANCETEST_ASSERTION_005_GUID;
+
+EFI_GUID gConformanceTestAssertionGuid006 = EFI_TEST_CONFORMANCETEST_ASSERTION_006_GUID;
+
+EFI_GUID gConformanceTestAssertionGuid007 = EFI_TEST_CONFORMANCETEST_ASSERTION_007_GUID;
+
+EFI_GUID gConformanceTestAssertionGuid008 = EFI_TEST_CONFORMANCETEST_ASSERTION_008_GUID;
+
+EFI_GUID gConformanceTestAssertionGuid009 = EFI_TEST_CONFORMANCETEST_ASSERTION_009_GUID;
+
+EFI_GUID gFunctionAssertionGuid001 = EFI_TEST_FUNCTIONTEST_ASSERTION_001_GUID;
+
+EFI_GUID gFunctionAssertionGuid002 = EFI_TEST_FUNCTIONTEST_ASSERTION_002_GUID;

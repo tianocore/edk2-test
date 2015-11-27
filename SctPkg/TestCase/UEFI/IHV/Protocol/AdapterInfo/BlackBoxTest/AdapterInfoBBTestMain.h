@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -61,7 +61,7 @@ Abstract:
 #include "Efi.h"
 #include <Library/EfiTestLib.h>
 #include <UEFI/Protocol/AdapterInfo.h>
-#include "guid.h"
+#include "Guid.h"
 
 
 #define IHV_ADAPTER_INFORMATION_PROTOCOL_TEST_REVISION    0x00010000

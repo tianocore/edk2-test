@@ -47,71 +47,34 @@
 
 Module Name:
 
-  DriverBindingBBTest.h
+  Guid.c
 
 Abstract:
 
-  head file of test driver of EFI Driver Binding Protocol Test
+  GUIDs auto-generated for EFI test assertion.
 
 --*/
 
-#ifndef _DRIVER_BINDING_TEST_H
-#define _DRIVER_BINDING_TEST_H
-
-
 #include "Efi.h"
-#include "SctLib.h"
-#include <Library/EfiTestLib.h>
-#include <UEFI/Protocol/DriverBinding.h>
 #include "Guid.h"
-#include "Print.h"
-
-#include EFI_TEST_PROTOCOL_DEFINITION(TestProfileLibrary)
-
-#define IHV_DRIVER_BINDING_TEST_REVISION    0x00010000
-
-#define IHV_DRIVER_BINDING_PROTOCOL_GUID    \
-  { 0x6f36a19d, 0x44d0, 0x4334, 0x94, 0x5d, 0x37, 0xbb, 0x5a, 0x55, 0xbf, 0x32 }
 
 
-//////////////////////////////////////////////////////////////////////////////
-//
-// Entry GUIDs for test entry
-//
-#define EFI_DRIVER_BINDING_PROTOCOL_TEST_ENTRY_GUID0101   \
-  { 0x50de666c, 0xee1a, 0x4f22, 0x94, 0xca, 0x92, 0xd4, 0xaf, 0xad, 0xd2, 0x58 }
+EFI_GUID gConformanceTestAssertionGuid001 = EFI_TEST_CONFORMANCETEST_ASSERTION_001_GUID;
 
-#define SYSTEMLOG 0
-#define CASELOG   1
-#define SYSTEMKEY 2
-#define CASEKEY   3
+EFI_GUID gConformanceTestAssertionGuid002 = EFI_TEST_CONFORMANCETEST_ASSERTION_002_GUID;
 
-//
-// functions declaration
-//
+EFI_GUID gConformanceTestAssertionGuid003 = EFI_TEST_CONFORMANCETEST_ASSERTION_003_GUID;
 
-EFI_STATUS
-InitializeBBTestDriverBinding (
-  IN EFI_HANDLE           ImageHandle,
-  IN EFI_SYSTEM_TABLE     *SystemTable
-  );
+EFI_GUID gConformanceTestAssertionGuid004 = EFI_TEST_CONFORMANCETEST_ASSERTION_004_GUID;
 
-EFI_STATUS
-BBTestDriverBindingUnload (
-  IN EFI_HANDLE       ImageHandle
-  );
+EFI_GUID gConformanceTestAssertionGuid005 = EFI_TEST_CONFORMANCETEST_ASSERTION_005_GUID;
 
+EFI_GUID gConformanceTestAssertionGuid006 = EFI_TEST_CONFORMANCETEST_ASSERTION_006_GUID;
 
-//
-// Test function
-//
+EFI_GUID gConformanceTestAssertionGuid008 = EFI_TEST_CONFORMANCETEST_ASSERTION_008_GUID;
 
-EFI_STATUS
-BBTestDriverBindingFunctionTest (
-  IN EFI_BB_TEST_PROTOCOL       *This,
-  IN VOID                       *ClientInterface,
-  IN EFI_TEST_LEVEL             TestLevel,
-  IN EFI_HANDLE                 SupportHandle
-  );
+EFI_GUID gConformanceTestAssertionGuid009 = EFI_TEST_CONFORMANCETEST_ASSERTION_009_GUID;
 
-#endif
+EFI_GUID gConformanceTestAssertionGuid011 = EFI_TEST_CONFORMANCETEST_ASSERTION_011_GUID;
+
+EFI_GUID gConformanceTestAssertionGuid012 = EFI_TEST_CONFORMANCETEST_ASSERTION_012_GUID;
