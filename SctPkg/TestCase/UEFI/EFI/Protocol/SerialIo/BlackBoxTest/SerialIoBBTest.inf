@@ -57,7 +57,7 @@
 
 [defines]
   INF_VERSION          = 0x00010005
-  BASE_NAME            = SerialIoBbTest
+  BASE_NAME            = SerialIoBBTest
   FILE_GUID            = 5AD6EAA7-337F-4c20-9F6A-D3F92CF3F48A
   MODULE_TYPE          = UEFI_DRIVER
   VERSION_STRING       = 1.0

@@ -57,7 +57,7 @@
 
 [defines]
   INF_VERSION          = 0x00010005
-  BASE_NAME            = IhvSerialIoBbTest
+  BASE_NAME            = IhvSerialIoBBTest
   FILE_GUID            = BA0AB53A-4B3B-4b58-96CB-4CDF18117914
   MODULE_TYPE          = UEFI_DRIVER
   VERSION_STRING       = 1.0

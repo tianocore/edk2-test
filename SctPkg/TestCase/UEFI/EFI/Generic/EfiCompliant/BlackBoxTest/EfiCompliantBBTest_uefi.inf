@@ -57,7 +57,7 @@
 
 [Defines]
   INF_VERSION          = 0x00010005
-  BASE_NAME            = EfiCompliantBbTest
+  BASE_NAME            = EfiCompliantBBTest
   FILE_GUID            = B45574E7-3848-4917-853F-931AC4FC0225
   MODULE_TYPE          = UEFI_DRIVER
   VERSION_STRING       = 1.0

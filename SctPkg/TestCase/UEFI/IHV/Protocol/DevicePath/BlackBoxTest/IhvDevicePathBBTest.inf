@@ -56,8 +56,8 @@
 #--*/
 
 [defines]
-  BASE_NAME            = IhvDevicePathBBTest
-  FILE_GUID            = 160EB3DB-0B8C-43f4-9FE5-459087E8B0C4
+  BASE_NAME        = IhvDevicePathBBTest
+  FILE_GUID        = 160EB3DB-0B8C-43f4-9FE5-459087E8B0C4
   COMPONENT_TYPE   = BS_DRIVER
 
 [sources.common]
