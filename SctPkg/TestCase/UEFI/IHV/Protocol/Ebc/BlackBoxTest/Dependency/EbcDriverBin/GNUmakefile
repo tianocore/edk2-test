@@ -64,11 +64,11 @@ UNAME = $(shell uname)
 
 #Check if it is cygwin environment
 ifeq ($(findstring CYGWIN,$(UNAME)),CYGWIN)
-	GEN_BIN_PROFILE=`cygpath -m $(DEPENDECY)"
+	GEN_BIN_PROFILE=`cygpath -m $(DEPENDECY)`
 	TARGET=`cygpath -m $(BIN_DIR)/$(BASE_NAME)`
 else
 	GEN_BIN_PROFILE=$(DEPENDECY)
-	TARGET=$(BIN_DIR)/$(BASE_NAME).efi
+	TARGET=$(BIN_DIR)/$(BASE_NAME)
 endif
 #
 # Define some useful macros, then include the master Efi toolchain setup
