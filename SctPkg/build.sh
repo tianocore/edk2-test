@@ -265,11 +265,12 @@ done
 # Change directory to Build directory
 #
 cd Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}
+pwd
 
 #
 # Run a script to generate Sct binary for the target architecture
 #
-../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH InstallSct$SCT_TARGET_ARCH.efi
+../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi
 
 status=$?
 if test $status -ne 0
@@ -280,10 +281,12 @@ else
 echo The SCT binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}"
 fi
 
+cd ../../../
+pwd
 
-cd Build/IvhSct/${SCT_BUILD}_${TARGET_TOOLS}
-
-../../../SctPkg/CommonGenFramework.sh hv_sct $SCT_TARGET_ARCH InstallSct$SCT_TARGET_ARCH.efi
+cd Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}
+pwd
+../../../SctPkg/CommonGenFramework.sh ihv_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi
 
 status=$?
 if test $status -ne 0
