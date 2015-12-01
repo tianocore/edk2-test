@@ -67,11 +67,11 @@
 #
 ################################################################################
 [Defines]
-  PLATFORM_NAME                  = IHVSct
+  PLATFORM_NAME                  = IhvSct
   PLATFORM_GUID                  = 81ae3da4-3e91-4611-9015-eabc96b5e556
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
-  OUTPUT_DIRECTORY               = Build/IHVSct
+  OUTPUT_DIRECTORY               = Build/IhvSct
   SUPPORTED_ARCHITECTURES        = IA32|X64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
@@ -203,7 +203,7 @@ SctPkg/TestCase/UEFI/IHV/Protocol/Ebc/BlackBoxTest/IhvEbcBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/PlatformDriverOverride/BlackBoxTest/IhvPlatformDriverOverrideBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/PxeBaseCode/BlackBoxTest/IhvPxeBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/ScsiPassThru/BlackBoxTest/IhvScsiPassThruBBTest.inf
-SctPkg/TestCase/UEFI/IHV/Protocol/SerialIo/BlackBoxTest/IhvSerialIoBbTest.inf
+SctPkg/TestCase/UEFI/IHV/Protocol/SerialIo/BlackBoxTest/IhvSerialIoBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/SimpleFileSystem/BlackBoxTest/IhvSimpleFileSystemBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/SimpleNetwork/BlackBoxTest/IhvSimpleNetworkBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/SimplePointer/BlackBoxTest/IhvSimplePointerBBTest.inf
