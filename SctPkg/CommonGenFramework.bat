@@ -121,56 +121,56 @@ copy %ProcessorType%\SCRTDriver.efi           %Framework%\SCRT            > NUL
 copy %ProcessorType%\SCRTApp.efi              %Framework%\SCRT            > NUL
 copy ..\..\..\SctPkg\Config\Data\SCRT.conf    %Framework%\SCRT            > NUL
 
-copy %ProcessorType%\EfiCompliantBbTest.efi                   %Framework%\Test\ > NUL
+copy %ProcessorType%\EfiCompliantBBTest.efi                   %Framework%\Test\ > NUL
 copy %ProcessorType%\ExeModeBBTest.efi                        %Framework%\Test\ > NUL
 
-copy %ProcessorType%\EventTimerTaskPriorityServicesBbTest.efi %Framework%\Test\ > NUL
-copy %ProcessorType%\MemoryAllocationServicesBbTest.efi       %Framework%\Test\ > NUL
-copy %ProcessorType%\ProtocolHandlerServicesBbTest.efi        %Framework%\Test\ > NUL
-copy %ProcessorType%\ImageServicesBbTest.efi                  %Framework%\Test\ > NUL
-copy %ProcessorType%\MiscBootServicesBbTest.efi               %Framework%\Test\ > NUL
+copy %ProcessorType%\EventTimerTaskPriorityServicesBBTest.efi %Framework%\Test\ > NUL
+copy %ProcessorType%\MemoryAllocationServicesBBTest.efi       %Framework%\Test\ > NUL
+copy %ProcessorType%\ProtocolHandlerServicesBBTest.efi        %Framework%\Test\ > NUL
+copy %ProcessorType%\ImageServicesBBTest.efi                  %Framework%\Test\ > NUL
+copy %ProcessorType%\MiscBootServicesBBTest.efi               %Framework%\Test\ > NUL
 
-copy %ProcessorType%\VariableServicesBbTest.efi               %Framework%\Test\ > NUL
-copy %ProcessorType%\TimeServicesBbTest.efi                   %Framework%\Test\ > NUL
-copy %ProcessorType%\MiscRuntimeServicesBbTest.efi            %Framework%\Test\ > NUL
+copy %ProcessorType%\VariableServicesBBTest.efi               %Framework%\Test\ > NUL
+copy %ProcessorType%\TimeServicesBBTest.efi                   %Framework%\Test\ > NUL
+copy %ProcessorType%\MiscRuntimeServicesBBTest.efi            %Framework%\Test\ > NUL
 
-copy %ProcessorType%\BisBbTest.efi                            %Framework%\Test\ > NUL
-copy %ProcessorType%\BlockIoBbTest.efi                        %Framework%\Test\ > NUL
-copy %ProcessorType%\BlockIo2BbTest.efi                       %Framework%\Test\ > NUL
-copy %ProcessorType%\BusSpecificDriverOverrideBbTest.efi      %Framework%\Test\ > NUL
-rem copy %ProcessorType%\ComponentNameBbTest.efi                  %Framework%\Test\ > NUL
-copy %ProcessorType%\DebugPortBbTest.efi                      %Framework%\Test\ > NUL
-copy %ProcessorType%\DebugSupportBbTest.efi                   %Framework%\Test\ > NUL
-copy %ProcessorType%\DecompressBbTest.efi                     %Framework%\Test\ > NUL
-rem copy %ProcessorType%\DeviceIoBbTest.efi                       %Framework%\Test\ > NUL
+copy %ProcessorType%\BisBBTest.efi                            %Framework%\Test\ > NUL
+copy %ProcessorType%\BlockIoBBTest.efi                        %Framework%\Test\ > NUL
+copy %ProcessorType%\BlockIo2BBTest.efi                       %Framework%\Test\ > NUL
+copy %ProcessorType%\BusSpecificDriverOverrideBBTest.efi      %Framework%\Test\ > NUL
+rem copy %ProcessorType%\ComponentNameBBTest.efi                  %Framework%\Test\ > NUL
+copy %ProcessorType%\DebugPortBBTest.efi                      %Framework%\Test\ > NUL
+copy %ProcessorType%\DebugSupportBBTest.efi                   %Framework%\Test\ > NUL
+copy %ProcessorType%\DecompressBBTest.efi                     %Framework%\Test\ > NUL
+rem copy %ProcessorType%\DeviceIoBBTest.efi                       %Framework%\Test\ > NUL
 copy %ProcessorType%\DevicePathBBTest.efi                     %Framework%\Test\ > NUL
 copy %ProcessorType%\DevicePathUtilitiesBBTest.efi            %Framework%\Test\ > NUL
 copy %ProcessorType%\DevicePathToTextBBTest.efi               %Framework%\Test\ > NUL
 copy %ProcessorType%\DevicePathFromTextBBTest.efi             %Framework%\Test\ > NUL
-copy %ProcessorType%\DiskIoBbTest.efi                         %Framework%\Test\ > NUL
-rem copy %ProcessorType%\DriverDiagnosticsBbTest.efi              %Framework%\Test\ > NUL
-rem copy %ProcessorType%\DriverConfigurationBbTest.efi            %Framework%\Test\ > NUL
-copy %ProcessorType%\EbcBbTest.efi                            %Framework%\Test\ > NUL
-copy %ProcessorType%\LoadedImageBbTest.efi                    %Framework%\Test\ > NUL
-copy %ProcessorType%\LoadFileBbTest.efi                       %Framework%\Test\ > NUL
-copy %ProcessorType%\PciIoBbTest.efi                          %Framework%\Test\ > NUL
-copy %ProcessorType%\PciRootBridgeIoBbTest.efi                %Framework%\Test\ > NUL
-copy %ProcessorType%\PlatformDriverOverrideBbTest.efi         %Framework%\Test\ > NUL
-copy %ProcessorType%\PxeBaseCodeBbTest.efi                    %Framework%\Test\ > NUL
-rem copy %ProcessorType%\ScsiPassThruBbTest.efi                   %Framework%\Test\ > NUL
-copy %ProcessorType%\ScsiIoBbTest.efi                         %Framework%\Test\ > NUL
-copy %ProcessorType%\ExtScsiPassThruBbTest.efi                %Framework%\Test\ > NUL
+copy %ProcessorType%\DiskIoBBTest.efi                         %Framework%\Test\ > NUL
+rem copy %ProcessorType%\DriverDiagnosticsBBTest.efi              %Framework%\Test\ > NUL
+rem copy %ProcessorType%\DriverConfigurationBBTest.efi            %Framework%\Test\ > NUL
+copy %ProcessorType%\EbcBBTest.efi                            %Framework%\Test\ > NUL
+copy %ProcessorType%\LoadedImageBBTest.efi                    %Framework%\Test\ > NUL
+copy %ProcessorType%\LoadFileBBTest.efi                       %Framework%\Test\ > NUL
+copy %ProcessorType%\PciIoBBTest.efi                          %Framework%\Test\ > NUL
+copy %ProcessorType%\PciRootBridgeIoBBTest.efi                %Framework%\Test\ > NUL
+copy %ProcessorType%\PlatformDriverOverrideBBTest.efi         %Framework%\Test\ > NUL
+copy %ProcessorType%\PxeBaseCodeBBTest.efi                    %Framework%\Test\ > NUL
+rem copy %ProcessorType%\ScsiPassThruBBTest.efi                   %Framework%\Test\ > NUL
+copy %ProcessorType%\ScsiIoBBTest.efi                         %Framework%\Test\ > NUL
+copy %ProcessorType%\ExtScsiPassThruBBTest.efi                %Framework%\Test\ > NUL
 copy %ProcessorType%\AtaPassThruBBTest.efi                    %Framework%\Test\ > NUL
 copy %ProcessorType%\iScsiInitiatorNameBBTest.efi             %Framework%\Test\ > NUL
-copy %ProcessorType%\SerialIoBbTest.efi                       %Framework%\Test\ > NUL
-copy %ProcessorType%\SimpleFileSystemBbTest.efi               %Framework%\Test\ > NUL
-copy %ProcessorType%\SimpleNetworkBbTest.efi                  %Framework%\Test\ > NUL
-copy %ProcessorType%\SimplePointerBbTest.efi                  %Framework%\Test\ > NUL
-copy %ProcessorType%\SimpleTextInBbTest.efi                   %Framework%\Test\ > NUL
-copy %ProcessorType%\SimpleTextOutBbTest.efi                  %Framework%\Test\ > NUL
-rem copy %ProcessorType%\UgaDrawBbTest.efi                        %Framework%\Test\ > NUL
+copy %ProcessorType%\SerialIoBBTest.efi                       %Framework%\Test\ > NUL
+copy %ProcessorType%\SimpleFileSystemBBTest.efi               %Framework%\Test\ > NUL
+copy %ProcessorType%\SimpleNetworkBBTest.efi                  %Framework%\Test\ > NUL
+copy %ProcessorType%\SimplePointerBBTest.efi                  %Framework%\Test\ > NUL
+copy %ProcessorType%\SimpleTextInBBTest.efi                   %Framework%\Test\ > NUL
+copy %ProcessorType%\SimpleTextOutBBTest.efi                  %Framework%\Test\ > NUL
+rem copy %ProcessorType%\UgaDrawBBTest.efi                        %Framework%\Test\ > NUL
 copy %ProcessorType%\GraphicsOutputBBTest.efi                 %Framework%\Test\ > NUL
-copy %ProcessorType%\UnicodeCollation2BbTest.efi              %Framework%\Test\ > NUL
+copy %ProcessorType%\UnicodeCollation2BBTest.efi              %Framework%\Test\ > NUL
 rem copy %ProcessorType%\UsbHcTest.efi                            %Framework%\Test\ > NUL
 copy %ProcessorType%\UsbIoTest.efi                            %Framework%\Test\ > NUL
 copy %ProcessorType%\Usb2HcTest.efi                           %Framework%\Test\ > NUL
@@ -179,8 +179,8 @@ rem copy %ProcessorType%\HashBBTest.efi                           %Framework%\Te
 copy %ProcessorType%\TapeBBTest.efi                           %Framework%\Test\ > NUL
 copy %ProcessorType%\AcpiTableProtocolBBTest.efi              %Framework%\Test\ > NUL
 copy %ProcessorType%\SimpleTextInputExBBTest.efi              %Framework%\Test\ > NUL
-copy %ProcessorType%\ComponentName2BbTest.efi                 %Framework%\Test\ > NUL
-copy %ProcessorType%\DriverDiagnostics2BbTest.efi             %Framework%\Test\ > NUL
+copy %ProcessorType%\ComponentName2BBTest.efi                 %Framework%\Test\ > NUL
+copy %ProcessorType%\DriverDiagnostics2BBTest.efi             %Framework%\Test\ > NUL
 
 copy %ProcessorType%\HIIDatabaseBBTest.efi                    %Framework%\Test\ > NUL
 copy %ProcessorType%\HIIStringBBTest.efi                      %Framework%\Test\ > NUL
@@ -203,7 +203,7 @@ copy %ProcessorType%\FirmwareManagementBBTest.efi             %Framework%\Test\ 
 copy %ProcessorType%\AdapterInfoBBTest.efi                    %Framework%\Test\ > NUL
 copy %ProcessorType%\DiskIo2BBTest.efi                        %Framework%\Test\ > NUL
 copy %ProcessorType%\TimeStampBBTest.efi                      %Framework%\Test\ > NUL
-copy %ProcessorType%\RandomNumberBbTest.efi                   %Framework%\Test\ > NUL
+copy %ProcessorType%\RandomNumberBBTest.efi                   %Framework%\Test\ > NUL
 
 
 rem *********************************************
@@ -259,35 +259,35 @@ if %1. EQU ihv_sct. (
   rem Copy the EFI 1.10 Test Cases for IHV
   rem *********************************************
 
-  copy %ProcessorType%\IhvBlockIoBbTest.efi                     %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvBlockIo2BbTest.efi                    %Framework%\Test\ > NUL
-rem  copy %ProcessorType%\IhvComponentNameBbTest.efi               %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvComponentName2BbTest.efi              %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvBusSpecificDriverOverrideBbTest.efi   %Framework%\Test\ > NUL
-rem  copy %ProcessorType%\IhvDeviceIoBbTest.efi                    %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvDevicePathBbTest.efi                  %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvDiskIoBbTest.efi                      %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvDriverBindingBbTest.efi               %Framework%\Test\ > NUL
-rem  copy %ProcessorType%\IhvDriverConfigurationBbTest.efi         %Framework%\Test\ > NUL
-rem  copy %ProcessorType%\IhvDriverDiagnosticsBbTest.efi           %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvDriverDiagnostics2BbTest.efi          %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvEbcBbTest.efi                         %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvPlatformDriverOverrideBbTest.efi      %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvPxeBaseCodeBbTest.efi                 %Framework%\Test\ > NUL
-rem  copy %ProcessorType%\IhvScsiPassThruBbTest.efi                %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvSerialIoBbTest.efi                    %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvSimpleFileSystemBbTest.efi            %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvSimpleNetworkBbTest.efi               %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvSimplePointerBbTest.efi               %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvSimpleTextInBbTest.efi                %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvBlockIoBBTest.efi                     %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvBlockIo2BBTest.efi                    %Framework%\Test\ > NUL
+rem  copy %ProcessorType%\IhvComponentNameBBTest.efi               %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvComponentName2BBTest.efi              %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvBusSpecificDriverOverrideBBTest.efi   %Framework%\Test\ > NUL
+rem  copy %ProcessorType%\IhvDeviceIoBBTest.efi                    %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvDevicePathBBTest.efi                  %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvDiskIoBBTest.efi                      %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvDriverBindingBBTest.efi               %Framework%\Test\ > NUL
+rem  copy %ProcessorType%\IhvDriverConfigurationBBTest.efi         %Framework%\Test\ > NUL
+rem  copy %ProcessorType%\IhvDriverDiagnosticsBBTest.efi           %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvDriverDiagnostics2BBTest.efi          %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvEbcBBTest.efi                         %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvPlatformDriverOverrideBBTest.efi      %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvPxeBaseCodeBBTest.efi                 %Framework%\Test\ > NUL
+rem  copy %ProcessorType%\IhvScsiPassThruBBTest.efi                %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvSerialIoBBTest.efi                    %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvSimpleFileSystemBBTest.efi            %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvSimpleNetworkBBTest.efi               %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvSimplePointerBBTest.efi               %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvSimpleTextInBBTest.efi                %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvSimpleTextInputExBBTest.efi           %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvSimpleTextOutBbTest.efi               %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvSimpleTextOutBBTest.efi               %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvGraphicsOutputBBTest.efi              %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvExtScsiPassThruBbTest.efi             %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvExtScsiPassThruBBTest.efi             %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvScsiIoBBTest.efi                      %Framework%\Test\ > NUL
-rem  copy %ProcessorType%\IhvUgaDrawBbTest.efi                     %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvUnicodeCollationBbTest.efi            %Framework%\Test\ > NUL
-  copy %ProcessorType%\IhvUnicodeCollation2BbTest.efi           %Framework%\Test\ > NUL
+rem  copy %ProcessorType%\IhvUgaDrawBBTest.efi                     %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvUnicodeCollationBBTest.efi            %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvUnicodeCollation2BBTest.efi           %Framework%\Test\ > NUL
 rem  copy %ProcessorType%\IhvUsbHcTest.efi                         %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvUsbIoTest.efi                         %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvUsb2HcTest.efi                        %Framework%\Test\ > NUL
@@ -324,7 +324,7 @@ rem *********************************************
 
 :CopyDependency
 
-mkdir %Framework%\Dependency\%1BbTest
+mkdir %Framework%\Dependency\%1BBTest
 
 dir /b %ProcessorType%\%1_*.       > temp.txt 2>NUL
 dir /b %ProcessorType%\%1_*.efi   >> temp.txt 2>NUL
@@ -352,7 +352,7 @@ setlocal
 set Source=%2
 set Target=%Source:*_=%
 
-copy %ProcessorType%\%Source%     %Framework%\Dependency\%1BbTest\%Target%  > NUL
+copy %ProcessorType%\%Source%     %Framework%\Dependency\%1BBTest\%Target%  > NUL
 
 endlocal
 
