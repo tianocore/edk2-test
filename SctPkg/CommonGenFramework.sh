@@ -121,7 +121,7 @@ CopyDependencyFile()
 CopyDependency()
 {
     mkdir -p $Framework/Dependency/$1BBTest	
-    ls -h $ProcessorType/$1_*.       > temp.txt 2>NUL
+    ls -h $ProcessorType/$1_Invalid*       > temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.efi   >> temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.ini   >> temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.cmp   >> temp.txt 2>NUL
