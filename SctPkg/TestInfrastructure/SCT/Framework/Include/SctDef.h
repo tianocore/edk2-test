@@ -71,10 +71,12 @@ Abstract:
 #define EFI_SCT_NAME                        L"UEFI2.3 Self Certification Test"
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_31_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.3.1C Self Certification Test"
-#elif (EFI_SPECIFICATION_VERSION == EFI_2_40_SYTEM_TABLE_REVISION)
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_40_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.4B Self Certification Test(SCT2)"
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_50_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.5 Self Certification Test(SCT2)"
+#else
+#error Unknown EFI_SPECIFICATION_VERSION
 #endif
 
 #define EFI_SCT_SHORT_NAME                  L"SCT"
