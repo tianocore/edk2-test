@@ -45,6 +45,64 @@
 
 SctpackageDependencyList=(EdkCompatibilityPkg SctPkg BaseTools)
 
+function get_build_arch
+{
+	case `uname -m` in
+	    arm*)
+	        BUILD_ARCH=ARM;;
+	    aarch64*)
+	        BUILD_ARCH=AARCH64;;
+	    *)
+	        BUILD_ARCH=other;;
+	esac
+}
+
+function set_cross_compile
+{
+	get_build_arch
+
+	echo "Target: $SCT_TARGET_ARCH"
+	echo "Build: $BUILD_ARCH"
+	if [ "$SCT_TARGET_ARCH" = "$BUILD_ARCH" ]; then
+	    TEMP_CROSS_COMPILE=
+	elif [ "$SCT_TARGET_ARCH" == "AARCH64" ]; then
+	    if [ X"$CROSS_COMPILE_64" != X"" ]; then
+	        TEMP_CROSS_COMPILE="$CROSS_COMPILE_64"
+	    else
+	        TEMP_CROSS_COMPILE=aarch64-linux-gnu-
+	    fi
+	elif [ "$SCT_TARGET_ARCH" == "ARM" ]; then
+	    if [ X"$CROSS_COMPILE_32" != X"" ]; then
+	        TEMP_CROSS_COMPILE="$CROSS_COMPILE_32"
+	    else
+	        TEMP_CROSS_COMPILE=arm-linux-gnueabihf-
+	    fi
+	else
+	    echo "Unsupported target architecture '$SCT_TARGET_ARCH'!" >&2
+	fi
+}
+
+function get_gcc_version
+{
+	gcc_version=$($1 -dumpversion)
+	case $gcc_version in
+		4.6*|4.7*|4.8*|4.9*)
+			echo GCC$(echo ${gcc_version} | awk -F. '{print $1$2}')
+			;;
+		*)
+			echo "Unknown toolchain version '$gcc_version'" >&2
+			echo "Attempting to build using GCC49 profile." >&2
+			echo GCC49
+			;;
+	esac
+}
+
+function get_clang_version
+{
+	clang_version=`$1 --version | head -1 | sed 's/^.*version\s*\([0-9]*\).\([0-9]*\).*/\1\2/g'`
+	echo "CLANG$clang_version"
+}
+
 
 GetBaseToolsBinSubDir() {
 	#
@@ -78,7 +136,7 @@ PrintUsage() {
 	#
 	echo "Usage:"
 	echo "    $0 <architecture (ARM, AARCH64, X64, etc)> \
-<toolchain name (RVCT or ARMGCC or GCC)> \
+<toolchain name (RVCT or ARMGCC or GCC*)> \
 [build type (RELEASE OR DEBUG, DEFAULT: DEBUG)]"
 }
 
@@ -120,23 +178,10 @@ case `uname` in
 		;;
 		
 		GCC | gcc)
-			gcc_version=$(gcc -v 2>&1 | tail -1 | awk '{print $3}')
-			if [ "$SCT_TARGET_ARCH" == "ARM" ]; then
-				gcc_version=$(${GCC47_ARM_PREFIX}gcc -v 2>&1 | tail -1 | awk '{print $3}')
-			elif [ "$SCT_TARGET_ARCH" == "AARCH64" ]; then
-				gcc_version=$(${GCC47_AARCH64_PREFIX}gcc -v 2>&1 | tail -1 | awk '{print $3}')
-			fi
-			case $gcc_version in
-				4.6.*)
-					TARGET_TOOLS=GCC46
-					;;
-				4.[789].*)
-					TARGET_TOOLS=GCC47
-					;;
-				*)
-					TARGET_TOOLS=GCC47
-					;;
-			esac
+            set_cross_compile
+	        CROSS_COMPILE="$TEMP_CROSS_COMPILE"
+            export TARGET_TOOLS=`get_gcc_version "$CROSS_COMPILE"gcc`
+
 		;;
 
 		*)
@@ -170,6 +215,10 @@ case `uname` in
      exit -1
    ;;
 esac
+
+echo "TOOLCHAIN is ${TARGET_TOOLS}"
+export ${TARGET_TOOLS}_${SCT_TARGET_ARCH}_PREFIX=$CROSS_COMPILE
+echo "Toolchain prefix: ${TARGET_TOOLS}_${SCT_TARGET_ARCH}_PREFIX=$CROSS_COMPILE"
 
 SCT_BUILD=DEBUG
 if [ "$3" = "RELEASE" -o "$3" = "DEBUG" ]; then

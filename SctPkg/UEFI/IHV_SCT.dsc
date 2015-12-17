@@ -72,7 +72,7 @@
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
   OUTPUT_DIRECTORY               = Build/IhvSct
-  SUPPORTED_ARCHITECTURES        = IA32|X64
+  SUPPORTED_ARCHITECTURES        = IA32|X64|ARM|AARCH64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
 
@@ -108,6 +108,33 @@
   GCC:*_*_X64_APP_FLAGS    = -D EFIX64 $(GCC_VER_MACRO)
   GCC:*_*_X64_PP_FLAGS     = -D EFIX64 $(GCC_VER_MACRO)
   GCC:*_*_X64_ASM_FLAGS    = -DEFIX64
+
+  #TODO: OM - fixme RVCT:*_*_ARM_CC_FLAGS = -D EFIARM $(GCC_VER_MACRO)
+  *_*_ARM_CC_FLAGS = -D EFIARM
+  GCC:*_*_ARM_CC_FLAGS  = -D EFIARM $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error=implicit-function-declaration -Wno-error
+  *_*_ARM_VFRPP_FLAGS   = -D EFIARM $(GCC_VER_MACRO)
+  *_*_ARM_APP_FLAGS     = -D EFIARM $(GCC_VER_MACRO)
+  *_*_ARM_PP_FLAGS      = -D EFIARM $(GCC_VER_MACRO)
+
+  RVCT:*_*_ARM_DLINK_FLAGS = --muldefweak
+# 167:  "argument of type <type1> is incompatible with parameter of type # <type2>"
+#       (caused here by passing typed pointers to functions that take "void *" or "void **")
+# 1295: "provide arguments" (i.e. `UINTN Function ()` should be `UINTN Function (VOID)`)
+# 188:  "enumerated type mixed with another type"
+#       (i.e. passing an integer as an enum without a cast)
+# 550:  "variable <var> was set but never used"
+# 1:    "last line of file ends without a newline"
+# 68:   "integer conversion resulted in a change of sign" ("if (Status == -1)")
+# 111:  "statement is unreachable" (invariably "break;" after "return X;" in case statement)
+# 177:  "function <static function> was declared but never referenced"
+  RVCT:*_*_ARM_CC_FLAGS    = --diag_remark=167 --diag_suppress=167,1295,188,550,1,68,111,177
+
+  *_*_AARCH64_CC_FLAGS         = -D EFIAARCH64 -I$(WORKSPACE)/MdePkg/Include/AArch64 $(GCC_VER_MACRO)
+  GCC:*_*_AARCH64_CC_FLAGS     = -D EFIAARCH64 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error
+  *_*_AARCH64_VFRPP_FLAGS      = -D EFIAARCH64 $(GCC_VER_MACRO)
+  *_*_AARCH64_APP_FLAGS        = -D EFIAARCH64 $(GCC_VER_MACRO)
+  *_*_AARCH64_PP_FLAGS         = -D EFIAARCH64 $(GCC_VER_MACRO)
+  RVCT:*_*_AARCH64_DLINK_FLAGS = --muldefweak
 
   DEBUG_*_*_CC_FLAGS  = -DEFI_DEBUG
   RELEASE_*_*_CC_FLAGS  = -DMDEPKG_NDEBUG
