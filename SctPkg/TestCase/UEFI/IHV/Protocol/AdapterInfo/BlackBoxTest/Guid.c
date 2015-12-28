@@ -90,8 +90,9 @@ EFI_GUID gEfiAdapterInfoMediaStateGuid              = EFI_ADAPTER_INFO_MEDIA_STA
 
 EFI_GUID gEfiAdapterInfoSanMacAddressGuid           = EFI_ADAPTER_INFO_SAN_MAC_ADDRESS_GUID;
 
-
 EFI_GUID gEfiAdapterInfoNetworkBootGuid             = EFI_ADAPTER_INFO_NETWORK_BOOT_GUID;
+
+EFI_GUID gEfiAdapterInfoUndiIPv6SupportGuid         = EFI_ADAPTER_INFO_NETWORK_BOOT_GUID;
 
 
 EFI_GUID gEfiUnSupportedGuid                        = EFI_UNSUPPORTED_GUID;

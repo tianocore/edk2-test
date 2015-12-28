@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2014 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -519,7 +519,8 @@ BBTestSetInformationConformanceTestCheckpoint2 (
   UINTN                 InformationBlockSize;
                         
   EFI_GUID              *InfoTypesBuffer;
-  EFI_GUID              *InformationType;                 
+  EFI_GUID              *InformationType;
+  VOID                  *InformationBlock;
   UINTN                 InfoTypesBufferCount;
   UINTN                 Index;
   
@@ -556,12 +557,26 @@ BBTestSetInformationConformanceTestCheckpoint2 (
   
   for(Index = 0; Index < InfoTypesBufferCount; Index++){
 
-    if (!GuidCmp(*InformationType , gEfiAdapterInfoMediaStateGuid ))
-      InformationBlockSize = sizeof(EFI_ADAPTER_INFO_MEDIA_STATE);
-    else if(!GuidCmp(*InformationType, gEfiAdapterInfoNetworkBootGuid))
-      InformationBlockSize = sizeof(EFI_ADAPTER_INFO_NETWORK_BOOT);
-    else
-      InformationBlockSize = sizeof(EFI_ADAPTER_INFO_SAN_MAC_ADDRESS);
+    Status = AdapterInfo->GetInformation(
+                              AdapterInfo,
+                              InformationType,
+                              &InformationBlock,
+                              &InformationBlockSize
+                              );
+
+    if (EFI_SUCCESS != Status ) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_FAILED,
+                     gTestGenericFailureGuid,
+                     L"GetInformation---Failed",
+                     L"%a:%d:Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
+      return Status;       
+    }
 
     //
     // Call SetInformation to config an adapter
@@ -588,6 +603,11 @@ BBTestSetInformationConformanceTestCheckpoint2 (
                      (UINTN)__LINE__,
                      Status
                      );
+
+    if ( InformationBlock != NULL ){
+      gtBS->FreePool (InformationBlock);
+      InformationBlock = NULL;
+    }
 
     InformationType++;
   }

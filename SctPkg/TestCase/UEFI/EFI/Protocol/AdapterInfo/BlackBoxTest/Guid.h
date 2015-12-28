@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -137,8 +137,6 @@ extern EFI_GUID gEfiAdapterInfoMediaStateGuid;
 #define EFI_ADAPTER_INFO_NETWORK_BOOT_GUID \
 { 0x1FBD2960, 0x4130, 0x41E5, {0x94, 0xAC,0xD2, 0xCF, 0x03, 0x7F, 0xB3, 0x7C}}
 
-//{0x1FBD2960, 0x4130, 0x41E5, 0x94AC, {0xD2, 0xCF, 0x03, 0x7F, 0xB3, 0x7C}}
-
 extern EFI_GUID gEfiAdapterInfoNetworkBootGuid;
 
 
@@ -146,6 +144,13 @@ extern EFI_GUID gEfiAdapterInfoNetworkBootGuid;
 { 0x114da5ef, 0x2cf1, 0x4e12, {0x9b, 0xbb, 0xc4, 0x70, 0xb5, 0x52, 0x5, 0xd9}}
 
 extern EFI_GUID gEfiAdapterInfoSanMacAddressGuid;
+
+
+#define EFI_ADAPTER_INFO_UNDI_IPV6_SUPPORT_GUID \
+{ 0x4bd56be3, 0x4975, 0x4d8a, {0xa0, 0xad, 0xc4, 0x91, 0x20, 0x4b, 0x5d, 0x4d}}
+
+extern EFI_GUID gEfiAdapterInfoUndiIPv6SupportGuid;
+
 
 #define EFI_UNSUPPORTED_GUID \
 { 0xa86aeb76, 0x3104, 0x45fb, { 0x8a, 0x9f, 0x72, 0x2d, 0x6e, 0x55, 0x3d, 0x74 }}

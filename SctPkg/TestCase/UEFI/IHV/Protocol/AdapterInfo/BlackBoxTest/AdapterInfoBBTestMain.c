@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -186,12 +186,13 @@ InfoTypeAndBlockSizeCmp(
   )
 {
    
-  if ((!GuidCmp (InformationType,gEfiAdapterInfoMediaStateGuid) && InformationBlockSize == sizeof(EFI_ADAPTER_INFO_MEDIA_STATE)) || 
-      (!GuidCmp (InformationType,gEfiAdapterInfoNetworkBootGuid) && InformationBlockSize == sizeof(EFI_ADAPTER_INFO_NETWORK_BOOT)) || 
-      (!GuidCmp (InformationType,gEfiAdapterInfoSanMacAddressGuid) && InformationBlockSize == sizeof(EFI_ADAPTER_INFO_SAN_MAC_ADDRESS))) 
-    return TRUE;
+  if ((!GuidCmp (InformationType,gEfiAdapterInfoMediaStateGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_MEDIA_STATE)) || 
+      (!GuidCmp (InformationType,gEfiAdapterInfoNetworkBootGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_NETWORK_BOOT)) || 
+      (!GuidCmp (InformationType,gEfiAdapterInfoSanMacAddressGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_SAN_MAC_ADDRESS)) ||
+      (!GuidCmp (InformationType,gEfiAdapterInfoUndiIPv6SupportGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_UNDI_IPV6_SUPPORT)) ) 
+    return FALSE;
   else
-    return FALSE;  
+    return TRUE;  
 }
 
 
