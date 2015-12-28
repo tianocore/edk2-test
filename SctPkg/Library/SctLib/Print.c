@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2014 Unified EFI, Inc. All
+  Copyright 2006 - 2015 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
-  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2014-2015, Intel Corporation. All rights reserved.<BR>   
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
 
 --*/
@@ -49,6 +49,7 @@
 
 #define SctPrint_STRING_LEN            1024
 #define SctPrint_ITEM_BUFFER_LEN       100
+#define SctAVSPrint_BUFFER_LEN         1024
 
 typedef struct {
     BOOLEAN             Ascii;
@@ -448,18 +449,6 @@ SctSPrint (
     return spc.len;
 }
 
-UINTN
-SctASPrint (
-  OUT CHAR8   *Str,
-  IN UINTN    StrSize,
-  IN CHAR8    *fmt,
-  ...
-  )
-{
-  //TODO: Fixme
-  return 0;
-}
-
 /*++
 
 Routine Description:
@@ -494,6 +483,54 @@ SctVSPrint (
 
   _PoolCatPrint (fmt, vargs, &spc, _SPrint);
   return spc.len;
+}
+
+UINTN
+SctAVSPrint (
+  OUT CHAR8         *Buffer,
+  IN  UINTN         BufferSize,
+  IN  CONST CHAR8   *FormatString,
+  IN  VA_LIST       Marker
+  )
+{
+  UINTN   Index;
+  CHAR16  UnicodeFormat[SctAVSPrint_BUFFER_LEN + 1];
+  CHAR16  UnicodeResult[SctAVSPrint_BUFFER_LEN + 1];
+
+  for (Index = 0; Index < SctAVSPrint_BUFFER_LEN && FormatString[Index] != '\0'; Index++) {
+    UnicodeFormat[Index] = (CHAR16) FormatString[Index];
+  }
+
+  UnicodeFormat[Index]  = '\0';
+
+  Index                 = SctVSPrint (UnicodeResult, sizeof (UnicodeResult), UnicodeFormat, Marker);
+
+  for (Index = 0; (Index < (BufferSize - 1)) && UnicodeResult[Index] != '\0'; Index++) {
+    Buffer[Index] = (CHAR8) UnicodeResult[Index];
+  }
+
+  Buffer[Index] = '\0';
+
+  return Index++;
+}
+
+
+UINTN
+SctASPrint (
+  OUT CHAR8   *Str,
+  IN UINTN    StrSize,
+  IN CHAR8    *fmt,
+  ...
+  )
+{
+  UINTN   Return;
+  VA_LIST Marker;
+
+  VA_START (Marker, fmt);
+  Return = SctAVSPrint (Str, StrSize, fmt, Marker);
+  VA_END (Marker);
+  
+  return Return;
 }
 
 /*++

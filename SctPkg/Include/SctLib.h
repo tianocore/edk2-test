@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2014 Unified EFI, Inc. All
+  Copyright 2006 - 2015 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
-  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2014-2015, Intel Corporation. All rights reserved.<BR>
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
 
 --*/
@@ -561,19 +561,27 @@ SctSPrint (
   );
 
 UINTN
-SctASPrint (
-  OUT CHAR8   *Str,
-  IN UINTN    StrSize,
-  IN CHAR8    *fmt,
-  ...
-  );
-
-UINTN
 SctVSPrint (
   OUT CHAR16                        *Str,
   IN UINTN                          StrSize,
   IN CONST CHAR16                   *fmt,
   IN VA_LIST                        vargs
+  );
+
+UINTN
+SctAVSPrint (
+  OUT CHAR8         *Buffer,
+  IN  UINTN         BufferSize,
+  IN  CONST CHAR8   *FormatString,
+  IN  VA_LIST       Marker
+  );
+
+UINTN
+SctASPrint (
+  OUT CHAR8   *Str,
+  IN UINTN    StrSize,
+  IN CHAR8    *fmt,
+  ...
   );
 
 CHAR16 *
