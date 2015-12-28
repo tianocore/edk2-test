@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2014 Unified EFI, Inc. All
+  Copyright 2006 - 2015 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
-  Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2014-2015, Intel Corporation. All rights reserved.<BR>
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
 
 --*/
@@ -554,7 +554,8 @@ SctShellFilterNullArgs (
 
     for (Index = 0; Index < mEfiShellInterface->Argc; Index++) {
       SctShellFreeArgInfo (&mEfiShellInterface->ArgInfo[Index]);
-      SctFreePool (mArgv[Index]);
+
+      //SctFreePool (mArgv[Index]);
     }
 
     SctFreePool (mEfiShellInterface->ArgInfo);
@@ -1299,11 +1300,21 @@ SctShellOpenFileByName(
                                                FileHandle,
                                                OpenMode);
     if (SctStrCmp(FileName, L"NUL") != 0 && !EFI_ERROR(Status) && ((OpenMode & EFI_FILE_MODE_CREATE) != 0)){
+
+/*
       FileInfo = FileFunctionMap.GetFileInfo(*FileHandle);
       ASSERT(FileInfo != NULL);
       FileInfo->Attribute = Attributes;
       Status = FileFunctionMap.SetFileInfo(*FileHandle, FileInfo);
       SctFreePool(FileInfo);
+*/
+
+      Status = SctGetFileInfo (*FileHandle, &FileInfo);
+      ASSERT(FileInfo != NULL);
+      FileInfo->Attribute = Attributes;
+      Status = SctSetFileInfo (*FileHandle, FileInfo);
+      SctFreePool(FileInfo);	  
+
     }
     return (Status);
   }

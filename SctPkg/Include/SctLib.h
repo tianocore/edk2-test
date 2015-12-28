@@ -260,6 +260,12 @@ SctGetFileInfo (
   OUT EFI_FILE_INFO      **FileInfo
   );
 
+EFI_STATUS
+SctSetFileInfo (
+  IN  EFI_FILE_HANDLE      FileHandle,
+  IN  EFI_FILE_INFO      *FileInfo
+  );
+
 EFI_FILE_HANDLE
 SctOpenRoot (
   IN EFI_HANDLE                   DeviceHandle
