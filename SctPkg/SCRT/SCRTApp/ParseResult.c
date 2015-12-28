@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -239,34 +239,34 @@ SCRTLogProcess(
 
 
   if (Request.BitMap.GetNextVariable){
-    SctPrint (L"%5s %-20s Requested\n", L" ", L"GetNextVariable");
+    SctPrint (L"%5s %-20s Requested\n", L" ", L"GetNextVariableName");
     SctZeroMem (Buffer, 100);
     BufferSize = 100;
-    SctASPrint(Buffer, BufferSize, "%5s %-20s Requested\n", L" ", L"GetNextVariable");
+    SctASPrint(Buffer, BufferSize, "%5s %-20s Requested\n", L" ", L"GetNextVariableName");
     BufferSize = SctAsciiStrSize (Buffer);
     SctWriteFile (FileHandle, &BufferSize, Buffer);		
     if (!FirstFail) {
       if (Result.BitMap.GetNextVariable) {
-        SctPrint (L"%5s %-20s Pass\n", L" ", L"GetNextVariable");
+        SctPrint (L"%5s %-20s Pass\n", L" ", L"GetNextVariableName");
         SctZeroMem (Buffer, 100);
         BufferSize = 100;
-        SctASPrint(Buffer, BufferSize, "%5s %-20s Pass\n", L" ", L"GetNextVariable");
+        SctASPrint(Buffer, BufferSize, "%5s %-20s Pass\n", L" ", L"GetNextVariableName");
         BufferSize = SctAsciiStrSize (Buffer);
         SctWriteFile (FileHandle, &BufferSize, Buffer);
       } else {
         FirstFail  = TRUE;
-        SctPrint (L"%5s %-20s Fail\n", L" ", L"GetNextVariable");
+        SctPrint (L"%5s %-20s Fail\n", L" ", L"GetNextVariableName");
         SctZeroMem (Buffer, 100);
         BufferSize = 100;
-        SctASPrint(Buffer, BufferSize, "%5s %-20s Fail\n", L" ", L"GetNextVariable");
+        SctASPrint(Buffer, BufferSize, "%5s %-20s Fail\n", L" ", L"GetNextVariableName");
         BufferSize = SctAsciiStrSize (Buffer);
         SctWriteFile (FileHandle, &BufferSize, Buffer);
       } 
     } else {
-      SctPrint (L"%5s %-20s Not Test\n", L" ", L"GetNextVariable");
+      SctPrint (L"%5s %-20s Not Test\n", L" ", L"GetNextVariableName");
       SctZeroMem (Buffer, 100);
       BufferSize = 100;
-      SctASPrint(Buffer, BufferSize, "%5s %-20s Not Test\n", L" ", L"GetNextVariable");
+      SctASPrint(Buffer, BufferSize, "%5s %-20s Not Test\n", L" ", L"GetNextVariableName");
       BufferSize = SctAsciiStrSize (Buffer);
       SctWriteFile (FileHandle, &BufferSize, Buffer);
     } 
