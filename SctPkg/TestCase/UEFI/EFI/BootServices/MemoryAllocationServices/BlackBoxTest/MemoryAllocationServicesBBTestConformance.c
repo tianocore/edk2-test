@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -519,7 +519,7 @@ BBTestAllocatePagesConsistencyTest (
                  );
   Status = gtBS->AllocatePages (
                    AllocateAnyPages,
-                   0x7ffffffe, // invalid
+                   0x6ffffffe, // invalid
                    1,
                    &Memory
                    );
@@ -532,7 +532,7 @@ BBTestAllocatePagesConsistencyTest (
                  StandardLib,
                  AssertionType,
                  gMemoryAllocationServicesBBTestConformanceAssertionGuid001,
-                 L"BS.AllocatePages - MemoryType is 0x7ffffffe",
+                 L"BS.AllocatePages - MemoryType is 0x6ffffffe",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -540,7 +540,7 @@ BBTestAllocatePagesConsistencyTest (
                  );
   Status = gtBS->AllocatePages (
                    AllocateAnyPages,
-                   0x7fffffff, // invalid
+                   0x6fffffff, // invalid
                    1,
                    &Memory
                    );
@@ -553,7 +553,7 @@ BBTestAllocatePagesConsistencyTest (
                  StandardLib,
                  AssertionType,
                  gMemoryAllocationServicesBBTestConformanceAssertionGuid002,
-                 L"BS.AllocatePages - MemoryType is 0x7fffffff",
+                 L"BS.AllocatePages - MemoryType is 0x6fffffff",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -984,7 +984,7 @@ BBTestAllocatePoolConsistencyTest (
                  Status
                  );
   Status = gtBS->AllocatePool (
-                   0x7ffffffe, // invalid
+                   0x6ffffffe, // invalid
                    1,
                    (VOID **)&Memory
                    );
@@ -997,14 +997,14 @@ BBTestAllocatePoolConsistencyTest (
                  StandardLib,
                  AssertionType,
                  gMemoryAllocationServicesBBTestConformanceAssertionGuid003,
-                 L"BS.AllocatePool - Type is 0x7ffffffe",
+                 L"BS.AllocatePool - Type is 0x6ffffffe",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
                  );
   Status = gtBS->AllocatePool (
-                   0x7fffffff, // invalid
+                   0x6fffffff, // invalid
                    1,
                    (VOID **)&Memory
                    );
@@ -1017,7 +1017,7 @@ BBTestAllocatePoolConsistencyTest (
                  StandardLib,
                  AssertionType,
                  gMemoryAllocationServicesBBTestConformanceAssertionGuid004,
-                 L"BS.AllocatePool - Type is 0x7fffffff",
+                 L"BS.AllocatePool - Type is 0x6fffffff",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
