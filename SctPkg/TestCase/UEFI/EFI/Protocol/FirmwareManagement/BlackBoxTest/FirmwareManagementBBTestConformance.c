@@ -670,7 +670,7 @@ BBTestSetImageConformanceTest (
   //
 
   BBTestSetImageConformanceTestCheckpoint1 (StandardLib, FirmwareManagement);
-  BBTestSetImageConformanceTestCheckpoint2 (StandardLib, FirmwareManagement);
+  //BBTestSetImageConformanceTestCheckpoint2 (StandardLib, FirmwareManagement);
   BBTestSetImageConformanceTestCheckpoint3 (StandardLib, FirmwareManagement);
   BBTestSetImageConformanceTestCheckpoint4 (StandardLib, FirmwareManagement);
   
