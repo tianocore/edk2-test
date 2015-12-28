@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -609,5 +609,19 @@ extern EFI_GUID gUsb2HcTestConformanceAssertionGuid041;
   }
 
 extern EFI_GUID gUsb2HcTestConformanceAssertionGuid042;
+
+#define EFI_TEST_USB2HCTESTCONFORMANCE_ASSERTION_043_GUID \
+  { \
+    0xfa4f5868, 0xf004, 0x4cbe, 0x88, 0x97, 0xfd, 0x6, 0xb2, 0x72, 0x76, 0x71 \
+  }
+
+extern EFI_GUID gUsb2HcTestConformanceAssertionGuid043;
+
+#define EFI_TEST_USB2HCTESTCONFORMANCE_ASSERTION_044_GUID \
+  { \
+    0x474590c4, 0x8410, 0x4871, 0x93, 0xb4, 0x2b, 0xe, 0x9f, 0xb5, 0xe8, 0x30 \
+  }
+
+extern EFI_GUID gUsb2HcTestConformanceAssertionGuid044;
 
 #endif

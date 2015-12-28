@@ -610,4 +610,18 @@ extern EFI_GUID gUsb2HcTestConformanceAssertionGuid041;
 
 extern EFI_GUID gUsb2HcTestConformanceAssertionGuid042;
 
+#define EFI_TEST_USB2HCTESTCONFORMANCE_ASSERTION_043_GUID \
+  { \
+    0xfa4f5868, 0xf004, 0x4cbe, 0x88, 0x97, 0xfd, 0x6, 0xb2, 0x72, 0x76, 0x71 \
+  }
+
+extern EFI_GUID gUsb2HcTestConformanceAssertionGuid043;
+
+#define EFI_TEST_USB2HCTESTCONFORMANCE_ASSERTION_044_GUID \
+  { \
+    0x474590c4, 0x8410, 0x4871, 0x93, 0xb4, 0x2b, 0xe, 0x9f, 0xb5, 0xe8, 0x30 \
+  }
+
+extern EFI_GUID gUsb2HcTestConformanceAssertionGuid044;
+
 #endif

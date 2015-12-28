@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -269,6 +269,13 @@ Usb2HcAsyncIsochronousTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+Usb2HcAsyncIsochronousTransferConformanceSubTest4 (
+  IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib
+  );
+
+EFI_STATUS
 Usb2HcIsochronousTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -291,6 +298,13 @@ Usb2HcIsochronousTransferConformanceSubTest3 (
 
 EFI_STATUS
 Usb2HcIsochronousTransferConformanceSubTest4 (
+  IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib
+  );
+
+EFI_STATUS
+Usb2HcIsochronousTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib
@@ -1020,7 +1034,7 @@ Returns:
   //
   // Data transfer direction indicated by EndPointAddress is other than EfiUsbDataIn.
   //
-  Status = Usb2HcAsyncInterruptTransferConformanceSubTest1 (Usb2Hc, StandardLib, LoggingLib);
+  //Status = Usb2HcAsyncInterruptTransferConformanceSubTest1 (Usb2Hc, StandardLib, LoggingLib);
 
   //
   // Call AsyncInterruptTransfer() with Invalid Parameters
@@ -1248,6 +1262,13 @@ Returns:
   Status = Usb2HcAsyncIsochronousTransferConformanceSubTest3 (Usb2Hc, StandardLib, LoggingLib);
 
   //
+  // Call AsyncIsochronousTransfer() with Invalid Parameters
+  //
+  // DeviceSpeed is not one of the supported values.
+  //
+  Status = Usb2HcAsyncIsochronousTransferConformanceSubTest4 (Usb2Hc, StandardLib, LoggingLib);
+
+  //
   // Done
   //
   return EFI_SUCCESS;
@@ -1344,6 +1365,13 @@ Returns:
   // TransferResult is NULL.
   //
   Status = Usb2HcIsochronousTransferConformanceSubTest4 (Usb2Hc, StandardLib, LoggingLib);
+
+  //
+  // Call IsochronousTransfer() with Invalid Parameters
+  //
+  // DeviceSpeed is not one of the supported values.
+  //
+  Status = Usb2HcIsochronousTransferConformanceSubTest5 (Usb2Hc, StandardLib, LoggingLib);
 
   //
   // Done
@@ -2613,6 +2641,7 @@ Returns:
                  (UINTN)__LINE__,
                  Status
                  );
+
   if (Usb2Hc->MajorRevision >= 0x3) {
     //
     // 4. DeviceSpeed is EFI_USB_SPEED_SUPER, MaximumPacketLength is 256 (not 512)
@@ -2651,6 +2680,7 @@ Returns:
                    Status
                    );
   }
+
   if (LoggingLib != NULL) {
     LoggingLib->ExitFunction (
                   LoggingLib,
@@ -4668,7 +4698,7 @@ Returns:
                   );
   }
   //
-  // MaximumPacketLength is larger than 1023
+  // MaximumPacketLength is larger than 1023 when it is the full-speed device
   //
   DataLength = 128;
   Status = Usb2Hc->AsyncIsochronousTransfer (
@@ -4677,7 +4707,7 @@ Returns:
                      0x81,
                      EFI_USB_SPEED_FULL,
                      1024,
-                     0,
+                     1,
                      (void **) &Data,
                      DataLength,
                      NULL,
@@ -4704,10 +4734,173 @@ Returns:
                  Status
                  );
 
+  //
+  // MaximumPacketLength is larger than 1024 when it is the high-speed device
+  //
+  DataLength = 128;
+  Status = Usb2Hc->AsyncIsochronousTransfer (
+                     Usb2Hc,
+                     2,
+                     0x81,
+                     EFI_USB_SPEED_HIGH,
+                     1025,
+                     1,
+                     (void **) &Data,
+                     DataLength,
+                     NULL,
+                     Usb2HcIsochronousCallBack,
+                     NULL
+                     );
+
+  if (Status == EFI_INVALID_PARAMETER || Status == EFI_UNSUPPORTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gUsb2HcTestConformanceAssertionGuid033,
+                 L"USB2_HC_PROCOTOL.AsyncIsochronousTransfer - AsyncIsochronousTransfer() returns EFI_INVALID_PARAMETER with MaximumPacketLength is larger than 1024",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // MaximumPacketLength is larger than 1024 when it is the super-device
+  //
+  DataLength = 128;
+  Status = Usb2Hc->AsyncIsochronousTransfer (
+                     Usb2Hc,
+                     2,
+                     0x81,
+                     EFI_USB_SPEED_SUPER,
+                     1025,
+                     1,
+                     (void **) &Data,
+                     DataLength,
+                     NULL,
+                     Usb2HcIsochronousCallBack,
+                     NULL
+                     );
+
+  if (Status == EFI_INVALID_PARAMETER || Status == EFI_UNSUPPORTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gUsb2HcTestConformanceAssertionGuid033,
+                 L"USB2_HC_PROCOTOL.AsyncIsochronousTransfer - AsyncIsochronousTransfer() returns EFI_INVALID_PARAMETER with MaximumPacketLength is larger than 1024",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
   if (LoggingLib != NULL) {
     LoggingLib->ExitFunction (
                   LoggingLib,
                   L"Usb2HcAsyncIsochronousTransferConformanceSubTest3",
+                  L"TDS 5.14.2.1 - Call Usb2Hc->AsyncIsochronousTransfer() with Invalid Parameters\n"
+                  );
+  }
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+Usb2HcAsyncIsochronousTransferConformanceSubTest4 (
+  IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib
+  )
+/*++
+
+Routine Description:
+
+  Call Usb2Hc->AsyncIsochronousTransfer() with Invalid Parameters.
+  
+Arguments:
+
+  Usb2Hc           - A pointer to EFI_USB2_HC_PROTOCOL instance. 
+  
+  StandardLib      - A pointer to EFI_STANDARD_TEST_LIBRARY_PROTOCOL instance.
+  
+  LoggingLib       - A pointer to EFI_TEST_LOGGING_LIBRARY_PROTOCOL instance.
+
+Returns:
+
+  EFI_SUCCESS      - Successfully.
+  Other value      - Something failed.
+
+--*/
+{
+  EFI_STATUS          Status;
+  EFI_TEST_ASSERTION  Result;
+  UINTN               DataLength;
+  UINT32              Data[255];
+
+  if (LoggingLib != NULL) {
+    LoggingLib->EnterFunction (
+                  LoggingLib,
+                  L"Usb2HcAsyncIsochronousTransferConformanceSubTest4",
+                  L"TDS 5.14.2.1 - Call Usb2Hc->AsyncIsochronousTransfer() with Invalid Parameters\n"
+                  );
+  }
+  //
+  // DeviceSpeed is not one of the supported values
+  //
+  DataLength = 128;
+  Status = Usb2Hc->AsyncIsochronousTransfer (
+                     Usb2Hc,
+                     2,
+                     0x81,
+                     EFI_USB_SPEED_LOW,
+                     8,
+                     1,
+                     (void **) &Data,
+                     DataLength,
+                     NULL,
+                     Usb2HcIsochronousCallBack,
+                     NULL
+                     );
+
+  if (Status == EFI_INVALID_PARAMETER || Status == EFI_UNSUPPORTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gUsb2HcTestConformanceAssertionGuid044,
+                 L"USB2_HC_PROCOTOL.AsyncIsochronousTransfer - AsyncIsochronousTransfer() returns EFI_INVALID_PARAMETER when DeviceSpeed is not one of the supported values",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  if (LoggingLib != NULL) {
+    LoggingLib->ExitFunction (
+                  LoggingLib,
+                  L"Usb2HcAsyncIsochronousTransferConformanceSubTest4",
                   L"TDS 5.14.2.1 - Call Usb2Hc->AsyncIsochronousTransfer() with Invalid Parameters\n"
                   );
   }
@@ -4935,7 +5128,7 @@ Returns:
                   );
   }
   //
-  // MaximumPacketLength is larger than 1023
+  // MaximumPacketLength is larger than 1023 when it is the full-speed device
   //
   DataLength = 128;
   Status = Usb2Hc->IsochronousTransfer (
@@ -4964,6 +5157,78 @@ Returns:
                  Result,
                  gUsb2HcTestConformanceAssertionGuid036,
                  L"USB2_HC_PROCOTOL.IsochronousTransfer - IsochronousTransfer() returns EFI_INVALID_PARAMETER with MaximumPacketLength is larger than 1023",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // MaximumPacketLength is larger than 1024 when it is the high-speed device
+  //
+  DataLength = 128;
+  Status = Usb2Hc->IsochronousTransfer (
+                     Usb2Hc,
+                     2,
+                     0x81,
+                     EFI_USB_SPEED_HIGH,
+                     1025,
+                     1,
+                     (void **) &Data,
+                     DataLength,
+                     NULL,
+                     &TransferResult
+                     );
+
+  if (Status == EFI_INVALID_PARAMETER || Status == EFI_UNSUPPORTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gUsb2HcTestConformanceAssertionGuid036,
+                 L"USB2_HC_PROCOTOL.IsochronousTransfer - IsochronousTransfer() returns EFI_INVALID_PARAMETER with MaximumPacketLength is larger than 1024",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // MaximumPacketLength is larger than 1024 when it is the super-speed device
+  //
+  DataLength = 128;
+  Status = Usb2Hc->IsochronousTransfer (
+                     Usb2Hc,
+                     2,
+                     0x81,
+                     EFI_USB_SPEED_SUPER,
+                     1025,
+                     1,
+                     (void **) &Data,
+                     DataLength,
+                     NULL,
+                     &TransferResult
+                     );
+
+  if (Status == EFI_INVALID_PARAMETER || Status == EFI_UNSUPPORTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gUsb2HcTestConformanceAssertionGuid036,
+                 L"USB2_HC_PROCOTOL.IsochronousTransfer - IsochronousTransfer() returns EFI_INVALID_PARAMETER with MaximumPacketLength is larger than 1024",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -5062,6 +5327,95 @@ Returns:
     LoggingLib->ExitFunction (
                   LoggingLib,
                   L"Usb2HcIsochronousTransferConformanceSubTest4",
+                  L"TDS 5.13.2.1 - Call Usb2Hc->IsochronousTransfer() with Invalid Parameters\n"
+                  );
+  }
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+Usb2HcIsochronousTransferConformanceSubTest5 (
+  IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib
+  )
+/*++
+
+Routine Description:
+
+  Call Usb2Hc->IsochronousTransfer() with Invalid Parameters.
+  
+Arguments:
+
+  Usb2Hc           - A pointer to EFI_USB2_HC_PROTOCOL instance. 
+  
+  StandardLib      - A pointer to EFI_STANDARD_TEST_LIBRARY_PROTOCOL instance.
+  
+  LoggingLib       - A pointer to EFI_TEST_LOGGING_LIBRARY_PROTOCOL instance.
+
+Returns:
+
+  EFI_SUCCESS      - Successfully.
+  Other value      - Something failed.
+
+--*/
+{
+  EFI_STATUS          Status;
+  EFI_TEST_ASSERTION  Result;
+  UINTN               DataLength;
+  UINT32              Data[255];
+  UINT32              TransferResult;
+
+  if (LoggingLib != NULL) {
+    LoggingLib->EnterFunction (
+                  LoggingLib,
+                  L"Usb2HcIsochronousTransferConformanceSubTest5",
+                  L"TDS 5.13.2.1 - Call Usb2Hc->IsochronousTransfer() with Invalid Parameters\n"
+                  );
+  }
+  //
+  // DeviceSpeed is EFI_USB_SPEED_LOW
+  //
+  DataLength = 128;
+  Status = Usb2Hc->IsochronousTransfer (
+                     Usb2Hc,
+                     2,
+                     0x81,
+                     EFI_USB_SPEED_LOW,
+                     8,
+                     1,
+                     (void **) &Data,
+                     DataLength,
+                     NULL,
+                     &TransferResult  
+                     );
+
+  if (Status == EFI_INVALID_PARAMETER || Status == EFI_UNSUPPORTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gUsb2HcTestConformanceAssertionGuid043,
+                 L"USB2_HC_PROCOTOL.IsochronousTransfer - IsochronousTransfer() returns EFI_INVALID_PARAMETER When DeviceSpeed is not one of the supported values",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  if (LoggingLib != NULL) {
+    LoggingLib->ExitFunction (
+                  LoggingLib,
+                  L"Usb2HcIsochronousTransferConformanceSubTest5",
                   L"TDS 5.13.2.1 - Call Usb2Hc->IsochronousTransfer() with Invalid Parameters\n"
                   );
   }
