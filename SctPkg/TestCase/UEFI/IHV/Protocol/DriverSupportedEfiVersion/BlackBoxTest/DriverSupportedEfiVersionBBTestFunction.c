@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Byosoft Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Byosoft Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -92,7 +92,7 @@ BBTestLengthParameterAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **)&StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -166,7 +166,7 @@ BBTestFirmwareVersionParameterAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **)&StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -184,16 +184,21 @@ BBTestFirmwareVersionParameterAutoTest (
   }
   DriverSupportedEfiVersion = (EFI_DRIVER_SUPPORTED_EFI_VERSION_PROTOCOL *)ClientInterface;
   S1 = DriverSupportedEfiVersion->FirmwareVersion;
-  S2 = EFI_2_10_SYSTEM_TABLE_REVISION;
+  S2 = EFI_2_50_SYSTEM_TABLE_REVISION;
   
-  if (S1==S2) {
+  if (S1 == S2) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-     if(S2==EFI_2_00_SYSTEM_TABLE_REVISION ||
-	  S2==EFI_1_10_SYSTEM_TABLE_REVISION ||
-	  S2==EFI_1_02_SYSTEM_TABLE_REVISION ) {
-           AssertionType = EFI_TEST_ASSERTION_WARNING;
-	    StandardLib->RecordAssertion (
+    if ( S1 == EFI_2_40_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_2_31_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_2_30_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_2_20_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_2_10_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_2_00_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_1_10_SYSTEM_TABLE_REVISION ||
+      S1 == EFI_1_02_SYSTEM_TABLE_REVISION ) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+      StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
                  gDriverSupportedEfiVersionTestAssertionGuid002,
@@ -205,10 +210,10 @@ BBTestFirmwareVersionParameterAutoTest (
                  S2,
                  EFI_SUCCESS
                  );
-          return EFI_INCOMPATIBLE_VERSION;
-	 } else {
-	   AssertionType = EFI_TEST_ASSERTION_FAILED;
-	 }
+      return EFI_INCOMPATIBLE_VERSION;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
   StandardLib->RecordAssertion (
                  StandardLib,
