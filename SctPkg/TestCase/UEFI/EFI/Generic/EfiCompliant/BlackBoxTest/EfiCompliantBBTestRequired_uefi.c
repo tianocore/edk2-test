@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -68,7 +68,7 @@ Abstract:
 
 EFI_GUID gGlobalVariableGuid = EFI_GLOBAL_VARIABLE;
 
-#define  GlobalVariableNum    33
+#define  GlobalVariableNum    40
 #define  MAX_BUFFER_SIZE      1024
 
 typedef struct _VARIABLE_PAIR {
@@ -77,39 +77,46 @@ typedef struct _VARIABLE_PAIR {
 } VARIABLE_PAIR;
 
 VARIABLE_PAIR  VariableArray[GlobalVariableNum] = {
-  {L"LangCodes",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"Lang",                 EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"Timeout",              EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"PlatformLangCodes",                                EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"PlatformLang",         EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"ConIn",                EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"ConOut",               EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"ErrOut",               EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"ConInDev",                                         EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"ConOutDev",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"ErrOutDev",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"AuditMode",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"Boot",                 EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"BootOrder",            EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"BootCurrent",                                      EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS}, 
   {L"BootNext",             EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"BootCurrent",                                      EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"BootOrder",            EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"BootOptionSupport",                                EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"ConIn",                EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"ConInDev",                                         EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"ConOut",               EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"ConOutDev",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"dbDefault",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"dbrDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},  
+  {L"dbtDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"dbxDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"DeployedMode",                                     EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"Driver",               EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"DriverOrder",          EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"Key",                  EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"ErrOut",               EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"ErrOutDev",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"HwErrRecSupport",      EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"SetupMode",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"KEK",                  EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS},
+  {L"KEKDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"Key",                  EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"Lang",                 EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},  
+  {L"LangCodes",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"OsIndications",        EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"OsIndicationsSupported",                           EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"OsRecoveryOrder",      EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS},
   {L"PK",                   EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS},
+  {L"PKDefault",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},  
+  {L"PlatformLang",         EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"PlatformLangCodes",                                EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"PlatformRecovery",                                 EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"SignatureSupport",                                 EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
   {L"SecureBoot",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"KEKDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"PKDefault",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"dbDefault",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"dbxDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"dbtDefault",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},  
-  {L"OsIndicationsSupported",                           EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"OsIndications",        EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
-  {L"VendorKeys",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS}
+  {L"SetupMode",                                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"SysPrep",              EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"SysPrepOrder",         EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"Timeout",              EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
+  {L"VendorKeys",                                       EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS},
 };
 
 //
@@ -1134,7 +1141,7 @@ CheckGloballyDefinedVariables(
             Data     = NULL;
             DataSize = 0;
             
-            if (Attribute != VariableArray[11].Attributes) {
+            if (Attribute != VariableArray[1].Attributes) {
               AssertionType   = EFI_TEST_ASSERTION_FAILED;
               //
               // Record the info, include variable name / attributes
@@ -1145,7 +1152,7 @@ CheckGloballyDefinedVariables(
                              L"VariableName: %s, VariableAttribute: 0x%08x, Correct Attribute: 0x%08x\n",
                              VariableName,
                              Attribute,
-                             VariableArray[11].Attributes
+                             VariableArray[1].Attributes
                              );
               break;
             } else {
@@ -1220,7 +1227,7 @@ CheckGloballyDefinedVariables(
             Data     = NULL;
             DataSize = 0;
             
-            if (Attribute != VariableArray[16].Attributes) {
+            if (Attribute != VariableArray[15].Attributes) {
               AssertionType   = EFI_TEST_ASSERTION_FAILED;
               //
               // Record the info, include variable name / attributes
@@ -1231,7 +1238,7 @@ CheckGloballyDefinedVariables(
                              L"VariableName: %s, VariableAttribute: 0x%08x, Correct Attribute: 0x%08x\n",
                              VariableName,
                              Attribute,
-                             VariableArray[16].Attributes
+                             VariableArray[15].Attributes
                              );
               break;
             } else {
@@ -1302,7 +1309,7 @@ CheckGloballyDefinedVariables(
             Data     = NULL;
             DataSize = 0;
             
-            if (Attribute != VariableArray[18].Attributes) {
+            if (Attribute != VariableArray[22].Attributes) {
               AssertionType   = EFI_TEST_ASSERTION_FAILED;
               //
               // Record the info, include variable name / attributes
@@ -1313,7 +1320,171 @@ CheckGloballyDefinedVariables(
                              L"VariableName: %s, VariableAttribute: 0x%08x, Correct Attribute: 0x%08x\n",
                              VariableName,
                              Attribute,
-                             VariableArray[18].Attributes
+                             VariableArray[22].Attributes
+                             );
+              break;
+            } else {
+              break;
+            }
+          }
+        } else if (SctStrnCmp (VariableNamePtr, L"SysPrep", 7) == 0) {
+
+          Found = TRUE;
+
+          VariableNamePtr += 7;
+          for (CharIndex = 0; CharIndex < 4; CharIndex++) {
+            C = *VariableNamePtr;
+            if ((C >= '0'  &&  C <= '9')  ||  (C >= 'A'  &&  C <= 'F')) {
+              AssertionType = EFI_TEST_ASSERTION_PASSED;
+            } else {
+              AssertionType = EFI_TEST_ASSERTION_FAILED;
+              break;
+            }
+            VariableNamePtr++;
+          }
+
+          if (AssertionType == EFI_TEST_ASSERTION_PASSED && *VariableNamePtr != L'\0') {
+            AssertionType = EFI_TEST_ASSERTION_FAILED;
+          }
+          
+          if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+            //
+            // Record the info, include variable name
+            //
+            StandardLib->RecordMessage (
+                           StandardLib,
+                           EFI_VERBOSE_LEVEL_DEFAULT,
+                           L"VariableName: %s\n",
+                           VariableName
+                           );
+            break;
+          }
+          
+          if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
+            Status = gtRT->GetVariable (
+                             VariableName,
+                             &gGlobalVariableGuid,
+                             &Attribute,
+                             &DataSize,
+                             Data
+                             );
+
+            if (Status == EFI_BUFFER_TOO_SMALL) {
+              if (Data != NULL) {
+                gtBS->FreePool (Data);
+              }
+              gtBS->AllocatePool (
+                      EfiBootServicesData, 
+                      DataSize, 
+                      &Data
+                      );
+          
+              Status = gtRT->GetVariable (
+                               VariableName,
+                               &gGlobalVariableGuid,
+                               &Attribute,
+                               &DataSize,
+                               Data
+                               );
+            }
+            gtBS->FreePool (Data);
+            Data     = NULL;
+            DataSize = 0;
+            
+            if (Attribute != VariableArray[36].Attributes) {
+              AssertionType   = EFI_TEST_ASSERTION_FAILED;
+              //
+              // Record the info, include variable name / attributes
+              //
+              StandardLib->RecordMessage (
+                             StandardLib,
+                             EFI_VERBOSE_LEVEL_DEFAULT,
+                             L"VariableName: %s, VariableAttribute: 0x%08x, Correct Attribute: 0x%08x\n",
+                             VariableName,
+                             Attribute,
+                             VariableArray[36].Attributes
+                             );
+              break;
+            } else {
+              break;
+            }
+          }
+        } else if (SctStrnCmp (VariableNamePtr, L"PlatformRecovery", 16) == 0){ 
+
+          Found = TRUE;
+
+          VariableNamePtr += 16;
+          for (CharIndex = 0; CharIndex < 4; CharIndex++) {
+            C = *VariableNamePtr;
+            if ((C >= '0'  &&  C <= '9')  ||  (C >= 'A'  &&  C <= 'F')) {
+              AssertionType = EFI_TEST_ASSERTION_PASSED;
+            } else {
+              AssertionType = EFI_TEST_ASSERTION_FAILED;
+              break;
+            }
+            VariableNamePtr++;
+          }
+
+          if (AssertionType == EFI_TEST_ASSERTION_PASSED && *VariableNamePtr != L'\0') {
+            AssertionType = EFI_TEST_ASSERTION_FAILED;
+          }
+          
+          if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+            //
+            // Record the info, include variable name
+            //
+            StandardLib->RecordMessage (
+                           StandardLib,
+                           EFI_VERBOSE_LEVEL_DEFAULT,
+                           L"VariableName: %s\n",
+                           VariableName
+                           );
+            break;
+          }
+          
+          if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
+            Status = gtRT->GetVariable (
+                             VariableName,
+                             &gGlobalVariableGuid,
+                             &Attribute,
+                             &DataSize,
+                             Data
+                             );
+
+            if (Status == EFI_BUFFER_TOO_SMALL) {
+              if (Data != NULL) {
+                gtBS->FreePool (Data);
+              }
+              gtBS->AllocatePool (
+                      EfiBootServicesData, 
+                      DataSize, 
+                      &Data
+                      );
+          
+              Status = gtRT->GetVariable (
+                               VariableName,
+                               &gGlobalVariableGuid,
+                               &Attribute,
+                               &DataSize,
+                               Data
+                               );
+            }
+            gtBS->FreePool (Data);
+            Data     = NULL;
+            DataSize = 0;
+            
+            if (Attribute != VariableArray[32].Attributes) {
+              AssertionType   = EFI_TEST_ASSERTION_FAILED;
+              //
+              // Record the info, include variable name / attributes
+              //
+              StandardLib->RecordMessage (
+                             StandardLib,
+                             EFI_VERBOSE_LEVEL_DEFAULT,
+                             L"VariableName: %s, VariableAttribute: 0x%08x, Correct Attribute: 0x%08x\n",
+                             VariableName,
+                             Attribute,
+                             VariableArray[32].Attributes
                              );
               break;
             } else {
