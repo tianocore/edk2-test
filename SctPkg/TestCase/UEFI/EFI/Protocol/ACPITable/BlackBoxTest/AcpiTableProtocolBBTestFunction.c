@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -256,30 +256,34 @@ BBTestInstallAcpiTableFunctionTestCheckpoint1 (
     } else {
       RSDP = (EFI_ACPI_RSDP *)ConfigurationTable->VendorTable;
 
-      RSDT = (EFI_ACPI_DESCRIPTION_HEADER *)(UINTN)(RSDP->RSDTAddress);
-      NumberOfTableEntries = (RSDT->Length - sizeof(EFI_ACPI_DESCRIPTION_HEADER))/sizeof(UINT32);
-
       RSDTTable = FALSE;
 
-      for (Index = 0; Index < NumberOfTableEntries; Index++) {
-        LinkedTable = (EFI_ACPI_DESCRIPTION_HEADER *)(UINTN)*(UINT32 *)((UINTN)RSDT + sizeof(EFI_ACPI_DESCRIPTION_HEADER) + Index * sizeof(UINT32));
-        if (((EFI_ACPI_DESCRIPTION_HEADER *) LinkedTable)->Signature == UEFI_SCTT_TABLE_SIGNATURE) {
-          RSDTTable = TRUE;
-          break;
-        }  
-        LinkedTable = NULL;
-      }
-
-      if (LinkedTable == NULL) {
-        XSDT = (EFI_ACPI_DESCRIPTION_HEADER *)(UINTN)(RSDP->XSDTAddress);
-        NumberOfTableEntries = (XSDT->Length - sizeof(EFI_ACPI_DESCRIPTION_HEADER))/sizeof(UINT64);
+      RSDT = (EFI_ACPI_DESCRIPTION_HEADER *)(UINTN)(RSDP->RSDTAddress);
+      if (RSDT != NULL) {	  
+        NumberOfTableEntries = (RSDT->Length - sizeof(EFI_ACPI_DESCRIPTION_HEADER))/sizeof(UINT32);
 
         for (Index = 0; Index < NumberOfTableEntries; Index++) {
-          SctCopyMem (&Address, (UINT64 *)((UINTN)XSDT + sizeof(EFI_ACPI_DESCRIPTION_HEADER) + Index * sizeof(UINT64)), sizeof(UINT64));
-          LinkedTable = (EFI_ACPI_DESCRIPTION_HEADER*)(UINTN)Address;
-          if (((EFI_ACPI_DESCRIPTION_HEADER *) LinkedTable)->Signature == UEFI_SCTT_TABLE_SIGNATURE)
+          LinkedTable = (EFI_ACPI_DESCRIPTION_HEADER *)(UINTN)*(UINT32 *)((UINTN)RSDT + sizeof(EFI_ACPI_DESCRIPTION_HEADER) + Index * sizeof(UINT32));
+          if (((EFI_ACPI_DESCRIPTION_HEADER *) LinkedTable)->Signature == UEFI_SCTT_TABLE_SIGNATURE) {
+            RSDTTable = TRUE;
             break;
+          }  
           LinkedTable = NULL;
+        }
+      }
+      if (LinkedTable == NULL) {
+        XSDT = (EFI_ACPI_DESCRIPTION_HEADER *)(UINTN)(RSDP->XSDTAddress);
+
+        if (XSDT != NULL) {		
+          NumberOfTableEntries = (XSDT->Length - sizeof(EFI_ACPI_DESCRIPTION_HEADER))/sizeof(UINT64);
+
+          for (Index = 0; Index < NumberOfTableEntries; Index++) {
+            SctCopyMem (&Address, (UINT64 *)((UINTN)XSDT + sizeof(EFI_ACPI_DESCRIPTION_HEADER) + Index * sizeof(UINT64)), sizeof(UINT64));
+            LinkedTable = (EFI_ACPI_DESCRIPTION_HEADER*)(UINTN)Address;
+            if (((EFI_ACPI_DESCRIPTION_HEADER *) LinkedTable)->Signature == UEFI_SCTT_TABLE_SIGNATURE)
+              break;
+            LinkedTable = NULL;
+          }
         }
       }
 
