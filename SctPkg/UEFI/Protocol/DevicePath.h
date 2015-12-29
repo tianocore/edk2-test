@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -271,6 +271,28 @@ typedef struct {
   /// Vendor-defined variable size data.
   ///
 } VENDOR_DEVICE_PATH;
+
+///
+/// The BMC Device Path for a Baseboard Management Controller(BMC) host interface.
+///
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  ///
+  /// The Baseboard Management Controller (BMC) host interface type:
+  /// 0x00: Unknown
+  /// 0x01: KCS: Keyboard Controller Style
+  /// 0x02: SMIC: Server Management Interface Chip
+  /// 0x03: BT: Block Transfer
+  ///
+  UINT8                        InterfaceType;
+  ///
+  /// Base address (either memory-mapped or I/O) of the BMC.
+  /// If the least-significant bit of the field is a 1, the address is in
+  /// I/O space; otherwise, the address is memory-mapped. Refer to the
+  /// IPMI Interface Specification for usage details.
+  ///
+  UINT8                        BaseAddress[8];
+} BMC_DEVICE_PATH;
 
 ///
 /// The Media Protocol Device Path is used to denote the protocol that is being

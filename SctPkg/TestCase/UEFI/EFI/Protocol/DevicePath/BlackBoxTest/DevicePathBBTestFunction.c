@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -101,6 +101,7 @@ BBTestDevicePathNodeConformanceAutoTest (
   VLAN_DEVICE_PATH                    *Vlan;
   HARDDRIVE_DEVICE_PATH               *Hd;
   CHAR16                              *DevStr;
+  BMC_DEVICE_PATH                     *BMC;
 
   //
   // Get the Standard Library Interface
@@ -279,6 +280,33 @@ BBTestDevicePathNodeConformanceAutoTest (
                     (UINTN)Length
                     );
     }
+    //
+    // 
+    // Check Hardware Device Path: BMC Device Path
+    //
+    else if ((Type == 1) && (SubType == 6)) {
+      BMC = (BMC_DEVICE_PATH *) DevicePath;
+      if (Length == 13 && BMC->InterfaceType >= 0x00 && BMC->InterfaceType <= 0x03) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid051,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Hardware Device Path - Controller Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d, InterfaceType - %x",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length,
+					BMC->InterfaceType
+                    );
+    }
+	
     //
     // Assertion Point 3.1.2.8
     // Check ACPI Device Path: ACPI Device Path
@@ -770,6 +798,121 @@ BBTestDevicePathNodeConformanceAutoTest (
                     );  
     }
     //
+    // Add a new checkpoint for Uniform Resource Identifiers (URI) Device Path
+    // Check Messaging Device Path: Uniform Resource Identifiers (URI) Device Path
+    //
+    else if ((Type == 3) && (SubType == 24)) {
+      if (Length  >= 4) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid053,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Uniform Resource Identifiers (URI) Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }
+    //
+    // Add a new checkpoint for Universal Flash Storage (UFS) Device Path
+    // Check Messaging Device Path: Universal Flash Storage (UFS) Device Path
+    //
+    else if ((Type == 3) && (SubType == 25)) {
+      if (Length  == 6) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid054,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Universal Flash Storage (UFS) Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }
+    //
+    // Add a new checkpoint for Secure Digital (SD) Device Path
+    // Check Messaging Device Path: Secure Digital (SD) Device Path
+    //
+    else if ((Type == 3) && (SubType == 26)) {
+      if (Length  == 5) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid055,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Secure Digital (SD) Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }
+    //
+    // Add a new checkpoint for Bluetooth Device Path
+    // Check Messaging Device Path: Bluetooth Device Path
+    //
+    else if ((Type == 3) && (SubType == 27)) {
+      if (Length  == 10) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid056,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Bluetooth Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }
+    //
+    // Add a new checkpoint for WIFI Device Path
+    // Check Messaging Device Path: WIFI Device Path
+    //
+    else if ((Type == 3) && (SubType == 28)) {
+      if (Length  == 36) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid057,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - WIFI Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }	
+    //
     // Assertion Point 3.1.2.23
     // Check Messaging Device Path: InfiniBand Device Path
     //
@@ -1100,7 +1243,55 @@ BBTestDevicePathNodeConformanceAutoTest (
                     (UINTN)Length
                     );
     }		
-#endif	
+#endif
+    //
+    // Add a new CheckPoint for Relative Offset Range
+    // Check Relative Offset Range Device Path
+    //
+    else if ((Type == 4) && (SubType == 8)) {
+      if (Length ==24) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid058,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Media Device Path - Relative Offset Range",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }	
+    //
+    // Add a new CheckPoint for RAM Disk
+    // Check RAM Disk Device Path
+    //
+    else if ((Type == 4) && (SubType == 9)) {
+      if (Length ==38) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid059,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Media Device Path - RAM Disk",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }		
     //
     // Assertion Point 3.1.2.34
     // Check BIOS Boot Specification Device Path

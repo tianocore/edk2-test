@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -138,4 +138,20 @@ EFI_GUID  gDevicePathBBTestFunctionAssertionGuid049 = EFI_TEST_DEVICEPATHBBTESTF
 EFI_GUID  gDevicePathBBTestFunctionAssertionGuid050 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_050_GUID;
 
 EFI_GUID  gDevicePathBBTestFunctionAssertionGuid052 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_052_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid051 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_051_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid053 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_053_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid054 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_054_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid055 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_055_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid056 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_056_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid057 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_057_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid058 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_058_GUID;
+
+EFI_GUID  gDevicePathBBTestFunctionAssertionGuid059 = EFI_TEST_DEVICEPATHBBTESTFUNCTION_ASSERTION_059_GUID;
 
