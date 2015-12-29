@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1167,13 +1167,18 @@ SetControlFuncTestSub1 (
   UINTN                 Index;
   UINT32                SxControlBits;
   UINT32                RxControlBits;
+  UINT32                ControlMask;
+  UINT32                ValidControlBits;
 
   //
-  // UEFI 2.0 spec does not require all control bits can be set. From
-  // investigation, we think only SEND and READY control bit may required.
+  // UEFI 2.5 spec mentions Only the REQUEST_TO_SEND, DATA_TERMINAL_READY, HARDWARE_LOOPBACK_ENABLE,
+  // SOFTWARE_LOOPBACK_ENABLE, and HARDWARE_FLOW_CONTROL_ENABLE bits can be set with SetControl().
   //
-  UINT32                ValidControlBits = EFI_SERIAL_REQUEST_TO_SEND |
-                                           EFI_SERIAL_DATA_TERMINAL_READY;
+  UINT32                ControlBits = EFI_SERIAL_REQUEST_TO_SEND |
+                                           EFI_SERIAL_DATA_TERMINAL_READY |
+                                           EFI_SERIAL_HARDWARE_LOOPBACK_ENABLE |
+                                           EFI_SERIAL_SOFTWARE_LOOPBACK_ENABLE |
+                                           EFI_SERIAL_HARDWARE_FLOW_CONTROL_ENABLE;
 
   //
   // Trace ...
@@ -1185,6 +1190,9 @@ SetControlFuncTestSub1 (
                   L"TDS 3.3.2.1"
                   );
   }
+
+  ControlMask      = SerialIo->Mode->ControlMask;
+  ValidControlBits = ControlMask & ControlBits;
 
   //
   // Walk through all 32 control-bits
@@ -1304,13 +1312,18 @@ GetControlFuncTestSub1 (
   UINTN                 Index;
   UINT32                SxControlBits;
   UINT32                RxControlBits;
+  UINT32                ValidControlBits;
+  UINT32                ControlMask;
 
   //
-  // UEFI 2.0 spec does not require all control bits can be set. From
-  // investigation, we think only SEND and READY control bit may required.
+  // UEFI 2.5 spec mentions Only the REQUEST_TO_SEND, DATA_TERMINAL_READY, HARDWARE_LOOPBACK_ENABLE,
+  // SOFTWARE_LOOPBACK_ENABLE, and HARDWARE_FLOW_CONTROL_ENABLE bits can be set with SetControl().
   //
-  UINT32                ValidControlBits = EFI_SERIAL_REQUEST_TO_SEND |
-                                           EFI_SERIAL_DATA_TERMINAL_READY;
+  UINT32                ControlBits = EFI_SERIAL_REQUEST_TO_SEND |
+                                           EFI_SERIAL_DATA_TERMINAL_READY |
+                                           EFI_SERIAL_HARDWARE_LOOPBACK_ENABLE |
+                                           EFI_SERIAL_SOFTWARE_LOOPBACK_ENABLE |
+                                           EFI_SERIAL_HARDWARE_FLOW_CONTROL_ENABLE;
 
   //
   // Trace ...
@@ -1322,6 +1335,9 @@ GetControlFuncTestSub1 (
                   L"TDS 3.4.2.1"
                   );
   }
+
+  ControlMask      = SerialIo->Mode->ControlMask;
+  ValidControlBits = ControlMask & ControlBits;
 
   //
   // Walk through all 32 control-bits
@@ -1410,9 +1426,9 @@ GetControlFuncTestSub1 (
       break;
     }
   }
-      //
-    // Get the control-bits
-    //
+  //
+  // Get the control-bits
+  //
   ReturnedStatus = SerialIo->GetControl (
                                SerialIo,
                                &RxControlBits
