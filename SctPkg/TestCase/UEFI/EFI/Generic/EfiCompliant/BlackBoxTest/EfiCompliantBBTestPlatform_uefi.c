@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -119,6 +119,81 @@ extern EFI_GUID gGlobalVariableGuid;
 
 #define SECTION_NAME_PLATFORM_SPECIFIC      L"Platform Specific"
 
+#define EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID \
+{0x9fb9a8a1,0x2f4a,0x43a6,0x88,0x9c,0xd0,0xf7,0xb6,0xc4,0x7a,0xd5}
+#define EFI_TCP6_SERVICE_BINDING_PROTOCOL_GUID \
+{0xec20eb79,0x6c1a,0x4664,0x9a,0xd,0xd2,0xe4,0xcc,0x16,0xd6, 0x64}
+#define EFI_IP6_SERVICE_BINDING_PROTOCOL_GUID \
+{0xec835dd3,0xfe0f,0x617b,0xa6,0x21,0xb3,0x50,0xc3,0xe1,0x33,0x88}
+#define EFI_UDP6_SERVICE_BINDING_PROTOCOL_GUID \
+{0x66ed4721,0x3c98,0x4d3e,0x81,0xe3,0xd0,0x3d,0xd3,0x9a,0x72,0x54}
+#define EFI_IP6_CONFIG_PROTOCOL_GUID \
+{0x937fe521,0x95ae,0x4d1a,0x89,0x29,0x48,0xbc,0xd9,0xa,0xd3,0x1a}
+#define EFI_VLAN_CONFIG_PROTOCOL_GUID \
+{0x9e23d768,0xd2f3,0x4366,0x9f,0xc3,0x3a,0x7a,0xba,0x86,0x43,0x74}
+
+#define EFI_DHCP6_PROTOCOL_GUID \
+{0x87c8bad7,0x595,0x4053,0x82,0x97,0xde,0xde,0x39,0x5f,0x5d,0x5b}
+#define EFI_TCP6_PROTOCOL_GUID \
+{0x46e44855,0xbd60,0x4ab7,0xab,0xd,0xa6,0x79,0xb9,0x44,0x7d,0x77}
+#define EFI_IP6_PROTOCOL_GUID \
+{0x2c8759d5,0x5c2d,0x66ef,0x92,0x5f,0xb6,0x6c,0x10,0x19,0x57,0xe2}
+#define EFI_UDP6_PROTOCOL_GUID \
+{0x4f948815,0xb4b9,0x43cb,0x8a,0x33,0x90,0xe0,0x60,0xb3,0x49,0x55}
+
+EFI_GUID gEfiDhcp6ServiceBindingProtocolGuid = EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID;
+EFI_GUID gEfiTcp6ServiceBindingProtocolGuid  = EFI_TCP6_SERVICE_BINDING_PROTOCOL_GUID;
+EFI_GUID gEfiIp6ServiceBindingProtocolGuid   = EFI_IP6_SERVICE_BINDING_PROTOCOL_GUID;
+EFI_GUID gEfiUdp6ServiceBindingProtocolGuid  = EFI_UDP6_SERVICE_BINDING_PROTOCOL_GUID;
+EFI_GUID gEfiIp6ConfigProtocolGuid           = EFI_IP6_CONFIG_PROTOCOL_GUID;
+EFI_GUID gEfiVlanConfigProtocolGuid          = EFI_VLAN_CONFIG_PROTOCOL_GUID;
+
+EFI_GUID gEfiDhcp6ProtocolGuid               = EFI_DHCP6_PROTOCOL_GUID;
+EFI_GUID gEfiTcp6ProtocolGuid                = EFI_TCP6_PROTOCOL_GUID;
+EFI_GUID gEfiIp6ProtocolGuid                 = EFI_IP6_PROTOCOL_GUID;
+EFI_GUID gEfiUdp6ProtocolGuid                = EFI_UDP6_PROTOCOL_GUID;
+
+EFI_GUID gEfiIp4Config2ProtocolGuid = { 0x5b446ed1, 0xe30b, 0x4faa,{ 0x87, 0x1a, 0x36, 0x54, 0xec, 0xa3, 0x60, 0x80 }};
+
+EFI_GUID gEfiNvmExpressPassThruProtocolGuid = { 0x52c78312, 0x8edc, 0x4233,{ 0x98, 0xf2, 0x1a, 0x1a, 0xa5, 0xe3, 0x88, 0xa5 }};
+
+EFI_GUID gEfiAtaPassThruProtocolGuid = {0x1d3de7f0,0x807,0x424f,{ 0xaa,0x69,0x11,0xa5,0x4e,0x19,0xa4,0x6f}};
+
+EFI_GUID gEfiDns4ServiceBindingProtocolGuid = { 0xb625b186, 0xe063, 0x44f7,{ 0x89, 0x5, 0x6a, 0x74, 0xdc, 0x6f, 0x52, 0xb4}};
+
+EFI_GUID gEfiDns4ProtocolGuid = { 0xae3d28cc, 0xe05b, 0x4fa1,{ 0xa0, 0x11, 0x7e, 0xb5, 0x5a, 0x3f, 0x14, 0x1 }};
+
+EFI_GUID gEfiDns6ServiceBindingProtocolGuid = { 0x7f1647c8, 0xb76e, 0x44b2,{ 0xa5, 0x65, 0xf7, 0xf, 0xf1, 0x9c, 0xd1, 0x9e}};
+
+EFI_GUID gEfiDns6ProtocolGuid = { 0xca37bc1f, 0xa327, 0x4ae9,{ 0x82, 0x8a, 0x8c, 0x40, 0xd8, 0x50, 0x6a, 0x17 }};
+
+EFI_GUID gEfiTlsServiceBindingProtocolGuid = { 0x952cb795, 0xff36, 0x48cf, 0xa2, 0x49, 0x4d, 0xf4, 0x86, 0xd6, 0xab, 0x8d };
+
+EFI_GUID gEfiTlsConfigurationProtocolGuid = { 0x1682fe44, 0xbd7a, 0x4407, {0xb7, 0xc7, 0xdc, 0xa3, 0x7c, 0xa3, 0x92, 0x2d }};
+
+EFI_GUID gEfiTlsProtocolGuid = { 0xca959f, 0x6cfa, 0x4db1, {0x95, 0xbc, 0xe4, 0x6c, 0x47, 0x51, 0x43, 0x90 }};
+
+EFI_GUID gEfiHttpServiceBindingProtocolGuid = {0xbdc8e6af, 0xd9bc, 0x4379,{0xa7, 0x2a, 0xe0, 0xc4, 0xe7, 0x5d, 0xae, 0x1c}};
+
+EFI_GUID gEfiHttpUtilitiesProtocolGuid = { 0x3E35C163, 0x4074, 0x45DD,{ 0x43, 0x1E, 0x23, 0x98, 0x9D, 0xD8, 0x6B, 0x32 }};
+
+EFI_GUID gEfiHttpProtocolGuid = {0x7A59B29B, 0x910B, 0x4171,{0x82, 0x42, 0xA8, 0x5A, 0x0D, 0xF2, 0x5B, 0x5B}};
+
+EFI_GUID gEfiBlueToothHcProtocolGuid = { 0xb3930571, 0xbeba, 0x4fc5,{ 0x92, 0x3, 0x94, 0x27, 0x24, 0x2e, 0x6a, 0x43 }};
+
+EFI_GUID gEfiBlueToothServiceBindingProtocolGuid = { 0x388278d3, 0x7b85, 0x42f0,{ 0xab, 0xa9, 0xfb, 0x4b, 0xfd, 0x69, 0xf5, 0xab }};
+
+EFI_GUID gEfiBlueToothIoProtocolGuid = { 0x388278d3, 0x7b85, 0x42f0,{ 0xab, 0xa9, 0xfb, 0x4b, 0xfd, 0x69, 0xf5, 0xab }};
+
+EFI_GUID gEfiBlueToothConfigProtocolGuid = { 0xb3930571, 0xbeba, 0x4fc5,{ 0x92, 0x3, 0x94, 0x27, 0x24, 0x2e, 0x6a, 0x43 }};
+
+EFI_GUID gEfiEapProtocolGuid = { 0x5d9f96db, 0xe731, 0x4caa,{0xa0, 0x0d, 0x72, 0xe1, 0x87, 0xcd, 0x77, 0x62 }};
+
+EFI_GUID gEfiEapManagement2ProtocolGuid = { 0x5e93c847, 0x456d, 0x40b3, { 0xa6, 0xb4, 0x78, 0xb0, 0xc9, 0xcf, 0x7f, 0x20 }};
+
+EFI_GUID gEfiEapConfigProtocolGuid = { 0xe5b58dbb, 0x7688, 0x44b4, { 0x97, 0xbf, 0x5f, 0x1d, 0x4b, 0x7c, 0xc8, 0xdb }};
+
+
 //
 // Internal functions declarations
 //
@@ -174,19 +249,7 @@ CheckGraphicalConsoleProtocols (
   );
 
 EFI_STATUS
-CheckUefiNetworkApplication (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
-  IN EFI_INI_FILE_HANDLE                  IniFile
-  );
-  
-EFI_STATUS
-CheckUefiV6NetworkApplication (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
-  IN EFI_INI_FILE_HANDLE                  IniFile
-  );  
-  
-EFI_STATUS
-CheckPointerProtocols (
+CheckPointerProtocol (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -204,7 +267,19 @@ CheckBootFromNetworkProtocols (
   );
 
 EFI_STATUS
-CheckUartProtocols (
+CheckUefiNetworkApplication (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+  
+EFI_STATUS
+CheckUefiV6NetworkApplication (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );  
+
+EFI_STATUS
+CheckUartProtocol (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -222,13 +297,19 @@ CheckUsbProtocols (
   );
 
 EFI_STATUS
-CheckScsiProtocols (
+CheckNVMeProtocol (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
 
 EFI_STATUS
-CheckBootFromIScsi (
+CheckBootFromNVMe (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckScsiProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -240,7 +321,7 @@ CheckBootFromScsi (
   );
 
 EFI_STATUS
-CheckEbcProtocol (
+CheckBootFromIScsi (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -252,7 +333,55 @@ CheckDebugProtocols (
   );
 
 EFI_STATUS
-CheckDriverOverrideProtocols (
+CheckDriverOverrideProtocol (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckATAProtocol (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckEbcProtocol (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckDNS4Protocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckDNS6Protocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckTLSProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckHTTPProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckEAPProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckBlueToothProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -344,20 +473,10 @@ Routine Description:
   //
   CheckGraphicalConsoleProtocols (StandardLib, IniFile);
 
-  //
-  // Check the general network application
-  //
-  CheckUefiNetworkApplication (StandardLib, IniFile);
-
-  //
-  // Check the general V6 network application
-  //  
-  CheckUefiV6NetworkApplication (StandardLib, IniFile);
-  
-  //
+    //
   // Check the pointer protocols
   //
-  CheckPointerProtocols (StandardLib, IniFile);
+  CheckPointerProtocol (StandardLib, IniFile);
 
   //
   // Check the boot from disk protocols
@@ -367,12 +486,22 @@ Routine Description:
   //
   // Check the boot from network protocols
   //
-  CheckBootFromNetworkProtocols (StandardLib, IniFile);
+  CheckBootFromNetworkProtocols (StandardLib, IniFile);  
+
+  //
+  // Check the general network application
+  //
+  CheckUefiNetworkApplication (StandardLib, IniFile);
+
+  //
+  // Check the general V6 network application
+  //  
+  CheckUefiV6NetworkApplication (StandardLib, IniFile);
 
   //
   // Check the UART support protocols
   //
-  CheckUartProtocols (StandardLib, IniFile);
+  CheckUartProtocol (StandardLib, IniFile);
 
   //
   // Check the PCI support protocols
@@ -383,6 +512,16 @@ Routine Description:
   // Check the USB support protocols
   //
   CheckUsbProtocols (StandardLib, IniFile);
+
+  //
+  // Check the NVMe support protocols
+  //
+  CheckNVMeProtocol (StandardLib, IniFile);
+
+  //
+  // Check the boot from NVMe protocols
+  //
+  CheckBootFromNVMe (StandardLib, IniFile);
 
   //
   // Check the SCSI support protocols
@@ -407,12 +546,47 @@ Routine Description:
   //
   // Check the driver override protocols
   //
-  CheckDriverOverrideProtocols (StandardLib, IniFile);
+  CheckDriverOverrideProtocol (StandardLib, IniFile);
+
+  //
+  // Check the ATA support protocols
+  //
+  CheckATAProtocol (StandardLib, IniFile);
 
   //
   // Check the EBC Interpreter
   //
   CheckEbcProtocol (StandardLib, IniFile);
+
+  //
+  // Check the DNS4 protocols
+  //
+  CheckDNS4Protocols (StandardLib, IniFile);
+
+  //
+  // Check the DNS6 protocols
+  //
+  CheckDNS6Protocols (StandardLib, IniFile);
+
+  //
+  // Check the TLS protocols
+  //
+  CheckTLSProtocols (StandardLib, IniFile);
+
+  //
+  // Check the HTTP protocols
+  //
+  CheckHTTPProtocols (StandardLib, IniFile);
+
+  //
+  // Check the EAP protocols
+  //
+  CheckEAPProtocols (StandardLib, IniFile);  
+
+  //
+  // Check the BlueTooth protocols
+  //
+  CheckBlueToothProtocols (StandardLib, IniFile);  
 
   //
   // Close the INI file
@@ -647,11 +821,12 @@ CheckConsoleProtocols (
                  AssertionType,
                  gEfiCompliantBbTestPlatformAssertionGuid001,
                  L"UEFI Compliant - Console protocols must be implemented",
-                 L"%a:%d:Text Input - %s, Text Output - %s",
+                 L"%a:%d:Text Input - %s, Text Output - %s, Text InputEx",
                  __FILE__,
                  (UINTN)__LINE__,
                  ValueA ? L"Yes" : L"No",
-                 ValueB ? L"Yes" : L"No"
+                 ValueB ? L"Yes" : L"No",
+                 ValueC ? L"Yes" : L"No"
                  );
 
   return EFI_SUCCESS;
@@ -879,7 +1054,7 @@ CheckGraphicalConsoleProtocols (
 }
 
 EFI_STATUS
-CheckPointerProtocols (
+CheckPointerProtocol (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   )
@@ -1195,11 +1370,13 @@ CheckBootFromNetworkProtocols (
                  AssertionType,
                  gEfiCompliantBbTestPlatformAssertionGuid005,
                  L"UEFI Compliant - Boot from network protocols must be implemented",
-                 L"%a:%d:SNP - %s, PXE BC - %s, BIS (not required) - %s",
+                 L"%a:%d:PXE BC - %s, SNP - %s, MNP - %s, UNDI - %s",
                  __FILE__,
                  (UINTN)__LINE__,
                  ValueA ? L"Yes" : L"No",
-                 ValueB ? L"Yes" : L"No"
+                 Value[0] ? L"Yes" : L"No",
+                 Value[1] ? L"Yes" : L"No",
+                 Value[2] ? L"Yes" : L"No"
                  );
 
   if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
@@ -1231,8 +1408,8 @@ CheckBootFromNetworkProtocols (
                    StandardLib,
                    AssertionType,
                    gEfiCompliantBbTestPlatformAssertionGuid005,
-                   L"UEFI Compliant - Boot from network protocols must be implemented",
-                   L"%a:%d:BIS - %s",
+                   L"UEFI Compliant - Validating a boot image received through a network device must be implemented",
+                   L"%a:%d:SetupMode equal zero - %s",
                    __FILE__,
                    (UINTN)__LINE__,
                    ValueC ? L"Yes" : L"No"
@@ -1243,8 +1420,454 @@ CheckBootFromNetworkProtocols (
   return EFI_SUCCESS;
 }
 
+
 EFI_STATUS
-CheckUartProtocols (
+CheckUefiNetworkApplication (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  UINTN               Index;
+  EFI_GUID            Guid[15];
+  BOOLEAN             Value[15];
+  VOID                *Interface;
+  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_HANDLE          ChildHandle = NULL;
+  
+  Guid[0] =     gEfiManagedNetworkServiceBindingProtocolGuid;
+  Guid[1] =     gEfiArpServiceBindingProtocolGuid;
+  Guid[2] =     gEfiIp4ServiceBindingProtocolGuid;
+  Guid[3] =     gEfiDhcp4ServiceBindingProtocolGuid;
+  Guid[4] =     gEfiTcp4ServiceBindingProtocolGuid;
+  Guid[5] =     gEfiUdp4ServiceBindingProtocolGuid;
+  Guid[6] =     gEfiIp4Config2ProtocolGuid;
+
+  Guid[7] =     gEfiManagedNetworkProtocolGuid;
+  Guid[8] =     gEfiArpProtocolGuid;
+  Guid[9] =     gEfiIp4ProtocolGuid;
+  Guid[10] =    gEfiDhcp4ProtocolGuid;
+  Guid[11] =    gEfiTcp4ProtocolGuid;
+  Guid[12] =    gEfiUdp4ProtocolGuid;
+
+  for (Index = 0; Index < 7; Index ++) { 
+    Status = gtBS->LocateProtocol (
+                     &Guid[Index],
+                     NULL,
+                     &Interface
+                   );
+    if (!EFI_ERROR (Status)) {
+      Value[Index] = TRUE;
+    } else {
+      Value[Index] = FALSE;
+    }
+  }
+  
+  AssertionType = NeedOrWarning (7, Value);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+  
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile != NULL)) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"UefiNetworkApplication",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid012,
+                   L"UEFI Compliant - UEFI General Network Application required",
+                   L"%a:%d:MnpSB-%s, ArpSB-%s, Ip4SB-%s, Dhcp4SB-%s, Tcp4SB-%s, Udp4SB-%s, Ip4Config2-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Value[0] ? L"Y" : L"N",
+                   Value[1] ? L"Y" : L"N",
+                   Value[2] ? L"Y" : L"N",
+                   Value[3] ? L"Y" : L"N",
+                   Value[4] ? L"Y" : L"N",
+                   Value[5] ? L"Y" : L"N",
+                   Value[6] ? L"Y" : L"N"
+                   );
+
+  }  else {
+    for (Index = 0; Index < 6; Index ++) {
+      Status = gtBS->LocateProtocol (
+                       &Guid[Index],
+                       NULL,
+                       (VOID **)&TempInterface
+                       );
+      switch (Index) {
+        case 0:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 1:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 2:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 3:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 4:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        default:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+      }
+   
+      Status = gtBS->LocateProtocol (
+                       &Guid[Index+7],
+                       NULL,
+                       (VOID **)&Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        Value[Index+7] = TRUE;
+      } else {
+        Value[Index+7] = FALSE;
+      }
+   
+      switch (Index) {
+        case 0:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 1:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 2:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 3:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 4:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        default:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+      }
+    } 
+
+    AssertionType = NeedOrWarning (13, Value);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile != NULL)) {
+      MaxLength = 10;
+  
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"UefiNetworkApplication",
+                          String,
+                          &MaxLength
+                          );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid012,
+                   L"UEFI Compliant-UEFI General Network Application required",
+                   L"%a:%d:MnpSB-%s,ArpSB-%s,Ip4SB-%s,Dhcp4SB-%s,Tcp4SB-%s,Udp4SB-%s,Ip4Config2-%s,"
+                   L"Mnp-%s,Arp-%s,Ip4-%s,Dhcp4-%s,Tcp4-%s,Udp4-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Value[0] ? L"Y" : L"N",
+                   Value[1] ? L"Y" : L"N",
+                   Value[2] ? L"Y" : L"N",
+                   Value[3] ? L"Y" : L"N",
+                   Value[4] ? L"Y" : L"N",
+                   Value[5] ? L"Y" : L"N",
+                   Value[6] ? L"Y" : L"N",
+                   Value[7] ? L"Y" : L"N",
+                   Value[8] ? L"Y" : L"N",
+                   Value[9] ? L"Y" : L"N",
+                   Value[10] ? L"Y" : L"N",
+                   Value[11] ? L"Y" : L"N",
+                   Value[12] ? L"Y" : L"N"
+                   );
+    
+  }
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckUefiV6NetworkApplication (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  UINTN               Index;
+  EFI_GUID            Guid[15];
+  BOOLEAN             Value[15];
+  VOID                *Interface;
+  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_HANDLE          ChildHandle = NULL;
+  
+  Guid[0] =     gEfiDhcp6ServiceBindingProtocolGuid;
+  Guid[1] =     gEfiTcp6ServiceBindingProtocolGuid;
+  Guid[2] =     gEfiIp6ServiceBindingProtocolGuid;
+  Guid[3] =     gEfiUdp6ServiceBindingProtocolGuid;
+  Guid[4] =     gEfiIp6ConfigProtocolGuid;
+
+  Guid[5] =     gEfiDhcp6ProtocolGuid;
+  Guid[6] =     gEfiTcp6ProtocolGuid;
+  Guid[7] =     gEfiIp6ProtocolGuid;
+  Guid[8] =     gEfiUdp6ProtocolGuid;
+
+  Guid[9] =     gEfiVlanConfigProtocolGuid;
+
+  for (Index = 0; Index < 5; Index ++) {
+    Status = gtBS->LocateProtocol (
+                     &Guid[Index],
+                     NULL,
+                     &Interface
+                     );
+    if (!EFI_ERROR (Status)) {
+      Value[Index] = TRUE;
+    } else {
+      Value[Index] = FALSE;
+    }
+  }
+  
+  AssertionType = NeedOrWarning (5, Value);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+  
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile != NULL)) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"UEFIIPv6Support",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid015,
+                   L"UEFI Compliant - UEFI V6 General Network Application required",
+                   L"%a:%d:Dhcp6SB-%s, Tcp6SB-%s, Ip6SB-%s, Udp6SB-%s, Ip6Config-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Value[0] ? L"Y" : L"N",
+                   Value[1] ? L"Y" : L"N",
+                   Value[2] ? L"Y" : L"N",
+                   Value[3] ? L"Y" : L"N",
+                   Value[4] ? L"Y" : L"N"
+                   );
+
+  } else {
+    for (Index = 0; Index < 4; Index ++) {
+      Status = gtBS->LocateProtocol (
+                       &Guid[Index],
+                       NULL,
+                       (VOID **) &TempInterface
+                       );
+      switch (Index) {
+        case 0:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 1:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 2:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        case 3:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+          break;
+        default:
+          TempInterface->CreateChild(TempInterface, &ChildHandle);
+      }
+
+      Status = gtBS->LocateProtocol (
+                       &Guid[Index+5],
+                       NULL,
+                       &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        Value[Index+5] = TRUE;
+      } else {
+        Value[Index+5] = FALSE;
+      }
+      
+      switch (Index) {
+        case 0:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 1:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 2:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        case 3:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+          break;
+        default:
+          TempInterface->DestroyChild(TempInterface, ChildHandle);
+          ChildHandle = NULL;
+      }
+    } 
+
+    AssertionType = NeedOrWarning (9, Value);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+    
+    //
+    // If warning, check with INI file to decide they must exist or not
+    //
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile != NULL)) {
+      MaxLength = 10;
+  
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"UEFIIPv6Support",
+                          String,
+                          &MaxLength
+                          );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid015,
+                   L"UEFI Compliant-UEFI V6 General Network Application required",
+                   L"%a:%d:Dhcp6SB-%s, Tcp6SB-%s, Ip6SB-%s, Udp6SB-%s, Ip6Config-%s,"
+                   L"Dhcp6-%s,Tcp6-%s,Ip6-%s,Udp6-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Value[0] ? L"Y" : L"N",
+                   Value[1] ? L"Y" : L"N",
+                   Value[2] ? L"Y" : L"N",
+                   Value[3] ? L"Y" : L"N",
+                   Value[4] ? L"Y" : L"N",
+                   Value[5] ? L"Y" : L"N",
+                   Value[6] ? L"Y" : L"N",
+                   Value[7] ? L"Y" : L"N",
+                   Value[8] ? L"Y" : L"N"
+                   );
+    
+    if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
+      Status = gtBS->LocateProtocol (
+                       &Guid[9],
+                       NULL,
+                       &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        Value[9] = TRUE;
+      } else {
+        Value[9] = FALSE;
+      }
+
+      AssertionType = NeedOneOrWarning (Value[9]);
+
+      if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+        AssertionType = EFI_TEST_ASSERTION_WARNING;
+      }
+      
+      //
+      // If warning, check with INI file to decide they must exist or not
+      //
+      if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile       != NULL               )) {
+        MaxLength = 10;
+
+        Status = IniFile->GetString (
+                            IniFile,
+                            SECTION_NAME_PLATFORM_SPECIFIC,
+                            L"VlanSupport",
+                            String,
+                            &MaxLength
+                            );
+        if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+          AssertionType = EFI_TEST_ASSERTION_FAILED;
+        }
+      }
+
+      //
+      // Record test result
+      //
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gEfiCompliantBbTestPlatformAssertionGuid011,
+                     L"UEFI Compliant - VLAN protocols must be implemented",
+                     L"%a:%d:VLAN - %s",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Value[9] ? L"Yes" : L"No"
+                     );
+      
+    }
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+EFI_STATUS
+CheckUartProtocol (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   )
@@ -1484,6 +2107,200 @@ CheckUsbProtocols (
 }
 
 EFI_STATUS
+CheckNVMeProtocol (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  //
+  // Check the NVM Express Pass Thru protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiNvmExpressPassThruProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  AssertionType = NeedOneOrWarning (ValueA);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"NVMExpressPassThru",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid018,
+                 L"UEFI Compliant - NVM Express Pass Thru protocol must be implemented",
+                 L"%a:%d:NVM Express Pass Thru protocol - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueA ? L"Yes" : L"No"
+                 );
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckBootFromNVMe (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  //
+  // Check the Extended SCSI_PASS_THRU protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiExtScsiPassThruProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  //
+  // Check the BLOCK_IO protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlockIoProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }
+
+  AssertionType = NeedOneOrWarning (ValueB);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"BootFromNVMe",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid019,
+                 L"UEFI Compliant - Boot from block-oriented NVMe peripheral",
+                 L"%a:%d:Block IO - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueB ? L"Yes" : L"No"
+                 );
+
+  if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
+    AssertionType = NeedOneOrWarning (ValueA);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+      MaxLength = 10;
+
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"ExtScsiPassThruSupport",
+                          String,
+                          &MaxLength
+                        );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    //
+    // Record test result
+    //
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid019,
+                   L"UEFI Compliant - Boot from block-oriented NVMe peripheral",
+                   L"%a:%d:Ext SCSI Pass Thru - %s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Yes" : L"No"
+                   );
+  }
+
+
+  return EFI_SUCCESS;
+}
+
+
+
+EFI_STATUS
 CheckScsiProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
@@ -1548,379 +2365,6 @@ CheckScsiProtocols (
                  (UINTN)__LINE__,
                  ValueA ? L"Yes" : L"No"
                  );
-
-  return EFI_SUCCESS;
-}
-
-EFI_STATUS
-CheckDebugProtocols (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
-  IN EFI_INI_FILE_HANDLE                  IniFile
-  )
-{
-  EFI_STATUS          Status;
-  UINT32              MaxLength;
-  CHAR16              String[10];
-  BOOLEAN             ValueA;
-  BOOLEAN             ValueB;
-  VOID                *Interface;
-  EFI_TEST_ASSERTION  AssertionType;
-
-  //
-  // Check the DEBUG_SUPPORT protocol
-  //
-  Status = gtBS->LocateProtocol (
-                   &gEfiDebugSupportProtocolGuid,
-                   NULL,
-                   &Interface
-                   );
-  if (!EFI_ERROR (Status)) {
-    ValueA = TRUE;
-  } else {
-    ValueA = FALSE;
-  }
-
-  //
-  // Check the DEBUG_PORT protocol
-  //
-  Status = gtBS->LocateProtocol (
-                   &gEfiDebugPortProtocolGuid,
-                   NULL,
-                   &Interface
-                   );
-  if (!EFI_ERROR (Status)) {
-    ValueB = TRUE;
-  } else {
-    ValueB = FALSE;
-  }
-
-  AssertionType = NeedTwoOrWarning (ValueA, ValueB);
-
-  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
-  }
-
-  //
-  // If warning, check with INI file to decide they must exist or not
-  //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
-
-    Status = IniFile->GetString (
-                        IniFile,
-                        SECTION_NAME_PLATFORM_SPECIFIC,
-                        L"DebugSupport",
-                        String,
-                        &MaxLength
-                        );
-    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
-  }
-
-  //
-  // Record test result
-  //
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gEfiCompliantBbTestPlatformAssertionGuid010,
-                 L"UEFI Compliant - Debug support protocols must be implemented",
-                 L"%a:%d:Debug Support - %s, Debug Port - %s",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 ValueA ? L"Yes" : L"No",
-                 ValueB ? L"Yes" : L"No"
-                 );
-
-  return EFI_SUCCESS;
-}
-
-EFI_STATUS
-CheckDriverOverrideProtocols (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
-  IN EFI_INI_FILE_HANDLE                  IniFile
-  )
-{
-  EFI_STATUS          Status;
-  UINT32              MaxLength;
-  CHAR16              String[10];
-  BOOLEAN             ValueA;
-  VOID                *Interface;
-  EFI_TEST_ASSERTION  AssertionType;
-
-  //
-  // Check the DRIVER_OVERRIDE protocol
-  //
-  Status = gtBS->LocateProtocol (
-                   &gEfiPlatformDriverOverrideProtocolGuid,
-                   NULL,
-                   &Interface
-                   );
-  if (!EFI_ERROR (Status)) {
-    ValueA = TRUE;
-  } else {
-    ValueA = FALSE;
-  }
-
-  AssertionType = NeedOneOrWarning (ValueA);
-
-  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
-  }
-
-  //
-  // If warning, check with INI file to decide they must exist or not
-  //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
-
-    Status = IniFile->GetString (
-                        IniFile,
-                        SECTION_NAME_PLATFORM_SPECIFIC,
-                        L"PlatformDriverOverride",
-                        String,
-                        &MaxLength
-                        );
-    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
-  }
-
-  //
-  // Record test result
-  //
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gEfiCompliantBbTestPlatformAssertionGuid011,
-                 L"UEFI Compliant - Platform Driver Override protocols must be implemented",
-                 L"%a:%d:Platform Driver Override - %s",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 ValueA ? L"Yes" : L"No"
-                 );
-
-  return EFI_SUCCESS;
-}
-
-EFI_STATUS
-CheckUefiNetworkApplication (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
-  IN EFI_INI_FILE_HANDLE                  IniFile
-  )
-{
-
-  EFI_STATUS          Status;
-  UINT32              MaxLength;
-  CHAR16              String[10];
-  UINTN               Index;
-  EFI_GUID            Guid[15];
-  BOOLEAN             Value[15];
-  VOID                *Interface;
-  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
-  EFI_TEST_ASSERTION  AssertionType;
-  EFI_HANDLE          ChildHandle = NULL;
-  
-  Guid[0] =     gEfiManagedNetworkServiceBindingProtocolGuid;
-  Guid[1] =     gEfiArpServiceBindingProtocolGuid;
-  Guid[2] =     gEfiIp4ServiceBindingProtocolGuid;
-  Guid[3] =     gEfiDhcp4ServiceBindingProtocolGuid;
-  Guid[4] =     gEfiTcp4ServiceBindingProtocolGuid;
-  Guid[5] =     gEfiUdp4ServiceBindingProtocolGuid;
-  Guid[6] =     gEfiIp4ConfigProtocolGuid;
-
-  Guid[7] =     gEfiManagedNetworkProtocolGuid;
-  Guid[8] =     gEfiArpProtocolGuid;
-  Guid[9] =     gEfiIp4ProtocolGuid;
-  Guid[10] =    gEfiDhcp4ProtocolGuid;
-  Guid[11] =    gEfiTcp4ProtocolGuid;
-  Guid[12] =    gEfiUdp4ProtocolGuid;
-
-  for (Index = 0; Index < 7; Index ++) { 
-    Status = gtBS->LocateProtocol (
-                     &Guid[Index],
-                     NULL,
-                     &Interface
-                   );
-    if (!EFI_ERROR (Status)) {
-      Value[Index] = TRUE;
-    } else {
-      Value[Index] = FALSE;
-    }
-  }
-  
-  AssertionType = NeedOrWarning (7, Value);
-
-  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
-  }
-  
-  //
-  // If warning, check with INI file to decide they must exist or not
-  //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
-
-    Status = IniFile->GetString (
-                        IniFile,
-                        SECTION_NAME_PLATFORM_SPECIFIC,
-                        L"UefiNetworkApplication",
-                        String,
-                        &MaxLength
-                        );
-    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gEfiCompliantBbTestPlatformAssertionGuid012,
-                   L"UEFI Compliant - UEFI General Network Application required",
-                   L"%a:%d:MnpSB-%s, ArpSB-%s, Ip4SB-%s, Dhcp4SB-%s, Tcp4SB-%s, Udp4SB-%s, Ip4Config-%s",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Value[0] ? L"Y" : L"N",
-                   Value[1] ? L"Y" : L"N",
-                   Value[2] ? L"Y" : L"N",
-                   Value[3] ? L"Y" : L"N",
-                   Value[4] ? L"Y" : L"N",
-                   Value[5] ? L"Y" : L"N",
-                   Value[6] ? L"Y" : L"N"
-                   );
-
-  }else if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gEfiCompliantBbTestPlatformAssertionGuid012,
-                   L"UEFI Compliant - UEFI General Network Application required",
-                   L"%a:%d:MnpSB-%s, ArpSB-%s, Ip4SB-%s, Dhcp4SB-%s, Tcp4SB-%s, Udp4SB-%s, Ip4Config-%s",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Value[0] ? L"Y" : L"N",
-                   Value[1] ? L"Y" : L"N",
-                   Value[2] ? L"Y" : L"N",
-                   Value[3] ? L"Y" : L"N",
-                   Value[4] ? L"Y" : L"N",
-                   Value[5] ? L"Y" : L"N",
-                   Value[6] ? L"Y" : L"N"
-                   );    
-  } else {
-    for (Index = 0; Index < 6; Index ++) {
-      Status = gtBS->LocateProtocol (
-                       &Guid[Index],
-                       NULL,
-                       (VOID **)&TempInterface
-                       );
-      switch (Index) {
-        case 0:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 1:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 2:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 3:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 4:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        default:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-      }
-   
-      Status = gtBS->LocateProtocol (
-                       &Guid[Index+7],
-                       NULL,
-                       (VOID **)&Interface
-                       );
-      if (!EFI_ERROR (Status)) {
-        Value[Index+7] = TRUE;
-      } else {
-        Value[Index+7] = FALSE;
-      }
-   
-      switch (Index) {
-        case 0:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 1:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 2:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 3:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 4:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        default:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-      }
-    } 
-
-    AssertionType = NeedOrWarning (13, Value);
-
-    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-      AssertionType = EFI_TEST_ASSERTION_WARNING;
-    }
-
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
-  
-      Status = IniFile->GetString (
-                          IniFile,
-                          SECTION_NAME_PLATFORM_SPECIFIC,
-                          L"UefiNetworkApplication",
-                          String,
-                          &MaxLength
-                          );
-      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
-        AssertionType = EFI_TEST_ASSERTION_FAILED;
-      }
-    }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gEfiCompliantBbTestPlatformAssertionGuid012,
-                   L"UEFI Compliant-UEFI General Network Application required",
-                   L"%a:%d:MnpSB-%s,ArpSB-%s,Ip4SB-%s,Dhcp4SB-%s,Tcp4SB-%s,Udp4SB-%s,Ip4Config-%s,"
-                   L"Mnp-%s,Arp-%s,Ip4-%s,Dhcp4-%s,Tcp4-%s,Udp4-%s",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Value[0] ? L"Y" : L"N",
-                   Value[1] ? L"Y" : L"N",
-                   Value[2] ? L"Y" : L"N",
-                   Value[3] ? L"Y" : L"N",
-                   Value[4] ? L"Y" : L"N",
-                   Value[5] ? L"Y" : L"N",
-                   Value[6] ? L"Y" : L"N",
-                   Value[7] ? L"Y" : L"N",
-                   Value[8] ? L"Y" : L"N",
-                   Value[9] ? L"Y" : L"N",
-                   Value[10] ? L"Y" : L"N",
-                   Value[11] ? L"Y" : L"N",
-                   Value[12] ? L"Y" : L"N"
-                   );
-    
-  }
 
   return EFI_SUCCESS;
 }
@@ -2093,7 +2537,7 @@ CheckBootFromIScsi (
   }
 
   //
-  // Check the EFI_ISCSI_INITIATOR_NAME_PROTOCOL
+  // Check the EFI_AUTHENTICATION_INFO_PROTOCOL
   //
   Status = gtBS->LocateProtocol (
                    &gEfiAuthenticationInfoProtocolGuid,
@@ -2152,6 +2596,228 @@ CheckBootFromIScsi (
   return EFI_SUCCESS;
 }
 
+EFI_STATUS
+CheckDebugProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  //
+  // Check the DEBUG_SUPPORT protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiDebugSupportProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  //
+  // Check the DEBUG_PORT protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiDebugPortProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }
+
+  AssertionType = NeedTwoOrWarning (ValueA, ValueB);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"DebugSupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid010,
+                 L"UEFI Compliant - Debug support protocols must be implemented",
+                 L"%a:%d:Debug Support - %s, Debug Port - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueA ? L"Yes" : L"No",
+                 ValueB ? L"Yes" : L"No"
+                 );
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckDriverOverrideProtocol (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  //
+  // Check the DRIVER_OVERRIDE protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiPlatformDriverOverrideProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  AssertionType = NeedOneOrWarning (ValueA);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"PlatformDriverOverride",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid011,
+                 L"UEFI Compliant - Platform Driver Override protocols must be implemented",
+                 L"%a:%d:Platform Driver Override - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueA ? L"Yes" : L"No"
+                 );
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckATAProtocol (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  //
+  // Check the DRIVER_OVERRIDE protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiAtaPassThruProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  AssertionType = NeedOneOrWarning (ValueA);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"AtaPassThru",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid020,
+                 L"UEFI Compliant - Ata Pass Thru protocols must be implemented",
+                 L"%a:%d:Ata Pass Thru - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueA ? L"Yes" : L"No"
+                 );
+
+  return EFI_SUCCESS;
+}
 
 EFI_STATUS
 CheckEbcProtocol (
@@ -2248,42 +2914,11 @@ CheckEbcProtocol (
 }
 
 
-#define EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID \
-{0x9fb9a8a1,0x2f4a,0x43a6,0x88,0x9c,0xd0,0xf7,0xb6,0xc4,0x7a,0xd5}
-#define EFI_TCP6_SERVICE_BINDING_PROTOCOL_GUID \
-{0xec20eb79,0x6c1a,0x4664,0x9a,0xd,0xd2,0xe4,0xcc,0x16,0xd6, 0x64}
-#define EFI_IP6_SERVICE_BINDING_PROTOCOL_GUID \
-{0xec835dd3,0xfe0f,0x617b,0xa6,0x21,0xb3,0x50,0xc3,0xe1,0x33,0x88}
-#define EFI_UDP6_SERVICE_BINDING_PROTOCOL_GUID \
-{0x66ed4721,0x3c98,0x4d3e,0x81,0xe3,0xd0,0x3d,0xd3,0x9a,0x72,0x54}
-#define EFI_IP6_CONFIG_PROTOCOL_GUID \
-{0x937fe521,0x95ae,0x4d1a,0x89,0x29,0x48,0xbc,0xd9,0xa,0xd3,0x1a}
-#define EFI_VLAN_CONFIG_PROTOCOL_GUID \
-{0x9e23d768,0xd2f3,0x4366,0x9f,0xc3,0x3a,0x7a,0xba,0x86,0x43,0x74}
 
-#define EFI_DHCP6_PROTOCOL_GUID \
-{0x87c8bad7,0x595,0x4053,0x82,0x97,0xde,0xde,0x39,0x5f,0x5d,0x5b}
-#define EFI_TCP6_PROTOCOL_GUID \
-{0x46e44855,0xbd60,0x4ab7,0xab,0xd,0xa6,0x79,0xb9,0x44,0x7d,0x77}
-#define EFI_IP6_PROTOCOL_GUID \
-{0x2c8759d5,0x5c2d,0x66ef,0x92,0x5f,0xb6,0x6c,0x10,0x19,0x57,0xe2}
-#define EFI_UDP6_PROTOCOL_GUID \
-{0x4f948815,0xb4b9,0x43cb,0x8a,0x33,0x90,0xe0,0x60,0xb3,0x49,0x55}
 
-EFI_GUID gEfiDhcp6ServiceBindingProtocolGuid = EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID;
-EFI_GUID gEfiTcp6ServiceBindingProtocolGuid  = EFI_TCP6_SERVICE_BINDING_PROTOCOL_GUID;
-EFI_GUID gEfiIp6ServiceBindingProtocolGuid   = EFI_IP6_SERVICE_BINDING_PROTOCOL_GUID;
-EFI_GUID gEfiUdp6ServiceBindingProtocolGuid  = EFI_UDP6_SERVICE_BINDING_PROTOCOL_GUID;
-EFI_GUID gEfiIp6ConfigProtocolGuid           = EFI_IP6_CONFIG_PROTOCOL_GUID;
-EFI_GUID gEfiVlanConfigProtocolGuid          = EFI_VLAN_CONFIG_PROTOCOL_GUID;
-
-EFI_GUID gEfiDhcp6ProtocolGuid               = EFI_DHCP6_PROTOCOL_GUID;
-EFI_GUID gEfiTcp6ProtocolGuid                = EFI_TCP6_PROTOCOL_GUID;
-EFI_GUID gEfiIp6ProtocolGuid                 = EFI_IP6_PROTOCOL_GUID;
-EFI_GUID gEfiUdp6ProtocolGuid                = EFI_UDP6_PROTOCOL_GUID;
 
 EFI_STATUS
-CheckUefiV6NetworkApplication (
+CheckDNS4Protocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   )
@@ -2292,41 +2927,26 @@ CheckUefiV6NetworkApplication (
   EFI_STATUS          Status;
   UINT32              MaxLength;
   CHAR16              String[10];
-  UINTN               Index;
-  EFI_GUID            Guid[15];
-  BOOLEAN             Value[15];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
   VOID                *Interface;
   EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
   EFI_TEST_ASSERTION  AssertionType;
   EFI_HANDLE          ChildHandle = NULL;
   
-  Guid[0] =     gEfiDhcp6ServiceBindingProtocolGuid;
-  Guid[1] =     gEfiTcp6ServiceBindingProtocolGuid;
-  Guid[2] =     gEfiIp6ServiceBindingProtocolGuid;
-  Guid[3] =     gEfiUdp6ServiceBindingProtocolGuid;
-  Guid[4] =     gEfiIp6ConfigProtocolGuid;
 
-  Guid[5] =     gEfiDhcp6ProtocolGuid;
-  Guid[6] =     gEfiTcp6ProtocolGuid;
-  Guid[7] =     gEfiIp6ProtocolGuid;
-  Guid[8] =     gEfiUdp6ProtocolGuid;
-
-  Guid[9] =     gEfiVlanConfigProtocolGuid;
-
-  for (Index = 0; Index < 5; Index ++) {
-    Status = gtBS->LocateProtocol (
-                     &Guid[Index],
-                     NULL,
-                     &Interface
-                     );
-    if (!EFI_ERROR (Status)) {
-      Value[Index] = TRUE;
-    } else {
-      Value[Index] = FALSE;
-    }
+  Status = gtBS->LocateProtocol (
+                   &gEfiDns4ServiceBindingProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
   }
   
-  AssertionType = NeedOrWarning (5, Value);
+  AssertionType = NeedOneOrWarning (ValueA);
 
   if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;
@@ -2342,7 +2962,7 @@ CheckUefiV6NetworkApplication (
     Status = IniFile->GetString (
                         IniFile,
                         SECTION_NAME_PLATFORM_SPECIFIC,
-                        L"UEFIIPv6Support",
+                        L"DNS4Support",
                         String,
                         &MaxLength
                         );
@@ -2352,92 +2972,39 @@ CheckUefiV6NetworkApplication (
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gEfiCompliantBbTestPlatformAssertionGuid015,
-                   L"UEFI Compliant - UEFI V6 General Network Application required",
-                   L"%a:%d:Dhcp6SB-%s, Tcp6SB-%s, Ip6SB-%s, Udp6SB-%s, Ip6Config-%s",
+                   gEfiCompliantBbTestPlatformAssertionGuid021,
+                   L"UEFI Compliant - DNS4 support is required",
+                   L"%a:%d:DNS4SB-%s",
                    __FILE__,
                    (UINTN)__LINE__,
-                   Value[0] ? L"Y" : L"N",
-                   Value[1] ? L"Y" : L"N",
-                   Value[2] ? L"Y" : L"N",
-                   Value[3] ? L"Y" : L"N",
-                   Value[4] ? L"Y" : L"N"
+                   ValueA ? L"Y" : L"N"
                    );
 
-  }else if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gEfiCompliantBbTestPlatformAssertionGuid015,
-                   L"UEFI Compliant - UEFI V6 General Network Application required",
-                   L"%a:%d:Dhcp6SB-%s, Tcp6SB-%s, Ip6SB-%s, Udp6SB-%s, Ip6Config-%s",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Value[0] ? L"Y" : L"N",
-                   Value[1] ? L"Y" : L"N",
-                   Value[2] ? L"Y" : L"N",
-                   Value[3] ? L"Y" : L"N",
-                   Value[4] ? L"Y" : L"N"
-                   );    
-  } else {
-    for (Index = 0; Index < 4; Index ++) {
-      Status = gtBS->LocateProtocol (
-                       &Guid[Index],
+  }  else {
+    Status = gtBS->LocateProtocol (
+                       &gEfiDns4ServiceBindingProtocolGuid,
                        NULL,
                        (VOID **) &TempInterface
                        );
-      switch (Index) {
-        case 0:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 1:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 2:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 3:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        default:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-      }
 
-      Status = gtBS->LocateProtocol (
-                       &Guid[Index+5],
-                       NULL,
-                       &Interface
-                       );
-      if (!EFI_ERROR (Status)) {
-        Value[Index+5] = TRUE;
-      } else {
-        Value[Index+5] = FALSE;
-      }
-      
-      switch (Index) {
-        case 0:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 1:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 2:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 3:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        default:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-      }
-    } 
+    TempInterface->CreateChild(TempInterface, &ChildHandle);
 
-    AssertionType = NeedOrWarning (9, Value);
+
+    Status = gtBS->LocateProtocol (
+                     &gEfiDns4ProtocolGuid,
+                     NULL,
+                     &Interface
+                     );
+    if (!EFI_ERROR (Status)) {
+      ValueB = TRUE;
+    } else {
+      ValueB = FALSE;
+    }
+
+    TempInterface->DestroyChild(TempInterface, ChildHandle);
+    ChildHandle = NULL;
+
+    AssertionType = NeedOneOrWarning (ValueB);
 
     if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
       AssertionType = EFI_TEST_ASSERTION_WARNING;
@@ -2453,7 +3020,7 @@ CheckUefiV6NetworkApplication (
       Status = IniFile->GetString (
                           IniFile,
                           SECTION_NAME_PLATFORM_SPECIFIC,
-                          L"UEFIIPv6Support",
+                          L"DNS4Support",
                           String,
                           &MaxLength
                           );
@@ -2465,75 +3032,680 @@ CheckUefiV6NetworkApplication (
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gEfiCompliantBbTestPlatformAssertionGuid015,
-                   L"UEFI Compliant-UEFI V6 General Network Application required",
-                   L"%a:%d:Dhcp6SB-%s, Tcp6SB-%s, Ip6SB-%s, Udp6SB-%s, Ip6Config-%s,"
-                   L"Dhcp6-%s,Tcp6-%s,Ip6-%s,Udp6-%s",
+                   gEfiCompliantBbTestPlatformAssertionGuid021,
+                   L"UEFI Compliant - DNS4 support is required",
+                   L"%a:%d:DNS4SB-%s, DNS4-%s",
                    __FILE__,
                    (UINTN)__LINE__,
-                   Value[0] ? L"Y" : L"N",
-                   Value[1] ? L"Y" : L"N",
-                   Value[2] ? L"Y" : L"N",
-                   Value[3] ? L"Y" : L"N",
-                   Value[4] ? L"Y" : L"N",
-                   Value[5] ? L"Y" : L"N",
-                   Value[6] ? L"Y" : L"N",
-                   Value[7] ? L"Y" : L"N",
-                   Value[8] ? L"Y" : L"N"
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N"
                    );
-    
-    if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
-      Status = gtBS->LocateProtocol (
-                       &Guid[9],
-                       NULL,
-                       &Interface
-                       );
-      if (!EFI_ERROR (Status)) {
-        Value[9] = TRUE;
-      } else {
-        Value[9] = FALSE;
-      }
+  }
 
-      AssertionType = NeedOneOrWarning (Value[9]);
+  return EFI_SUCCESS;
+}
 
-      if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
-        AssertionType = EFI_TEST_ASSERTION_WARNING;
-      }
-      
-      //
-      // If warning, check with INI file to decide they must exist or not
-      //
-      if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile       != NULL               )) {
-        MaxLength = 10;
+EFI_STATUS
+CheckDNS6Protocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
 
-        Status = IniFile->GetString (
-                            IniFile,
-                            SECTION_NAME_PLATFORM_SPECIFIC,
-                            L"VlanSupport",
-                            String,
-                            &MaxLength
-                            );
-        if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
-          AssertionType = EFI_TEST_ASSERTION_FAILED;
-        }
-      }
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  VOID                *Interface;
+  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_HANDLE          ChildHandle = NULL;
+  
 
-      //
-      // Record test result
-      //
-      StandardLib->RecordAssertion (
-                     StandardLib,
-                     AssertionType,
-                     gEfiCompliantBbTestPlatformAssertionGuid011,
-                     L"UEFI Compliant - VLAN protocols must be implemented",
-                     L"%a:%d:VLAN - %s",
-                     __FILE__,
-                     (UINTN)__LINE__,
-                     Value[9] ? L"Yes" : L"No"
-                     );
-      
+  Status = gtBS->LocateProtocol (
+                   &gEfiDns6ServiceBindingProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+  
+  AssertionType = NeedOneOrWarning (ValueA);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+  
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile != NULL)) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"DNS6Support",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid022,
+                   L"UEFI Compliant - DNS6 support is required",
+                   L"%a:%d:DNS6SB-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N"
+                   );
+
+  }  else {
+    Status = gtBS->LocateProtocol (
+                       &gEfiDns6ServiceBindingProtocolGuid,
+                       NULL,
+                       (VOID **) &TempInterface
+                       );
+
+    TempInterface->CreateChild(TempInterface, &ChildHandle);
+
+
+    Status = gtBS->LocateProtocol (
+                     &gEfiDns6ProtocolGuid,
+                     NULL,
+                     &Interface
+                     );
+    if (!EFI_ERROR (Status)) {
+      ValueB = TRUE;
+    } else {
+      ValueB = FALSE;
+    }
+
+    TempInterface->DestroyChild(TempInterface, ChildHandle);
+    ChildHandle = NULL;
+
+    AssertionType = NeedOneOrWarning (ValueB);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+    
+    //
+    // If warning, check with INI file to decide they must exist or not
+    //
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile != NULL)) {
+      MaxLength = 10;
+  
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"DNS6Support",
+                          String,
+                          &MaxLength
+                          );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid022,
+                   L"UEFI Compliant - DNS6 support is required",
+                   L"%a:%d:DNS6SB-%s, DNS6-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N"
+                   );
+  }
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckTLSProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  BOOLEAN             ValueC;
+  VOID                *Interface;
+  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_HANDLE          ChildHandle = NULL;
+  
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiTlsServiceBindingProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiTlsConfigurationProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }  
+  
+  AssertionType = NeedTwoOrWarning (ValueA, ValueB);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+  
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile != NULL)) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"TLSSupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid023,
+                   L"UEFI Compliant - TLS support is required",
+                   L"%a:%d:TLSSB-%s, TLSConfig-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N"
+                   );
+
+  }  else {
+    Status = gtBS->LocateProtocol (
+                       &gEfiTlsServiceBindingProtocolGuid,
+                       NULL,
+                       (VOID **) &TempInterface
+                       );
+
+    TempInterface->CreateChild(TempInterface, &ChildHandle);
+
+
+    Status = gtBS->LocateProtocol (
+                     &gEfiTlsProtocolGuid,
+                     NULL,
+                     &Interface
+                     );
+    if (!EFI_ERROR (Status)) {
+      ValueC = TRUE;
+    } else {
+      ValueC = FALSE;
+    }
+
+    TempInterface->DestroyChild(TempInterface, ChildHandle);
+    ChildHandle = NULL;
+
+    AssertionType = NeedOneOrWarning (ValueC);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+    
+    //
+    // If warning, check with INI file to decide they must exist or not
+    //
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile != NULL)) {
+      MaxLength = 10;
+  
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"TLSSupport",
+                          String,
+                          &MaxLength
+                          );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid023,
+                   L"UEFI Compliant - TLS support is required",
+                   L"%a:%d:TLSSB-%s, TLSConfig-%s, TLS-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N",
+                   ValueC ? L"Y" : L"N"
+                   );
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+EFI_STATUS
+CheckHTTPProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  BOOLEAN             ValueC;
+  VOID                *Interface;
+  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_HANDLE          ChildHandle = NULL;
+  
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiHttpServiceBindingProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiHttpUtilitiesProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }  
+  
+  AssertionType = NeedTwoOrWarning (ValueA, ValueB);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+  
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile != NULL)) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"HTTPSupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid024,
+                   L"UEFI Compliant - HTTP support is required",
+                   L"%a:%d:HTTPSB-%s, HTTP Utilities-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N"
+                   );
+
+  }  else {
+    Status = gtBS->LocateProtocol (
+                       &gEfiHttpServiceBindingProtocolGuid,
+                       NULL,
+                       (VOID **) &TempInterface
+                       );
+
+    TempInterface->CreateChild(TempInterface, &ChildHandle);
+
+
+    Status = gtBS->LocateProtocol (
+                     &gEfiHttpProtocolGuid,
+                     NULL,
+                     &Interface
+                     );
+    if (!EFI_ERROR (Status)) {
+      ValueC = TRUE;
+    } else {
+      ValueC = FALSE;
+    }
+
+    TempInterface->DestroyChild(TempInterface, ChildHandle);
+    ChildHandle = NULL;
+
+    AssertionType = NeedOneOrWarning (ValueC);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+    
+    //
+    // If warning, check with INI file to decide they must exist or not
+    //
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile != NULL)) {
+      MaxLength = 10;
+  
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"HTTPSupport",
+                          String,
+                          &MaxLength
+                          );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid024,
+                   L"UEFI Compliant - HTTP support is required",
+                   L"%a:%d:HTTPSB-%s, HTTP Utilities-%s, HTTP-%s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N",
+                   ValueC ? L"Y" : L"N"
+                   );
+  }
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckEAPProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  BOOLEAN             ValueC;  
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiEapProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiEapConfigProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiEapManagement2ProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueC = TRUE;
+  } else {
+    ValueC = FALSE;
+  }  
+
+  AssertionType = NeedThreeOrWarning (ValueA, ValueB, ValueC);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"EAPSupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid025,
+                 L"UEFI Compliant - EAP Support protocols must be implemented",
+                 L"%a:%d:EAP - %s, EAP Config - %s, EAP Management2 - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueA ? L"Yes" : L"No",
+                 ValueB ? L"Yes" : L"No",
+                 ValueC ? L"Yes" : L"No"
+                 );
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckBlueToothProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  BOOLEAN             ValueC;
+  BOOLEAN             ValueD;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_SERVICE_BINDING_PROTOCOL    *TempInterface;
+  EFI_HANDLE          ChildHandle = NULL;
+    
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlueToothHcProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlueToothServiceBindingProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlueToothConfigProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueC = TRUE;
+  } else {
+    ValueC = FALSE;
+  }  
+
+  AssertionType = NeedThreeOrWarning (ValueA, ValueB, ValueC);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"BlueToothSupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    //
+    // Record test result
+    //
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid026,
+                   L"UEFI Compliant - BlueTooth Support protocols must be implemented",
+                   L"%a:%d:BLUETOOTH HC - %s, BLUETOOTH Service Binding - %s, BLUETOOTH Config - %s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Yes" : L"No",
+                   ValueB ? L"Yes" : L"No",
+                   ValueC ? L"Yes" : L"No"
+                   );
+  }
+
+  if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
+    Status = gtBS->LocateProtocol (
+                       &gEfiBlueToothServiceBindingProtocolGuid,
+                       NULL,
+                       (VOID **) &TempInterface
+                       );
+
+    TempInterface->CreateChild(TempInterface, &ChildHandle);
+
+
+    Status = gtBS->LocateProtocol (
+                     &gEfiBlueToothIoProtocolGuid,
+                     NULL,
+                     &Interface
+                     );
+    if (!EFI_ERROR (Status)) {
+      ValueD = TRUE;
+    } else {
+      ValueD = FALSE;
+    }
+    
+    TempInterface->DestroyChild(TempInterface, ChildHandle);
+    ChildHandle = NULL;
+
+    AssertionType = NeedOneOrWarning (ValueD);
+
+    if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
+    }
+    
+    //
+    // If warning, check with INI file to decide they must exist or not
+    //
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+        (IniFile != NULL)) {
+      MaxLength = 10;
+  
+      Status = IniFile->GetString (
+                          IniFile,
+                          SECTION_NAME_PLATFORM_SPECIFIC,
+                          L"BlueToothSupport",
+                          String,
+                          &MaxLength
+                          );
+      if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid026,
+                   L"UEFI Compliant - BlueTooth Support protocols must be implemented",
+                   L"%a:%d:BLUETOOTH HC - %s, BLUETOOTH Service Binding - %s, BLUETOOTH Config - %s, BLUETOOTH IO - %s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Y" : L"N",
+                   ValueB ? L"Y" : L"N",
+                   ValueC ? L"Y" : L"N",
+                   ValueD ? L"Y" : L"N"
+                   );    
+
   }
 
   return EFI_SUCCESS;

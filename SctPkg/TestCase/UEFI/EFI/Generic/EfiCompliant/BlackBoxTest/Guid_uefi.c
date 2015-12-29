@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -92,6 +92,24 @@ EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid015 = EFI_TEST_EFICOMPLIANTBBTE
 EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid016 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_016_GUID;
 
 EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid017 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_017_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid018 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_018_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid019 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_019_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid020 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_020_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid021 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_021_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid022 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_022_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid023 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_023_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid024 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_024_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid025 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_025_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid026 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_026_GUID;
 
 EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid001 = EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_001_GUID;
 

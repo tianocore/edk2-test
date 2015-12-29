@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -140,6 +140,51 @@ extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid016;
 { 0xb7cd2d76, 0xea43, 0x4013, 0xb7, 0xd1, 0x59, 0xeb, 0x2e, 0xc9, 0xbf, 0x1b }
 
 extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid017;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_018_GUID \
+{ 0x5aea7246, 0xbcf9, 0x4ba4, 0x81, 0xd2, 0x83, 0x2c, 0x98, 0x41, 0x46, 0xf3 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid018;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_019_GUID \
+{ 0x5cb0cdb5, 0xac80, 0x4983, 0xb7, 0x10, 0x4b, 0xb, 0xf0, 0x19, 0x15, 0x63 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid019;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_020_GUID \
+{ 0x563f654f, 0xaba8, 0x4539, 0x80, 0x4b, 0x50, 0x63, 0x5, 0x7, 0x26, 0x23 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid020;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_021_GUID \
+{ 0x2e6d1733, 0x6d39, 0x49ab, 0xa8, 0x86, 0x1b, 0x6d, 0xe4, 0x45, 0x66, 0xa8 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid021;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_022_GUID \
+{ 0xe02a6ef3, 0x4b70, 0x40ec, 0xaa, 0x23, 0x50, 0xb7, 0xb9, 0x72, 0xb0, 0x65 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid022;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_023_GUID \
+{ 0xcb6f7b77, 0xb15, 0x43f7, 0xa9, 0x5b, 0x8c, 0x7f, 0x9f, 0xd7, 0xb, 0x21 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid023;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_024_GUID \
+{ 0x77fddb95, 0x5969, 0x4fb4, 0xa2, 0x18, 0x5c, 0xc, 0x76, 0xb, 0x5, 0x64 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid024;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_025_GUID \
+{ 0xf0dc12fa, 0x3c4b, 0x43f7, 0xa6, 0x9e, 0xa5, 0xbe, 0x6f, 0xcc, 0x90, 0xa1 }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid025;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_026_GUID \
+{ 0x87e50392, 0xf5a2, 0x42b8, 0x81, 0x12, 0x68, 0xbe, 0xc9, 0x2, 0xb9, 0xbc }
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid026;
 
 #define EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_001_GUID \
 { 0xf6a871e3, 0xef8a, 0x420f, 0x82, 0x01, 0x35, 0xb6, 0x1c, 0xe2, 0xe8, 0xdb }
