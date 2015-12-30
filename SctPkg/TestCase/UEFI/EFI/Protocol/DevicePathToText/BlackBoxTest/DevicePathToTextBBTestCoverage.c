@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -416,6 +416,50 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   if (Text != NULL) {
     SctFreePool (Text);
   }
+
+  //
+  // BMC(11, 0xC0000000D0000000)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x1, 0x6, 13);
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->InterfaceType = 11;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[0] = 0x00;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[1] = 0x00;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[2] = 0x00;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[3] = 0xD0;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[4] = 0x00;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[5] = 0x00;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[6] = 0x00;
+  ((BMC_DEVICE_PATH *)pDeviceNode1)->BaseAddress[7] = 0xC0;
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid125,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: BMC(11, 0xC0000000D0000000)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
 
   //
   // AcpiEx(HID,CID,UID,HIDSTR,CIDSTR,UIDSTR)
@@ -1214,6 +1258,206 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   }
 
   //
+  // RamDisk(0xA0000000B0000000,0xA0000000BFFFFFFF,3,BA3A77E6-39A2-4375-A39A-108BFFCCE1AA)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x4, 0x9, sizeof(RAM_DISK_DEVICE_PATH));
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[0] = 0xB0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[0] = 0xBFFFFFFF;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[1] = 0xA0000000;
+  StrToGuid (L"BA3A77E6-39A2-4375-A39A-108BFFCCE1AA", &((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->RamDiskType);
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->DiskInstance = 3;
+  
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid126,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: RamDisk(0xA0000000B0000000,0xA0000000BFFFFFFF,3,BA3A77E6-39A2-4375-A39A-108BFFCCE1AA)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // VirtualDisk(0xA0000000B0000000,0xA0000000BFFFFFFF,3)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x4, 0x9, sizeof(RAM_DISK_DEVICE_PATH));
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[0] = 0xB0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[0] = 0xBFFFFFFF;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->RamDiskType = gDevicePathToTextBBTestVirtualDiskGuid;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->DiskInstance = 3;
+  
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid126,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: VirtualDisk(0xA0000000B0000000,0xA0000000BFFFFFFF,3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // VirtualCD(0xA0000000B0000000,0xA0000000BFFFFFFF,3)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x4, 0x9, sizeof(RAM_DISK_DEVICE_PATH));
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[0] = 0xB0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[0] = 0xBFFFFFFF;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->RamDiskType = gDevicePathToTextBBTestVirtualCDGuid;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->DiskInstance = 3;
+  
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid126,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: VirtualCD(0xA0000000B0000000,0xA0000000BFFFFFFF,3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // PersistentVirtualDisk(0xA0000000B0000000,0xA0000000BFFFFFFF,3)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x4, 0x9, sizeof(RAM_DISK_DEVICE_PATH));
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[0] = 0xB0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[0] = 0xBFFFFFFF;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->RamDiskType = gDevicePathToTextBBTestPresistentVirtualDiskGuid;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->DiskInstance = 3;
+  
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid126,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: PersistentVirtualDisk(0xA0000000B0000000,0xA0000000BFFFFFFF,3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // PersistentVirtualCD(0xA0000000B0000000,0xA0000000BFFFFFFF,3)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x4, 0x9, sizeof(RAM_DISK_DEVICE_PATH));
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[0] = 0xB0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->StartingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[0] = 0xBFFFFFFF;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->EndingAddr[1] = 0xA0000000;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->RamDiskType = gDevicePathToTextBBTestPresistentVirtualCDGuid;
+  ((RAM_DISK_DEVICE_PATH *)pDeviceNode1)->DiskInstance = 3;
+  
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid126,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: PersistentVirtualCD(0xA0000000B0000000,0xA0000000BFFFFFFF,3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
   // Vlan(18)
   //
   pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x14, 6);
@@ -1639,6 +1883,201 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   if (Text != NULL) {
     SctFreePool (Text);
   }
+
+  //
+  // Uri(Uri)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x18, 7); 
+  ((URI_DEVICE_PATH *)pDeviceNode1)->Uri[0] = 'U';
+  ((URI_DEVICE_PATH *)pDeviceNode1)->Uri[1] = 'r';
+  ((URI_DEVICE_PATH *)pDeviceNode1)->Uri[2] = 'i';
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid127,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: Uri(Uri)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // UFS(0,3) UFS 2.0 spec
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x19, 6);  
+  ((UFS_DEVICE_PATH *)pDeviceNode1)->TargetID = 0;
+  ((UFS_DEVICE_PATH *)pDeviceNode1)->LUN      = 3;
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid127,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: UFS(0,3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // SD(3) 
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1A, 5);  
+  ((SD_DEVICE_PATH *)pDeviceNode1)->SlotNumber = 3;
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid128,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: SD(3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // Bluetooth(001320F5FA77) 
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1B, 10);  
+  ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[0] = 0x77;
+  ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[1] = 0xFA;
+  ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[2] = 0xF5;
+  ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[3] = 0x20;
+  ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[4] = 0x13;
+  ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[5] = 0x00;
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid129,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: Bluetooth(001320F5FA77)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // Wi-Fi(It's a SSID)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1C, 36);
+  SctZeroMem(&((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[0], sizeof(SSID));
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[0] = 'I';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[1] = 't';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[2] = '\'';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[3] = 's';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[4] = ' ';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[5] = 'a';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[6] = ' ';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[7] = 'S';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[8] = 'S';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[9] = 'I';
+  ((WIFI_DEVICE_PATH *)pDeviceNode1)->SSId.Id[10] = 'D';
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid130,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: Wi-Fi(It's a SSID)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
 
   return EFI_SUCCESS;
 }

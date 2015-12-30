@@ -66,6 +66,22 @@ Abstract:
   }
 #endif
 
+#define PCINodeType         1
+#define PCINodeSubType      1
+#define PCINodeLength       6
+
+#define PCIRootNodeType     2
+#define PCIRootNodeSubType  1
+#define PCIRootNodeLength   12
+
+#define ACPINodeType        2
+#define ACPINodeSubType     1
+#define ACPINodeLength      12
+
+#define ATAPINodeType       3
+#define ATAPINodeSubType    1
+#define ATAPINodeLength     8
+
 #pragma pack(1)
 
 /**
@@ -131,6 +147,27 @@ typedef struct {
 #define DEVICE_PATH_MESSAGING_VT_100      EFI_VT_100_GUID
 #define DEVICE_PATH_MESSAGING_VT_100_PLUS EFI_VT_100_PLUS_GUID
 #define DEVICE_PATH_MESSAGING_VT_UTF8     EFI_VT_UTF8_GUID
+
+#define EFI_VIRTUAL_DISK_GUID \
+  { \
+    0x77AB535A, 0x45FC, 0x624B, 0x55, 0x60, 0xF7, 0xB2, 0x81, 0xD1, 0xF9, 0x6E \
+  }
+
+#define EFI_VIRTUAL_CD_GUID \
+  { \
+    0x3D5ABD30, 0x4175, 0x87CE, {0x6D, 0x64, 0xD2, 0xAD, 0xE5, 0x23, 0xC4, 0xBB } \
+  }
+
+#define EFI_PERSISTENT_VIRTUAL_DISK_GUID \
+  { \
+    0x5CEA02C9, 0x4D07, 0x69D3, {0x26, 0x9F, 0x44, 0x96, 0xFB, 0xE0, 0x96, 0xF9 } \
+  }
+
+#define EFI_PERSISTENT_VIRTUAL_CD_GUID \
+  { \
+    0x08018188, 0x42CD, 0xBB48, {0x10, 0x0F, 0x53, 0x87, 0xD5, 0x3D, 0xED, 0x3D } \
+  }
+
 
 ///
 /// A new device path node is defined to declare flow control characteristics.
@@ -804,6 +841,106 @@ typedef struct {
   ///
   UINT32                          ControllerNumber;
 } CONTROLLER_DEVICE_PATH;
+
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT8                           TargetID;
+  UINT8                           LUN;
+} UFS_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT8                           SlotNumber;
+} SD_DEVICE_PATH;
+
+///
+/// BLUETOOTH_ADDRESS
+///
+typedef struct {
+  ///
+  /// 48bit Bluetooth device address.
+  ///
+  UINT8      Address[6];
+} BLUETOOTH_ADDRESS;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  BLUETOOTH_ADDRESS               BD_ADDR;
+} BLUETOOTH_DEVICE_PATH;
+
+typedef struct {
+  UINT8      Id[32];
+} SSID;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  SSID                            SSId;
+} WIFI_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT32                          StartingAddr[2];
+  UINT32                          EndingAddr[2];
+  EFI_GUID                        RamDiskType;
+  UINT16                          DiskInstance;
+} RAM_DISK_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL  Header;
+  UINT32                    HID;
+  UINT32                    UID;
+  UINT32                    CID;
+  CHAR8                     HidUidCidStr[3];
+} ACPI_EXTENDED_HID_DEVICE_PATH_WITH_STR;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL  Header;
+  EFI_GUID                  Guid;
+  UINT8                     VendorDefinedData[1];
+} VENDOR_DEFINED_MESSAGING_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL  Header;
+  UINT16                    NetworkProtocol;
+  UINT16                    LoginOption;
+  UINT64                    Lun;
+  UINT16                    TargetPortalGroupTag;
+  CHAR8                     iSCSITargetName[1];
+} ISCSI_DEVICE_PATH_WITH_NAME;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL  Header;
+  UINT32                    Reserved;
+  UINT64                    StartingOffset;
+  UINT64                    EndingOffset;
+} MEDIA_OFFSET_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT32                          Reserved;
+  UINT8                           WWN[8];
+  UINT8                           Lun[8];
+} FIBRECHANNELEX_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT8                           SasAddress[8];
+  UINT8                           Lun[8];
+  UINT16                          DeviceTopology;
+  UINT16                          RelativeTargetPort;
+} SASEX_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT32                          NamespaceId;
+  UINT64                          EUId;
+} NVME_DEVICE_PATH;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  CHAR8                           Uri[1];
+} URI_DEVICE_PATH;
 
 #pragma pack()
 

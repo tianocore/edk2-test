@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -158,5 +158,19 @@ EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid129 = EFI_TEST_DEVICEPAT
 EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid130 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_130_GUID;
 
 EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid131 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_131_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid132 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_132_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid133 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_133_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid134 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_134_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid135 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_135_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid136 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_136_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid137 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_137_GUID;
+
+EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid138 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_138_GUID;
 
 EFI_GUID  gDevicePathFromTextBBTestFunctionAssertionGuid180 = EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_180_GUID;

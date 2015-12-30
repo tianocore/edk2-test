@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -55,61 +55,61 @@ Abstract:
 
 --*/
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_071_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_081_GUID \
   { \
     0x68d2e9f6, 0xb5f0, 0x4660, 0xbd, 0xf7, 0x74, 0x97, 0x43, 0xce, 0xb1, 0xb4 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid071;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid081;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_072_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_082_GUID \
   { \
     0x945a93f7, 0xedac, 0x4893, 0xb2, 0xd2, 0x84, 0xc, 0x39, 0xbb, 0x78, 0x24 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid072;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid082;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_073_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_083_GUID \
   { \
     0x11993701, 0x534b, 0x4804, 0xb9, 0x17, 0x72, 0x6b, 0xc9, 0x57, 0x43, 0x13 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid073;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid083;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_074_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_084_GUID \
   { \
     0x2570911f, 0x1a08, 0x4f96, 0x92, 0xf5, 0x26, 0x7e, 0xc0, 0x8d, 0x75, 0xb0 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid074;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid084;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_075_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_085_GUID \
   { \
     0x9a4021d, 0x2804, 0x49fa, 0x82, 0x95, 0x30, 0xb1, 0xcf, 0x27, 0xf7, 0x88 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid075;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid085;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_076_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_086_GUID \
   { \
     0x97deff32, 0xa4d0, 0x4909, 0xa7, 0xfa, 0x98, 0xcf, 0x3e, 0xcf, 0xf5, 0xf0 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid076;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid086;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_077_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_087_GUID \
   { \
     0xdb90a554, 0xc75f, 0x409e, 0x9d, 0x40, 0xcc, 0xcd, 0x6a, 0xc6, 0xd0, 0x57 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid077;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid087;
 
-#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_078_GUID \
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_088_GUID \
   { \
     0x532045b2, 0x8cb7, 0x4c27, 0x83, 0x72, 0xc2, 0x80, 0xe4, 0xe1, 0xf9, 0x29 \
   }
 
-extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid078;
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid088;
 
 #define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_089_GUID \
   { \
@@ -362,4 +362,52 @@ extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid123;
   }
 
 extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid124;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_125_GUID \
+  { \
+    0x252df981, 0x416a, 0x486d, 0x8c, 0x78, 0xde, 0xae, 0x72, 0x4a, 0x68, 0xeb \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid125;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_126_GUID \
+  { \
+    0x77cdae2c, 0x642c, 0x4113, 0xb6, 0x59, 0x25, 0x23, 0x42, 0xb1, 0x16, 0xb6 \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid126;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_127_GUID \
+  { \
+    0xd823b4b, 0x58b4, 0x4882, 0x9f, 0x38, 0xb, 0xfb, 0x3, 0xa0, 0x29, 0xa3 \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid127;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_128_GUID \
+  { \
+    0x4136553e, 0x8284, 0x409c, 0x90, 0x56, 0xcb, 0xbc, 0x91, 0xc5, 0xea, 0xa1 \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid128;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_129_GUID \
+  { \
+    0x23bcd190, 0x10b4, 0x4063, 0x95, 0x2, 0xea, 0x5c, 0x14, 0xfc, 0x72, 0x1e \
+  }
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid129;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_130_GUID \
+  { \
+    0x6faccc19, 0x7785, 0x49e6, 0xaf, 0x86, 0x9b, 0x5f, 0x69, 0x53, 0x60, 0x7d \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid130;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_131_GUID \
+  { \
+    0x60e2e2ac, 0xf5f9, 0x4ecf, 0xac, 0xb1, 0x79, 0xa1, 0xe5, 0xcc, 0xbc, 0xf6 \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid131;
 

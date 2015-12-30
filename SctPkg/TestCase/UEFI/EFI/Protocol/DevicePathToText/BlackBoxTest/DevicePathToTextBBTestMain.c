@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -571,6 +571,19 @@ CheckParamIdentiferValid (
 }
 
 STATIC
+UINT64
+WriteUnaligned64 (
+  OUT UINT64                    *Buffer,
+  IN  UINT64                    Value
+  )
+{
+  ASSERT (Buffer != NULL);
+
+  return *Buffer = Value;
+}
+
+
+STATIC
 EFI_DEVICE_PATH_PROTOCOL *
 CreateDeviceNode (
   IN UINT8                           NodeType,
@@ -867,6 +880,45 @@ InValidText:
 
 STATIC
 EFI_DEVICE_PATH_PROTOCOL *
+BuildBMCDeviceNode (
+  IN CHAR16               *TextDeviceNode
+  )
+{
+  EFI_STATUS        Status;
+  CHAR16            *ParamIdentifierStr;
+  CHAR16            *ParamIdentifierVal;
+  UINT64            BaseAddress;
+  BMC_DEVICE_PATH   *BMC;
+
+  BMC = (BMC_DEVICE_PATH *) CreateDeviceNode (0x1, 0x6, sizeof (BMC_DEVICE_PATH));
+  if (BMC == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"Type", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    BMC->InterfaceType = (UINT8) SctStrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }  
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"Address", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    SctStrToUInt64 (ParamIdentifierVal, &BaseAddress);
+  } else {
+  	goto InValidText;
+  }  
+
+  WriteUnaligned64((UINT64 *) &(BMC->BaseAddress[0]), BaseAddress);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) BMC;
+InValidText:
+  SctFreePool (BMC);
+  return NULL;
+}
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
 BuildAcpiDeviceNode (
   IN CHAR16             *TextDeviceNode
   )
@@ -896,14 +948,14 @@ BuildAcpiDeviceNode (
     if (ParamIdentifierStr != NULL) {
       if (CheckParamIdentiferValid (ParamIdentifierStr, L"UID", OptionalParamIndex, 0)) {
         OptionalParamIndex = 0;
-	    Acpi->UID = (UINT32) SctStrToUInt (ParamIdentifierVal);
+        Acpi->UID = (UINT32) SctStrToUInt (ParamIdentifierVal);
       } else {
         goto InValidText;
       }
     } else if (ParamIdentifierVal != NULL) {
       switch(OptionalParamIndex) {
       case 0:  // UID
-	    Acpi->UID = (UINT32) SctStrToUInt (ParamIdentifierVal);
+        Acpi->UID = (UINT32) SctStrToUInt (ParamIdentifierVal);
         break;
 
       default:
@@ -2936,6 +2988,327 @@ InValidText:
 
 STATIC
 EFI_DEVICE_PATH_PROTOCOL *
+BuildRamDiskDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS              Status;
+  CHAR16                  *ParamIdentifierStr;
+  CHAR16                  *ParamIdentifierVal;
+  CHAR16                  *StartingAddressStr;
+  CHAR16                  *EndingAddressStr;
+  CHAR16                  *DiskInstanceStr;
+  CHAR16                  *DiskTypeGuidStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk = NULL;
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"StartingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    StartingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"EndingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    EndingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DiskInstance", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    DiskInstanceStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DiskTypeGuid", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+	DiskTypeGuidStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  RamDisk = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (0x4, 0x9, sizeof (RAM_DISK_DEVICE_PATH));
+  if (RamDisk == NULL) {
+    return NULL;
+  }
+
+  SctStrToUInt64 (StartingAddressStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  
+  SctStrToUInt64 (EndingAddressStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  Status = StrToUInt16 (DiskInstanceStr, &RamDisk->DiskInstance);
+  if (EFI_ERROR(Status))
+    goto InValidText;
+  
+  StrToGuid (ParamIdentifierVal, &RamDisk->RamDiskType);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+InValidText:
+  if (RamDisk != NULL)
+    SctFreePool(RamDisk);
+  return NULL;
+}
+
+EFI_GUID  gDevicePathToTextBBTestVirtualDiskGuid = EFI_VIRTUAL_DISK_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildVirtualDiskDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS              Status;
+  CHAR16                  *ParamIdentifierStr;
+  CHAR16                  *ParamIdentifierVal;
+  CHAR16                  *StartingAddressStr;
+  CHAR16                  *EndingAddressStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk = NULL;
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"StartingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    StartingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"EndingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    EndingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DiskInstance", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    DiskInstanceStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  RamDisk = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (0x4, 0x9, sizeof (RAM_DISK_DEVICE_PATH));
+  if (RamDisk == NULL) {
+    return NULL;
+  }
+
+  SctStrToUInt64 (StartingAddressStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  
+  SctStrToUInt64 (EndingAddressStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  Status = StrToUInt16 (DiskInstanceStr, &RamDisk->DiskInstance);
+  if (EFI_ERROR(Status))
+    goto InValidText;
+  
+  RamDisk->RamDiskType = gDevicePathToTextBBTestVirtualDiskGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+InValidText:
+  if (RamDisk != NULL)
+    SctFreePool(RamDisk);
+  return NULL;
+}
+
+EFI_GUID  gDevicePathToTextBBTestVirtualCDGuid = EFI_VIRTUAL_CD_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildVirtualCDDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS              Status;
+  CHAR16                  *ParamIdentifierStr;
+  CHAR16                  *ParamIdentifierVal;
+  CHAR16                  *StartingAddressStr;
+  CHAR16                  *EndingAddressStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk = NULL;
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"StartingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    StartingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"EndingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    EndingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DiskInstance", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    DiskInstanceStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  RamDisk = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (0x4, 0x9, sizeof (RAM_DISK_DEVICE_PATH));
+  if (RamDisk == NULL) {
+    return NULL;
+  }
+
+  SctStrToUInt64 (StartingAddressStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  
+  SctStrToUInt64 (EndingAddressStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  Status = StrToUInt16 (DiskInstanceStr, &RamDisk->DiskInstance);
+  if (EFI_ERROR(Status))
+    goto InValidText;
+  
+  RamDisk->RamDiskType = gDevicePathToTextBBTestVirtualCDGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+InValidText:
+  if (RamDisk != NULL)
+    SctFreePool(RamDisk);
+  return NULL;
+}
+
+EFI_GUID  gDevicePathToTextBBTestPresistentVirtualDiskGuid = EFI_PERSISTENT_VIRTUAL_DISK_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildPersistentVirtualDiskDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS              Status;
+  CHAR16                  *ParamIdentifierStr;
+  CHAR16                  *ParamIdentifierVal;
+  CHAR16                  *StartingAddressStr;
+  CHAR16                  *EndingAddressStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk = NULL;
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"StartingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    StartingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"EndingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    EndingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DiskInstance", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    DiskInstanceStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  RamDisk = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (0x4, 0x9, sizeof (RAM_DISK_DEVICE_PATH));
+  if (RamDisk == NULL) {
+    return NULL;
+  }
+
+  SctStrToUInt64 (StartingAddressStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  
+  SctStrToUInt64 (EndingAddressStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  Status = StrToUInt16 (DiskInstanceStr, &RamDisk->DiskInstance);
+  if (EFI_ERROR(Status))
+    goto InValidText;
+  
+  RamDisk->RamDiskType = gDevicePathToTextBBTestPresistentVirtualDiskGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+InValidText:
+  if (RamDisk != NULL)
+    SctFreePool(RamDisk);
+  return NULL;
+}
+
+EFI_GUID  gDevicePathToTextBBTestPresistentVirtualCDGuid = EFI_PERSISTENT_VIRTUAL_CD_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildPersistentVirtualCDDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS              Status;
+  CHAR16                  *ParamIdentifierStr;
+  CHAR16                  *ParamIdentifierVal;
+  CHAR16                  *StartingAddressStr;
+  CHAR16                  *EndingAddressStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk = NULL;
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"StartingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    StartingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"EndingAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    EndingAddressStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DiskInstance", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    DiskInstanceStr = ParamIdentifierVal;
+  } else {
+    goto InValidText;
+  }
+
+  RamDisk = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (0x4, 0x9, sizeof (RAM_DISK_DEVICE_PATH));
+  if (RamDisk == NULL) {
+    return NULL;
+  }
+
+  SctStrToUInt64 (StartingAddressStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  
+  SctStrToUInt64 (EndingAddressStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  Status = StrToUInt16 (DiskInstanceStr, &RamDisk->DiskInstance);
+  if (EFI_ERROR(Status))
+    goto InValidText;
+  
+  RamDisk->RamDiskType = gDevicePathToTextBBTestPresistentVirtualCDGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+InValidText:
+  if (RamDisk != NULL)
+    SctFreePool(RamDisk);
+  return NULL;
+}
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
 BuildSASDeviceNode (
   IN CHAR16    *TextDeviceNode
   )
@@ -3278,6 +3651,199 @@ InValidText:
   return NULL;
 }
 
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildUriDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS                     Status;
+  CHAR16                         *ParamIdentifierStr;
+  CHAR16                         *ParamIdentifierVal;
+  URI_DEVICE_PATH                *Uri;
+  UINT16                         Length;
+  CHAR16                         *UriStr;
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"Uri", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    UriStr = ParamIdentifierVal;
+  } else {
+  	return NULL;
+  }
+
+  Length = sizeof (URI_DEVICE_PATH) - 1 + (UINT16) (SctStrLen (UriStr));
+  Uri    = (URI_DEVICE_PATH *) CreateDeviceNode (0x3, 0x18, Length);
+  if (Uri == NULL) {
+  	return NULL;
+  }
+
+  SctUnicodeToAscii (Uri->Uri, UriStr, SctStrLen (UriStr));
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) Uri;
+
+}
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildUFSDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS            Status;
+  CHAR16                *ParamIdentifierStr;
+  CHAR16                *ParamIdentifierVal;
+  UFS_DEVICE_PATH       *UFS;
+
+  UFS = (UFS_DEVICE_PATH *) CreateDeviceNode (0x3, 0x19, sizeof (UFS_DEVICE_PATH));
+  if (UFS == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"PUN", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    UFS->TargetID = (UINT8) SctStrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"LUN", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+  	UFS->LUN = (UINT8) SctStrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) UFS;
+InValidText:
+  SctFreePool(UFS);
+  return NULL;
+}
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildSDDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS            Status;
+  CHAR16                *ParamIdentifierStr;
+  CHAR16                *ParamIdentifierVal;
+  SD_DEVICE_PATH        *SD;
+
+  SD = (SD_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1A, sizeof (SD_DEVICE_PATH));
+  if (SD == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"SlotNumber", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    SD->SlotNumber = (UINT8) SctStrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) SD;
+InValidText:
+  SctFreePool(SD);
+  return NULL;
+}
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildBluetoothDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS                   Status;
+  CHAR16                       *ParamIdentifierStr;
+  CHAR16                       *ParamIdentifierVal;
+  BLUETOOTH_DEVICE_PATH        *Bluetooth;
+  UINTN                        StrLength;
+  UINTN                        Index;
+  UINT8                        Digit;
+  UINT8                        Byte;
+
+  Bluetooth = (BLUETOOTH_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1B, sizeof (BLUETOOTH_DEVICE_PATH));
+  if (Bluetooth == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"BD_ADDR", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+
+    //
+    // Two hex char make up one byte
+    //
+    StrLength = sizeof (BLUETOOTH_ADDRESS) * sizeof (CHAR16);
+
+    for(Index = 0; Index < StrLength; Index++, ParamIdentifierVal++) {
+
+      SctIsHexDigit (&Digit, *ParamIdentifierVal);
+
+      //
+      // For odd charaters, write the upper nibble for each buffer byte,
+      // and for even characters, the lower nibble.
+      //
+      if ((Index & 1) == 0) {
+        Byte = Digit << 4;
+      } else {
+        Byte = Bluetooth->BD_ADDR.Address[sizeof(BLUETOOTH_ADDRESS) - 1 - Index / 2];
+        Byte &= 0xF0;
+        Byte |= Digit;
+      }
+
+      Bluetooth->BD_ADDR.Address[sizeof(BLUETOOTH_ADDRESS) - 1 - Index / 2] = Byte;
+    }
+
+
+    
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) Bluetooth;
+InValidText:
+  SctFreePool(Bluetooth);
+  return NULL;
+}
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildWiFiDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS              Status;
+  CHAR16                  *ParamIdentifierStr;
+  CHAR16                  *ParamIdentifierVal;
+  WIFI_DEVICE_PATH        *WiFi;
+  UINT8                   Index;
+
+  WiFi = (WIFI_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1C, sizeof (WIFI_DEVICE_PATH));
+  if (WiFi == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"SSID", &ParamIdentifierStr, &ParamIdentifierVal);
+  
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    Index = 0;
+    while (*ParamIdentifierVal != L'\0' && Index < sizeof (SSID)) {
+      WiFi->SSId.Id[Index] = (CHAR8) *(ParamIdentifierVal);
+      Index++;
+      ParamIdentifierVal++;
+    }  
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) WiFi;
+InValidText:
+  SctFreePool(WiFi);
+  return NULL;
+}
+
+
 STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   L"PciRoot",
   BuildPciRootDeviceNode,
@@ -3293,6 +3859,8 @@ STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   BuildVenHwDeviceNode,
   L"Ctrl",
   BuildCtrlDeviceNode,
+  L"BMC",
+  BuildBMCDeviceNode,
   L"Acpi",
   BuildAcpiDeviceNode,
   L"Floppy",
@@ -3355,6 +3923,16 @@ STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   BuildSASExDeviceNode,
   L"NVMe",
   BuildNVMeDeviceNode,
+  L"Uri",
+  BuildUriDeviceNode,
+  L"UFS",
+  BuildUFSDeviceNode,
+  L"SD",
+  BuildSDDeviceNode,
+  L"Bluetooth",
+  BuildBluetoothDeviceNode,
+  L"Wi-Fi",
+  BuildWiFiDeviceNode,
   L"Uart",
   BuildUartDeviceNode,
   L"UsbClass",
@@ -3405,6 +3983,16 @@ STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   BuildTextFileDeviceNode,
   L"Offset",
   BuildMediaRelativeOffsetRangeDeviceNode,
+  L"RamDisk",
+  BuildRamDiskDeviceNode,
+  L"VirtualDisk",
+  BuildVirtualDiskDeviceNode,
+  L"VirtualCD",
+  BuildVirtualCDDeviceNode,
+  L"PersistentVirtualDisk",
+  BuildPersistentVirtualDiskDeviceNode,
+  L"PersistentVirtualCD",
+  BuildPersistentVirtualCDDeviceNode,
   NULL, NULL
 };
 

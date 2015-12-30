@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -96,60 +96,6 @@ typedef struct {
   EFI_DEVICE_PATH_PROTOCOL  * (*Function) (CHAR16 *);
 } DEVICE_PATH_FROM_TEXT_TABLE;
 
-#pragma pack(1)
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL  Header;
-  UINT32                    HID;
-  UINT32                    UID;
-  UINT32                    CID;
-  CHAR8                     HidUidCidStr[3];
-} ACPI_EXTENDED_HID_DEVICE_PATH_WITH_STR;
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL  Header;
-  EFI_GUID                  Guid;
-  UINT8                     VendorDefinedData[1];
-} VENDOR_DEFINED_MESSAGING_DEVICE_PATH;
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL  Header;
-  UINT16                    NetworkProtocol;
-  UINT16                    LoginOption;
-  UINT64                    Lun;
-  UINT16                    TargetPortalGroupTag;
-  CHAR8                     iSCSITargetName[1];
-} ISCSI_DEVICE_PATH_WITH_NAME;
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL  Header;
-  UINT32                    Reserved;
-  UINT64                    StartingOffset;
-  UINT64                    EndingOffset;
-} MEDIA_OFFSET_DEVICE_PATH;
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL        Header;
-  UINT32                          Reserved;
-  UINT8                           WWN[8];
-  UINT8                           Lun[8];
-} FIBRECHANNELEX_DEVICE_PATH;
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL        Header;
-  UINT8                           SasAddress[8];
-  UINT8                           Lun[8];
-  UINT16                          DeviceTopology;
-  UINT16                          RelativeTargetPort;
-} SASEX_DEVICE_PATH;
-
-typedef struct {
-  EFI_DEVICE_PATH_PROTOCOL        Header;
-  UINT32                          NamespaceId;
-  UINT64                          EUId;
-} NVME_DEVICE_PATH;
-
-#pragma pack()
 
 EFI_STATUS
 InitializeBBTestDevicePathToTextProtocol (
@@ -276,5 +222,10 @@ SctConvertTextToDevicePath (
       0xaf, 0x3a, 0x4, 0x8a, 0x4d, 0x4a, 0xfd, 0xe1 \
     } \
   }
+
+extern EFI_GUID gDevicePathToTextBBTestVirtualDiskGuid;
+extern EFI_GUID gDevicePathToTextBBTestVirtualCDGuid;
+extern EFI_GUID gDevicePathToTextBBTestPresistentVirtualDiskGuid;
+extern EFI_GUID gDevicePathToTextBBTestPresistentVirtualCDGuid;
 
 #endif

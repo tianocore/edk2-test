@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -59,21 +59,6 @@ Abstract:
 
 #define MaxDevicePathStrLen 200
 
-#define PCINodeType         1
-#define PCINodeSubType      1
-#define PCINodeLength       6
-
-#define PCIRootNodeType     2
-#define PCIRootNodeSubType  1
-#define PCIRootNodeLength   12
-
-#define ACPINodeType        2
-#define ACPINodeSubType     1
-#define ACPINodeLength      12
-
-#define ATAPINodeType       3
-#define ATAPINodeSubType    1
-#define ATAPINodeLength     8
 //
 // TDS 3.8.1
 //

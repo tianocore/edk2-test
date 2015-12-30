@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2105 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -56,18 +56,6 @@ Abstract:
 --*/
 
 #include "DevicePathToTextBBTestMain.h"
-
-#define PCINodeType         1
-#define PCINodeSubType      1
-#define PCINodeLength       6
-
-#define PCIRootNodeType     2
-#define PCIRootNodeSubType  1
-#define PCIRootNodeLength   12
-
-#define USBNodeType         3
-#define USBNodeSubType      5
-#define USBNodeLength       6
 
 //
 // TDS 3.6.1
@@ -122,7 +110,7 @@ DevicePathToTextConvertDeviceNodeToTextConformanceTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid072,
+                gDevicePathToTextBBTestFunctionAssertionGuid082,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText should return NULL with DeviceNode set to be NULL",
                 L"%a:%d",
                 __FILE__,
@@ -184,7 +172,7 @@ DevicePathToTextConvertDevicePathToTextConformanceTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid074,
+                gDevicePathToTextBBTestFunctionAssertionGuid084,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDevicePathToText should return NULL with DevicePath set to be NULL",
                 L"%a:%d",
                 __FILE__,

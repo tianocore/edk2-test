@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -284,6 +284,18 @@ EUI64StrToUInt64 (
 }
 
 STATIC
+UINT64
+WriteUnaligned64 (
+  OUT UINT64                    *Buffer,
+  IN  UINT64                    Value
+  )
+{
+  ASSERT (Buffer != NULL);
+
+  return *Buffer = Value;
+}
+
+STATIC
 EFI_DEVICE_PATH_PROTOCOL *
 CreateDeviceNode (
   IN UINT8                           NodeType,
@@ -485,6 +497,37 @@ CreateCtrlDeviceNode (
 
   return (EFI_DEVICE_PATH_PROTOCOL *) Controller;
 }
+
+#define BMCNodeType         1
+#define BMCNodeSubType      6
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateBMCDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16             *TypeStr;
+  CHAR16             *BaseAddrStr;
+  BMC_DEVICE_PATH    *BMC;
+  UINT64             BaseAddress;
+
+  TypeStr     = SctSplitStr (&TextDeviceNode, L',');
+  BaseAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  BMC = (BMC_DEVICE_PATH *) CreateDeviceNode (
+                                BMCNodeType,
+                                BMCNodeSubType,
+                                sizeof (BMC_DEVICE_PATH)
+                                );
+  
+  BMC->InterfaceType = (UINT8) SctStrToUInt (TypeStr);
+  SctStrToUInt64 (BaseAddrStr, &BaseAddress);
+
+  WriteUnaligned64((UINT64 *) &(BMC->BaseAddress[0]), BaseAddress);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) BMC;
+}
+
 
 #define AcpiNodeType     2
 #define AcpiNodeSubType  1
@@ -1497,6 +1540,165 @@ CreateNVMEDeviceNode (
   return (EFI_DEVICE_PATH_PROTOCOL *) NVMe;
 }
 
+#define UriNodeType    3
+#define UriNodeSubType 24
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateUriDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16             *UriStr;
+  URI_DEVICE_PATH    *Uri;
+
+  UriStr = SctSplitStr (&TextDeviceNode, L',');
+  Uri    = (URI_DEVICE_PATH *) CreateDeviceNode (
+                                   UriNodeType,
+                                   UriNodeSubType,
+                                   sizeof (URI_DEVICE_PATH) - 1 + (UINT16) SctStrLen (UriStr)
+                                   );
+  SctUnicodeToAscii (Uri->Uri, UriStr, SctStrLen (UriStr));
+  return (EFI_DEVICE_PATH_PROTOCOL *) Uri;
+}
+
+#define UFSNodeType    3
+#define UFSNodeSubType 25
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateUFSDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16              *PUNStr;
+  CHAR16              *LUNStr;
+  UFS_DEVICE_PATH     *UFS;
+
+  PUNStr = SctSplitStr (&TextDeviceNode, L',');
+  LUNStr = SctSplitStr (&TextDeviceNode, L',');
+  UFS  = (UFS_DEVICE_PATH *) CreateDeviceNode (
+                                 UFSNodeType,
+                                 UFSNodeSubType,
+                                 sizeof (UFS_DEVICE_PATH)
+                                 );
+
+  UFS->TargetID = (UINT8) SctStrToUInt (PUNStr);
+  UFS->LUN      = (UINT8) SctStrToUInt (LUNStr);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) UFS;
+}
+
+
+#define SDNodeType    3
+#define SDNodeSubType 26
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateSDDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16              *SlotNumberStr;
+  SD_DEVICE_PATH      *SD;
+
+  SlotNumberStr = SctSplitStr (&TextDeviceNode, L',');
+  SD  = (SD_DEVICE_PATH *) CreateDeviceNode (
+                                 SDNodeType,
+                                 SDNodeSubType,
+                                 sizeof (SD_DEVICE_PATH)
+                                 );
+
+  SD->SlotNumber = (UINT8) SctStrToUInt (SlotNumberStr);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) SD;
+}
+
+
+#define BlueToothNodeType    3
+#define BlueToothNodeSubType 27
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateBlueToothDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                   *BDAddrStr;
+  BLUETOOTH_DEVICE_PATH    *BLUETOOTH;
+  UINTN                    Length;
+  UINTN                    StrLength;
+  UINTN                    Index;
+  UINT8                    Digit;
+  UINT8                    Byte;
+
+
+  BDAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  BLUETOOTH  = (BLUETOOTH_DEVICE_PATH *) CreateDeviceNode (
+                                 BlueToothNodeType,
+                                 BlueToothNodeSubType,
+                                 sizeof (BLUETOOTH_DEVICE_PATH)
+                                 );
+
+  Length = sizeof (BLUETOOTH_ADDRESS);
+
+  //
+  // Two hex char make up one byte
+  //
+  StrLength = Length * sizeof (CHAR16);
+
+  for(Index = 0; Index < StrLength; Index++, BDAddrStr++) {
+
+    SctIsHexDigit (&Digit, *BDAddrStr);
+
+    //
+    // For odd charaters, write the upper nibble for each buffer byte,
+    // and for even characters, the lower nibble.
+    //
+    if ((Index & 1) == 0) {
+      Byte = Digit << 4;
+    } else {
+      Byte = BLUETOOTH->BD_ADDR.Address[Length - 1 - Index / 2];
+      Byte &= 0xF0;
+      Byte |= Digit;
+    }
+
+    BLUETOOTH->BD_ADDR.Address[Length - 1 - Index / 2] = Byte;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) BLUETOOTH;
+}
+
+#define WiFiNodeType    3
+#define WiFiNodeSubType 28
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateWiFiDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16              *SSIDStr;
+  WIFI_DEVICE_PATH    *WiFi;
+  UINT8               Index;
+
+  SSIDStr = SctSplitStr (&TextDeviceNode, L',');
+  WiFi    = (WIFI_DEVICE_PATH *) CreateDeviceNode (
+                                 WiFiNodeType,
+                                 WiFiNodeSubType,
+                                 sizeof (WIFI_DEVICE_PATH)
+                                 );
+
+  Index = 0;
+  while (*SSIDStr != L'\0' && Index < sizeof (SSID)) {
+    WiFi->SSId.Id[Index] = (CHAR8) *(SSIDStr);
+    Index++;
+    SSIDStr++;
+  } 
+  return (EFI_DEVICE_PATH_PROTOCOL *) WiFi;
+}
+
+
 #define HdNodeType     4
 #define HdNodeSubType  1
 
@@ -1608,7 +1810,6 @@ CreateTextFileDeviceNode (
 #define VenMEDIANodeSubType  5
 
 STATIC
-
 EFI_DEVICE_PATH_PROTOCOL *
 CreateMediaDeviceNode (
   IN CHAR16 *TextDeviceNode
@@ -1627,6 +1828,189 @@ CreateMediaDeviceNode (
   StrToGuid (GuidStr, &Media->Protocol);
 
   return (EFI_DEVICE_PATH_PROTOCOL *) Media;
+}
+
+#define RamDiskNodeType     4
+#define RamDiskNodeSubType  9
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateRamDiskDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                  *StartingAddrStr;
+  CHAR16                  *EndingAddrStr;
+  CHAR16                  *DiskInstanceStr;
+  CHAR16                  *DiskTypeGuidStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk;
+
+  StartingAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  EndingAddrStr   = SctSplitStr (&TextDeviceNode, L',');
+  DiskInstanceStr = SctSplitStr (&TextDeviceNode, L',');
+  DiskTypeGuidStr = SctSplitStr (&TextDeviceNode, L',');
+
+  RamDisk   = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (
+                                             RamDiskNodeType,
+                                             RamDiskNodeSubType,
+                                             sizeof (RAM_DISK_DEVICE_PATH)
+                                             );
+
+  SctStrToUInt64 (StartingAddrStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  SctStrToUInt64 (EndingAddrStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  RamDisk->DiskInstance = (UINT16) SctStrToUInt (DiskInstanceStr);
+  StrToGuid (DiskTypeGuidStr, &RamDisk->RamDiskType);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+}
+
+EFI_GUID  gDevicePathFromTextBBTestVirtualDiskGuid = EFI_VIRTUAL_DISK_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateVirtualDiskDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                  *StartingAddrStr;
+  CHAR16                  *EndingAddrStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk;
+
+  StartingAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  EndingAddrStr   = SctSplitStr (&TextDeviceNode, L',');
+  DiskInstanceStr = SctSplitStr (&TextDeviceNode, L',');
+
+  RamDisk   = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (
+                                             RamDiskNodeType,
+                                             RamDiskNodeSubType,
+                                             sizeof (RAM_DISK_DEVICE_PATH)
+                                             );
+
+  SctStrToUInt64 (StartingAddrStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  SctStrToUInt64 (EndingAddrStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  RamDisk->DiskInstance = (UINT16) SctStrToUInt (DiskInstanceStr);
+  RamDisk->RamDiskType  = gDevicePathFromTextBBTestVirtualDiskGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+}
+
+EFI_GUID  gDevicePathFromTextBBTestVirtualCDGuid = EFI_VIRTUAL_CD_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateVirtualCDDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                  *StartingAddrStr;
+  CHAR16                  *EndingAddrStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk;
+
+  StartingAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  EndingAddrStr   = SctSplitStr (&TextDeviceNode, L',');
+  DiskInstanceStr = SctSplitStr (&TextDeviceNode, L',');
+
+  RamDisk   = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (
+                                             RamDiskNodeType,
+                                             RamDiskNodeSubType,
+                                             sizeof (RAM_DISK_DEVICE_PATH)
+                                             );
+
+  SctStrToUInt64 (StartingAddrStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  SctStrToUInt64 (EndingAddrStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  RamDisk->DiskInstance = (UINT16) SctStrToUInt (DiskInstanceStr);
+  RamDisk->RamDiskType  = gDevicePathFromTextBBTestVirtualCDGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+}
+
+EFI_GUID  gDevicePathFromTextBBTestPersistentVirtualDiskGuid = EFI_PERSISTENT_VIRTUAL_DISK_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreatePersistentVirtualDiskDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                  *StartingAddrStr;
+  CHAR16                  *EndingAddrStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk;
+
+  StartingAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  EndingAddrStr   = SctSplitStr (&TextDeviceNode, L',');
+  DiskInstanceStr = SctSplitStr (&TextDeviceNode, L',');
+
+  RamDisk   = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (
+                                             RamDiskNodeType,
+                                             RamDiskNodeSubType,
+                                             sizeof (RAM_DISK_DEVICE_PATH)
+                                             );
+
+  SctStrToUInt64 (StartingAddrStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  SctStrToUInt64 (EndingAddrStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  RamDisk->DiskInstance = (UINT16) SctStrToUInt (DiskInstanceStr);
+  RamDisk->RamDiskType  = gDevicePathFromTextBBTestPersistentVirtualDiskGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
+}
+
+EFI_GUID  gDevicePathFromTextBBTestPersistentVirtualCDGuid = EFI_PERSISTENT_VIRTUAL_CD_GUID;
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreatePersistentVirtualCDDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                  *StartingAddrStr;
+  CHAR16                  *EndingAddrStr;
+  CHAR16                  *DiskInstanceStr;
+  UINT64                  StartingAddr;
+  UINT64                  EndingAddr;
+  RAM_DISK_DEVICE_PATH    *RamDisk;
+
+  StartingAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  EndingAddrStr   = SctSplitStr (&TextDeviceNode, L',');
+  DiskInstanceStr = SctSplitStr (&TextDeviceNode, L',');
+
+  RamDisk   = (RAM_DISK_DEVICE_PATH *) CreateDeviceNode (
+                                             RamDiskNodeType,
+                                             RamDiskNodeSubType,
+                                             sizeof (RAM_DISK_DEVICE_PATH)
+                                             );
+
+  SctStrToUInt64 (StartingAddrStr, &StartingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->StartingAddr[0]), StartingAddr);
+  SctStrToUInt64 (EndingAddrStr, &EndingAddr);
+  WriteUnaligned64 ((UINT64 *)&(RamDisk->EndingAddr[0]), EndingAddr);
+  
+  RamDisk->DiskInstance = (UINT16) SctStrToUInt (DiskInstanceStr);
+  RamDisk->RamDiskType  = gDevicePathFromTextBBTestPersistentVirtualCDGuid;
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) RamDisk;
 }
 
 #define BbsNodeType     5
@@ -1855,6 +2239,34 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 __FILE__,
                 (UINTN)__LINE__
                 );
+
+
+  //
+  // BMC(0x00,0x12345678FFFFFFFF)
+  //
+  SctStrCpy (text, L"0x00,0x12345678FFFFFFFF");
+  pDevicePath = CreateBMCDeviceNode(text);
+
+  SctStrCpy (text, L"BMC(0x00,0x12345678FFFFFFFF))");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid132,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, BMC(0x00,0x12345678FFFFFFFF)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
 
   //
   // TDS 3.10.1.2.5
@@ -2877,7 +3289,267 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 (UINTN)__LINE__
                 );
 
+  //
+  // Uri(Uri)
+  //
+  SctStrCpy (text, L"Uri");
+  pDevicePath = CreateUriDeviceNode(text);
 
+  SctStrCpy (text, L"Uri(Uri)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid138,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert Uri(Uri)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+
+  //
+  // UFS(0,3) UFS 2.0 spec
+  //
+  SctStrCpy (text, L"0,3");
+  pDevicePath = CreateUFSDeviceNode(text);
+
+  SctStrCpy (text, L"UFS(0,3)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid133,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert UFS(0,3)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // SD(0) 
+  //
+  SctStrCpy (text, L"0");
+  pDevicePath = CreateSDDeviceNode(text);
+
+  SctStrCpy (text, L"SD(0)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid134,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert SD(0)",
+                __FILE__,
+                (UINTN)__LINE__
+                );  
+
+  //
+  // Bluetooth(001320F5FA77) 
+  //
+  SctStrCpy (text, L"001320F5FA77");
+  pDevicePath = CreateBlueToothDeviceNode(text);
+
+  SctStrCpy (text, L"Bluetooth(001320F5FA77)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid135,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert Bluetooth(001320F5FA77)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // Wi-Fi(It's a SSID)
+  //
+  SctStrCpy (text, L"It's a SSID");
+  pDevicePath = CreateWiFiDeviceNode(text);
+
+  SctStrCpy (text, L"Wi-Fi(It's a SSID)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid136,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert Wi-Fi(It's a SSID)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // RamDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1,E8AAED38-1815-4E4F-BCB5-2E3DBD160C9C)
+  //
+  SctStrCpy (text, L"0xABCD1234C0000000,0xABCD1234CFFFFFFF,1,E8AAED38-1815-4E4F-BCB5-2E3DBD160C9C");
+  pDevicePath = CreateRamDiskDeviceNode(text);
+
+  SctStrCpy (text, L"RamDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1,E8AAED38-1815-4E4F-BCB5-2E3DBD160C9C)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid137,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert RamDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1,E8AAED38-1815-4E4F-BCB5-2E3DBD160C9C)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // VirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF, 1)
+  //
+  SctStrCpy (text, L"0xABCD1234C0000000,0xABCD1234CFFFFFFF,1");
+  pDevicePath = CreateVirtualDiskDeviceNode(text);
+
+  SctStrCpy (text, L"VirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid137,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert VirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // VirtualCD(0xABCD1234C0000000,0xABCD1234CFFFFFFF, 1)
+  //
+  SctStrCpy (text, L"0xABCD1234C0000000,0xABCD1234CFFFFFFF,1");
+  pDevicePath = CreateVirtualCDDeviceNode(text);
+
+  SctStrCpy (text, L"VirtualCD(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid137,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert VirtualCD(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // PersistentVirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF, 1)
+  //
+  SctStrCpy (text, L"0xABCD1234C0000000,0xABCD1234CFFFFFFF,1");
+  pDevicePath = CreatePersistentVirtualDiskDeviceNode(text);
+
+  SctStrCpy (text, L"PersistentVirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid137,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert PersistentVirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // PersistentVirtualDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF, 1)
+  //
+  SctStrCpy (text, L"0xABCD1234C0000000,0xABCD1234CFFFFFFF,1");
+  pDevicePath = CreatePersistentVirtualCDDeviceNode(text);
+
+  SctStrCpy (text, L"PersistentVirtualCD(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid137,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert PersistentVirtualCD(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+   
   return EFI_SUCCESS;
 }
 
@@ -2949,15 +3621,26 @@ CreateFloppyDevicePath (
   EFI_DEVICE_PATH_PROTOCOL *pDevPathNode;
   EFI_DEVICE_PATH_PROTOCOL *pDevPath;
 
+  CHAR16                   *Temp;
+  CHAR16                   *TempStr;
+
   pDevPath = (EFI_DEVICE_PATH_PROTOCOL *) SctAllocatePool (END_DEVICE_PATH_LENGTH);
   SctSetDevicePathEndNode (pDevPath);
 
   pDevPathNode    = ConvertDevNodeFromTextPciRoot(DevicePathUtilities, L"PciRoot(0)");
   pDevPath        = DevicePathUtilities->AppendDeviceNode (pDevPath, pDevPathNode);
-  pDevPathNode    = ConvertDevNodeFromTextPci(DevicePathUtilities, L"Pci(0,10)");
+
+  Temp = SctStrDuplicate ( L"Pci(0,10)");
+  TempStr = Temp;
+  
+  pDevPathNode    = ConvertDevNodeFromTextPci(DevicePathUtilities, Temp);
   pDevPath        = DevicePathUtilities->AppendDeviceNode (pDevPath, pDevPathNode);
+
+  
   pDevPathNode    = ConvertDevNodeFromTextFloppy(DevicePathUtilities, L"Floppy(0)");
   pDevPath        = DevicePathUtilities->AppendDeviceNode (pDevPath, pDevPathNode);
+
+  SctFreePool (TempStr);
 
   return pDevPath;
 }

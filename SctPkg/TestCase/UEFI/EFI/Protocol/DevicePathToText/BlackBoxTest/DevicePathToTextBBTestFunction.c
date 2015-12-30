@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, - 2013 Unified EFI, Inc. All  
+  Copyright 2006, - 2015 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -56,22 +56,6 @@ Abstract:
 --*/
 
 #include "DevicePathToTextBBTestMain.h"
-
-#define PCINodeType         1
-#define PCINodeSubType      1
-#define PCINodeLength       6
-
-#define PCIRootNodeType     2
-#define PCIRootNodeSubType  1
-#define PCIRootNodeLength   12
-
-#define ACPINodeType        2
-#define ACPINodeSubType     1
-#define ACPINodeLength      12
-
-#define ATAPINodeType       3
-#define ATAPINodeSubType    1
-#define ATAPINodeLength     8
 
 STATIC
 UINT32
@@ -307,7 +291,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid071,
+                gDevicePathToTextBBTestFunctionAssertionGuid081,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly set a string to describe the device node structure",
                 L"%a:%d: Convert result: %s - Expected: Acpi(PNP0A03,0)",
                 __FILE__,
@@ -337,7 +321,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid075,
+                gDevicePathToTextBBTestFunctionAssertionGuid085,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly set a string to describe the device node structure",
                 L"%a:%d:Convert result: %s - Expected: Pci(0,0x10)",
                 __FILE__,
@@ -372,7 +356,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid076,
+                gDevicePathToTextBBTestFunctionAssertionGuid086,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly set a string to describe the device node structure",
                 L"%a:%d:Convert result: %s - Expected: Ata(Primary,Master,0)",
                 __FILE__,
@@ -475,7 +459,7 @@ DevicePathToTextConvertDevicePathToTextFunctionTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid073,
+                gDevicePathToTextBBTestFunctionAssertionGuid083,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly set a string to describe the device path structure",
                 L"%a:%d:Convert result: %s - Expected: Acpi(PNP0A03,0)/Pci(0,0x10)/Acpi(PNP0604,0)",
                 __FILE__,
@@ -529,7 +513,7 @@ DevicePathToTextConvertDevicePathToTextFunctionTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid077,
+                gDevicePathToTextBBTestFunctionAssertionGuid087,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly set a string to describe the device path structure",
                 L"%a:%d:Convert result: %s - Expected: Acpi(PNP0A03,0)/Pci(1,0x10)/Ata(Primary,Master,0)",
                 __FILE__,
@@ -582,7 +566,7 @@ DevicePathToTextConvertDevicePathToTextFunctionTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid078,
+                gDevicePathToTextBBTestFunctionAssertionGuid088,
                 L"EFI_DEVICE_PATH_TO_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly set a string to describe the device path structure",
                 L"%a:%d:Convert result: %s - Expected: Acpi(PNP0A03,0)/Pci(0,0xC)/Pci(0,0)",
                 __FILE__,
