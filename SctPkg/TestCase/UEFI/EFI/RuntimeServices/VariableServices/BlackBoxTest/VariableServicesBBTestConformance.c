@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -3112,6 +3112,7 @@ HardwareErrorRecordConfTest (
   CHAR16                GetVariableName[MAX_BUFFER_SIZE];
   UINTN                 VariableNameSize;
   EFI_GUID              VendorGuid;
+  CHAR16                *P = NULL;
   
   UINTN                 Num;
   UINTN                 MaxNum = 0;
@@ -3205,7 +3206,7 @@ HardwareErrorRecordConfTest (
   //
   GetVariableName[0] = L'\0';
   ErrorNum[4] = L'\0';
-  
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
 
   while (TRUE) {
     VariableNameSize = MAX_BUFFER_SIZE * sizeof (CHAR16);
@@ -3229,12 +3230,44 @@ HardwareErrorRecordConfTest (
 
     if ( (SctStrnCmp (GetVariableName, L"HwErrRec", 8) == 0) &&
          (SctCompareGuid (&VendorGuid, &gHwErrRecGuid) == 0) ) {
-      SctStrnCpy (ErrorNum, &GetVariableName[8], 4);
+      P = GetVariableName;
+	  if (SctStrLen(P) == 12) {
+	  	P = GetVariableName;
+        if (((P[8] >= '0' && P[8] <= '9') || (P[8] >= 'A' && P[8] <= 'F') || (P[8] >= 'a' && P[8] <= 'f')) && 
+           ((P[9] >= '0' && P[9] <= '9') || (P[9] >= 'A' && P[9] <= 'F') || (P[9] >= 'a' && P[9] <= 'f')) &&
+           ((P[10] >= '0' && P[10] <= '9') || (P[10] >= 'A' && P[10] <= 'F') || (P[10] >= 'a' && P[10] <= 'f')) &&
+           ((P[11] >= '0' && P[11] <= '9') || (P[11] >= 'A' && P[11] <= 'F') || (P[11] >= 'a' && P[11] <= 'f'))) {
+          AssertionType = EFI_TEST_ASSERTION_PASSED;
+		} else { 
+          AssertionType = EFI_TEST_ASSERTION_FAILED;
+		  break;
+        }
+	  } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+        break;
+	  }
+
+	  SctStrnCpy (ErrorNum, &GetVariableName[8], 4);
       Num = SctXtoi (ErrorNum);
       if (MaxNum < Num)
         MaxNum = Num;
     }
   }
+
+  if (P != NULL)
+    StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gHwErrRecBbTestAssertionGuid004,
+                     L"RT.SetVariable - Retrive the Hardware Error Record variables, check the name of them",
+                     L"%a:%d:Status - %r, Expected - %r",
+                     __FILE__,
+                     (UINTN)__LINE__
+                     );  
+
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED)
+    return EFI_SUCCESS;
 
   MaxNum++;
     

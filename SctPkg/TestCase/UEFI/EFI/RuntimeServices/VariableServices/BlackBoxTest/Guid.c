@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -226,3 +226,6 @@ EFI_GUID gHwErrRecBbTestAssertionGuid001 = EFI_TEST_VARIABLESERVICESBBTEST_HWERR
 EFI_GUID gHwErrRecBbTestAssertionGuid002 = EFI_TEST_VARIABLESERVICESBBTEST_HWERRREC_ASSERTION_002_GUID;
 
 EFI_GUID gHwErrRecBbTestAssertionGuid003 = EFI_TEST_VARIABLESERVICESBBTEST_HWERRREC_ASSERTION_003_GUID;
+
+EFI_GUID gHwErrRecBbTestAssertionGuid004 = EFI_TEST_VARIABLESERVICESBBTEST_HWERRREC_ASSERTION_004_GUID;
+
