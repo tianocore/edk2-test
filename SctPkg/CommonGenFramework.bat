@@ -35,12 +35,12 @@
 @REM DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 @REM THE POSSIBILITY OF SUCH DAMAGES.                            
 @REM                                                             
-@REM Copyright 2006 - 2013 Unified EFI, Inc. All
+@REM Copyright 2006 - 2016 Unified EFI, Inc. All
 @REM Rights Reserved, subject to all existing rights in all      
 @REM matters included within this Test Suite, to which United    
 @REM EFI, Inc. makes no claim of right.                          
 @REM                                                             
-@REM Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR> 
+@REM Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR> 
 @REM
 @REM
 @echo %DEBUG% OFF
@@ -204,7 +204,8 @@ copy %ProcessorType%\AdapterInfoBBTest.efi                    %Framework%\Test\ 
 copy %ProcessorType%\DiskIo2BBTest.efi                        %Framework%\Test\ > NUL
 copy %ProcessorType%\TimeStampBBTest.efi                      %Framework%\Test\ > NUL
 copy %ProcessorType%\RandomNumberBBTest.efi                   %Framework%\Test\ > NUL
-
+copy %ProcessorType%\Hash2BBTest.efi                          %Framework%\Test\ > NUL
+copy %ProcessorType%\Pkcs7BBTest.efi                          %Framework%\Test\ > NUL
 
 rem *********************************************
 rem Copy ENTS binary

@@ -1,16 +1,59 @@
-#/** @file
 #
-#  Copyright (c) 2014, ARM Limited. All rights reserved.
+# The material contained herein is not a license, either      
+# expressly or impliedly, to any intellectual property owned  
+# or controlled by any of the authors or developers of this   
+# material or to any contribution thereto. The material       
+# contained herein is provided on an "AS IS" basis and, to the
+# maximum extent permitted by applicable law, this information
+# is provided AS IS AND WITH ALL FAULTS, and the authors and  
+# developers of this material hereby disclaim all other       
+# warranties and conditions, either express, implied or       
+# statutory, including, but not limited to, any (if any)      
+# implied warranties, duties or conditions of merchantability,
+# of fitness for a particular purpose, of accuracy or         
+# completeness of responses, of results, of workmanlike       
+# effort, of lack of viruses and of lack of negligence, all   
+# with regard to this material and any contribution thereto.  
+# Designers must not rely on the absence or characteristics of
+# any features or instructions marked "reserved" or           
+# "undefined." The Unified EFI Forum, Inc. reserves any       
+# features or instructions so marked for future definition and
+# shall have no responsibility whatsoever for conflicts or    
+# incompatibilities arising from future changes to them. ALSO,
+# THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,
+# QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR          
+# NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY      
+# CONTRIBUTION THERETO.                                       
+#                                                             
+# IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR
+# ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR   
+# THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST    
+# PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,      
+# CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER 
+# UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY
+# WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS     
+# DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
+# THE POSSIBILITY OF SUCH DAMAGES.                            
+#                                                             
+# Copyright 2014 - 2016 Unified EFI, Inc. All
+# Rights Reserved, subject to all existing rights in all      
+# matters included within this Test Suite, to which United    
+# EFI, Inc. makes no claim of right.                          
+#                                                            
+# Copyright (c) 2014, ARM Limited. All rights reserved. 
+# Copyright (c) 2016, Intel Corporation. All rights reserved.
 #
-#  This program and the accompanying materials
-#  are licensed and made available under the terms and conditions of the BSD License
-#  which accompanies this distribution. The full text of the license may be found at
-#  http://opensource.org/licenses/bsd-license.php
 #
-#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#/*++
 #
-#**/
+# Module Name:
+#
+#    UEFI.dec
+#
+#
+#
+#--*/
+
 
 [Defines]
   DEC_SPECIFICATION              = 0x00010005
@@ -41,6 +84,24 @@
   gBlackBoxEfiVT100Guid = { 0xDFA66065, 0xB419, 0x11D3, { 0x9A, 0x2D, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}
   gBlackBoxEfiVT100PlusGuid = { 0x7BAEC70B, 0x57E0, 0x4C76, { 0x8E, 0x87, 0x2F, 0x9E, 0x28, 0x08, 0x83, 0x43 }}
   gBlackBoxEfiVTUTF8Guid = { 0xAD15A0D6, 0x8BEC, 0x4ACF, { 0xA0, 0x73, 0xD0, 0x1D, 0xE7, 0x7E, 0x2D, 0x88 }}
+
+  gBlackBoxEfiHash2AlgorithmSha1Guid = { 0x2ae9d80f, 0x3fb2, 0x4095, 0xb7, 0xb1, 0xe9, 0x31, 0x57, 0xb9, 0x46, 0xb6 } 
+  gBlackBoxEfiHash2AlgorithmSha224Guid = { 0x8df01a06, 0x9bd5, 0x4bf7, 0xb0, 0x21, 0xdb, 0x4f, 0xd9, 0xcc, 0xf4, 0x5b }
+  gBlackBoxEfiHash2AlgorithmSha256Guid = { 0x51aa59de, 0xfdf2, 0x4ea3, 0xbc, 0x63, 0x87, 0x5f, 0xb7, 0x84, 0x2e, 0xe9 }
+  gBlackBoxEfiHash2AlgorithmSha384Guid = { 0xefa96432, 0xde33, 0x4dd2, 0xae, 0xe6, 0x32, 0x8c, 0x33, 0xdf, 0x77, 0x7a }
+  gBlackBoxEfiHash2AlgorithmSha512Guid = { 0xcaa4381e, 0x750c, 0x4770, 0xb8, 0x70, 0x7a, 0x23, 0xb4, 0xe4, 0x21, 0x30 }
+  gBlackBoxEfiHash2AlgorithmMD5Guid = { 0xaf7c79c, 0x65b5, 0x4319, 0xb0, 0xae, 0x44, 0xec, 0x48, 0x4e, 0x4a, 0xd7 }
+  gBlackBoxEfiHash2AlgorithmSha1NoPadGuid = { 0x24c5dc2f, 0x53e2, 0x40ca, 0x9e, 0xd6, 0xa5, 0xd9, 0xa4, 0x9f, 0x46, 0x3b }
+  gBlackBoxEfiHash2AlgorithmSha256NoPadGuid = { 0x8628752a, 0x6cb7, 0x4814, 0x96, 0xfc, 0x24, 0xa8, 0x15, 0xac, 0x22, 0x26 }
+
+  
+  gBlackBoxEfiCertSha256Guid             = { 0xc1c41626, 0x504c, 0x4092, {0xac, 0xa9, 0x41, 0xf9, 0x36, 0x93, 0x43, 0x28 }} 
+  gBlackBoxEfiCertRsa2048Guid            = { 0x3c5766e8, 0x269c, 0x4e34, {0xaa, 0x14, 0xed, 0x77, 0x6e, 0x85, 0xb3, 0xb6 }} 
+  gBlackBoxEfiCertRsa2048Sha256Guid      = { 0xe2b36190, 0x879b, 0x4a3d, {0xad, 0x8d, 0xf2, 0xe7, 0xbb, 0xa3, 0x27, 0x84 }} 
+  gBlackBoxEfiCertSha1Guid               = { 0x826ca512, 0xcf10, 0x4ac9, {0xb1, 0x87, 0xbe,  0x1, 0x49, 0x66, 0x31, 0xbd }} 
+  gBlackBoxEfiCertRsa2048Sha1Guid        = { 0x67f8444f, 0x8743, 0x48f1, {0xa3, 0x28, 0x1e, 0xaa, 0xb8, 0x73, 0x60, 0x80 }} 
+  gBlackBoxEfiCertX509Guid               = { 0xa5c059a1, 0x94e4, 0x4aa7, {0x87, 0xb5, 0xab, 0x15, 0x5c, 0x2b, 0xf0, 0x72 }} 
+  gBlackBoxEfiCertX509Sha256Guid         = { 0x3bd2a492, 0x96c0, 0x4079, {0xb4, 0x20, 0xfc, 0xf9, 0x8e, 0xf1, 0x03, 0xed }}
 
 [Protocols.common]
   gBlackBoxEfiAbsolutePointerProtocolGuid = { 0x8D59D32B, 0xC655, 0x4AE9, { 0x9B, 0x15, 0xF2, 0x59, 0x04, 0x99, 0x2A, 0x43 } }
@@ -131,3 +192,8 @@
   gBlackBoxEfiUsbHcProtocolGuid = {0xF5089266,0x1AA0,0x4953,0x97,0xD8,0x56,0x2F,0x8A,0x73,0xB5,0x19}
   gBlackBoxEfiUsbIoProtocolGuid = {0x2B2F68D6,0x0CD2,0x44cf,0x8E,0x8B,0xBB,0xA2,0x0B,0x1B,0x5B,0x75}
   gBlackBoxEfiVlanConfigProtocolGuid = { 0x9e23d768, 0xd2f3, 0x4366, 0x9f, 0xc3, 0x3a, 0x7a, 0xba, 0x86, 0x43, 0x74 }
+
+  gBlackBoxEfiHash2ServiceBindingProtocolGuid = { 0xda836f8d, 0x217f, 0x4ca0, 0x99, 0xc2, 0x1c, 0xa4, 0xe1, 0x60, 0x77, 0xea }
+  gBlackBoxEfiHash2ProtocolGuid = { 0x55b1d734, 0xc5e1, 0x49db, 0x96, 0x47, 0xb1, 0x6a, 0xfb, 0xe, 0x30, 0x5b } 
+
+  gBlackBoxEfiPkcs7VerifyProtocolGuid = { 0x47889fb2, 0xd671, 0x4fab, 0xa0, 0xca, 0xdf, 0xe, 0x44, 0xdf, 0x70, 0xd6 }
