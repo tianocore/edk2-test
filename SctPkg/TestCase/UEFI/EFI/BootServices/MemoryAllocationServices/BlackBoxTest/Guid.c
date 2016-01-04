@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -243,6 +243,17 @@ EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid003 = EFI_TEST_M
 
 EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid004 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_004_GUID;
 
+EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid005 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_005_GUID;
+
+EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid006 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_006_GUID;
+
+EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid007 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_007_GUID;
+
+EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid008 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_008_GUID;
+
+EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid009 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_009_GUID;
+
+
 EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid001 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTFUNCTION_ASSERTION_001_GUID;
 
 EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid002 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTFUNCTION_ASSERTION_002_GUID;
@@ -394,10 +405,4 @@ EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid074 = EFI_TEST_MEMO
 EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid075 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTFUNCTION_ASSERTION_075_GUID;
 
 EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid076 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTFUNCTION_ASSERTION_076_GUID;
-
-EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid005 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_005_GUID;
-
-EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid006 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_006_GUID;
-
-EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid007 = EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_007_GUID;
 

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -516,6 +516,33 @@ extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid003;
 
 extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid004;
 
+#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_005_GUID \
+{ 0x69663454, 0x635d, 0x48f8, 0x8e, 0x9a, 0x8b, 0x3f, 0x28, 0xc8, 0x42, 0xc2 }
+
+extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid005;
+
+#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_006_GUID \
+{ 0xa49b9e70, 0x956a, 0x4f29, 0xbb, 0x7f, 0x37, 0x5a, 0xc0, 0xa7, 0x29, 0x30 }
+
+extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid006;
+
+#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_007_GUID \
+{ 0xe6ee903a, 0x88a3, 0x4428, 0xb0, 0x05, 0x62, 0x59, 0x43, 0xed, 0x6e, 0x9d }
+
+extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid007;
+
+#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_008_GUID \
+{ 0x2d261231, 0xc694, 0x4dbb, 0x83, 0xd0, 0x1d, 0xc8, 0xd3, 0x89, 0x44, 0x5f }
+
+extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid008;
+
+#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_009_GUID \
+{ 0x41062e36, 0x7401, 0x4b0c, 0xb4, 0xe9, 0xe7, 0xaa, 0x27, 0xcc, 0xa8, 0x8 }
+
+extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid009;
+
+
+
 #define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTFUNCTION_ASSERTION_001_GUID \
 { 0xfb436e4d, 0x7f39, 0x4fdf, 0xbe, 0xf8, 0x5b, 0x4f, 0x66, 0x69, 0x7d, 0x5b }
 
@@ -895,19 +922,4 @@ extern EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid075;
 { 0xdc1fa4f1, 0x91c5, 0x4edc, 0xa1, 0x00, 0x8a, 0x95, 0x32, 0xb8, 0x89, 0x14 }
 
 extern EFI_GUID gMemoryAllocationServicesBBTestFunctionAssertionGuid076;
-
-#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_005_GUID \
-{ 0x69663454, 0x635d, 0x48f8, 0x8e, 0x9a, 0x8b, 0x3f, 0x28, 0xc8, 0x42, 0xc2 }
-
-extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid005;
-
-#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_006_GUID \
-{ 0xa49b9e70, 0x956a, 0x4f29, 0xbb, 0x7f, 0x37, 0x5a, 0xc0, 0xa7, 0x29, 0x30 }
-
-extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid006;
-
-#define EFI_TEST_MEMORYALLOCATIONSERVICESBBTESTCONFORMANCE_ASSERTION_007_GUID \
-{ 0xe6ee903a, 0x88a3, 0x4428, 0xb0, 0x05, 0x62, 0x59, 0x43, 0xed, 0x6e, 0x9d }
-
-extern EFI_GUID gMemoryAllocationServicesBBTestConformanceAssertionGuid007;
 
