@@ -206,6 +206,7 @@ copy %ProcessorType%\TimeStampBBTest.efi                      %Framework%\Test\ 
 copy %ProcessorType%\RandomNumberBBTest.efi                   %Framework%\Test\ > NUL
 copy %ProcessorType%\Hash2BBTest.efi                          %Framework%\Test\ > NUL
 copy %ProcessorType%\Pkcs7BBTest.efi                          %Framework%\Test\ > NUL
+copy %ProcessorType%\ConfigKeywordHandlerBBTest.efi           %Framework%\Test\ > NUL
 
 rem *********************************************
 rem Copy ENTS binary
@@ -249,6 +250,7 @@ call :CopyDependency LoadedImage
 call :CopyDependency PciIo
 call :CopyDependency PciRootBridgeIo
 call :CopyDependency PxeBaseCode
+call :CopyDependency ConfigKeywordHandler
 )
 
 rem *********************************************

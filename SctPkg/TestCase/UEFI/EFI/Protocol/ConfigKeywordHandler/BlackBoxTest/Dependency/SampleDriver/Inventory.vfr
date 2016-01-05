@@ -1,0 +1,146 @@
+//  or controlled by any of the authors or developers of this     
+//  material or to any contribution thereto. The material         
+//  contained herein is provided on an "AS IS" basis and, to the  
+//  maximum extent permitted by applicable law, this information  
+//  is provided AS IS AND WITH ALL FAULTS, and the authors and    
+//  developers of this material hereby disclaim all other         
+//  warranties and conditions, either express, implied or         
+//  statutory, including, but not limited to, any (if any)        
+//  implied warranties, duties or conditions of merchantability,  
+//  of fitness for a particular purpose, of accuracy or           
+//  completeness of responses, of results, of workmanlike         
+//  effort, of lack of viruses and of lack of negligence, all     
+//  with regard to this material and any contribution thereto.    
+//  Designers must not rely on the absence or characteristics of  
+//  any features or instructions marked "reserved" or             
+//  "undefined." The Unified EFI Forum, Inc. reserves any         
+//  features or instructions so marked for future definition and  
+//  shall have no responsibility whatsoever for conflicts or      
+//  incompatibilities arising from future changes to them. ALSO,  
+//  THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,  
+//  QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR            
+//  NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY        
+//  CONTRIBUTION THERETO.                                         
+//                                                                
+//  IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR  
+//  ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR     
+//  THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST      
+//  PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,        
+//  CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER   
+//  UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY  
+//  WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS       
+//  DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
+//  THE POSSIBILITY OF SUCH DAMAGES.                              
+//                                                                
+//  Copyright 2016 Unified EFI, Inc. All  
+//  Rights Reserved, subject to all existing rights in all        
+//  matters included within this Test Suite, to which United      
+//  EFI, Inc. makes no claim of right.                            
+//                                                                
+//  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>   
+//
+
+
+
+#include "NVDataStruc.h"
+
+formset
+  guid     = DRIVER_SAMPLE_INVENTORY_GUID,
+  title    = STRING_TOKEN(STR_INV_FORM_SET_TITLE),
+  help     = STRING_TOKEN(STR_INV_FORM_SET_HELP),
+
+  form formid = 1,
+       title  = STRING_TOKEN(STR_INV_FORM1_TITLE);  // note formid is a variable (for readability) (UINT16) - also added Form to the line to signify the Op-Code
+
+  	text
+      help   = STRING_TOKEN(STR_INV_VERSION_HELP),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT2),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT3),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT4),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+    subtitle text = STRING_TOKEN(STR_INV_EMPTY_STRING);
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT5),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT6),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT7),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT8),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT9),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT10),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+  	text
+      help   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_INV_VERSION_TEXT11),
+	    text   = STRING_TOKEN(STR_INV_EMPTY_STRING),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_CHECK_KEYWORD_SUPPORT),
+      text   = STRING_TOKEN(STR_CHECK_KEYWORD_SUPPORT),
+      flags  = INTERACTIVE,
+      key    = 0x1231;
+
+    subtitle text = STRING_TOKEN(STR_INV_EMPTY_STRING);
+
+    subtitle text = STRING_TOKEN(STR_INV_VERSION_TEXT12);
+
+  endform;
+
+endformset;

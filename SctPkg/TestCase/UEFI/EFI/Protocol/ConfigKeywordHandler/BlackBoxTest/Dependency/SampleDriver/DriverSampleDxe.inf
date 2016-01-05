@@ -1,0 +1,140 @@
+#
+# The material contained herein is not a license, either      
+# expressly or impliedly, to any intellectual property owned  
+# or controlled by any of the authors or developers of this   
+# material or to any contribution thereto. The material       
+# contained herein is provided on an "AS IS" basis and, to the
+# maximum extent permitted by applicable law, this information
+# is provided AS IS AND WITH ALL FAULTS, and the authors and  
+# developers of this material hereby disclaim all other       
+# warranties and conditions, either express, implied or       
+# statutory, including, but not limited to, any (if any)      
+# implied warranties, duties or conditions of merchantability,
+# of fitness for a particular purpose, of accuracy or         
+# completeness of responses, of results, of workmanlike       
+# effort, of lack of viruses and of lack of negligence, all   
+# with regard to this material and any contribution thereto.  
+# Designers must not rely on the absence or characteristics of
+# any features or instructions marked "reserved" or           
+# "undefined." The Unified EFI Forum, Inc. reserves any       
+# features or instructions so marked for future definition and
+# shall have no responsibility whatsoever for conflicts or    
+# incompatibilities arising from future changes to them. ALSO,
+# THERE IS NO WARRANTY OR CONDITION OF TITLE, QUIET ENJOYMENT,
+# QUIET POSSESSION, CORRESPONDENCE TO DESCRIPTION OR          
+# NON-INFRINGEMENT WITH REGARD TO THE TEST SUITE AND ANY      
+# CONTRIBUTION THERETO.                                       
+#                                                             
+# IN NO EVENT WILL ANY AUTHOR OR DEVELOPER OF THIS MATERIAL OR
+# ANY CONTRIBUTION THERETO BE LIABLE TO ANY OTHER PARTY FOR   
+# THE COST OF PROCURING SUBSTITUTE GOODS OR SERVICES, LOST    
+# PROFITS, LOSS OF USE, LOSS OF DATA, OR ANY INCIDENTAL,      
+# CONSEQUENTIAL, DIRECT, INDIRECT, OR SPECIAL DAMAGES WHETHER 
+# UNDER CONTRACT, TORT, WARRANTY, OR OTHERWISE, ARISING IN ANY
+# WAY OUT OF THIS OR ANY OTHER AGREEMENT RELATING TO THIS     
+# DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
+# THE POSSIBILITY OF SUCH DAMAGES.                            
+#                                                             
+# Copyright 2016 Unified EFI, Inc. All
+# Rights Reserved, subject to all existing rights in all      
+# matters included within this Test Suite, to which United    
+# EFI, Inc. makes no claim of right.                          
+#                                                             
+# Copyright (c) 2016, Intel Corporation. All rights reserved.<BR> 
+#
+#
+#/*++
+#
+# Module Name:
+#
+#   DriverSampleDxe.inf
+#
+# Abstract:
+#
+#   This is a sample HII driver.
+#
+#--*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ConfigKeywordHandler_DriverSample
+  MODULE_UNI_FILE                = DriverSample.uni
+  FILE_GUID                      = FE3542FE-C1D3-4EF8-657C-8048606FF671
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DriverSampleInit
+  UNLOAD_IMAGE                   = DriverSampleUnload
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  DriverSample.c
+  InventoryStrings.uni
+  NVDataStruc.h
+  VfrStrings.uni
+  DriverSample.h
+  Inventory.vfr
+  Vfr.vfr
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+
+[LibraryClasses]
+  BaseLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  HiiLib
+  PrintLib
+  UefiLib
+  DevicePathLib
+
+[Guids]
+  gEfiIfrTianoGuid                              ## PRODUCES ## UNDEFINED
+  gDriverSampleInventoryGuid                    ## CONSUMES ## HII
+  ## SOMETIMES_PRODUCES ## Event
+  ## CONSUMES ## Event
+  gEfiIfrRefreshIdOpGuid
+  ## CONSUMES ## HII
+  ## PRODUCES ## Variable:L"MyIfrNVData"
+  ## SOMETIMES_CONSUMES ## Variable:L"MyIfrNVData"
+  ## PRODUCES ## Variable:L"MyEfiVar"
+  ## SOMETIMES_CONSUMES ## Variable:L"MyEfiVar"
+  ## PRODUCES ## GUID  # HiiConstructConfigHdr MyEfiVar
+  ## PRODUCES ## GUID  # HiiConstructConfigHdr MyIfrNVData
+  ## SOMETIMES_CONSUMES ## GUID  # HiiIsConfigHdrMatch MyEfiVar
+  ## SOMETIMES_CONSUMES ## GUID  # HiiIsConfigHdrMatch MyIfrNVData
+  ## SOMETIMES_PRODUCES ## GUID  # HiiGetBrowserData MyIfrNVData
+  ## SOMETIMES_CONSUMES ## GUID  # HiiSetBrowserData MyIfrNVData
+  ## SOMETIMES_PRODUCES ## GUID  # HiiGetBrowserData MyEfiVar
+  ## SOMETIMES_CONSUMES ## GUID  # HiiSetBrowserData MyEfiVar
+  gDriverSampleFormSetGuid
+
+[Protocols]
+  ## PRODUCES # DriverSampleFormSet
+  ## PRODUCES # DriverSampleInventory
+  gEfiDevicePathProtocolGuid
+  gEfiHiiStringProtocolGuid                     ## CONSUMES
+  gEfiHiiConfigRoutingProtocolGuid              ## CONSUMES
+  gEfiHiiConfigAccessProtocolGuid               ## PRODUCES
+  gEfiFormBrowser2ProtocolGuid                  ## CONSUMES
+  gEfiHiiDatabaseProtocolGuid                   ## CONSUMES
+  gEfiSimpleTextInputExProtocolGuid             ## SOMETIMES_CONSUMES
+  gEfiFormBrowserExProtocolGuid                 ## CONSUMES
+  gBlackBoxEfiConfigKeywordHandlerProtocolGuid  ## CONSUMES
+
+[Depex]
+  gEfiSimpleTextOutProtocolGuid AND gEfiHiiDatabaseProtocolGuid AND gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid
+
+[UserExtensions.TianoCore."ExtraFiles"]
+  DriverSampleExtra.uni

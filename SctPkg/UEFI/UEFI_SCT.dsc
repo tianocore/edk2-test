@@ -166,6 +166,13 @@
   BaseMemoryLib|MdePkg/Library/BaseMemoryLib/BaseMemoryLib.inf
   DebugLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
+  MemoryAllocationLib|MdePkg/Library/UefiMemoryAllocationLib/UefiMemoryAllocationLib.inf
+  UefiRuntimeServicesTableLib|MdePkg/Library/UefiRuntimeServicesTableLib/UefiRuntimeServicesTableLib.inf
+  UefiHiiServicesLib|MdeModulePkg/Library/UefiHiiServicesLib/UefiHiiServicesLib.inf
+  HiiLib|MdeModulePkg/Library/UefiHiiLib/UefiHiiLib.inf
+  PrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
+  UefiLib|MdePkg/Library/UefiLib/UefiLib.inf
+  DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
   
   SctLib|SctPkg/Library/SctLib/SctLib.inf
   NetLib|SctPkg/Library/NetLib/NetLib.inf
@@ -296,6 +303,9 @@ SctPkg/TestCase/UEFI/EFI/Protocol/RandomNumber/BlackBoxTest/RandomNumberBBTest.i
 
 SctPkg/TestCase/UEFI/EFI/Protocol/Hash2/BlackBoxTest/Hash2BBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/PKCS7Verify/BlackBoxTest/Pkcs7BBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/ConfigKeywordHandler/BlackBoxTest/ConfigKeywordHandlerBBTest.inf
+
+
 #
 # Dependency files for UEFI/EFI Compliant Test
 #
@@ -426,6 +436,10 @@ SctPkg/TestCase/UEFI/EFI/Protocol/PciRootBridgeIo/BlackBoxTest/Dependency/Config
 #
 SctPkg/TestCase/UEFI/EFI/Protocol/PxeBaseCode/BlackBoxTest/Dependency/Config/Config.inf
 
+#
+# Dependency files for Config Keyword Handler Protocol Test
+#
+SctPkg/TestCase/UEFI/EFI\Protocol/ConfigKeywordHandler/BlackBoxTest/Dependency/SampleDriver/DriverSampleDxe.inf
 
 #
 # Support Files
