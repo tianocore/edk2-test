@@ -240,6 +240,9 @@ then
     cp $ProcessorType/DiskIo2BBTest.efi                        $Framework/Test/ > NUL
     cp $ProcessorType/TimeStampBBTest.efi                      $Framework/Test/ > NUL
     cp $ProcessorType/RandomNumberBBTest.efi                   $Framework/Test/ > NUL
+    cp $ProcessorType/Hash2BBTest.efi                          $Framework/Test/ > NUL
+    cp $ProcessorType/Pkcs7BBTest.efi                          $Framework/Test/ > NUL
+    cp $ProcessorType/ConfigKeywordHandlerBBTest.efi           $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary
@@ -283,6 +286,7 @@ then
     CopyDependency PciIo
     CopyDependency PciRootBridgeIo
     CopyDependency PxeBaseCode
+    CopyDependency ConfigKeywordHandler
 fi
 
 # *********************************************

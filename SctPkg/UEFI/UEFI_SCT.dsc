@@ -439,7 +439,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/PxeBaseCode/BlackBoxTest/Dependency/Config/Con
 #
 # Dependency files for Config Keyword Handler Protocol Test
 #
-SctPkg/TestCase/UEFI/EFI\Protocol/ConfigKeywordHandler/BlackBoxTest/Dependency/SampleDriver/DriverSampleDxe.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/ConfigKeywordHandler/BlackBoxTest/Dependency/SampleDriver/DriverSampleDxe.inf
 
 #
 # Support Files
