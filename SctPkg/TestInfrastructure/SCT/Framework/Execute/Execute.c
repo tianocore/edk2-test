@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -947,20 +947,13 @@ Routine Description:
 --*/
 {
   EFI_STATUS            Status;
-  UINTN                 Index;
-  UINTN                 NoInstance;
-  UINTN                 InstanceIndex;
   UINTN                 NoHandles;
   EFI_HANDLE            *HandleBuffer;
   EFI_GUID              *Guid;
-  SCT_LIST_ENTRY        *Link;
-  MDK_LIBRARY_INSTANCE  *MdkLibInstance;
   VOID                  *Interface;
   EFI_BB_TEST_PROTOCOL  *BbTest;
   UINTN                 HandleIndex;
   CHAR16                *FileName;
-
-  MdkLibInstance = NULL;
 
   //
   // Check parameters
@@ -1218,79 +1211,6 @@ Routine Description:
         }
         ExecuteInfo->Iteration = 0;
         ExecuteInfo->Index ++;
-      }
-    }
-
-    //
-    // Search this GUID from configuration table
-    //
-    for (Index = 0; Index < tST->NumberOfTableEntries; Index++) {
-      if (SctCompareGuid (Guid, &tST->ConfigurationTable[Index].VendorGuid) == 0) {
-        //
-	    // Get library instance No.
-        //
-        Link = (SCT_LIST_ENTRY *) tST->ConfigurationTable[Index].VendorTable; 
-        
-        NoInstance = GetLibInstanceNo(Link);
-
-        SctPrint (L"\nNumber of library instance: %hd\n", NoInstance); 
-        
-        while (ExecuteInfo->Index < NoInstance) {
-          //
-          // Get the library instance from link list based on the InstanceIndex
-          //
-          InstanceIndex = 0;
-          Link = ((SCT_LIST_ENTRY *) tST->ConfigurationTable[Index].VendorTable)->ForwardLink;
-          for (InstanceIndex = 0; InstanceIndex < ExecuteInfo->Index; InstanceIndex ++) {
-            Link = Link->ForwardLink;
-          }
-          MdkLibInstance = CR (Link, MDK_LIBRARY_INSTANCE, Link, MDK_LIBRARY_INSTANCE_SIGNATURE);
-
-          //
-          // Print out the library instance name
-          //
-          SctPrint (L"\n\n");
-          SctPrint (L"************************************************************\n");
-          SctPrint (L"Library instance name: %hs\n", MdkLibInstance->Name);
-          SctPrint (L"************************************************************\n");
-          SctPrint (L"\n");
-          
-          while (ExecuteInfo->Iteration < ExecuteInfo->TestCase->Iterations) {
-            //
-            // Configuration table item test
-            //
-            if (ExecuteInfo->State == EFI_SCT_LOG_STATE_FINISHED) {
-              EFI_SCT_DEBUG ((EFI_SCT_D_DEBUG, L"Recovery finished"));
-              ExecuteInfo->State = EFI_SCT_LOG_STATE_UNKNOWN;
-              ExecuteInfo->Iteration ++;
-              continue;
-            }
-
-            //
-            // Process information
-            //
-            SctPrint (L"  Configuration table item test: %hs\n", ExecuteInfo->TestCase->Name);
-            SctPrint (L"  Library instance name: %hs\n", MdkLibInstance->Name);
-            SctPrint (L"  Instances: %hd/%hd\n", ExecuteInfo->Index + 1, NoInstance);
-            SctPrint (L"  Iterations: %hd/%hd\n", ExecuteInfo->Iteration + 1, ExecuteInfo->TestCase->Iterations);
-
-            //
-            // Start the test case with configuration table item
-            //
-            Status = ExecuteBbTestInstance (ExecuteInfo, MdkLibInstance->Interface, NULL);
-            if (EFI_ERROR (Status)) {
-              EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Execute a BB test instance - %r", Status));
-              return Status;
-            }
-
-            ExecuteInfo->State = EFI_SCT_LOG_STATE_UNKNOWN;
-          ExecuteInfo->Iteration ++;
-        }
-
-        ExecuteInfo->Iteration = 0;
-        ExecuteInfo->Index ++;
-        }
-        break;
       }
     }
   }
