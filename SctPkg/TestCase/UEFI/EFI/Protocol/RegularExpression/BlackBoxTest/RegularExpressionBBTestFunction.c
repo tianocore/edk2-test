@@ -40,7 +40,7 @@
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2013 - 2014, Intel Corporation. All rights reserved.<BR>   
+  (C) Copyright 2016 Hewlett Packard Enterprise Development LP<BR>
    
 --*/
 /*++
