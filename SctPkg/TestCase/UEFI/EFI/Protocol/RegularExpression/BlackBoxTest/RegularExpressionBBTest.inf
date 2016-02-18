@@ -57,7 +57,7 @@
 
 [defines]
   INF_VERSION          = 0x00010005
-  BASE_NAME            = RegularExpressionBbTest
+  BASE_NAME            = RegularExpressionBBTest
   FILE_GUID            = FBE3AF82-E30D-491D-8AD2-2D8FD582733F
   MODULE_TYPE          = UEFI_DRIVER
   VERSION_STRING       = 1.0

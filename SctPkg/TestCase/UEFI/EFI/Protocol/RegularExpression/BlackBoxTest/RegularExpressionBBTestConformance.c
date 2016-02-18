@@ -207,7 +207,8 @@ BBTestGetInfoConformanceTestCheckpoint1 (
   }
   
   if (    (EFI_BUFFER_TOO_SMALL == Status)
-       && (SyntaxTypeListSize % sizeof(EFI_REGEX_SYNTAX_TYPE) == 0))
+       && (SyntaxTypeListSize % sizeof(EFI_REGEX_SYNTAX_TYPE) == 0)
+       && (SyntaxTypeListSize != 0))
   {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
@@ -313,7 +314,7 @@ BBTestMatchStringConformanceTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
-                   gRegExConformanceTestAssertionGuid003,
+                   gTestGenericFailureGuid,
                    L"Can't get the correct SyntaxTypeListSize.",
                    L"%a:%d: Status - %r, SyntaxTypeListSize - %d",
                    __FILE__,
@@ -358,7 +359,7 @@ BBTestMatchStringConformanceTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
-                   gRegExConformanceTestAssertionGuid003,
+                   gTestGenericFailureGuid,
                    L"Can't get the valid SyntaxTypes.",
                    L"%a:%d: Status - %r.",
                    __FILE__,

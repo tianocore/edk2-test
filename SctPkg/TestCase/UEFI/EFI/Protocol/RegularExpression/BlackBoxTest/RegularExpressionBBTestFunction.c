@@ -261,6 +261,7 @@ BBTestRegExGetInfoFunctionTestCheckpoint1 (
   EFI_REGEX_SYNTAX_TYPE                    *RegExSyntaxTypeList1 = NULL;
   EFI_REGEX_SYNTAX_TYPE                    *RegExSyntaxTypeList2;
   UINTN                                    SyntaxTypeListSize = 0;
+  UINTN                                    InputListSize = 0;
   
   Status = RegularExpression->GetInfo (
                                 RegularExpression,
@@ -289,7 +290,7 @@ BBTestRegExGetInfoFunctionTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
-                   gRegExFunctionTestAssertionGuid001,
+                   gTestGenericFailureGuid,
                    L"REGULAR_EXPRESSION_PROTOCOL.GetInfo() did not return EFI_BUFFER_TOO_SMALL or ListSize wrong.",
                    L"%a:%d: Status - %r, SyntaxTypeListSize - %d.",
                    __FILE__,
@@ -320,13 +321,16 @@ BBTestRegExGetInfoFunctionTestCheckpoint1 (
     return Status;
   }
   
+  InputListSize = SyntaxTypeListSize;
+  
   Status = RegularExpression->GetInfo (
                                 RegularExpression,
                                 &SyntaxTypeListSize,
                                 RegExSyntaxTypeList2
                               );
   if (    (EFI_SUCCESS == Status)
-       && (SyntaxTypeListSize % sizeof(EFI_REGEX_SYNTAX_TYPE) == 0))
+       && (SyntaxTypeListSize % sizeof(EFI_REGEX_SYNTAX_TYPE) == 0)
+       && (SyntaxTypeListSize == InputListSize))
   {
   AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else if (    (Status == EFI_UNSUPPORTED)
@@ -405,7 +409,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_WARNING,
-                   gRegExFunctionTestAssertionGuid002,
+                   gTestGenericFailureGuid,
                    L"Can't get the RegExSyntaxTypeListSize.",
                    L"%a:%d: Status - %r.",
                    __FILE__,
@@ -446,7 +450,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
-                   gRegExFunctionTestAssertionGuid002,
+                   gTestGenericFailureGuid,
                    L"Can't get the valid SyntaxTypes.",
                    L"%a:%d: Status - %r.",
                    __FILE__,
@@ -460,24 +464,6 @@ BBTestMatchStringFunctionTestCheckpoint1 (
   //
   //Test MatchString() for all supported syntax types with Unicode test data.
   //
-  Status = gtBS->AllocatePool (
-                   EfiBootServicesData,
-                   sizeof(EFI_REGEX_CAPTURE),
-                   (VOID **)&Captures
-                 );
-  if (EFI_ERROR (Status)) {
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   EFI_TEST_ASSERTION_FAILED,
-                   gTestGenericFailureGuid,
-                   L"Allocate Pool failure.",
-                   L"%a:%d: Status - %r.",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                 );
-    return Status;
-  }
   
   RegExSyntaxTypeList3 = RegExSyntaxTypeList2;
   for (IndexI = 0; IndexI < (SyntaxTypeListSize / sizeof(EFI_REGEX_SYNTAX_TYPE)); IndexI++) {
@@ -615,7 +601,7 @@ BBTestMatchStringFunctionTestCheckpoint2 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
-                   gRegExFunctionTestAssertionGuid003,
+                   gTestGenericFailureGuid,
                    L"Can't get the valid SyntaxTypeListSize.",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -656,7 +642,7 @@ BBTestMatchStringFunctionTestCheckpoint2 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
-                   gRegExFunctionTestAssertionGuid003,
+                   gTestGenericFailureGuid,
                    L"Can't get the valid SyntaxTypes.",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -728,6 +714,7 @@ BBTestMatchStringFunctionTestCheckpoint2 (
                  *RegExSyntaxTypeList2
                );
   
+  gtBS->FreePool (RegExSyntaxTypeList2);
   return EFI_SUCCESS;
 }
 

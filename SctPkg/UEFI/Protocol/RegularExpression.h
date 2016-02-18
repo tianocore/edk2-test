@@ -59,7 +59,7 @@ Abstract:
 #define _REGEX_PROTOCOL_H_
 
 //
-// Global ID for the Random Number Protocol
+// Global ID for the Regular Expression Protocol
 //
 #define EFI_REGULAR_EXPRESSION_PROTOCOL_GUID    \
   { 0xB3F79D9A, 0x436C, 0xDC11, 0xB0, 0x52, 0xCD, 0x85,0xDF, 0x52, 0x4C, 0xE6 }

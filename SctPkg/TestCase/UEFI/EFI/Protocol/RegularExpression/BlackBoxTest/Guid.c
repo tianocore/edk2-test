@@ -47,7 +47,7 @@
 
 Module Name:
 
-  guid.c
+  Guid.c
 
 Abstract:
 
