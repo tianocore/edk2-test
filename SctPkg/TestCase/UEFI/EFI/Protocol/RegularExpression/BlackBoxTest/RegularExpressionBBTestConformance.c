@@ -66,7 +66,7 @@ EFI_GUID UnsupportedSyntaxTypeGuid = UNSUPPORTED_SYNTAX_TYPE_GUID;
 // Test Data for all other types of Regular Expression Syantax Types.
 //
 MATCHSTRING_TEST_DATA_FIELD           MatchStringSampleTestData[] ={
-  { L".", L"Match everything", TRUE, 1 },
+  { L"Match", L"Match a specific string", TRUE, 1 },
 };
 
 /**

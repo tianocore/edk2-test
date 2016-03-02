@@ -132,20 +132,30 @@ EFI_REGEX_CAPTURE  MatchStringPerlTestCaptures[10][4] = {
 };
 
 //
-// Test Data for all other types of Regular Expression Syantax Types.
+// Unicode Test Data for Ecma Regular Expression Syantax Type.
 //
-MATCHSTRING_TEST_DATA_FIELD  MatchStringGenericTestData[] ={
-  { L".", L"Match everything", TRUE, 1 },
+MATCHSTRING_TEST_DATA_FIELD  MatchStringEcmaTestData[] ={
   { L"\\b(\\S)(\\S)(\\S*)\\b", L"This regex matches words with at least 2 characters", TRUE, 4 },
   { L"(^.+(capture))(.+$)", L"Three capture groups", TRUE, 4 },
   { L"b[aeiou]t", L"boot", FALSE, 0 },
   { L"^abcdef$", L"abcdefgh", FALSE, 0 },
 };
-EFI_REGEX_CAPTURE  MatchStringGenericTestCaptures[10][4] = {
-  {{ L"M", 1}, { L"", 0}, { L"", 0}, { L"", 0}},
+EFI_REGEX_CAPTURE  MatchStringEcmaTestCaptures[10][4] = {
   {{ L"This", 4}, { L"T", 1}, { L"h", 1}, { L"is", 2}},
   {{ L"Three capture groups", 20}, { L"Three capture", 13}, { L"capture", 7}, { L" groups", 7}},
   {{ L"", 1}, { L"", 0}, { L"", 0}, { L"", 0}},
+  {{ L"", 1}, { L"", 0}, { L"", 0}, { L"", 0}},
+};
+
+//
+// Test Data for all other types of Regular Expression Syantax Types.
+//
+MATCHSTRING_TEST_DATA_FIELD  MatchStringGenericTestData[] ={
+  { L"Protocol", L"Regular Expression Protocol Test", TRUE, 1 },
+  { L"Protocol", L"Regular Expression Test", FALSE, 0 },
+};
+EFI_REGEX_CAPTURE  MatchStringGenericTestCaptures[10][4] = {
+  {{ L"Protocol", 8}, { L"", 0}, { L"", 0}, { L"", 0}},
   {{ L"", 1}, { L"", 0}, { L"", 0}, { L"", 0}},
 };
 
@@ -365,6 +375,8 @@ BBTestMatchStringFunctionTestCheckpoint1 (
   )
 {
   EFI_STATUS                               Status;
+  EFI_STATUS                               FreePoolStatus1;
+  EFI_STATUS                               FreePoolStatus2;
   EFI_TEST_ASSERTION                       AssertionType;
   EFI_REGEX_SYNTAX_TYPE                    *RegExSyntaxTypeList1 = NULL;
   EFI_REGEX_SYNTAX_TYPE                    *RegExSyntaxTypeList2;
@@ -477,6 +489,11 @@ BBTestMatchStringFunctionTestCheckpoint1 (
       ExpectedCaptures = &MatchStringPerlTestCaptures;
       TestDataSize = sizeof(MatchStringPerlTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
     
+    } else if (SctCompareGuid(RegExSyntaxTypeList3, &SyntaxTypes[2]) == 0) {
+      MatchStringTestData = MatchStringEcmaTestData;
+      ExpectedCaptures = &MatchStringEcmaTestCaptures;
+      TestDataSize = sizeof(MatchStringEcmaTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
+    
     } else {
       MatchStringTestData = MatchStringGenericTestData;
       ExpectedCaptures = &MatchStringGenericTestCaptures;
@@ -485,6 +502,8 @@ BBTestMatchStringFunctionTestCheckpoint1 (
     for (IndexJ = 0; IndexJ < TestDataSize; IndexJ++) {
       AssertionType      = EFI_TEST_ASSERTION_PASSED;
       CaptureMatchResult = 1;
+      FreePoolStatus1 = EFI_SUCCESS;
+      FreePoolStatus2 = EFI_SUCCESS;
       Status = RegularExpression->MatchString (
                                     RegularExpression,
                                     MatchStringTestData[IndexJ].String,
@@ -512,40 +531,61 @@ BBTestMatchStringFunctionTestCheckpoint1 (
                 CaptureMatchResult = 0;
                 break;
               }
+
+              FreePoolStatus1 = gBS->FreePool ((CHAR16 *)Captures[IndexK].CapturePtr);
+              if (EFI_ERROR (Status)) { //If unable to free the CapturePtr, mark test as FAIL.
+                AssertionType = EFI_TEST_ASSERTION_FAILED;
+                break;
+              }
             }
           } else {
             AssertionType = EFI_TEST_ASSERTION_FAILED;
             CaptureMatchResult = 2;
           }
+          FreePoolStatus2 = gtBS->FreePool (Captures);
         }
       } else if (    (Status == EFI_NOT_READY)
                   || (Status == EFI_DEVICE_ERROR))
-      {
+        {
           AssertionType = EFI_TEST_ASSERTION_WARNING;
-      } else {
+        } else {
           AssertionType = EFI_TEST_ASSERTION_FAILED;
-      }
-       StandardLib->RecordAssertion (
-                     StandardLib,
-                     AssertionType,
-                     gRegExFunctionTestAssertionGuid002,
-                     L"REGULAR_EXPRESSION_PROTOCOL.MatchString() returns EFI_SUCCESS with Unicode String and Pattern.",
-                     L"%a:%d: '%s'=~'%s', Status: %r, Result=%d Expected=%d, CaptureCount=%d Expected=%d, SyntaxType: %g.",
-                     __FILE__,
-                     (UINTN)__LINE__,
-                     MatchStringTestData[IndexJ].Pattern,
-                     MatchStringTestData[IndexJ].String,
-                     Status,
-                     Result,
-                     MatchStringTestData[IndexJ].Result,
-                     CapturesCount,
-                     MatchStringTestData[IndexJ].CapturesCount,
-                     *RegExSyntaxTypeList3
-                   );
+        }
+
+      if (    (FreePoolStatus1 == EFI_SUCCESS)
+           && (FreePoolStatus2 == EFI_SUCCESS))
+      {
+        StandardLib->RecordAssertion (
+                      StandardLib,
+                      AssertionType,
+                      gRegExFunctionTestAssertionGuid002,
+                      L"REGULAR_EXPRESSION_PROTOCOL.MatchString() returns EFI_SUCCESS with Unicode String and Pattern.",
+                      L"%a:%d: '%s'=~'%s', Status: %r, Result=%d Expected=%d, CaptureCount=%d Expected=%d, SyntaxType: %g.",
+                      __FILE__,
+                      (UINTN)__LINE__,
+                      MatchStringTestData[IndexJ].Pattern,
+                      MatchStringTestData[IndexJ].String,
+                      Status,
+                      Result,
+                      MatchStringTestData[IndexJ].Result,
+                      CapturesCount,
+                      MatchStringTestData[IndexJ].CapturesCount,
+                      *RegExSyntaxTypeList3
+                    );
+       } else { //If unable to free the Captures or CapturePtr, mark test as FAIL.
+           StandardLib->RecordAssertion (
+                       StandardLib,
+                       EFI_TEST_ASSERTION_FAILED,
+                       gTestGenericFailureGuid,
+                       L"REGULAR_EXPRESSION_PROTOCOL.MatchString() returns EFI_SUCCESS with Unicode String and Pattern.",
+                       L"%a:%d: Unable to free Captures or CapturePtr.",
+                       __FILE__,
+                       (UINTN)__LINE__
+                     );
+       }
     }
     RegExSyntaxTypeList3 += 1;
   }
-  
   gtBS->FreePool (RegExSyntaxTypeList2);
   return EFI_SUCCESS;
 }
