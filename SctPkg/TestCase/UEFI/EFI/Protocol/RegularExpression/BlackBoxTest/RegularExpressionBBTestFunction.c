@@ -140,7 +140,7 @@ MATCHSTRING_TEST_DATA_FIELD  MatchStringEcmaTestData[] ={
   { L"b[aeiou]t", L"boot", FALSE, 0 },
   { L"^abcdef$", L"abcdefgh", FALSE, 0 },
 };
-EFI_REGEX_CAPTURE  MatchStringEcmaTestCaptures[10][4] = {
+EFI_REGEX_CAPTURE  MatchStringEcmaTestCaptures[4][4] = {
   {{ L"This", 4}, { L"T", 1}, { L"h", 1}, { L"is", 2}},
   {{ L"Three capture groups", 20}, { L"Three capture", 13}, { L"capture", 7}, { L" groups", 7}},
   {{ L"", 1}, { L"", 0}, { L"", 0}, { L"", 0}},
@@ -154,7 +154,7 @@ MATCHSTRING_TEST_DATA_FIELD  MatchStringGenericTestData[] ={
   { L"Protocol", L"Regular Expression Protocol Test", TRUE, 1 },
   { L"Protocol", L"Regular Expression Test", FALSE, 0 },
 };
-EFI_REGEX_CAPTURE  MatchStringGenericTestCaptures[10][4] = {
+EFI_REGEX_CAPTURE  MatchStringGenericTestCaptures[2][4] = {
   {{ L"Protocol", 8}, { L"", 0}, { L"", 0}, { L"", 0}},
   {{ L"", 1}, { L"", 0}, { L"", 0}, { L"", 0}},
 };
@@ -383,7 +383,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
   EFI_REGEX_SYNTAX_TYPE                    *RegExSyntaxTypeList3;
   MATCHSTRING_TEST_DATA_FIELD              *MatchStringTestData = NULL;
   EFI_REGEX_CAPTURE                        *Captures;
-  EFI_REGEX_CAPTURE                        (*ExpectedCaptures)[10][4];
+  EFI_REGEX_CAPTURE                        (*ExpectedCaptures)[4];
   UINTN                                    SyntaxTypeListSize = 0;
   UINTN                                    CapturesCount = 0;
   UINTN                                    TestDataSize = 0;
@@ -481,29 +481,27 @@ BBTestMatchStringFunctionTestCheckpoint1 (
   for (IndexI = 0; IndexI < (SyntaxTypeListSize / sizeof(EFI_REGEX_SYNTAX_TYPE)); IndexI++) {
     if (SctCompareGuid(RegExSyntaxTypeList3, &SyntaxTypes[0]) == 0) {
       MatchStringTestData = MatchStringPosixTestData;
-      ExpectedCaptures = &MatchStringPosixTestCaptures;
+      ExpectedCaptures = (EFI_REGEX_CAPTURE (*)[4])&MatchStringPosixTestCaptures;
       TestDataSize = sizeof(MatchStringPosixTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
     
     } else if (SctCompareGuid(RegExSyntaxTypeList3, &SyntaxTypes[1]) == 0) {
       MatchStringTestData = MatchStringPerlTestData;
-      ExpectedCaptures = &MatchStringPerlTestCaptures;
+      ExpectedCaptures = (EFI_REGEX_CAPTURE (*)[4])&MatchStringPerlTestCaptures;
       TestDataSize = sizeof(MatchStringPerlTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
     
     } else if (SctCompareGuid(RegExSyntaxTypeList3, &SyntaxTypes[2]) == 0) {
       MatchStringTestData = MatchStringEcmaTestData;
-      ExpectedCaptures = &MatchStringEcmaTestCaptures;
+      ExpectedCaptures = (EFI_REGEX_CAPTURE (*)[4])&MatchStringEcmaTestCaptures;
       TestDataSize = sizeof(MatchStringEcmaTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
     
     } else {
       MatchStringTestData = MatchStringGenericTestData;
-      ExpectedCaptures = &MatchStringGenericTestCaptures;
+      ExpectedCaptures = (EFI_REGEX_CAPTURE (*)[4])&MatchStringGenericTestCaptures;
       TestDataSize = sizeof(MatchStringGenericTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
     }
     for (IndexJ = 0; IndexJ < TestDataSize; IndexJ++) {
       AssertionType      = EFI_TEST_ASSERTION_PASSED;
       CaptureMatchResult = 1;
-      FreePoolStatus1 = EFI_SUCCESS;
-      FreePoolStatus2 = EFI_SUCCESS;
       Status = RegularExpression->MatchString (
                                     RegularExpression,
                                     MatchStringTestData[IndexJ].String,
@@ -521,11 +519,11 @@ BBTestMatchStringFunctionTestCheckpoint1 (
             for (IndexK = 0; IndexK < CapturesCount; IndexK++) {
               CaptureMatchResult = SctCompareMem (
                                      (CHAR16 *)Captures[IndexK].CapturePtr,
-                                     (CHAR16 *)(*ExpectedCaptures)[IndexJ][IndexK].CapturePtr,
-                                     (*ExpectedCaptures)[IndexJ][IndexK].Length
+                                     (CHAR16 *)ExpectedCaptures[IndexJ][IndexK].CapturePtr,
+                                     ExpectedCaptures[IndexJ][IndexK].Length
                                    );
               if (    (CaptureMatchResult != 0)
-                   && (Captures[IndexK].Length != (*ExpectedCaptures)[IndexJ][IndexK].Length))
+                   || (Captures[IndexK].Length != ExpectedCaptures[IndexJ][IndexK].Length))
               {
                 AssertionType = EFI_TEST_ASSERTION_FAILED;
                 CaptureMatchResult = 0;
@@ -533,7 +531,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
               }
 
               FreePoolStatus1 = gBS->FreePool ((CHAR16 *)Captures[IndexK].CapturePtr);
-              if (EFI_ERROR (Status)) { //If unable to free the CapturePtr, mark test as FAIL.
+              if (EFI_ERROR (FreePoolStatus1)) { //If unable to free the CapturePtr, mark test as FAIL.
                 AssertionType = EFI_TEST_ASSERTION_FAILED;
                 break;
               }
@@ -543,7 +541,13 @@ BBTestMatchStringFunctionTestCheckpoint1 (
             CaptureMatchResult = 2;
           }
           FreePoolStatus2 = gtBS->FreePool (Captures);
-        }
+            if (EFI_ERROR (FreePoolStatus1)) { //If unable to free the Captures, mark test as FAIL.
+              AssertionType = EFI_TEST_ASSERTION_FAILED;
+            }
+        } else { //If the string doesn't match, there's no captures returned. Hence initialize the status to EFI_SUCCESS
+          FreePoolStatus1 = EFI_SUCCESS;
+          FreePoolStatus2 = EFI_SUCCESS;
+          }
       } else if (    (Status == EFI_NOT_READY)
                   || (Status == EFI_DEVICE_ERROR))
         {
@@ -575,8 +579,8 @@ BBTestMatchStringFunctionTestCheckpoint1 (
        } else { //If unable to free the Captures or CapturePtr, mark test as FAIL.
            StandardLib->RecordAssertion (
                        StandardLib,
-                       EFI_TEST_ASSERTION_FAILED,
-                       gTestGenericFailureGuid,
+                       AssertionType,
+                       gRegExFunctionTestAssertionGuid002,
                        L"REGULAR_EXPRESSION_PROTOCOL.MatchString() returns EFI_SUCCESS with Unicode String and Pattern.",
                        L"%a:%d: Unable to free Captures or CapturePtr.",
                        __FILE__,
