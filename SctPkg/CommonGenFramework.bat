@@ -207,6 +207,7 @@ copy %ProcessorType%\RandomNumberBBTest.efi                   %Framework%\Test\ 
 copy %ProcessorType%\Hash2BBTest.efi                          %Framework%\Test\ > NUL
 copy %ProcessorType%\Pkcs7BBTest.efi                          %Framework%\Test\ > NUL
 copy %ProcessorType%\ConfigKeywordHandlerBBTest.efi           %Framework%\Test\ > NUL
+copy %ProcessorType%\RegularExpressionBBTest.efi              %Framework%\Test\ > NUL
 
 rem *********************************************
 rem Copy ENTS binary

@@ -269,6 +269,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/SimplePointer/BlackBoxTest/SimplePointerBBTest
 SctPkg/TestCase/UEFI/EFI/Protocol/SimpleTextIn/BlackBoxTest/SimpleTextInBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/SimpleTextOut/BlackBoxTest/SimpleTextOutBBTest_uefi.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/UnicodeCollation2/BlackBoxTest/UnicodeCollation2BBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/RegularExpression/BlackBoxTest/RegularExpressionBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/Usb2Hc/BlackBoxTest/Usb2HcTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/UsbIo/BlackBoxTest/UsbIoTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/Authentication/BlackBoxTest/AuthenticationBBTest.inf
