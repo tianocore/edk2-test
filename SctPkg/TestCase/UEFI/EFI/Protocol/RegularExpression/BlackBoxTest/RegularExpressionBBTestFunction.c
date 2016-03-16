@@ -541,9 +541,9 @@ BBTestMatchStringFunctionTestCheckpoint1 (
             CaptureMatchResult = 2;
           }
           FreePoolStatus2 = gtBS->FreePool (Captures);
-            if (EFI_ERROR (FreePoolStatus1)) { //If unable to free the Captures, mark test as FAIL.
-              AssertionType = EFI_TEST_ASSERTION_FAILED;
-            }
+          if (EFI_ERROR (FreePoolStatus2)) { //If unable to free the Captures, mark test as FAIL.
+            AssertionType = EFI_TEST_ASSERTION_FAILED;
+          }
         } else { //If the string doesn't match, there's no captures returned. Hence initialize the status to EFI_SUCCESS
           FreePoolStatus1 = EFI_SUCCESS;
           FreePoolStatus2 = EFI_SUCCESS;
