@@ -35,12 +35,13 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2012 Unified EFI, Inc. All
+  Copyright 2006 - 2016 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
+  Copyright (c) 2016, Intel Corporation. All rights reserved.
 
 --*/
 
@@ -1126,7 +1127,7 @@ SctValueToHexStr (
     p2 = Buffer;
 
     while (v) {
-        *(p1++) = mHex[v & 0xf];
+        *(p1++) = mHex[(UINT8)v & 0xf];
         v = SctRShiftU64 (v, 4);
     }
 
