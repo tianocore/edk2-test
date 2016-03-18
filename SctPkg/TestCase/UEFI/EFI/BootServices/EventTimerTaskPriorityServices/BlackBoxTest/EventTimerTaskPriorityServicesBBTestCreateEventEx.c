@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -836,9 +836,9 @@ BBTestCreateEventEx_Func_Sub2 (
   }
   
   //
-  // Install a configuration table at TPL_HIGH_LEVEL
+  // Install a configuration table at TPL_NOTIFY
   //
-  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  OldTpl = gtBS->RaiseTPL (TPL_NOTIFY);
   
   Status = gtBS->InstallConfigurationTable (
                      &EventGroupTestGroup3Guid,
