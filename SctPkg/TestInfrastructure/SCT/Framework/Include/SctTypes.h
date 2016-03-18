@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2015 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -67,7 +67,7 @@ Abstract:
 
 #define TEST_CASE_MAX_RUN_TIME_DEFAULT      0
 #define ENABLE_SCREEN_OUTPUT_DEFAULT        TRUE
-#define BIOS_ID_DEFAULT                     L"UEFI 2.4B"
+#define BIOS_ID_DEFAULT                     L"UEFI 2.5"
 #define PLATFORM_NUMBER_DEFAULT             0
 #define CONFIGURATION_NUMBER_DEFAULT        0
 #define SCENARIO_STRING_DEFAULT             L""
