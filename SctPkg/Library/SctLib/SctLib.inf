@@ -35,7 +35,13 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright (c) 2014, Intel Corporation. All rights reserved.<BR>
+# Copyright 2006 - 2016 Unified EFI, Inc. All
+# Rights Reserved, subject to all existing rights in all      
+# matters included within this Test Suite, to which United    
+# EFI, Inc. makes no claim of right. 
+                           
+#                                                             
+# Copyright (c) 2014 - 2016, Intel Corporation. All rights reserved.<BR>
 # Copyright (c) 2013 - 2014, ARM Ltd. All rights reserved.<BR> 
 #
 #
@@ -91,7 +97,11 @@
 [sources.ia32]
   ia32/SctLibPlat.h
   ia32/initplat.c
-  ia32/Math.c
+  ia32/Math.c | MSFT
+  ia32/RShiftU64.S | GCC
+  ia32/LShiftU64.S | GCC
+  ia32/MultU64x32.S | GCC
+  ia32/DivU64x32.S | GCC
 
 [sources.ipf]
   Ipf/SctLibPlat.h

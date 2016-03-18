@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2015 Unified EFI, Inc. All
+# Copyright 2006 - 2016 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -98,7 +98,7 @@
   MSFT:*_*_X64_APP_FLAGS   = /D EFI_SPECIFICATION_VERSION=0x00020028 /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
   MSFT:*_*_X64_PP_FLAGS    = /D EFI_SPECIFICATION_VERSION=0x00020028 /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
 
-  GCC:*_*_IA32_CC_FLAGS     = -D EFI32 $(GCC_VER_MACRO)
+  GCC:*_*_IA32_CC_FLAGS     = -D EFI32 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error -DEFI_SPECIFICATION_VERSION=0x00020028 -mno-red-zone -Wno-address -mno-stack-arg-probe "-DEFIAPI=__attribute__((ms_abi))" -m32 -mabi=ms -D MDE_CPU_X32
   GCC:*_*_IA32_VFRPP_FLAGS  = -D EFI32 $(GCC_VER_MACRO)
   GCC:*_*_IA32_APP_FLAGS    = -D EFI32 $(GCC_VER_MACRO)
   GCC:*_*_IA32_PP_FLAGS     = -D EFI32 $(GCC_VER_MACRO)

@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2015 Unified EFI, Inc. All
+# Copyright 2006 - 2016 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -67,18 +67,18 @@
   Usb2HcTest.h
   Usb2HcTestMain.c
   Usb2HcTestConformance.c
-  Usb2HcTestBasic.c
+#  Usb2HcTestBasic.c
   Guid.h
   Guid.c
 
-[sources.x64]
-  x64/TimerInterrupt.asm
+#[sources.x64]
+#  x64/TimerInterrupt.asm
 
-[sources.ipf]    
-  ipf/TimerInterrupt.c
+#[sources.ipf]    
+#  ipf/TimerInterrupt.c
 
-[sources.ia32]    
-  Ia32/TimerInterrupt.c
+#[sources.ia32]    
+#  Ia32/TimerInterrupt.c
 
 [Packages]
   MdePkg/MdePkg.dec

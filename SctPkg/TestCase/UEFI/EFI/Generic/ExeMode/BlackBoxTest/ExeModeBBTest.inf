@@ -70,6 +70,7 @@
 
 [sources.ia32]
   Ia32/AsmFuncs.asm
+  Ia32/AsmFuncs.S | GCC
 
 [sources.x64]
   X64/AsmFuncs.asm
