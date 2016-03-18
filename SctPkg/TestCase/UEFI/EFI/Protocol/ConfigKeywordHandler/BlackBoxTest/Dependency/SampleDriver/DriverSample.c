@@ -2459,6 +2459,8 @@ DriverSampleUnload (
             DriverHandle[1],
             &gEfiDevicePathProtocolGuid,
             &mHiiVendorDevicePath1,
+            &gEfiHiiConfigAccessProtocolGuid,
+            &PrivateData->ConfigAccess,
             NULL
            );
     DriverHandle[1] = NULL;
