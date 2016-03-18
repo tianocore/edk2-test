@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2015 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -395,3 +395,8 @@ extern EFI_GUID gSimpleNetworkBBTestFunctionAssertionGuid025;
 { 0xd08dfba3, 0xec28, 0x48aa, 0x87, 0x3d, 0x43, 0xc4, 0xb0, 0x6d, 0xdb, 0xd5 }
 
 extern EFI_GUID gSimpleNetworkBBTestFunctionAssertionGuid026;
+
+#define EFI_TEST_SIMPLENETWORKBBTESTFUNCTION_ASSERTION_027_GUID \
+{ 0xa32b5f48, 0x8215, 0x4024, 0x80, 0x31, 0x33, 0x70, 0x5, 0x20, 0x37, 0x54 }
+
+extern EFI_GUID gSimpleNetworkBBTestFunctionAssertionGuid027;

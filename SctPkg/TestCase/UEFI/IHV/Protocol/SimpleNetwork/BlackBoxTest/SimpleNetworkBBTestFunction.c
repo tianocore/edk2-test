@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1701,6 +1701,18 @@ BBTestGetStatusFunctionTest (
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
   VOID                                  *TxBuf;
   UINT32                                InterruptStatus;
+  EFI_STATUS                            StatCode;
+  VOID                                  *Buffer;
+  UINTN                                 HeaderSize;
+  UINTN                                 BufferSize;
+  EFI_MAC_ADDRESS                       SrcAddr;
+  EFI_MAC_ADDRESS                       DestAddr;
+  UINT16                                Protocol;
+  EFI_NETWORK_STATISTICS                StatisticsTable;
+  EFI_NETWORK_STATISTICS                StatisticsTable1;
+  UINTN                                 StatisticsSize;  
+  EFI_EVENT                             TimeoutEvent;
+
 
   //
   // Get the Standard Library Interface
@@ -1720,6 +1732,156 @@ BBTestGetStatusFunctionTest (
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
 
+  //
+  // Check whether the state of network interface is EfiSimpleNetworkInitialized.
+  // If not, change the state to EfiSimpleNetworkInitialized.
+  //
+  State1 = SnpInterface->Mode->State;
+  if (State1 == EfiSimpleNetworkStopped) {
+    Status = SnpInterface->Start (SnpInterface);
+    if (EFI_ERROR(Status)) {
+      return Status;
+    }
+  }
+
+  State2 = SnpInterface->Mode->State;
+  if (State2 == EfiSimpleNetworkStarted) {
+    Status = SnpInterface->Initialize (SnpInterface, 0, 0);
+    if (EFI_ERROR(Status)) {
+      return Status;
+    }
+  }
+
+  //
+  // Initialize the variables.
+  //
+
+  Buffer = NULL;
+  HeaderSize = 0;
+  BufferSize = 0;
+  SctSetMem (&SrcAddr, sizeof (EFI_MAC_ADDRESS), 0xFF);
+  SctSetMem (&DestAddr, sizeof (EFI_MAC_ADDRESS), 0xFF);
+  Protocol = 0;
+  Status = gtBS->AllocatePool (EfiLoaderData, 1024, &Buffer);
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  //Need to put correct conten of a packet into the Buffer.
+  SctSetMem (Buffer, 1024, 0x0);
+  HeaderSize = SnpInterface->Mode->MediaHeaderSize;
+  BufferSize = 128;
+  StatisticsSize = sizeof (EFI_NETWORK_STATISTICS);
+
+  Protocol = 0x0806;
+
+  //
+  // Get the Statistics before invoke the Transmit();
+  //
+  SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
+
+  Status = SnpInterface->Transmit (SnpInterface, HeaderSize, BufferSize, Buffer, &SnpInterface->Mode->CurrentAddress, &DestAddr, &Protocol);
+
+  //
+  // Wait the package to be sent
+  //
+  if (!EFI_ERROR(Status)) {
+    StatCode =gtBS->CreateEvent (
+                      EVT_TIMER,
+                      TPL_CALLBACK,
+                      NULL,
+                      NULL,
+                      &TimeoutEvent
+                      );
+    if (EFI_ERROR(StatCode)) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_WARNING,
+                     gTestGenericFailureGuid,
+                     L"EFI_SIMPLE_NETWORK_PROTOCOL.GetStatus - CreateEvent",
+                     L"%a:%d:Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     StatCode
+                     );
+      gtBS->FreePool (Buffer);
+      return StatCode;
+    }
+
+    StatCode = gtBS->SetTimer (
+                       TimeoutEvent,
+                       TimerRelative,
+                       50000);  /* 5 milliseconds */
+    if (EFI_ERROR(StatCode)) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_WARNING,
+                     gTestGenericFailureGuid,
+                     L"EFI_SIMPLE_NETWORK_PROTOCOL.GetStatus - SetTimer",
+                     L"%a:%d:Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     StatCode
+                     );
+      gtBS->FreePool (Buffer);
+      return StatCode;
+    }
+
+    for (;;) {
+      StatCode = SnpInterface->GetStatus (SnpInterface, &InterruptStatus, &TxBuf);
+
+      if (EFI_ERROR(StatCode)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+        break;
+      }
+
+      if (TxBuf == Buffer) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+        break;
+      }
+
+      if (!EFI_ERROR(tBS->CheckEvent (TimeoutEvent))) {
+        StatCode = EFI_TIMEOUT;
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+        break;
+      }
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestFunctionAssertionGuid027,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.GetStatus - The transmitted buffer should be shown up in the recycled transmit buffer",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   StatCode
+                   );
+
+
+    tBS->CloseEvent (TimeoutEvent);
+    gtBS->FreePool (Buffer);
+    
+  }
+
+  StatisticsSize = sizeof (EFI_NETWORK_STATISTICS);
+  SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable1);
+
+  //
+  // Restore SNP State
+  //
+  if (State1 == EfiSimpleNetworkStopped) {
+    Status = SnpInterface->Shutdown (SnpInterface);
+    if (EFI_ERROR(Status)) {
+      return Status;
+    }
+
+    Status = SnpInterface->Stop (SnpInterface);
+    if (EFI_ERROR(Status)) {
+      return Status;
+    }
+  }
+
+  
   //
   // Check whether the state of network interface is EfiSimpleNetworkInitialized.
   // If not, change the state to EfiSimpleNetworkInitialized.
@@ -2007,7 +2169,7 @@ BBTestTransmitFunctionTest (
         break;
       }
 
-      if (!EFI_ERROR(gBS->CheckEvent (TimeoutEvent))) {
+      if (!EFI_ERROR(gtBS->CheckEvent (TimeoutEvent))) {
         StatCode = EFI_TIMEOUT;
         StandardLib->RecordAssertion (
                        StandardLib,
@@ -2025,7 +2187,7 @@ BBTestTransmitFunctionTest (
       }
     }
 
-    gBS->CloseEvent (TimeoutEvent);
+    gtBS->CloseEvent (TimeoutEvent);
   }
 
   AssertionType = EFI_TEST_ASSERTION_PASSED;
