@@ -115,7 +115,7 @@
 
   #TODO: OM - fixme RVCT:*_*_ARM_CC_FLAGS = -D EFIARM $(GCC_VER_MACRO)
   *_*_ARM_CC_FLAGS = -D EFIARM
-  GCC:*_*_ARM_CC_FLAGS  = -D EFIARM $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error=implicit-function-declaration -Wno-error
+  GCC:*_*_ARM_CC_FLAGS  = -D EFIARM $(GCC_VER_MACRO) -fno-stack-protector -ffreestanding -nostdinc -nostdlib -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error=implicit-function-declaration -Wno-error
   *_*_ARM_VFRPP_FLAGS   = -D EFIARM $(GCC_VER_MACRO)
   *_*_ARM_APP_FLAGS     = -D EFIARM $(GCC_VER_MACRO)
   *_*_ARM_PP_FLAGS      = -D EFIARM $(GCC_VER_MACRO)
