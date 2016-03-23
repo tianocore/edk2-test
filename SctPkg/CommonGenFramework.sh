@@ -143,7 +143,7 @@ then
     # *********************************************
     # Copy the UEFI 2.1 Test Cases
     # *********************************************
-	
+
     mkdir -p $Framework/SCRT
     cp $ProcessorType/SCRTDRIVER.efi                           $Framework/SCRT  > NUL
     cp $ProcessorType/SCRTAPP.efi                              $Framework/SCRT  > NUL
@@ -155,7 +155,7 @@ then
   if [ -e $ProcessorType/ExeModeBBTest.efi ]; then
     cp $ProcessorType/ExeModeBBTest.efi                      $Framework/Test/ > NUL
   fi
-	
+
     cp $ProcessorType/EventTimerTaskPriorityServicesBBTest.efi $Framework/Test/ > NUL
     cp $ProcessorType/MemoryAllocationServicesBBTest.efi       $Framework/Test/ > NUL
     cp $ProcessorType/ProtocolHandlerServicesBBTest.efi        $Framework/Test/ > NUL
@@ -165,7 +165,7 @@ then
     cp $ProcessorType/VariableServicesBBTest.efi               $Framework/Test/ > NUL
     cp $ProcessorType/TimeServicesBBTest.efi                   $Framework/Test/ > NUL
     cp $ProcessorType/MiscRuntimeServicesBBTest.efi            $Framework/Test/ > NUL
-	
+
     cp $ProcessorType/BisBBTest.efi                            $Framework/Test/ > NUL
     cp $ProcessorType/BlockIoBBTest.efi                        $Framework/Test/ > NUL
     cp $ProcessorType/BlockIo2BBTest.efi                       $Framework/Test/ > NUL
@@ -226,7 +226,6 @@ then
     cp $ProcessorType/AbsolutePointerBBTest.efi                $Framework/Test/ > NUL
 #   cp $ProcessorType/DriverSupportedEfiVersionBBTest.efi      $Framework/Test/ > NUL
     cp $ProcessorType/PlatformToDriverConfigurationBBTest.efi  $Framework/Test/ > NUL
-
     cp $ProcessorType/HIIConfigAccessBBTest.efi                $Framework/Test/ > NUL
     cp $ProcessorType/HIIConfigRoutingBBTest.efi               $Framework/Test/ > NUL
     cp $ProcessorType/VlanConfigBBTest.efi                     $Framework/Test/ > NUL
@@ -271,7 +270,7 @@ then
     cp $ProcessorType/Mtftp6*_ENTSTest.efi             $Framework/Ents/Test/    > NUL
     cp $ProcessorType/Tcp4*_ENTSTest.efi               $Framework/Ents/Test/    > NUL
     cp $ProcessorType/Tcp6*_ENTSTest.efi               $Framework/Ents/Test/    > NUL
-	
+
     # *********************************************
     # Copy the test dependency files
     # *********************************************
@@ -312,7 +311,6 @@ then
 #  cp $ProcessorType/IhvDriverDiagnosticsBBTest.efi           $Framework/Test/ > NUL
   cp $ProcessorType/IhvDriverDiagnostics2BBTest.efi          $Framework/Test/ > NUL
   cp $ProcessorType/IhvEbcBBTest.efi                         $Framework/Test/ > NUL
-  cp $ProcessorType/IhvPlatformDriverOverrideBBTest.efi      $Framework/Test/ > NUL
   cp $ProcessorType/IhvPxeBaseCodeBBTest.efi                 $Framework/Test/ > NUL
 #  cp $ProcessorType/IhvScsiPassThruBBTest.efi                $Framework/Test/ > NUL
   cp $ProcessorType/IhvSerialIoBBTest.efi                    $Framework/Test/ > NUL
@@ -340,8 +338,11 @@ then
 
   cp $ProcessorType/IhvAbsolutePointerBBTest.efi             $Framework/Test/ > NUL
 #  cp $ProcessorType/IhvDriverSupportedEfiVersionBBTest.efi   $Framework/Test/ > NUL
-  cp $ProcessorType/IhvPlatformToDriverConfigurationBBTest.efi  $Framework/Test/ > NUL
-  
+  if [ $ProcessorType = "IA32" ] || [ $ProcessorType = "X64" ]
+  then
+     cp $ProcessorType/IhvPlatformDriverOverrideBBTest.efi      $Framework/Test/ > NUL
+     cp $ProcessorType/IhvPlatformToDriverConfigurationBBTest.efi  $Framework/Test/ > NUL
+  fi
   # *********************************************
   # Copy the test dependency files
   # *********************************************
