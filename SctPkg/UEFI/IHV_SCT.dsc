@@ -227,7 +227,6 @@ SctPkg/TestCase/UEFI/IHV/Protocol/DiskIo2/BlackBoxTest/IhvDiskIo2BBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/DriverBinding/BlackBoxTest/IhvDriverBindingBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/DriverDiagnostics2/BlackBoxTest/IhvDriverDiagnostics2BBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/Ebc/BlackBoxTest/IhvEbcBBTest.inf
-SctPkg/TestCase/UEFI/IHV/Protocol/PlatformDriverOverride/BlackBoxTest/IhvPlatformDriverOverrideBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/PxeBaseCode/BlackBoxTest/IhvPxeBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/ScsiPassThru/BlackBoxTest/IhvScsiPassThruBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/SerialIo/BlackBoxTest/IhvSerialIoBBTest.inf
@@ -246,7 +245,6 @@ SctPkg/TestCase/UEFI/IHV/Protocol/ScsiIo/BlackBoxTest/IhvScsiIoBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/iScsiInitiatorName/BlackBoxTest/IhviScsiInitiatorNameBBTest.inf
 
 SctPkg/TestCase/UEFI/IHV/Protocol/AbsolutePointer/BlackBoxTest/IhvAbsolutePointerBBTest.inf
-SctPkg/TestCase/UEFI/IHV/Protocol/PlatformToDriverConfiguration/BlackBoxTest/IhvPlatformToDriverConfigurationBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/StorageSecurityCommand/BlackBoxTest/IhvStorageSecurityCommandBBTest.inf
 
 SctPkg/TestCase/UEFI/IHV/Protocol/AdapterInfo/BlackBoxTest/IhvAdapterInfoBBTest.inf
@@ -257,4 +255,6 @@ SctPkg/TestCase/UEFI/IHV/Protocol/Ebc/BlackBoxTest/Dependency/EbcDriverBin/EbcDr
 
 SctPkg/TestInfrastructure/SCT/Framework/Sct.inf
 
-
+[Components.IA32, Components.X64]
+SctPkg/TestCase/UEFI/IHV/Protocol/PlatformDriverOverride/BlackBoxTest/IhvPlatformDriverOverrideBBTest.inf
+SctPkg/TestCase/UEFI/IHV/Protocol/PlatformToDriverConfiguration/BlackBoxTest/IhvPlatformToDriverConfigurationBBTest.inf
