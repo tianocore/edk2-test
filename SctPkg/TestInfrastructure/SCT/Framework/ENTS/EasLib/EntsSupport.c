@@ -101,9 +101,11 @@ STATIC EFI_MANAGED_NETWORK_TRANSMIT_DATA EntsMnpTxDataTemplate = {
   0,                                     // HeaderLength
   1,                                     // FragmentCount
   {
+  {
     0,
     NULL
   }                                      // FragmentTable
+  }
 };
 
 #define ENTS_SERVER_MAC_ADDRESS_NAME    L"ServerMac"
@@ -123,7 +125,7 @@ STATIC EFI_MANAGED_NETWORK_CONFIG_DATA     EntsMnpConfigDataTemplate = {
 // CompareGuid is added for IPsec only.
 
 #define EFI_IPSEC_CONFIG_PROTOCOL_GUID \
-  {0xce5e5929, 0xc7a3, 0x4602, { 0xad, 0x9e, 0xc9, 0xda, 0xf9, 0x4e, 0xbf, 0xcf }}
+  { 0xce5e5929, 0xc7a3, 0x4602, {0xad, 0x9e, 0xc9, 0xda, 0xf9, 0x4e, 0xbf, 0xcf }}
 
 EFI_GUID EfiIPsecConfigProtocolGuid = EFI_IPSEC_CONFIG_PROTOCOL_GUID;
 

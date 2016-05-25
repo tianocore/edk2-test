@@ -1920,7 +1920,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
   EFI_FILE                  *FileHandle;
   CHAR16                    FileName[100];
   EFI_GUID                  UnsupportedInfoType =
-                              {0x986dcfe, 0x90b8, 0x46bb, 0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b};
+                              { 0x986dcfe, 0x90b8, 0x46bb, {0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b }};
   UINT8                     TempInfo;
   UINTN                     TempSize;
 
@@ -2154,7 +2154,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
   EFI_FILE                  *FileHandle;
   CHAR16                    FileName[100];
   EFI_GUID                  UnsupportedInfoType =
-                              {0x986dcfe, 0x90b8, 0x46bb, 0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b};
+                              { 0x986dcfe, 0x90b8, 0x46bb, {0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b }};
   UINT8                     TempInfo;
   UINTN                     TempSize;
   UINTN                     BufferSize;
