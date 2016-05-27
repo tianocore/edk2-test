@@ -1258,7 +1258,7 @@ BBTestGetAltCfgConformanceTestCheckpoint1(
   EFI_TEST_ASSERTION          AssertionType;
   EFI_STATUS                  Status;
   EFI_STRING                  MultiAltResp;
-  EFI_GUID                    Guid1 = { 0x4ab90e97, 0xd4a0, 0xf749, 0xb9, 0x80, 0xbd, 0xaa, 0x47, 0xd4, 0x25, 0x27};
+  EFI_GUID                    Guid1 = { 0x4ab90e97, 0xd4a0, 0xf749, {0xb9, 0x80, 0xbd, 0xaa, 0x47, 0xd4, 0x25, 0x27 }};
   EFI_STRING                  NameDomain1 = L"006a0069006e0039";
   UINT16                      AltCfgId1 = EFI_HII_DEFAULT_CLASS_STANDARD;
   EFI_STRING                  AltCfgResp = NULL;
