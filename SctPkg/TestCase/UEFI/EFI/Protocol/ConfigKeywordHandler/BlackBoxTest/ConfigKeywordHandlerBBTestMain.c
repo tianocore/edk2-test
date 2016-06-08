@@ -183,7 +183,7 @@ LoadedImageTestComposeSimpleFilePath (
   Status = gtBS->HandleProtocol (
                    CurrentImageHandle,
                    &gBlackBoxEfiLoadedImageProtocolGuid,
-                   &LoadImage
+                   (VOID **) &LoadImage
                    );
   if (EFI_ERROR (Status)) {
     if (StandardLib != NULL) {

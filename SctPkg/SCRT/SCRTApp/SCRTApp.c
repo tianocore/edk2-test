@@ -181,7 +181,7 @@ Returns:
     //  
     Status = SctShellOpenFileByName (
                InfFileName,
-               &FileHandle,
+               (VOID **) &FileHandle,
                EFI_FILE_MODE_READ,
                0
                );

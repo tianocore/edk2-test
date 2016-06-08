@@ -153,7 +153,7 @@ BBTestRunDiagnosticsConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -732,7 +732,7 @@ FindMatchedDeviceHandle (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiDriverDiagnosticsProtocolGuid,
-                     &TestedDriverDiagnostics
+                     (VOID **) &TestedDriverDiagnostics
                      );
     if (EFI_ERROR(Status)) {
       continue;

@@ -184,7 +184,7 @@ InitializeBBTestBlockIo2 (
   EfiInitializeTestLib (ImageHandle, SystemTable);
   SctInitializeLib (ImageHandle, SystemTable);
 
-  gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
 
   return EfiInitAndInstallIHVBBTestInterface (
            &ImageHandle,
@@ -296,7 +296,7 @@ LocateDevicePathFromBlockIo2 (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiBlockIo2ProtocolGuid,
-                     &OtherBlockIo2
+                     (VOID **) &OtherBlockIo2
                      );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -330,7 +330,7 @@ LocateDevicePathFromBlockIo2 (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gEfiDevicePathProtocolGuid,
-                   DevicePath
+                   (VOID **) DevicePath
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -419,7 +419,7 @@ LocateBlockIo2FromDevicePath (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gEfiDevicePathProtocolGuid,
-                     &OtherDevicePath
+                     (VOID **) &OtherDevicePath
                      );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -453,7 +453,7 @@ LocateBlockIo2FromDevicePath (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gBlackBoxEfiBlockIo2ProtocolGuid,
-                   BlockIo2
+                   (VOID **) BlockIo2
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -639,7 +639,7 @@ AllocateAlignedPool (
   //
   ASSERT (RealAllocationSize > AllocationSize); 
 
-  Status = gtBS->AllocatePool (PoolType, RealAllocationSize, &RawAddress);
+  Status = gtBS->AllocatePool (PoolType, RealAllocationSize, (VOID **) &RawAddress);
   if (EFI_ERROR (Status)) {
     return NULL;
   }

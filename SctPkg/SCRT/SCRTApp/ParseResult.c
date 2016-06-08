@@ -145,7 +145,7 @@ SCRTLogProcess(
   //  
   Status = SctShellOpenFileByName (
              InfFileName,
-             &FileHandle,
+             (VOID **) &FileHandle,
              EFI_FILE_MODE_CREATE | EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE,
              0
              );

@@ -71,7 +71,7 @@ SctAllocatePool (
   EFI_STATUS              Status;
   VOID                    *p;
 
-  Status = tBS->AllocatePool (PoolAllocationType, Size, &p);
+  Status = tBS->AllocatePool (PoolAllocationType, Size, (VOID **) &p);
   if (EFI_ERROR(Status)) {
     DEBUG((EFI_D_ERROR, "AllocatePool: out of pool  %x\n", Status));
     p = NULL;
@@ -88,7 +88,7 @@ SctAllocateCopyPool (
   VOID  *Memory;
 
   Memory = NULL;
-  tBS->AllocatePool (PoolAllocationType, AllocationSize, &Memory);
+  tBS->AllocatePool (PoolAllocationType, AllocationSize, (VOID **) &Memory);
   if (Memory != NULL) {
     tBS->CopyMem (Memory, Buffer, AllocationSize);
   }

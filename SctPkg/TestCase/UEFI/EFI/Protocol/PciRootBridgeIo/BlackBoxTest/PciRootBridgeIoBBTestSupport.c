@@ -1041,7 +1041,7 @@ InitializeCaseEnvironment (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiPciRootBridgeIoProtocolGuid,
-                     &RootBridgeIo
+                     (VOID **) &RootBridgeIo
                      );
 
     if (EFI_ERROR(Status)) {
@@ -1055,7 +1055,7 @@ InitializeCaseEnvironment (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gEfiDevicePathProtocolGuid,
-                     &DevicePath
+                     (VOID **) &DevicePath
                      );
 
     if (EFI_ERROR(Status)) {
@@ -1868,7 +1868,7 @@ GetUserInputOrTimeOut (
   Status = gtBS->CreateEvent (
                    EVT_TIMER ,
                    0,
-                   NULL,
+                   (EFI_EVENT_NOTIFY) NULL,
                    NULL,
                    &TimeOutEvent
                    );
@@ -1881,7 +1881,7 @@ GetUserInputOrTimeOut (
   Status = gtBS->CreateEvent (
                    EVT_TIMER,
                    0,
-                   NULL,
+                   (EFI_EVENT_NOTIFY) NULL,
                    NULL,
                    &OneSecondTimer
                    );

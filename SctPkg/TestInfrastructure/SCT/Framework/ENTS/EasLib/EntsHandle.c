@@ -97,7 +97,7 @@ Returns:
     Status = gntBS->HandleProtocol (
                       Handles[Index],
                       ProtocolGuid,
-                      Interface
+                      (VOID **) Interface
                       );
 
     if (!EFI_ERROR (Status)) {

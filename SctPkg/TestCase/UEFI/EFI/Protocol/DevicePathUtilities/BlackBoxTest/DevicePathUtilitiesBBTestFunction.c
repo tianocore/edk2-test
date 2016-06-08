@@ -94,7 +94,7 @@ DevicePathUtilitiesCreateDeviceNodeFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -184,7 +184,7 @@ DevicePathUtilitiesAppendDeviceNodeFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -284,7 +284,7 @@ DevicePathUtilitiesGetDevicePathSizeFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -357,7 +357,7 @@ DevicePathUtilitiesDuplicateDevicePathFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -436,7 +436,7 @@ DevicePathUtilitiesAppendDevicePathFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -529,7 +529,7 @@ DevicePathUtilitiesAppendDevicePathInstanceFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -637,7 +637,7 @@ DevicePathUtilitiesGetNextDevicePathInstanceFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -746,7 +746,7 @@ DevicePathUtilitiesIsDevicePathMultiInstanceFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {

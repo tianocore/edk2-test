@@ -1128,10 +1128,10 @@ Routine Description:
           Status = tBS->OpenProtocol (
                          HandleBuffer[HandleIndex],
                          Guid,
-                         &Interface,
+                         (VOID **) &Interface,
                          HandleBuffer[HandleIndex],
-		                 NULL,
-		                 0x00000020    //EXCLUSIVE
+                         NULL,
+                         0x00000020    //EXCLUSIVE
                          );
           if (EFI_ERROR (Status)) {
             EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Open protocol - %r", Status));
@@ -1141,7 +1141,7 @@ Routine Description:
           Status = tBS->HandleProtocol (
                          HandleBuffer[HandleIndex],
                          Guid,
-                         &Interface
+                         (VOID **) &Interface
                          );
           if (EFI_ERROR (Status)) {
             EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Handle protocol - %r", Status));
@@ -1156,7 +1156,7 @@ Routine Description:
                              HandleBuffer[HandleIndex],
                              Guid,
                              HandleBuffer[HandleIndex],
-    		                     NULL
+                             NULL
                              );
               if (EFI_ERROR (Status)) {
                 EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Close protocol - %r", Status));

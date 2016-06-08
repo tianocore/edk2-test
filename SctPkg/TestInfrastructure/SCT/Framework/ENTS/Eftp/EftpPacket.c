@@ -629,7 +629,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  Func,
+                  (EFI_EVENT_NOTIFY) Func,
                   Buf,
                   &Buf->EftpToken.MnpToken.Event
                   );
@@ -774,7 +774,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  Func,
+                  (EFI_EVENT_NOTIFY) Func,
                   Buf,
                   &Buf->EftpToken.MnpToken.Event
                   );
@@ -942,7 +942,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  Func,
+                  (EFI_EVENT_NOTIFY) Func,
                   Tmp,
                   &Tmp->EftpToken.MnpToken.Event
                   );

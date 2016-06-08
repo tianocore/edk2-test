@@ -2109,7 +2109,7 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -2119,7 +2119,7 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathUtilitiesProtocolGuid,
                   NULL,
-                  &DevicePathUtilities
+                  (VOID **) &DevicePathUtilities
                   );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -2128,7 +2128,7 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathToTextProtocolGuid,
                   NULL,
-                  &DevicePathToText
+                  (VOID **) &DevicePathToText
                   );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -3673,7 +3673,7 @@ DevicePathFromTextConvertTextToDevicePathCoverageTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -3683,7 +3683,7 @@ DevicePathFromTextConvertTextToDevicePathCoverageTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathUtilitiesProtocolGuid,
                   NULL,
-                  &DevicePathUtilities
+                  (VOID **) &DevicePathUtilities
                   );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -3692,7 +3692,7 @@ DevicePathFromTextConvertTextToDevicePathCoverageTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathToTextProtocolGuid,
                   NULL,
-                  &DevicePathToText
+                  (VOID **) &DevicePathToText
                   );
   if (EFI_ERROR (Status)) {
     return Status;

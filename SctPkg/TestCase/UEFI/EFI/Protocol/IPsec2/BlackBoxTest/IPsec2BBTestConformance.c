@@ -90,7 +90,7 @@ BBTestProcessExtConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -100,7 +100,7 @@ BBTestProcessExtConformanceTest (
   //
   SctLocateProtocol(
     &gBlackBoxEfiIPsecConfigProtocolGuid,
-    &IpSecConf
+    (VOID**) &IpSecConf
     );
 
   if (IpSecConf != NULL) {
@@ -225,7 +225,7 @@ BBTestProcessExtConformanceTestCheckpoint1 (
              Ip4PacketTemp, 
              Ip4PacketSize,
              &Ip4Head, 
-             &OptionsBuffer,
+             (VOID**) &OptionsBuffer,
              &OptionLen,
              &FragmentTable, 
              &FragmentCount
@@ -250,7 +250,7 @@ BBTestProcessExtConformanceTestCheckpoint1 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       NULL,
+                       (VOID **) NULL,
                        &OptionLen,
                        &FragmentTable,
                        &FragmentCount,
@@ -290,7 +290,7 @@ BBTestProcessExtConformanceTestCheckpoint1 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        NULL,
                        &FragmentTable,
                        &FragmentCount,
@@ -330,7 +330,7 @@ BBTestProcessExtConformanceTestCheckpoint1 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        NULL,
                        &FragmentCount,
@@ -365,7 +365,7 @@ BBTestProcessExtConformanceTestCheckpoint1 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &FragmentTable,
                        NULL,

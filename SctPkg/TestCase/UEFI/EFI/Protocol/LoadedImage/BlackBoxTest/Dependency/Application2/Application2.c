@@ -88,7 +88,7 @@ InitializeEfiApplication2 (
   Status = gtBS->HandleProtocol (
                    ImageHandle,
                    &gBlackBoxEfiLoadedImageProtocolGuid,
-                   &LoadedImage
+                   (VOID **) &LoadedImage
                    );
   if (EFI_ERROR (Status)) {
     return Status;

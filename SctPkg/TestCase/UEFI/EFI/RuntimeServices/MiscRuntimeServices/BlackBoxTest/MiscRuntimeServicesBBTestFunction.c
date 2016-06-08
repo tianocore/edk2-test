@@ -93,7 +93,7 @@ BBTestResetSystemInterfaceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -106,7 +106,7 @@ BBTestResetSystemInterfaceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestRecoveryLibraryGuid,
-                   &RecoveryLib
+                   (VOID **) &RecoveryLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -314,7 +314,7 @@ BBTestResetSystemManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -327,7 +327,7 @@ BBTestResetSystemManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestRecoveryLibraryGuid,
-                   &RecoveryLib
+                   (VOID **) &RecoveryLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -460,7 +460,7 @@ BBTestQueryCapsuleCapabilitiesTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

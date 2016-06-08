@@ -173,7 +173,7 @@ InitializeLoadFileDriver (
         ImageHandle, 
         &gEfiLoadedImageProtocolGuid, 
         (VOID*)&LoadedImageInfoPtr
-        ); 
+        );
         
   LoadedImageInfoPtr->Unload = LoadFileDriverUnload;
   
@@ -194,7 +194,7 @@ LoadFileDriverBindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mImageTestForLoadFileProtocol1Guid,
-                      &TestProtInstance,
+                      (VOID **) &TestProtInstance,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -226,7 +226,7 @@ LoadFileDriverBindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mImageTestForLoadFileProtocol1Guid,
-                     &TestProtInstance,
+                     (VOID **) &TestProtInstance,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -267,7 +267,7 @@ LoadFileDriverBindingStop (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mImageTestForLoadFileProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -329,7 +329,7 @@ CopySimpleFileToMemory (
   Status = gtBS->HandleProtocol (
                       CurrentImageHandle,
                       &gEfiLoadedImageProtocolGuid,
-                      &LoadImage
+                      (VOID **) &LoadImage
                       );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -341,7 +341,7 @@ CopySimpleFileToMemory (
   Status = gtBS->HandleProtocol (
                       LoadImage->DeviceHandle,
                       &gEfiSimpleFileSystemProtocolGuid,
-                      &Volume
+                      (VOID **) &Volume
                       );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -357,7 +357,7 @@ CopySimpleFileToMemory (
   Status = gtBS->LocateProtocol (
                    &gEfiTestProfileLibraryGuid,
                    NULL,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

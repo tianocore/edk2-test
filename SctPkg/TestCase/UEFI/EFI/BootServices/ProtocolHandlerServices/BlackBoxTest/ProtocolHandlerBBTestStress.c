@@ -230,7 +230,7 @@ BBTestCombinationTest1 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -314,7 +314,7 @@ BBTestCombinationTest1 (
           Status = gtBS->OpenProtocol (
                            HandleBuffer[HandleIndex],
                            ProtocolGuidArray[ProtocolIndex],
-                           &Instance,
+                           (VOID **) &Instance,
                            mImageHandle,
                            NULL,
                            EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -423,7 +423,7 @@ BBTestCombinationTest2 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -523,7 +523,7 @@ BBTestCombinationTest3 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -642,7 +642,7 @@ BBTestCombinationTest3 (
     Status = gtBS->LocateProtocol (
                      &ProtGuid[Index],
                      NULL,
-                     &ProtInst[Index]
+                     (VOID **) &ProtInst[Index]
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -672,7 +672,7 @@ BBTestCombinationTest3 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   TestNotifyFunction1,
+                   (EFI_EVENT_NOTIFY) TestNotifyFunction1,
                    &NotifyTimes,
                    &Event
                    );
@@ -737,7 +737,7 @@ BBTestCombinationTest3 (
   Status = gtBS->HandleProtocol (
                    *HandleBuffer,
                    &mInterfaceFunctionTestProtocol1Guid,
-                   &ProtInst[0]
+                   (VOID **) &ProtInst[0]
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -805,7 +805,7 @@ BBTestCombinationTest3 (
     Status = gtBS->LocateProtocol (
                      &ProtGuid[Index],
                      NULL,
-                     &ProtInst[Index]
+                     (VOID **) &ProtInst[Index]
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -912,7 +912,7 @@ Scenario_2_clean:
     Status = gtBS->LocateProtocol (
                      &ProtGuid[Index],
                      NULL,
-                     &ProtInst[Index]
+                     (VOID **) &ProtInst[Index]
                      );
     if (Index == 6) {
       if (EFI_NOT_FOUND == Status) {
@@ -1017,7 +1017,7 @@ Scenario_3_clean:
     Status = gtBS->LocateProtocol (
                      &ProtGuid[Index],
                      NULL,
-                     &ProtInst[Index]
+                     (VOID **) &ProtInst[Index]
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1069,7 +1069,7 @@ Scenario_4_clean:
   Status = gtBS->HandleProtocol (
                    *HandleBuffer,
                    &mInterfaceFunctionTestProtocol3Guid,
-                   &ProtInst[0]
+                   (VOID **) &ProtInst[0]
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -1112,7 +1112,7 @@ Scenario_4_clean:
     Status = gtBS->LocateProtocol (
                      &ProtGuid[Index],
                      NULL,
-                     &ProtInst[Index]
+                     (VOID **) &ProtInst[Index]
                      );
     if ((Index == 2) || (Index == 4)) {
       if (EFI_NOT_FOUND == Status) {
@@ -1175,7 +1175,7 @@ Scenario_5_clean:
     Status = gtBS->LocateProtocol (
                      &ProtGuid[Index],
                      NULL,
-                     &ProtInst[Index]
+                     (VOID **) &ProtInst[Index]
                      );
     if (Index == 1 || Index == 3) {
       if (EFI_SUCCESS == Status) {
@@ -1417,7 +1417,7 @@ BBTestCombinationTest2CheckPoint2 (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_WAIT,
                      TPL_CALLBACK,
-                     TestNotifyFunction1,
+                     (EFI_EVENT_NOTIFY) TestNotifyFunction1,
                      &NotifyTimes,
                      &Event[Index]
                      );
@@ -1588,7 +1588,7 @@ BBTestCombinationTest2CheckPoint3 (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &mTestNoInterfaceProtocol1Guid,
-                     &ProtInstance
+                     (VOID **) &ProtInstance
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1730,7 +1730,7 @@ BBTestCombinationTest2CheckPoint4 (
       Status = gtBS->OpenProtocol (
                        Handle,
                        &mTestNoInterfaceProtocol1Guid,
-                       &ProtInstance,
+                       (VOID **) &ProtInstance,
                        mImageHandle,
                        ChildHandle,
                        Attributes[AttributesIndex]

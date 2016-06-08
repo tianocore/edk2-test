@@ -128,7 +128,7 @@ BBTestGetInformationConformanceTest (
   Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     &StandardLib
+                     (VOID **) &StandardLib
                      );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -171,7 +171,7 @@ BBTestSetInformationConformanceTest (
   Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     &StandardLib
+                     (VOID **) &StandardLib
                      );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -211,7 +211,7 @@ BBTestGetSupportedTypesConformanceTest (
   Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     &StandardLib
+                     (VOID **) &StandardLib
                      );
   if ( EFI_ERROR(Status) ) {
     return Status;

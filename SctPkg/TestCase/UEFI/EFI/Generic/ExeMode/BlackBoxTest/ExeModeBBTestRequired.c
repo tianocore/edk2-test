@@ -86,7 +86,7 @@ BBTestFpuControlWordTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -160,7 +160,7 @@ BBTestMxCsrTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
   if (EFI_ERROR (Status)) {
     return Status;

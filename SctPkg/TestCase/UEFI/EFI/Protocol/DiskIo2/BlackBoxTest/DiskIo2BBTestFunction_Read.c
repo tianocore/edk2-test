@@ -182,7 +182,7 @@ DiskIo2AsyncReadData (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(DiskIO2_Task), 
-                   &DiskIo2Entity);
+                   (VOID **) &DiskIo2Entity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -193,7 +193,7 @@ DiskIo2AsyncReadData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2ReadNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2ReadNotifyFunc,
                    DiskIo2Entity,
                    &DiskIo2Entity->DiskIo2Token.Event
                    );
@@ -276,7 +276,7 @@ EFIAPI DiskIo2AsyncReadBatchNotifyFunc (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     DiskIo2AsyncReadBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) DiskIo2AsyncReadBatchNotifyFunc,
                      TaskContext,
                      &DiskIo2Entity->DiskIo2Token.Event
                      );
@@ -341,7 +341,7 @@ DiskIo2AsyncBatchRead (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(DiskIO2_Batch_Task_Context), 
-                     &TaskContext
+                     (VOID **) &TaskContext
                      );
     if (TaskContext == NULL) {
       return EFI_OUT_OF_RESOURCES;
@@ -360,7 +360,7 @@ DiskIo2AsyncBatchRead (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     DiskIo2AsyncReadBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) DiskIo2AsyncReadBatchNotifyFunc,
                      TaskContext,
                      &DiskIo2Entity->DiskIo2Token.Event
                      );
@@ -433,7 +433,7 @@ DiskIo2MixedReadData (
   //
   // Allocate memory for one DiskIo2Entity
   //
-  Status = gtBS->AllocatePool(EfiBootServicesData, sizeof(DiskIO2_Task), &DiskIo2Entity);
+  Status = gtBS->AllocatePool(EfiBootServicesData, sizeof(DiskIO2_Task), (VOID **) &DiskIo2Entity);
   
   if (Status != EFI_SUCCESS) {
     gtBS->FreePool(Buffer);
@@ -446,7 +446,7 @@ DiskIo2MixedReadData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2MixedReadNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2MixedReadNotifyFunc,
                    DiskIo2Entity,
                    &DiskIo2Entity->DiskIo2Token.Event
                    );
@@ -510,7 +510,7 @@ DiskIo2MixedReadData (
   // Sync Call comes after a successful Async Read 
   //
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferSync);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferSync);
 
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -530,7 +530,7 @@ DiskIo2MixedReadData (
   //
   // Allocate memory for one DiskIo2Entity
   //
-  Status = gtBS->AllocatePool(EfiBootServicesData, sizeof(DiskIO2_Task), &DiskIo2EntitySync);
+  Status = gtBS->AllocatePool(EfiBootServicesData, sizeof(DiskIO2_Task), (VOID **) &DiskIo2EntitySync);
 
   if (Status != EFI_SUCCESS) {
     gtBS->FreePool(BufferSync);
@@ -612,7 +612,7 @@ BBTestCancelFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -699,7 +699,7 @@ BBTestReadDiskExFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -756,13 +756,13 @@ BBTestReadDiskExFunctionAutoTest (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiDiskIo2ProtocolGuid,
-                     &DiskIo2Temp
+                     (VOID **) &DiskIo2Temp
                      );
      if (Status == EFI_SUCCESS && DiskIo2Temp == DiskIo2) {
        Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiDiskIoProtocolGuid,
-                        &DiskIo
+                        (VOID **) &DiskIo
                         );
        if (Status != EFI_SUCCESS) {
          DiskIo = NULL;
@@ -1029,7 +1029,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint1(
         //
         // allocate bufferasync
         //
-        Status = gtBS->AllocatePool (EfiBootServicesData, NewBufferSize, &BufferAsync);	
+        Status = gtBS->AllocatePool (EfiBootServicesData, NewBufferSize, (VOID **) &BufferAsync);
 
         if (EFI_ERROR(Status)) {
           StandardLib->RecordAssertion (
@@ -1107,7 +1107,7 @@ END_WAIT:
       //
       if (DiskIo != NULL && DiskIo2Entity->DiskIo2Token.TransactionStatus == EFI_SUCCESS) {
 
-        Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferSync);
+        Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferSync);
 
         if (BufferSync != NULL) {
           StatusSync = DiskIo->ReadDisk(
@@ -1360,7 +1360,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint2(
   // allocate DiskIoBuffer if Disk IO protocol is null then ignore this
   //
   if (DiskIo != NULL) {
-    Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &DiskIoBuffer);
+    Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &DiskIoBuffer);
     if (Status != EFI_SUCCESS) {
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -1380,7 +1380,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint2(
   // allocate  DiskIo2BufferSync
   //
   
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &DiskIo2BufferSync);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &DiskIo2BufferSync);
   
   if (DiskIo2BufferSync == NULL) {
     StandardLib->RecordAssertion (
@@ -1719,7 +1719,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint3(
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2FinishNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2FinishNotifyFunc,
                    &AsyncBatchReadFinished,
                    &AsyncBatchReadToken.Event
                    );
@@ -1897,7 +1897,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          sizeof(DiskIO2_Task), 
-                         &DiskIo2Entity
+                         (VOID **) &DiskIo2Entity
                          );
         if (Status != EFI_SUCCESS) {
           MemoryAllocFail = TRUE;
@@ -1917,7 +1917,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint3(
         DiskIo2Entity->Offset                         = Offset;
         DiskIo2Entity->MediaId                        = MediaId;
           
-        Status=gtBS->AllocatePool (EfiBootServicesData, NewBufferSize, &DiskIo2Entity->Buffer);
+        Status=gtBS->AllocatePool (EfiBootServicesData, NewBufferSize, (VOID **) &DiskIo2Entity->Buffer);
 
         if (Status != EFI_SUCCESS) {
           MemoryAllocFail = TRUE;
@@ -1971,7 +1971,7 @@ END:
       //
       if (DiskIo != NULL && DiskIo2Entity->DiskIo2Token.TransactionStatus == EFI_SUCCESS) {
 
-        Status=gtBS->AllocatePool (EfiBootServicesData, BufferSize, &DiskIoBuffer);
+        Status=gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &DiskIoBuffer);
 
         if (Status == EFI_SUCCESS) {
           DiskIoStatus = DiskIo->ReadDisk(
@@ -2306,7 +2306,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint4(
         // allocate aligned BufferAsync
         //
         BufferAsync = NULL;
-        Status = gtBS->AllocatePool (EfiBootServicesData, NewBufferSize, &BufferAsync);
+        Status = gtBS->AllocatePool (EfiBootServicesData, NewBufferSize, (VOID **) &BufferAsync);
         if (Status != EFI_SUCCESS) {
           goto END_WAIT;
         }

@@ -95,7 +95,7 @@ SCRTRuntimeDriverInit(
   Status = mBS->CreateEvent (
                   EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE,
                   TPL_NOTIFY,
-                  SCRTDriverVirtualNotifyEvent,
+                  (EFI_EVENT_NOTIFY) SCRTDriverVirtualNotifyEvent,
                   (VOID *)(UINTN)GoVirtualChildEvent,
                   &mEfiVirtualNotifyEvent
                   );

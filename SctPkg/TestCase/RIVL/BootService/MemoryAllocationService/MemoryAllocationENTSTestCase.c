@@ -231,7 +231,7 @@ Returns:
   *BSAllocatePoolStatus = BootService->AllocatePool (
                                         BSAllocatePoolPoolType,
                                         BSAllocatePoolSize,
-                                        BSAllocatePoolBuffer
+                                        (VOID **) BSAllocatePoolBuffer
                                         );
   return EFI_SUCCESS;
 }

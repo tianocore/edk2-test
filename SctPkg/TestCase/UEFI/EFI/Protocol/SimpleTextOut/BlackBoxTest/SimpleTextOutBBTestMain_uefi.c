@@ -296,7 +296,7 @@ InitializeBBTestSimpleTextOutput (
   EfiInitializeTestLib (ImageHandle, SystemTable);
   SctInitializeLib (ImageHandle, SystemTable);
 
-  gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
 
   return EfiInitAndInstallBBTestInterface (
            &ImageHandle,
@@ -384,7 +384,7 @@ _IPrint (
   //
   Status = gtBS->AllocatePool (EfiBootServicesData,
                               0x10000,
-                              &Buffer);
+                              (VOID **) &Buffer);
 
   CopyUnicodeString ((CHAR16*) Buffer, fmt);
 
@@ -419,7 +419,7 @@ _IPrint (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiHiiProtocolGuid,
-                   &Hii
+                   (VOID **) &Hii
                    );
 
   if (EFI_ERROR (Status)) {
@@ -494,7 +494,7 @@ PrintXY (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiGraphicsOutputProtocolGuid,
-                   &GraphicsOutput
+                   (VOID **) &GraphicsOutput
                    );
 
   if (EFI_ERROR (Status)) {
@@ -504,7 +504,7 @@ PrintXY (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiSimpleTextOutProtocolGuid,
-                   &Sto
+                   (VOID **) &Sto
                    );
 
   if (EFI_ERROR (Status)) {
@@ -891,7 +891,7 @@ LocateDevicePathFromSimpleTextOut (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiSimpleTextOutProtocolGuid,
-                     &OtherSimpleOut
+                     (VOID **) &OtherSimpleOut
                      );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -928,7 +928,7 @@ LocateDevicePathFromSimpleTextOut (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gBlackBoxEfiDevicePathProtocolGuid,
-                   DevicePath
+                   (VOID **) DevicePath
                    );
 
 
@@ -1001,7 +1001,7 @@ LocateGopFromSimpleTextOut (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiSimpleTextOutProtocolGuid,
-                     &OtherSimpleOut
+                     (VOID **) &OtherSimpleOut
                      );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -1037,7 +1037,7 @@ LocateGopFromSimpleTextOut (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gBlackBoxEfiGraphicsOutputProtocolGuid,
-                   GraphicsOutput
+                   (VOID **) GraphicsOutput
                    );
 
   gtBS->FreePool (HandleBuffer);

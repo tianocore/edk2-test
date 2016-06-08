@@ -89,7 +89,7 @@ BBTestStartConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -195,7 +195,7 @@ BBTestStopConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -300,7 +300,7 @@ BBTestInitializeConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -410,7 +410,7 @@ BBTestResetConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -517,7 +517,7 @@ BBTestShutdownConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -623,7 +623,7 @@ BBTestReceiveFilterConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -827,7 +827,7 @@ BBTestStationAddressConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -986,7 +986,7 @@ BBTestStatisticsConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1154,7 +1154,7 @@ BBTestMCastIpToMacConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1267,7 +1267,7 @@ BBTestNVDataConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1328,7 +1328,7 @@ BBTestNVDataConformanceTest (
   }
 
   Buffer = NULL;
-  Status = gtBS->AllocatePool (EfiLoaderData, SnpInterface->Mode->NvRamSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiLoaderData, SnpInterface->Mode->NvRamSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -1531,7 +1531,7 @@ BBTestGetStatusConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1721,7 +1721,7 @@ BBTestTransmitConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1759,7 +1759,7 @@ BBTestTransmitConformanceTest (
   SctSetMem (&SrcAddr, sizeof (EFI_MAC_ADDRESS), 0x0);
   SctSetMem (&DestAddr, sizeof (EFI_MAC_ADDRESS), 0x0);
   Protocol = SnpInterface->Mode->IfType;
-  Status = gtBS->AllocatePool (EfiLoaderData, 2048, &Buffer);
+  Status = gtBS->AllocatePool (EfiLoaderData, 2048, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -1996,7 +1996,7 @@ BBTestReceiveConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2035,11 +2035,11 @@ BBTestReceiveConformanceTest (
   SctSetMem (&SrcAddr, sizeof (EFI_MAC_ADDRESS), 0x0);
   SctSetMem (&DestAddr, sizeof (EFI_MAC_ADDRESS), 0x0);
   Protocol = 0;
-  Status = gtBS->AllocatePool (EfiLoaderData, 2048, &Buffer);
+  Status = gtBS->AllocatePool (EfiLoaderData, 2048, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     return Status;
   }
-  Status = gtBS->AllocatePool (EfiLoaderData, 48, &Buffer1);
+  Status = gtBS->AllocatePool (EfiLoaderData, 48, (VOID **) &Buffer1);
   if (EFI_ERROR(Status)) {
     return Status;
   }

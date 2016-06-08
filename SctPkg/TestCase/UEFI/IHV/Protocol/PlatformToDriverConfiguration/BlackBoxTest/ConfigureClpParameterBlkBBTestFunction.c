@@ -214,7 +214,7 @@ BBTestCLPCommandAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -247,7 +247,7 @@ BBTestCLPCommandAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -471,7 +471,7 @@ BBTestCLPReturnStringAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -504,7 +504,7 @@ BBTestCLPReturnStringAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -744,7 +744,7 @@ BBTestCLPCmdStatusAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -777,7 +777,7 @@ BBTestCLPCmdStatusAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -964,7 +964,7 @@ BBTestCLPErrorValueAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -997,7 +997,7 @@ BBTestCLPErrorValueAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -1225,7 +1225,7 @@ BBTestCLPMessageCodeAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1258,7 +1258,7 @@ BBTestCLPMessageCodeAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (

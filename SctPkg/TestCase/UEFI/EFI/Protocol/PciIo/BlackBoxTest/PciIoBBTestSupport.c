@@ -1519,7 +1519,7 @@ InitializeCaseEnvironment (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiPciRootBridgeIoProtocolGuid,
-                   &gRootBridgeIo
+                   (VOID **) &gRootBridgeIo
                    );
   gtBS->FreePool (HandleBuffer);
   if (EFI_ERROR(Status)) {
@@ -1553,12 +1553,12 @@ InitializeCaseEnvironment (
   //get all the pci io devices PciIo protocol and DevicePath protocol instance.
   //
   for (Index = 0 ; Index < HandleNum ; Index++) {
-    Status = gtBS->HandleProtocol (HandleBuffer[Index], &gBlackBoxEfiPciIoProtocolGuid, &PciIo);
+    Status = gtBS->HandleProtocol (HandleBuffer[Index], &gBlackBoxEfiPciIoProtocolGuid, (VOID **) &PciIo);
     if (EFI_ERROR(Status)) {
       EfiStatus  = Status;
       continue;
     }
-    Status = gtBS->HandleProtocol (HandleBuffer[Index], &gEfiDevicePathProtocolGuid, &DevicePath);
+    Status = gtBS->HandleProtocol (HandleBuffer[Index], &gEfiDevicePathProtocolGuid, (VOID **) &DevicePath);
     if (EFI_ERROR(Status)) {
       EfiStatus = Status;
       continue;

@@ -124,7 +124,7 @@ Returns:
   Status = tBS->AllocatePool (
                   EfiBootServicesData,
                   sizeof (EFI_ENTS_PROTOCOL),
-                  &gTcp6ServiceBindingEntsProtocolInterface
+                  (VOID **) &gTcp6ServiceBindingEntsProtocolInterface
                   );
   if (EFI_ERROR (Status)) {
     goto Error;

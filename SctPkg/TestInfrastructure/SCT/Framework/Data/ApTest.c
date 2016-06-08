@@ -448,7 +448,7 @@ Routine Description:
   Status = tBS->AllocatePool (
                  EfiBootServicesData,
                  sizeof(EFI_AP_TEST_INTERFACE),
-                 &TempApTest
+                 (VOID **) &TempApTest
                  );
   if (EFI_ERROR (Status)) {
     EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Allocate pool - %r", Status));

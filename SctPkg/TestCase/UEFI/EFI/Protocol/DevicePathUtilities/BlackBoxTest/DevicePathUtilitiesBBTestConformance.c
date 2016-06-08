@@ -95,7 +95,7 @@ DevicePathUtilitiesCreateDeviceNodeConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -152,7 +152,7 @@ DevicePathUtilitiesAppendDeviceNodeConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -276,7 +276,7 @@ DevicePathUtilitiesAppendDevicePathConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -404,7 +404,7 @@ DevicePathUtilitiesAppendDevicePathInstanceConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -477,7 +477,7 @@ DevicePathUtilitiesGetNextDevicePathInstanceConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -530,7 +530,7 @@ DevicePathUtilitiesGetDevicePathSizeConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -579,7 +579,7 @@ DevicePathUtilitiesDuplicateDevicePathConformanceTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {

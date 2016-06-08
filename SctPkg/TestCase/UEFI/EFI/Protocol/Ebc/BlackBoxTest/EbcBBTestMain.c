@@ -198,8 +198,8 @@ InitializeBBTestEbcProtocol (
   //
   // Get Pei Protocols
   //
-  SctGetPeiProtocol (&gEfiPeiFlushInstructionCacheGuid, &gEfiPeiFlushInstructionCache);
-  SctGetPeiProtocol (&gEfiPeiPeCoffLoaderGuid, &gEfiPeiPeCoffLoader);
+  SctGetPeiProtocol (&gEfiPeiFlushInstructionCacheGuid, (VOID**) &gEfiPeiFlushInstructionCache);
+  SctGetPeiProtocol (&gEfiPeiPeCoffLoaderGuid, (VOID**) &gEfiPeiPeCoffLoader);
 
   //
   // Use profile lib at here just for less effect on the current system. It is
@@ -209,7 +209,7 @@ InitializeBBTestEbcProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiTestProfileLibraryGuid,
                    NULL,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

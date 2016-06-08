@@ -944,7 +944,7 @@ BBTestLocateHandleInterfaceTestCheckPoint3 (
       Status = gtBS->HandleProtocol (
                        HandleBuffer[HandleIndex],
                        &mTestNoInterfaceProtocol1Guid,
-                       &Interface
+                       (VOID **) &Interface
                        );
 
       //
@@ -1817,7 +1817,7 @@ BBTestLocateHandleBufferInterfaceTestCheckPoint2 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_WAIT,
                    TPL_CALLBACK,
-                   TestNotifyFunction0,
+                   (EFI_EVENT_NOTIFY) TestNotifyFunction0,
                    NULL,
                    &Event
                       );
@@ -2252,7 +2252,7 @@ BBTestLocateHandleBufferInterfaceTestCheckPoint3 (
       Status = gtBS->HandleProtocol (
                        HandleBuffer[HandleIndex],
                        &mTestNoInterfaceProtocol1Guid,
-                       &Interface
+                       (VOID **) &Interface
                        );
 
       //
@@ -2397,7 +2397,7 @@ BBTestHandleProtocolInterfaceTestCheckPoint1 (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1
+                     (VOID **) &IFTestProt1
                      );
     gtBS->RestoreTPL (OldTpl);
 
@@ -2478,7 +2478,7 @@ BBTestHandleProtocolInterfaceTestCheckPoint1 (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1
+                     (VOID **) &IFTestProt1
                      );
     gtBS->RestoreTPL (OldTpl);
 
@@ -2643,7 +2643,7 @@ BBTestLocateProtocolInterfaceTestCheckPoint1 (
     Status = gtBS->LocateProtocol (
                      &mInterfaceFunctionTestProtocol1Guid,
                      NULL,
-                     &IFTestProt1
+                     (VOID **) &IFTestProt1
                      );
     gtBS->RestoreTPL (OldTpl);
 
@@ -2847,7 +2847,7 @@ BBTestLocateProtocolInterfaceTestCheckPoint2 (
     Status = gtBS->LocateProtocol (
                      &mInterfaceFunctionTestProtocol1Guid,
                      Registration,
-                     &IFTestProt1
+                     (VOID **) &IFTestProt1
                      );
     gtBS->RestoreTPL (OldTpl);
 
@@ -2916,7 +2916,7 @@ BBTestLocateProtocolInterfaceTestCheckPoint2 (
     Status = gtBS->LocateProtocol (
                      &mInterfaceFunctionTestProtocol1Guid,
                      Registration,
-                     &IFTestProt1
+                     (VOID **) &IFTestProt1
                      );
     gtBS->RestoreTPL (OldTpl);
 
@@ -3038,7 +3038,7 @@ BBTestLocateProtocolInterfaceTestCheckPoint3 (
     Status = gtBS->LocateProtocol (
                      &mTestNoInterfaceProtocol1Guid,
                      NULL,
-                     &Protocol
+                     (VOID **) &Protocol
                      );
     gtBS->RestoreTPL (OldTpl);
 
@@ -3330,7 +3330,7 @@ BBTestLocateDevicePathInterfaceTestCheckPoint1 (
         Status = gtBS->HandleProtocol (
                          Handle,
                          ProtocolGuidArray[AnotherIndex],
-                         &ProtocolArray[AnotherIndex]
+                         (VOID **) &ProtocolArray[AnotherIndex]
                          );
         if (EFI_SUCCESS == Status) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -3886,7 +3886,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint1 (
           Status = gtBS->OpenProtocol (
                            Handle,
                            &mInterfaceFunctionTestProtocol1Guid,
-                           &IFTestProt1,
+                           (VOID **) &IFTestProt1,
                            AgentHandleArray[Indexi],
                            ControllerHandleArray[Indexj],
                            EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -3938,7 +3938,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint1 (
           gtBS->OpenProtocol (
                   Handle,
                   &mInterfaceFunctionTestProtocol1Guid,
-                  &IFTestProt1,
+                  (VOID **) &IFTestProt1,
                   AgentHandleArray[Indexi],
                   ControllerHandleArray[Indexj],
                   AttributesArray[AttributesIndex]
@@ -4074,7 +4074,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint2 (
           Status = gtBS->OpenProtocol (
                            Handle,
                            &mInterfaceFunctionTestProtocol1Guid,
-                           &IFTestProt1,
+                           (VOID **) &IFTestProt1,
                            AgentHandleArray[Indexi],
                            ControllerHandleArray[Indexj],
                            EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -4126,7 +4126,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint2 (
           gtBS->OpenProtocol (
                   Handle,
                   &mInterfaceFunctionTestProtocol1Guid,
-                  &IFTestProt1,
+                  (VOID **) &IFTestProt1,
                   AgentHandleArray[Indexi],
                   ControllerHandleArray[Indexj],
                   AttributesArray[AttributesIndex]
@@ -4262,7 +4262,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint3 (
           Status = gtBS->OpenProtocol (
                            Handle,
                            &mInterfaceFunctionTestProtocol1Guid,
-                           &IFTestProt1,
+                           (VOID **) &IFTestProt1,
                            AgentHandleArray[Indexi],
                            ControllerHandleArray[Indexj],
                            EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -4314,7 +4314,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint3 (
           gtBS->OpenProtocol (
                   Handle,
                   &mInterfaceFunctionTestProtocol1Guid,
-                  &IFTestProt1,
+                  (VOID **) &IFTestProt1,
                   AgentHandleArray[Indexi],
                   ControllerHandleArray[Indexj],
                   AttributesArray[AttributesIndex]
@@ -4457,7 +4457,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint4 (
       Status = gtBS->OpenProtocol (
                        Handle,
                        &mInterfaceFunctionTestProtocol1Guid,
-                       &IFTestProt1,
+                       (VOID **) &IFTestProt1,
                        mImageHandle,
                        ChildHandle,
                        EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -4508,7 +4508,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint4 (
           gtBS->OpenProtocol (
                   Handle,
                   &mInterfaceFunctionTestProtocol1Guid,
-                  &IFTestProt1,
+                  (VOID **) &IFTestProt1,
                   AgentHandleArray[Indexi],
                   ControllerHandleArray[Indexj],
                   AttributesArray[AttributesIndex]
@@ -4639,7 +4639,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint5 (
       Status = gtBS->OpenProtocol (
                        Handle,
                        &mInterfaceFunctionTestProtocol1Guid,
-                       &IFTestProt1,
+                       (VOID **) &IFTestProt1,
                        mImageHandle,
                        ControllerHandleArray[ControllerHandleIndex],
                        EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -4790,7 +4790,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -4944,7 +4944,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5107,7 +5107,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint8 (
   Status1 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol1Guid,
-                    &IFTestProt1,
+                    (VOID **) &IFTestProt1,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5118,7 +5118,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint8 (
   Status2 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol2Guid,
-                    &IFTestProt2,
+                    (VOID **) &IFTestProt2,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5129,7 +5129,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint8 (
   Status3 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol3Guid,
-                    &IFTestProt3,
+                    (VOID **) &IFTestProt3,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5160,7 +5160,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5200,7 +5200,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5240,7 +5240,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5419,7 +5419,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint9 (
   Status1 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol1Guid,
-                    &IFTestProt1,
+                    (VOID **) &IFTestProt1,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5430,7 +5430,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint9 (
   Status2 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol2Guid,
-                    &IFTestProt2,
+                    (VOID **) &IFTestProt2,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5441,7 +5441,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint9 (
   Status3 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol3Guid,
-                    &IFTestProt3,
+                    (VOID **) &IFTestProt3,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5472,7 +5472,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5512,7 +5512,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5552,7 +5552,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5730,7 +5730,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
   Status1 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol1Guid,
-                    &IFTestProt1,
+                    (VOID **) &IFTestProt1,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5741,7 +5741,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
   Status2 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol2Guid,
-                    &IFTestProt2,
+                    (VOID **) &IFTestProt2,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5752,7 +5752,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
   Status3 = gtBS->OpenProtocol (
                     Handle,
                     &mInterfaceFunctionTestProtocol3Guid,
-                    &IFTestProt3,
+                    (VOID **) &IFTestProt3,
                     mImageHandle,
                     ChildHandle,
                     EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5783,7 +5783,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5823,7 +5823,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -5863,7 +5863,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -6044,7 +6044,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint1 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -6111,7 +6111,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint1 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -6175,7 +6175,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint1 (
     Status = gtBS->OpenProtocol (
                       Handle1,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      &IFTestProt1,
+                      (VOID **) &IFTestProt1,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -6342,7 +6342,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint2 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -6409,7 +6409,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint2 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -6473,7 +6473,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint2 (
     Status = gtBS->OpenProtocol (
                      Handle1,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -6641,7 +6641,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -6708,7 +6708,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint3 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -6772,7 +6772,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle1,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -6953,7 +6953,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -7020,7 +7020,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint4 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -7084,7 +7084,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle1,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -7308,7 +7308,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint5 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -7372,7 +7372,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint5 (
     Status = gtBS->OpenProtocol (
                       Handle1,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      &IFTestProt1,
+                      (VOID **) &IFTestProt1,
                       mImageHandle,
                       ChildHandle,
                       EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -7410,7 +7410,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -7448,7 +7448,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle3,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -7685,7 +7685,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint6 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -7749,7 +7749,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle1,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -7787,7 +7787,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -7825,7 +7825,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle3,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -8065,7 +8065,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint7 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -8129,7 +8129,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle1,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -8167,7 +8167,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle2,
                      &mInterfaceFunctionTestProtocol2Guid,
-                     &IFTestProt2,
+                     (VOID **) &IFTestProt2,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -8205,7 +8205,7 @@ BBTestOpenProtocolInterfaceTest222CheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle3,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -8487,7 +8487,7 @@ BBTestOpenProtocolInterfaceTest333CheckPoint1 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -8570,7 +8570,7 @@ BBTestOpenProtocolInterfaceTest333CheckPoint1 (
     Status = gtBS->LocateProtocol (
                 &mExternalDriverProtocol1Guid,
                 NULL,
-                &ExProt1
+                (VOID **) &ExProt1
                 );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -8838,7 +8838,7 @@ BBTestOpenProtocolInterfaceTest333CheckPoint2 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                    &ExProt1
+                    (VOID **) &ExProt1
                     );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -8922,7 +8922,7 @@ BBTestOpenProtocolInterfaceTest333CheckPoint2 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -9211,7 +9211,7 @@ BBTestOpenProtocolInterfaceTest333CheckPoint3 (
     Status = gtBS->LocateProtocol (
                 &mExternalDriverProtocol1Guid,
                 NULL,
-                &ExProt1
+                (VOID **) &ExProt1
                 );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -9303,7 +9303,7 @@ BBTestOpenProtocolInterfaceTest333CheckPoint3 (
     Status = gtBS->LocateProtocol (
                      &mExternalDriverProtocol1Guid,
                      NULL,
-                     &ExProt1
+                     (VOID **) &ExProt1
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -9495,7 +9495,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint1 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -9725,7 +9725,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint2 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -9956,7 +9956,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -10199,7 +10199,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -10447,7 +10447,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -10695,7 +10695,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -10944,7 +10944,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -11232,7 +11232,7 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
           Status = gtBS->OpenProtocol (
                            Handle,
                            &mInterfaceFunctionTestProtocol1Guid,
-                           &IFTestProt1,
+                           (VOID **) &IFTestProt1,
                            mImageHandle,
                            ChildHandle,
                            AttributesArray[AttributesIndex]
@@ -11403,7 +11403,7 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
       gtBS->OpenProtocol (
               Handle,
               &mInterfaceFunctionTestProtocol1Guid,
-              &IFTestProt1,
+              (VOID **) &IFTestProt1,
               mImageHandle,
               ChildHandle,
               Attributes
@@ -11591,7 +11591,7 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
       Status = gtBS->OpenProtocol (
                        Handle,
                        &mInterfaceFunctionTestProtocol1Guid,
-                       &IFTestProt1,
+                       (VOID **) &IFTestProt1,
                        mImageHandle,
                        ChildHandle,
                        Attributes
@@ -11744,7 +11744,7 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -12294,7 +12294,7 @@ BBTestConnectControllerInterfaceTestCheckPoint2 (
           Status = gtBS->LocateProtocol (
                            &mInterfaceFunctionTestProtocol2Guid,
                            NULL,
-                           &IFTestProt2
+                           (VOID **) &IFTestProt2
                            );
           if (EFI_SUCCESS == Status) {
             AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -12623,7 +12623,7 @@ BBTestConnectControllerInterfaceTestCheckPoint3 (
             Status = gtBS->HandleProtocol (
                              *HandleBuffer,
                              &gEfiDevicePathProtocolGuid,
-                             &NewDevicePath
+                             (VOID **) &NewDevicePath
                              );
             if (EFI_SUCCESS == Status) {
               AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -12883,7 +12883,7 @@ BBTestConnectControllerInterfaceTestCheckPoint4 (
       Status = gtBS->LocateProtocol (
                        &mInterfaceFunctionTestProtocol2Guid,
                        NULL,
-                       &IFTestProt2
+                       (VOID **) &IFTestProt2
                        );
       if (EFI_SUCCESS == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -12915,7 +12915,7 @@ BBTestConnectControllerInterfaceTestCheckPoint4 (
       Status = gtBS->LocateProtocol (
                        &mInterfaceFunctionTestProtocol3Guid,
                        NULL,
-                       &IFTestProt3
+                       (VOID **) &IFTestProt3
                        );
       if (EFI_NOT_FOUND == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -13136,7 +13136,7 @@ BBTestConnectControllerInterfaceTestCheckPoint5 (
       Status = gtBS->LocateProtocol (
                        &mInterfaceFunctionTestProtocol2Guid,
                        NULL,
-                       &IFTestProt2
+                       (VOID **) &IFTestProt2
                        );
       if (EFI_SUCCESS == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -13168,7 +13168,7 @@ BBTestConnectControllerInterfaceTestCheckPoint5 (
       Status = gtBS->LocateProtocol (
                        &mInterfaceFunctionTestProtocol3Guid,
                        NULL,
-                       &IFTestProt3
+                       (VOID **) &IFTestProt3
                        );
       if (EFI_SUCCESS == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -13385,17 +13385,17 @@ BBTestConnectControllerInterfaceTestCheckPoint6 (
       Status1 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol2Guid,
                         NULL,
-                        &IFTestProt2
+                        (VOID **) &IFTestProt2
                         );
       Status2 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol3Guid,
                         NULL,
-                        &IFTestProt3
+                        (VOID **) &IFTestProt3
                         );
       Status3 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol4Guid,
                         NULL,
-                        &IFTestProt4
+                        (VOID **) &IFTestProt4
                         );
       if ((EFI_SUCCESS == Status1)
           && (EFI_SUCCESS == Status2)
@@ -13615,12 +13615,12 @@ BBTestConnectControllerInterfaceTestCheckPoint7_13 (
       Status1 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol2Guid,
                         NULL,
-                        &IFTestProt2
+                        (VOID **) &IFTestProt2
                         );
       Status2 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol3Guid,
                         NULL,
-                        &IFTestProt3
+                        (VOID **) &IFTestProt3
                         );
       if ((EFI_SUCCESS == Status1)
           && (EFI_NOT_FOUND == Status2)) {
@@ -13862,7 +13862,7 @@ BBTestConnectControllerInterfaceTestCheckPoint8 (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gEfiPlatformDriverOverrideProtocolGuid,
-                   &PlatformDriverOverrideInterface
+                   (VOID **) &PlatformDriverOverrideInterface
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -13998,12 +13998,12 @@ BBTestConnectControllerInterfaceTestCheckPoint8 (
       Status1 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol8Guid,
                         NULL,
-                        &IFTestProt8
+                        (VOID **) &IFTestProt8
                         );
       Status2 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol9Guid,
                         NULL,
-                        &IFTestProt9
+                        (VOID **) &IFTestProt9
                         );
       if ((EFI_SUCCESS == Status1)
           && (EFI_NOT_FOUND == Status2)) {
@@ -14211,12 +14211,12 @@ BBTestConnectControllerInterfaceTestCheckPoint9 (
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol10Guid,
                       NULL,
-                      &IFTestProt10
+                      (VOID **) &IFTestProt10
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol11Guid,
                       NULL,
-                      &IFTestProt11
+                      (VOID **) &IFTestProt11
                       );
     if ((EFI_SUCCESS == Status1)
         && (EFI_NOT_FOUND == Status2)) {
@@ -14427,12 +14427,12 @@ BBTestConnectControllerInterfaceTestCheckPoint10 (
       Status1 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol2Guid,
                         NULL,
-                        &IFTestProt2
+                        (VOID **) &IFTestProt2
                         );
       Status2 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol3Guid,
                         NULL,
-                        &IFTestProt3
+                        (VOID **) &IFTestProt3
                         );
       if ((EFI_SUCCESS == Status1)
           && (EFI_NOT_FOUND == Status2)) {
@@ -14679,7 +14679,7 @@ BBTestConnectControllerInterfaceTestCheckPoint11 (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gEfiPlatformDriverOverrideProtocolGuid,
-                   &PlatformDriverOverrideInterface
+                   (VOID **) &PlatformDriverOverrideInterface
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -14838,17 +14838,17 @@ BBTestConnectControllerInterfaceTestCheckPoint11 (
       Status = gtBS->LocateProtocol (
                        &mInterfaceFunctionTestProtocol2Guid,
                        NULL,
-                       &IFTestProt2
+                       (VOID **) &IFTestProt2
                        );
       Status1 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol8Guid,
                         NULL,
-                        &IFTestProt8
+                        (VOID **) &IFTestProt8
                         );
       Status2 = gtBS->LocateProtocol (
                         &mInterfaceFunctionTestProtocol9Guid,
                         NULL,
-                        &IFTestProt9
+                        (VOID **) &IFTestProt9
                         );
       if ((EFI_SUCCESS == Status) && (EFI_NOT_FOUND == Status1)
           && (EFI_NOT_FOUND == Status2)) {
@@ -15141,17 +15141,17 @@ BBTestConnectControllerInterfaceTestCheckPoint12 (
     Status = gtBS->LocateProtocol (
                      &mInterfaceFunctionTestProtocol2Guid,
                      NULL,
-                     &IFTestProt2
+                     (VOID **) &IFTestProt2
                      );
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol10Guid,
                       NULL,
-                      &IFTestProt10
+                      (VOID **) &IFTestProt10
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol11Guid,
                       NULL,
-                      &IFTestProt11
+                      (VOID **) &IFTestProt11
                       );
     if ((EFI_SUCCESS == Status) && (EFI_NOT_FOUND == Status1)
         && (EFI_NOT_FOUND == Status2)) {
@@ -15480,17 +15480,17 @@ BBTestConnectControllerInterfaceTestCheckPoint14 (
     Status = gtBS->LocateProtocol (
                      &mInterfaceFunctionTestProtocol8Guid,
                      NULL,
-                     &IFTestProt8
+                     (VOID **) &IFTestProt8
                      );
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol10Guid,
                       NULL,
-                      &IFTestProt10
+                      (VOID **) &IFTestProt10
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol11Guid,
                       NULL,
-                      &IFTestProt11
+                      (VOID **) &IFTestProt11
                       );
     if ((EFI_SUCCESS == Status) && (EFI_NOT_FOUND == Status1)
         && (EFI_NOT_FOUND == Status2)) {
@@ -15803,12 +15803,12 @@ BBTestConnectControllerInterfaceTestCheckPoint15 (
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol8Guid,
                       NULL,
-                      &IFTestProt8
+                      (VOID **) &IFTestProt8
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol3Guid,
                       NULL,
-                      &IFTestProt3
+                      (VOID **) &IFTestProt3
                       );
     if ((EFI_SUCCESS == Status1) && (EFI_NOT_FOUND == Status2)) {
 
@@ -16041,12 +16041,12 @@ BBTestConnectControllerInterfaceTestCheckPoint16 (
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol10Guid,
                       NULL,
-                      &IFTestProt10
+                      (VOID **) &IFTestProt10
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol3Guid,
                       NULL,
-                      &IFTestProt3
+                      (VOID **) &IFTestProt3
                       );
     if ((EFI_SUCCESS == Status1)
         && (EFI_NOT_FOUND == Status2)) {
@@ -16494,12 +16494,12 @@ BBTestDisconnectControllerInterfaceTestCheckPoint3 (
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol2Guid,
                       NULL,
-                      &IFTestProt2
+                      (VOID **) &IFTestProt2
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol3Guid,
                       NULL,
-                      &IFTestProt3
+                      (VOID **) &IFTestProt3
                       );
     if ((EFI_SUCCESS == Status1)
         && (EFI_NOT_FOUND == Status2)) {
@@ -16723,12 +16723,12 @@ BBTestDisconnectControllerInterfaceTestCheckPoint4 (
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol2Guid,
                       NULL,
-                      &IFTestProt2
+                      (VOID **) &IFTestProt2
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol3Guid,
                       NULL,
-                      &IFTestProt3
+                      (VOID **) &IFTestProt3
                       );
     if ((EFI_NOT_FOUND == Status1)
         && (EFI_NOT_FOUND == Status2)) {
@@ -16959,22 +16959,22 @@ BBTestDisconnectControllerInterfaceTestCheckPoint5 (
     Status = gtBS->LocateProtocol (
                      &mInterfaceFunctionTestProtocol2Guid,
                      NULL,
-                     &IFTestProt2
+                     (VOID **) &IFTestProt2
                      );
     Status1 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol3Guid,
                       NULL,
-                      &IFTestProt3
+                      (VOID **) &IFTestProt3
                       );
     Status2 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol4Guid,
                       NULL,
-                      &IFTestProt4
+                      (VOID **) &IFTestProt4
                       );
     Status3 = gtBS->LocateProtocol (
                       &mInterfaceFunctionTestProtocol5Guid,
                       NULL,
-                      &IFTestProt5
+                      (VOID **) &IFTestProt5
                       );
     if ((EFI_NOT_FOUND == Status)
         && (EFI_NOT_FOUND == Status1)
@@ -17013,7 +17013,7 @@ BBTestDisconnectControllerInterfaceTestCheckPoint5 (
     Status = gtBS->HandleProtocol (
                     Handle,
                     &mBusDriver3Guid,
-                    &ProtInstance
+                    (VOID **) &ProtInstance
                     );
     if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -17351,7 +17351,7 @@ BBTestDisconnectControllerInterfaceTestCheckPoint6 (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &mBusDriver3Guid,
-                     &ProtInstance
+                     (VOID **) &ProtInstance
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -17533,7 +17533,7 @@ BBTestDisconnectControllerInterfaceTestCheckPoint6 (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &mBusDriver3Guid,
-                     &ProtInstance
+                     (VOID **) &ProtInstance
                      );
     if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;

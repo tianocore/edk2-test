@@ -302,7 +302,7 @@ UsbControlTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -315,7 +315,7 @@ UsbControlTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -385,7 +385,7 @@ UsbBulkTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -398,7 +398,7 @@ UsbBulkTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -472,7 +472,7 @@ UsbAsyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -485,7 +485,7 @@ UsbAsyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -545,7 +545,7 @@ UsbSyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -558,7 +558,7 @@ UsbSyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -627,7 +627,7 @@ UsbAsyncIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -640,7 +640,7 @@ UsbAsyncIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -695,7 +695,7 @@ UsbIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -708,7 +708,7 @@ UsbIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -762,7 +762,7 @@ UsbGetDeviceDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -775,7 +775,7 @@ UsbGetDeviceDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -829,7 +829,7 @@ UsbGetConfigDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -842,7 +842,7 @@ UsbGetConfigDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -896,7 +896,7 @@ UsbGetInterfaceDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -909,7 +909,7 @@ UsbGetInterfaceDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -963,7 +963,7 @@ UsbGetEndpointDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -976,7 +976,7 @@ UsbGetEndpointDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -1040,7 +1040,7 @@ UsbPortResetConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1053,7 +1053,7 @@ UsbPortResetConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -1107,7 +1107,7 @@ UsbGetStringDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1120,7 +1120,7 @@ UsbGetStringDescriptorConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //

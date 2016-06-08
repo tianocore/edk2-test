@@ -107,7 +107,7 @@ BBTestGetInformationFunctionTest (
   Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     &StandardLib
+                     (VOID **) &StandardLib
                      );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -146,7 +146,7 @@ BBTestSetInformationFunctionTest (
   Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     &StandardLib
+                     (VOID **) &StandardLib
                      );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -185,7 +185,7 @@ BBTestGetSupportedTypesFunctionTest (
   Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     &StandardLib
+                     (VOID **) &StandardLib
                      );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -364,7 +364,7 @@ BBTestSetInformationFunctionTestCheckpoint1 (
     Status = AdapterInfo->GetInformation(
                               AdapterInfo,
                               InfoType,
-                              &InformationBlockGet1,
+                              (VOID **) &InformationBlockGet1,
                               &InformationBlockSize1
                               );
     
@@ -439,7 +439,7 @@ BBTestSetInformationFunctionTestCheckpoint1 (
       Status = AdapterInfo->GetInformation(
                                 AdapterInfo,
                                 InfoType,
-                                &InformationBlockGet2,
+                                (VOID **) &InformationBlockGet2,
                                 &InformationBlockSize2
                                 );
       

@@ -137,7 +137,7 @@ Returns:
   *BSCreateEventStatus = BootService->CreateEvent (
                                         BSCreateEventType,
                                         BSCreateEventNotifyTpl,
-                                        BSNotifyFunctionList[BSCreateEventNotifyFunction],
+                                        (EFI_EVENT_NOTIFY) BSNotifyFunctionList[BSCreateEventNotifyFunction],
                                         BSCreateEventNotifyContext,
                                         BSCreateEventEvent
                                         );

@@ -171,7 +171,7 @@ GetFloppyDevicePath (
     Status = gtBS->HandleProtocol (
                      Buffer[Index],
                      &gEfiDevicePathProtocolGuid,
-                     &DevicePath
+                     (VOID **) &DevicePath
                  );
     RemainPath = DevicePath;
     LastNode = DevicePath;

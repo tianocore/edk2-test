@@ -126,7 +126,7 @@ PciRead_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -139,7 +139,7 @@ PciRead_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -811,7 +811,7 @@ PciWrite_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -824,7 +824,7 @@ PciWrite_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1554,7 +1554,7 @@ CopyMem_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1567,7 +1567,7 @@ CopyMem_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2300,7 +2300,7 @@ Map_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2832,7 +2832,7 @@ Map_Func (
                            AllocateAnyPages,
                            EfiBootServicesData,
                            2,
-                           &Buffer,
+                           (VOID **) &Buffer,
                            0
                            );
 
@@ -3074,7 +3074,7 @@ Map_Func (
                            AllocateAnyPages,
                            EfiBootServicesData,
                            2,
-                           &Buffer,
+                           (VOID **) &Buffer,
                            0
                            );
 
@@ -3346,7 +3346,7 @@ Unmap_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -3794,7 +3794,7 @@ Unmap_Func (
                            AllocateAnyPages,
                            EfiBootServicesData,
                            2,
-                           &Buffer,
+                           (VOID **) &Buffer,
                            0
                            );
 
@@ -3960,7 +3960,7 @@ Unmap_Func (
                            AllocateAnyPages,
                            EfiBootServicesData,
                            2,
-                           &Buffer,
+                           (VOID **) &Buffer,
                            0
                            );
 
@@ -4186,7 +4186,7 @@ AllocateBuffer_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4225,7 +4225,7 @@ AllocateBuffer_Func (
                                AllocateType,
                                MemoryType[MemoryTypeNum],
                                2,
-                               &Buffer,
+                               (VOID **) &Buffer,
                                Attributes[AttributesNum]
                                );
       //
@@ -4366,7 +4366,7 @@ FreeBuffer_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4405,7 +4405,7 @@ FreeBuffer_Func (
                                AllocateType,
                                MemoryType[MemoryTypeNum],
                                2,
-                               &Buffer,
+                               (VOID **) &Buffer,
                                Attributes[AttributesNum]
                                );
       //
@@ -4519,7 +4519,7 @@ Flush_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4618,7 +4618,7 @@ GetAttributes_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4867,7 +4867,7 @@ SetAttributes_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -5181,7 +5181,7 @@ Configuration_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

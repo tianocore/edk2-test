@@ -2079,7 +2079,7 @@ AllocateBuffer_Conf (
                          AllocateAnyPages,
                          InvalidMemoryType[Index],
                          1,
-                         &HostAddress
+                         (VOID **) &HostAddress
                          );
 
     //
@@ -2216,7 +2216,7 @@ AllocateBuffer_Conf (
                          AllocateAddress,
                          EfiBootServicesData,
                          1,
-                         &BaseAddress
+                         (VOID **) &BaseAddress
                          );
 
     if (Status == EFI_UNSUPPORTED) {
@@ -2323,7 +2323,7 @@ FreeBuffer_Conf (
   //
   //these check points are added after the EFI 1.10 spec has been updated.
   //call FreeBuffer with a Physical address that is not allocted from
-  //AllocateBuffer() it will return EFI_NOT_FOUND.
+    //AllocateBuffer() it will return EFI_NOT_FOUND.
   //
   //
   //first call allocatebuffer allocate 5 pages.
@@ -2335,7 +2335,7 @@ FreeBuffer_Conf (
                        AllocateAnyPages,
                        EfiBootServicesData,
                        AllocatedPages,
-                       &HostAddress
+                       (VOID **) &HostAddress
                        );
 
   if (!EFI_ERROR(Status)) {

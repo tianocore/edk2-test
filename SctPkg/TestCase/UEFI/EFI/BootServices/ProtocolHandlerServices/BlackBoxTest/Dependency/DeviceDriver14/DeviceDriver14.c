@@ -191,7 +191,7 @@ DeviceDriver14BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -219,7 +219,7 @@ DeviceDriver14BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE | EFI_OPEN_PROTOCOL_BY_DRIVER

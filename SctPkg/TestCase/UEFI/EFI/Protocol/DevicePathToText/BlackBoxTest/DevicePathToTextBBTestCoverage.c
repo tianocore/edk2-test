@@ -255,7 +255,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -265,7 +265,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathUtilitiesProtocolGuid,
                   NULL,
-                  &DevicePathUtilities
+                  (VOID **) &DevicePathUtilities
                   );
   if (EFI_ERROR (Status)) {
     return Status;

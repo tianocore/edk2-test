@@ -131,7 +131,7 @@ InitializeBootServicesDriver1 (
   gtBS->OpenProtocol (
           mPrivateData.OpenHandle,
           &mImageTestNoInterfaceProtocol2Guid,
-          NULL,
+          (VOID **) NULL,
           ImageHandle,
           NULL,
           EFI_OPEN_PROTOCOL_TEST_PROTOCOL

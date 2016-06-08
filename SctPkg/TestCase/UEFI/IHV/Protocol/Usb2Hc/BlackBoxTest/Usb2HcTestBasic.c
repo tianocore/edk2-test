@@ -372,7 +372,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -384,7 +384,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -444,7 +444,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -456,7 +456,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -540,7 +540,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -552,7 +552,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -622,7 +622,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -634,7 +634,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -734,7 +734,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -746,7 +746,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -821,7 +821,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -833,7 +833,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -903,7 +903,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -915,7 +915,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -990,7 +990,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1002,7 +1002,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //
@@ -1087,7 +1087,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1099,7 +1099,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   //

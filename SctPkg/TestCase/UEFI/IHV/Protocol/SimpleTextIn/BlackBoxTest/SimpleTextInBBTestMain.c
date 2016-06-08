@@ -181,7 +181,7 @@ InitializeBBTestSimpleTextIn (
   EfiInitializeTestLib (ImageHandle, SystemTable);
   SctInitializeLib (ImageHandle, SystemTable);
 
-  gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
 
   return EfiInitAndInstallIHVBBTestInterface (
               &ImageHandle,
@@ -278,7 +278,7 @@ LocateDevicePathFromSimpleTextIn (
       Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiSimpleTextInProtocolGuid,
-                        &OtherSimpleIn
+                        (VOID **) &OtherSimpleIn
                         );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -315,7 +315,7 @@ LocateDevicePathFromSimpleTextIn (
   Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiDevicePathProtocolGuid,
-                      DevicePath
+                      (VOID **) DevicePath
                       );
 
   gtBS->FreePool (HandleBuffer);
