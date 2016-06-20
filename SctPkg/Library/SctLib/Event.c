@@ -88,7 +88,7 @@ SctWaitForSingleEvent (
     //
     // Create a timer event
     //
-    Status = tBS->CreateEvent (EFI_EVENT_TIMER, 0, NULL, NULL, &TimerEvent);
+    Status = tBS->CreateEvent (EFI_EVENT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
     if (!EFI_ERROR(Status)) {
 
       //

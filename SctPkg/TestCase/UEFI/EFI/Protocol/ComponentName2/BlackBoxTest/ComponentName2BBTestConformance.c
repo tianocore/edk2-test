@@ -139,7 +139,7 @@ BBTestGetDriverNameConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -185,7 +185,7 @@ BBTestGetControllerNameConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1158,7 +1158,7 @@ FindMatchedDeviceHandle (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiComponentName2ProtocolGuid,
-                     &TestedComponentName
+                     (VOID **) &TestedComponentName
                      );
     if (EFI_ERROR(Status)) {
       continue;
@@ -1240,7 +1240,7 @@ FindMatchedBusHandle (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiComponentName2ProtocolGuid,
-                     &TestedComponentName
+                     (VOID **) &TestedComponentName
                      );
     if (EFI_ERROR(Status)) {
       continue;

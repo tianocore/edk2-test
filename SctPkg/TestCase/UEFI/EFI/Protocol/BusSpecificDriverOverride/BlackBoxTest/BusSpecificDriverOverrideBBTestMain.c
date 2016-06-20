@@ -131,7 +131,7 @@ InitializeBBTestBusSpecificDriverOverride (
   SctInitializeLib (ImageHandle, SystemTable);
 
 
-  Status = gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  Status = gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   if (EFI_ERROR(Status)) {
 
   }
@@ -235,7 +235,7 @@ LocateDevicePathFromBusOverride (
       Status = gtBS->HandleProtocol (
                        HandleBuffer[Index],
                        &gBlackBoxEfiBusSpecificDriverOverrideProtocolGuid,
-                       &OtherBusOverride
+                       (VOID **) &OtherBusOverride
                        );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -274,7 +274,7 @@ LocateDevicePathFromBusOverride (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gEfiDevicePathProtocolGuid,
-                   DevicePath
+                   (VOID **) DevicePath
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (

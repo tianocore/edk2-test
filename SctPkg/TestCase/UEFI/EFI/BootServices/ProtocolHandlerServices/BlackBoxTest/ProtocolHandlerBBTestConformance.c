@@ -2324,7 +2324,7 @@ BBTestHandleProtocolConsistencyTest (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   NULL
+                   (VOID **) NULL
                    );
   //
   // step 1: check return status
@@ -2496,7 +2496,7 @@ BBTestLocateProtocolConsistencyTest (
   Status = gtBS->LocateProtocol (
                    &mTestProtocol1Guid,
                    NULL,
-                   NULL
+                   (VOID **) NULL
                    );
   //
   // step 1: check return status
@@ -3339,7 +3339,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    InvalidHandle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -3349,7 +3349,7 @@ BBTestOpenProtocolConsistencyTest (
   Status1 = gtBS->OpenProtocol (
                     NULL,
                     &mTestProtocol1Guid,
-                    &TestProtocol1,
+                    (VOID **) &TestProtocol1,
                     mImageHandle,
                     NULL,
                     EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -3380,7 +3380,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    NULL,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -3412,7 +3412,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   NULL,
+                   (VOID **) NULL,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -3444,7 +3444,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    InvalidAttributes
@@ -3483,7 +3483,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    InvalidHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -3498,7 +3498,7 @@ BBTestOpenProtocolConsistencyTest (
   Status1 = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    NULL,
                    NULL,
                    EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -3535,7 +3535,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    InvalidHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -3571,7 +3571,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    InvalidHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -3607,7 +3607,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    InvalidHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -3644,7 +3644,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    InvalidHandle,
                    EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -3680,7 +3680,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    InvalidHandle,
                    EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -3717,7 +3717,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    InvalidHandle,
                    EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -3754,7 +3754,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    Handle,
                    EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -3795,7 +3795,7 @@ BBTestOpenProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol2Guid,
-                   &TestProtocol2,
+                   (VOID **) &TestProtocol2,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -3942,7 +3942,7 @@ BBTestCloseProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -4006,7 +4006,7 @@ BBTestCloseProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -4069,7 +4069,7 @@ BBTestCloseProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    Handle,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -4124,7 +4124,7 @@ BBTestCloseProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -4177,7 +4177,7 @@ BBTestCloseProtocolConsistencyTest (
   Status = gtBS->OpenProtocol (
                    Handle,
                    &mTestProtocol1Guid,
-                   &TestProtocol1,
+                   (VOID **) &TestProtocol1,
                    mImageHandle,
                    NULL,
                    EFI_OPEN_PROTOCOL_GET_PROTOCOL

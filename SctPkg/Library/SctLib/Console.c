@@ -467,7 +467,7 @@ SctStallForKey (
   Status = tBS->CreateEvent (
                  EFI_EVENT_TIMER,
                  0,
-                 NULL,
+                 (EFI_EVENT_NOTIFY) NULL,
                  NULL,
                  &TimerEvent
                  );

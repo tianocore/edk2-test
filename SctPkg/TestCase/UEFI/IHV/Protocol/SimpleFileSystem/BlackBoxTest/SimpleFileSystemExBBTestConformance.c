@@ -188,7 +188,7 @@ BBTestOpenExConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -248,7 +248,7 @@ BBTestWriteExConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -310,7 +310,7 @@ BBTestFlushExConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -362,7 +362,7 @@ BBTestReadExConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -457,7 +457,7 @@ BBTestOpenExConformanceTestCheckpoint1 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &FileIoFinished,
                    &FileIoTokenAsync.Event
                    );
@@ -639,7 +639,7 @@ BBTestOpenExConformanceTestCheckpoint2 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &FileIoFinished,
                    &FileIoTokenAsync.Event
                    );
@@ -856,7 +856,7 @@ BBTestOpenExConformanceTestCheckpoint3 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &FileIoFinished,
                    &FileIoTokenAsync.Event
                    );
@@ -1046,7 +1046,7 @@ BBTestWriteExConformanceTestCheckpoint1 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &FileIoFinished,
                    &FileIoTokenAsync.Event
                    );
@@ -1213,7 +1213,7 @@ BBTestWriteExConformanceTestCheckpoint2 (
  Status = gtBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunc,
+                  (EFI_EVENT_NOTIFY) NotifyFunc,
                   &FileIoFinished,
                   &FileIoTokenAsync.Event
                   );
@@ -1428,7 +1428,7 @@ BBTestWriteExConformanceTestCheckpoint3 (
  Status = gtBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunc,
+                  (EFI_EVENT_NOTIFY) NotifyFunc,
                   &FileIoFinished,
                   &FileIoTokenAsync.Event
                   );
@@ -1628,7 +1628,7 @@ BBTestFlushExConformanceTestCheckpoint1 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &FileIoFinished,
                    &FileIoTokenAsync.Event
                    );
@@ -1842,7 +1842,7 @@ BBTestReadExConformanceTestCheckpoint1 (
  Status = gtBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunc,
+                  (EFI_EVENT_NOTIFY) NotifyFunc,
                   &FileIoFinished,
                   &FileIoTokenAsync.Event
                   );
@@ -2059,7 +2059,7 @@ BBTestReadExConformanceTestCheckpoint2 (
  Status = gtBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunc,
+                  (EFI_EVENT_NOTIFY) NotifyFunc,
                   &FileIoFinished,
                   &FileIoTokenAsync.Event
                   );

@@ -115,7 +115,7 @@ BBTestReadBlocksConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -751,7 +751,7 @@ BBTestReadBlocksConformanceManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -826,7 +826,7 @@ BBTestReadBlocksConformanceManualTest (
   //
   // allocate buffer
   //
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1190,7 +1190,7 @@ BBTestWriteBlocksConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1917,7 +1917,7 @@ BBTestWriteBlocksConformanceManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1992,7 +1992,7 @@ BBTestWriteBlocksConformanceManualTest (
   //
   // allocate buffer
   //
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2555,7 +2555,7 @@ BBTestFlushBlocksConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2597,7 +2597,7 @@ BBTestFlushBlocksConformanceAutoTest (
   //
   // allocate buffer
   //
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,

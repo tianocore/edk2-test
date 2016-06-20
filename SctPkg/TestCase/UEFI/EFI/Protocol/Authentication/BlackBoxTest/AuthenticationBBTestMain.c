@@ -129,7 +129,7 @@ InitializeAuthenticationTest (
   //
   //ASSERT_PROTOCOL_ALREADY_INSTALLED (NULL, &);  
   
-  Status = gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  Status = gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -190,7 +190,7 @@ BBTestAuthenticationFunctionTestA (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status))
   {
@@ -202,7 +202,7 @@ BBTestAuthenticationFunctionTestA (
   Status = gtBS->LocateProtocol (
                    &gEfiTestLoggingLibraryGuid,
                    NULL,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
   if (EFI_ERROR(Status))
   {
@@ -261,7 +261,7 @@ BBTestAuthenticationFunctionTestB (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status))
   {
@@ -273,7 +273,7 @@ BBTestAuthenticationFunctionTestB (
   Status = gtBS->LocateProtocol (
                    &gEfiTestLoggingLibraryGuid,
                    NULL,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
   if (EFI_ERROR(Status))
   {

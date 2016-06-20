@@ -368,7 +368,7 @@ GetDevicePath (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiHIIConfigAccessProtocolGuid,
-                     &TestedConfigAccess
+                     (VOID **) &TestedConfigAccess
                      );
     if (EFI_ERROR(Status)) {
       continue;
@@ -570,7 +570,7 @@ GetHIIConfigRoutingInterface (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiHIIConfigRoutingProtocolGuid,
-                   HIIConfigRouting
+                   (VOID **) HIIConfigRouting
                    );
   if ( EFI_ERROR(Status) ) {
     gtBS->FreePool ( HandleBuffer );

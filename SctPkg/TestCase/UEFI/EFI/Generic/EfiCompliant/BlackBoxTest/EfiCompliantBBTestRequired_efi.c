@@ -134,7 +134,7 @@ Routine Description:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -649,7 +649,7 @@ CheckLoadedImageProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiLoadedImageProtocolGuid,
                    NULL,
-                   &LoadedImage
+                   (VOID **) &LoadedImage
                    );
 
   if (!EFI_ERROR (Status)) {
@@ -697,7 +697,7 @@ CheckDevicePathProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiDevicePathProtocolGuid,
                    NULL,
-                   &DevicePath
+                   (VOID **) &DevicePath
                    );
 
   if (!EFI_ERROR (Status)) {
@@ -739,7 +739,7 @@ CheckDecompressProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiDecompressProtocolGuid,
                    NULL,
-                   &Decompress
+                   (VOID **) &Decompress
                    );
 
   if ((Status                 == EFI_SUCCESS) &&
@@ -797,7 +797,7 @@ CheckEbcProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiEbcProtocolGuid,
                    NULL,
-                   &Ebc
+                   (VOID **) &Ebc
                    );
 
   if ((Status                   == EFI_SUCCESS) &&

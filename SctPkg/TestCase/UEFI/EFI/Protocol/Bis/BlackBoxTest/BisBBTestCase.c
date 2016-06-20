@@ -105,7 +105,7 @@ BBTestManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -554,7 +554,7 @@ BBTestManualTest (
   Status = ReadFloppyFile (
              CREDENTIAL_FILE_NAME,
              &RequestCredential.Length,
-             &RequestCredential.Data
+             (VOID **) &RequestCredential.Data
              );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordMessage (
@@ -650,7 +650,7 @@ BBTestManualTest (
   Status = ReadFloppyFile (
              CREDENTIAL_FILE_NAME,
              &RequestCredential.Length,
-             &RequestCredential.Data
+             (VOID **) &RequestCredential.Data
              );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordMessage (
@@ -804,7 +804,7 @@ BBTestManualTest (
     Status = ReadFloppyFile (
                CREDENTIAL_FILE_NAME,
                &RequestCredential.Length,
-               &RequestCredential.Data
+               (VOID **) &RequestCredential.Data
                );
     if (EFI_ERROR(Status)) {
       StandardLib->RecordMessage (
@@ -1018,7 +1018,7 @@ BBTestManualTest (
   Status = ReadFloppyFile (
              CREDENTIAL_FILE_NAME,
              &RequestCredential.Length,
-             &RequestCredential.Data
+             (VOID **) &RequestCredential.Data
              );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordMessage (
@@ -1035,7 +1035,7 @@ BBTestManualTest (
     Status = ReadFloppyFile (
                DATA_FILE_NAME,
                &DataObject.Length,
-               &DataObject.Data
+               (VOID **) &DataObject.Data
                );
     if (EFI_ERROR(Status)) {
       StandardLib->RecordMessage (
@@ -1169,7 +1169,7 @@ BBTestManualTest (
     Status = ReadFloppyFile (
                CREDENTIAL_FILE_NAME,
                &RequestCredential.Length,
-               &RequestCredential.Data
+               (VOID **) &RequestCredential.Data
                );
     if (EFI_ERROR(Status)) {
       StandardLib->RecordMessage (
@@ -1186,7 +1186,7 @@ BBTestManualTest (
       Status = ReadFloppyFile (
                  DATA_FILE_NAME,
                  &DataObject.Length,
-                 &DataObject.Data
+                 (VOID **) &DataObject.Data
                  );
       if (EFI_ERROR(Status)) {
         StandardLib->RecordMessage (
@@ -1243,7 +1243,7 @@ BBTestManualTest (
   Status = ReadFloppyFile (
              CREDENTIAL_FILE_NAME,
              &RequestCredential.Length,
-             &RequestCredential.Data
+             (VOID **) &RequestCredential.Data
              );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordMessage (
@@ -1260,7 +1260,7 @@ BBTestManualTest (
     Status = ReadFloppyFile (
                CERTIFICATE_FILE_NAME,
                &AuthorityCertificate.Length,
-               &AuthorityCertificate.Data
+               (VOID **) &AuthorityCertificate.Data
                );
     if (EFI_ERROR(Status)) {
       StandardLib->RecordMessage (
@@ -1277,7 +1277,7 @@ BBTestManualTest (
       Status = ReadFloppyFile (
                  DATA_FILE_NAME,
                  &DataObject.Length,
-                 &DataObject.Data
+                 (VOID **) &DataObject.Data
                  );
       if (EFI_ERROR(Status)) {
         StandardLib->RecordMessage (
@@ -1474,7 +1474,7 @@ BBTestManualTest (
     Status = ReadFloppyFile (
                CREDENTIAL_FILE_NAME,
                &RequestCredential.Length,
-               &RequestCredential.Data
+               (VOID **) &RequestCredential.Data
                );
     if (EFI_ERROR(Status)) {
       StandardLib->RecordMessage (
@@ -1491,7 +1491,7 @@ BBTestManualTest (
       Status = ReadFloppyFile (
                  CERTIFICATE_FILE_NAME,
                  &AuthorityCertificate.Length,
-                 &AuthorityCertificate.Data
+                 (VOID **) &AuthorityCertificate.Data
                  );
       if (EFI_ERROR(Status)) {
         StandardLib->RecordMessage (
@@ -1508,7 +1508,7 @@ BBTestManualTest (
         Status = ReadFloppyFile (
                    DATA_FILE_NAME,
                    &DataObject.Length,
-                   &DataObject.Data
+                   (VOID **) &DataObject.Data
                    );
         if (EFI_ERROR(Status)) {
           StandardLib->RecordMessage (
@@ -1570,7 +1570,7 @@ BBTestManualTest (
   Status = ReadFloppyFile (
              CREDENTIAL_FILE_NAME,
              &RequestCredential.Length,
-             &RequestCredential.Data
+             (VOID **) &RequestCredential.Data
              );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordMessage (

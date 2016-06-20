@@ -103,7 +103,7 @@ BBTestGetInfoConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                  );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -150,7 +150,7 @@ BBTestMatchStringConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                  );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -331,7 +331,7 @@ BBTestMatchStringConformanceTestCheckpoint1 (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    SyntaxTypeListSize,
-                   (VOID **)&RegExSyntaxTypeList2
+                   (VOID **) &RegExSyntaxTypeList2
                  );
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (

@@ -253,13 +253,13 @@ Returns:
     tBS->HandleProtocol (
           HandleBuffer[HANDLE_IN_USE - 1],
           &gEfiSerialIoProtocolGuid,
-          &SerialIo
+          (VOID **) &SerialIo
           );
   } else {
     Status = tBS->LocateProtocol (
                     &gEfiSerialIoProtocolGuid,
                     NULL,
-                    &SerialIo
+                    (VOID **) &SerialIo
                     );
     if (EFI_ERROR (Status)) {
       return Status;

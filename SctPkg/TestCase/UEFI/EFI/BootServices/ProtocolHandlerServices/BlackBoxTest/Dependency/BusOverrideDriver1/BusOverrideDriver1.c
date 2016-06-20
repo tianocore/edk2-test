@@ -217,7 +217,7 @@ BusOverrideDriver1BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mTestNoInterfaceProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -245,7 +245,7 @@ BusOverrideDriver1BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mTestNoInterfaceProtocol2Guid,
-                     &ProtInstance,
+                     (VOID **) &ProtInstance,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -280,7 +280,7 @@ BusOverrideDriver1BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mTestNoInterfaceProtocol2Guid,
-                     &ProtInstance,
+                     (VOID **) &ProtInstance,
                      This->DriverBindingHandle,
                      PrivateData->ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -418,7 +418,7 @@ LoadAndStartImage (
   Status = gtBS->HandleProtocol (
                       CurrentImageHandle,
                       &gEfiLoadedImageProtocolGuid,
-                      &LoadImage
+                      (VOID **) &LoadImage
                       );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -432,7 +432,7 @@ LoadAndStartImage (
   Status = gtBS->LocateProtocol (
                    &gEfiTestProfileLibraryGuid,
                    NULL,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

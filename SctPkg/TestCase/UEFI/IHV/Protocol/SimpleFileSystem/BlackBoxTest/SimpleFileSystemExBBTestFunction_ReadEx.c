@@ -174,7 +174,7 @@ FileIoAsyncReadData (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIo_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -185,7 +185,7 @@ FileIoAsyncReadData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoReadNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoReadNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -293,7 +293,7 @@ FileIoAsyncReadDir (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoDir_Task), 
-                   &FileIoReadDirEntity);
+                   (VOID **) &FileIoReadDirEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -303,7 +303,7 @@ FileIoAsyncReadDir (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    BufferSize, 
-                   &FileIoReadDirEntity->FileIoToken.Buffer
+                   (VOID **) &FileIoReadDirEntity->FileIoToken.Buffer
                    );
   if (EFI_ERROR (Status)) {
     gtBS->FreePool(FileIoReadDirEntity);
@@ -315,7 +315,7 @@ FileIoAsyncReadDir (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoReadDirNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoReadDirNotifyFunc,
                    FileIoReadDirEntity,
                    &FileIoReadDirEntity->FileIoToken.Event
                    );
@@ -414,7 +414,7 @@ BBTestReadExBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

@@ -386,7 +386,7 @@ Returns:
   Status = tBS->HandleProtocol (
                   ControllerHandle,
                   &gEfiManagedNetworkServiceBindingProtocolGuid,
-                  &MnpSb
+                  (VOID **) &MnpSb
                   );
   if (EFI_ERROR (Status)) {
   	return Status;
@@ -411,7 +411,7 @@ Returns:
   Status = tBS->OpenProtocol (
                   mMnpInstanceHandle,
                   &gEfiManagedNetworkProtocolGuid,
-                  &Mnp,
+                  (VOID **) &Mnp,
                   mImageHandle,
                   mMnpInstanceHandle,
                   EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -1020,7 +1020,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunctionListen,
+                  (EFI_EVENT_NOTIFY) NotifyFunctionListen,
                   NULL,
                   &RxToken.Event
                   );
@@ -1038,7 +1038,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunctionSend,
+                  (EFI_EVENT_NOTIFY) NotifyFunctionSend,
                   &Context,
                   &TxToken.Event
                   );
@@ -1050,7 +1050,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunctionSend,
+                  (EFI_EVENT_NOTIFY) NotifyFunctionSend,
                   &Context,
                   &TxLLToken.Event
                   );
@@ -1062,7 +1062,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_TIMER | EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  ReSendTimer,
+                  (EFI_EVENT_NOTIFY) ReSendTimer,
                   NULL,
                   &ResendTimeEvent
                   );

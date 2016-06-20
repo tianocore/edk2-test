@@ -83,7 +83,7 @@ BBTestGetConformanceTest (
   Status1 = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status1) ) {
     return Status1;
@@ -174,7 +174,7 @@ BBTestSetConformanceTest (
   Status[0] = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status[0]) ) {
     return Status[0];

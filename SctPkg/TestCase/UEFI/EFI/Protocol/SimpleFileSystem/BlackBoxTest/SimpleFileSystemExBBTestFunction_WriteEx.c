@@ -211,7 +211,7 @@ FileIoAsyncWriteOneFile(
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoWrite_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -222,7 +222,7 @@ FileIoAsyncWriteOneFile(
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoWriteOneFileNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoWriteOneFileNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -344,7 +344,7 @@ FileIoAsyncWriteMultiFiles (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoWrite_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -355,7 +355,7 @@ FileIoAsyncWriteMultiFiles (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoWriteMultiFilesNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoWriteMultiFilesNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -444,7 +444,7 @@ BBTestWriteExBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1090,7 +1090,7 @@ BBTestWriteExBasicTestCheckpoint2 (
             // file size grows
             //
             FileInfo = NULL;
-            Status = InternalGetInfoFileIo2 (FileHandle, &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
+            Status = InternalGetInfoFileIo2 (FileHandle, (VOID **) &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
             if (EFI_ERROR (Status)) {
               StandardLib->RecordAssertion (
                              StandardLib,
@@ -1424,7 +1424,7 @@ BBTestWriteExBasicTestCheckpoint3 (
             // file size grows
             //
             FileInfo = NULL;
-            Status = InternalGetInfoFileIo2 (FileIoEntity->FileIo, &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
+            Status = InternalGetInfoFileIo2 (FileIoEntity->FileIo, (VOID **) &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
             if (EFI_ERROR (Status)) {
               StandardLib->RecordAssertion (
                              StandardLib,
@@ -1847,7 +1847,7 @@ BBTestWriteExBasicTestCheckpoint4 (
           // file size grows
           //
           FileInfo = NULL;
-          Status = InternalGetInfoFileIo2 (FileHandle[Index], &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
+          Status = InternalGetInfoFileIo2 (FileHandle[Index], (VOID **) &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
           if (EFI_ERROR (Status)) {
             StandardLib->RecordAssertion (
                            StandardLib,
@@ -2031,7 +2031,7 @@ InternalSetFileSizeFileIo2 (
   UINTN         BufferSize;
   EFI_STATUS    Status;
 
-  Status = InternalGetInfoFileIo2 (FileHandle, &InfoBuffer, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfoFileIo2 (FileHandle, (VOID **) &InfoBuffer, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     return Status;
   }

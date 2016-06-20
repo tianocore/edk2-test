@@ -192,7 +192,7 @@ DeviceDriver3BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol3Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -220,7 +220,7 @@ DeviceDriver3BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER

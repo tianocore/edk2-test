@@ -247,7 +247,7 @@ PlatformOverrideDriver1BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mTestNoInterfaceProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -277,7 +277,7 @@ PlatformOverrideDriver1BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mTestNoInterfaceProtocol1Guid,
-                     &ProtInstance,
+                     (VOID **) &ProtInstance,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -319,7 +319,7 @@ PlatformOverrideDriver1BindingStart (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[0],
                      &gEfiPlatformDriverOverrideProtocolGuid,
-                     &PrivateData->OrigPlatformOverride
+                     (VOID **) &PrivateData->OrigPlatformOverride
                      );
     if (EFI_ERROR (Status)) {
       return Status;
@@ -476,7 +476,7 @@ PlatformOverrideDriver1GetDriver (
   Status = gtBS->OpenProtocol (
                       ControllerHandle,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       PrivateData->DriverBinding.DriverBindingHandle,
                       ControllerHandle,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -515,7 +515,7 @@ PlatformOverrideDriver1GetDriverPath (
   Status = gtBS->OpenProtocol (
                       ControllerHandle,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       PrivateData->DriverBinding.DriverBindingHandle,
                       ControllerHandle,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -557,7 +557,7 @@ PlatformOverrideDriver1DriverLoaded (
   Status = gtBS->OpenProtocol (
                       ControllerHandle,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       PrivateData->DriverBinding.DriverBindingHandle,
                       ControllerHandle,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -599,7 +599,7 @@ ComposeFilePath (
   Status = gtBS->HandleProtocol (
                       CurrentImageHandle,
                       &gEfiLoadedImageProtocolGuid,
-                      &LoadImage
+                      (VOID **) &LoadImage
                       );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -613,7 +613,7 @@ ComposeFilePath (
   Status = gtBS->LocateProtocol (
                    &gEfiTestProfileLibraryGuid,
                    NULL,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

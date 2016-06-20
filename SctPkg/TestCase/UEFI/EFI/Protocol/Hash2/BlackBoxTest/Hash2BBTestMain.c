@@ -245,8 +245,8 @@ Hash2ServiceBindingCreateChild (
     Status = gtBS->LocateProtocol(
                      &gBlackBoxEfiHash2ServiceBindingProtocolGuid,
                      NULL,
-                     &Hash2Sb
-                     );	
+                     (VOID **) &Hash2Sb
+                     );
 	
     if (EFI_ERROR (Status)) 
       return Status;

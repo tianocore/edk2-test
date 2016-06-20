@@ -75,7 +75,7 @@ NetDbgGetCfg (
     Status = tBS->LocateProtocol (
                     &gEfiNetDebugConfigProtocolGuid,
                     NULL,
-                    &NetDebugConfigProtocol
+                    (VOID **) &NetDebugConfigProtocol
                     );
     if (EFI_ERROR (Status)) {
       return NULL;
@@ -132,7 +132,7 @@ NetDbgCheck (
     Status = tBS->LocateProtocol (
                     &gEfiNetDebugConfigProtocolGuid,
                     NULL,
-                    &NetDebugConfigProtocol
+                    (VOID **) &NetDebugConfigProtocol
                     );
     if (EFI_ERROR (Status)) {
       return FALSE;
@@ -157,7 +157,7 @@ NetDbgAssert (
     Status = tBS->LocateProtocol (
                     &gEfiNetDebugConfigProtocolGuid,
                     NULL,
-                    &NetDebugConfigProtocol
+                    (VOID **) &NetDebugConfigProtocol
                     );
     if (EFI_ERROR (Status)) {
       return -1;
@@ -200,7 +200,7 @@ NetDbgOutput (
     Status = tBS->LocateProtocol (
                     &gEfiNetDebugConfigProtocolGuid,
                     NULL,
-                    &NetDebugConfigProtocol
+                    (VOID **) &NetDebugConfigProtocol
                     );
     if (EFI_ERROR (Status)) {
       tBS->FreePool (Description);
@@ -244,7 +244,7 @@ NetDbgSPrint (
     Status = tBS->LocateProtocol (
                     &gEfiNetDebugConfigProtocolGuid,
                     NULL,
-                    &NetDebugConfigProtocol
+                    (VOID **) &NetDebugConfigProtocol
                     );
     if (EFI_ERROR (Status)) {
       return NULL;
@@ -283,7 +283,7 @@ AllocatePoolDbg (
     Status = tBS->LocateProtocol (
                     &gEfiNetDebugConfigProtocolGuid,
                     NULL,
-                    &NetDebugConfigProtocol
+                    (VOID **) &NetDebugConfigProtocol
                     );
 
     if (EFI_ERROR (Status)) {

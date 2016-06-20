@@ -1291,7 +1291,7 @@ Returns:
           Status = tBS->HandleProtocol (
                         Interface->ClientHandle,
                         Interface->ClientGuid,
-                        &Interface->ClientInterface
+                        (VOID **) &Interface->ClientInterface
                         );
           if (EFI_ERROR (Status)) {
             EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Handle protocol - %r", Status));
@@ -1309,7 +1309,7 @@ Returns:
         Status = tBS->HandleProtocol (
                        Interface->ClientHandle,
                        Interface->ClientGuid,
-                       &Interface->ClientInterface
+                       (VOID **) &Interface->ClientInterface
                        );
         if (EFI_ERROR(Status)) {
           EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"HandleProtocol Error - %r", Status));

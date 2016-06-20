@@ -162,7 +162,7 @@ DiskIo2AsyncFlushData (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(DiskIO2_Task), 
-                   &DiskIo2Entity);
+                   (VOID **) &DiskIo2Entity);
   if (EFI_ERROR(Status) ) {
     return Status;
   }
@@ -172,7 +172,7 @@ DiskIo2AsyncFlushData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2FlushNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2FlushNotifyFunc,
                    DiskIo2Entity,
                    &DiskIo2Entity->DiskIo2Token.Event
                    );
@@ -259,7 +259,7 @@ EFIAPI DiskIo2FlushBatchNotifyFunc (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     DiskIo2FlushBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) DiskIo2FlushBatchNotifyFunc,
                      TaskContext,
                      &DiskIo2Entity->DiskIo2Token.Event
                      );
@@ -345,7 +345,7 @@ DiskIo2AsyncBatchFlush (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(DiskIO2_Batch_Task_Context), 
-                     &TaskContext
+                     (VOID **) &TaskContext
                      );
     if (TaskContext == NULL) {
       return EFI_OUT_OF_RESOURCES;
@@ -364,7 +364,7 @@ DiskIo2AsyncBatchFlush (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     DiskIo2FlushBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) DiskIo2FlushBatchNotifyFunc,
                      TaskContext,
                      &DiskIo2Entity->DiskIo2Token.Event
                      );
@@ -431,7 +431,7 @@ BBTestFlushDiskExFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   
   if (EFI_ERROR(Status)) {
@@ -487,7 +487,7 @@ BBTestFlushDiskExFunctionAutoTest (
      Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiDiskIo2ProtocolGuid,
-                      &DiskIo2Temp
+                      (VOID **) &DiskIo2Temp
                       );
     if (Status == EFI_SUCCESS && DiskIo2Temp == DiskIo2) {
        break;
@@ -1129,7 +1129,7 @@ BBTestFlushDiskExFunctionAutoTestCheckpoint3(
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2FinishNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2FinishNotifyFunc,
                    &AsyncBatchFlushFinished,
                    &BatchFlushToken.Event
                    );
@@ -1260,7 +1260,7 @@ BBTestFlushDiskExFunctionAutoTestCheckpoint3(
       Status = gtBS->AllocatePool(
                       EfiBootServicesData, 
                       sizeof(DiskIO2_Task), 
-                      &DiskIo2Entity
+                      (VOID **) &DiskIo2Entity
                       );
       if (Status != EFI_SUCCESS) {
         MemoryAllocFail = TRUE;

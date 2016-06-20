@@ -942,7 +942,7 @@ BBTestAllocatePoolConsistencyTest (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData, // invalid
                    1000,
-                   NULL
+                   (VOID **) NULL
                    );
   if (Status == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;

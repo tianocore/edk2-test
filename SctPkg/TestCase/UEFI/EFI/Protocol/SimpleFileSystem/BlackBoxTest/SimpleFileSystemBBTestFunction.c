@@ -235,7 +235,7 @@ BBTestOpenVolumeBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -285,7 +285,7 @@ BBTestOpenBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -342,7 +342,7 @@ BBTestCloseBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -392,7 +392,7 @@ BBTestDeleteBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -452,7 +452,7 @@ BBTestReadBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -507,7 +507,7 @@ BBTestWriteBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -557,7 +557,7 @@ BBTestFlushBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -612,7 +612,7 @@ BBTestSetPositionBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -667,7 +667,7 @@ BBTestGetPositionBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -718,7 +718,7 @@ BBTestGetInfoBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -788,7 +788,7 @@ BBTestSetInfoBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1557,7 +1557,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
     //
     // retrieve EFI_FILE_INFO
     //
-    Status = InternalGetInfo (Root, &FileInfo, &BufferSize, InfoType[0]);
+    Status = InternalGetInfo (Root, (VOID **) &FileInfo, &BufferSize, InfoType[0]);
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
@@ -1613,7 +1613,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
     // retrieve EFI_FILE_SYSTEM_INFO
     //
 
-    Status1 = InternalGetInfo (Root, &SystemInfo, &BufferSize, InfoType[1]);
+    Status1 = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, InfoType[1]);
     if (EFI_SUCCESS == Status1) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
@@ -1641,7 +1641,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
     //
     // retrieve EFI_FILE_SYSTEM_VOLUME_LABEL
     //
-    Status2 = InternalGetInfo (Root, &VolumeLabel, &BufferSize, InfoType[2]);
+    Status2 = InternalGetInfo (Root, (VOID **) &VolumeLabel, &BufferSize, InfoType[2]);
     if (EFI_SUCCESS == Status2) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
@@ -3087,7 +3087,7 @@ BBTestOpenBasicTestCheckpoint2_Test1 (
 
           Status = InternalGetInfo (
                      CreateFileHandle,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -3184,7 +3184,7 @@ BBTestOpenBasicTestCheckpoint2_Test1 (
           //
           Status = InternalGetInfo (
                      OpenFileHandle,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -3469,7 +3469,7 @@ BBTestOpenBasicTestCheckpoint2_Test2 (
 
             Status = InternalGetInfo (
                        CreateFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -3566,7 +3566,7 @@ BBTestOpenBasicTestCheckpoint2_Test2 (
             //
             Status = InternalGetInfo (
                        OpenFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -3823,7 +3823,7 @@ BBTestOpenBasicTestCheckpoint2_Test3 (
 
             Status = InternalGetInfo (
                        CreateFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -3920,7 +3920,7 @@ BBTestOpenBasicTestCheckpoint2_Test3 (
             //
             Status = InternalGetInfo (
                        OpenFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -4248,7 +4248,7 @@ BBTestOpenBasicTestCheckpoint2_Test4 (
 
             Status = InternalGetInfo (
                        CreateFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -4345,7 +4345,7 @@ BBTestOpenBasicTestCheckpoint2_Test4 (
             //
             Status = InternalGetInfo (
                        OpenFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -4714,7 +4714,7 @@ BBTestOpenBasicTestCheckpoint2_Test5 (
 
             Status = InternalGetInfo (
                        CreateFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -4811,7 +4811,7 @@ BBTestOpenBasicTestCheckpoint2_Test5 (
             //
             Status = InternalGetInfo (
                        OpenFileHandle,
-                       &FileInfo,
+                       (VOID **) &FileInfo,
                        &InfoBufferSize,
                        &gBlackBoxEfiFileInfoGuid
                        );
@@ -5256,7 +5256,7 @@ BBTestCloseBasicTestCheckpoint1 (
 
       Status3 = InternalGetInfo (
                   FileHandle[Index],
-                  &FileInfo,
+                  (VOID **) &FileInfo,
                   &InfoBufferSize,
                   &gBlackBoxEfiFileInfoGuid
                   );
@@ -5321,7 +5321,7 @@ BBTestCloseBasicTestCheckpoint1 (
 
     Status2 = InternalGetInfo (
                 DirHandle[1],
-                &FileInfo,
+                (VOID **) &FileInfo,
                 &InfoBufferSize,
                 &gBlackBoxEfiFileInfoGuid
                 );
@@ -6811,7 +6811,7 @@ BBTestWriteBasicTestCheckpoint1 (
       // file size grows
       //
       FileInfo = NULL;
-      Status = InternalGetInfo (FileHandle, &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
+      Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
       if (EFI_ERROR (Status)) {
         StandardLib->RecordAssertion (
                        StandardLib,
@@ -7952,7 +7952,7 @@ BBTestGetInfoBasicTestCheckpoint1 (
         // get info
         //
         OldTpl = gtBS->RaiseTPL (TplArray[Index]);
-        Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+        Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
         gtBS->RestoreTPL (OldTpl);
 
         //
@@ -8112,7 +8112,7 @@ BBTestGetInfoBasicTestCheckpoint2 (
     // get EFI_FILE info from the Root
     //
     OldTpl = gtBS->RaiseTPL (TplArray[Index]);
-    Status = InternalGetInfo (Root, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (Root, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
     gtBS->RestoreTPL (OldTpl);
 
     //
@@ -8275,7 +8275,7 @@ BBTestGetInfoBasicTestCheckpoint3 (
       OldTpl = gtBS->RaiseTPL (TplArray[Index]);
       Status = InternalGetInfo (
                  Root,
-                 &SystemInfo[InfoIndex],
+                 (VOID **) &SystemInfo[InfoIndex],
                  &BufferSize[InfoIndex],
                  &gBlackBoxEfiFileSystemInfoGuid
                  );
@@ -8469,7 +8469,7 @@ BBTestGetInfoBasicTestCheckpoint4 (
     OldTpl = gtBS->RaiseTPL (TplArray[Index]);
     Status = InternalGetInfo (
                Root,
-               &VolumeLabel,
+               (VOID **) &VolumeLabel,
                &VolumeLabelSize,
                &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid
                );
@@ -8508,7 +8508,7 @@ BBTestGetInfoBasicTestCheckpoint4 (
     //
     Status = InternalGetInfo (
                Root,
-               &SystemInfo,
+               (VOID **) &SystemInfo,
                &SystemInfoSize,
                &gBlackBoxEfiFileSystemInfoGuid
                );
@@ -8686,7 +8686,7 @@ BBTestSetInfoBasicTestCheckpoint1 (
         //
         // get info
         //
-        Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+        Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
                          StandardLib,
@@ -8787,7 +8787,7 @@ BBTestSetInfoBasicTestCheckpoint1 (
         //
 
 
-        Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+        Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
                          StandardLib,
@@ -8885,7 +8885,7 @@ BBTestSetInfoBasicTestCheckpoint1 (
         // get info and compare
         //
 
-        Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+        Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
         if (EFI_ERROR (Status)) {
           StandardLib->RecordAssertion (
                          StandardLib,
@@ -8995,7 +8995,7 @@ BBTestSetInfoBasicTestCheckpoint2 (
     //
     Status = InternalGetInfo (
                Root,
-               &SavedSystemInfo,
+               (VOID **) &SavedSystemInfo,
                &BufferSize,
                &gBlackBoxEfiFileSystemInfoGuid
                );

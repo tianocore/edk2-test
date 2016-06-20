@@ -97,7 +97,7 @@ BBTestQueryConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -143,7 +143,7 @@ BBTestQueryConformanceAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -171,7 +171,7 @@ BBTestQueryConformanceAutoTest (
                                          NULL,
                                          Instance,
                                          &ParameterTypeGuid,
-                                         &ParameterClpBlock,
+                                         (VOID **) &ParameterClpBlock,
                                          ParameterClpBlockSize
                                          );
     if(Status == EFI_INVALID_PARAMETER) {
@@ -271,7 +271,7 @@ BBTestQueryConformanceAutoTest (
                                          NULL,
                                          NULL,
                                          &ParameterTypeGuid,
-                                         &ParameterClpBlock,
+                                         (VOID **) &ParameterClpBlock,
                                          ParameterClpBlockSize
                                          );
   if(Status == EFI_INVALID_PARAMETER) {
@@ -338,7 +338,7 @@ BBTestResponseConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -384,7 +384,7 @@ BBTestResponseConformanceAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -412,7 +412,7 @@ BBTestResponseConformanceAutoTest (
                                          NULL,
                                          Instance,
                                          &ParameterTypeGuid,
-                                         &ParameterClpBlock,
+                                         (VOID **) &ParameterClpBlock,
                                          ParameterClpBlockSize
                                          );
     if(Status == EFI_INVALID_PARAMETER) {

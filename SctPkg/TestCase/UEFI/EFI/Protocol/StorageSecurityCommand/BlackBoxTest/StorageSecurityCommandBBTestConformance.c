@@ -103,7 +103,7 @@ BBTestReceiveDataConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -136,13 +136,13 @@ BBTestReceiveDataConformanceAutoTest (
      Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiStorageSecurityCommandProtocolGuid,
-                      &StorageSecurityTemp
+                      (VOID **) &StorageSecurityTemp
                       );
      if (Status == EFI_SUCCESS && StorageSecurityTemp == StorageSecurityCommand) {
        Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiBlockIoProtocolGuid,
-                        &BlockIo
+                        (VOID **) &BlockIo
                         );
        Handle = HandleBuffer[Index];
        if (Status != EFI_SUCCESS) {
@@ -186,14 +186,14 @@ BBTestReceiveDataConformanceAutoTest (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &gEfiDevicePathProtocolGuid,
-                     &DevicePath
+                     (VOID **) &DevicePath
                      );
 
     if (!EFI_ERROR(Status)) {
       Status = gtBS->LocateProtocol (
                        &gBlackBoxEfiDevicePathToTextProtocolGuid,
                        NULL,
-                       &DevicePathToText
+                       (VOID **) &DevicePathToText
                        );
       if (!EFI_ERROR(Status)) {
         //
@@ -462,7 +462,7 @@ BBTestSendDataConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -495,13 +495,13 @@ BBTestSendDataConformanceAutoTest (
      Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiStorageSecurityCommandProtocolGuid,
-                      &StorageSecurityTemp
+                      (VOID **) &StorageSecurityTemp
                       );
      if (Status == EFI_SUCCESS && StorageSecurityTemp == StorageSecurityCommand) {
        Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiBlockIoProtocolGuid,
-                        &BlockIo
+                        (VOID **) &BlockIo
                         );
        if (Status != EFI_SUCCESS) {
          StandardLib->RecordAssertion (

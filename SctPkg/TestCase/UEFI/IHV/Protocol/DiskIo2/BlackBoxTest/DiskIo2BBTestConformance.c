@@ -127,7 +127,7 @@ BBTestReadDiskExConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -185,7 +185,7 @@ BBTestReadDiskExConformanceAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &DiskIO2Finished,
                    &DiskIo2TokenAsync.Event
                    );
@@ -559,7 +559,7 @@ BBTestWriteDiskExConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -616,7 +616,7 @@ BBTestWriteDiskExConformanceAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &DiskIO2Finished,
                    &DiskIo2TokenAsync.Event
                    );
@@ -1042,7 +1042,7 @@ BBTestFlushDiskExConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                     SupportHandle,
                     &gEfiStandardTestLibraryGuid,
-                    &StandardLib
+                    (VOID **) &StandardLib
                     );
   
   if (EFI_ERROR(Status)) {
@@ -1100,7 +1100,7 @@ BBTestFlushDiskExConformanceAutoTest (
   Status = gtBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunc,
+                  (EFI_EVENT_NOTIFY) NotifyFunc,
                   &DiskIO2Finished,
                   &DiskIo2TokenAsync.Event
                   );

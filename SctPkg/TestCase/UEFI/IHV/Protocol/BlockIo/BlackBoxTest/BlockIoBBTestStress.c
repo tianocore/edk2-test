@@ -95,7 +95,7 @@ BBTestResetStressAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -245,7 +245,7 @@ BBTestReadBlocksStressAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -317,7 +317,7 @@ BBTestReadBlocksStressAutoTest (
   //
   // allocate buffer
   //
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -332,7 +332,7 @@ BBTestReadBlocksStressAutoTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer2);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer2);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -779,7 +779,7 @@ BBTestWriteBlocksStressAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -854,7 +854,7 @@ BBTestWriteBlocksStressAutoTest (
   //
   // allocate buffer
   //
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -869,7 +869,7 @@ BBTestWriteBlocksStressAutoTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer2);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer2);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -885,7 +885,7 @@ BBTestWriteBlocksStressAutoTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer3);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer3);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -902,7 +902,7 @@ BBTestWriteBlocksStressAutoTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer4);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer4);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,

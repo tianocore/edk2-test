@@ -265,7 +265,7 @@ BBTestNewStartFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1215,7 +1215,7 @@ BBTestNewStopFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1356,7 +1356,7 @@ BBTestStartFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1725,7 +1725,7 @@ BBTestStopFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1798,7 +1798,7 @@ BBTestDhcpFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1809,7 +1809,7 @@ BBTestDhcpFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1931,7 +1931,7 @@ BBTestDiscoverFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1942,7 +1942,7 @@ BBTestDiscoverFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -2929,7 +2929,7 @@ BBTestSetParametersFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -3278,7 +3278,7 @@ BBTestSetPacketsFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -3320,19 +3320,19 @@ BBTestSetPacketsFunctionTest (
   NewPxeBisReplyReceived = BcInterface->Mode->PxeBisReplyReceived;
 
   // Allocate Pool for PXE Packet
-  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), &NewDhcpDiscover);
+  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), (VOID **) &NewDhcpDiscover);
   if (EFI_ERROR(Status)){
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), &NewDhcpAck);
+  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), (VOID **) &NewDhcpAck);
   if (EFI_ERROR(Status))
   {
     gtBS->FreePool (NewDhcpDiscover);
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), &NewProxyOffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), (VOID **) &NewProxyOffer);
   if (EFI_ERROR(Status))
   {
     gtBS->FreePool (NewDhcpDiscover);
@@ -3340,7 +3340,7 @@ BBTestSetPacketsFunctionTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), &NewPxeDiscover);
+  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), (VOID **) &NewPxeDiscover);
   if (EFI_ERROR(Status))
   {
     gtBS->FreePool (NewDhcpDiscover);
@@ -3349,7 +3349,7 @@ BBTestSetPacketsFunctionTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), &NewPxeReply);
+  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), (VOID **) &NewPxeReply);
   if (EFI_ERROR(Status))
   {
     gtBS->FreePool (NewDhcpDiscover);
@@ -3359,7 +3359,7 @@ BBTestSetPacketsFunctionTest (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), &NewPxeBisReply);
+  Status = gtBS->AllocatePool (EfiBootServicesData, sizeof (EFI_PXE_BASE_CODE_PACKET), (VOID **) &NewPxeBisReply);
   if (EFI_ERROR(Status))
   {
     gtBS->FreePool (NewDhcpDiscover);
@@ -3642,7 +3642,7 @@ BBTestTftpReadFile  (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, Size, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, Size, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordMessage (
@@ -3801,7 +3801,7 @@ BBTestTftpWriteFile    (
     return Status;
   }
   // Malloc resource for Raw Data
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordMessage (
@@ -3919,7 +3919,7 @@ BBTestTftpReadDirectory (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, Size, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, Size, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordMessage (
@@ -4156,7 +4156,7 @@ BBTestMtftpReadFile (
   }
 
   // Allocate Pool for receviced file
-  Status = gtBS->AllocatePool (EfiBootServicesData, Size, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, Size, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordMessage (
@@ -4286,7 +4286,7 @@ BBTestMtftpReadDirectory (
   }
 
   // Allocate Pool for receviced file
-  Status = gtBS->AllocatePool (EfiBootServicesData, Size, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, Size, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordMessage (
@@ -4435,7 +4435,7 @@ BBTestUdpWriteGetConfPara (
     Status = GetUINTNVarFromFile (FileHandle, L"UDPWRITE_FUNC", L"Header_Size", 0, HeaderSize);
     if (EFI_ERROR(Status))
       return Status;
-    Status = gtBS->AllocatePool (EfiBootServicesData, *HeaderSize, HeaderPtr);
+    Status = gtBS->AllocatePool (EfiBootServicesData, *HeaderSize, (VOID **) HeaderPtr);
     if (EFI_ERROR(Status))
       return EFI_OUT_OF_RESOURCES;
     Status = GetRawDataFromFile (FileHandle, L"UDPWRITE_FUNC", L"Raw_Header", 0, HeaderSize, (*HeaderPtr));
@@ -4450,7 +4450,7 @@ BBTestUdpWriteGetConfPara (
     return Status;
   }
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, *BufferSize, BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, *BufferSize, (VOID **) BufferPtr);
   if (EFI_ERROR(Status)) {
     return EFI_OUT_OF_RESOURCES;
   }
@@ -4839,7 +4839,7 @@ BBTestUdpReadFuncBasic (
 
   // Malloc for data
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
     return EFI_OUT_OF_RESOURCES;
 
@@ -4993,7 +4993,7 @@ BBTestUdpReadFuncDesIpFilter (
 
   // Malloc for data
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
     return EFI_OUT_OF_RESOURCES;
 
@@ -5133,7 +5133,7 @@ BBTestUdpReadFuncDestPortFilter (
 
   // Malloc for data
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
     return EFI_OUT_OF_RESOURCES;
 
@@ -5278,7 +5278,7 @@ BBTestUdpReadFuncSrcIpFilter (
 
   // Malloc for data
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status))
     return EFI_OUT_OF_RESOURCES;
 
@@ -5417,7 +5417,7 @@ BBTestUdpReadFuncSrcPortFilter (
 
   // Malloc for data
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status)) {
     return EFI_OUT_OF_RESOURCES;
   }

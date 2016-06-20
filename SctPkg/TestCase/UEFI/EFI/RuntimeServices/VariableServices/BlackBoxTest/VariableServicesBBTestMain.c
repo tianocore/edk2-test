@@ -318,7 +318,7 @@ GetTestSupportLibrary (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   StandardLib
+                   (VOID **) StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -331,7 +331,7 @@ GetTestSupportLibrary (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestRecoveryLibraryGuid,
-                   RecoveryLib
+                   (VOID **) RecoveryLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -344,7 +344,7 @@ GetTestSupportLibrary (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   LoggingLib
+                   (VOID **) LoggingLib
                    );
   // Test logging support library is optional
 

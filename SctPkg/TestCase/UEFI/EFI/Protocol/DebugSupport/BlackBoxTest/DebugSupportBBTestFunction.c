@@ -90,7 +90,7 @@ BBTestIsaFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -168,7 +168,7 @@ BBTestGetMaximumProcessorIndexFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -262,7 +262,7 @@ BBTestRegisterPeriodicCallbackFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -366,7 +366,7 @@ BBTestRegisterPeriodicCallbackFunctionAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_TIMER | EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   TimerNotifyFunction1,
+                   (EFI_EVENT_NOTIFY) TimerNotifyFunction1,
                    NULL,
                    &TimeEvent
                    );

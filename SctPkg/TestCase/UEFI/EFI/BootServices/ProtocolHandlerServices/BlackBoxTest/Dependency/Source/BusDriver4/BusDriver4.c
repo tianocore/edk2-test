@@ -171,7 +171,7 @@ InitializeBusDriver4 (
         ImageHandle, 
         &gEfiLoadedImageProtocolGuid, 
         (VOID*)&LoadedImageInfoPtr
-        ); 
+        );
         
   LoadedImageInfoPtr->Unload = BusDriver4Unload;
   
@@ -191,7 +191,7 @@ BusDriver4BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mTestNoInterfaceProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -222,7 +222,7 @@ BusDriver4BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mTestNoInterfaceProtocol2Guid,
-                     &ProtInstance,
+                     (VOID **) &ProtInstance,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -262,7 +262,7 @@ BusDriver4BindingStart (
     Status = gtBS->OpenProtocol (
                      Controller,
                      &mTestNoInterfaceProtocol2Guid,
-                     &ProtInstance,
+                     (VOID **) &ProtInstance,
                      This->DriverBindingHandle,
                      PrivateData->HandleArray[Index],
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER

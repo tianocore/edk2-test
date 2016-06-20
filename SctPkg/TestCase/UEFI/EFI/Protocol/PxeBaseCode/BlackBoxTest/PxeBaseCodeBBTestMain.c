@@ -389,7 +389,7 @@ InitializeBBTestPxeBCProtocol (
   SctInitializeLib (ImageHandle, SystemTable);
   SctInitializeDriver (ImageHandle, SystemTable);
 
-  Status = gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  Status = gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -1119,7 +1119,7 @@ LogChar8String (
     return EFI_INVALID_PARAMETER;
   }
 
-  Status = gtBS->AllocatePool (EfiRuntimeServicesData, Len * sizeof (CHAR16), &TempBuffer);
+  Status = gtBS->AllocatePool (EfiRuntimeServicesData, Len * sizeof (CHAR16), (VOID **) &TempBuffer);
   if (EFI_ERROR(Status)) {
     return Status;
   }

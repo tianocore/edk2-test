@@ -1194,7 +1194,7 @@ BBTestInstallProtocolInterfaceInterfaceTestCheckPoint4 (
       Status = gtBS->HandleProtocol (
                        Handle,
                        ProtocolGuidArray[ProtocolIndex],
-                       &ProtocolArray[ProtocolIndex]
+                       (VOID **) &ProtocolArray[ProtocolIndex]
                        );
       if ((Status == EFI_SUCCESS)
           && (ProtocolArray[ProtocolIndex] == ProtocolInstanceArray[ProtocolIndex])) {
@@ -1427,7 +1427,7 @@ BBTestInstallProtocolInterfaceInterfaceTestCheckPoint5 (
     Status = gtBS->HandleProtocol (
                      Handle,
                      &mTestNoInterfaceProtocol1Guid,
-                     &Protocol
+                     (VOID **) &Protocol
                      );
     if ((Status == EFI_SUCCESS) && (Protocol == NULL)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1908,7 +1908,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint2 (
     Status1 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -1916,7 +1916,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint2 (
     Status2 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -2116,7 +2116,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -2181,7 +2181,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -2343,7 +2343,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -2408,7 +2408,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -2570,7 +2570,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -2635,7 +2635,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -2823,7 +2823,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -2888,7 +2888,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -3101,7 +3101,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -3166,7 +3166,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -3394,7 +3394,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      Handle2,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -3459,7 +3459,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -3696,7 +3696,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      Handle2,
                      (EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE)
@@ -3761,7 +3761,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -4005,7 +4005,7 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint10 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mTestNoInterfaceProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -4592,7 +4592,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -4817,7 +4817,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -5043,7 +5043,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -5300,7 +5300,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -5593,7 +5593,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -5856,7 +5856,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -6141,7 +6141,7 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      (EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE)
@@ -9553,7 +9553,7 @@ BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint3 (
       Status = gtBS->HandleProtocol (
                        Handle,
                        ProtocolGuidArray[ProtocolIndex],
-                       &ProtocolArray[ProtocolIndex]
+                       (VOID **) &ProtocolArray[ProtocolIndex]
                        );
       if ((EFI_SUCCESS == Status)
           && (ProtocolArray[ProtocolIndex] == ProtocolInstanceArray[ProtocolIndex])) {
@@ -9882,7 +9882,7 @@ BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint4 (
       Status = gtBS->HandleProtocol (
                        Handle,
                        ProtocolGuidArray[ProtocolIndex],
-                       &ProtocolArray[ProtocolIndex]
+                       (VOID **) &ProtocolArray[ProtocolIndex]
                        );
       if ((EFI_SUCCESS == Status)
           && (ProtocolArray[ProtocolIndex] == ProtocolInstanceArray[ProtocolIndex])) {
@@ -11424,7 +11424,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint2 (
     Status1 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -11432,7 +11432,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint2 (
     Status2 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -11638,7 +11638,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
@@ -11710,7 +11710,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint3 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -11718,7 +11718,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint3 (
     Status2 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -11927,7 +11927,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_GET_PROTOCOL
@@ -11998,7 +11998,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint4 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -12006,7 +12006,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint4 (
     Status2 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -12215,7 +12215,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -12286,7 +12286,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint5 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -12294,7 +12294,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint5 (
     Status2 = gtBS->OpenProtocol (
                       Handle,
                       &mInterfaceFunctionTestProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -12527,7 +12527,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      ChildHandle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -12598,7 +12598,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint6 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -12857,7 +12857,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -12928,7 +12928,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint7 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -13202,7 +13202,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      Handle2,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -13273,7 +13273,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint8 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -13556,7 +13556,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      mImageHandle,
                      Handle2,
                      (EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE)
@@ -13627,7 +13627,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint9 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -13918,7 +13918,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint10 (
     Status = gtBS->OpenProtocol (
                      Handle,
                      &mTestNoInterfaceProtocol1Guid,
-                     NULL,
+                     (VOID **) NULL,
                      mImageHandle,
                      NULL,
                      EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -13926,7 +13926,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint10 (
     Status2 = gtBS->OpenProtocol (
                       Handle,
                       &mTestNoInterfaceProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       mImageHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL

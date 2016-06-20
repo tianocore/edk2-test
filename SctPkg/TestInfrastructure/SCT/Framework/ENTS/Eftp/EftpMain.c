@@ -112,7 +112,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  EftpRrqRxCallback,
+                  (EFI_EVENT_NOTIFY) EftpRrqRxCallback,
                   &Private->UniToken,
                   &Private->UniToken.MnpToken.Event
                   );
@@ -124,7 +124,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_TIMER | EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  EftpRrqTimer,
+                  (EFI_EVENT_NOTIFY) EftpRrqTimer,
                   Private,
                   &Private->TimeoutEvent
                   );
@@ -203,7 +203,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  EftpWrqRxCallback,
+                  (EFI_EVENT_NOTIFY) EftpWrqRxCallback,
                   &Private->UniToken,
                   &Private->UniToken.MnpToken.Event
                   );
@@ -216,7 +216,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_TIMER | EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  EftpWrqTimer,
+                  (EFI_EVENT_NOTIFY) EftpWrqTimer,
                   Private,
                   &Private->TimeoutEvent
                   );

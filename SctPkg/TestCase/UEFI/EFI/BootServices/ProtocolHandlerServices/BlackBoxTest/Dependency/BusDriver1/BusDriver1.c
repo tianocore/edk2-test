@@ -203,7 +203,7 @@ BusDriver1BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -249,7 +249,7 @@ BusDriver1BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -300,7 +300,7 @@ BusDriver1BindingStart (
     Status = gtBS->OpenProtocol (
                      Controller,
                      &mInterfaceFunctionTestProtocol1Guid,
-                     &IFTestProt1,
+                     (VOID **) &IFTestProt1,
                      This->DriverBindingHandle,
                      Handle,
                      EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -360,7 +360,7 @@ BusDriver1BindingStop (
     Status = gtBS->OpenProtocol (
                   ChildHandleBuffer[Index],
                   &gEfiDevicePathProtocolGuid,
-                  &DevicePath,
+                  (VOID **) &DevicePath,
                   This->DriverBindingHandle,
                   NULL,
                   EFI_OPEN_PROTOCOL_GET_PROTOCOL

@@ -1064,7 +1064,7 @@ Returns:
 
     EFTP_DEBUG_VERBOSE ((L"EftpWrqReadBlk: call PacketNeeded to fill in data\n"));
 
-    Status = Private->Token->PacketNeeded (&Private->Eftp, Private->Token, &DataLen, &DataBuf);
+    Status = Private->Token->PacketNeeded (&Private->Eftp, Private->Token, &DataLen, (VOID **) &DataBuf);
 
     if (EFI_ERROR (Status)) {
       EFTP_DEBUG_ERROR ((L"EftpWrqReadBlk: PacketNeeded returns %r .\n", Status));
@@ -1186,7 +1186,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  EftpWrqTxCallback,
+                  (EFI_EVENT_NOTIFY) EftpWrqTxCallback,
                   Buf,
                   &Buf->EftpToken.MnpToken.Event
                   );

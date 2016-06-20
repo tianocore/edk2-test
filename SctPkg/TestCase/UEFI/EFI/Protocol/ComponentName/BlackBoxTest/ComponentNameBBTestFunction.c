@@ -94,7 +94,7 @@ BBTestGetDriverNameBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -145,7 +145,7 @@ BBTestGetControllerNameBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -271,7 +271,7 @@ BBTestGetControllerNameBasicTestCheckpoint1 (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiComponentNameProtocolGuid,
-                     &TestedComponentName
+                     (VOID **) &TestedComponentName
                      );
     if (EFI_ERROR (Status)) {
       continue;
@@ -421,7 +421,7 @@ BBTestGetControllerNameBasicTestCheckpoint2 (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiComponentNameProtocolGuid,
-                     &TestedComponentName
+                     (VOID **) &TestedComponentName
                      );
     if (EFI_ERROR (Status)) {
       continue;

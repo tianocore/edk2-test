@@ -205,7 +205,7 @@ InitializeBBTestEbcProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiTestProfileLibraryGuid,
                    NULL,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

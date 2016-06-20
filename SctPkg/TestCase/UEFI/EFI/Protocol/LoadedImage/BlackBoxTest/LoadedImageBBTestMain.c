@@ -195,7 +195,7 @@ BBTestLoadedImageTest1 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                  );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -207,7 +207,7 @@ BBTestLoadedImageTest1 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -312,7 +312,7 @@ BBTestLoadedImageTest1 (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     TestNotifyFunction,
+                     (EFI_EVENT_NOTIFY) TestNotifyFunction,
                      &ProtocolNotifyContext,
                      &EventArray[Index]
                      );
@@ -389,7 +389,7 @@ BBTestLoadedImageTest1 (
     Status = gtBS->HandleProtocol (
                      ImageHandle,
                      &gBlackBoxEfiLoadedImageProtocolGuid,
-                     &LoadedImage
+                     (VOID **) &LoadedImage
                      );
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -675,7 +675,7 @@ BBTestLoadedImageTest1 (
       Status = gtBS->HandleProtocol (
                        ImageHandle,
                        &gBlackBoxEfiLoadedImageProtocolGuid,
-                       &LoadedImage
+                       (VOID **) &LoadedImage
                        );
       if (EFI_ERROR (Status)) {
         StandardLib->RecordAssertion (
@@ -760,7 +760,7 @@ BBTestLoadedImageTest1 (
       Status = gtBS->HandleProtocol (
                        ImageHandle,
                        &gBlackBoxEfiLoadedImageProtocolGuid,
-                       &LoadedImage
+                       (VOID **) &LoadedImage
                        );
       if (EFI_ERROR (Status)) {
         StandardLib->RecordAssertion (
@@ -866,7 +866,7 @@ BBTestLoadedImageTest2 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1035,7 +1035,7 @@ LoadedImageTestComposeSimpleFilePath (
   Status = gtBS->HandleProtocol (
                    CurrentImageHandle,
                    &gBlackBoxEfiLoadedImageProtocolGuid,
-                   &LoadImage
+                   (VOID **) &LoadImage
                    );
   if (EFI_ERROR (Status)) {
     if (StandardLib != NULL) {

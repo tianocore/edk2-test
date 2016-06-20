@@ -1038,7 +1038,7 @@ CheckGloballyDefinedVariables(
             gtBS->AllocatePool (
                     EfiBootServicesData,
                     DataSize, 
-                    &Data
+                    (VOID **) &Data
                     );
           
             Status = gtRT->GetVariable (
@@ -1126,7 +1126,7 @@ CheckGloballyDefinedVariables(
               gtBS->AllocatePool (
                       EfiBootServicesData, 
                       DataSize, 
-                      &Data
+                      (VOID **) &Data
                       );
           
               Status = gtRT->GetVariable (
@@ -1211,7 +1211,7 @@ CheckGloballyDefinedVariables(
               gtBS->AllocatePool (
                       EfiBootServicesData, 
                       DataSize, 
-                      &Data
+                      (VOID **) &Data
                       );
           
               Status = gtRT->GetVariable (
@@ -1294,7 +1294,7 @@ CheckGloballyDefinedVariables(
               gtBS->AllocatePool (
                       EfiBootServicesData, 
                       DataSize, 
-                      &Data
+                      (VOID **) &Data
                       );
           
               Status = gtRT->GetVariable (
@@ -1376,7 +1376,7 @@ CheckGloballyDefinedVariables(
               gtBS->AllocatePool (
                       EfiBootServicesData, 
                       DataSize, 
-                      &Data
+                      (VOID **) &Data
                       );
           
               Status = gtRT->GetVariable (
@@ -1458,7 +1458,7 @@ CheckGloballyDefinedVariables(
               gtBS->AllocatePool (
                       EfiBootServicesData, 
                       DataSize, 
-                      &Data
+                      (VOID **) &Data
                       );
           
               Status = gtRT->GetVariable (
