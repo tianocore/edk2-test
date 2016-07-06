@@ -110,7 +110,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   StandardLib
+                   (VOID **) StandardLib
                    );
 
   if (EFI_ERROR (Status)) {
@@ -169,7 +169,7 @@ Returns:
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiGraphicsOutputProtocolGuid,
-                     &OtherGraphicsOutput
+                     (VOID **) &OtherGraphicsOutput
                      );
     if (EFI_ERROR (Status)) {
       (*StandardLib)->RecordAssertion (
@@ -206,7 +206,7 @@ Returns:
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gEfiDevicePathProtocolGuid,
-                   &DevicePath
+                   (VOID **) &DevicePath
                    );
 
   gtBS->FreePool (HandleBuffer);
@@ -566,7 +566,7 @@ Returns:
   Status = gtBS->CreateEvent (
                    EVT_TIMER,
                    0,
-                   NULL,
+                   (EFI_EVENT_NOTIFY) NULL,
                    NULL,
                    &TimerEvent
                    );

@@ -361,7 +361,7 @@ UsbHcResetConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -374,7 +374,7 @@ UsbHcResetConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -428,7 +428,7 @@ UsbHcGetStateConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -441,7 +441,7 @@ UsbHcGetStateConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -495,7 +495,7 @@ UsbHcSetStateConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -508,7 +508,7 @@ UsbHcSetStateConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -562,7 +562,7 @@ UsbHcControlTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -575,7 +575,7 @@ UsbHcControlTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -663,7 +663,7 @@ UsbHcBulkTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -676,7 +676,7 @@ UsbHcBulkTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -761,7 +761,7 @@ UsbHcAsyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -774,7 +774,7 @@ UsbHcAsyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -851,7 +851,7 @@ UsbHcSyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -864,7 +864,7 @@ UsbHcSyncInterruptTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -958,7 +958,7 @@ UsbHcAsyncIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -971,7 +971,7 @@ UsbHcAsyncIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -1042,7 +1042,7 @@ UsbHcIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1055,7 +1055,7 @@ UsbHcIsochronousTransferConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -1133,7 +1133,7 @@ UsbHcGetRootHubPortNumberConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1146,7 +1146,7 @@ UsbHcGetRootHubPortNumberConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -1200,7 +1200,7 @@ UsbHcGetRootHubPortStatusConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1213,7 +1213,7 @@ UsbHcGetRootHubPortStatusConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -1267,7 +1267,7 @@ UsbHcSetRootHubPortFeatureConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1280,7 +1280,7 @@ UsbHcSetRootHubPortFeatureConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional
@@ -1339,7 +1339,7 @@ UsbHcClearRootHubPortFeatureConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1352,7 +1352,7 @@ UsbHcClearRootHubPortFeatureConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestLoggingLibraryGuid,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
 
   // Test Logging Support Library is optional

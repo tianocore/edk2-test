@@ -86,7 +86,7 @@ BBTestResetFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -157,7 +157,7 @@ BBTestResetFunctionManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -228,7 +228,7 @@ BBTestReadKeyStrokeExFunctionManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -299,7 +299,7 @@ BBTestSetStateFunctionManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -371,7 +371,7 @@ BBTestRegisterKeyNotifyFunctionManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -442,7 +442,7 @@ BBTestUnregisterKeyNotifyFunctionManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;

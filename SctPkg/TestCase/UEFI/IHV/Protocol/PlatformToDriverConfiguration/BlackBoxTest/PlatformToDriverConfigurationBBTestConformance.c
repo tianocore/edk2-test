@@ -97,7 +97,7 @@ BBTestQueryConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -143,7 +143,7 @@ BBTestQueryConformanceAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -338,7 +338,7 @@ BBTestResponseConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -384,7 +384,7 @@ BBTestResponseConformanceAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (

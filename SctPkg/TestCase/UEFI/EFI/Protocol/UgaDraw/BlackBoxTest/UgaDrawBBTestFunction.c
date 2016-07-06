@@ -113,7 +113,7 @@ BBTestGetModeFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -798,7 +798,7 @@ BBTestEfiUgaVideoFillFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1394,7 +1394,7 @@ BBTestEfiUgaVideoBltBufferFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2102,7 +2102,7 @@ BBTestEfiUgaVideoToVideoFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

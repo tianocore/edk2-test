@@ -98,7 +98,7 @@ BBTestQueryFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -150,7 +150,7 @@ BBTestQueryFunctionAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -178,7 +178,7 @@ BBTestQueryFunctionAutoTest (
                                          ChildHandle,
                                          Instance,
                                          &ParameterTypeGuid,
-                                         &ParameterClpBlock,
+                                         (VOID **) &ParameterClpBlock,
                                          ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
@@ -260,7 +260,7 @@ BBTestResponseFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -312,7 +312,7 @@ BBTestResponseFunctionAutoTest (
   Status = gtBS->LocateProtocol (
                          &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                          NULL,
-                         &Instance
+                         (VOID **) &Instance
                          );
   if( EFI_ERROR(Status) ){
      StandardLib->RecordAssertion (
@@ -340,7 +340,7 @@ BBTestResponseFunctionAutoTest (
                                          ChildHandle,
                                          Instance,
                                          &ParameterTypeGuid,
-                                         &ParameterClpBlock,
+                                         (VOID **) &ParameterClpBlock,
                                          ParameterBlockSize
                                          );
 	  

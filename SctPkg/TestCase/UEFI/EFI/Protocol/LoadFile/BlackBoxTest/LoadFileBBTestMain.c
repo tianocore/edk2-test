@@ -113,7 +113,7 @@ InitializeLoadFileTest (
   SctInitializeLib (ImageHandle, SystemTable);
   SctInitializeDriver (ImageHandle, SystemTable);
 
-  Status = gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  Status = gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -180,7 +180,7 @@ BBTestLoadFileFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status))
   {
@@ -199,7 +199,7 @@ BBTestLoadFileFunctionTest (
   // Allocate Buffer for received file
   //
   Buffer = NULL;
-  Status= gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status= gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordAssertion (

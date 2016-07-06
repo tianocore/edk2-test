@@ -169,7 +169,7 @@ InitializeBootServicesDriver4 (
   gtBS->OpenProtocol (
           mPrivateData.OpenHandle,
           &mImageTestNoInterfaceProtocol2Guid,
-          NULL,
+          (VOID **) NULL,
           ImageHandle,
           NULL,
           EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -192,7 +192,7 @@ BootServicesDriver4BindingSupported (
   Status = gtBS->OpenProtocol (
                    Controller,
                    &mImageTestNoInterfaceProtocol3Guid,
-                   NULL,
+                   (VOID **) NULL,
                    This->DriverBindingHandle,
                    Controller,
                    EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -219,7 +219,7 @@ BootServicesDriver4BindingStart (
   Status = gtBS->OpenProtocol (
                    Controller,
                    &mImageTestNoInterfaceProtocol3Guid,
-                   &ProtInst,
+                   (VOID **) &ProtInst,
                    This->DriverBindingHandle,
                    Controller,
                    EFI_OPEN_PROTOCOL_BY_DRIVER

@@ -130,7 +130,7 @@ BBTestGetImageInfoFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -170,7 +170,7 @@ BBTestGetImageFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -210,7 +210,7 @@ BBTestGetPackageInfoFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -310,7 +310,7 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    ImageInfoSize,
-                   &ImageInfo
+                   (VOID **) &ImageInfo
                    );
   if (EFI_ERROR (Status)) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -333,7 +333,7 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData,
                      ImageInfoSize,
-                     &ImageInfo
+                     (VOID **) &ImageInfo
                      );
     if (EFI_ERROR (Status)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -592,7 +592,7 @@ BBTestGetImageFunctionTestCheckpoint1 (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    ImageInfoSize,
-                   &ImageInfo
+                   (VOID **) &ImageInfo
                    );
   if (EFI_ERROR (Status)) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -615,7 +615,7 @@ BBTestGetImageFunctionTestCheckpoint1 (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData,
                      ImageInfoSize,
-                     &ImageInfo
+                     (VOID **) &ImageInfo
                      );
     if (EFI_ERROR (Status)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -679,7 +679,7 @@ BBTestGetImageFunctionTestCheckpoint1 (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData,
                      ImageSize,
-                     &Image
+                     (VOID **) &Image
                      );
     if (EFI_ERROR (Status)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -701,7 +701,7 @@ BBTestGetImageFunctionTestCheckpoint1 (
       Status = gtBS->AllocatePool (
                        EfiBootServicesData,
                        ImageSize,
-                       &Image
+                       (VOID **) &Image
                        );
       if (EFI_ERROR (Status)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;

@@ -116,7 +116,7 @@ BBTestVideoFillBufferToVideoManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -209,7 +209,7 @@ BBTestVideoFillBufferToVideoManualTest (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiConsoleControlProtocolGuid,
-                   &Console
+                   (VOID **) &Console
                    );
 
   if (EFI_ERROR (Status)) {
@@ -954,7 +954,7 @@ BBTestVideoFillVideoToVideoManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1048,7 +1048,7 @@ BBTestVideoFillVideoToVideoManualTest (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiConsoleControlProtocolGuid,
-                   &Console
+                   (VOID **) &Console
                    );
 
   if (EFI_ERROR (Status)) {
@@ -1847,7 +1847,7 @@ BBTestVideoToBltBufferAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1941,7 +1941,7 @@ BBTestVideoToBltBufferAutoTest (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiConsoleControlProtocolGuid,
-                   &Console
+                   (VOID **) &Console
                    );
 
   if (EFI_ERROR (Status)) {
@@ -2589,7 +2589,7 @@ BBTestEfiUgaVideoFillStressAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2683,7 +2683,7 @@ BBTestEfiUgaVideoFillStressAutoTest (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiConsoleControlProtocolGuid,
-                   &Console
+                   (VOID **) &Console
                    );
 
   if (EFI_ERROR (Status)) {
@@ -3211,7 +3211,7 @@ BBTestEfiUgaVideoBltBufferStressAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -3305,7 +3305,7 @@ BBTestEfiUgaVideoBltBufferStressAutoTest (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiConsoleControlProtocolGuid,
-                   &Console
+                   (VOID **) &Console
                    );
 
   if (EFI_ERROR (Status)) {
@@ -4145,7 +4145,7 @@ BBTestEfiUgaVideoToVideoStressAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4239,7 +4239,7 @@ BBTestEfiUgaVideoToVideoStressAutoTest (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gBlackBoxEfiConsoleControlProtocolGuid,
-                   &Console
+                   (VOID **) &Console
                    );
 
   if (EFI_ERROR (Status)) {

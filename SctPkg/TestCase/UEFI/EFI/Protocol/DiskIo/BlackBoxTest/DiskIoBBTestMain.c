@@ -172,7 +172,7 @@ InitializeBBTestDiskIo (
   SctInitializeLib (ImageHandle, SystemTable);
 
 
-  Status = gtBS->CreateEvent(EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  Status = gtBS->CreateEvent(EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   ASSERT_EFI_ERROR(Status);
 
   return EfiInitAndInstallBBTestInterface (
@@ -295,7 +295,7 @@ LocateBlockIoFromDiskIo(
       Status = gtBS->HandleProtocol(
                        HandleBuffer[Index],
                        &gBlackBoxEfiDiskIoProtocolGuid,
-                       &OtherDiskIo
+                       (VOID **) &OtherDiskIo
                        );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -334,7 +334,7 @@ LocateBlockIoFromDiskIo(
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gBlackBoxEfiBlockIoProtocolGuid,
-                   BlockIo
+                   (VOID **) BlockIo
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -425,7 +425,7 @@ LocateDevicePathFromDiskIo(
       Status = gtBS->HandleProtocol(
                        HandleBuffer[Index],
                        &gBlackBoxEfiDiskIoProtocolGuid,
-                       &OtherDiskIo
+                       (VOID **) &OtherDiskIo
                        );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -464,7 +464,7 @@ LocateDevicePathFromDiskIo(
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gEfiDevicePathProtocolGuid,
-                   DevicePath
+                   (VOID **) DevicePath
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (

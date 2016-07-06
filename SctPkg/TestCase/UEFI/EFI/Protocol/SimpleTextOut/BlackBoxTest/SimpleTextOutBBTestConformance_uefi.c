@@ -97,7 +97,7 @@ BBTestQueryModeConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -293,7 +293,7 @@ BBTestSetModeConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -506,7 +506,7 @@ BBTestSetAttributeConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -704,7 +704,7 @@ BBTestSetCursorPositionConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

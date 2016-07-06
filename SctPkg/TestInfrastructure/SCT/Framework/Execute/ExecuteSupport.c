@@ -639,7 +639,7 @@ MatchHandleInterface (
     Status = tBS->HandleProtocol (
                      HandleBuffer[Index],
                      ClientGuid,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (EFI_ERROR (Status)) {
       continue;

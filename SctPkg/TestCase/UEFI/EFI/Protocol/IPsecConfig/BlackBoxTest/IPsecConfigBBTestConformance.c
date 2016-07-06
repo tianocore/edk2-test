@@ -173,7 +173,7 @@ BBTestSetDataConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -210,7 +210,7 @@ BBTestGetDataConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -255,7 +255,7 @@ BBTestGetNextSelectorConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -300,7 +300,7 @@ BBTestRegisterDataNotifyConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -339,7 +339,7 @@ BBTestUnregisterDataNotifyConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -1914,7 +1914,7 @@ BBTestRegisterDataNotifyConformanceTestCheckpoint2 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_NOTIFY,
-                   EventNotifyFunc,
+                   (EFI_EVENT_NOTIFY) EventNotifyFunc,
                    NULL,
                    &Event
                    );
@@ -2021,7 +2021,7 @@ BBTestUnregisterDataNotifyConformanceTestCheckpoint2 (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_NOTIFY,
-                   EventNotifyFunc,
+                   (EFI_EVENT_NOTIFY) EventNotifyFunc,
                    NULL,
                    &Event
                    );

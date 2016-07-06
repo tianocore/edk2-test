@@ -185,7 +185,7 @@ Returns:
   EFI_STATUS  Status;
   VOID        *p;
 
-  Status = gntBS->AllocatePool (EfiLoaderData, Size, &p);
+  Status = gntBS->AllocatePool (EfiLoaderData, Size, (VOID **) &p);
   if (EFI_ERROR (Status)) {
     DEBUG ((EFI_D_ERROR, "AllocatePool: out of pool  %x\n", Status));
     p = NULL;

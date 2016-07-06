@@ -262,7 +262,7 @@ BBTestDriverBindingFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -285,7 +285,7 @@ BBTestDriverBindingFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -358,7 +358,7 @@ BBTestDriverBindingFunctionTest (
     Status = gtBS->HandleProtocol (
                     HandleBuffer[Index],
                     &gEfiDevicePathProtocolGuid,
-                    &DevicePath
+                    (VOID **) &DevicePath
                     );
     if (!EFI_ERROR (Status)) {
       if (SctMatchDevicePaths (ProfileDevicePath, DevicePath)) {
@@ -467,7 +467,7 @@ BBTestDriverBindingFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

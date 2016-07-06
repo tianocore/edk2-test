@@ -118,7 +118,7 @@ FindTestCard (
     Status = tBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gBlackBoxEfiPciRootBridgeIoProtocolGuid,
-                   &RootBridgeIo
+                   (VOID **) &RootBridgeIo
                    );
     if (EFI_ERROR(Status)) {
       continue;

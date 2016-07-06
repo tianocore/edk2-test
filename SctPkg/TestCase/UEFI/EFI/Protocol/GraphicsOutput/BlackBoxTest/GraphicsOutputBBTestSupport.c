@@ -565,7 +565,7 @@ Returns:
   Status = gtBS->CreateEvent (
                    EVT_TIMER,
                    0,
-                   NULL,
+                   (EFI_EVENT_NOTIFY) NULL,
                    NULL,
                    &TimerEvent
                    );

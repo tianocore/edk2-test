@@ -241,7 +241,7 @@ DBindingDriver2BindingSupported (
   Status1 = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol1Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -249,7 +249,7 @@ DBindingDriver2BindingSupported (
   Status2 = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol2Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -257,7 +257,7 @@ DBindingDriver2BindingSupported (
   Status3 = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol3Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       NULL,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -287,7 +287,7 @@ DBindingDriver2BindingStart (
   PrivateData->StatusArray[0] = gtBS->OpenProtocol (
                                   Controller,
                                   &mInterfaceFunctionTestProtocol1Guid,
-                                  &IFTestProt1,
+                                  (VOID **) &IFTestProt1,
                                   This->DriverBindingHandle,
                                   PrivateData->ChildHandle,
                                   EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -297,7 +297,7 @@ DBindingDriver2BindingStart (
   PrivateData->StatusArray[1] = gtBS->OpenProtocol (
                                   Controller,
                                   &mInterfaceFunctionTestProtocol2Guid,
-                                  &IFTestProt2,
+                                  (VOID **) &IFTestProt2,
                                   This->DriverBindingHandle,
                                   PrivateData->ChildHandle,
                                   EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -307,7 +307,7 @@ DBindingDriver2BindingStart (
   PrivateData->StatusArray[2] = gtBS->OpenProtocol (
                                   Controller,
                                   &mInterfaceFunctionTestProtocol3Guid,
-                                  &IFTestProt3,
+                                  (VOID **) &IFTestProt3,
                                   This->DriverBindingHandle,
                                   PrivateData->ChildHandle,
                                   EFI_OPEN_PROTOCOL_BY_DRIVER

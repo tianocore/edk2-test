@@ -95,7 +95,7 @@ BBTestGetDriverFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -191,7 +191,7 @@ BBTestGetDriverPathFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -293,7 +293,7 @@ BBTestDriverLoadedFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

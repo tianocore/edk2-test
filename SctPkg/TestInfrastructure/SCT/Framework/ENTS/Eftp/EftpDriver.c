@@ -182,7 +182,7 @@ Returns:
   Status = tBS->OpenProtocol (
                   Controller,
                   &gEfiManagedNetworkServiceBindingProtocolGuid,
-                  NULL,
+                  (VOID **) NULL,
                   This->DriverBindingHandle,
                   Controller,
                   EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -229,7 +229,7 @@ Returns:
   Status = tBS->OpenProtocol (
                   Controller,
                   &gEfiEftpServiceBindingProtocolGuid,
-                  NULL,
+                  (VOID **) NULL,
                   This->DriverBindingHandle,
                   Controller,
                   EFI_OPEN_PROTOCOL_TEST_PROTOCOL

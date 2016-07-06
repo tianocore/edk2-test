@@ -107,7 +107,7 @@ InitializeBootServicesDriver1 (
         ImageHandle, 
         &gBlackBoxEfiLoadedImageProtocolGuid, 
         (VOID*)&LoadedImage
-        ); 
+        );
   if (EFI_ERROR (Status)) {
     return Status;
   }

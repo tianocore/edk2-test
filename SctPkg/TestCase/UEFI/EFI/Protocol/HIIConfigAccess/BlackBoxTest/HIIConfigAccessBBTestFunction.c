@@ -161,7 +161,7 @@ BBTestExtractConfigFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -209,7 +209,7 @@ BBTestRouteConfigFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -255,7 +255,7 @@ BBTestCallBackFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;

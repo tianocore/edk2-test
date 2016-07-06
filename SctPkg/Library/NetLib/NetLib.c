@@ -150,7 +150,7 @@ EfiLibDefaultUnload (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
     Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiComponentName2ProtocolGuid, (VOID **) &ComponentName2);
 #else
-    Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiComponentNameProtocolGuid, &ComponentName);
+    Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiComponentNameProtocolGuid, (VOID **) &ComponentName);
 #endif
     if (!EFI_ERROR (Status)) {
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
@@ -162,7 +162,7 @@ EfiLibDefaultUnload (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
     Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiDriverConfiguration2ProtocolGuid, (VOID **) &DriverConfiguration2);
 #else                                                           
-    Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiDriverConfigurationProtocolGuid, &DriverConfiguration);
+    Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiDriverConfigurationProtocolGuid, (VOID **) &DriverConfiguration);
 #endif	
     if (!EFI_ERROR (Status)) {
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
@@ -174,7 +174,7 @@ EfiLibDefaultUnload (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
     Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiDriverDiagnostics2ProtocolGuid, (VOID **) &DriverDiagnostics2);
 #else                                                         
-    Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiDriverDiagnosticsProtocolGuid, &DriverDiagnostics);
+    Status = tBS->HandleProtocol (DeviceHandleBuffer[Index], &gEfiDriverDiagnosticsProtocolGuid, (VOID **) &DriverDiagnostics);
 #endif
     if (!EFI_ERROR (Status)) {
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)

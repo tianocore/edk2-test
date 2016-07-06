@@ -111,7 +111,7 @@ BBTestGetHashSizeFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -180,7 +180,7 @@ BBTestHashFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -192,7 +192,7 @@ BBTestHashFunctionTest (
   	SctZeroMem(Hash2Out, 64);
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
 	if (Status == EFI_SUCCESS) {
-      Status = Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, Hash2Out);
+      Status = Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize,  (EFI_HASH2_OUTPUT *) Hash2Out);
       if (Status == EFI_SUCCESS) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
         if (0 != SctCompareMem(Hash2Out, Hash2OutStd[Index], Length[Index]) )
@@ -252,7 +252,7 @@ BBTestHashMultiBlocksFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -269,7 +269,7 @@ BBTestHashMultiBlocksFunctionTest (
 	  
       Status3 = Hash2->HashUpdate (Hash2, Message1, MessageSize);
 	  Status4 = Hash2->HashUpdate (Hash2, Message2, MessageSize);
-	  Status5 = Hash2->HashFinal (Hash2, Hash2Out);
+	  Status5 = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
 
       
       if ((Status1 == EFI_SUCCESS) && (Status2 == EFI_ALREADY_STARTED) && (Status3 == EFI_SUCCESS) && (Status4 == EFI_SUCCESS) && (Status5 == EFI_SUCCESS)) {

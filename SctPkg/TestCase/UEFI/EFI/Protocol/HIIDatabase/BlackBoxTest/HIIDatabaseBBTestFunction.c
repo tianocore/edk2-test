@@ -168,7 +168,7 @@ BBTestNewPackageListFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -205,7 +205,7 @@ BBTestRemovePackageListFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -242,7 +242,7 @@ BBTestUpdatePackageListFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -279,7 +279,7 @@ BBTestListPackageListsFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -316,7 +316,7 @@ BBTestExportPackageListsFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -355,7 +355,7 @@ BBTestRegisterPackageNotifyFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -392,7 +392,7 @@ BBTestUnregisterPackageNotifyFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -429,7 +429,7 @@ BBTestFindKeyboardLayoutsFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -466,7 +466,7 @@ BBTestGetKeyboardLayoutFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -503,7 +503,7 @@ BBTestSetKeyboardLayoutFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -540,7 +540,7 @@ BBTestGetPackageListHandleFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;

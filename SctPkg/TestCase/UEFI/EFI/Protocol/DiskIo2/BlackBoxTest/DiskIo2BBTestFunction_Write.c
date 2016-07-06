@@ -184,7 +184,7 @@ DiskIo2AsyncWriteData (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(DiskIO2_Task), 
-                   &DiskIo2Entity
+                   (VOID **) &DiskIo2Entity
                    );
   
   if (EFI_ERROR (Status)) {
@@ -197,7 +197,7 @@ DiskIo2AsyncWriteData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2WriteNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2WriteNotifyFunc,
                    DiskIo2Entity,
                    &DiskIo2Entity->DiskIo2Token.Event
                    );
@@ -285,7 +285,7 @@ EFIAPI DiskIo2WriteBatchNotifyFunc (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     DiskIo2WriteBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) DiskIo2WriteBatchNotifyFunc,
                      TaskContext,
                      &DiskIo2Entity->DiskIo2Token.Event
                      );
@@ -366,7 +366,7 @@ DiskIo2AsyncBatchWrite (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(DiskIO2_Batch_Task_Context), 
-                     &TaskContext
+                     (VOID **) &TaskContext
                      );
     if (TaskContext == NULL) {
       return EFI_OUT_OF_RESOURCES;
@@ -385,7 +385,7 @@ DiskIo2AsyncBatchWrite (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     DiskIo2WriteBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) DiskIo2WriteBatchNotifyFunc,
                      TaskContext,
                      &DiskIo2Entity->DiskIo2Token.Event
                      );
@@ -447,7 +447,7 @@ BBTestWriteDiskExFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
   );
   
   if (EFI_ERROR(Status)) {
@@ -504,14 +504,14 @@ BBTestWriteDiskExFunctionAutoTest (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiDiskIo2ProtocolGuid,
-                     &DiskIo2Temp
+                     (VOID **) &DiskIo2Temp
                      );
 
     if (Status == EFI_SUCCESS && DiskIo2Temp == DiskIo2) {
       Status = gtBS->HandleProtocol (
                        HandleBuffer[Index],
                        &gBlackBoxEfiDiskIoProtocolGuid,
-                       &DiskIo
+                       (VOID **) &DiskIo
                        );
       if (Status != EFI_SUCCESS) {
         DiskIo = NULL;
@@ -768,7 +768,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint1(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          sizeof(DiskIO2_Task), 
-                         &DiskIo2EntityRead
+                         (VOID **) &DiskIo2EntityRead
                          );
         if (EFI_ERROR(Status)) {
           goto END;
@@ -790,7 +790,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint1(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          NewBufferSize, 
-                         &DiskIo2EntityRead->Buffer
+                         (VOID **) &DiskIo2EntityRead->Buffer
                          );
         if (EFI_ERROR(Status)){
           goto END;
@@ -830,7 +830,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint1(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          DiskIo2EntityRead->BufferSize, 
-                         &WriteBuffer
+                         (VOID **) &WriteBuffer
                          );
     
         if ( EFI_ERROR(Status)) {
@@ -918,7 +918,7 @@ END_WAIT:
         Status= gtBS->AllocatePool(
                         EfiBootServicesData, 
                         DiskIo2EntityWrite->BufferSize, 
-                        &ReadBuffer
+                        (VOID **) &ReadBuffer
                         );
 
         if (!EFI_ERROR(Status)) {
@@ -1358,7 +1358,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint2(
       Status = gtBS->AllocatePool(
                        EfiBootServicesData, 
                        sizeof(DiskIO2_Task), 
-                       &DiskIo2EntityRead
+                       (VOID **) &DiskIo2EntityRead
                        );
       if (EFI_ERROR(Status)) {
         goto END;
@@ -1381,7 +1381,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint2(
       Status=gtBS->AllocatePool(
                      EfiBootServicesData, 
                      NewBufferSize, 
-                     &DiskIo2EntityRead->Buffer
+                     (VOID **) &DiskIo2EntityRead->Buffer
                      );
       
       if (EFI_ERROR(Status) ){
@@ -1417,7 +1417,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint2(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          DiskIo2EntityRead->BufferSize, 
-                         &WriteBuffer
+                         (VOID **) &WriteBuffer
                          );
         if (EFI_ERROR(Status)) {
           goto END;
@@ -1427,7 +1427,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint2(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          DiskIo2EntityRead->BufferSize, 
-                         &ReadBuffer
+                         (VOID **) &ReadBuffer
                          );
         if (EFI_ERROR(Status) ) {
           gtBS->FreePool(WriteBuffer);
@@ -1678,7 +1678,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint3(
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   DiskIo2FinishNotifyFunc,
+                   (EFI_EVENT_NOTIFY) DiskIo2FinishNotifyFunc,
                    &AsyncBatchWriteFinished,
                    &AsyncBatchWriteToken.Event
                    );
@@ -1857,7 +1857,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          sizeof(DiskIO2_Task), 
-                         &DiskIo2EntityRead
+                         (VOID **) &DiskIo2EntityRead
                          );
         if (EFI_ERROR(Status)) {
           MemoryAllocFail = TRUE;
@@ -1880,7 +1880,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          NewBufferSize, 
-                         &DiskIo2EntityRead->Buffer
+                         (VOID **) &DiskIo2EntityRead->Buffer
                          );
         
         if (EFI_ERROR(Status)){
@@ -1922,7 +1922,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          sizeof(DiskIO2_Task), 
-                         &DiskIo2EntityWrite
+                         (VOID **) &DiskIo2EntityWrite
                          );
         if (EFI_ERROR(Status)) {
           MemoryAllocFail = TRUE;
@@ -1945,7 +1945,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool(
                          EfiBootServicesData, 
                          DiskIo2EntityWrite->BufferSize, 
-                         &DiskIo2EntityWrite->Buffer
+                         (VOID **) &DiskIo2EntityWrite->Buffer
                          );
         if (EFI_ERROR(Status)){
           MemoryAllocFail = TRUE;
@@ -2018,7 +2018,7 @@ END:
         gtBS->AllocatePool(
                 EfiBootServicesData, 
                 DiskIo2EntityWrite->BufferSize, 
-                &ReadBufferSync
+                (VOID **) &ReadBufferSync
                 );
 
         if (ReadBufferSync != NULL) {

@@ -99,7 +99,7 @@ BBTestGetHashSizeConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -189,7 +189,7 @@ BBTestHashConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -197,10 +197,10 @@ BBTestHashConformanceTest (
 
   Status = Hash2ServiceBindingCreateChild(Hash2SB, &ChildHandle, &Hash2);
 
-  Status1 = Hash2->Hash (Hash2, NULL, Message, MessageSize, Hash2Out);
-  Status2 = Hash2->Hash (Hash2, &UnsupportedAlgoGuid, Message, MessageSize,Hash2Out);
-  Status3 = Hash2->Hash (Hash2, &gBlackBoxEfiHash2AlgorithmSha1NoPadGuid, Message, MessageSize,Hash2Out);
-  Status4 = Hash2->Hash (Hash2, &gBlackBoxEfiHash2AlgorithmSha256NoPadGuid, Message, MessageSize,Hash2Out);
+  Status1 = Hash2->Hash (Hash2, NULL, Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
+  Status2 = Hash2->Hash (Hash2, &UnsupportedAlgoGuid, Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
+  Status3 = Hash2->Hash (Hash2, &gBlackBoxEfiHash2AlgorithmSha1NoPadGuid, Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
+  Status4 = Hash2->Hash (Hash2, &gBlackBoxEfiHash2AlgorithmSha256NoPadGuid, Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
   if ((Status1 == EFI_UNSUPPORTED) && (Status2 == EFI_UNSUPPORTED) && (Status1 == EFI_UNSUPPORTED) && (Status1 == EFI_UNSUPPORTED))
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
@@ -279,7 +279,7 @@ BBTestHashInitConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -392,7 +392,7 @@ BBTestHashUpdateConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -421,7 +421,7 @@ BBTestHashUpdateConformanceTest (
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
 	if (Status == EFI_SUCCESS) {
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
-      Status = Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, Hash2Out);
+      Status = Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
  
       Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
       if (Status == EFI_NOT_READY)
@@ -443,7 +443,7 @@ BBTestHashUpdateConformanceTest (
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
 	  Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
-	  Status = Hash2->HashFinal (Hash2, Hash2Out);
+	  Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
 	  Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
       if (Status == EFI_NOT_READY)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -500,7 +500,7 @@ BBTestHashFinalConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status)) {
     return Status;
@@ -508,7 +508,7 @@ BBTestHashFinalConformanceTest (
 
   Status = Hash2ServiceBindingCreateChild(Hash2SB, &ChildHandle, &Hash2);
 
-  Status = Hash2->HashFinal (Hash2, Hash2Out);
+  Status = Hash2->HashFinal (Hash2,  (EFI_HASH2_OUTPUT *) Hash2Out);
   if (Status == EFI_NOT_READY)
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
@@ -529,7 +529,7 @@ BBTestHashFinalConformanceTest (
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
 	if (Status == EFI_SUCCESS) {
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
-      Status = Hash2->HashFinal (Hash2, Hash2Out);
+      Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
       if (Status == EFI_NOT_READY)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -548,8 +548,8 @@ BBTestHashFinalConformanceTest (
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
-	  Status =Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, Hash2Out);
-	  Status = Hash2->HashFinal (Hash2, Hash2Out);
+	  Status =Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
+	  Status = Hash2->HashFinal (Hash2,  (EFI_HASH2_OUTPUT *) Hash2Out);
       if (Status == EFI_NOT_READY)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -570,7 +570,7 @@ BBTestHashFinalConformanceTest (
       Status= Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
 	  Status =Hash2->HashUpdate (Hash2, Message, MessageSize);
 
-      Status = Hash2->HashFinal (Hash2, NULL);
+      Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) NULL);
       if (Status == EFI_INVALID_PARAMETER)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -586,9 +586,9 @@ BBTestHashFinalConformanceTest (
                      (UINTN)__LINE__,
                      Status
                      ); 
-	  
-	  Status = Hash2->HashFinal (Hash2, Hash2Out);
-	  Status = Hash2->HashFinal (Hash2, Hash2Out);;
+      
+      Status = Hash2->HashFinal (Hash2,  (EFI_HASH2_OUTPUT *) Hash2Out);
+      Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT*) Hash2Out);;
       if (Status == EFI_NOT_READY)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else

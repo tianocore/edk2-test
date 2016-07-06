@@ -110,7 +110,7 @@ BBTestStringToImageConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -150,7 +150,7 @@ BBTestStringIdToImageConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -198,7 +198,7 @@ BBTestGetGlyphConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -236,7 +236,7 @@ BBTestGetFontInfoConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;

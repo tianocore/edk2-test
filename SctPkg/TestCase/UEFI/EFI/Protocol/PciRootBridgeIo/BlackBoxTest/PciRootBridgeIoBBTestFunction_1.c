@@ -112,7 +112,7 @@ PollMem_Func_Manual (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -384,7 +384,7 @@ PollMemCheckPoint (
   Status = gtBS->CreateEvent (
                    EVT_TIMER | EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   EventNotifyWriteMem,
+                   (EFI_EVENT_NOTIFY) EventNotifyWriteMem,
                    EventContext,
                    &TimeOutEvent
                    );
@@ -741,7 +741,7 @@ PollMem_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -754,7 +754,7 @@ PollMem_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1114,7 +1114,7 @@ PollIo_Func_Manual (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1388,7 +1388,7 @@ PollIoCheckPoint (
   Status = gtBS->CreateEvent (
                    EVT_TIMER | EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   EventNotifyWriteIo,
+                   (EFI_EVENT_NOTIFY) EventNotifyWriteIo,
                    EventContext,
                    &TimeOutEvent
                    );
@@ -1746,7 +1746,7 @@ PollIo_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1759,7 +1759,7 @@ PollIo_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2124,7 +2124,7 @@ MemRead_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2137,7 +2137,7 @@ MemRead_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2795,7 +2795,7 @@ MemWrite_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2808,7 +2808,7 @@ MemWrite_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -3521,7 +3521,7 @@ IoRead_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -3534,7 +3534,7 @@ IoRead_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4187,7 +4187,7 @@ IoWrite_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4200,7 +4200,7 @@ IoWrite_Func (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiTestProfileLibraryGuid,
-                   &ProfileLib
+                   (VOID **) &ProfileLib
                    );
 
   if (EFI_ERROR(Status)) {

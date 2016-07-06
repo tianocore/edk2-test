@@ -128,7 +128,7 @@ Returns:
     Status = tBS->HandleProtocol (
                     HandleBuffer[HandleIndex],
                     &gEfiEntsProtocolGuid,
-                    &Interface
+                    (VOID **) &Interface
                     );
     if (EFI_ERROR (Status)) {
       goto Done;
@@ -227,7 +227,7 @@ Returns:
     Status = tBS->HandleProtocol (
                     HandleBuffer[HandleIndex],
                     &gEfiEntsProtocolGuid,
-                    &Interface
+                    (VOID **) &Interface
                     );
     if (EFI_ERROR (Status)) {
       goto Done;

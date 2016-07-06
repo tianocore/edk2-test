@@ -194,7 +194,7 @@ InitializeSimpleTextInputExBBTest (
   //
 
   SctInitializeLib (ImageHandle, SystemTable);
-  gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
 
   mImageHandle = ImageHandle;
 
@@ -601,7 +601,7 @@ LocateDevicePathFromSimpleTextInputEx (
       Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiSimpleTextInputExProtocolGuid,
-                        &OtherSimpleTextInputEx
+                        (VOID **) &OtherSimpleTextInputEx
                         );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -638,7 +638,7 @@ LocateDevicePathFromSimpleTextInputEx (
   Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiDevicePathProtocolGuid,
-                      DevicePath
+                      (VOID **) DevicePath
                       );
 
   gtBS->FreePool (HandleBuffer);

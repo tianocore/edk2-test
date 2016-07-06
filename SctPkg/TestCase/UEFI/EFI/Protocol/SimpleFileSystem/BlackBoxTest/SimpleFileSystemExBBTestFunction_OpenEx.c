@@ -449,7 +449,7 @@ FileIoAsyncOpenFile (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoOpenFile_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -462,7 +462,7 @@ FileIoAsyncOpenFile (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoOpenFileNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoOpenFileNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -572,7 +572,7 @@ FileIoAsyncOpenDir (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoOpenFile_Task), 
-                   &FileIoOpenFileEntity);
+                   (VOID **) &FileIoOpenFileEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -583,7 +583,7 @@ FileIoAsyncOpenDir (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoOpenFile_Task), 
-                   &FileIoOpenDirEntity);
+                   (VOID **) &FileIoOpenDirEntity);
   if (EFI_ERROR (Status)) {
     
     if (FileIoOpenFileEntity != NULL)
@@ -597,7 +597,7 @@ FileIoAsyncOpenDir (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoOpenDirNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoOpenDirNotifyFunc,
                    FileIoOpenDirEntity,
                    &FileIoOpenDirEntity->FileIoToken.Event
                    );
@@ -618,7 +618,7 @@ FileIoAsyncOpenDir (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoOpenFileNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoOpenFileNotifyFunc,
                    FileIoOpenFileEntity,
                    &FileIoOpenFileEntity->FileIoToken.Event
                    );
@@ -751,7 +751,7 @@ BBTestOpenExBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -3699,7 +3699,7 @@ FileIoAsyncOpenExistingFile (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoOpenFile_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -3712,7 +3712,7 @@ FileIoAsyncOpenExistingFile (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoOpenExistingFileNotifyFunc ,
+                   (EFI_EVENT_NOTIFY) FileIoOpenExistingFileNotifyFunc ,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -4048,7 +4048,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             StandardLib->RecordAssertion (
@@ -4145,7 +4145,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
           //
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -4330,7 +4330,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -4611,7 +4611,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             StandardLib->RecordAssertion (
@@ -4708,7 +4708,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
           //
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -4879,7 +4879,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -5170,7 +5170,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
@@ -5275,7 +5275,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
           //
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -5474,7 +5474,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -5846,7 +5846,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
@@ -5948,7 +5948,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
         
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -6135,7 +6135,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -6392,7 +6392,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
@@ -6487,7 +6487,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
           //
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -6669,7 +6669,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -6993,7 +6993,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
@@ -7088,7 +7088,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
           //
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -7259,7 +7259,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -7604,7 +7604,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
@@ -7715,7 +7715,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
         
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -7924,7 +7924,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -8350,7 +8350,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             SctAcquireLock (&gAsyncOpenExistingFileQueueLock);
@@ -8462,7 +8462,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
         
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -8656,7 +8656,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -9046,7 +9046,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             StandardLib->RecordAssertion (
@@ -9168,7 +9168,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
           //        
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -9378,7 +9378,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );
@@ -9825,7 +9825,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
           Status = gtBS->AllocatePool(
                            EfiBootServicesData, 
                            sizeof(FileIoOpenFile_Task), 
-                           &CreateFileEntity
+                           (VOID **) &CreateFileEntity
                            );
           if (EFI_ERROR(Status)) {
             StandardLib->RecordAssertion (
@@ -9945,7 +9945,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
           //
           Status = InternalGetInfoFileIo2 (
                      CreateFileEntity->FileIo,
-                     &FileInfo,
+                     (VOID **) &FileInfo,
                      &InfoBufferSize,
                      &gBlackBoxEfiFileInfoGuid
                      );
@@ -10139,7 +10139,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
         //
         Status = InternalGetInfoFileIo2 (
                    FileIoEntity->FileIo,
-                   &FileInfo,
+                   (VOID **) &FileInfo,
                    &InfoBufferSize,
                    &gBlackBoxEfiFileInfoGuid
                    );

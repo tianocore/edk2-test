@@ -491,7 +491,7 @@ LoadStartImage (
   Status = gtBS->HandleProtocol (
                    CurrentImageHandle,
                    &gEfiLoadedImageProtocolGuid,
-                   &LoadImage
+                   (VOID **) &LoadImage
                    );
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -631,7 +631,7 @@ GetPlatformOverrideDriverImages (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[0],
                    &gEfiPlatformDriverOverrideProtocolGuid,
-                   &PlatformDriverOverrideInterface
+                   (VOID **) &PlatformDriverOverrideInterface
                    );
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (

@@ -99,7 +99,7 @@ BBTestOpenConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -173,7 +173,7 @@ BBTestDeleteConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -222,7 +222,7 @@ BBTestWriteConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -290,7 +290,7 @@ BBTestFlushConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -353,7 +353,7 @@ BBTestSetPositionConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -403,7 +403,7 @@ BBTestGetPositionConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -453,7 +453,7 @@ BBTestGetInfoConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -508,7 +508,7 @@ BBTestSetInfoConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -2175,7 +2175,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
     return Status;
   }
   
-  Status = InternalGetInfo (Root, &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2290,7 +2290,7 @@ BBTestSetInfoConformanceTestCheckpoint2 (
     return Status;
   }
 
-  Status = InternalGetInfo (Root, &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2353,7 +2353,7 @@ BBTestSetInfoConformanceTestCheckpoint2 (
       goto NextLoop;
     }
 
-    Status = InternalGetInfo (FileHandle[Index], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (FileHandle[Index], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -2553,7 +2553,7 @@ BBTestSetInfoConformanceTestCheckpoint3 (
     return Status;
   }
 
-  Status = InternalGetInfo (Root, &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2625,7 +2625,7 @@ BBTestSetInfoConformanceTestCheckpoint3 (
     //
     // get info first
     //
-    Status = InternalGetInfo (FileHandle[Index], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (FileHandle[Index], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -2674,7 +2674,7 @@ NextLoop:
   //
 
   // retrieve system info first
-  Status = InternalGetInfo (Root, &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2712,7 +2712,7 @@ NextLoop:
   //
 
   // retrieve volume label first
-  Status = InternalGetInfo (Root, &VolumeLabel, &BufferSize, &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid);
+  Status = InternalGetInfo (Root, (VOID **) &VolumeLabel, &BufferSize, &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2800,7 +2800,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     return Status;
   }
 
-  Status = InternalGetInfo (Root, &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2894,7 +2894,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     goto Done;
   }
 
-  Status = InternalGetInfo (FileHandle[0], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle[0], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2942,7 +2942,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     //
     // check the FileInfo is not updated
     //
-    Status = InternalGetInfo (FileHandle[0], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (FileHandle[0], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
 
     if ((SavedSize == FileInfo->Size)
         && (SavedPhysicalSize == FileInfo->PhysicalSize)
@@ -2969,7 +2969,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     FileInfo = NULL;
   }
 
-  Status = InternalGetInfo (FileHandle[0], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle[0], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3008,7 +3008,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     //
     // check the FileInfo is not updated
     //
-    Status = InternalGetInfo (FileHandle[0], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (FileHandle[0], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
 
     //
     // should not match
@@ -3041,7 +3041,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
   // for the directory
   //
 
-  Status = InternalGetInfo (FileHandle[1], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle[1], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3089,7 +3089,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     //
     // check the FileInfo is not updated
     //
-    Status = InternalGetInfo (FileHandle[1], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (FileHandle[1], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
 
     if ((SavedSize == FileInfo->Size)
         && (SavedPhysicalSize == FileInfo->PhysicalSize)
@@ -3116,7 +3116,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     FileInfo = NULL;
   }
 
-  Status = InternalGetInfo (FileHandle[1], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle[1], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3155,7 +3155,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     //
     // check the FileInfo is not updated
     //
-    Status = InternalGetInfo (FileHandle[1], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+    Status = InternalGetInfo (FileHandle[1], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
 
     //
     // should not match
@@ -3222,7 +3222,7 @@ BBTestSetInfoConformanceTestCheckpoint5 (
     return Status;
   }
 
-  Status = InternalGetInfo (Root, &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3253,7 +3253,7 @@ BBTestSetInfoConformanceTestCheckpoint5 (
   //
   SystemInfo = NULL;
 
-  Status = InternalGetInfo (Root, &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3287,7 +3287,7 @@ BBTestSetInfoConformanceTestCheckpoint5 (
   gtBS->FreePool (SystemInfo);
   SystemInfo = NULL;
 
-  Status = InternalGetInfo (Root, &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3364,7 +3364,7 @@ BBTestSetInfoConformanceTestCheckpoint6 (
     return Status;
   }
   
-  Status = InternalGetInfo (Root, &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3427,7 +3427,7 @@ BBTestSetInfoConformanceTestCheckpoint6 (
   //
   // get info first
   //
-  Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3520,7 +3520,7 @@ BBTestSetInfoConformanceTestCheckpoint6 (
   //
   // get info first
   //
-  Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3575,7 +3575,7 @@ BBTestSetInfoConformanceTestCheckpoint6 (
                  (UINTN)__LINE__,
                  Status
                  );
-  Status = InternalGetInfo (FileHandle, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3665,7 +3665,7 @@ BBTestSetInfoConformanceTestCheckpoint7 (
     return Status;
   }
  
-  Status = InternalGetInfo (Root, &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3739,7 +3739,7 @@ BBTestSetInfoConformanceTestCheckpoint7 (
 	//
   // get info first
   //
-  Status = InternalGetInfo (FileHandle[0], &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle[0], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3832,7 +3832,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
   //
   // get system volume info  from Root directory
   //
-  Status = InternalGetInfo (Root, &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3882,7 +3882,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
   //
   // get system volume label from Root directory
   //
-  Status = InternalGetInfo (Root, &FileSystemLabel, &BufferSize, &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileSystemLabel, &BufferSize, &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3927,7 +3927,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
   //
   // get root directory file info  
   //
-  Status = InternalGetInfo (Root, &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (Root, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,

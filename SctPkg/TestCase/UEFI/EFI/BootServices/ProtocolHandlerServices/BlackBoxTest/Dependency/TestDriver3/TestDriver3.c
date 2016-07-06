@@ -187,7 +187,7 @@ InitializeTestDriver3 (
   mPrivateData->StatusArray[0] = gtBS->OpenProtocol (
                                   HandleBuffer[0],
                                   &mInterfaceFunctionTestProtocol1Guid,
-                                  &IFTestProt1,
+                                  (VOID **) &IFTestProt1,
                                   ImageHandle,
                                   NULL,
                                   EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -212,7 +212,7 @@ InitializeTestDriver3 (
   mPrivateData->StatusArray[1] = gtBS->OpenProtocol (
                                   HandleBuffer[0],
                                   &mInterfaceFunctionTestProtocol2Guid,
-                                  &IFTestProt2,
+                                  (VOID **) &IFTestProt2,
                                   ImageHandle,
                                   NULL,
                                   EFI_OPEN_PROTOCOL_TEST_PROTOCOL

@@ -162,7 +162,7 @@ InitializeTapeTest (
   //
   //ASSERT_PROTOCOL_ALREADY_INSTALLED (NULL, &gBlackBoxEfiTapeIoProtocolGuid);  
   
-  Status = gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  Status = gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -260,7 +260,7 @@ getStandardLibInterface( EFI_HANDLE SupportHandle )
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR(Status))
   {
@@ -273,7 +273,7 @@ getStandardLibInterface( EFI_HANDLE SupportHandle )
   Status = gtBS->LocateProtocol (
                    &gEfiTestLoggingLibraryGuid,
                    NULL,
-                   &LoggingLib
+                   (VOID **) &LoggingLib
                    );
   if (EFI_ERROR(Status))
   {

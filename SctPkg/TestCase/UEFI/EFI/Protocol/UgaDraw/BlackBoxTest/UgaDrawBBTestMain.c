@@ -251,7 +251,7 @@ InitializeBBTestUgaDraw (
   DemoRefreshRateMax = sizeof (DemoRefreshRate) / sizeof (DEMO_REFRESH_RATE_TYPE);
   DemoColorDepthMax  = sizeof (DemoColorDepth) / sizeof (DEMO_COLOR_DEPTH_TYPE);
 
-  gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
 
   return EfiInitAndInstallBBTestInterface (
            &ImageHandle,
@@ -350,7 +350,7 @@ _IPrint (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData,
                    0x10000,
-                   &Buffer
+                   (VOID **) &Buffer
                    );
 
   //SctZeroMem (Buffer, 0x10000);
@@ -386,7 +386,7 @@ _IPrint (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiHiiProtocolGuid,
-                   &Hii
+                   (VOID **) &Hii
                    );
 
   if (EFI_ERROR (Status)) {
@@ -468,7 +468,7 @@ UgaPrintXY (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiSimpleTextOutProtocolGuid,
-                   &Sto
+                   (VOID **) &Sto
                    );
 
   if (EFI_ERROR (Status)) {
@@ -527,7 +527,7 @@ PrintXY (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiUgaDrawProtocolGuid,
-                   &UgaDraw
+                   (VOID **) &UgaDraw
                    );
 
   if (EFI_ERROR (Status)) {
@@ -538,7 +538,7 @@ PrintXY (
   Status = gtBS->HandleProtocol (
                    Handle,
                    &gBlackBoxEfiSimpleTextOutProtocolGuid,
-                   &Sto
+                   (VOID **) &Sto
                    );
 
   if (EFI_ERROR (Status)) {
@@ -1284,7 +1284,7 @@ LocateDevicePathFromUgaDraw (
       Status = gtBS->HandleProtocol (
                        HandleBuffer[Index],
                        &gBlackBoxEfiUgaDrawProtocolGuid,
-                       &OtherUgaDraw
+                       (VOID **) &OtherUgaDraw
                        );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -1321,7 +1321,7 @@ LocateDevicePathFromUgaDraw (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gEfiDevicePathProtocolGuid,
-                   DevicePath
+                   (VOID **) DevicePath
                    );
 
    gtBS->FreePool (HandleBuffer);

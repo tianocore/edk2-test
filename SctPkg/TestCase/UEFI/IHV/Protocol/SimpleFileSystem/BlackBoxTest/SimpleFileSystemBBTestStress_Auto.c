@@ -115,7 +115,7 @@ BBTestSimpleFileSytemExtensiveTest5 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -368,7 +368,7 @@ BBTestSimpleFileSytemExtensiveTest5 (
     FileInfo = NULL;
     Status = InternalGetInfo (
                OpenFileHandle[FileIndex],
-               &FileInfo,
+               (VOID **) &FileInfo,
                &InfoBufferSize,
                &gBlackBoxEfiFileInfoGuid
                );
@@ -482,7 +482,7 @@ BBTestSimpleFileSytemExtensiveTest5 (
     FileInfo = NULL;
     Status = InternalGetInfo (
                OpenDirHandle[FileIndex],
-               &FileInfo,
+               (VOID **) &FileInfo,
                &InfoBufferSize,
                &gBlackBoxEfiFileInfoGuid
                );
@@ -599,7 +599,7 @@ BBTestSimpleFileSytemExtensiveTest6 (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -666,7 +666,7 @@ BBTestSimpleFileSytemOpenStress (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -722,7 +722,7 @@ BBTestSimpleFileSytemGetInfoStress (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -772,7 +772,7 @@ BBTestSimpleFileSytemSetInfoStress (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

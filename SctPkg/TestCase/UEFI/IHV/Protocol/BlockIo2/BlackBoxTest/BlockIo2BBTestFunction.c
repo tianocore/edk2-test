@@ -285,7 +285,7 @@ BlockIo2AsyncReadData (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData, 
                    sizeof(BlockIO2_Task), 
-                   &BlockIo2Entity);
+                   (VOID **) &BlockIo2Entity);
   if (Status != EFI_SUCCESS) {
     return Status;
   }
@@ -295,7 +295,7 @@ BlockIo2AsyncReadData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   BlockIo2ReadNotifyFunc,
+                   (EFI_EVENT_NOTIFY) BlockIo2ReadNotifyFunc,
                    BlockIo2Entity,
                    &BlockIo2Entity->BlockIo2Token.Event
                    );
@@ -413,7 +413,7 @@ BlockIo2MixedSyncAsyncReadData (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData, 
                    sizeof(BlockIO2_Task), 
-                   &BlockIo2Entity);
+                   (VOID **) &BlockIo2Entity);
   if (Status != EFI_SUCCESS) {
     return Status;
   }
@@ -423,7 +423,7 @@ BlockIo2MixedSyncAsyncReadData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   BlockIo2MixedReadNotifyFunc,
+                   (EFI_EVENT_NOTIFY) BlockIo2MixedReadNotifyFunc,
                    BlockIo2Entity,
                    &BlockIo2Entity->BlockIo2Token.Event
                    );
@@ -502,7 +502,7 @@ BlockIo2MixedSyncAsyncReadData (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(BlockIO2_Task), 
-                     &BlockIo2Entity);
+                     (VOID **) &BlockIo2Entity);
     if (Status != EFI_SUCCESS) {
       FreeAlignedPool(BufferSync);
       return Status;
@@ -610,7 +610,7 @@ BlockIo2AsyncWriteData (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData, 
                    sizeof(BlockIO2_Task), 
-                   &BlockIo2Entity
+                   (VOID **) &BlockIo2Entity
                    );
   if (Status != EFI_SUCCESS) {
     return Status;
@@ -621,7 +621,7 @@ BlockIo2AsyncWriteData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   BlockIo2WriteNotifyFunc,
+                   (EFI_EVENT_NOTIFY) BlockIo2WriteNotifyFunc,
                    BlockIo2Entity,
                    &BlockIo2Entity->BlockIo2Token.Event
                    );
@@ -738,7 +738,7 @@ BlockIo2MixedSyncAsyncWriteData (
   Status = gtBS->AllocatePool (
                    EfiBootServicesData, 
                    sizeof(BlockIO2_Task), 
-                   &BlockIo2Entity
+                   (VOID **) &BlockIo2Entity
                    );
   if (Status != EFI_SUCCESS) {
     return Status;
@@ -749,7 +749,7 @@ BlockIo2MixedSyncAsyncWriteData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   BlockIo2MixedWriteNotifyFunc,
+                   (EFI_EVENT_NOTIFY) BlockIo2MixedWriteNotifyFunc,
                    BlockIo2Entity,
                    &BlockIo2Entity->BlockIo2Token.Event
                    );
@@ -825,7 +825,7 @@ BlockIo2MixedSyncAsyncWriteData (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(BlockIO2_Task), 
-                     &BlockIo2Entity);
+                     (VOID **) &BlockIo2Entity);
     if (Status != EFI_SUCCESS) {
       FreeAlignedPool(BufferSync);
       return Status;
@@ -899,7 +899,7 @@ EFIAPI BlockIo2ReadBatchNotifyFunc (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     BlockIo2ReadBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) BlockIo2ReadBatchNotifyFunc,
                      TaskContext,
                      &BlockIo2Entity->BlockIo2Token.Event
                      );
@@ -983,7 +983,7 @@ BlockIo2AsyncBatchRead (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(BlockIO2_Batch_Task_Context), 
-                     &TaskContext
+                     (VOID **) &TaskContext
                      );
     if (TaskContext == NULL) {
       return EFI_OUT_OF_RESOURCES;
@@ -1002,7 +1002,7 @@ BlockIo2AsyncBatchRead (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     BlockIo2ReadBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) BlockIo2ReadBatchNotifyFunc,
                      TaskContext,
                      &BlockIo2Entity->BlockIo2Token.Event
                      );
@@ -1050,7 +1050,7 @@ EFIAPI BlockIo2WriteBatchNotifyFunc (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     BlockIo2WriteBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) BlockIo2WriteBatchNotifyFunc,
                      TaskContext,
                      &BlockIo2Entity->BlockIo2Token.Event
                      );
@@ -1135,7 +1135,7 @@ BlockIo2AsyncBatchWrite (
     Status = gtBS->AllocatePool (
                      EfiBootServicesData, 
                      sizeof(BlockIO2_Batch_Task_Context), 
-                     &TaskContext
+                     (VOID **) &TaskContext
                      );
     if (TaskContext == NULL) {
       return EFI_OUT_OF_RESOURCES;
@@ -1154,7 +1154,7 @@ BlockIo2AsyncBatchWrite (
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     BlockIo2WriteBatchNotifyFunc,
+                     (EFI_EVENT_NOTIFY) BlockIo2WriteBatchNotifyFunc,
                      TaskContext,
                      &BlockIo2Entity->BlockIo2Token.Event
                      );
@@ -1206,7 +1206,7 @@ BBTestResetFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1323,7 +1323,7 @@ BBTestReadBlocksExFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1387,13 +1387,13 @@ BBTestReadBlocksExFunctionAutoTest (
      Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiBlockIo2ProtocolGuid,
-                      &BlockIo2Temp
+                      (VOID **) &BlockIo2Temp
                       );
      if (Status == EFI_SUCCESS && BlockIo2Temp == BlockIo2) {
        Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiBlockIoProtocolGuid,
-                        &BlockIo
+                        (VOID **) &BlockIo
                         );
        if (Status != EFI_SUCCESS) {
          BlockIo = NULL;
@@ -2093,7 +2093,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint3(
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   BlockIo2FinishNotifyFunc,
+                   (EFI_EVENT_NOTIFY) BlockIo2FinishNotifyFunc,
                    &AsyncReadFinished,
                    &BatchReadToken.Event
                    );
@@ -2135,7 +2135,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool (
                          EfiBootServicesData, 
                          sizeof(BlockIO2_Task), 
-                         &BlockIo2Entity
+                         (VOID **) &BlockIo2Entity
                          );
         if (Status != EFI_SUCCESS) {
           MemoryAllocFail = TRUE;
@@ -2699,7 +2699,7 @@ BBTestWriteBlocksExFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   
   if (EFI_ERROR(Status)) {
@@ -2763,13 +2763,13 @@ BBTestWriteBlocksExFunctionAutoTest (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiBlockIo2ProtocolGuid,
-                     &BlockIo2Temp
+                     (VOID **) &BlockIo2Temp
                      );
     if (Status == EFI_SUCCESS && BlockIo2Temp == BlockIo2) {
       Status = gtBS->HandleProtocol (
                        HandleBuffer[Index],
                        &gBlackBoxEfiBlockIoProtocolGuid,
-                       &BlockIo
+                       (VOID **) &BlockIo
                        );
       if (Status != EFI_SUCCESS) {
         BlockIo = NULL;
@@ -2900,7 +2900,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint1(
         Status = gtBS->AllocatePool (
                          EfiBootServicesData, 
                          sizeof(BlockIO2_Task), 
-                         &BlockIo2Entity
+                         (VOID **) &BlockIo2Entity
                          );
         if (Status != EFI_SUCCESS) {
           goto END;
@@ -3388,7 +3388,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint2(
         Status = gtBS->AllocatePool (
                          EfiBootServicesData, 
                          sizeof(BlockIO2_Task), 
-                         &BlockIo2Entity
+                         (VOID **) &BlockIo2Entity
                          );
         if (Status != EFI_SUCCESS) {
           goto END;
@@ -3670,7 +3670,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   BlockIo2FinishNotifyFunc,
+                   (EFI_EVENT_NOTIFY) BlockIo2FinishNotifyFunc,
                    &AsyncWriteFinished,
                    &BatchWriteToken.Event
                    );
@@ -3714,7 +3714,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool (
                          EfiBootServicesData, 
                          sizeof(BlockIO2_Task), 
-                         &BlockIo2RecordEntity
+                         (VOID **) &BlockIo2RecordEntity
                          );
         if (Status != EFI_SUCCESS) {
           MemoryAllocFail = TRUE;
@@ -3776,7 +3776,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
         Status = gtBS->AllocatePool (
                          EfiBootServicesData, 
                          sizeof(BlockIO2_Task), 
-                         &BlockIo2WriteEntity
+                         (VOID **) &BlockIo2WriteEntity
                          );
         if (Status != EFI_SUCCESS) {
           MemoryAllocFail = TRUE;
@@ -4130,7 +4130,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint4(
         Status = gtBS->AllocatePool (
                          EfiBootServicesData, 
                          sizeof(BlockIO2_Task), 
-                         &BlockIo2Entity
+                         (VOID **) &BlockIo2Entity
                          );
         if (Status != EFI_SUCCESS) {
           goto END;
@@ -4542,7 +4542,7 @@ BBTestFlushBlocksExFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4643,7 +4643,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
     Status = gtBS->CreateEvent (
                      EVT_NOTIFY_SIGNAL,
                      TPL_CALLBACK,
-                     BlockIo2FinishNotifyFunc,
+                     (EFI_EVENT_NOTIFY) BlockIo2FinishNotifyFunc,
                      &AsyncFlushFinished[IndexI],
                      &BlockIo2TokenBuffer[IndexI].Event
                      );
@@ -4790,7 +4790,7 @@ BBTestMediaInfoCheckAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -4855,13 +4855,13 @@ BBTestMediaInfoCheckAutoTest (
      Status = gtBS->HandleProtocol (
                       HandleBuffer[Index],
                       &gBlackBoxEfiBlockIo2ProtocolGuid,
-                      &BlockIo2Temp
+                      (VOID **) &BlockIo2Temp
                       );
      if (Status == EFI_SUCCESS && BlockIo2Temp == BlockIo2) {
        Status = gtBS->HandleProtocol (
                         HandleBuffer[Index],
                         &gBlackBoxEfiBlockIoProtocolGuid,
-                        &BlockIo
+                        (VOID **) &BlockIo
                         );
        if (Status != EFI_SUCCESS) {
          BlockIo = NULL;

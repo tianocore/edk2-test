@@ -185,7 +185,7 @@ InitializeBBTestAbsolutePointer (
   EfiInitializeTestLib (ImageHandle, SystemTable);
   SctInitializeLib (ImageHandle, SystemTable);
 
-  gtBS->CreateEvent (EVT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EVT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
 
   return EfiInitAndInstallIHVBBTestInterface (
            &ImageHandle,
@@ -284,7 +284,7 @@ LocateDevicePathFromAbsolutePointer (
       Status = gtBS->HandleProtocol (
                        HandleBuffer[Index],
                        &gBlackBoxEfiAbsolutePointerProtocolGuid,
-                       &OtherAbsoluteIn
+                       (VOID **) &OtherAbsoluteIn
                        );
     if (EFI_ERROR (Status)) {
       StandardLib->RecordAssertion (
@@ -320,7 +320,7 @@ LocateDevicePathFromAbsolutePointer (
   Status = gtBS->HandleProtocol (
                    HandleBuffer[Index],
                    &gEfiDevicePathProtocolGuid,
-                   DevicePath
+                   (VOID **) DevicePath
                    );
 
   gtBS->FreePool (HandleBuffer);

@@ -2079,7 +2079,7 @@ AllocateBuffer_Conf (
                          AllocateAnyPages,
                          InvalidMemoryType[Index],
                          1,
-                         &HostAddress
+                         (VOID **) &HostAddress
                          );
 
     //
@@ -2216,7 +2216,7 @@ AllocateBuffer_Conf (
                          AllocateAddress,
                          EfiBootServicesData,
                          1,
-                         &BaseAddress
+                         (VOID **) &BaseAddress
                          );
 
     if (Status == EFI_UNSUPPORTED) {
@@ -2335,7 +2335,7 @@ FreeBuffer_Conf (
                        AllocateAnyPages,
                        EfiBootServicesData,
                        AllocatedPages,
-                       &HostAddress
+                       (VOID **) &HostAddress
                        );
 
   if (!EFI_ERROR(Status)) {

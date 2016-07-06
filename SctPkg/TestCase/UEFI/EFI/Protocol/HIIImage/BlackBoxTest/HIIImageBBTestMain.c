@@ -238,7 +238,7 @@ GetGraphicsOutputInterface (
   Status = gtBS->HandleProtocol (
              HandleBuffer[0],
              &gBlackBoxEfiGraphicsOutputProtocolGuid,
-             GraphicsOutput
+             (VOID **) GraphicsOutput
              );
   if ( EFI_ERROR(Status) ) {
     gtBS->FreePool ( HandleBuffer );
@@ -280,7 +280,7 @@ GetHIIDatabaseInterface (
   Status = gtBS->HandleProtocol (
              HandleBuffer[0],
              &gBlackBoxEfiHIIDatabaseProtocolGuid,
-             HIIDatabase
+             (VOID **) HIIDatabase
              );
   if ( EFI_ERROR(Status) ) {
     gtBS->FreePool ( HandleBuffer );

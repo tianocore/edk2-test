@@ -152,7 +152,7 @@ BBTestSetOptionsConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -211,7 +211,7 @@ BBTestOptionsValidConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -266,7 +266,7 @@ BBTestForceDefaultsConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -1051,7 +1051,7 @@ FindMatchedDeviceHandle (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiDriverConfigurationProtocolGuid,
-                     &TestedDriverConfig
+                     (VOID **) &TestedDriverConfig
                      );
     if (EFI_ERROR (Status)) {
       continue;

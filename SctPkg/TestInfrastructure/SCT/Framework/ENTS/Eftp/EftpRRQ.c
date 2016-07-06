@@ -1810,7 +1810,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   NET_TPL_EVENT,
-                  EftpRrqTxCallback,
+                  (EFI_EVENT_NOTIFY) EftpRrqTxCallback,
                   Buf,
                   &Buf->EftpToken.MnpToken.Event
                   );

@@ -752,7 +752,7 @@ CheckConsoleProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiSimpleTextInProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -766,7 +766,7 @@ CheckConsoleProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiSimpleTextOutProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -780,7 +780,7 @@ CheckConsoleProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiSimpleTextInputExProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueC = TRUE;
@@ -858,7 +858,7 @@ CheckHiiProtocols (
     Status = gtBS->LocateProtocol (
                      &Guid[Index],
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                    );
     if (!EFI_ERROR (Status)) {
       Value[Index] = TRUE;
@@ -973,7 +973,7 @@ CheckGraphicalConsoleProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiGraphicsOutputProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -987,7 +987,7 @@ CheckGraphicalConsoleProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiEdidDiscoveredProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -1001,7 +1001,7 @@ CheckGraphicalConsoleProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiEdidActiveProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueC = TRUE;
@@ -1072,7 +1072,7 @@ CheckPointerProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiSimplePointerProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -1144,7 +1144,7 @@ CheckBootFromDiskProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiBlockIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -1158,7 +1158,7 @@ CheckBootFromDiskProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiDiskIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -1172,7 +1172,7 @@ CheckBootFromDiskProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiSimpleFileSystemProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueC = TRUE;
@@ -1186,7 +1186,7 @@ CheckBootFromDiskProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiUnicodeCollationProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueD = TRUE;
@@ -1263,7 +1263,7 @@ CheckBootFromNetworkProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiPxeBaseCodeProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -1277,7 +1277,7 @@ CheckBootFromNetworkProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiSimpleNetworkProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     Value[0] = TRUE;
@@ -1291,7 +1291,7 @@ CheckBootFromNetworkProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiManagedNetworkProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     Value[1] = TRUE;
@@ -1305,7 +1305,7 @@ CheckBootFromNetworkProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiNetworkInterfaceIdentifierProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     Value[2] = TRUE;
@@ -1458,7 +1458,7 @@ CheckUefiNetworkApplication (
     Status = gtBS->LocateProtocol (
                      &Guid[Index],
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                    );
     if (!EFI_ERROR (Status)) {
       Value[Index] = TRUE;
@@ -1658,7 +1658,7 @@ CheckUefiV6NetworkApplication (
     Status = gtBS->LocateProtocol (
                      &Guid[Index],
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (!EFI_ERROR (Status)) {
       Value[Index] = TRUE;
@@ -1732,7 +1732,7 @@ CheckUefiV6NetworkApplication (
       Status = gtBS->LocateProtocol (
                        &Guid[Index+5],
                        NULL,
-                       &Interface
+                       (VOID **) &Interface
                        );
       if (!EFI_ERROR (Status)) {
         Value[Index+5] = TRUE;
@@ -1812,7 +1812,7 @@ CheckUefiV6NetworkApplication (
       Status = gtBS->LocateProtocol (
                        &Guid[9],
                        NULL,
-                       &Interface
+                       (VOID **) &Interface
                        );
       if (!EFI_ERROR (Status)) {
         Value[9] = TRUE;
@@ -1885,7 +1885,7 @@ CheckUartProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiSerialIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -1955,7 +1955,7 @@ CheckPciProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiPciRootBridgeIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -1969,7 +1969,7 @@ CheckPciProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiPciIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -2041,7 +2041,7 @@ CheckUsbProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiUsb2HcProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2055,7 +2055,7 @@ CheckUsbProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiUsbIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -2125,7 +2125,7 @@ CheckNVMeProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiNvmExpressPassThruProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2195,7 +2195,7 @@ CheckBootFromNVMe (
   Status = gtBS->LocateProtocol (
                    &gEfiExtScsiPassThruProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2209,7 +2209,7 @@ CheckBootFromNVMe (
   Status = gtBS->LocateProtocol (
                    &gEfiBlockIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -2319,7 +2319,7 @@ CheckScsiProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiExtScsiPassThruProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2390,7 +2390,7 @@ CheckBootFromScsi (
   Status = gtBS->LocateProtocol (
                    &gEfiExtScsiPassThruProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2404,7 +2404,7 @@ CheckBootFromScsi (
   Status = gtBS->LocateProtocol (
                    &gEfiScsiIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueC = TRUE;
@@ -2418,7 +2418,7 @@ CheckBootFromScsi (
   Status = gtBS->LocateProtocol (
                    &gEfiBlockIoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -2528,7 +2528,7 @@ CheckBootFromIScsi (
   Status = gtBS->LocateProtocol (
                    &gEfiIScsiInitiatorNameProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2542,7 +2542,7 @@ CheckBootFromIScsi (
   Status = gtBS->LocateProtocol (
                    &gEfiAuthenticationInfoProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -2616,7 +2616,7 @@ CheckDebugProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiDebugSupportProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2630,7 +2630,7 @@ CheckDebugProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiDebugPortProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -2700,7 +2700,7 @@ CheckDriverOverrideProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiPlatformDriverOverrideProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2769,7 +2769,7 @@ CheckATAProtocol (
   Status = gtBS->LocateProtocol (
                    &gEfiAtaPassThruProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2938,7 +2938,7 @@ CheckDNS4Protocols (
   Status = gtBS->LocateProtocol (
                    &gEfiDns4ServiceBindingProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -2993,7 +2993,7 @@ CheckDNS4Protocols (
     Status = gtBS->LocateProtocol (
                      &gEfiDns4ProtocolGuid,
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (!EFI_ERROR (Status)) {
       ValueB = TRUE;
@@ -3066,7 +3066,7 @@ CheckDNS6Protocols (
   Status = gtBS->LocateProtocol (
                    &gEfiDns6ServiceBindingProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -3121,7 +3121,7 @@ CheckDNS6Protocols (
     Status = gtBS->LocateProtocol (
                      &gEfiDns6ProtocolGuid,
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (!EFI_ERROR (Status)) {
       ValueB = TRUE;
@@ -3195,7 +3195,7 @@ CheckTLSProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiTlsServiceBindingProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -3206,7 +3206,7 @@ CheckTLSProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiTlsConfigurationProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -3262,7 +3262,7 @@ CheckTLSProtocols (
     Status = gtBS->LocateProtocol (
                      &gEfiTlsProtocolGuid,
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (!EFI_ERROR (Status)) {
       ValueC = TRUE;
@@ -3338,7 +3338,7 @@ CheckHTTPProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiHttpServiceBindingProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -3349,7 +3349,7 @@ CheckHTTPProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiHttpUtilitiesProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -3405,7 +3405,7 @@ CheckHTTPProtocols (
     Status = gtBS->LocateProtocol (
                      &gEfiHttpProtocolGuid,
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (!EFI_ERROR (Status)) {
       ValueC = TRUE;
@@ -3476,7 +3476,7 @@ CheckEAPProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiEapProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -3487,7 +3487,7 @@ CheckEAPProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiEapConfigProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -3498,7 +3498,7 @@ CheckEAPProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiEapManagement2ProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueC = TRUE;
@@ -3572,7 +3572,7 @@ CheckBlueToothProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiBlueToothHcProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueA = TRUE;
@@ -3583,7 +3583,7 @@ CheckBlueToothProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiBlueToothServiceBindingProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueB = TRUE;
@@ -3594,7 +3594,7 @@ CheckBlueToothProtocols (
   Status = gtBS->LocateProtocol (
                    &gEfiBlueToothConfigProtocolGuid,
                    NULL,
-                   &Interface
+                   (VOID **) &Interface
                    );
   if (!EFI_ERROR (Status)) {
     ValueC = TRUE;
@@ -3656,7 +3656,7 @@ CheckBlueToothProtocols (
     Status = gtBS->LocateProtocol (
                      &gEfiBlueToothIoProtocolGuid,
                      NULL,
-                     &Interface
+                     (VOID **) &Interface
                      );
     if (!EFI_ERROR (Status)) {
       ValueD = TRUE;

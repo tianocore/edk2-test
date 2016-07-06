@@ -126,7 +126,7 @@ BBTestReadBlocksExConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -192,7 +192,7 @@ BBTestReadBlocksExConformanceAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &BlkIO2Finished,
                    &BlkIo2TokenAsync.Event
                    );
@@ -1090,7 +1090,7 @@ BBTestWriteBlocksExConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1157,7 +1157,7 @@ BBTestWriteBlocksExConformanceAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &BlkIO2Finished,
                    &BlkIo2TokenAsync.Event
                    );
@@ -2039,7 +2039,7 @@ BBTestFlushBlocksExConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2071,7 +2071,7 @@ BBTestFlushBlocksExConformanceAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunc,
+                   (EFI_EVENT_NOTIFY) NotifyFunc,
                    &BlkIO2Finished,
                    &BlkIo2TokenAsync.Event
                    );

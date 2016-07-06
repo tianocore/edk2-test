@@ -174,7 +174,7 @@ InitializeDeviceDriver13 (
         ImageHandle, 
         &gEfiLoadedImageProtocolGuid, 
         (VOID*)&LoadedImageInfoPtr
-        ); 
+        );
         
   LoadedImageInfoPtr->Unload = DeviceDriver13Unload;
   
@@ -194,7 +194,7 @@ DeviceDriver13BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mInterfaceFunctionTestProtocol3Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -222,7 +222,7 @@ DeviceDriver13BindingStart (
   Status = gtBS->OpenProtocol (
                      Controller,
                      &mInterfaceFunctionTestProtocol3Guid,
-                     &IFTestProt3,
+                     (VOID **) &IFTestProt3,
                      This->DriverBindingHandle,
                      Controller,
                      EFI_OPEN_PROTOCOL_BY_DRIVER | EFI_OPEN_PROTOCOL_EXCLUSIVE
@@ -235,7 +235,7 @@ DeviceDriver13BindingStart (
   Status = gtBS->OpenProtocol (
                   Controller,
                   &mInterfaceFunctionTestProtocol6Guid,
-                  NULL,
+                  (VOID **) NULL,
                   This->DriverBindingHandle,
                   Controller,
                   EFI_OPEN_PROTOCOL_TEST_PROTOCOL

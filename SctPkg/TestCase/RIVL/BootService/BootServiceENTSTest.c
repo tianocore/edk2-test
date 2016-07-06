@@ -184,7 +184,7 @@ Returns:
   Status = tBS->AllocatePool (
                   EfiBootServicesData,
                   sizeof (EFI_ENTS_PROTOCOL),
-                  &gBootServiceEntsProtocolInterface
+                  (VOID **) &gBootServiceEntsProtocolInterface
                   );
   if (EFI_ERROR (Status)) {
     return Status;

@@ -170,7 +170,7 @@ InitializeRuntimeServicesDriver4 (
   gtBS->OpenProtocol (
                 mPrivateData.OpenHandle,
                 &mImageTestNoInterfaceProtocol2Guid,
-                NULL,
+                (VOID **) NULL,
                 ImageHandle,
                 NULL,
                 EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -194,7 +194,7 @@ RuntimeServicesDriver4BindingSupported (
   Status = gtBS->OpenProtocol (
                       Controller,
                       &mImageTestNoInterfaceProtocol3Guid,
-                      NULL,
+                      (VOID **) NULL,
                       This->DriverBindingHandle,
                       Controller,
                       EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -221,7 +221,7 @@ RuntimeServicesDriver4BindingStart (
   Status = gtBS->OpenProtocol (
                           Controller,
                           &mImageTestNoInterfaceProtocol3Guid,
-                          &ProtInst,
+                          (VOID **) &ProtInst,
                           This->DriverBindingHandle,
                           Controller,
                           EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -237,7 +237,7 @@ RuntimeServicesDriver4BindingStart (
         mPrivateData.ImageHandle, 
         &gEfiLoadedImageProtocolGuid, 
         (VOID*)&LoadedImageInfoPtr
-        ); 
+        );
         
   LoadedImageInfoPtr->Unload = RuntimeServicesDriver4Unload;
   

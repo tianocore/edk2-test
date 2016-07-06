@@ -364,7 +364,7 @@ Returns:
   Status = tBS->OpenProtocol (
                   ImageHandle,
                   &gEfiTslInitInterfaceGuid,
-                  NULL,
+                  (VOID **) NULL,
                   ImageHandle,
                   NULL,
                   EFI_OPEN_PROTOCOL_TEST_PROTOCOL
@@ -509,7 +509,7 @@ Returns:
     Status = tBS->OpenProtocol (
                     *LibHandle,
                     &gEfiTestProfileLibraryGuid,
-                    NULL,
+                    (VOID **) NULL,
                     TslPrivate->ImageHandle,
                     NULL,
                     EFI_OPEN_PROTOCOL_TEST_PROTOCOL

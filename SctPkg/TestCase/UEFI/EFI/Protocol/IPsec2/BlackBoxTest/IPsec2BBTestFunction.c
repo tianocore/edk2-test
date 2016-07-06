@@ -139,7 +139,7 @@ BBTestProcessExtFunctionTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if ( EFI_ERROR(Status) ) {
     return Status;
@@ -150,7 +150,7 @@ BBTestProcessExtFunctionTest (
   //
   SctLocateProtocol(
     &gBlackBoxEfiIPsecConfigProtocolGuid,
-    &IpSecConf
+    (VOID**) &IpSecConf
     );
 
   if (IpSecConf != NULL) {
@@ -863,7 +863,7 @@ BBTestProcessExtFunctionTestCheckpoint1 (
              Ip4PacketTemp, 
              Ip4PacketSize,
              &Ip4Head, 
-             &OptionsBuffer,
+             (VOID **) &OptionsBuffer,
              &OptionLen,
              &FragmentTable, 
              &FragmentCount
@@ -891,7 +891,7 @@ BBTestProcessExtFunctionTestCheckpoint1 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable1,
                        &TestFragmentCount1,
@@ -974,7 +974,7 @@ BBTestProcessExtFunctionTestCheckpoint1 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable2,
                        &TestFragmentCount2,
@@ -1200,7 +1200,7 @@ BBTestProcessExtFunctionTestCheckpoint2 (
              Ip4PacketTemp, 
              Ip4PacketSize,
              &Ip4Head, 
-             &OptionsBuffer,
+             (VOID **) &OptionsBuffer,
              &OptionLen,
              &FragmentTable, 
              &FragmentCount
@@ -1228,7 +1228,7 @@ BBTestProcessExtFunctionTestCheckpoint2 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable1,
                        &TestFragmentCount1,
@@ -1312,7 +1312,7 @@ BBTestProcessExtFunctionTestCheckpoint2 (
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable2,
                        &TestFragmentCount2,
@@ -1541,7 +1541,7 @@ BBTestProcessExtFunctionTestCheckpoint3(
              Ip4Packet, 
              Ip4PacketSize,
              &Ip4Head, 
-             &OptionsBuffer,
+             (VOID **) &OptionsBuffer,
              &OptionLen,
              &FragmentTable, 
              &FragmentCount
@@ -1569,7 +1569,7 @@ BBTestProcessExtFunctionTestCheckpoint3(
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable1,
                        &TestFragmentCount1,
@@ -1646,7 +1646,7 @@ BBTestProcessExtFunctionTestCheckpoint3(
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable2,
                        &TestFragmentCount2,
@@ -1960,7 +1960,7 @@ BBTestProcessExtFunctionTestCheckpoint4(
              Ip4Packet, 
              Ip4PacketSize,
              &Ip4Head, 
-             &OptionsBuffer,
+             (VOID **) &OptionsBuffer,
              &OptionLen,
              &FragmentTable, 
              &FragmentCount
@@ -1988,7 +1988,7 @@ BBTestProcessExtFunctionTestCheckpoint4(
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable1,
                        &TestFragmentCount1,
@@ -2064,7 +2064,7 @@ BBTestProcessExtFunctionTestCheckpoint4(
                        IP_VERSION_4,
                        Ip4Head,
                        &(Ip4Head->Protocol),
-                       &OptionsBuffer,
+                       (VOID **) &OptionsBuffer,
                        &OptionLen,
                        &TestFragmentTable2,
                        &TestFragmentCount2,
@@ -2382,7 +2382,7 @@ BBTestProcessExtFunctionTestCheckpoint5 (
                Ip6PacketTemp, 
                *(IP6PacketBuffer[PacketIndex].PacketSize),
                &Ip6Head, 
-               &OptionsBuffer,
+               (VOID **) &OptionsBuffer,
                &OptionLen,
                &FragmentTable, 
                &FragmentCount
@@ -2410,7 +2410,7 @@ BBTestProcessExtFunctionTestCheckpoint5 (
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable1,
                          &TestFragmentCount1,
@@ -2495,7 +2495,7 @@ BBTestProcessExtFunctionTestCheckpoint5 (
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable2,
                          &TestFragmentCount2,
@@ -2754,7 +2754,7 @@ BBTestProcessExtFunctionTestCheckpoint6 (
                Ip6PacketTemp, 
                *(IP6PacketBuffer[PacketIndex].PacketSize),
                &Ip6Head, 
-               &OptionsBuffer,
+               (VOID **) &OptionsBuffer,
                &OptionLen,
                &FragmentTable, 
                &FragmentCount
@@ -2782,7 +2782,7 @@ BBTestProcessExtFunctionTestCheckpoint6 (
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable1,
                          &TestFragmentCount1,
@@ -2868,7 +2868,7 @@ BBTestProcessExtFunctionTestCheckpoint6 (
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable2,
                          &TestFragmentCount2,
@@ -3126,7 +3126,7 @@ BBTestProcessExtFunctionTestCheckpoint7(
                IP6PacketBuffer[PacketIndex].Packet, 
                *(IP6PacketBuffer[PacketIndex].PacketSize),
                &Ip6Head, 
-               &OptionsBuffer,
+               (VOID **) &OptionsBuffer,
                &OptionLen,
                &FragmentTable, 
                &FragmentCount
@@ -3154,7 +3154,7 @@ BBTestProcessExtFunctionTestCheckpoint7(
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable1,
                          &TestFragmentCount1,
@@ -3234,7 +3234,7 @@ BBTestProcessExtFunctionTestCheckpoint7(
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable2,
                          &TestFragmentCount2,
@@ -3587,7 +3587,7 @@ BBTestProcessExtFunctionTestCheckpoint8(
                IP6PacketBuffer[PacketIndex].Packet, 
                *(IP6PacketBuffer[PacketIndex].PacketSize),
                &Ip6Head, 
-               &OptionsBuffer,
+               (VOID **) &OptionsBuffer,
                &OptionLen,
                &FragmentTable, 
                &FragmentCount
@@ -3615,7 +3615,7 @@ BBTestProcessExtFunctionTestCheckpoint8(
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable1,
                          &TestFragmentCount1,
@@ -3694,7 +3694,7 @@ BBTestProcessExtFunctionTestCheckpoint8(
                          IP_VERSION_6,
                          Ip6Head,
                          &(Ip6Head->NextHeader),
-                         &OptionsBuffer,
+                         (VOID **) &OptionsBuffer,
                          &OptionLen,
                          &TestFragmentTable2,
                          &TestFragmentCount2,

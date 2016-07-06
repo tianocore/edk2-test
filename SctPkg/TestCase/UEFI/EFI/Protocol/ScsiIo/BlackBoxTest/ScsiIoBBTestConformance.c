@@ -90,7 +90,7 @@ BBTestGetDeviceTypeConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -169,7 +169,7 @@ BBTestGetDeviceLocationConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -274,7 +274,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -351,7 +351,7 @@ BBTestExecuteScsiCommandConformanceAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunction,
+                   (EFI_EVENT_NOTIFY) NotifyFunction,
                    NULL,
                    &Event
                    );

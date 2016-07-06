@@ -442,7 +442,7 @@ InitializeBBTestSimpleFileSystem (
 
   mImageHandle = ImageHandle;
 
-  gtBS->CreateEvent (EFI_EVENT_TIMER, 0, NULL, NULL, &TimerEvent);
+  gtBS->CreateEvent (EFI_EVENT_TIMER, 0, (EFI_EVENT_NOTIFY) NULL, NULL, &TimerEvent);
   return EfiInitAndInstallIHVBBTestInterface (
            &ImageHandle,
            &gBBTestProtocolField,

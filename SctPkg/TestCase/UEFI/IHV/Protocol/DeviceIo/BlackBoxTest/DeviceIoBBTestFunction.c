@@ -3158,7 +3158,7 @@ AllocateBuffer_Func (
                              AllocateAnyPages,
                              MemoryType[MemoryTypeNum],
                              AllocatedPages,
-                             &HostAddress
+                             (VOID **) &HostAddress
                              );
 
         if (!EFI_ERROR(Status)) {
@@ -3233,7 +3233,7 @@ AllocateBuffer_Func (
                            AllocateType[AllocateTypeNum],
                            MemoryType[MemoryTypeNum],
                            AllocatedPages,
-                           &HostAddress
+                           (VOID **) &HostAddress
                            );
       if (!EFI_ERROR(Status)) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -3449,7 +3449,7 @@ FreeBuffer_Func (
                              AllocateAnyPages,
                              MemoryType[MemoryTypeNum],
                              1,
-                             &HostAddress
+                             (VOID **) &HostAddress
                              );
 
         if (!EFI_ERROR(Status)) {
@@ -3522,7 +3522,7 @@ FreeBuffer_Func (
                            AllocateType[AllocateTypeNum],
                            MemoryType[MemoryTypeNum],
                            1,
-                           &HostAddress
+                           (VOID **) &HostAddress
                            );
       if (!EFI_ERROR(Status)) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -3783,7 +3783,7 @@ PciDevicePath_Func (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gBlackBoxEfiPciIoProtocolGuid,
-                     &PciIo
+                     (VOID **) &PciIo
                      );
     if (EFI_ERROR(Status)) {
       continue;
@@ -3794,7 +3794,7 @@ PciDevicePath_Func (
     Status = gtBS->HandleProtocol (
                      HandleBuffer[Index],
                      &gEfiDevicePathProtocolGuid,
-                     &DevicePath
+                     (VOID **) &DevicePath
                      );
 
     if (EFI_ERROR(Status)) {

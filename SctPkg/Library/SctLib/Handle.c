@@ -98,7 +98,7 @@ SctLocateProtocol (
     Status = tBS->HandleProtocol(
                    Handles[Index],
                    ProtocolGuid,
-                   Interface
+                   (VOID **) Interface
                    );
 
     if (!EFI_ERROR(Status)) {

@@ -366,7 +366,7 @@ Returns:
   Status = tBS->LocateProtocol (
                   &gEfiIp4ServiceBindingProtocolGuid,
                   NULL,
-                  &Ip4Sb
+                  (VOID **) &Ip4Sb
                   );
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Locate Ip4Sb Error"));
@@ -392,7 +392,7 @@ Returns:
   Status = tBS->OpenProtocol (
                   mIp4InstanceHandle,
                   &gEfiIp4ProtocolGuid,
-                  &Ip4,
+                  (VOID **) &Ip4,
                   mImageHandle,
                   mIp4InstanceHandle,
                   EFI_OPEN_PROTOCOL_BY_DRIVER
@@ -487,7 +487,7 @@ Returns:
   Status = tBS->LocateProtocol (
                   &gEfiIp4ServiceBindingProtocolGuid,
                   NULL,
-                  &Ip4Sb
+                  (VOID **) &Ip4Sb
                   );
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Locate Ip4Sb Error"));
@@ -858,7 +858,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunctionListen,
+                  (EFI_EVENT_NOTIFY) NotifyFunctionListen,
                   NULL,
                   &RxToken.Event
                   );
@@ -870,7 +870,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunctionSend,
+                  (EFI_EVENT_NOTIFY) NotifyFunctionSend,
                   NULL,
                   &TxToken.Event
                   );
@@ -883,7 +883,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  NotifyFunctionSend,
+                  (EFI_EVENT_NOTIFY) NotifyFunctionSend,
                   NULL,
                   &TxLLToken.Event
                   );
@@ -913,7 +913,7 @@ Returns:
   Status = tBS->CreateEvent (
                   EVT_TIMER | EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
-                  ReSendTimer,
+                  (EFI_EVENT_NOTIFY) ReSendTimer,
                   NULL,
                   &ResendTimeEvent
                   );

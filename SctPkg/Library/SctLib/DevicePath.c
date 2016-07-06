@@ -294,7 +294,7 @@ SctDevicePathStrFromProtocol (
   }
 
   for ( Index = 0 ; Index < HandleNum ; Index ++ ) {
-    Status = tBS->HandleProtocol (HandleBuffer[Index], Guid, &Interface);
+    Status = tBS->HandleProtocol (HandleBuffer[Index], Guid, (VOID **) &Interface);
     if (EFI_ERROR(Status)) {
       continue;
     }
@@ -1435,7 +1435,7 @@ SctDevicePathToInterface (
       Status = tBS->HandleProtocol (
                      Device,
                      Protocol,
-                     Interface
+                     (VOID **) Interface
                      );
       }
   }

@@ -197,7 +197,7 @@ InitializeTestDriver4 (
   mPrivateData->StatusArray[0] = gtBS->OpenProtocol (
                                   HandleBuffer[0],
                                   &mInterfaceFunctionTestProtocol1Guid,
-                                  &IFTestProt1,
+                                  (VOID **) &IFTestProt1,
                                   ImageHandle,
                                   mPrivateData->ChildHandle,
                                   EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER
@@ -222,7 +222,7 @@ InitializeTestDriver4 (
   mPrivateData->StatusArray[1] = gtBS->OpenProtocol (
                                   HandleBuffer[0],
                                   &mInterfaceFunctionTestProtocol2Guid,
-                                  &IFTestProt2,
+                                  (VOID **) &IFTestProt2,
                                   ImageHandle,
                                   mPrivateData->ChildHandle,
                                   EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER

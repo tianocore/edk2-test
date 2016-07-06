@@ -105,7 +105,7 @@ GetTestSupportLibrary (
     Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiStandardTestLibraryGuid,
-                     StandardLib
+                     (VOID **) StandardLib
                      );
     if (EFI_ERROR(Status)) {
       return Status;
@@ -119,7 +119,7 @@ GetTestSupportLibrary (
     Status = gtBS->HandleProtocol (
                      SupportHandle,
                      &gEfiTestProfileLibraryGuid,
-                     ProfileLib
+                     (VOID **) ProfileLib
                      );
     if (EFI_ERROR(Status)) {
       return Status;
@@ -287,7 +287,7 @@ GetSystemDevicePathAndFilePath (
   Status = gtBS->HandleProtocol (
                    ImageHandle,
                    &gEfiLoadedImageProtocolGuid,
-                   &Image
+                   (VOID **) &Image
                    );
   if (EFI_ERROR(Status)) {
     return Status;

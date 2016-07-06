@@ -105,7 +105,7 @@ InitializeRuntimeServicesDriver5 (
         ImageHandle, 
         &gEfiLoadedImageProtocolGuid, 
         (VOID*)&LoadedImageInfoPtr
-        ); 
+        );
         
   LoadedImageInfoPtr->Unload = RuntimeServicesDriver5Unload;
   
@@ -131,7 +131,7 @@ InitializeRuntimeServicesDriver5 (
   gtBS->OpenProtocol (
                 mPrivateData.OpenHandle,
                 &mImageTestNoInterfaceProtocol4Guid,
-                NULL,
+                (VOID **) NULL,
                 ImageHandle,
                 NULL,
                 EFI_OPEN_PROTOCOL_TEST_PROTOCOL

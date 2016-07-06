@@ -92,7 +92,7 @@ BBTestGetNextPortFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -181,7 +181,7 @@ BBTestBuildDevicePathFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -282,7 +282,7 @@ BBTestGetDeviceFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -401,7 +401,7 @@ BBTestResetPortFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -510,7 +510,7 @@ BBTestResetDeviceFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -606,7 +606,7 @@ BBTestGetNextDeviceFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -717,7 +717,7 @@ BBTestPassThruFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -934,7 +934,7 @@ BBTestPassThruFunctionAutoTest (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   NotifyFunction,
+                   (EFI_EVENT_NOTIFY) NotifyFunction,
                    NULL,
                    &Event
                    );

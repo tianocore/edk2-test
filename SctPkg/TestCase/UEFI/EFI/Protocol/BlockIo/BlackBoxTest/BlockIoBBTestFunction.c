@@ -89,7 +89,7 @@ BBTestResetFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -224,7 +224,7 @@ BBTestReadBlocksFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -490,7 +490,7 @@ BBTestWriteBlocksFunctionAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -999,7 +999,7 @@ BBTestMediaInfoCheckAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1107,7 +1107,7 @@ BBTestMediaIntegrityManualTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1149,7 +1149,7 @@ BBTestMediaIntegrityManualTest (
   //
   // allocate buffer
   //
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &Buffer);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,

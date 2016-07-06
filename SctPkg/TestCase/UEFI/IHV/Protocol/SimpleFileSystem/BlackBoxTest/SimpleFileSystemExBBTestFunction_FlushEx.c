@@ -191,7 +191,7 @@ FileIoAsyncFlushFileData (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoFlush_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -202,7 +202,7 @@ FileIoAsyncFlushFileData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoFlushFileNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoFlushFileNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -295,7 +295,7 @@ FileIoAsyncFlushDirData (
   Status = gtBS->AllocatePool(
                    EfiBootServicesData, 
                    sizeof(FileIoFlush_Task), 
-                   &FileIoEntity);
+                   (VOID **) &FileIoEntity);
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -306,7 +306,7 @@ FileIoAsyncFlushDirData (
   Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
-                   FileIoFlushDirNotifyFunc,
+                   (EFI_EVENT_NOTIFY) FileIoFlushDirNotifyFunc,
                    FileIoEntity,
                    &FileIoEntity->FileIoToken.Event
                    );
@@ -389,7 +389,7 @@ BBTestFlushExBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
   if (EFI_ERROR (Status)) {
     return Status;

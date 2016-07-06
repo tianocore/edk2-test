@@ -250,7 +250,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -260,7 +260,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathUtilitiesProtocolGuid,
                   NULL,
-                  &DevicePathUtilities
+                  (VOID **) &DevicePathUtilities
                   );
   if (EFI_ERROR (Status)) {
     return Status;
@@ -399,7 +399,7 @@ DevicePathToTextConvertDevicePathToTextFunctionTest (
   Status = gtBS->HandleProtocol (
                   SupportHandle,
                   &gEfiStandardTestLibraryGuid,
-                  &StandardLib
+                  (VOID **) &StandardLib
                   );
 
   if (EFI_ERROR (Status)) {
@@ -409,7 +409,7 @@ DevicePathToTextConvertDevicePathToTextFunctionTest (
   Status = gtBS->LocateProtocol (
                   &gBlackBoxEfiDevicePathUtilitiesProtocolGuid,
                   NULL,
-                  &DevicePathUtilities
+                  (VOID **) &DevicePathUtilities
                   );
   if (EFI_ERROR (Status)) {
     return Status;

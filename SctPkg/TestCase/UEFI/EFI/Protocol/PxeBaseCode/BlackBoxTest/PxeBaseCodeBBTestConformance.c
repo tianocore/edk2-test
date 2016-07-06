@@ -87,7 +87,7 @@ BBTestNewStartConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -273,7 +273,7 @@ BBTestNewStopConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -453,7 +453,7 @@ BBTestStartConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -556,7 +556,7 @@ BBTestStopConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -639,7 +639,7 @@ BBTestDhcpConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -823,7 +823,7 @@ BBTestDiscoverConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1368,7 +1368,7 @@ BBTestMtftpConformanceTest (
   SctPrint (L"\r\nChange the requested file to READ-ONLY\r\n");
   WaitForAnyInput ();
 
-  Status = gtBS->AllocatePool (EfiBootServicesData, (UINT32)Size, &Buffer);
+  Status = gtBS->AllocatePool (EfiBootServicesData, (UINT32)Size, (VOID **) &Buffer);
   if (EFI_ERROR(Status))
   {
     StandardLib->RecordAssertion (
@@ -1507,7 +1507,7 @@ BBTestUdpWriteConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1515,7 +1515,7 @@ BBTestUdpWriteConformanceTest (
   }
 
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -1724,7 +1724,7 @@ BBTestUdpReadConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -1738,7 +1738,7 @@ BBTestUdpReadConformanceTest (
 
   // Malloc for data
   BufferSize = MAX_UDP_SIZE;
-  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, &BufferPtr);
+  Status = gtBS->AllocatePool (EfiBootServicesData, BufferSize, (VOID **) &BufferPtr);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -2033,7 +2033,7 @@ BBTestSetIpFilterConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2477,7 +2477,7 @@ BBTestSetParametersConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2555,7 +2555,7 @@ BBTestSetStationIpConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -2626,7 +2626,7 @@ BBTestSetPacketsConformanceTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {

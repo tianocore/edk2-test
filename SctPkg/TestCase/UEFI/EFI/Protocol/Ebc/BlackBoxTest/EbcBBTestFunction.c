@@ -90,7 +90,7 @@ BBTestCreateThunkBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -176,7 +176,7 @@ BBTestCreateThunkBasicTest (
     Status = gtBS->HandleProtocol (
                     gDummyImageHandle,
                     &gBlackBoxEfiEbcDriverProtocolGuid,
-                    &EbcDriverInterface
+                    (VOID **) &EbcDriverInterface
                     );
 
     if (Status == EFI_SUCCESS) {
@@ -249,7 +249,7 @@ BBTestUnloadImageBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if ( EFI_ERROR(Status) ) {
@@ -383,7 +383,7 @@ BBTestRegisterICacheFlushBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
@@ -535,7 +535,7 @@ BBTestGetVersionBasicTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   &StandardLib
+                   (VOID **) &StandardLib
                    );
 
   if (EFI_ERROR(Status)) {
