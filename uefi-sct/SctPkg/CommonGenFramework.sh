@@ -335,4 +335,37 @@ then
   CopyDependency Ebc
   CopyDependency PxeBaseCode
 fi
+# *********************************************
+# For SBBR v1.0 SCT
+# *********************************************
 
+if [ $1 = "sbbr_sct" ]
+then
+    # *********************************************
+    # Copy the SBBR v1.0 Test Cases
+    # *********************************************
+
+    mkdir -p $Framework/SCRT
+    cp $ProcessorType/SCRTDRIVER.efi                           $Framework/SCRT  > NUL
+    cp $ProcessorType/SCRTAPP.efi                              $Framework/SCRT  > NUL
+    cp ../../../SctPkg/Config/Data/SCRT.conf                   $Framework/SCRT  > NUL
+
+    # *********************************************
+    # Copy your test cases here
+    # *********************************************
+
+
+    # *********************************************
+    # Copy ENTS binary
+    # *********************************************
+
+    cp $ProcessorType/SerialMonitor.efi                $Framework/Ents/Support/ > NUL
+    cp $ProcessorType/ManagedNetworkMonitor.efi        $Framework/Ents/Support/ > NUL
+    cp $ProcessorType/IP4NetworkMonitor.efi            $Framework/Ents/Support/ > NUL
+    cp $ProcessorType/Eftp.efi                         $Framework/Ents/Support/ > NUL
+
+    # *********************************************
+    # Copy the test dependency files
+    # *********************************************
+
+fi
