@@ -64,6 +64,66 @@ CreateRandomValue (
   );
 
 /**
+ *  @brief Allocate a new FileInfo buffer of size Size and copy
+ *         old FileInfo buffer to new
+ *  @param InfoBuffer, A pointer to pointer to the old buffer and
+           to the allocated buffer if call succeeds
+ *  @param ChangeFileName, New file name
+ *  @return EFI_SUCCESS
+ *  @return EFI_INVALID_PARAMETER
+ */
+STATIC
+EFI_STATUS
+UpdateInfoFileName (EFI_FILE_INFO **InfoBuffer, CHAR16* ChangeFileName)
+{
+  EFI_STATUS    Status;
+  UINTN         Size;
+  EFI_FILE_INFO *FileInfo;
+
+  if (InfoBuffer == NULL || ChangeFileName == NULL) {
+    return EFI_INVALID_PARAMETER;
+  }
+
+  // Re-calculate required buffer size for new file name
+  Size = SIZE_OF_EFI_FILE_INFO + SctStrSize (ChangeFileName) + sizeof (CHAR16);
+
+  FileInfo = *InfoBuffer;
+  if (FileInfo == NULL || Size == 0) {
+     return EFI_INVALID_PARAMETER;
+  }
+
+  //
+  // Special case, if the file system truncates the name of the file.
+  // Allocate larger FileInfo buffer and free buffer obtained in
+  // InternalGetInfo
+  //
+  if (Size > FileInfo->Size) {
+    Status = gtBS->AllocatePool (
+                     EfiBootServicesData,
+                     Size,
+                     (VOID**) &FileInfo
+                     );
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
+    gtBS->CopyMem (
+            FileInfo,
+            *InfoBuffer,
+            SIZE_OF_EFI_FILE_INFO
+            );
+
+    gtBS->FreePool (*InfoBuffer);
+    *InfoBuffer = FileInfo;
+  }
+
+  SctStrCpy (FileInfo->FileName, ChangeFileName);
+  FileInfo->Size = Size;
+
+  return Status;
+}
+
+/**
  *  @brief Entrypoint for Open() Conformance Test.
  *         6 checkpoints will be tested.
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL
@@ -2268,7 +2328,6 @@ BBTestSetInfoConformanceTestCheckpoint2 (
   EFI_FILE                  *FileHandle[2];
   EFI_FILE                  *OpenHandle[2];
   CHAR16                    FileName[2][100];
-  CHAR16                    ChangeFileName[100];
   UINTN                     BufferSize;
   UINTN                     Index;
   UINT64                    Attribute[2] = {0, EFI_FILE_DIRECTORY};
@@ -2458,14 +2517,16 @@ BBTestSetInfoConformanceTestCheckpoint2 (
     // change file name
     //
 
-    SctStrCpy (ChangeFileName, L"BBTestSetInfoConfTestCheckpoint2_File_New");
-    SctStrCpy (FileInfo->FileName, ChangeFileName);
+    Status = UpdateInfoFileName (&FileInfo, L"BBTestSetInfoConfTestCheckpoint2_File_New");
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
 
     FileHandle[Index] = NULL;
     Status = Root->Open (
                      Root,
                      &FileHandle[Index],
-                     ChangeFileName,
+                     FileInfo->FileName, // Updated file name
                      EFI_FILE_MODE_READ|EFI_FILE_MODE_WRITE|EFI_FILE_MODE_CREATE,
                      Attribute[Index]
                      );
@@ -2477,7 +2538,7 @@ BBTestSetInfoConformanceTestCheckpoint2 (
     Status = OpenHandle[Index]->SetInfo (
                                   OpenHandle[Index],
                                   &gBlackBoxEfiFileInfoGuid,
-                                  BufferSize,
+                                  FileInfo->Size,
                                   FileInfo
                                   );
 
@@ -3753,16 +3814,16 @@ BBTestSetInfoConformanceTestCheckpoint7 (
                    );
     goto Done;
   }
-	
-	// change one file to a file name already exists 
-	// !! be carefull new file name should be same as or smaller than original file name 
-	// otherwise we should reallocate pool & change FileInfo->Size 
-	SctStrCpy (FileInfo->FileName, L"BBTestSetInfoConformanceTestCheckpoint7_File_Two");
+
+    Status = UpdateInfoFileName (&FileInfo, L"BBTestSetInfoConformanceTestCheckpoint7_File_Two");
+    if (EFI_ERROR (Status)) {
+       return Status;
+    }
 
 	Status = FileHandle[0]->SetInfo (
                             FileHandle[0],
                             &gBlackBoxEfiFileInfoGuid,
-                            BufferSize,
+                            FileInfo->Size,
                             FileInfo
                             );
 
