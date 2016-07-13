@@ -89,7 +89,7 @@ CopyDependencyFile()
 
 CopyDependency()
 {
-    mkdir -p $Framework/Dependency/$1BBTest	
+    mkdir -p $Framework/Dependency/$1BBTest
     ls -h $ProcessorType/$1_Invalid*       > temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.efi   >> temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.ini   >> temp.txt 2>NUL
@@ -107,8 +107,8 @@ CopyDependency()
 # For UEFI SCT
 # *********************************************
 
-if [ $1 = "uefi_sct" ] 
-then 
+if [ $1 = "uefi_sct" ]
+then
     # *********************************************
     # Copy the UEFI 2.1 Test Cases
     # *********************************************
@@ -354,6 +354,12 @@ then
     # Copy your test cases here
     # *********************************************
 
+    # Boot Services Tests - SBBR v1.0 Appendix A
+    cp $ProcessorType/EventTimerTaskPriorityServicesBBTest.efi          $Framework/Test/  > NUL
+    cp $ProcessorType/ImageServicesBBTest.efi                           $Framework/Test/  > NUL
+    cp $ProcessorType/MemoryAllocationServicesBBTest.efi                $Framework/Test/  > NUL
+    cp $ProcessorType/MiscBootServicesBBTest.efi                        $Framework/Test/  > NUL
+    cp $ProcessorType/ProtocolHandlerServicesBBTest.efi                 $Framework/Test/  > NUL
 
     # *********************************************
     # Copy ENTS binary

@@ -184,12 +184,60 @@ SctPkg/SCRT/SCRTDriver/SCRTDriver.inf
 # Test cases for SBBR SCT
 #
 
-# Add Your test cases here:
-
-# Runtime Services Tests
-#SctPkg/TestCase/UEFI/EFI/RuntimeServices/MiscRuntimeServices/BlackBoxTest/MiscRuntimeServicesBBTest.inf
-#SctPkg/TestCase/UEFI/EFI/RuntimeServices/TimeServices/BlackBoxTest/TimeServicesBBTest.inf
-#SctPkg/TestCase/UEFI/EFI/RuntimeServices/VariableServices/BlackBoxTest/VariableServicesBBTest.inf
+# Boot Services Tests - SBBR v1.0 Appendix A
+#
+##  1. EFI_RAISE_TPL
+##  2. EFI_RESTORE_TPL
+##  3. EFI_CREATE_EVENT
+##  4. EFI_SET_TIMER
+##  5. EFI_WAIT_FOR_EVENT
+##  6. EFI_SIGNAL_EVENT
+##  7. EFI_CLOSE_EVENT
+##  8. EFI_CREATE_EVENT_EX
+SctPkg/TestCase/UEFI/EFI/BootServices/EventTimerTaskPriorityServices/BlackBoxTest/EventTimerTaskPriorityServicesBBTest_uefi.inf
+#
+##  9. EFI_IMAGE_LOAD
+## 10. EFI_IMAGE_START
+## 11. EFI_EXIT
+## 12. EFI_IMAGE_UNLOAD
+## 13. EFI_EXIT_BOOT_SERVICES
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/ImageBBTest.inf
+#
+## 14. EFI_ALLOCATE_PAGES
+## 15. EFI_FREE_PAGES
+## 16. EFI_GET_MEMORY_MAP
+## 17. EFI_ALLOCATE_POOL
+## 18. EFI_FREE_POOL
+SctPkg/TestCase/UEFI/EFI/BootServices/MemoryAllocationServices/BlackBoxTest/MemoryAllocationServicesBBTest.inf
+#
+## 19. EFI_INSTALL_CONFIGURATION_TABLE
+## 20. EFI_GET_NEXT_MONOTONIC_COUNT
+## 21. EFI_STALL
+## 22. EFI_SET_WATCHDOG_TIMER
+## 23. EFI_CALCULATE_CRC32
+## 24. EFI_COPY_MEM
+## 25. EFI_SET_MEM
+SctPkg/TestCase/UEFI/EFI/BootServices/MiscBootServices/BlackBoxTest/MiscBootServicesBBTest.inf
+#
+## 26. EFI_INSTALL_PROTOCOL_INTERFACE
+## 27. EFI_REINSTALL_PROTOCOL_INTERFACE
+## 28. EFI_UNINSTALL_PROTOCOL_INTERFACE
+## 29. EFI_HANDLE_PROTOCOL
+## 30. EFI_REGISTER_PROTOCOL_NOTIFY
+## 31. EFI_LOCATE_HANDLE
+## 32. EFI_LOCATE_PROTOCOL
+## 33. EFI_LOCATE_DEVICE_PATH
+## 34. EFI_CONNECT_CONTROLLER
+## 35. EFI_DISCONNECT_CONTROLLER
+## 36. EFI_OPEN_PROTOCOL
+## 37. EFI_CLOSE_PROTOCOL
+## 38. EFI_OPEN_PROTOCOL_INFORMATION
+## 39. EFI_PROTOCOLS_PER_HANDLE
+## 40. EFI_LOCATE_HANDLE_BUFFER
+## 41. EFI_INSTALL_MULTIPLE_PROTOCOL_INTERFACES
+## 42. EFI_UNINSTALL_MULTIPLE_PROTOCOL_INTERFACES
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/ProtocolHandlerBBTest.inf
+# End of Boot Services Tests - SBBR v1.0 Appendix A
 
 #
 # Dependency files
@@ -202,4 +250,3 @@ SctPkg/TestInfrastructure/SCT/Framework/ENTS/Eftp/Eftp.inf
 SctPkg/TestInfrastructure/SCT/Framework/ENTS/MonitorServices/SerialMonitor/SerialMonitor.inf
 SctPkg/TestInfrastructure/SCT/Framework/ENTS/MonitorServices/ManagedNetworkMonitor/ManagedNetworkMonitor.inf
 SctPkg/TestInfrastructure/SCT/Framework/ENTS/MonitorServices/IP4NetworkMonitor/IP4NetworkMonitor.inf
-
