@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -2323,7 +2323,7 @@ FreeBuffer_Conf (
   //
   //these check points are added after the EFI 1.10 spec has been updated.
   //call FreeBuffer with a Physical address that is not allocted from
-    //AllocateBuffer() it will return EFI_NOT_FOUND.
+  //AllocateBuffer() it will return EFI_NOT_FOUND.
   //
   //
   //first call allocatebuffer allocate 5 pages.
