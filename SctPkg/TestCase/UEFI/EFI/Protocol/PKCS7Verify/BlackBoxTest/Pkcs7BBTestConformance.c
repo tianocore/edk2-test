@@ -443,7 +443,7 @@ BBTestVerifyBufferConformanceTest (
   AllowedDb[0]   = NULL;
   TimestampDb[0] = NULL;
   
-  DbEntry5->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TSRootCert);
+  DbEntry3->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TSRootCert);
 
   if (Status == EFI_ABORTED)
     AssertionType = EFI_TEST_ASSERTION_PASSED;
