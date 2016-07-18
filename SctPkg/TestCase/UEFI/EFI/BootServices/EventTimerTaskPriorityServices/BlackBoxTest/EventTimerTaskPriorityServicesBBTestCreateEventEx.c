@@ -70,6 +70,8 @@ Abstract:
 #define EVT_SIGNAL_LEGACY_BOOT    0x00000204
 #endif
 
+EFI_GUID gEfiEventMemoryMapChangeGuid   = { 0x78BEE926, 0x692F, 0x48FD, { 0x9E, 0xDB, 0x01, 0x42, 0x2E, 0xF0, 0xD7, 0xAB }};
+
 //
 // Declarations
 //
@@ -108,6 +110,11 @@ BBTestCreateEventEx_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 #endif
+
+EFI_STATUS
+BBTestCreateEventEx_Func_Sub3 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  );
   
 //
 // Functions
@@ -214,7 +221,10 @@ BBTestCreateEventEx_Func (
   //When call InstallConfigurationTable(), the events created by CreateEventEx() are invoked in order of
   //each specified notify TPL
   BBTestCreateEventEx_Func_Sub2 (StandardLib);
-#endif  
+#endif
+
+  BBTestCreateEventEx_Func_Sub3 (StandardLib);
+
   //
   // Done
   //
@@ -884,6 +894,161 @@ BBTestCreateEventEx_Func_Sub2 (
                  AssertionType,
                  gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid006,
                  L"BS.CreateEventEx - Check the notification of the EventGroup and the notify order when call InstallConfigurationTable.",
+                 L"%a:%d:Event's notify Tpl - %d,%d,%d",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Buffer[MAX_TEST_EVENT_NUM + 1],
+                 Buffer[MAX_TEST_EVENT_NUM + 3],
+                 Buffer[MAX_TEST_EVENT_NUM + 5]
+                 );
+
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+BBTestCreateEventEx_Func_Sub3 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  )
+{
+  EFI_STATUS          Status;
+  UINTN               Index;
+  EFI_TPL             OldTpl;
+  UINT32              EventTypes[] = {
+                        EVT_NOTIFY_SIGNAL,
+                        0
+                      };
+  EFI_TPL             NotifyTpls[] = {
+                        TPL_CALLBACK,
+                        TPL_NOTIFY,
+                        0
+                      };
+  EFI_TEST_ASSERTION  AssertionType;
+  EFI_EVENT           Event[MAX_TEST_EVENT_NUM];
+
+  EFI_PHYSICAL_ADDRESS    Memory;
+
+  //
+  //  Buffer[0] Buffer[1] Buffer[2] store event index
+  //
+  //  Buffer[3] stores the index of the first event notified
+  //  Buffer[4] stores the Tpl of the notification function of the first event notified
+  //
+  //  Buffer[5] stores the index of the second event notified
+  //  Buffer[6] stores the Tpl of the notification function of the second event notified  
+  //
+  //  Buffer[7] stores the index of the third event notified
+  //  Buffer[8] stores the Tpl of the notification function of the third event notified  
+  //
+  UINTN               Buffer[MAX_TEST_EVENT_NUM + MAX_TEST_EVENT_NUM*2];
+
+  //
+  // Initialize Buffer
+  //
+  for (Index = 0; Index < MAX_TEST_EVENT_NUM; Index ++) {
+    Buffer[Index] = Index;
+    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(-1);
+    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(-1);
+  }
+
+  //
+  // Creat Event0 in the EventGroup
+  //
+  Status = gtBS->CreateEventEx (
+                   EventTypes[0],
+                   NotifyTpls[0],
+                   NotifyFunctionTplEx,
+                   &Buffer[0],
+                   &gEfiEventMemoryMapChangeGuid,
+                   &Event[0]
+                   );
+
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  //
+  // Creat Event1 in the EventGroup
+  //  
+  Status = gtBS->CreateEventEx (
+                   EventTypes[0],
+                   NotifyTpls[0],
+                   NotifyFunctionTplEx,
+                   &Buffer[1],
+                   &gEfiEventMemoryMapChangeGuid,
+                   &Event[1]
+                   );
+
+  if (EFI_ERROR (Status)) {
+    gtBS->CloseEvent (Event[0]);
+    return Status;
+  }
+
+  //
+  // Creat Event2 in the EventGroup
+  //  
+  Status = gtBS->CreateEventEx (
+                   EventTypes[0],
+                   NotifyTpls[1],
+                   NotifyFunctionTplEx,
+                   &Buffer[2],
+                   &gEfiEventMemoryMapChangeGuid,
+                   &Event[2]
+                   );
+
+  if (EFI_ERROR (Status)) {
+    gtBS->CloseEvent (Event[0]);
+    gtBS->CloseEvent (Event[1]);
+    return Status;
+  }
+  
+  //
+  // Install a configuration table at TPL_NOTIFY
+  //
+  OldTpl = gtBS->RaiseTPL (TPL_NOTIFY);
+  
+  Status = gtBS->AllocatePages (
+                     AllocateAnyPages,
+                     EfiBootServicesData,
+                     2,
+                     &Memory
+                     );
+  
+  if (EFI_ERROR (Status)) {
+    gtBS->CloseEvent (Event[0]);
+    gtBS->CloseEvent (Event[1]);
+    gtBS->CloseEvent (Event[2]);
+    return Status;
+	}
+	
+  gtBS->RestoreTPL (OldTpl);
+
+  //
+  // Close all the events created and Free the pages
+  //
+  gtBS->CloseEvent (Event[0]);
+  gtBS->CloseEvent (Event[1]);
+  gtBS->CloseEvent (Event[2]);
+  gtBS->FreePages (Memory, 2);
+
+  //
+  // Compare the notify order
+  //
+  if ( (Buffer[MAX_TEST_EVENT_NUM] == 2 && Buffer[MAX_TEST_EVENT_NUM + 1] == TPL_NOTIFY) &&
+       Buffer[MAX_TEST_EVENT_NUM + 3] == TPL_CALLBACK &&
+       Buffer[MAX_TEST_EVENT_NUM + 5] == TPL_CALLBACK ) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid006,
+                 L"BS.CreateEventEx - Check the notification of the EFI_EVENT_GROUP_MEMORY_MAP_CHANGE and the notify order when Memory Allocation Services is called.",
                  L"%a:%d:Event's notify Tpl - %d,%d,%d",
                  __FILE__,
                  (UINTN)__LINE__,
