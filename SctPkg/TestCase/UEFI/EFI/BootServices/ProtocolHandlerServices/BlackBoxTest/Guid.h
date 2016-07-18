@@ -558,6 +558,38 @@ extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid001;
 
 extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid002;
 
+#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_003_GUID \
+{ 0xe41a6aac, 0xa293, 0x499a, {0xbe, 0xb9, 0x40, 0xa2, 0x95, 0x36, 0x72, 0xac }}
+
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid003;
+
+#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_004_GUID \
+{ 0x090defdb, 0x24a2, 0x43ff, {0xa6, 0x14, 0x75, 0x7b, 0xc2, 0xce, 0x9c, 0xdb }}
+
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid004;
+
+#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_005_GUID \
+{ 0xdb705ca6, 0x40ca, 0x4abc, {0x92, 0x66, 0x78, 0x0d, 0x3b, 0xac, 0x62, 0x63 }}
+
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid005;
+
+#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_006_GUID \
+{ 0x11449d53, 0xa735, 0x45b2, {0xa7, 0x81, 0xb6, 0x0f, 0x22, 0x73, 0x46, 0x0f }}
+
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid006;
+
+#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_007_GUID \
+{ 0xf7d46144, 0x290c, 0x48da, {0xad, 0x11, 0xca, 0x67, 0x8e, 0xa5, 0xab, 0x1b }}
+
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid007;
+
+#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_008_GUID \
+{ 0x4242e59c, 0x7370, 0x4a87, {0x83, 0x8c, 0x66, 0xdf, 0xf0, 0x66, 0xe0, 0x1e }}
+
+extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid008;
+
+
+
 #define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_001_GUID \
 { 0xb546a05c, 0x1cb5, 0x4c4f, {0x9e, 0x4d, 0x61, 0x30, 0x8a, 0x4c, 0x0c, 0xc5 }}
 
@@ -5928,217 +5960,6 @@ extern EFI_GUID gProtocolHandlerBBTestFunction_3AssertionGuid590;
 
 extern EFI_GUID gProtocolHandlerBBTestFunction_3AssertionGuid591;
 
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_003_GUID \
-{ 0xe41a6aac, 0xa293, 0x499a, {0xbe, 0xb9, 0x40, 0xa2, 0x95, 0x36, 0x72, 0xac }}
-
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid003;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_004_GUID \
-{ 0x090defdb, 0x24a2, 0x43ff, {0xa6, 0x14, 0x75, 0x7b, 0xc2, 0xce, 0x9c, 0xdb }}
-
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid004;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_005_GUID \
-{ 0xdb705ca6, 0x40ca, 0x4abc, {0x92, 0x66, 0x78, 0x0d, 0x3b, 0xac, 0x62, 0x63 }}
-
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid005;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_484_GUID \
-{ 0xf3cb0a58, 0x4682, 0x425d, {0x91, 0xfd, 0x7a, 0x10, 0xe4, 0xa0, 0xf3, 0x50 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid484;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_485_GUID \
-{ 0x7ed1d007, 0x7f32, 0x493a, {0xb0, 0xc9, 0xba, 0xce, 0xdc, 0x2d, 0xdd, 0xed }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid485;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_486_GUID \
-{ 0x48c64365, 0x01dd, 0x41c6, {0x93, 0x6e, 0x28, 0xea, 0x1d, 0xde, 0x0c, 0x1f }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid486;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_487_GUID \
-{ 0xa22e15c8, 0xe151, 0x4b84, {0xa0, 0x6b, 0x7f, 0x99, 0x28, 0x7f, 0xff, 0x64 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid487;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_488_GUID \
-{ 0xc9da7aef, 0x77e0, 0x44d4, {0xbd, 0xa8, 0x6e, 0xd6, 0xad, 0x3a, 0xf3, 0xfd }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid488;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_489_GUID \
-{ 0xa6f419a6, 0xcf35, 0x40ea, {0x80, 0x9c, 0x19, 0xe7, 0xcf, 0x8e, 0xcb, 0x95 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid489;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_490_GUID \
-{ 0x6926fa2f, 0xf78c, 0x454a, {0x91, 0x85, 0x56, 0x7b, 0x93, 0x8d, 0x17, 0x29 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid490;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_491_GUID \
-{ 0x0d00253b, 0x00d7, 0x429a, {0xba, 0x56, 0x7f, 0x91, 0x84, 0x77, 0xd8, 0xba }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid491;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_492_GUID \
-{ 0x799c3528, 0x4d2e, 0x4329, {0xa6, 0x9b, 0xce, 0x5c, 0x42, 0xf8, 0x3e, 0x00 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid492;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_493_GUID \
-{ 0x339ae67e, 0xdc65, 0x4411, {0xb6, 0x11, 0x5d, 0xfc, 0xd5, 0xcb, 0x70, 0x06 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid493;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_494_GUID \
-{ 0x75c6076f, 0xf57b, 0x4892, {0xaf, 0xa7, 0x1c, 0xa5, 0x51, 0x04, 0x36, 0x2a }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid494;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_495_GUID \
-{ 0x03ad7b51, 0x36c3, 0x4bf9, {0x91, 0x18, 0x2c, 0x50, 0xe7, 0x1d, 0x36, 0x1d }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid495;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_496_GUID \
-{ 0x0f91c7bb, 0x0e0b, 0x426a, {0x8b, 0x6b, 0xe5, 0x7f, 0x12, 0xb9, 0xa8, 0x5c }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid496;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_497_GUID \
-{ 0x254d9491, 0x1249, 0x4abd, {0xa6, 0x72, 0x5d, 0xfa, 0x68, 0xd9, 0x58, 0x6f }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid497;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_498_GUID \
-{ 0x662e7cb3, 0x297b, 0x4d97, {0x81, 0x6d, 0xc7, 0x61, 0x74, 0xad, 0x72, 0xee }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid498;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_499_GUID \
-{ 0x1366ce7c, 0xc588, 0x4e13, {0x91, 0x1d, 0x56, 0xb9, 0x2b, 0x24, 0x56, 0x45 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid499;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_500_GUID \
-{ 0xb9f4ddf8, 0x388a, 0x48df, {0xb6, 0x13, 0x1f, 0xf9, 0x57, 0x70, 0x2e, 0x71 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid500;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_501_GUID \
-{ 0x33dfbc47, 0xe974, 0x404e, {0xa0, 0x55, 0x5b, 0x7c, 0x06, 0x84, 0x7a, 0x95 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid501;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_502_GUID \
-{ 0x82d2a7f1, 0x6b7e, 0x475e, {0xa1, 0x55, 0x79, 0x38, 0xb1, 0xda, 0xae, 0x25 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid502;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_503_GUID \
-{ 0x5f578aa8, 0x74c0, 0x4cba, {0xbc, 0x0e, 0x38, 0x8a, 0x71, 0xf8, 0xc7, 0xd3 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid503;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_504_GUID \
-{ 0xc3e5a292, 0xb6fc, 0x41ff, {0xba, 0x39, 0xbe, 0xbc, 0x39, 0x13, 0xdb, 0x00 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid504;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_505_GUID \
-{ 0x9f6a0688, 0xe31b, 0x4df6, {0x8d, 0x7c, 0x91, 0xef, 0x8f, 0xb4, 0xae, 0xfa }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid505;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_506_GUID \
-{ 0xda7d27db, 0xa358, 0x4f49, {0xb1, 0x24, 0x90, 0x97, 0x53, 0xe1, 0xe6, 0xda }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid506;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_507_GUID \
-{ 0xa0b02f70, 0xdc35, 0x49dc, {0x94, 0x3a, 0xe6, 0xe4, 0xe7, 0x7a, 0x0f, 0x40 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid507;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_508_GUID \
-{ 0xe44995b9, 0x2c57, 0x4f99, {0x82, 0xa5, 0xb9, 0xee, 0xc7, 0x18, 0xcd, 0x79 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid508;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_509_GUID \
-{ 0xc5f403a8, 0x06a1, 0x49d1, {0x86, 0x1f, 0x4c, 0xa7, 0x4b, 0x4f, 0x45, 0x44 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid509;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_510_GUID \
-{ 0x7538063b, 0x1934, 0x4408, {0x87, 0x33, 0x57, 0xf1, 0xb6, 0x54, 0x33, 0x47 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid510;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_511_GUID \
-{ 0xf800d1fe, 0xb548, 0x4d37, {0xb0, 0x22, 0x1e, 0x45, 0xd7, 0xe2, 0xae, 0xb0 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid511;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_512_GUID \
-{ 0xc2ab2631, 0x012d, 0x4d14, {0x81, 0x4f, 0x1c, 0xda, 0xf2, 0xa6, 0x3b, 0xfa }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid512;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_513_GUID \
-{ 0xd995de48, 0xe12e, 0x4854, {0x86, 0x6c, 0x59, 0xd2, 0xf7, 0x6f, 0x6e, 0xb0 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid513;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_514_GUID \
-{ 0xe1b6ee4c, 0x79a9, 0x432d, {0xb7, 0xda, 0x68, 0x57, 0x05, 0xf0, 0x4d, 0x13 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid514;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_515_GUID \
-{ 0xdfb2e951, 0xc3d8, 0x4f27, {0x87, 0x9d, 0xfc, 0xd6, 0x1a, 0x6d, 0x77, 0xe9 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid515;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_516_GUID \
-{ 0xeb1621e3, 0x498e, 0x4b15, {0x82, 0xc5, 0x7b, 0x91, 0x71, 0xb5, 0xd0, 0x0a }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid516;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_517_GUID \
-{ 0x0705d119, 0x04b6, 0x4cfa, {0x9e, 0x1e, 0x00, 0x4e, 0xd0, 0x54, 0xd9, 0x05 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid517;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_518_GUID \
-{ 0x111c2fe1, 0x1c44, 0x42c8, {0x88, 0x76, 0x48, 0x0f, 0xd3, 0x0c, 0xa1, 0x5a }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid518;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_519_GUID \
-{ 0x132ccf99, 0x64f8, 0x4d31, {0xa5, 0x46, 0x36, 0xde, 0x50, 0xdf, 0xb1, 0xbc }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid519;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_520_GUID \
-{ 0xc7f4b9f2, 0xc755, 0x4bb4, {0xa2, 0x92, 0xc6, 0xa4, 0x52, 0x91, 0xf8, 0xbd }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid520;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_521_GUID \
-{ 0x1e93f309, 0x862d, 0x4add, {0x89, 0xb9, 0xc3, 0xa7, 0x58, 0x61, 0x98, 0x69 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid521;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_2_ASSERTION_522_GUID \
-{ 0x445c2395, 0x8bda, 0x4e5e, {0xab, 0x07, 0x82, 0x3b, 0x18, 0x7e, 0x52, 0xd8 }}
-
-extern EFI_GUID gProtocolHandlerBBTestFunction_2AssertionGuid522;
-
 #define EFI_TEST_PROTOCOLHANDLERBBTESTFUNCTION_3_ASSERTION_592_GUID \
 { 0x552ccd79, 0x14bd, 0x45d0, {0x8a, 0x0f, 0x86, 0xb0, 0x30, 0x85, 0xb2, 0x63 }}
 
@@ -6289,17 +6110,4 @@ extern EFI_GUID gProtocolHandlerBBTestFunction_3AssertionGuid620;
 
 extern EFI_GUID gProtocolHandlerBBTestFunction_3AssertionGuid621;
 
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_006_GUID \
-{ 0x11449d53, 0xa735, 0x45b2, {0xa7, 0x81, 0xb6, 0x0f, 0x22, 0x73, 0x46, 0x0f }}
 
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid006;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_007_GUID \
-{ 0xf7d46144, 0x290c, 0x48da, {0xad, 0x11, 0xca, 0x67, 0x8e, 0xa5, 0xab, 0x1b }}
-
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid007;
-
-#define EFI_TEST_PROTOCOLHANDLERBBTESTCONFORMANCE_ASSERTION_008_GUID \
-{ 0x4242e59c, 0x7370, 0x4a87, {0x83, 0x8c, 0x66, 0xdf, 0xf0, 0x66, 0xe0, 0x1e }}
-
-extern EFI_GUID gProtocolHandlerBBTestConformanceAssertionGuid008;

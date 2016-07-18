@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2013 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -483,6 +483,14 @@ BBTestRegisterProtocolNotifyInterfaceTest (
   // ByRegisterNotify and a valid search key is passed as an argument.
   //
   BBTestRegisterProtocolNotifyInterfaceTestCheckPoint7 (StandardLib);
+
+
+  //
+  // Checkpoint 8:
+  // Events that have been registered for protocol interface notification 
+  // can be unregistered by calling CloseEvent().
+  //
+  BBTestRegisterProtocolNotifyInterfaceTestCheckPoint8 (StandardLib);
 
   return EFI_SUCCESS;
 }

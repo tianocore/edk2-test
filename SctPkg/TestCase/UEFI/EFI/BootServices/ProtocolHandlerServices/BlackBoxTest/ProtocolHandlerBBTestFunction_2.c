@@ -8758,6 +8758,247 @@ Done:
   return EFI_SUCCESS;
 }
 
+EFI_STATUS
+BBTestRegisterProtocolNotifyInterfaceTestCheckPoint8 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  )
+{
+  EFI_EVENT             EventArray[2] = {NULL, NULL};
+  EFI_STATUS            Status1, Status2;
+  UINTN                 EventIndex;
+  VOID                  *Registration;
+  UINTN                 NotifiedTimesArray[2];
+  EFI_TEST_ASSERTION    AssertionType;
+  EFI_HANDLE            Handle;
+  EFI_STATUS            Status;
+
+  UINTN                 Numbers;
+
+  Handle = NULL;
+
+  Status = CheckForCleanEnvironment (&Numbers);
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L" CheckForCleanEnvironment",
+                   L"%a:%d:Status - %r, Number - %d",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status,
+                   Numbers
+                   );
+    return Status;
+  }
+
+  Status1 = gtBS->CreateEvent (
+                    EVT_NOTIFY_SIGNAL,
+                    TPL_CALLBACK,
+                    TestNotifyFunction1,
+                    &NotifiedTimesArray[0],
+                    &EventArray[0]
+                    );
+  Status2 = gtBS->CreateEvent (
+                    EVT_NOTIFY_SIGNAL,
+                    TPL_NOTIFY,
+                    TestNotifyFunction1,
+                    &NotifiedTimesArray[1],
+                    &EventArray[1]
+                    );
+  if (EFI_ERROR(Status1) || EFI_ERROR(Status2)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"BS.CreateEvent - build environment",
+                   L"%a:%d:Statuses - %r %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status1,
+                   Status2
+                   );
+    
+    for (EventIndex = 0; EventIndex < 2; EventIndex++) {
+      if (EventArray[EventIndex] != NULL) {
+        gtBS->CloseEvent (EventArray[EventIndex]);
+      }
+    }
+    return Status1 | Status2;
+  }
+
+  for (EventIndex = 0; EventIndex < 2; EventIndex++) {
+
+    //
+    // init
+    //
+    Registration = NULL;
+
+    Status = gtBS->RegisterProtocolNotify (
+                     &mTestNoInterfaceProtocol1Guid,
+                     EventArray[EventIndex],
+                     &Registration
+                     );
+    if (EFI_SUCCESS != Status) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_FAILED,
+                     gTestGenericFailureGuid,
+                     L"BS.RegisterProtocolNotify - build environment",
+                     L"%a:%d:Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
+      break;
+    }
+  }
+  if (EFI_SUCCESS != Status) {
+    for (EventIndex = 0; EventIndex < 2; EventIndex++) {
+      if (EventArray[EventIndex] != NULL) {
+        gtBS->CloseEvent (EventArray[EventIndex]);
+      }
+    }
+    return Status;
+  }
+  
+  //
+  // Step 2: Close the events at first, and then InstallProtocolInterface
+  //
+  gtBS->SetMem (NotifiedTimesArray, 2 * sizeof (UINTN), 0);
+
+  for (EventIndex = 0; EventIndex < 2; EventIndex++) {
+    if (EventArray[EventIndex] != NULL) {
+      gtBS->CloseEvent (EventArray[EventIndex]);
+    }
+  }  
+  
+
+  Status = gtBS->InstallProtocolInterface (
+                   &Handle,
+                   &mTestNoInterfaceProtocol1Guid,
+                   EFI_NATIVE_INTERFACE,
+                   NULL
+                   );
+  if (EFI_SUCCESS != Status) {
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"BS.InstallProtocolInterface - build environment",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    goto Done;
+  }
+  
+  //
+  // stall 10 seconds to wait for notify function execution
+  //
+  SctPrint (L"Waiting a few seconds for signal ...\n");
+  gtBS->Stall (STALL_10_SECONDS);
+
+  for (EventIndex = 0; EventIndex < 2; EventIndex++) {
+    if (0 == NotifiedTimesArray[EventIndex]) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gProtocolHandlerBBTestFunction_2AssertionGuid523,
+                   L"BS.RegisterProtocolNotify - InterfaceTestCheckpoint8",
+                   L"%a:%d:EventIndex - %d,NotifiedTimes - %d",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   EventIndex,
+                   NotifiedTimesArray[EventIndex]
+                   );
+  }
+
+  //
+  // Step 3: Reinstall TestNoInterfaceProtocol1
+  //
+  Status = gtBS->ReinstallProtocolInterface (
+                   Handle,
+                   &mTestNoInterfaceProtocol1Guid,
+                   NULL,
+                   NULL
+                   );
+  if (EFI_SUCCESS != Status) {
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"BS.ReinstallProtocolInterface - build environment",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    goto Done;
+  }
+  //
+  // stall 10 seconds to wait for notify function execution
+  //
+  SctPrint (L"Waiting a few seconds for signal ...\n");
+  gtBS->Stall (STALL_10_SECONDS);
+
+  for (EventIndex = 0; EventIndex < 2; EventIndex++) {
+    if (0 == NotifiedTimesArray[EventIndex]) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gProtocolHandlerBBTestFunction_2AssertionGuid524,
+                   L"BS.RegisterProtocolNotify - InterfaceTestCheckpoint8",
+                   L"%a:%d:EventIndex - %d,NotifiedTimes - %d",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   EventIndex,
+                   NotifiedTimesArray[EventIndex]
+                   );
+  }
+
+Done:
+  //
+  // restore environment
+  //
+  if (Handle != NULL) {
+    gtBS->UninstallProtocolInterface (
+            Handle,
+            &mTestNoInterfaceProtocol1Guid,
+            NULL
+            );
+  }
+
+  Status = CheckForCleanEnvironment (&Numbers);
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L" CheckForCleanEnvironment - restore environment",
+                   L"%a:%d:Status - %r, Number - %d",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status,
+                   Numbers
+                   );
+  }
+  return EFI_SUCCESS;
+}
+
+
 
 //
 // Checkpoint Functions for InstallMultipleProtocolInterfaces()

@@ -835,6 +835,11 @@ BBTestRegisterProtocolNotifyInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
+EFI_STATUS
+BBTestRegisterProtocolNotifyInterfaceTestCheckPoint8 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  );
+
 //
 // Checkpoint Functions for InstallMultipleProtocolInterfaces()
 //
