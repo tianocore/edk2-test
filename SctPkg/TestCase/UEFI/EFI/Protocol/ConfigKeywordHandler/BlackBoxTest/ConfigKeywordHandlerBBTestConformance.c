@@ -244,9 +244,9 @@ BBTestSetDataConformanceTest (
                  Status
                  );
 
-  gtBS->UnloadImage (ImageHandle);
+  Status = gtBS->UnloadImage (ImageHandle);
   
-  return EFI_SUCCESS;
+  return Status;
 }
 
 EFI_STATUS
@@ -486,8 +486,8 @@ BBTestGetDataConformanceTest (
   if (Results != NULL)
     SctFreePool (Results);
 
-  gtBS->UnloadImage (ImageHandle);
+  Status = gtBS->UnloadImage (ImageHandle);
 
-  return EFI_SUCCESS;  
+  return Status;  
 }
 

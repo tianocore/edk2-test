@@ -257,9 +257,9 @@ BBTestSetDataFunctionTest (
     Results = NULL;
   }
 
-  gtBS->UnloadImage (ImageHandle);
+  Status = gtBS->UnloadImage (ImageHandle);
 
-  return EFI_SUCCESS;
+  return Status;
 }
 
 
@@ -525,7 +525,7 @@ BBTestGetDataFunctionTest (
     Results2 = NULL;
   }
 
-  gtBS->UnloadImage (ImageHandle);
+  Status = gtBS->UnloadImage (ImageHandle);
   
-  return EFI_SUCCESS;  
+  return Status;  
 }
