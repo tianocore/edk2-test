@@ -1426,6 +1426,42 @@ GetVariableConfTestSub7 (
                  DataSize,    10
                  );
 
+  DataSize = 0;
+  Status = RT->GetVariable (
+                 L"TestVariable",         // VariableName
+                 &gTestVendor1Guid,       // VendorGuid
+                 NULL,                    // Attributes
+                 &DataSize,               // DataSize
+                 NULL                     // Data
+                 );
+  if ((Status   == EFI_BUFFER_TOO_SMALL) &&
+      (DataSize == 10                  )) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  //
+  // Record assertion & message
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gVariableServicesBbTestConformanceAssertionGuid022,
+                 L"RT.GetVariable - With DataSize is 0",
+                 L"%a:%d:Status - %r, Expected - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,      EFI_BUFFER_TOO_SMALL
+                 );
+
+  StandardLib->RecordMessage (
+                 StandardLib,
+                 EFI_VERBOSE_LEVEL_DEFAULT,
+                 L"DataSize=%d, Expected=%d\n",
+                 DataSize,    10
+                 );
+
   //
   // GetVariable should not succeed when DataSize is required - 1
   //
