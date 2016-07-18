@@ -193,6 +193,9 @@ EFI_GUID gEfiEapManagement2ProtocolGuid = { 0x5e93c847, 0x456d, 0x40b3, {0xa6, 0
 
 EFI_GUID gEfiEapConfigProtocolGuid = { 0xe5b58dbb, 0x7688, 0x44b4, {0x97, 0xbf, 0x5f, 0x1d, 0x4b, 0x7c, 0xc8, 0xdb }};
 
+EFI_GUID gEfiIPSecConfigProtocolGuid = { 0xce5e5929, 0xc7a3, 0x4602, {0xad, 0x9e, 0xc9, 0xda, 0xf9, 0x4e, 0xbf, 0xcf }};
+
+EFI_GUID gEfiIPSec2ProtocolGuid = { 0xa3979e64, 0xace8, 0x4ddc, {0xbc, 0x07, 0x4d, 0x66, 0xb8, 0xfd, 0x09, 0x77 }};
 
 //
 // Internal functions declarations
@@ -382,6 +385,12 @@ CheckEAPProtocols (
 
 EFI_STATUS
 CheckBlueToothProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckIPSecProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -581,12 +590,17 @@ Routine Description:
   //
   // Check the EAP protocols
   //
-  CheckEAPProtocols (StandardLib, IniFile);  
+  CheckEAPProtocols (StandardLib, IniFile);
 
   //
   // Check the BlueTooth protocols
   //
-  CheckBlueToothProtocols (StandardLib, IniFile);  
+  CheckBlueToothProtocols (StandardLib, IniFile);
+
+  //
+  // Check the IPSec protocols
+  //
+  CheckIPSecProtocols (StandardLib, IniFile);
 
   //
   // Close the INI file
@@ -3707,6 +3721,92 @@ CheckBlueToothProtocols (
                    );    
 
   }
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckIPSecProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[10];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  //
+  // Check the IPSEC_CONFIG protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiIPSecConfigProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  //
+  // Check the IPSEC2 protocol
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiIPSec2ProtocolGuid,
+                   NULL,
+                   &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }
+
+  AssertionType = NeedTwoOrWarning (ValueA, ValueB);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+  
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
+      (IniFile       != NULL               )) {
+    MaxLength = 10;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"IPSecSupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestPlatformAssertionGuid007,
+                 L"UEFI Compliant - IPsec protocols must be implemented",
+                 L"%a:%d:IPSEC_CONFIG - %s, IPSEC2 - %s",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 ValueA ? L"Yes" : L"No",
+                 ValueB ? L"Yes" : L"No"
+                 );
 
   return EFI_SUCCESS;
 }

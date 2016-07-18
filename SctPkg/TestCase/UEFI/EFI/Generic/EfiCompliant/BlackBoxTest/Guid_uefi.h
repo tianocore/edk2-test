@@ -186,6 +186,11 @@ extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid025;
 
 extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid026;
 
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_027_GUID \
+{ 0xb27660e2, 0xe87, 0x4794, {0x82, 0xf1, 0xe6, 0xbd, 0xbd, 0x8b, 0x74, 0x42 }}
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid027;
+
 #define EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_001_GUID \
 { 0xf6a871e3, 0xef8a, 0x420f, {0x82, 0x01, 0x35, 0xb6, 0x1c, 0xe2, 0xe8, 0xdb }}
 

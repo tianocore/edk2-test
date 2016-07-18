@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2015 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -110,6 +110,8 @@ EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid024 = EFI_TEST_EFICOMPLIANTBBTE
 EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid025 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_025_GUID;
 
 EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid026 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_026_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid027 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_027_GUID;
 
 EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid001 = EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_001_GUID;
 
