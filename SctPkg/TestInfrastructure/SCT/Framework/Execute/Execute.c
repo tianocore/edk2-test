@@ -2075,7 +2075,7 @@ Routine Description:
                            gFT->StslProtocol,
                            EFI_TEST_ASSERTION_FAILED,
                            gEfiSystemHangAssertionGuid,
-                           L"Sysem hangs or stops abnormally.",
+                           L"System hangs or stops abnormally.",
                            L"%a:%d",
                            __FILE__,
                            __LINE__
