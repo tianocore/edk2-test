@@ -500,6 +500,8 @@ BBTestMatchStringFunctionTestCheckpoint1 (
       TestDataSize = sizeof(MatchStringGenericTestData) / sizeof(MATCHSTRING_TEST_DATA_FIELD);
     }
     for (IndexJ = 0; IndexJ < TestDataSize; IndexJ++) {
+      FreePoolStatus1 = EFI_SUCCESS;
+      FreePoolStatus2 = EFI_SUCCESS;    	
       AssertionType      = EFI_TEST_ASSERTION_PASSED;
       CaptureMatchResult = 1;
       Status = RegularExpression->MatchString (
@@ -530,7 +532,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
                 break;
               }
 
-              FreePoolStatus1 = gBS->FreePool ((CHAR16 *)Captures[IndexK].CapturePtr);
+              FreePoolStatus1 = gtBS->FreePool ((CHAR16 *)Captures[IndexK].CapturePtr);
               if (EFI_ERROR (FreePoolStatus1)) { //If unable to free the CapturePtr, mark test as FAIL.
                 AssertionType = EFI_TEST_ASSERTION_FAILED;
                 break;
@@ -547,14 +549,14 @@ BBTestMatchStringFunctionTestCheckpoint1 (
         } else { //If the string doesn't match, there's no captures returned. Hence initialize the status to EFI_SUCCESS
           FreePoolStatus1 = EFI_SUCCESS;
           FreePoolStatus2 = EFI_SUCCESS;
-          }
+        }
       } else if (    (Status == EFI_NOT_READY)
                   || (Status == EFI_DEVICE_ERROR))
-        {
-          AssertionType = EFI_TEST_ASSERTION_WARNING;
-        } else {
-          AssertionType = EFI_TEST_ASSERTION_FAILED;
-        }
+      {
+        AssertionType = EFI_TEST_ASSERTION_WARNING;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
 
       if (    (FreePoolStatus1 == EFI_SUCCESS)
            && (FreePoolStatus2 == EFI_SUCCESS))
