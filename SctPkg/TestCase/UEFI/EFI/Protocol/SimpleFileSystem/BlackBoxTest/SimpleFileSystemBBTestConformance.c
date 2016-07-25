@@ -614,7 +614,7 @@ BBTestSetInfoConformanceTest (
 
   // 5.2.8.2.8 Call SetInfo() to check  when firmware media is read-only
   BBTestSetInfoConformanceTestCheckpoint8 (StandardLib, SimpleFileSystem);
-	
+
   return EFI_SUCCESS;
 }
 
@@ -1998,7 +1998,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
                    );
     return Status;
   }
-  
+
   SctStrCpy (FileName, L"BBTestGetInfoConformanceTestCheckpoint1_File");
 
   //
@@ -2234,7 +2234,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
                    );
     return Status;
   }
-  
+
   Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -2252,7 +2252,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
 
   //
   //  Read-only media, Bypass checkpoint 1
-  // 
+  //
   if (FileSystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (FileSystemInfo);
     return EFI_SUCCESS;
@@ -2260,8 +2260,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
     gtBS->FreePool (FileSystemInfo);
     FileSystemInfo = NULL;
   }
-  
-  
+
   SctStrCpy (FileName, L"BBTestSetInfoConformanceTestCheckpoint1_File");
 
   //
@@ -2274,7 +2273,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
                    EFI_FILE_MODE_READ|EFI_FILE_MODE_WRITE|EFI_FILE_MODE_CREATE,
                    0
                    );
-  
+
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2310,7 +2309,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
                  (UINTN)__LINE__,
                  Status
                  );
-  
+
   FileHandle->Delete (FileHandle);
 
   return EFI_SUCCESS;
@@ -2366,7 +2365,7 @@ BBTestSetInfoConformanceTestCheckpoint2 (
 
   //
   //  Read-only media, Bypass checkpoint 2
-  // 
+  //
   if (FileSystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (FileSystemInfo);
     return EFI_SUCCESS;
@@ -2374,7 +2373,7 @@ BBTestSetInfoConformanceTestCheckpoint2 (
     gtBS->FreePool (FileSystemInfo);
     FileSystemInfo = NULL;
   }
-  
+
   //
   // init
   //
@@ -2631,7 +2630,7 @@ BBTestSetInfoConformanceTestCheckpoint3 (
 
   //
   //  Read-only media, Bypass checkpoint 3
-  // 
+  //
   if (SystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (SystemInfo);
     return EFI_SUCCESS;
@@ -2878,7 +2877,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
 
   //
   //  Read-only media, Bypass checkpoint 4
-  // 
+  //
   if (FileSystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (FileSystemInfo);
     return EFI_SUCCESS;
@@ -2886,7 +2885,7 @@ BBTestSetInfoConformanceTestCheckpoint4 (
     gtBS->FreePool (FileSystemInfo);
     FileSystemInfo = NULL;
   }
-  
+
   //
   // init
   //
@@ -3300,7 +3299,7 @@ BBTestSetInfoConformanceTestCheckpoint5 (
 
   //
   //  Read-only media, Bypass checkpoint 5
-  // 
+  //
   if (SystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (SystemInfo);
     return EFI_SUCCESS;
@@ -3308,7 +3307,7 @@ BBTestSetInfoConformanceTestCheckpoint5 (
     gtBS->FreePool (SystemInfo);
     SystemInfo = NULL;
   }
-  
+
   //
   // init
   //
@@ -3424,7 +3423,7 @@ BBTestSetInfoConformanceTestCheckpoint6 (
                    );
     return Status;
   }
-  
+
   Status = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -3442,12 +3441,12 @@ BBTestSetInfoConformanceTestCheckpoint6 (
 
   //
   //  Read-only media, Bypass checkpoint 6
-  // 
+  //
   if (SystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (SystemInfo);
     return EFI_SUCCESS;
-  } 
-  
+  }
+
   //
   // init
   //
@@ -3725,7 +3724,7 @@ BBTestSetInfoConformanceTestCheckpoint7 (
                    );
     return Status;
   }
- 
+
   Status = InternalGetInfo (Root, (VOID **) &FileSystemInfo, &BufferSize, &gBlackBoxEfiFileSystemInfoGuid);
   if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -3743,7 +3742,7 @@ BBTestSetInfoConformanceTestCheckpoint7 (
 
   //
   //  Read-only media, Bypass checkpoint 7
-  // 
+  //
   if (FileSystemInfo->ReadOnly == TRUE) {
     gtBS->FreePool (FileSystemInfo);
     return EFI_SUCCESS;
@@ -3751,21 +3750,17 @@ BBTestSetInfoConformanceTestCheckpoint7 (
     gtBS->FreePool (FileSystemInfo);
     FileSystemInfo = NULL;
   }
-  
 
   //
   // init
   //
   gtBS->SetMem (FileHandle, 2 * sizeof (EFI_FILE*), 0);
 
-
   SctStrCpy (FileName[0], L"BBTestSetInfoConformanceTestCheckpoint7_File_One");
   SctStrCpy (FileName[1], L"BBTestSetInfoConformanceTestCheckpoint7_File_Two");
-	
 
   Attribute[0] = 0;
   Attribute[1] = 0;
-
 
   for (Index = 0; Index < 2; Index++) {
 
@@ -3797,7 +3792,7 @@ BBTestSetInfoConformanceTestCheckpoint7 (
     }
   }
 
-	//
+  //
   // get info first
   //
   Status = InternalGetInfo (FileHandle[0], (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
@@ -3820,14 +3815,14 @@ BBTestSetInfoConformanceTestCheckpoint7 (
        return Status;
     }
 
-	Status = FileHandle[0]->SetInfo (
+    Status = FileHandle[0]->SetInfo (
                             FileHandle[0],
                             &gBlackBoxEfiFileInfoGuid,
                             FileInfo->Size,
                             FileInfo
                             );
 
-	// according to UEFI 2.3 spec, interface must return EFI_ACCESS_DENIED
+  // according to UEFI 2.3 spec, interface must return EFI_ACCESS_DENIED
   if (Status == EFI_ACCESS_DENIED) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
@@ -3843,13 +3838,12 @@ BBTestSetInfoConformanceTestCheckpoint7 (
                  (UINTN)__LINE__,
                  Status
                  );
-	
 
 Done:
   if (FileInfo != NULL) {
     gtBS->FreePool (FileInfo);
   }
- 
+
   for (Index = 0; Index < 2; Index++) {
     if (FileHandle[Index] != NULL) {
       FileHandle[Index]->Delete (FileHandle[Index]);
@@ -3907,7 +3901,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                    );
     goto Done;
   }
-  
+
   // if file media is not read-only, skip test
   if (FileSystemInfo->ReadOnly == FALSE) {
     goto Done;
@@ -3921,7 +3915,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                    BufferSize,
                    FileSystemInfo
                    );
-	 
+
   // according to UEFI 2.3 spec, interface must return EFI_WRITE_PROTECTED
   if (Status == EFI_WRITE_PROTECTED) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -3966,7 +3960,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                    BufferSize,
                    FileSystemLabel
                    );
-  
+
   // according to UEFI 2.3 spec, interface must return EFI_WRITE_PROTECTED
   if (Status == EFI_WRITE_PROTECTED) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -3983,10 +3977,10 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                  (UINTN)__LINE__,
                  Status
                  );
- 
+
   // 3. ======================= test file info ==========================
   //
-  // get root directory file info  
+  // get root directory file info
   //
   Status = InternalGetInfo (Root, (VOID **) &FileInfo, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
@@ -4002,7 +3996,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                    );
     goto Done;
   }
-  
+
   // change file info to read-only for test
   FileInfo->Attribute |= EFI_FILE_READ_ONLY;
   Status = Root->SetInfo (
@@ -4011,7 +4005,7 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                    BufferSize,
                    FileInfo
                    );
-  
+
   // according to UEFI 2.3 spec, interface must return EFI_WRITE_PROTECTED
   if (Status == EFI_WRITE_PROTECTED) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -4028,17 +4022,16 @@ BBTestSetInfoConformanceTestCheckpoint8 (
                  (UINTN)__LINE__,
                  Status
                  );
- 
-		
+
 Done:
   if (FileInfo != NULL) {
     gtBS->FreePool (FileInfo);
   }
- 
+
   if (FileSystemInfo != NULL) {
     gtBS->FreePool (FileSystemInfo);
   }
- 
+
   if (FileSystemLabel != NULL) {
     gtBS->FreePool (FileSystemLabel);
   }
@@ -4046,7 +4039,6 @@ Done:
   return EFI_SUCCESS;
 
 }
-
 
 VOID
 CreateRandomValue (
