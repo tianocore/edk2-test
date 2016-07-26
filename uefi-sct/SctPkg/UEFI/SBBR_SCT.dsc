@@ -142,6 +142,7 @@
 
 [LibraryClasses.AARCH64]
   NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
+  ArmLib|ArmPkg/Library/ArmLib/AArch64/AArch64Lib.inf
 
 ###############################################################################
 #
@@ -238,6 +239,12 @@ SctPkg/TestCase/UEFI/EFI/BootServices/MiscBootServices/BlackBoxTest/MiscBootServ
 ## 42. EFI_UNINSTALL_MULTIPLE_PROTOCOL_INTERFACES
 SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/ProtocolHandlerBBTest.inf
 # End of Boot Services Tests - SBBR v1.0 Appendix A
+
+#
+# UEFI System Environment and Configuration Tests - SBBR v1.0 3.3
+#
+SctPkg/TestCase/UEFI/EFI/Generic/SbbrSysEnvConfig/BlackBoxTest/SysEnvConfigBBTest.inf
+#End of UEFI System Environment and Configuration Tests - SBBR v1.0 3.3
 
 #
 # Dependency files
