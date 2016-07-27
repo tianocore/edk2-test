@@ -106,7 +106,6 @@ BBTestLoadImageConsistencyTest (
   //
   StandardLib = NULL;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -317,8 +316,6 @@ BBTestLoadImageConsistencyTest (
                  Status
                  );
 
-
-
   //
   // ASSERT in CoreLoadImage (Core\Image.c Line1231),
   // so comments this checkpoint out temporarily until it is fixed.
@@ -351,7 +348,6 @@ BBTestLoadImageConsistencyTest (
                  (UINTN)__LINE__,
                  Status
                  );
-
 
   //
   // Checkpoint 6:
@@ -468,7 +464,6 @@ BBTestStartImageConsistencyTest (
   //
   StandardLib = NULL;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -555,7 +550,6 @@ BBTestStartImageConsistencyTest (
   return Status;
 }
 
-
 /**
  *  @brief Entrypoint for gtBS->UnloadImage() Consistency Test.
  *         1 check point will be tested.
@@ -589,7 +583,6 @@ BBTestUnloadImageConsistencyTest (
   // Init
   //
   StandardLib = NULL;
-
 
   //
   // Get the Standard Library Interface
@@ -707,7 +700,6 @@ BBTestExitConsistencyTest (
   // Init
   //
   StandardLib = NULL;
-
 
   //
   // Get the Standard Library Interface
@@ -831,7 +823,6 @@ BBTestExitBootServicesConsistencyTest (
   //
   StandardLib = NULL;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -913,7 +904,7 @@ BBTestExitBootServicesConsistencyTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   Status = gtRT->SetVariable (
                      L"ExitBootServicesTestVariable",                                                           // VariableName
                      &gTestVendor1Guid,                                                                         // VendorGuid
@@ -924,7 +915,6 @@ BBTestExitBootServicesConsistencyTest (
 
   //reset system
   gtRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
-  
 
   // get var to get the status
 CheckResult:
@@ -934,7 +924,7 @@ CheckResult:
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
@@ -954,7 +944,6 @@ CheckResult:
                      0,                               // DataSize
                      Data                             // Data
                      );
-  
 
   Status = ImageTestCheckForCleanEnvironment (&Numbers);
   if (EFI_ERROR(Status)) {
