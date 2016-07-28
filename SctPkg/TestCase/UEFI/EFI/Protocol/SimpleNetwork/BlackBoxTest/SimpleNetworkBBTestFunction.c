@@ -1237,6 +1237,11 @@ BBTestStatisticsFunctionTest (
   SctSetMem (&StatisticsTable1, sizeof (EFI_NETWORK_STATISTICS), 0x0);
   SctSetMem (&StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS), 0x0);
 
+  // As per the UEFI specification a previous call to SnpInterface->Statistics
+  // may set the StatisticsSize greater than size of EFI_NETWORK_STATISTICS.
+  // Since StatisticsSize is an IN/OUT parameter, reset StatisticsSize to
+  // size of EFI_NETWORK_STATISTICS to avoid memory corruption.
+  StatisticsSize = sizeof (EFI_NETWORK_STATISTICS);
   Status = SnpInterface->Statistics (SnpInterface, TRUE, &StatisticsSize, &StatisticsTable1);
   LoggingLib->DumpBuf (LoggingLib, EFI_VERBOSE_LEVEL_DEFAULT, (CHAR16*)&(StatisticsTable1), sizeof (EFI_NETWORK_STATISTICS)/2, EFI_DUMP_HEX);
 
