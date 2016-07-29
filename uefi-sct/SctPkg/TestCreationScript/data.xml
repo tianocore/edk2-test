@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <category>
+        <name>GenericTest</name>
+        <path>Generic</path>
+        <uuid>71652D04-BF38-434A-BCB8-6547D7FD8384</uuid>
+    </category>
+    <category>
+        <name>BootServicesTest</name>
+        <path>BootServices</path>
+        <uuid>E9EF7553-F833-4E56-96E8-38AE679523CC</uuid>
+    </category>
+    <category>
+        <name>RuntimeServicesTest</name>
+        <path>RuntimeServices</path>
+        <uuid>AFF115FB-387B-4c18-8C41-6AFC7F03BB90</uuid>
+    </category>
+    <category>
+        <name>ProtocolTest</name>
+        <path>Protocol</path>
+        <uuid>None</uuid>
+    </category>
+</data>
