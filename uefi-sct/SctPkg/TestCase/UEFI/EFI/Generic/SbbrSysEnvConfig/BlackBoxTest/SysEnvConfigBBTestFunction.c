@@ -57,6 +57,7 @@ Abstract:
 
 #include <Chipset/AArch64.h>
 #include "Guid.h"
+#include <Library/ArmLib.h>
 #include "SctLib.h"
 #include "SysEnvConfigBBTestFunction.h"
 #include "SysEnvConfigBBTestMain.h"
@@ -188,7 +189,7 @@ BBTestMemAddrAlignmentTest (
   //
   // Reading SCTLR for current exception level
   //
-  Sctlr = ArmReadSctlr64();
+  Sctlr = ArmReadSctlr();
 
   if (Sctlr & SCTLR_A_MASK)
   {

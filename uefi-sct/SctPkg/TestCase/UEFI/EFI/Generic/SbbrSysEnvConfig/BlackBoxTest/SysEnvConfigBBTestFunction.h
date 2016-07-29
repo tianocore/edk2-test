@@ -58,13 +58,15 @@ Abstract:
 #ifndef _SYSENVCONFIG_BB_TEST_FUNCTION_H_
 #define _SYSENVCONFIG_BB_TEST_FUNCTION_H_
 
+#include <Library/EfiTestLib.h>
+
 #define SCTLR_A_MASK           0x2
 #define SCTLR_A_SHIFT          1
 
 #define GPT_HEADER_LBA         1
 #define GPT_SIGNATURE_SIZE     8
 #define GPT_SIGNATURE          "EFI PART"
-#define GPT_EFI_PARTITION_GUID { 0xC12A7328, 0xF81F, 0x11D2, {0xBA, 0x4B, 0x00, 0xA0, 0xC9, 0x3E, 0xC9, 0x3B} }
+#define GPT_EFI_PARTITION_GUID {0xC12A7328, 0xF81F, 0x11D2, {0xBA, 0x4B, 0x00, 0xA0, 0xC9, 0x3E, 0xC9, 0x3B}}
 #define GPT_STARTING_ENTRY_LBA_OFFSET  72
 
 EFI_STATUS

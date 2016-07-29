@@ -65,11 +65,8 @@
 
 [Sources.common]
   Guid.c
-  Guid.h
   SysEnvConfigBBTestFunction.c
-  SysEnvConfigBBTestFunction.h
   SysEnvConfigBBTestMain.c
-  SysEnvConfigBBTestMain.h
 
 [Packages]
   ArmPkg/ArmPkg.dec

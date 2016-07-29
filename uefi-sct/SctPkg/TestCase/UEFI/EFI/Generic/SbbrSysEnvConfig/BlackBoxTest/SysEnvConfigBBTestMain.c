@@ -66,7 +66,7 @@ EFI_BB_TEST_PROTOCOL_FIELD gBBTestProtocolField = {
   L"Tests various processor configuration parameters to make sure they conform to ARM SBBR."
 };
 
-EFI_GUID gSupportProtocolGuid1[2] = {
+EFI_GUID gSupportProtocolGuid[2] = {
   EFI_STANDARD_TEST_LIBRARY_GUID,
   EFI_NULL_GUID
 };
@@ -77,7 +77,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     L"BootExcLevel",
     L"Check the execution level of the UEFI boot environment.",
     EFI_TEST_LEVEL_DEFAULT,
-    gSupportProtocolGuid1,
+    gSupportProtocolGuid,
     EFI_TEST_CASE_AUTO,
     BBTestBootExcLevelTest
   },
@@ -86,7 +86,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     L"MemAddrAlignment",
     L"Checking that memory address alignment is not enforced.",
     EFI_TEST_LEVEL_DEFAULT,
-    gSupportProtocolGuid1,
+    gSupportProtocolGuid,
     EFI_TEST_CASE_AUTO,
     BBTestMemAddrAlignmentTest
   },
@@ -95,7 +95,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     L"OsDiskFormat",
     L"Checking that the operating system disk contains a GPT partition table with an EFI partition.",
     EFI_TEST_LEVEL_DEFAULT,
-    gSupportProtocolGuid1,
+    gSupportProtocolGuid,
     EFI_TEST_CASE_AUTO,
     BBTestOsDiskFormatTest
   },
