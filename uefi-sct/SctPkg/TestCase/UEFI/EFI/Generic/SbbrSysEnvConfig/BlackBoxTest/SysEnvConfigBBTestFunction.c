@@ -62,6 +62,7 @@ Abstract:
 #include "SysEnvConfigBBTestFunction.h"
 #include "SysEnvConfigBBTestMain.h"
 #include <UEFI/Protocol/BlockIo.h>
+#include <UEFI/Protocol/Ebc.h>
 #include <Uefi/UefiGpt.h>
 #include <Uefi/UefiMultiPhase.h>
 
@@ -442,6 +443,85 @@ BBTestOsDiskFormatTest (
               __FILE__,
               (UINTN)__LINE__
               );
+
+  return EFI_SUCCESS;
+}
+
+/**
+ *  Entrypoint for EBC interface check.
+ *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
+ *  @param ClientInterface a pointer to the interface to be tested.
+ *  @param TestLevel test "thoroughness" control.
+ *  @param SupportHandle a handle containing protocols required.
+ *  @return EFI_SUCCESS Finish the test successfully.
+ */
+
+//
+// SBBR 3.3.4
+//
+
+EFI_STATUS
+BBTestEbcInterfacePresentTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  )
+{
+
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib;
+  EFI_STATUS                          Status;
+  EFI_HANDLE                          *HandleBuffer;
+  UINTN                               NumberOfHandles;
+  EFI_GUID                            EbcProtocolGuid = EFI_EBC_PROTOCOL_GUID;
+
+  //
+  // Get the Standard Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+              SupportHandle,
+              &gEfiStandardTestLibraryGuid,
+              (VOID **) &StandardLib
+              );
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  //
+  // Attempting to locate EBC protocol
+  //
+  Status = gBS->LocateHandleBuffer (
+              ByProtocol,
+              &EbcProtocolGuid,
+              NULL,
+              &NumberOfHandles,
+              &HandleBuffer
+              );
+  if ( (Status == EFI_NOT_FOUND) && (NumberOfHandles == 0) ) {
+    StandardLib->RecordAssertion (
+                StandardLib,
+                EFI_TEST_ASSERTION_FAILED,
+                gSysEnvConfigAssertion004Guid,
+                L"SBBRTestEbcInterfacePresent",
+                L"%a:%d:EBC Interpreter Not Found",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+  }
+  else if( (Status == EFI_SUCCESS) && (NumberOfHandles > 0) ) {
+    StandardLib->RecordAssertion (
+                StandardLib,
+                EFI_TEST_ASSERTION_PASSED,
+                gSysEnvConfigAssertion004Guid,
+                L"SBBRTestEbcInterfacePresent",
+                L"%a:%d:EBC Interpreter Found",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+  }
+  else {
+    return Status;
+  }
 
   return EFI_SUCCESS;
 }

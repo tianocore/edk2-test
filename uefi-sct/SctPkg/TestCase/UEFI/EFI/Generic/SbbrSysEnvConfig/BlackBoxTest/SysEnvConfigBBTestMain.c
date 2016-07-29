@@ -99,6 +99,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestOsDiskFormatTest
   },
+  {
+    SYSENVCONFIG_EBC_INTERPRETER_PRESENT_GUID,
+    L"EbcInterfacePresent",
+    L"Checking that an EBC interpreter is present in the system.",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    BBTestEbcInterfacePresentTest
+  },
   EFI_NULL_GUID
 };
 
