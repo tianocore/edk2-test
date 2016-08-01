@@ -364,6 +364,12 @@ then
     # Tests SBBR sections 3.3.1, 3.3.2, 3.3.3, and 3.3.4
     cp $ProcessorType/SysEnvConfigBBTest.efi                            $Framework/Test/ > NUL
 
+    # Runtime Services Tests - SBBR v1.0 Appendix B
+    cp $ProcessorType/VariableServicesBBTest.efi               $Framework/Test/ > NUL
+    cp $ProcessorType/TimeServicesBBTest.efi                   $Framework/Test/ > NUL
+    cp $ProcessorType/MiscRuntimeServicesBBTest.efi            $Framework/Test/ > NUL
+    cp $ProcessorType/SBBRRuntimeServicesBBTest.efi            $Framework/Test/ > NUL
+
     # *********************************************
     # Copy ENTS binary
     # *********************************************

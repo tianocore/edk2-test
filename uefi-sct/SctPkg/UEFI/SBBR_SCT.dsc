@@ -246,6 +246,30 @@ SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Proto
 SctPkg/TestCase/UEFI/EFI/Generic/SbbrSysEnvConfig/BlackBoxTest/SysEnvConfigBBTest.inf
 #End of UEFI System Environment and Configuration Tests - SBBR v1.0 3.3
 
+# Required UEFI Runtime Services Tests - SBBR v1.0 Appendix B
+#
+##  1. EFI_GET_TIME
+##  2. EFI_SET_TIME
+##  3. EFI_GET_WAKEUP_TIME
+##  4. EFI_SET_WAKEUP_TIME
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/TimeServices/BlackBoxTest/TimeServicesBBTest.inf
+#
+##  5. EFI_GET_VARIABLE
+##  6. EFI_GET_NEXT_VARIABLE_NAME
+##  7. EFI_SET_VARIABLE
+##  8. EFI_QUERY_VARIABLE_INFO
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/VariableServices/BlackBoxTest/VariableServicesBBTest.inf
+#
+##  9. EFI_QUERY_CAPSULE_CAPABILITIES
+## 10. EFI_UPDATE_CAPSULE
+## 11. EFI_RESET_SYSTEM
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/MiscRuntimeServices/BlackBoxTest/MiscRuntimeServicesBBTest.inf
+#
+## 12. EFI_SET_VIRTUAL_ADDRESS_MAP
+## 13. EFI_CONVERT_POINTER
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/SBBRRuntimeServices/BlackBoxTest/SBBRRuntimeServicesBBTest.inf
+# End of Runtime Services Tests - SBBR v1.0 Appendix B
+
 #
 # Dependency files
 #
