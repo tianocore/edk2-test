@@ -1497,61 +1497,23 @@ CheckUefiNetworkApplication (
                        NULL,
                        (VOID **)&TempInterface
                        );
-      switch (Index) {
-        case 0:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 1:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 2:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 3:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 4:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        default:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-      }
-   
-      Status = gtBS->LocateProtocol (
-                       &Guid[Index+7],
-                       NULL,
-                       (VOID **)&Interface
-                       );
       if (!EFI_ERROR (Status)) {
-        Value[Index+7] = TRUE;
+        TempInterface->CreateChild (TempInterface, &ChildHandle);
+
+        Status = gtBS->LocateProtocol (
+                         &Guid[Index+7],
+                         NULL,
+                         (VOID **)&Interface
+                         );
+        if (!EFI_ERROR (Status)) {
+          Value[Index+7] = TRUE;
+        } else {
+          Value[Index+7] = FALSE;
+        }
+     
+        TempInterface->DestroyChild (TempInterface, ChildHandle);
       } else {
         Value[Index+7] = FALSE;
-      }
-   
-      switch (Index) {
-        case 0:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 1:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 2:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 3:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 4:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        default:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
       }
     } 
 
@@ -1695,54 +1657,23 @@ CheckUefiV6NetworkApplication (
                        NULL,
                        (VOID **) &TempInterface
                        );
-      switch (Index) {
-        case 0:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 1:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 2:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        case 3:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-          break;
-        default:
-          TempInterface->CreateChild(TempInterface, &ChildHandle);
-      }
-
-      Status = gtBS->LocateProtocol (
-                       &Guid[Index+5],
-                       NULL,
-                       (VOID **) &Interface
-                       );
       if (!EFI_ERROR (Status)) {
-        Value[Index+5] = TRUE;
+        TempInterface->CreateChild (TempInterface, &ChildHandle);
+
+        Status = gtBS->LocateProtocol (
+                         &Guid[Index+5],
+                         NULL,
+                         (VOID **) &Interface
+                         );
+        if (!EFI_ERROR (Status)) {
+          Value[Index+5] = TRUE;
+        } else {
+          Value[Index+5] = FALSE;
+        }
+        
+        TempInterface->DestroyChild (TempInterface, ChildHandle);
       } else {
         Value[Index+5] = FALSE;
-      }
-      
-      switch (Index) {
-        case 0:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 1:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 2:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        case 3:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
-          break;
-        default:
-          TempInterface->DestroyChild(TempInterface, ChildHandle);
-          ChildHandle = NULL;
       }
     } 
 
@@ -2969,23 +2900,25 @@ CheckDNS4Protocols (
                        NULL,
                        (VOID **) &TempInterface
                        );
-
-    TempInterface->CreateChild(TempInterface, &ChildHandle);
-
-
-    Status = gtBS->LocateProtocol (
-                     &gEfiDns4ProtocolGuid,
-                     NULL,
-                     (VOID **) &Interface
-                     );
     if (!EFI_ERROR (Status)) {
-      ValueB = TRUE;
+      TempInterface->CreateChild (TempInterface, &ChildHandle);
+
+      Status = gtBS->LocateProtocol (
+                       &gEfiDns4ProtocolGuid,
+                       NULL,
+                       (VOID **) &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        ValueB = TRUE;
+      } else {
+        ValueB = FALSE;
+      }
+
+      TempInterface->DestroyChild (TempInterface, ChildHandle);
+      ChildHandle = NULL;
     } else {
       ValueB = FALSE;
     }
-
-    TempInterface->DestroyChild(TempInterface, ChildHandle);
-    ChildHandle = NULL;
 
     AssertionType = NeedOneOrWarning (ValueB);
 
@@ -3097,23 +3030,25 @@ CheckDNS6Protocols (
                        NULL,
                        (VOID **) &TempInterface
                        );
-
-    TempInterface->CreateChild(TempInterface, &ChildHandle);
-
-
-    Status = gtBS->LocateProtocol (
-                     &gEfiDns6ProtocolGuid,
-                     NULL,
-                     (VOID **) &Interface
-                     );
     if (!EFI_ERROR (Status)) {
-      ValueB = TRUE;
+      TempInterface->CreateChild (TempInterface, &ChildHandle);
+
+      Status = gtBS->LocateProtocol (
+                       &gEfiDns6ProtocolGuid,
+                       NULL,
+                       (VOID **) &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        ValueB = TRUE;
+      } else {
+        ValueB = FALSE;
+      }
+
+      TempInterface->DestroyChild (TempInterface, ChildHandle);
+      ChildHandle = NULL;
     } else {
       ValueB = FALSE;
     }
-
-    TempInterface->DestroyChild(TempInterface, ChildHandle);
-    ChildHandle = NULL;
 
     AssertionType = NeedOneOrWarning (ValueB);
 
@@ -3238,23 +3173,25 @@ CheckTLSProtocols (
                        NULL,
                        (VOID **) &TempInterface
                        );
-
-    TempInterface->CreateChild(TempInterface, &ChildHandle);
-
-
-    Status = gtBS->LocateProtocol (
-                     &gEfiTlsProtocolGuid,
-                     NULL,
-                     (VOID **) &Interface
-                     );
     if (!EFI_ERROR (Status)) {
-      ValueC = TRUE;
+      TempInterface->CreateChild (TempInterface, &ChildHandle);
+
+      Status = gtBS->LocateProtocol (
+                       &gEfiTlsProtocolGuid,
+                       NULL,
+                       (VOID **) &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        ValueC = TRUE;
+      } else {
+        ValueC = FALSE;
+      }
+
+      TempInterface->DestroyChild (TempInterface, ChildHandle);
+      ChildHandle = NULL;
     } else {
       ValueC = FALSE;
     }
-
-    TempInterface->DestroyChild(TempInterface, ChildHandle);
-    ChildHandle = NULL;
 
     AssertionType = NeedOneOrWarning (ValueC);
 
@@ -3381,23 +3318,25 @@ CheckHTTPProtocols (
                        NULL,
                        (VOID **) &TempInterface
                        );
+    if (!EFI_ERROR (Status)){
+      TempInterface->CreateChild (TempInterface, &ChildHandle);
 
-    TempInterface->CreateChild(TempInterface, &ChildHandle);
+      Status = gtBS->LocateProtocol (
+                       &gEfiHttpProtocolGuid,
+                       NULL,
+                       (VOID **) &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        ValueC = TRUE;
+      } else {
+        ValueC = FALSE;
+      }
 
-
-    Status = gtBS->LocateProtocol (
-                     &gEfiHttpProtocolGuid,
-                     NULL,
-                     (VOID **) &Interface
-                     );
-    if (!EFI_ERROR (Status)) {
-      ValueC = TRUE;
+      TempInterface->DestroyChild (TempInterface, ChildHandle);
+      ChildHandle = NULL;
     } else {
       ValueC = FALSE;
     }
-
-    TempInterface->DestroyChild(TempInterface, ChildHandle);
-    ChildHandle = NULL;
 
     AssertionType = NeedOneOrWarning (ValueC);
 
@@ -3632,23 +3571,25 @@ CheckBlueToothProtocols (
                        NULL,
                        (VOID **) &TempInterface
                        );
-
-    TempInterface->CreateChild(TempInterface, &ChildHandle);
-
-
-    Status = gtBS->LocateProtocol (
-                     &gEfiBlueToothIoProtocolGuid,
-                     NULL,
-                     (VOID **) &Interface
-                     );
     if (!EFI_ERROR (Status)) {
-      ValueD = TRUE;
+      TempInterface->CreateChild (TempInterface, &ChildHandle);
+
+      Status = gtBS->LocateProtocol (
+                       &gEfiBlueToothIoProtocolGuid,
+                       NULL,
+                       (VOID **) &Interface
+                       );
+      if (!EFI_ERROR (Status)) {
+        ValueD = TRUE;
+      } else {
+        ValueD = FALSE;
+      }
+      
+      TempInterface->DestroyChild (TempInterface, ChildHandle);
+      ChildHandle = NULL;
     } else {
       ValueD = FALSE;
     }
-    
-    TempInterface->DestroyChild(TempInterface, ChildHandle);
-    ChildHandle = NULL;
 
     AssertionType = NeedOneOrWarning (ValueD);
 
