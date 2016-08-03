@@ -148,6 +148,25 @@ typedef struct {
   //
   UINT64  UnsupportedProtocol;
 
+  //
+  // Number of valid frames received that were duplicated.
+  //
+  UINT64  RxDuplicatedFrames;
+
+  //
+  // Number of encrypted frames received that failed to decrypt.
+  //
+  UINT64  RxDecryptErrorFrames;
+
+  //
+  // Number of frames that failed to transmit after exceeding the retry limit.
+  //
+  UINT64  TxErrorFrames;
+
+  //
+  // Number of frames transmitted successfully after more than one attempt.
+  //
+  UINT64  TxRetryFrames;
 } EFI_NETWORK_STATISTICS;
 
 
