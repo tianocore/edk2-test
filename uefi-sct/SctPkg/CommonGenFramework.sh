@@ -367,6 +367,9 @@ then
     # UEFI Boot Services - SBBR v1.0 3.4
     cp $ProcessorType/SbbrBootServicesBBTest.efi               $Framework/Test/ > NUL
 
+    # Check if EFI Specification Version is 2.5 or greater
+    cp $ProcessorType/EfiSpecVerLvlBBTest.efi                  $Framework/Test/ > NUL
+
     # Runtime Services Tests - SBBR v1.0 Appendix B
     cp $ProcessorType/VariableServicesBBTest.efi               $Framework/Test/ > NUL
     cp $ProcessorType/TimeServicesBBTest.efi                   $Framework/Test/ > NUL

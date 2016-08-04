@@ -42,6 +42,8 @@
 #
 # Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
 #
+# Copyright (c) 2016, ARM Ltd. All rights reserved.<BR>
+#
 #
 #/*++
 #
@@ -245,7 +247,9 @@ SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Proto
 #
 SctPkg/TestCase/UEFI/EFI/Generic/SbbrSysEnvConfig/BlackBoxTest/SysEnvConfigBBTest.inf
 #End of UEFI System Environment and Configuration Tests - SBBR v1.0 3.3
-
+#
+# Check if EFI Specification Version is 2.5 or greater
+SctPkg/TestCase/UEFI/EFI/Generic/SbbrEfiSpecVerLvl/BlackBoxTest/EfiSpecVerLvlBBTest.inf
 #
 # UEFI Boot Services - SBBR v1.0 3.4
 #
