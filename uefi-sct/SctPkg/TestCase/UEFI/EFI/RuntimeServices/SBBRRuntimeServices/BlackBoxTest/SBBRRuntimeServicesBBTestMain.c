@@ -60,6 +60,12 @@ Abstract:
 #include "SBBRRuntimeServicesBBTestMain.h"
 
 
+EFI_TPL TplArray [TPL_ARRAY_SIZE] = {
+  TPL_APPLICATION,
+  TPL_CALLBACK,
+  TPL_NOTIFY
+};
+
 EFI_BB_TEST_PROTOCOL_FIELD gBBTestProtocolField = {
   SBBRRUNTIMESERVICES_TEST_REVISION,
   SBBRRUNTIMESERVICES_TEST_GUID,
@@ -81,6 +87,24 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     gSupportProtocolGuid,
     EFI_TEST_CASE_AUTO,
     BBTestRuntimeServices
+  },
+  {
+    SBBRRUNTIMESERVICES_TEST_CASE_RESETSHUTDOWN_GUID,
+    L"ResetSystem Shutdown Test",
+    L"Manual Test for ResetSystem Shutdown.",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_MANUAL,
+    BBTestResetShutdown
+  },
+  {
+    SBBRRUNTIMESERVICES_TEST_CASE_NONVOLATILEVARIABLE_GUID,
+    L"Non-volatile Variable Reset Test",
+    L"Ensures that non-volatile UEFI variables can survive cold resets.",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    BBTestNonVolatileVariable
   },
   EFI_NULL_GUID
 };
@@ -120,6 +144,7 @@ InitializeBBTestSBBRRuntimeServices (
 {
 
   EfiInitializeTestLib (ImageHandle, SystemTable);
+  SctInitializeLib (ImageHandle, SystemTable);
 
   return EfiInitAndInstallBBTestInterface (
            &ImageHandle,

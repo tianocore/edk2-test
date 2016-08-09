@@ -56,8 +56,10 @@ Abstract:
 --*/
 #include "Guid.h"
 #include "SctLib.h"
+#include <Library/EfiTestLib.h>
 #include "SBBRRuntimeServicesBBTestMain.h"
 #include "SBBRRuntimeServicesBBTestFunction.h"
+#include EFI_TEST_PROTOCOL_DEFINITION(TestRecoveryLibrary)
 
 
 
@@ -215,4 +217,393 @@ BBTestRuntimeServices (
   //
 
   return EFI_SUCCESS;
+}
+
+
+extern EFI_TPL TplArray [];
+
+
+/**
+ *  Entrypoint for gtRT->ResetSystem() Manual Test.
+ *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
+ *  @param ClientInterface a pointer to the interface to be tested.
+ *  @param TestLevel test "thoroughness" control.
+ *  @param SupportHandle a handle containing protocols required.
+ *  @return EFI_SUCCESS Finish the test successfully.
+ */
+//
+// SBBR 3.5.4
+//
+EFI_STATUS
+BBTestResetShutdown (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  )
+{
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
+  EFI_TEST_RECOVERY_LIBRARY_PROTOCOL   *RecoveryLib;
+  EFI_STATUS                           Status;
+  EFI_TEST_ASSERTION                   AssertionType;
+  UINTN                                Index;
+  EFI_TPL                              OldTpl;
+  UINT8                                Buffer[1024];
+  RESET_DATA                           *ResetData;
+  UINTN                                Size;
+
+  //
+  // Get the Standard Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+              SupportHandle,
+              &gEfiStandardTestLibraryGuid,
+              (VOID **) &StandardLib
+              );
+
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  //
+  // Get the Recovery Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+              SupportHandle,
+              &gEfiTestRecoveryLibraryGuid,
+              (VOID **) &RecoveryLib
+              );
+
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
+                StandardLib,
+                EFI_TEST_ASSERTION_FAILED,
+                gTestGenericFailureGuid,
+                L"BS.HandleProtocol - Handle recovery library",
+                L"%a:%d:Status - %r",
+                __FILE__,
+                (UINTN)__LINE__,
+                Status
+                );
+    return Status;
+  }
+
+  //
+  // Read reset record
+  //
+  Status = RecoveryLib->ReadResetRecord (
+              RecoveryLib,
+              &Size,
+              Buffer
+              );
+  ResetData = (RESET_DATA *)Buffer;
+  if (EFI_ERROR (Status) || (Size < sizeof (RESET_DATA))) {
+    //
+    // Step 1
+    //
+  } else if (ResetData->Step == 1) {
+    //
+    // Step 2
+    //
+    if (ResetData->TplIndex < TPL_ARRAY_SIZE) {
+      Index = ResetData->TplIndex;
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+      goto ManualTestStep2;
+    }
+  } else {
+    return EFI_LOAD_ERROR;
+  }
+
+  for (Index = 0; Index < TPL_ARRAY_SIZE; Index++) {
+    //
+    // 4.2.2.1  ResetSystem must succeed when ResetType is EfiResetShutdown
+    //
+    ResetData->Step = 1;
+    ResetData->TplIndex = Index;
+    Status = RecoveryLib->WriteResetRecord (
+                RecoveryLib,
+                sizeof (RESET_DATA),
+                Buffer
+                );
+    if (EFI_ERROR (Status)) {
+      StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"TestRecoveryLib - WriteResetRecord",
+                  L"%a:%d:Status - %r, TPL - %d",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status,
+                  TplArray[Index]
+                  );
+      return Status;
+    }
+
+    //
+    // Print out some information to avoid the user thought it is an error.
+    //
+    // And the stall a second is required to make sure the recovery data has
+    // been written into the storage device.
+    //
+    SctPrint (L"System will shut down (or cold reset) after 1 second...");
+    gtBS->Stall (1000000);
+
+    OldTpl = gtBS->RaiseTPL (TplArray[Index]);
+    gtRT->ResetSystem (
+                EfiResetShutdown,
+                EFI_SUCCESS,
+                0,
+                NULL
+                );
+    gtBS->RestoreTPL (OldTpl);
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+ManualTestStep2:
+    StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                Index==0? \
+                  gSBBRRuntimeServicesAssertion003Guid: \
+                  (Index == 1? \
+                  gSBBRRuntimeServicesAssertion002Guid: \
+                  gSBBRRuntimeServicesAssertion003Guid),
+                L"RT.ResetSystem - EfiResetShutdown",
+                L"%a:%d:Status - %r, TPL - %d",
+                __FILE__,
+                (UINTN)__LINE__,
+                Status,
+                TplArray[Index]
+                );
+  }
+
+  return EFI_SUCCESS;
+}
+
+/**
+ *  Entrypoint for NonVolatileVariable test.
+ *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
+ *  @param ClientInterface a pointer to the interface to be tested.
+ *  @param TestLevel test "thoroughness" control.
+ *  @param SupportHandle a handle containing protocols required.
+ *  @return EFI_SUCCESS Finish the test successfully.
+ */
+//
+// SBBR 3.5.5
+//
+EFI_STATUS
+BBTestNonVolatileVariable (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  )
+{
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
+  EFI_TEST_RECOVERY_LIBRARY_PROTOCOL   *RecoveryLib;
+  EFI_STATUS                           Status;
+  EFI_TEST_ASSERTION                   AssertionType;
+  UINT8                                Buffer[20];
+  EFI_GUID                             ResetGuid = SBBRRUNTIMESERVICES_NONVOLATILEVARIABLE_RESET_GUID;
+  EFI_GUID                             *TestResetGuid;
+  EFI_GUID                             VarVendorGuid = VENDOR_GUID;
+  UINTN                                Size;
+  UINT32                               Attributes;
+  UINT32                               VariableValue = UEFI_VARIABLE_TEST_VALUE;
+  UINT32                               *TestVariableValue;
+
+  //
+  // Get the Standard Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+              SupportHandle,
+              &gEfiStandardTestLibraryGuid,
+              (VOID **) &StandardLib
+              );
+
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  //
+  // Get the Recovery Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+              SupportHandle,
+              &gEfiTestRecoveryLibraryGuid,
+              (VOID **) &RecoveryLib
+              );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                StandardLib,
+                EFI_TEST_ASSERTION_FAILED,
+                gTestGenericFailureGuid,
+                L"BS.HandleProtocol - Handle recovery library",
+                L"%a:%d:Status - %r",
+                __FILE__,
+                (UINTN)__LINE__,
+                Status
+                );
+    return Status;
+  }
+
+  //
+  // Read reset record
+  //
+  Status = RecoveryLib->ReadResetRecord (
+              RecoveryLib,
+              &Size,
+              Buffer
+              );
+  TestResetGuid = (EFI_GUID *)Buffer;
+  if (EFI_ERROR(Status) || SctCompareGuid((void *)TestResetGuid, (void *)&ResetGuid) != 0) {
+    //
+    // Writing a new non-volatile variable for testing after making sure it doesn't already exist.
+    //
+
+    // Making a variable of the same name and vendor GUID with a size of zero to delete anything that might be left over
+    Size = 0;
+    Status = gtRT->SetVariable (
+                TEST_VAR_NAME,
+                &VarVendorGuid,
+                NULL,
+                Size,
+                NULL
+                );
+    if (EFI_ERROR(Status) && Status != EFI_NOT_FOUND) {
+      StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"RS.SetVariable",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+      return Status;
+    }
+
+    // Writing a known value into the UEFI variable with nonvolatile flag
+    Size = sizeof (UINT32);
+    Attributes = EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS;
+    Status = gtRT->SetVariable (
+                TEST_VAR_NAME,
+                &VarVendorGuid,
+                Attributes,
+                Size,
+                (VOID *)&VariableValue
+                );
+    if (EFI_ERROR(Status)) {
+      StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"RS.SetVariable",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+      return Status;
+    }
+
+    // Writing reset record and doing a cold reset
+    SctPrint (L"System will cold reboot...");
+    Status = RecoveryLib->WriteResetRecord (
+                RecoveryLib,
+                sizeof (EFI_GUID),
+                &ResetGuid
+                );
+    gtBS->Stall (1000000);
+    gtRT->ResetSystem (
+                EfiResetCold,
+                EFI_SUCCESS,
+                0,
+                NULL
+                );
+
+    // Execution should never get here
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"RT.ResetSystem",
+                  L"%a:%d - System failed to reboot.",
+                  __FILE__,
+                  (UINTN)__LINE__
+                  );
+    return EFI_ABORTED;
+
+  } else if (SctCompareGuid((void *)TestResetGuid, (void *)&ResetGuid) == 0) {
+    //
+    // Reading non-volatile variable to see if it's value was retained.
+    //
+
+    // Calling GetVariable to see if our new variable is still there.
+    Status = gtRT->GetVariable (
+                TEST_VAR_NAME,
+                &VarVendorGuid,
+                &Attributes,
+                &Size,
+                Buffer
+                );
+    if (EFI_ERROR(Status)) {
+      StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"RS.GetVariable",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+      return Status;
+    }
+
+    // Erasing the variable we created from the system
+    Size = 0;
+    Status = gtRT->SetVariable (
+                TEST_VAR_NAME,
+                &VarVendorGuid,
+                NULL,
+                Size,
+                NULL
+                );
+    if (EFI_ERROR(Status)) {
+      StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"RS.SetVariable",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+      return Status;
+    }
+
+    // Checking value received against value written.
+    TestVariableValue = (UINT32 *)Buffer;
+    if (*TestVariableValue == VariableValue) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gSBBRRuntimeServicesAssertion004Guid,
+                L"NonVolatileVariable",
+                L"%a:%d",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+    return EFI_SUCCESS;
+  } else {
+    return EFI_LOAD_ERROR;
+  }
 }

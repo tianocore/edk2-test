@@ -79,3 +79,4 @@
   UefiDriverEntryPoint
 
 [Protocols]
+  gEfiTestRecoveryLibraryGuid

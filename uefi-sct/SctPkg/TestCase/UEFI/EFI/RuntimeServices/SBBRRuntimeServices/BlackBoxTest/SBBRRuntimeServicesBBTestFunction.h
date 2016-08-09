@@ -60,8 +60,27 @@ Abstract:
 
 #include <Library/EfiTestLib.h>
 
+#define TEST_VAR_NAME (L"SCT_NON_VOLATILE_TEST")
+#define UEFI_VARIABLE_TEST_VALUE 0xDEADBEEF
+
 EFI_STATUS
 BBTestRuntimeServices (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+EFI_STATUS
+BBTestResetShutdown (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+EFI_STATUS
+BBTestNonVolatileVariable (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
