@@ -246,6 +246,7 @@ SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Proto
 SctPkg/TestCase/UEFI/EFI/Generic/SbbrSysEnvConfig/BlackBoxTest/SysEnvConfigBBTest.inf
 #End of UEFI System Environment and Configuration Tests - SBBR v1.0 3.3
 
+#
 # Required UEFI Runtime Services Tests - SBBR v1.0 Appendix B
 #
 ##  1. EFI_GET_TIME
@@ -269,6 +270,13 @@ SctPkg/TestCase/UEFI/EFI/RuntimeServices/MiscRuntimeServices/BlackBoxTest/MiscRu
 ## 13. EFI_CONVERT_POINTER
 SctPkg/TestCase/UEFI/EFI/RuntimeServices/SBBRRuntimeServices/BlackBoxTest/SBBRRuntimeServicesBBTest.inf
 # End of Runtime Services Tests - SBBR v1.0 Appendix B
+
+#
+# UEFI Required Protocols Tests - SBBR Appendix C
+#
+SctPkg/TestCase/UEFI/EFI/Generic/SbbrRequiredUefiProtocols/BlackBoxTest/RequiredUefiProtocolsBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Generic/EfiCompliant/BlackBoxTest/EfiCompliantBBTest_uefi.inf
+# End of UEFI Required Protocols Tests - SBBR Appendix C
 
 #
 # Dependency files

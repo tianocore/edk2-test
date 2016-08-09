@@ -355,20 +355,24 @@ then
     # *********************************************
 
     # Boot Services Tests - SBBR v1.0 Appendix A
-    cp $ProcessorType/EventTimerTaskPriorityServicesBBTest.efi          $Framework/Test/  > NUL
-    cp $ProcessorType/ImageServicesBBTest.efi                           $Framework/Test/  > NUL
-    cp $ProcessorType/MemoryAllocationServicesBBTest.efi                $Framework/Test/  > NUL
-    cp $ProcessorType/MiscBootServicesBBTest.efi                        $Framework/Test/  > NUL
-    cp $ProcessorType/ProtocolHandlerServicesBBTest.efi                 $Framework/Test/  > NUL
+    cp $ProcessorType/EventTimerTaskPriorityServicesBBTest.efi $Framework/Test/ > NUL
+    cp $ProcessorType/ImageServicesBBTest.efi                  $Framework/Test/ > NUL
+    cp $ProcessorType/MemoryAllocationServicesBBTest.efi       $Framework/Test/ > NUL
+    cp $ProcessorType/MiscBootServicesBBTest.efi               $Framework/Test/ > NUL
+    cp $ProcessorType/ProtocolHandlerServicesBBTest.efi        $Framework/Test/ > NUL
 
     # Tests SBBR sections 3.3.1, 3.3.2, 3.3.3, and 3.3.4
-    cp $ProcessorType/SysEnvConfigBBTest.efi                            $Framework/Test/ > NUL
+    cp $ProcessorType/SysEnvConfigBBTest.efi                   $Framework/Test/ > NUL
 
     # Runtime Services Tests - SBBR v1.0 Appendix B
     cp $ProcessorType/VariableServicesBBTest.efi               $Framework/Test/ > NUL
     cp $ProcessorType/TimeServicesBBTest.efi                   $Framework/Test/ > NUL
     cp $ProcessorType/MiscRuntimeServicesBBTest.efi            $Framework/Test/ > NUL
     cp $ProcessorType/SBBRRuntimeServicesBBTest.efi            $Framework/Test/ > NUL
+
+    # Tests SBBR Appendix C
+    cp $ProcessorType/RequiredUefiProtocolsBBTest.efi          $Framework/Test/ > NUL
+    cp $ProcessorType/EfiCompliantBBTest.efi                   $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary
