@@ -59,7 +59,7 @@ Abstract:
 #define _$<testnameupper>$_GUID_H_
 
 #define $<testnameupper>$_ASSERTION_001_GUID \
-$<assertionguid>$
+  $<assertionguid>$
 
 extern EFI_GUID g$<testname>$Assertion001Guid;
 

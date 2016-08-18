@@ -97,8 +97,8 @@ BBTest$<testname>$Unload (
   )
 {
   return EfiUninstallAndFreeBBTestInterface (
-           ImageHandle,
-           gBBTestProtocolInterface
+              ImageHandle,
+              gBBTestProtocolInterface
            );
 }
 
@@ -121,10 +121,10 @@ InitializeBBTest$<testname>$ (
   EfiInitializeTestLib (ImageHandle, SystemTable);
 
   return EfiInitAndInstallBBTestInterface (
-           &ImageHandle,
-           &gBBTestProtocolField,
-           gBBTestEntryField,
-           BBTest$<testname>$Unload,
-           &gBBTestProtocolInterface
+              &ImageHandle,
+              &gBBTestProtocolField,
+              gBBTestEntryField,
+              BBTest$<testname>$Unload,
+              &gBBTestProtocolInterface
            );
 }

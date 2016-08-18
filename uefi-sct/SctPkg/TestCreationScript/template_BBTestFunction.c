@@ -86,10 +86,10 @@ BBTest$<testcasename>$Test (
   // Get the Standard Library Interface
   //
   Status = gtBS->HandleProtocol (
-                   SupportHandle,
-                   &gEfiStandardTestLibraryGuid,
-                   (VOID **) &StandardLib
-                   );
+              SupportHandle,
+              &gEfiStandardTestLibraryGuid,
+              (VOID **) &StandardLib
+              );
   if (EFI_ERROR (Status)) {
     return Status;
   }
@@ -99,14 +99,14 @@ BBTest$<testcasename>$Test (
   //
 
   StandardLib->RecordAssertion (
-                 StandardLib,
-                 EFI_TEST_ASSERTION_PASSED,
-                 g$<testname>$Assertion001Guid,
-                 L"$<testcasename>$",
-                 L"%a:%d",
-                 __FILE__,
-                 __LINE__
-                 );
+              StandardLib,
+              EFI_TEST_ASSERTION_PASSED,
+              g$<testname>$Assertion001Guid,
+              L"$<testcasename>$",
+              L"%a:%d",
+              __FILE__,
+              __LINE__
+              );
 
   //
   // Function calls like above are used to record test results.

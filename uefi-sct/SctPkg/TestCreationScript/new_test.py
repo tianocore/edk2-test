@@ -347,7 +347,7 @@ CategoryIniNew.close()
 
 
 # adding entry to CommonGenFramework.sh
-print "Updating SctPkg/CommonGenFramework.sh"
+print "Updating SctPkg/CommonGenFramework.sh..."
 if os.path.isfile("CommonGenFramework.sh.backup"):
     os.remove("CommonGenFramework.sh.backup")
 shutil.copyfile(os.path.join(path_to_sctpkg, "CommonGenFramework.sh"), "CommonGenFramework.sh.backup")

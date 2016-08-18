@@ -74,7 +74,7 @@ InitializeBBTest$<testname>$ (
   );
 
 EFI_STATUS
-BBTestBoot$<testname>$ (
+BBTest$<testname>$Unload (
   IN EFI_HANDLE       ImageHandle
   );
 
