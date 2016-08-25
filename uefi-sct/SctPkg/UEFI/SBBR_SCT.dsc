@@ -247,6 +247,13 @@ SctPkg/TestCase/UEFI/EFI/Generic/SbbrSysEnvConfig/BlackBoxTest/SysEnvConfigBBTes
 #End of UEFI System Environment and Configuration Tests - SBBR v1.0 3.3
 
 #
+# UEFI Boot Services - SBBR v1.0 3.4
+#
+## 3.4.4 Configuration Tables
+SctPkg/TestCase/UEFI/EFI/BootServices/SbbrBootServices/BlackBoxTest/SbbrBootServicesBBTest.inf
+# End of UEFI Boot Services - SBBR v1.0 3.4
+
+#
 # Required UEFI Runtime Services Tests - SBBR v1.0 Appendix B
 #
 ##  1. EFI_GET_TIME
