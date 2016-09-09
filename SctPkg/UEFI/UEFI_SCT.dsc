@@ -305,7 +305,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/RandomNumber/BlackBoxTest/RandomNumberBBTest.i
 SctPkg/TestCase/UEFI/EFI/Protocol/Hash2/BlackBoxTest/Hash2BBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/PKCS7Verify/BlackBoxTest/Pkcs7BBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/ConfigKeywordHandler/BlackBoxTest/ConfigKeywordHandlerBBTest.inf
-
+SctPkg/TestCase/UEFI/EFI/Protocol/RamDisk/BlackBoxTest/RamDiskProtocolBBTest.inf
 
 #
 # Dependency files for UEFI/EFI Compliant Test

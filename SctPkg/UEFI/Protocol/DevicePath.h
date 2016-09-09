@@ -40,7 +40,7 @@
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -955,5 +955,10 @@ extern EFI_GUID gBlackBoxEfiPcAnsiGuid;
 extern EFI_GUID gBlackBoxEfiVT100Guid;
 extern EFI_GUID gBlackBoxEfiVT100PlusGuid;
 extern EFI_GUID gBlackBoxEfiVTUTF8Guid;
+
+extern EFI_GUID gBlackBoxEfiVirtualDiskGuid;
+extern EFI_GUID gBlackBoxEfiVirtualCdGuid;
+extern EFI_GUID gBlackBoxEfiPersistentVirtualDiskGuid;
+extern EFI_GUID gBlackBoxEfiPersistentVirtualCdGuid;
 
 #endif /* _DEVICE_PATH_FOR_TEST_H_ */
