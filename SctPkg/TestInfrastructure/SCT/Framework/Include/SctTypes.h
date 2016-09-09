@@ -67,7 +67,7 @@ Abstract:
 
 #define TEST_CASE_MAX_RUN_TIME_DEFAULT      0
 #define ENABLE_SCREEN_OUTPUT_DEFAULT        TRUE
-#define BIOS_ID_DEFAULT                     L"UEFI 2.5"
+#define BIOS_ID_DEFAULT                     L"UEFI 2.6"
 #define PLATFORM_NUMBER_DEFAULT             0
 #define CONFIGURATION_NUMBER_DEFAULT        0
 #define SCENARIO_STRING_DEFAULT             L""
