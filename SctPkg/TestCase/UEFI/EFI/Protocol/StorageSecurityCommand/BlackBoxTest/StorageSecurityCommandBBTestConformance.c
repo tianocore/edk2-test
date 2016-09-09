@@ -245,7 +245,10 @@ BBTestReceiveDataConformanceAutoTest (
         AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
     } else {
-      if((!EFI_ERROR(Status)) || (Status == EFI_WARN_BUFFER_TOO_SMALL)){
+      //
+      // for SCSI SPC-4, some device return  EFI_DEVICE_ERROR
+      //
+      if((Status == EFI_SUCCESS) || (Status == EFI_DEVICE_ERROR) || (Status == EFI_WARN_BUFFER_TOO_SMALL)){
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       } else {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
