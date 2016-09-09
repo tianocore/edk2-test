@@ -1830,7 +1830,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
     //
     // retrieve EFI_FILE_INFO
     //
-    Status = InternalGetInfo (Root, &FileInfo, (VOID **) &BufferSize, InfoType[0]);
+    Status = InternalGetInfo (Root, (VOID **) &FileInfo, &BufferSize, InfoType[0]);
     if (EFI_SUCCESS == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
@@ -1886,7 +1886,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
     // retrieve EFI_FILE_SYSTEM_INFO
     //
 
-    Status1 = InternalGetInfo (Root, &SystemInfo, (VOID **) &BufferSize, InfoType[1]);
+    Status1 = InternalGetInfo (Root, (VOID **) &SystemInfo, &BufferSize, InfoType[1]);
     if (EFI_SUCCESS == Status1) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
@@ -1914,7 +1914,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
     //
     // retrieve EFI_FILE_SYSTEM_VOLUME_LABEL
     //
-    Status2 = InternalGetInfo (Root, &VolumeLabel, (VOID **) &BufferSize, InfoType[2]);
+    Status2 = InternalGetInfo (Root, (VOID **) &VolumeLabel, &BufferSize, InfoType[2]);
     if (EFI_SUCCESS == Status2) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {

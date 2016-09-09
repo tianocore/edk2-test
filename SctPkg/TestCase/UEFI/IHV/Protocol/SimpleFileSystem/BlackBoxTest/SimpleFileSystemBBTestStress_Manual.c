@@ -635,7 +635,7 @@ BBTestSimpleFileSytemExtensiveTest1 (
         //
         // GetInfo from F5
         //
-        Status = InternalGetInfo (FileHandle[4], &FileInfo, (VOID **) &InfoBufferSize, &gBlackBoxEfiFileInfoGuid);
+        Status = InternalGetInfo (FileHandle[4], (VOID **) &FileInfo, &InfoBufferSize, &gBlackBoxEfiFileInfoGuid);
         AssertionType = EFI_TEST_ASSERTION_PASSED;
         StandardLib->RecordAssertion (
                        StandardLib,
@@ -1269,7 +1269,7 @@ BBTestSimpleFileSytemExtensiveTest2 (
         //
         // GetInfo from F4
         //
-        Status = InternalGetInfo (FileHandle[3], &FileInfo, (VOID **) &InfoBufferSize, &gBlackBoxEfiFileInfoGuid);
+        Status = InternalGetInfo (FileHandle[3], (VOID **) &FileInfo, &InfoBufferSize, &gBlackBoxEfiFileInfoGuid);
         if (EFI_NO_MEDIA == Status) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
         } else {
