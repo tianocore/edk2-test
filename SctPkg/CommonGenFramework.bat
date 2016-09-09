@@ -210,6 +210,8 @@ copy %ProcessorType%\ConfigKeywordHandlerBBTest.efi           %Framework%\Test\ 
 copy %ProcessorType%\RegularExpressionBBTest.efi              %Framework%\Test\ > NUL
 
 copy %ProcessorType%\RamDiskProtocolBBTest.efi                %Framework%\Test\ > NUL
+copy %ProcessorType%\NVMEPassThruBBTest.efi                   %Framework%\Test\ > NUL
+
 rem *********************************************
 rem Copy ENTS binary
 rem *********************************************
