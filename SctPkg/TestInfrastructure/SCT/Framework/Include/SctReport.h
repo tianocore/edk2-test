@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -65,6 +65,7 @@ Abstract:
 EFI_STATUS
 GetInstanceAssertion (
   IN EFI_DEVICE_PATH_PROTOCOL                         *DevicePath,
+  IN CHAR16                                           *FilePath,
   IN CHAR16                                           *MetaName,
   OUT EFI_SCT_LOG_STATE                               *FileState,
   OUT UINT32                                          *Index,
@@ -77,6 +78,7 @@ GetInstanceAssertion (
 EFI_STATUS
 GetInterfaceAssertion (
   IN EFI_DEVICE_PATH_PROTOCOL                         *DevicePath,
+  IN CHAR16                                           *FilePath,
   IN CHAR16                                           *MetaName,
   OUT UINT32                                          *PassNumber,
   OUT UINT32                                          *WarnNumber,

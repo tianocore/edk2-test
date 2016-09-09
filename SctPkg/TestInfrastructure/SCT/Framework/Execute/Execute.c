@@ -522,7 +522,11 @@ Routine Description:
 {
   EFI_STATUS            Status;
   EFI_SCT_EXECUTE_INFO  ExecuteInfo;
-  CHAR16                *FullMetaName;
+  CHAR16                *MetaName;
+  CHAR16                *FilePath;  
+
+  FilePath = NULL;
+  MetaName = NULL;
 
   //
   // Initialize the execute information
@@ -537,14 +541,19 @@ Routine Description:
   }
 
   //
-  // Get the full meta name of key files
+  // Get the meta name of key files
   //
-  Status = GetKeyFileFullMetaName (
+  Status = GetKeyFileMetaName (
              &ExecuteInfo,
-             &FullMetaName
+             &FilePath,
+             &MetaName
              );
   if (EFI_ERROR (Status)) {
-    EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Get key file full meta name - %r", Status));
+    EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Get key file meta name - %r", Status));
+    if (FilePath != NULL)
+      tBS->FreePool (FilePath);
+    if (MetaName != NULL)
+      tBS->FreePool (MetaName);
     return Status;
   }
 
@@ -553,7 +562,8 @@ Routine Description:
   //
   Status = GetInstanceAssertion (
              gFT->DevicePath,
-             FullMetaName,
+             FilePath,
+             MetaName,
              &ExecuteInfo.State,
              &ExecuteInfo.Index,
              &ExecuteInfo.Iteration,
@@ -563,11 +573,13 @@ Routine Description:
              );
   if (EFI_ERROR (Status)) {
     EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Get instance assertion - %r", Status));
-    tBS->FreePool (FullMetaName);
+    tBS->FreePool (FilePath);
+    tBS->FreePool (MetaName);
     return Status;
   }
 
-  tBS->FreePool (FullMetaName);
+  tBS->FreePool (FilePath);
+  tBS->FreePool (MetaName);
 
   //
   // Start the execution
@@ -725,7 +737,11 @@ Routine Description:
 --*/
 {
   EFI_STATUS  Status;
-  CHAR16      *FullMetaName;
+  CHAR16      *MetaName;
+  CHAR16      *FilePath;
+
+  MetaName = NULL;
+  FilePath = NULL;
 
   //
   // Check parameters
@@ -791,21 +807,27 @@ Routine Description:
   //
   // Get the full meta name of key files
   //
-  Status = GetKeyFileFullMetaName (
+  Status = GetKeyFileMetaName(
              ExecuteInfo,
-             &FullMetaName
+             &FilePath,
+             &MetaName
              );
   if (EFI_ERROR (Status)) {
     EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Get key file full meta name - %r", Status));
+    if (FilePath != NULL)
+      tBS->FreePool (FilePath);
+    if (MetaName != NULL)
+      tBS->FreePool (MetaName);	
     return Status;
   }
 
   //
   // Get the results of test case
   //
-  Status = GetInterfaceAssertion (
+  Status = GetInterfaceAssertion(
              gFT->DevicePath,
-             FullMetaName,
+             FilePath,
+             MetaName,
              &ExecuteInfo->TestCase->Passes,
              &ExecuteInfo->TestCase->Warnings,
              &ExecuteInfo->TestCase->Failures
@@ -816,7 +838,8 @@ Routine Description:
   }
 
 Done:
-  tBS->FreePool (FullMetaName);
+  tBS->FreePool(MetaName);
+  tBS->FreePool(FilePath);
   return EFI_SUCCESS;
 }
 

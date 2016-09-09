@@ -242,6 +242,7 @@ Returns:
   EFI_GUID  *EntryGuid;
   CHAR16    EntryGuidStr[EFI_SCT_GUID_LEN];
   CHAR16    *EntryName;
+  UINTN     Index;
 
   //
   // Check parameters
@@ -314,12 +315,19 @@ Returns:
                   CategoryGuidStr
                   );
   } else {
-    *FilePath = SctPoolPrint (
-                  L"%s\\%s\\%s",
+    Index = 0;
+    if (((ExecuteInfo->Index + 1) * (ExecuteInfo->Iteration + 1)) >= MaxInstanceNumInSingleDirectory) {
+      Index = ((ExecuteInfo->Index) * (ExecuteInfo->Iteration + 1)) / MaxInstanceNumInSingleDirectory;
+    }
+
+    *FilePath = SctPoolPrint(
+                  L"%s\\%s\\%s%d",
                   gFT->FilePath,
                   EFI_SCT_PATH_LOG,
-                  ExecuteInfo->Category->Name
+                  ExecuteInfo->Category->Name,
+                  Index
                   );
+
   }
 
   if (*FilePath == NULL) {
@@ -440,6 +448,54 @@ Returns:
   return EFI_SUCCESS;
 }
 
+
+EFI_STATUS
+GetKeyFileMetaName(
+IN EFI_SCT_EXECUTE_INFO         *ExecuteInfo,
+OUT CHAR16                      **FilePath,
+OUT CHAR16                      **MetaName
+)
+{
+  EFI_STATUS  Status;
+  CHAR16      *TempName;
+
+  if ((ExecuteInfo == NULL) || (FilePath == NULL) || (MetaName == NULL)) {
+    return EFI_INVALID_PARAMETER;
+  }
+
+  //
+  // Get the file meta name
+  //
+  Status = GetFileMetaName(
+             ExecuteInfo,
+             FilePath,
+             &TempName
+             );
+  if (EFI_ERROR(Status)) {
+    EFI_SCT_DEBUG((EFI_SCT_D_ERROR, L"Get file meta name - %r", Status));
+    return Status;
+  }
+
+  //
+  // Convert the meta file name to number file name
+  //
+  *MetaName = SctPoolPrint(TempName, L"%d", L"%d", L"ekl");
+  if (*MetaName == NULL) {
+    EFI_SCT_DEBUG((EFI_SCT_D_ERROR, L"SctPoolPrint: Out of resources"));
+    tBS->FreePool(TempName);
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  //
+  // Free resources
+  //
+  tBS->FreePool(TempName);
+
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
 
 EFI_STATUS
 GetKeyFileFullMetaName (

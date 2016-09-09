@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2015 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -115,6 +115,11 @@ Abstract:
 //
 #define EFI_SCT_MAX_BUFFER_SIZE             512
 #define MAX_STRING_LEN                      250
+
+//
+// Instance Num in single directory 
+//
+#define MaxInstanceNumInSingleDirectory     100
 
 //
 // System hang assertion

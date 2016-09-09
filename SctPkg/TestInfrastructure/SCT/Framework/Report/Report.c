@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -65,6 +65,7 @@ Abstract:
 EFI_STATUS
 GetInstanceAssertion (
   IN EFI_DEVICE_PATH_PROTOCOL     *DevicePath,
+  IN CHAR16                       *FilePath,
   IN CHAR16                       *MetaName,
   OUT EFI_SCT_LOG_STATE           *FileState,
   OUT UINT32                      *Index,
@@ -97,11 +98,14 @@ Returns:
 --*/
 {
   EFI_STATUS  Status;
+  CHAR16      *TempName;
   CHAR16      *FileName;
   UINT32      InstanceIndex;
   UINT32      IterationIndex;
   UINTN       BufferSize;
   CHAR16      *Buffer;
+  UINTN       FilePathLength;
+  UINTN       Id;
 
   //
   // Check parameters
@@ -123,19 +127,44 @@ Returns:
   *WarnNumber = 0;
   *FailNumber = 0;
 
-  InstanceIndex  = 0;
-  IterationIndex = 0;
-
+  FilePathLength = SctStrLen(FilePath);
   //
   // Found the maximum index of instance and iteration
   //
   for (InstanceIndex = 0; TRUE; InstanceIndex ++) {
     for (IterationIndex = 0; TRUE; IterationIndex ++) {
-      FileName = SctPoolPrint (MetaName, InstanceIndex, IterationIndex);
-      if (FileName == NULL) {
+      TempName = SctPoolPrint (MetaName, InstanceIndex, IterationIndex);
+      if (TempName == NULL) {
         EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"SctPoolPrint: Out of resources"));
         return EFI_OUT_OF_RESOURCES;
       }
+
+
+      Id = InstanceIndex * (IterationIndex + 1) / MaxInstanceNumInSingleDirectory;
+      switch (Id) {
+        case 0:
+        FilePath[FilePathLength - 1] = L'0';
+        break;
+        case 1:
+        FilePath[FilePathLength - 1] = L'1';
+        break;
+        case 2:
+        FilePath[FilePathLength - 1] = L'2';
+        break;
+        case 3:
+        FilePath[FilePathLength - 1] = L'3';
+        break;
+        case 4:
+        FilePath[FilePathLength - 1] = L'4';
+        break;
+        case 5:
+        FilePath[FilePathLength - 1] = L'5';
+        break;
+        default:
+        break;
+      }
+      FileName = SctPoolPrint(L"%s\\%s", FilePath, TempName);
+      tBS->FreePool (TempName);
 
       if (!FileExist (DevicePath, FileName)) {
         //
@@ -171,11 +200,14 @@ Returns:
   //
   // The maximum instance index is found
   //
-  FileName = SctPoolPrint (MetaName, *Index, *Iteration);
-  if (FileName == NULL) {
+  TempName = SctPoolPrint (MetaName, *Index, *Iteration);
+  if (TempName == NULL) {
     EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"SctPoolPrint: Out of resources"));
     return EFI_OUT_OF_RESOURCES;
   }
+
+  FileName = SctPoolPrint(L"%s\\%s", FilePath, TempName);   
+  tBS->FreePool (TempName);
 
   //
   // Read the file to a buffer
@@ -225,6 +257,7 @@ Returns:
 EFI_STATUS
 GetInterfaceAssertion (
   IN EFI_DEVICE_PATH_PROTOCOL     *DevicePath,
+  IN CHAR16                       *FilePath,
   IN CHAR16                       *MetaName,
   OUT UINT32                      *PassNumber,
   OUT UINT32                      *WarnNumber,
@@ -251,12 +284,15 @@ Returns:
 --*/
 {
   EFI_STATUS          Status;
+  CHAR16              *TempName;
   CHAR16              *FileName;
   UINT32              InstanceIndex;
   UINT32              IterationIndex;
   UINTN               BufferSize;
   CHAR16              *Buffer;
   EFI_SCT_LOG_STATE   FileState;
+  UINTN               Index;
+  UINTN               FilePathLength;
 
   //
   // Check parameters
@@ -274,16 +310,43 @@ Returns:
   *WarnNumber = 0;
   *FailNumber = 0;
 
+  FilePathLength = SctStrLen(FilePath);
   //
   // For each instance file
   //
   for (InstanceIndex = 0; TRUE; InstanceIndex ++) {
     for (IterationIndex = 0; TRUE; IterationIndex ++) {
-      FileName = SctPoolPrint (MetaName, InstanceIndex, IterationIndex);
-      if (FileName == NULL) {
+      TempName = SctPoolPrint(MetaName, InstanceIndex, IterationIndex);
+      if (TempName == NULL) {
         EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"SctPoolPrint: Out of resources"));
         return EFI_OUT_OF_RESOURCES;
       }
+
+      Index = InstanceIndex * (IterationIndex + 1) / MaxInstanceNumInSingleDirectory;
+      switch (Index) {
+        case 0:
+        FilePath[FilePathLength - 1] = L'0';
+        break;
+        case 1:
+        FilePath[FilePathLength - 1] = L'1';
+        break;
+        case 2:
+        FilePath[FilePathLength - 1] = L'2';
+        break;
+        case 3:
+        FilePath[FilePathLength - 1] = L'3';
+        break;
+        case 4:
+        FilePath[FilePathLength - 1] = L'4';
+        break;
+        case 5:
+        FilePath[FilePathLength - 1] = L'5';
+        break;
+        default:
+        break;
+      }
+      FileName = SctPoolPrint(L"%s\\%s", FilePath, TempName);
+      tBS->FreePool (TempName);
 
       if (!FileExist (DevicePath, FileName)) {
         //
