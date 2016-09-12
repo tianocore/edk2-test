@@ -10,7 +10,7 @@ pre-installed VS2005.
       https://github.com/tianocore/udk/releases/download/UDK2015/UDK2015.Complete.MyWorkSpace.zip
    2) Extract UDK2015.MyWorkSpace.zip to C:\MyWorkSpace
    3) Extract BaseTools(Windows).zip to C:\MyWorkSpace
-   4) Extract SctPkg.zip to C:\MyWorkSpace
+   4) Copy SctPkg to C:\MyWorkSpace
    5) Copy C:\MyWorkSpace\SctPkg\Tools\Bin\GenBin.exe C:\MyWorkSpace\BaseTools\Bin\Win32\
 
 2. Build Instructions for UEFI SCTII X64
@@ -39,7 +39,18 @@ Notice: The example shows the build process of X64 only. For other architecture,
 Notice: The example shows the build process of X64 only. For other architecture, 
         please change the keyword, X64, in build step to IA32.
 
-     
+
+Linux Environment：
+   1) Download the UDK2015(UDK2015.Complete.MyWorkSpace.zip) from the link and extract it
+      https://github.com/tianocore/udk/releases/download/UDK2015/UDK2015.Complete.MyWorkSpace.zip
+   2) Extract UDK2015.MyWorkSpace.zip to Home/Dev/MyWorkSpace
+   3) Extract BaseTools(Unix).tar to Home/Dev/MyWorkSpace
+   4) Copy SctPkg to Home/Dev/MyWorkSpace
+   5) Copy SctPkg/Tools/Bin/GenBin_lin_64 to Home/Dev/MyWorkSpace/Bin/BaseTools/BinWrappers/PosixLike
+   6) Execute ". edksetup.sh" in Home/Dev/MyWorkSpace
+   7) Execute ". SctPkg/build.sh X64 GCC" in Home/Dev/MyWorkSpace
+
+
 Build EMS :
   Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 
   after this step, a subdirectory named as Ems is generated.
