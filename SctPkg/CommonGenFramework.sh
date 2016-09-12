@@ -242,6 +242,7 @@ then
     cp $ProcessorType/Hash2BBTest.efi                          $Framework/Test/ > NUL
     cp $ProcessorType/Pkcs7BBTest.efi                          $Framework/Test/ > NUL
     cp $ProcessorType/ConfigKeywordHandlerBBTest.efi           $Framework/Test/ > NUL
+    cp $ProcessorType/RegularExpressionBBTest.efi              $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary
