@@ -2,57 +2,43 @@
                                  HOW TO BUILD
 ================================================================================
 This section provides the build steps for UEFI/IHV SCT2, Shell2 on one X64/IA32 
-Desktop/Laptop pre-installed with Windows 7 and VS2008. The current EMS build need 
+Desktop/Laptop pre-installed with Windows 8 and VS2013. The current EMS build need 
 pre-installed VS2005.
 
 1. Prepare the build environment
-   1) Download the UDK2014(UDK2014.Complete.MyWorkSpace.zip) from the link and extract it
-      http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=UDK2014#UDK2014
-   2) Extract UDK2014.MyWorkSpace.zip to C:\MyWorkSpace
+   1) Download the UDK2015(UDK2015.Complete.MyWorkSpace.zip) from the link and extract it
+      https://github.com/tianocore/udk/releases/download/UDK2015/UDK2015.Complete.MyWorkSpace.zip
+   2) Extract UDK2015.MyWorkSpace.zip to C:\MyWorkSpace
    3) Extract BaseTools(Windows).zip to C:\MyWorkSpace
    4) Extract SctPkg.zip to C:\MyWorkSpace
    5) Copy C:\MyWorkSpace\SctPkg\Tools\Bin\GenBin.exe C:\MyWorkSpace\BaseTools\Bin\Win32\
 
-
 2. Build Instructions for UEFI SCTII X64
-   1) Open the Visual Studio 2008 Command Prompt
+   1) Open the Visual Studio 2013 Command Prompt
    2) Execute "edksetup.bat"
-   3) Execute "build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2008x86"
-   4) Execute "cd c:\MyWorkSpace\Build\UefiSct\DEBUG_VS2008x86"
+   3) Execute "build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2013x86"
+   4) Execute "cd c:\MyWorkSpace\Build\UefiSct\DEBUG_VS2013x86"
    5) Execute "..\..\..\SctPkg\CommonGenFramework.bat uefi_sct X64 InstallX64.efi"
    6) The target subdirectory named as SctPackageX64 which includes test cases and 
       UEFI SCT II applications will be generated and located at 
-      C:\MyWorkSpace\Build\UefiSct\DEBUG_VS2008x86
+      C:\MyWorkSpace\Build\UefiSct\DEBUG_VS2013x86
 
 Notice: The example shows the build process of X64 only. For other architecture, 
         please change the keyword, X64, in build step to IA32.
 
 3. Build Instructions for IHV SCT II X64
-   1) Open the Visual Studio 2008 Command Prompt
+   1) Open the Visual Studio 2013 Command Prompt
    2) Execute "edksetup.bat"
-   3) Execute "build -p SctPkg\UEFI\IHV_SCT.dsc -a X64 -t VS2008x86"
-   4) Execute "cd C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2008x86"
+   3) Execute "build -p SctPkg\UEFI\IHV_SCT.dsc -a X64 -t VS2013x86"
+   4) Execute "cd C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2013x86"
    5) Execute "..\..\..\SctPkg\CommonGenFramework.bat ihv_sct X64 InstallX64.efi"
    6) The target subdirectory named as SctPackageX64 which includes test cases and 
       IHV SCT II applications will be generated and located at 
-      C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2008x86
+      C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2013x86
 
 Notice: The example shows the build process of X64 only. For other architecture, 
         please change the keyword, X64, in build step to IA32.
 
-
-4. Build UEFI Shell
-   1) Please replace the 4 files before the build. The new files are provided in 
-      "ShellPkg Patch.zip"
-      a) ShellPkg\Application\Shell\Shell.c
-      b) ShellPkg\Application\Shell\ShellProtocol.c
-      c) ShellPkg\Application\Shell\ShellProtocol.h
-      d) ShellPkg\Application\Shell\ConsoleLogger.c
-   2) Execute "edksetup.bat"
-   3) Execute "build -p ShellPkg\ShellPkg.dsc -a X64 -t VS2008x86" or 
-      "build -p ShellPkg\ShellPkg.dsc -a IA32 -t VS2008x86"
-   4) The shell.efi will be generated and located at 
-      C:WorkSpace\Build\Shell\DEBUG_VS2008x86\X64 or C:WorkSpace\Build\Shell\DEBUG_VS2008x86\IA32
      
 Build EMS :
   Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 
