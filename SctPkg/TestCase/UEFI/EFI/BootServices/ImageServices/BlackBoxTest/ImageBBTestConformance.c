@@ -55,6 +55,7 @@ Abstract:
 
 --*/
 
+#include <Protocol/TestRecoveryLibrary.h>
 #include "SctLib.h"
 #include "Misc.h"
 
@@ -62,6 +63,14 @@ Abstract:
   { 0xF6FAB04F, 0xACAF, 0x4af3, { 0xB9, 0xFA, 0xDC, 0xF9, 0x7F, 0xB4, 0x42, 0x6F } }
 
 #define MAX_BUFFER_SIZE  10
+
+// We will write this value as a reset record before system reset
+#define RESET_RECORD_FLAG  0x1
+
+#define RESET_RECORD_BUFFER_SIZE  1024
+
+// Allocate this as a global to avoid allocation on the stack
+UINT8 ResetRecordBuffer[RESET_RECORD_BUFFER_SIZE];
 
 EFI_GUID gTestVendor1Guid = TEST_VENDOR1_GUID;
 
@@ -105,7 +114,6 @@ BBTestLoadImageConsistencyTest (
   // Init
   //
   StandardLib = NULL;
-
 
   //
   // Get the Standard Library Interface
@@ -317,8 +325,6 @@ BBTestLoadImageConsistencyTest (
                  Status
                  );
 
-
-
   //
   // ASSERT in CoreLoadImage (Core\Image.c Line1231),
   // so comments this checkpoint out temporarily until it is fixed.
@@ -351,7 +357,6 @@ BBTestLoadImageConsistencyTest (
                  (UINTN)__LINE__,
                  Status
                  );
-
 
   //
   // Checkpoint 6:
@@ -468,7 +473,6 @@ BBTestStartImageConsistencyTest (
   //
   StandardLib = NULL;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -555,7 +559,6 @@ BBTestStartImageConsistencyTest (
   return Status;
 }
 
-
 /**
  *  @brief Entrypoint for gtBS->UnloadImage() Consistency Test.
  *         1 check point will be tested.
@@ -589,7 +592,6 @@ BBTestUnloadImageConsistencyTest (
   // Init
   //
   StandardLib = NULL;
-
 
   //
   // Get the Standard Library Interface
@@ -708,7 +710,6 @@ BBTestExitConsistencyTest (
   //
   StandardLib = NULL;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -818,6 +819,7 @@ BBTestExitBootServicesConsistencyTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
   EFI_STATUS                           Status;
+  EFI_TEST_RECOVERY_LIBRARY_PROTOCOL   *RecoveryLib;
   EFI_TEST_ASSERTION                   AssertionType;
   UINTN                                MapKey;
 
@@ -826,11 +828,12 @@ BBTestExitBootServicesConsistencyTest (
   UINT8                                Data[MAX_BUFFER_SIZE];
   EFI_STATUS                           ReturnStatus;
 
+  UINTN                                ResetRecordBufferSize;
+
   //
   // Init
   //
   StandardLib = NULL;
-
 
   //
   // Get the Standard Library Interface
@@ -841,6 +844,18 @@ BBTestExitBootServicesConsistencyTest (
                    (VOID **) &StandardLib);
   if (EFI_ERROR(Status)) {
     return Status;
+  }
+
+  //
+  // Locate the test recovery libraries
+  //
+  Status = gtBS->LocateProtocol (
+                   &gEfiTestRecoveryLibraryGuid,
+                   NULL,
+                   (VOID**) &RecoveryLib
+                   );
+  if (EFI_ERROR (Status)) {
+   return Status;
   }
 
   Status = ImageTestCheckForCleanEnvironment (&Numbers);
@@ -859,17 +874,43 @@ BBTestExitBootServicesConsistencyTest (
     return Status;
   }
 
-  DataSize = MAX_BUFFER_SIZE;
-  Status = gtRT->GetVariable (
-                 L"ExitBootServicesTestVariable",             // VariableName
-                 &gTestVendor1Guid,                           // VendorGuid
-                 NULL,                                        // Attributes
-                 &DataSize,                                   // DataSize
-                 &ReturnStatus                                // Data
-                 );
+  //
+  // Look for the recovery record
+  //
+  Status = RecoveryLib->ReadResetRecord (
+                          RecoveryLib,
+                          &ResetRecordBufferSize,
+                          ResetRecordBuffer
+                          );
+  if ((Status != EFI_SUCCESS) && (Status != EFI_NOT_FOUND)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"ReadResetRecord failed ",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+     return Status;
+  }
 
-  if (Status == EFI_SUCCESS) {
-    goto CheckResult;
+  if ((ResetRecordBuffer[0] == RESET_RECORD_FLAG)) {
+    // Successful reading of the reset record indicates
+    // normal system reset by this test
+    DataSize = MAX_BUFFER_SIZE;
+    Status = gtRT->GetVariable (
+                     L"ExitBootServicesTestVariable",             // VariableName
+                     &gTestVendor1Guid,                           // VendorGuid
+                     NULL,                                        // Attributes
+                     &DataSize,                                   // DataSize
+                     &ReturnStatus                                // Data
+                    );
+
+    if (Status == EFI_SUCCESS) {
+      goto CheckResult;
+    }
   }
 
   //
@@ -913,7 +954,7 @@ BBTestExitBootServicesConsistencyTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   Status = gtRT->SetVariable (
                      L"ExitBootServicesTestVariable",                                                           // VariableName
                      &gTestVendor1Guid,                                                                         // VendorGuid
@@ -922,9 +963,21 @@ BBTestExitBootServicesConsistencyTest (
                      &ReturnStatus                              // Data
                      );
 
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  // Write the reset record before initiating
+  // system reset
+  ResetRecordBufferSize = sizeof (UINT8);
+  ResetRecordBuffer[0] = RESET_RECORD_FLAG;
+  Status = RecoveryLib->WriteResetRecord (
+                          RecoveryLib,
+                          ResetRecordBufferSize,
+                          ResetRecordBuffer
+                          );
   //reset system
   gtRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
-  
 
   // get var to get the status
 CheckResult:
@@ -934,7 +987,7 @@ CheckResult:
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
@@ -954,7 +1007,6 @@ CheckResult:
                      0,                               // DataSize
                      Data                             // Data
                      );
-  
 
   Status = ImageTestCheckForCleanEnvironment (&Numbers);
   if (EFI_ERROR(Status)) {
