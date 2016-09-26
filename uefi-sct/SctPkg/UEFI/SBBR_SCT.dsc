@@ -258,6 +258,11 @@ SctPkg/TestCase/UEFI/EFI/BootServices/SbbrBootServices/BlackBoxTest/SbbrBootServ
 # End of UEFI Boot Services - SBBR v1.0 3.4
 
 #
+# SMBIOS Requirements on UEFI - SBBR v1.0 5.1.1
+#
+SctPkg/TestCase/UEFI/EFI/Generic/SbbrSmbios/BlackBoxTest/SbbrSmbiosBBTest.inf
+
+#
 # Required UEFI Runtime Services Tests - SBBR v1.0 Appendix B
 #
 ##  1. EFI_GET_TIME

@@ -370,6 +370,9 @@ then
     # Check if EFI Specification Version is 2.5 or greater
     cp $ProcessorType/EfiSpecVerLvlBBTest.efi                  $Framework/Test/ > NUL
 
+    # SMBIOS Requirements on UEFI - SBBR v1.0 5.1.1
+    cp $ProcessorType/SbbrSmbiosBBTest.efi                     $Framework/Test/ > NUL
+
     # Runtime Services Tests - SBBR v1.0 Appendix B
     cp $ProcessorType/VariableServicesBBTest.efi               $Framework/Test/ > NUL
     cp $ProcessorType/TimeServicesBBTest.efi                   $Framework/Test/ > NUL
