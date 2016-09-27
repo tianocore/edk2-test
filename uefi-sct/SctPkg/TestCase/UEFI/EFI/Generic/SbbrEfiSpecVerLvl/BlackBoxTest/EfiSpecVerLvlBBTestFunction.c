@@ -57,10 +57,10 @@ Abstract:
 
 #include <Library/ArmLib.h>
 
-#include "EfiSpecVerLvlBBTestFunction.h"
 #include "EfiSpecVerLvlBBTestMain.h"
 #include "Guid.h"
 #include "SctLib.h"
+#include "EfiSpecVerLvlBBTestFunction.h"
 
 /** Entrypoint for EFI Specification Version Level Test.
  *
