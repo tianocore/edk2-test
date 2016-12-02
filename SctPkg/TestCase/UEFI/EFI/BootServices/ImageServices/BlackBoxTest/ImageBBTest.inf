@@ -84,5 +84,4 @@
 
 [Protocols]
   gEfiTestProfileLibraryGuid
-  gEfiTestRecoveryLibraryGuid
   gBlackBoxEfiHIIPackageListProtocolGuid
