@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2016 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -147,6 +147,8 @@ EFI_GUID gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid004 = EF
 EFI_GUID gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid005 = EFI_TEST_EVENTTIMERTASKPRIORITYSERVICESBBTESTCREATEEVENTEX_ASSERTION_005_GUID;
 
 EFI_GUID gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid006 = EFI_TEST_EVENTTIMERTASKPRIORITYSERVICESBBTESTCREATEEVENTEX_ASSERTION_006_GUID;
+
+EFI_GUID gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid007 = EFI_TEST_EVENTTIMERTASKPRIORITYSERVICESBBTESTCREATEEVENTEX_ASSERTION_007_GUID;
 
 EFI_GUID EventGroupTestGroup1Guid = EVT_GROUP_TEST_GROUP1_GUID;
 EFI_GUID EventGroupTestGroup2Guid = EVT_GROUP_TEST_GROUP2_GUID;
