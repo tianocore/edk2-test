@@ -2204,10 +2204,10 @@ CheckBootFromNVMe (
   EFI_TEST_ASSERTION  AssertionType;
 
   //
-  // Check the Extended SCSI_PASS_THRU protocol
+  // Check the NVME Pass Thru protocol
   //
   Status = gtBS->LocateProtocol (
-                   &gEfiExtScsiPassThruProtocolGuid,
+                   &gEfiNvmExpressPassThruProtocolGuid,
                    NULL,
                    (VOID **) &Interface
                    );
@@ -2284,7 +2284,7 @@ CheckBootFromNVMe (
       Status = IniFile->GetString (
                           IniFile,
                           SECTION_NAME_PLATFORM_SPECIFIC,
-                          L"ExtScsiPassThruSupport",
+                          L"NVMExpressPassThru",
                           String,
                           &MaxLength
                         );
@@ -2301,7 +2301,7 @@ CheckBootFromNVMe (
                    AssertionType,
                    gEfiCompliantBbTestPlatformAssertionGuid019,
                    L"UEFI Compliant - Boot from block-oriented NVMe peripheral",
-                   L"%a:%d:Ext SCSI Pass Thru - %s",
+                   L"%a:%d:NVMExpressPassThru - %s",
                    __FILE__,
                    (UINTN)__LINE__,
                    ValueA ? L"Yes" : L"No"
@@ -3799,7 +3799,7 @@ CheckIPSecProtocols (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gEfiCompliantBbTestPlatformAssertionGuid007,
+                 gEfiCompliantBbTestPlatformAssertionGuid027,
                  L"UEFI Compliant - IPsec protocols must be implemented",
                  L"%a:%d:IPSEC_CONFIG - %s, IPSEC2 - %s",
                  __FILE__,
