@@ -120,10 +120,10 @@ BBTestGetHashSizeFunctionTest (
   Status = Hash2ServiceBindingCreateChild(Hash2SB, &ChildHandle, &Hash2);
 
   for (Index = 0; Index < 6; Index++) {
-  	AssertionType = EFI_TEST_ASSERTION_PASSED;
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
-	  if (HashSize != Length[Index])
+    if (Status == EFI_SUCCESS) {
+      if (HashSize != Length[Index])
         AssertionType = EFI_TEST_ASSERTION_FAILED;
     } else {
       if (Status != EFI_UNSUPPORTED) 
@@ -189,16 +189,16 @@ BBTestHashFunctionTest (
   Status = Hash2ServiceBindingCreateChild(Hash2SB, &ChildHandle, &Hash2);
 
   for (Index = 0; Index < 6; Index++) {
-  	SctZeroMem(Hash2Out, 64);
+    SctZeroMem(Hash2Out, 64);
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
+    if (Status == EFI_SUCCESS) {
       Status = Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize,  (EFI_HASH2_OUTPUT *) Hash2Out);
       if (Status == EFI_SUCCESS) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
         if (0 != SctCompareMem(Hash2Out, Hash2OutStd[Index], Length[Index]) )
           AssertionType = EFI_TEST_ASSERTION_FAILED;
-	  }
-	  else
+      }
+      else
         AssertionType = EFI_TEST_ASSERTION_FAILED; 
 
       StandardLib->RecordAssertion (
@@ -261,23 +261,23 @@ BBTestHashMultiBlocksFunctionTest (
   Status = Hash2ServiceBindingCreateChild(Hash2SB, &ChildHandle, &Hash2);
 
   for (Index = 0; Index < 6; Index++) {
-  	SctZeroMem(Hash2Out, 64);
+    SctZeroMem(Hash2Out, 64);
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
+    if (Status == EFI_SUCCESS) {
       Status1 = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
-	  Status2 = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
+      Status2 = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
 	  
       Status3 = Hash2->HashUpdate (Hash2, Message1, MessageSize);
-	  Status4 = Hash2->HashUpdate (Hash2, Message2, MessageSize);
-	  Status5 = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
+      Status4 = Hash2->HashUpdate (Hash2, Message2, MessageSize);
+      Status5 = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
 
       
       if ((Status1 == EFI_SUCCESS) && (Status2 == EFI_ALREADY_STARTED) && (Status3 == EFI_SUCCESS) && (Status4 == EFI_SUCCESS) && (Status5 == EFI_SUCCESS)) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
         if (0 != SctCompareMem(Hash2Out, Hash2OutStd[Index], Length[Index]) )
           AssertionType = EFI_TEST_ASSERTION_FAILED;
-	  }
-	  else
+      }
+      else
         AssertionType = EFI_TEST_ASSERTION_FAILED; 
 
       StandardLib->RecordAssertion (

@@ -102,7 +102,7 @@ BBTestVerifyBufferFunctionTest (
   // Function test with EmbeddedData
   //
 
-  // Content signature was verified against hash of content, the signer¡¯certificate was not found in RevokedDb, and was found in AllowedDb.
+  // Content signature was verified against hash of content, the signer certificate was not found in RevokedDb, and was found in AllowedDb.
   AllowedDb[0] = DbEntry2;
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Embedded, sizeof(P7Embedded), NULL, 0, AllowedDb, RevokedDb, TimestampDb, NULL, 0);
 
