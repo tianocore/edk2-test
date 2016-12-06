@@ -856,7 +856,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gReadOnlyFileSystemBBTestAssertionGuid009,
+                   gReadOnlyFileSystemBBTestAssertionGuid008,
                    L"ReadOnly System - Open Dir with invalid mode",
                    L"%a:%d: ReadOnly System: Open Dir should be failed, Status1 - %r, Status2 - %r",
                    __FILE__,
@@ -881,7 +881,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gReadOnlyFileSystemBBTestAssertionGuid010,
+                   gReadOnlyFileSystemBBTestAssertionGuid009,
                    L"ReadOnly System - Open Dir with InvalidName",
                    L"%a:%d: ReadOnly System: Open Dir should be failed, Status - %r",
                    __FILE__,
@@ -906,7 +906,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gReadOnlyFileSystemBBTestAssertionGuid011,
+                   gReadOnlyFileSystemBBTestAssertionGuid010,
                    L"ReadOnly System - Open File with read mode",
                    L"%a:%d: ReadOnly System: Open File should be success, Status - %r",
                    __FILE__,
@@ -930,7 +930,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid012,
+                 gReadOnlyFileSystemBBTestAssertionGuid011,
                  L"ReadOnly System - GetInfo with unsupported GUID",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -948,7 +948,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid013,
+                 gReadOnlyFileSystemBBTestAssertionGuid012,
                  L"ReadOnly System - GetInfo with small buffer size",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -994,7 +994,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid014,
+                 gReadOnlyFileSystemBBTestAssertionGuid013,
                  L"ReadOnly System - GetInfo with correct paremeters, the outputs should be correct",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1019,7 +1019,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid015,
+                 gReadOnlyFileSystemBBTestAssertionGuid014,
                  L"ReadOnly System - SetInfo, the returned status should be EFI_WRITE_PROTECTED and EFI_UNSUPPORTED",
                  L"%a:%d: Status1 - %r, Status2 - %r",
                  __FILE__,
@@ -1043,7 +1043,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid020,
+                 gReadOnlyFileSystemBBTestAssertionGuid019,
                  L"ReadOnly System - Delete, the returned status should be EFI_WARN_DELETE_FAILURE",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1074,7 +1074,7 @@ ReadOnlyDirCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid021,
+                 gReadOnlyFileSystemBBTestAssertionGuid020,
                  L"ReadOnly System - Close, the returned status should be EFI_SUCCESS",
                  L"%a:%d: Status2 - %r",
                  __FILE__,
@@ -1110,7 +1110,7 @@ ReadOnlyFileCheck (
   UINT8                 Index;
 
   EFI_GUID              UnsupportedInfoType =
-                              {0x986dcfe, 0x90b8, 0x46bb, 0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b};
+                              {0x986dcfe, 0x90b8, 0x46bb, {0xb1, 0xbf, 0x1e, 0xfe, 0x9d, 0xd, 0xa2, 0x6b }};
 
   Status1 = Root->Open (
                     Root,
@@ -1136,7 +1136,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gReadOnlyFileSystemBBTestAssertionGuid009,
+                   gReadOnlyFileSystemBBTestAssertionGuid008,
                    L"ReadOnly System - Open File with invalid mode",
                    L"%a:%d: ReadOnly System: Open File should be failed, Status1 - %r, Status2 - %r",
                    __FILE__,
@@ -1161,7 +1161,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gReadOnlyFileSystemBBTestAssertionGuid010,
+                   gReadOnlyFileSystemBBTestAssertionGuid009,
                    L"ReadOnly System - Open File with InvalidName",
                    L"%a:%d: ReadOnly System: Open File should be failed, Status - %r",
                    __FILE__,
@@ -1186,7 +1186,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gReadOnlyFileSystemBBTestAssertionGuid011,
+                   gReadOnlyFileSystemBBTestAssertionGuid010,
                    L"ReadOnly System - Open File with read mode",
                    L"%a:%d: ReadOnly System: Open File should be success, Status - %r",
                    __FILE__,
@@ -1210,7 +1210,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid012,
+                 gReadOnlyFileSystemBBTestAssertionGuid011,
                  L"ReadOnly System - GetInfo with unsupported GUID",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1228,7 +1228,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid013,
+                 gReadOnlyFileSystemBBTestAssertionGuid012,
                  L"ReadOnly System - GetInfo with small buffer size",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1274,7 +1274,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid014,
+                 gReadOnlyFileSystemBBTestAssertionGuid013,
                  L"ReadOnly System - GetInfo with correct paremeters, the outputs should be correct",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1299,7 +1299,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid015,
+                 gReadOnlyFileSystemBBTestAssertionGuid014,
                  L"ReadOnly System - SetInfo, the returned status should be EFI_WRITE_PROTECTED and EFI_UNSUPPORTED",
                  L"%a:%d: Status1 - %r, Status2 - %r",
                  __FILE__,
@@ -1323,7 +1323,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid016,
+                 gReadOnlyFileSystemBBTestAssertionGuid015,
                  L"ReadOnly System - GetPosition, the returned status should be EFI_SUCCESS and Position is one reasonable value",
                  L"%a:%d: Status - %r, Position - %d",
                  __FILE__,
@@ -1346,7 +1346,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid017,
+                 gReadOnlyFileSystemBBTestAssertionGuid016,
                  L"ReadOnly System - Write, the returned status should be EFI_WRITE_PROTECTED",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1369,7 +1369,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid018,
+                 gReadOnlyFileSystemBBTestAssertionGuid017,
                  L"ReadOnly System - Flush, the returned status should be EFI_WRITE_PROTECTED",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1435,7 +1435,7 @@ ReadOnlyFileCheck (
       FileHandle->Read (FileHandle, &Size, Buf);
       for (Index = 0; Index < 10 ; Index++) {
 
-        if (Buf[Index] != *(FileBuf + Position - 10 + Index))	
+        if (Buf[Index] != *(FileBuf + Position - 10 + Index))
           break;
       }
       if (Index != 10) {
@@ -1449,7 +1449,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid019,
+                 gReadOnlyFileSystemBBTestAssertionGuid018,
                  L"ReadOnly System - Read/SetPosition, the operation should be correct",
                  L"%a:%d: ",
                  __FILE__,
@@ -1472,7 +1472,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid020,
+                 gReadOnlyFileSystemBBTestAssertionGuid019,
                  L"ReadOnly System - Delete, the returned status should be EFI_WARN_DELETE_FAILURE",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1504,7 +1504,7 @@ ReadOnlyFileCheck (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gReadOnlyFileSystemBBTestAssertionGuid021,
+                 gReadOnlyFileSystemBBTestAssertionGuid020,
                  L"ReadOnly System - Close, the returned status should be EFI_SUCCESS",
                  L"%a:%d: Status2 - %r",
                  __FILE__,
@@ -7084,7 +7084,7 @@ BBTestWriteBasicTestCheckpoint1 (
       // file size grows
       //
       FileInfo = NULL;
-      Status = InternalGetInfo (FileHandle, (VOID **)  &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
+      Status = InternalGetInfo (FileHandle, (VOID **) &FileInfo, &InfoSize, &gBlackBoxEfiFileInfoGuid);
       if (EFI_ERROR (Status)) {
         StandardLib->RecordAssertion (
                        StandardLib,
@@ -9366,7 +9366,7 @@ BBTestSetInfoBasicTestCheckpoint2 (
     //
     Status = InternalGetInfo (
                Root,
-               (VOID**) &SystemInfo,
+               (VOID**)&SystemInfo,
                &BufferSize,
                &gBlackBoxEfiFileSystemInfoGuid
                );
@@ -9482,7 +9482,7 @@ BBTestSetInfoBasicTestCheckpoint3 (
     //
     Status = InternalGetInfo (
                Root,
-               (VOID**) &SavedVolumeLabel,
+               (VOID**)&SavedVolumeLabel,
                &BufferSize,
                &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid
                );
@@ -9568,7 +9568,7 @@ BBTestSetInfoBasicTestCheckpoint3 (
     //
     Status = InternalGetInfo (
                Root,
-               (VOID**) &VolumeLabel,
+               (VOID**)&VolumeLabel,
                &BufferSize,
                &gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid
                );
@@ -9613,7 +9613,7 @@ BBTestSetInfoBasicTestCheckpoint3 (
     //
     Status = InternalGetInfo (
                Root,
-               (VOID**) &SystemInfo,
+               (VOID**)&SystemInfo,
                &BufferSize,
                &gBlackBoxEfiFileSystemInfoGuid
                );
@@ -9789,7 +9789,7 @@ InternalSetFileSize (
   UINTN         BufferSize;
   EFI_STATUS    Status;
 
-  Status = InternalGetInfo (FileHandle, (VOID**) &InfoBuffer, &BufferSize, &gBlackBoxEfiFileInfoGuid);
+  Status = InternalGetInfo (FileHandle, (VOID**)&InfoBuffer, &BufferSize, &gBlackBoxEfiFileInfoGuid);
   if (EFI_ERROR (Status)) {
     return Status;
   }
