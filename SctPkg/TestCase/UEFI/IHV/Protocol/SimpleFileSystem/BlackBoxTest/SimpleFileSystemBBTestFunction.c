@@ -9015,8 +9015,12 @@ BBTestSetInfoBasicTestCheckpoint1 (
         SctStrCpy (NewFileInfo->FileName, ChangeFileName);
         InvertFileAttributes (NewFileInfo);
 
-        OldTpl = gtBS->RaiseTPL (TplArray[Index]);
+        //
+        // update the Size
+        //
+        NewFileInfo->Size = SIZE_OF_EFI_FILE_INFO + SctStrSize (NewFileInfo->FileName);
 
+        OldTpl = gtBS->RaiseTPL (TplArray[Index]);
 
         Status = FileHandle->SetInfo (
                                FileHandle,
@@ -9079,7 +9083,7 @@ BBTestSetInfoBasicTestCheckpoint1 (
         //
         // the Attribute always add EFI_FILE_ARCHIVE. <-- is it a bug?
         //
-        if ((NewFileInfo->FileSize == FileInfo->FileSize)
+        if ((NewFileInfo->FileSize == FileInfo->FileSize) && (NewFileInfo->Size == FileInfo->Size)
             && !SctStrCmp (NewFileInfo->FileName, (FileInfo->FileName))
             && ((NewFileInfo->Attribute | EFI_FILE_ARCHIVE) == (FileInfo->Attribute | EFI_FILE_ARCHIVE))) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -9097,11 +9101,13 @@ BBTestSetInfoBasicTestCheckpoint1 (
                        AssertionType,
                        TplGuid,
                        L"SetInfo() Basic Test - checkpoint1",
-                       L"%a:%d: OldFileSize = 0x%lx, NewFileSize = 0x%lx, OldAttribute = 0x%lx, NewAttribute = 0x%lx",
+                       L"%a:%d: OldFileSize = 0x%lx, NewFileSize = 0x%lx, OldSize = 0x%lx, NewSize = 0x%lx, OldAttribute = 0x%lx, NewAttribute = 0x%lx",
                        __FILE__,
                        (UINTN)__LINE__,
                        FileInfo->FileSize,
                        NewFileInfo->FileSize,
+                       FileInfo->Size,
+                       NewFileInfo->Size,
                        FileInfo->Attribute,
                        NewFileInfo->Attribute
                        );
