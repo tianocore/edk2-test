@@ -40,8 +40,8 @@
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+
 --*/
 /*++
 
@@ -378,8 +378,8 @@ BBTestInitializeFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 ); 
-                 
+                 );
+
   //
   // Restore SNP State
   //
@@ -388,12 +388,12 @@ BBTestInitializeFunctionTest (
     if (EFI_ERROR(Status)) {
       return Status;
     }
-  
+
     if (State1 == EfiSimpleNetworkInitialized) {
       SnpInterface->Initialize (SnpInterface, 0, 0);
     }
   }
-  
+
   if (State1 == EfiSimpleNetworkStopped) {
     Status = SnpInterface->Shutdown (SnpInterface);
     if (EFI_ERROR(Status)) {
@@ -441,6 +441,7 @@ BBTestResetFunctionTest (
   UINTN                                 StatisticsSize1;
   EFI_NETWORK_STATISTICS                StatisticsTable2;
   UINTN                                 StatisticsSize2;
+
   //
   // Get the Standard Library Interface
   //
@@ -513,13 +514,13 @@ BBTestResetFunctionTest (
   if (EFI_ERROR(Status1)) {
     return Status1;
   }
-  
+
   if (SnpInterface->Mode->MediaPresent == FALSE) {
     if (InterruptStatus != 0 || TxBuf != NULL) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
   } else {
-    if ((InterruptStatus & 
+    if ((InterruptStatus &
              ~( EFI_SIMPLE_NETWORK_RECEIVE_INTERRUPT |
                 EFI_SIMPLE_NETWORK_TRANSMIT_INTERRUPT |
                 EFI_SIMPLE_NETWORK_COMMAND_INTERRUPT |
@@ -527,7 +528,7 @@ BBTestResetFunctionTest (
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
   }
-  
+
   SctSetMem (&StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS), 0x0);
   StatisticsSize2 = sizeof (EFI_NETWORK_STATISTICS);
   Status1 = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize2, &StatisticsTable2);
@@ -674,7 +675,7 @@ BBTestShutdownFunctionTest (
       return Status1;
     }
   }
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
@@ -692,7 +693,7 @@ BBTestShutdownFunctionTest (
       return Status1;
     }
   }
-  
+
   return EFI_SUCCESS;
 }
 
@@ -851,7 +852,7 @@ BBTestReceiveFilterFunctionTest (
                    Status,
                    SnpInterface->Mode->ReceiveFilterSetting
                    );
-  }  
+  }
 
   //
   // Assertion Point 4.6.2.2
@@ -894,7 +895,7 @@ BBTestReceiveFilterFunctionTest (
                    SnpInterface->Mode->MCastFilter[1].Addr[0]
                    );
   }
-  
+
   //
   // Assertion Point 4.6.2.3
   // Reset multicast receive filters list.
@@ -973,7 +974,7 @@ BBTestStationAddressFunctionTest (
   EFI_MAC_ADDRESS                       MacAddress;
   INTN                                  CheckPoint1, CheckPoint2;
   EFI_MAC_ADDRESS                       BackMacAddress;
-  
+
   //
   // Get the Standard Library Interface
   //
@@ -1018,23 +1019,22 @@ BBTestStationAddressFunctionTest (
   //
   StatusBuf[0] = SnpInterface->StationAddress (SnpInterface, TRUE, NULL);
   CheckPoint1 = SctCompareMem (
-                  &SnpInterface->Mode->CurrentAddress, 
-                  &SnpInterface->Mode->PermanentAddress, 
+                  &SnpInterface->Mode->CurrentAddress,
+                  &SnpInterface->Mode->PermanentAddress,
                   sizeof (EFI_MAC_ADDRESS)
                   );
-  
-  
+
   //
   // Assertion Point 4.7.2.2
   // Call StationAddress to modify its MAC Address.
   //
   SctCopyMem (&BackMacAddress, &SnpInterface->Mode->CurrentAddress, sizeof (EFI_MAC_ADDRESS));
-  
+
   SctSetMem (&MacAddress, sizeof (EFI_MAC_ADDRESS), 0x0);
   StatusBuf[1] = SnpInterface->StationAddress (SnpInterface, FALSE, &MacAddress);
   CheckPoint2 = SctCompareMem (
-                  &SnpInterface->Mode->CurrentAddress, 
-                  &MacAddress, 
+                  &SnpInterface->Mode->CurrentAddress,
+                  &MacAddress,
                   sizeof (EFI_MAC_ADDRESS)
                   );
 
@@ -1069,7 +1069,7 @@ BBTestStationAddressFunctionTest (
                    StatusBuf[0]
                    );
   }
-  
+
   if ((StatusBuf[1] == EFI_INVALID_PARAMETER) || (StatusBuf[1] == EFI_UNSUPPORTED)) {
     StandardLib->RecordMessage(
                    StandardLib,
@@ -1110,7 +1110,7 @@ BBTestStationAddressFunctionTest (
       return Status;
     }
   }
-  
+
   return EFI_SUCCESS;
 }
 
@@ -1205,7 +1205,7 @@ BBTestStatisticsFunctionTest (
   SctSetMem (&StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS), 0x0);
   Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable2);
 
-  LoggingLib->DumpBuf (LoggingLib, EFI_VERBOSE_LEVEL_DEFAULT, (CHAR16*)& (StatisticsTable1), sizeof (EFI_NETWORK_STATISTICS)/2, EFI_DUMP_HEX);
+  LoggingLib->DumpBuf (LoggingLib, EFI_VERBOSE_LEVEL_DEFAULT, (CHAR16*)&(StatisticsTable1), sizeof (EFI_NETWORK_STATISTICS)/2, EFI_DUMP_HEX);
   LoggingLib->DumpBuf (LoggingLib, EFI_VERBOSE_LEVEL_DEFAULT, (CHAR16*)&(StatisticsTable2), sizeof (EFI_NETWORK_STATISTICS)/2, EFI_DUMP_HEX);
 
   if ((Status == EFI_SUCCESS) &&
@@ -1237,9 +1237,13 @@ BBTestStatisticsFunctionTest (
   SctSetMem (&StatisticsTable1, sizeof (EFI_NETWORK_STATISTICS), 0x0);
   SctSetMem (&StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS), 0x0);
 
+  // As per the UEFI specification a previous call to SnpInterface->Statistics
+  // may set the StatisticsSize greater than size of EFI_NETWORK_STATISTICS.
+  // Since StatisticsSize is an IN/OUT parameter, reset StatisticsSize to
+  // size of EFI_NETWORK_STATISTICS to avoid memory corruption.
+  StatisticsSize = sizeof (EFI_NETWORK_STATISTICS);
   Status = SnpInterface->Statistics (SnpInterface, TRUE, &StatisticsSize, &StatisticsTable1);
   LoggingLib->DumpBuf (LoggingLib, EFI_VERBOSE_LEVEL_DEFAULT, (CHAR16*)&(StatisticsTable1), sizeof (EFI_NETWORK_STATISTICS)/2, EFI_DUMP_HEX);
-
 
   if ((Status == EFI_SUCCESS) &&
       (!SctCompareMem (&StatisticsTable1, &StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS)))) {
@@ -1482,12 +1486,12 @@ BBTestNVDataFunctionTest (
   }
 
   if ((SnpInterface->Mode->NvRamAccessSize == 0) || (SnpInterface->Mode->NvRamSize == 0)) {
-	StandardLib->RecordMessage (
-	               StandardLib,
-	               EFI_VERBOSE_LEVEL_DEFAULT,
-	               L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - NvRAM device is not attached\n"
-	               );
-	return EFI_SUCCESS;
+    StandardLib->RecordMessage (
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_DEFAULT,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - NvRAM device is not attached\n"
+                   );
+    return EFI_SUCCESS;
   }
 
   Buffer = NULL;
@@ -1515,7 +1519,7 @@ BBTestNVDataFunctionTest (
   SctSetMem (Buffer, SnpInterface->Mode->NvRamSize, 0x0);
   Status = SnpInterface->NvData (SnpInterface, TRUE, 0, SnpInterface->Mode->NvRamSize, Buffer);
   if (Status == EFI_UNSUPPORTED) {
-  	StandardLib->RecordMessage(
+    StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
                    L"NvData isn't supproted, Status - %r\n",
@@ -1546,7 +1550,7 @@ BBTestNVDataFunctionTest (
   SctSetMem (Buffer, SnpInterface->Mode->NvRamSize, 0x0);
   Status = SnpInterface->NvData (SnpInterface, TRUE, SnpInterface->Mode->NvRamAccessSize, (SnpInterface->Mode->NvRamSize - SnpInterface->Mode->NvRamAccessSize), Buffer);
   if (Status == EFI_UNSUPPORTED) {
-  	StandardLib->RecordMessage(
+    StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
                    L"NvData isn't supproted, Status - %r\n",
@@ -1575,7 +1579,7 @@ BBTestNVDataFunctionTest (
   SctSetMem (Buffer, SnpInterface->Mode->NvRamSize, 0x0);
   Status = SnpInterface->NvData (SnpInterface, TRUE, (SnpInterface->Mode->NvRamSize - SnpInterface->Mode->NvRamAccessSize), SnpInterface->Mode->NvRamAccessSize, Buffer);
   if (Status == EFI_UNSUPPORTED) {
-  	StandardLib->RecordMessage(
+    StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
                    L"NvData isn't supproted, Status - %r\n",
@@ -1587,7 +1591,7 @@ BBTestNVDataFunctionTest (
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-  
+
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -1627,7 +1631,7 @@ BBTestNVDataFunctionTest (
   }
 
   if (Status == EFI_UNSUPPORTED) {
-  	StandardLib->RecordMessage(
+    StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
                    L"NvData isn't supproted, Status - %r\n",
@@ -1652,7 +1656,7 @@ BBTestNVDataFunctionTest (
                    );
   }
 
-End: 
+End:
   //
   // Restore SNP State
   //
@@ -1710,9 +1714,8 @@ BBTestGetStatusFunctionTest (
   UINT16                                Protocol;
   EFI_NETWORK_STATISTICS                StatisticsTable;
   EFI_NETWORK_STATISTICS                StatisticsTable1;
-  UINTN                                 StatisticsSize;  
+  UINTN                                 StatisticsSize;
   EFI_EVENT                             TimeoutEvent;
-
 
   //
   // Get the Standard Library Interface
@@ -1857,10 +1860,9 @@ BBTestGetStatusFunctionTest (
                    StatCode
                    );
 
-
     tBS->CloseEvent (TimeoutEvent);
     gtBS->FreePool (Buffer);
-    
+
   }
 
   StatisticsSize = sizeof (EFI_NETWORK_STATISTICS);
@@ -1881,7 +1883,6 @@ BBTestGetStatusFunctionTest (
     }
   }
 
-  
   //
   // Check whether the state of network interface is EfiSimpleNetworkInitialized.
   // If not, change the state to EfiSimpleNetworkInitialized.
@@ -1927,7 +1928,7 @@ BBTestGetStatusFunctionTest (
   } else {
     if ((Status1 == EFI_SUCCESS) && (Status == EFI_SUCCESS)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
-      if (InterruptStatus & 
+      if (InterruptStatus &
          ~( EFI_SIMPLE_NETWORK_RECEIVE_INTERRUPT |
             EFI_SIMPLE_NETWORK_TRANSMIT_INTERRUPT |
             EFI_SIMPLE_NETWORK_COMMAND_INTERRUPT |
@@ -1950,7 +1951,7 @@ BBTestGetStatusFunctionTest (
                  Status1,
                  InterruptStatus
                  );
-  
+
   //
   // Restore SNP State
   //
@@ -2013,7 +2014,6 @@ BBTestTransmitFunctionTest (
   UINT32                                IntStatus;
   VOID                                  *TxBuf;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -2026,7 +2026,6 @@ BBTestTransmitFunctionTest (
   if (EFI_ERROR(Status)) {
     return Status;
   }
-
 
   //
   // Get the Logginh Library Interface
@@ -2231,7 +2230,7 @@ BBTestTransmitFunctionTest (
                  (UINTN)__LINE__,
                  Status
                  );
-  
+
   //
   // Restore SNP State
   //
@@ -2289,7 +2288,6 @@ BBTestReceiveFunctionTest (
   UINTN                                 WaitIndex;
   EFI_INPUT_KEY                         Key;
 
-
   //
   // Get the Standard Library Interface
   //
@@ -2345,11 +2343,11 @@ BBTestReceiveFunctionTest (
   // Enable receive filters
   //
   Status = SnpInterface->ReceiveFilters (
-                           SnpInterface, 
-                           EFI_SIMPLE_NETWORK_RECEIVE_UNICAST|EFI_SIMPLE_NETWORK_RECEIVE_BROADCAST, 
-                           0, 
-                           FALSE, 
-                           0, 
+                           SnpInterface,
+                           EFI_SIMPLE_NETWORK_RECEIVE_UNICAST|EFI_SIMPLE_NETWORK_RECEIVE_BROADCAST,
+                           0,
+                           FALSE,
+                           0,
                            NULL
                            );
   if (EFI_ERROR(Status)) {
@@ -2574,6 +2572,7 @@ BBTestReceiveFunctionTest (
       return Status;
     }
   }
-  
+
   return EFI_SUCCESS;
 }
+
