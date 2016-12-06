@@ -132,7 +132,7 @@ BBTestGetHashSizeConformanceTest (
 
   for (Index = 0; Index < 6; Index++) {
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
+    if (Status == EFI_SUCCESS) {
       Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], NULL);
       if (Status == EFI_INVALID_PARAMETER)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -312,7 +312,7 @@ BBTestHashInitConformanceTest (
 
   for (Index = 0; Index < 6; Index++) {
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
+    if (Status == EFI_SUCCESS) {
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
 	  
@@ -334,9 +334,9 @@ BBTestHashInitConformanceTest (
  
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
-	  Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
+      Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
 
-	  Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
+      Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       if (Status == EFI_ALREADY_STARTED)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -419,7 +419,7 @@ BBTestHashUpdateConformanceTest (
 
   for (Index = 0; Index < 6; Index++) {
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
+    if (Status == EFI_SUCCESS) {
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       Status = Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
  
@@ -442,9 +442,9 @@ BBTestHashUpdateConformanceTest (
  
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
-	  Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
-	  Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
-	  Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
+      Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
+      Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
+      Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
       if (Status == EFI_NOT_READY)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -527,7 +527,7 @@ BBTestHashFinalConformanceTest (
 
   for (Index = 0; Index < 6; Index++) {
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
-	if (Status == EFI_SUCCESS) {
+    if (Status == EFI_SUCCESS) {
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) Hash2Out);
       if (Status == EFI_NOT_READY)
@@ -548,8 +548,8 @@ BBTestHashFinalConformanceTest (
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
-	  Status =Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
-	  Status = Hash2->HashFinal (Hash2,  (EFI_HASH2_OUTPUT *) Hash2Out);
+      Status =Hash2->Hash (Hash2, &gHashAlgorithmGuids[Index], Message, MessageSize, (EFI_HASH2_OUTPUT*) Hash2Out);
+      Status = Hash2->HashFinal (Hash2,  (EFI_HASH2_OUTPUT *) Hash2Out);
       if (Status == EFI_NOT_READY)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -568,7 +568,7 @@ BBTestHashFinalConformanceTest (
  
 
       Status= Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
-	  Status =Hash2->HashUpdate (Hash2, Message, MessageSize);
+      Status =Hash2->HashUpdate (Hash2, Message, MessageSize);
 
       Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT *) NULL);
       if (Status == EFI_INVALID_PARAMETER)
