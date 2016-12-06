@@ -2537,7 +2537,7 @@ BBTestSetInfoConformanceTestCheckpoint2 (
     Status = OpenHandle[Index]->SetInfo (
                                   OpenHandle[Index],
                                   &gBlackBoxEfiFileInfoGuid,
-                                  FileInfo->Size,
+                                  (UINTN) FileInfo->Size,
                                   FileInfo
                                   );
 
@@ -3818,7 +3818,7 @@ BBTestSetInfoConformanceTestCheckpoint7 (
     Status = FileHandle[0]->SetInfo (
                             FileHandle[0],
                             &gBlackBoxEfiFileInfoGuid,
-                            FileInfo->Size,
+                            (UINTN) FileInfo->Size,
                             FileInfo
                             );
 
