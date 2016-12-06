@@ -1881,7 +1881,4 @@ extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid019;
 
 extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid020;
 
-#define EFI_TEST_READONLYFILESYSTEMBBTEST_ASSERTION_021_GUID \
-{ 0x141fefb, 0xcb29, 0x451b, 0xb2, 0x7c, 0x5c, 0x81, 0x51, 0x77, 0x34, 0x97 }
 
-extern EFI_GUID gReadOnlyFileSystemBBTestAssertionGuid021;
