@@ -1047,7 +1047,7 @@ BBTestCreateEventEx_Func_Sub3 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid006,
+                 gEventTimerTaskPriorityServicesBBTestCreateEventExAssertionGuid007,
                  L"BS.CreateEventEx - Check the notification of the EFI_EVENT_GROUP_MEMORY_MAP_CHANGE and the notify order when Memory Allocation Services is called.",
                  L"%a:%d:Event's notify Tpl - %d,%d,%d",
                  __FILE__,
