@@ -243,6 +243,7 @@ then
     cp $ProcessorType/Pkcs7BBTest.efi                          $Framework/Test/ > NUL
     cp $ProcessorType/ConfigKeywordHandlerBBTest.efi           $Framework/Test/ > NUL
     cp $ProcessorType/RegularExpressionBBTest.efi              $Framework/Test/ > NUL
+    cp $ProcessorType/NVMEPassThruBBTest.efi                   $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary
