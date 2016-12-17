@@ -50,6 +50,23 @@ Linux Environment：
    6) Execute ". edksetup.sh" in Home/Dev/MyWorkSpace
    7) Execute ". SctPkg/build.sh X64 GCC" in Home/Dev/MyWorkSpace
 
+Build Instructions for UEFI SCTII AARCH64 (Linux)
+   1) mkdir "sct_workspace"
+   2) cd sct_workspace
+   3) git clone https://github.com/UEFI/UEFI-SCT
+   4) git clone https://github.com/tianocore/edk2
+   5) cd edk2
+   6) git checkout UDK2015
+   7) ln -s ../SctPkg SctPkg
+   8) cd ..
+   9) mkdir -p "tools/gcc"
+  10) cd "tools/gcc"
+  11) wget -nv "https://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/aarch64-linux-gnu/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz"
+  12) tar -xf gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz
+  13) cd ../..
+  14) export PATH=$PATH:"$PWD/tools/gcc/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu/bin"
+  15) export CROSS_COMPILE="$PWD/tools/gcc/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-"
+  16) ./SctPkg/build.sh AARCH64 GCC
 
 Build EMS :
   Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 
