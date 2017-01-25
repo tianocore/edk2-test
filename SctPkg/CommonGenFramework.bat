@@ -174,7 +174,7 @@ copy %ProcessorType%\UnicodeCollation2BBTest.efi              %Framework%\Test\ 
 rem copy %ProcessorType%\UsbHcTest.efi                            %Framework%\Test\ > NUL
 copy %ProcessorType%\UsbIoTest.efi                            %Framework%\Test\ > NUL
 copy %ProcessorType%\Usb2HcTest.efi                           %Framework%\Test\ > NUL
-copy %ProcessorType%\AuthenticationBBTest.efi                 %Framework%\Test\ > NUL
+rem copy %ProcessorType%\AuthenticationBBTest.efi                 %Framework%\Test\ > NUL
 rem copy %ProcessorType%\HashBBTest.efi                           %Framework%\Test\ > NUL
 copy %ProcessorType%\TapeBBTest.efi                           %Framework%\Test\ > NUL
 copy %ProcessorType%\AcpiTableProtocolBBTest.efi              %Framework%\Test\ > NUL
