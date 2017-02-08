@@ -95,7 +95,7 @@ extern UINT8 TestSubCert[755];
 extern UINT8 TestRootCert[756];
 extern UINT8 P7Embedded[3330];
 extern UINT8 P7Detached[1138];
-extern UINT8 TSRootCert[1177];
+extern UINT8 TSRootCert[1176];
 extern UINT8 TBSCert[479];
 extern UINT8 TestSubHash[32];
 
