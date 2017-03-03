@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -1698,6 +1698,29 @@ CreateWiFiDeviceNode (
   return (EFI_DEVICE_PATH_PROTOCOL *) WiFi;
 }
 
+#define EMMCNodeType    3
+#define EMMCNodeSubType 29
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateEMMCDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16              *SlotNumberStr;
+  EMMC_DEVICE_PATH    *EMMC;
+
+  SlotNumberStr = SctSplitStr (&TextDeviceNode, L',');
+  EMMC  = (SD_DEVICE_PATH *) CreateDeviceNode (
+                                 EMMCNodeType,
+                                 EMMCNodeSubType,
+                                 sizeof (EMMC_DEVICE_PATH)
+                                 );
+
+  EMMC->SlotNumber = (UINT8) SctStrToUInt (SlotNumberStr);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) EMMC;
+}
 
 #define HdNodeType     4
 #define HdNodeSubType  1
@@ -3419,6 +3442,32 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 __FILE__,
                 (UINTN)__LINE__
                 );
+
+  //
+  // eMMC(0) 
+  //
+  SctStrCpy (text, L"0");
+  pDevicePath = CreateEMMCDeviceNode(text);
+
+  SctStrCpy (text, L"eMMC(0)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid139,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert eMMC(0)",
+                __FILE__,
+                (UINTN)__LINE__
+                ); 
 
   //
   // RamDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1,E8AAED38-1815-4E4F-BCB5-2E3DBD160C9C)

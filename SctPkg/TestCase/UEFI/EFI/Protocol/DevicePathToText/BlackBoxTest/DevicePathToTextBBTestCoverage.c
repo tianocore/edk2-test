@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -2078,7 +2078,41 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
     SctFreePool (Text);
   }
 
+  //
+  // eMMC(3) 
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1D, 5);  
+  ((EMMC_DEVICE_PATH *)pDeviceNode1)->SlotNumber = 3;
 
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid131,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: eMMC(3)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+  
   return EFI_SUCCESS;
 }
 

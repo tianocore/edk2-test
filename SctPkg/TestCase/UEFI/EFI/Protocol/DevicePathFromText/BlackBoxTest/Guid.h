@@ -35,19 +35,19 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
 
 Module Name:
 
-  guid.h
+  Guid.h
 
 Abstract:
 
@@ -458,6 +458,12 @@ extern EFI_GUID gDevicePathFromTextBBTestFunctionAssertionGuid137;
     0x7e00edfb, 0x4ef8, 0x45da, {0x9e, 0x54, 0x8e, 0xf, 0x1b, 0xa5, 0xc3, 0xde } \
   }
 extern EFI_GUID gDevicePathFromTextBBTestFunctionAssertionGuid138;
+
+#define EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_139_GUID \
+  { \
+    0x882a6001, 0xae82, 0x4bb5, { 0x83, 0xd, 0x6c, 0x2a, 0xd7, 0x68, 0x44, 0xec } \
+  }
+extern EFI_GUID gDevicePathFromTextBBTestFunctionAssertionGuid139;
 
 #define EFI_TEST_DEVICEPATHFROMTEXTBBTESTFUNCTION_ASSERTION_180_GUID \
   { \
