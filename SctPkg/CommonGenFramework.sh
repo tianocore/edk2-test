@@ -246,6 +246,8 @@ then
 
     cp $ProcessorType/RamDiskProtocolBBTest.efi                $Framework/Test/ > NUL
     cp $ProcessorType/NVMEPassThruBBTest.efi                   $Framework/Test/ > NUL
+    cp $ProcessorType/EraseBlockBBTest.efi                     $Framework/Test/ > NUL
+    cp $ProcessorType/SDMMCPassThruBBTest.efi                  $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary
