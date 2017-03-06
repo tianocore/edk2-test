@@ -212,6 +212,7 @@ copy %ProcessorType%\RegularExpressionBBTest.efi              %Framework%\Test\ 
 copy %ProcessorType%\RamDiskProtocolBBTest.efi                %Framework%\Test\ > NUL
 copy %ProcessorType%\NVMEPassThruBBTest.efi                   %Framework%\Test\ > NUL
 copy %ProcessorType%\EraseBlockBBTest.efi                     %Framework%\Test\ > NUL
+copy %ProcessorType%\SDMMCPassThruBBTest.efi                  %Framework%\Test\ > NUL
 
 rem *********************************************
 rem Copy ENTS binary

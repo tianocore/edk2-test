@@ -308,6 +308,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/ConfigKeywordHandler/BlackBoxTest/ConfigKeywor
 SctPkg/TestCase/UEFI/EFI/Protocol/RamDisk/BlackBoxTest/RamDiskProtocolBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/NVMEPassThru/BlackBoxTest/NVMEPassThruBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/EraseBlock/BlackBoxTest/EraseBlockBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/SDMMCPassThru/BlackBoxTest/SDMMCPassThruBBTest.inf
 
 #
 # Dependency files for UEFI/EFI Compliant Test
