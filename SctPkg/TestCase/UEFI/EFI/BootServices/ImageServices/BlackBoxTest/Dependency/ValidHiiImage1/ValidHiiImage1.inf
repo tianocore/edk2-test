@@ -56,23 +56,20 @@
 #--*/
 
 [defines]
-  INF_VERSION          = 0x00010005
-  BASE_NAME            = ImageServices_ValidHiiImage1
-  FILE_GUID            = E106D131-E5F2-4670-A4F5-7BA4FC0829C0
-  MODULE_TYPE          = UEFI_APPLICATION
-  VERSION_STRING       = 1.0
-  ENTRY_POINT          = InitializeValidHiiImage1
-
-  #
-  # Comment out CUSTOM_MAKEFILE tag to build the image from sources.
-  #
-  CUSTOM_MAKEFILE      = MSFT| makefile
-  CUSTOM_MAKEFILE      = GCC | GNUmakefile
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = ImageServices_ValidHiiImage1
+  FILE_GUID                 = E106D131-E5F2-4670-A4F5-7BA4FC0829C0
+  MODULE_TYPE               = UEFI_APPLICATION
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = InitializeValidHiiImage1
+  UEFI_HII_RESOURCE_SECTION = TRUE
 
 [sources.common]
   ValidHiiImage1.c
   ../../ProtocolDefinition.c
   ../../Misc.c
+  SampleStrings.uni
+  Sample.vfr
 
 [Packages]
   MdePkg/MdePkg.dec
