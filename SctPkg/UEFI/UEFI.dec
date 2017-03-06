@@ -35,13 +35,13 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2014 - 2016 Unified EFI, Inc. All
+# Copyright 2014 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                            
 # Copyright (c) 2014, ARM Limited. All rights reserved. 
-# Copyright (c) 2016, Intel Corporation. All rights reserved.
+# Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.
 #
 #
 #/*++
@@ -207,3 +207,4 @@
   gBlackBoxEfiConfigKeywordHandlerProtocolGuid = { 0x0a8badd5, 0x03b8, 0x4d19, {0xb1, 0x28, 0x7b, 0x8f, 0x0e, 0xda, 0xa5, 0x96 }}
   gBlackBoxEfiNVMEPassThruProtocolGuid = { 0x52c78312, 0x8edc, 0x4233, {0x98, 0xf2, 0x1a, 0x1a, 0xa5, 0xe3, 0x88, 0xa5 }}
   gBlackBoxEfiRamDiskProtocolGuid = { 0xab38a0df, 0x6873, 0x44a9, { 0x87, 0xe6, 0xd4, 0xeb, 0x56, 0x14, 0x84, 0x49 }}
+  gBlackBoxEfiEraseBlockProtocolGuid = { 0x95a9a93e, 0xa86e, 0x4926, {0xaa, 0xef, 0x99, 0x18, 0xe7, 0x72, 0xd9, 0x87}}

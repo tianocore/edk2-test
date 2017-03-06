@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2016 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 #/*++
@@ -307,6 +307,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/PKCS7Verify/BlackBoxTest/Pkcs7BBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/ConfigKeywordHandler/BlackBoxTest/ConfigKeywordHandlerBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/RamDisk/BlackBoxTest/RamDiskProtocolBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/NVMEPassThru/BlackBoxTest/NVMEPassThruBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/EraseBlock/BlackBoxTest/EraseBlockBBTest.inf
 
 #
 # Dependency files for UEFI/EFI Compliant Test
