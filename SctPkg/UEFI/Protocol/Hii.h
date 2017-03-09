@@ -41,7 +41,13 @@
   EFI, Inc. makes no claim of right.                            
                                                                 
   Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
-   
+  
+  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
+  This software contains information confidential and proprietary to
+  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
+  or transferred to other documents, or disclosed to third parties, or used
+  for any purpose other than that for which it was obtained without the prior
+  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -72,6 +78,13 @@ Revision History
 
 #define EFI_HII_FONT_PROTOCOL_GUID \
   { 0xe9ca4775, 0x8657, 0x47fc, { 0x97, 0xe7, 0x7e, 0xd6, 0x5a, 0x8, 0x43, 0x24 } }
+
+#define EFI_HII_IMAGE_EX_PROTOCOL_GUID \
+  { 0x1a1241e6, 0x8f19, 0x41a9, { 0xbc, 0xe, 0xe8, 0xef,0x39, 0xe0, 0x65, 0x46 } }
+
+#define EFI_HII_FONT_EX_PROTOCOL_GUID \
+  { 0x849e6875, 0xdb35, 0x4df8, { 0xb4, 0x1e, 0xc8, 0xf3, 0x37, 0x18, 0x7, 0x3f } }
+
 
 #include "HiiDef.h"
 //
@@ -136,6 +149,80 @@ struct _EFI_HII_FONT_PROTOCOL {
   EFI_HII_STRING_ID_TO_IMAGE        StringIdToImage;
   EFI_HII_GET_GLYPH                 GetGlyph;
   EFI_HII_GET_FONT_INFO             GetFontInfo;
+};
+
+//
+// The definition for HIIFontEx protocol
+//
+typedef struct _EFI_HII_FONT_EX_PROTOCOL EFI_HII_FONT_EX_PROTOCOL;;
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_STRING_TO_IMAGE_EX) (
+  IN CONST EFI_HII_FONT_EX_PROTOCOL *This,
+  IN EFI_HII_OUT_FLAGS              Flags,
+  IN CONST EFI_STRING               String,
+  IN CONST EFI_FONT_DISPLAY_INFO    *StringInfo,
+  IN OUT EFI_IMAGE_OUTPUT           **Blt,
+  IN UINTN                          BltX,
+  IN UINTN                          BltY,
+  OUT EFI_HII_ROW_INFO              **RowInfoArray OPTIONAL,
+  OUT UINTN                         *RowInfoArraySize OPTIONAL,
+  OUT UINTN                         *ColumnInfoArray OPTIONAL
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_STRING_ID_TO_IMAGE_EX) (
+  IN CONST EFI_HII_FONT_EX_PROTOCOL *This,
+  IN EFI_HII_OUT_FLAGS              Flags,
+  IN EFI_HII_HANDLE                 PackageList,
+  IN EFI_STRING_ID                  StringId,
+  IN CONST CHAR8                    *Language,
+  IN CONST EFI_FONT_DISPLAY_INFO    *StringInfo OPTIONAL,
+  IN OUT EFI_IMAGE_OUTPUT           **Blt,
+  IN UINTN                          BltX,
+  IN UINTN                          BltY,
+  OUT EFI_HII_ROW_INFO              **RowInfoArray OPTIONAL,
+  OUT UINTN                         *RowInfoArraySize OPTIONAL,
+  OUT UINTN                         *ColumnInfoArray OPTIONAL
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_GET_GLYPH_EX) (
+  IN CONST EFI_HII_FONT_EX_PROTOCOL *This,
+  IN CHAR16                         Char,
+  IN CONST EFI_FONT_DISPLAY_INFO    *StringInfo,
+  OUT EFI_IMAGE_OUTPUT              **Blt,
+  OUT UINTN                         *Baseline OPTIONAL
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_GET_FONT_INFO_EX) (
+  IN CONST EFI_HII_FONT_EX_PROTOCOL *This,
+  IN OUT EFI_FONT_HANDLE            *FontHandle,
+  IN CONST EFI_FONT_DISPLAY_INFO    *StringInfoIn,
+  OUT EFI_FONT_DISPLAY_INFO         **StringInfoOut,
+  IN CONST EFI_STRING               String OPTIONAL
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_GET_GLYPH_INFO) (
+  IN CONST EFI_HII_FONT_EX_PROTOCOL *This,
+  IN CHAR16                         Char,
+  IN CONST EFI_FONT_DISPLAY_INFO    *FontDisplayInfo,
+  OUT EFI_HII_GLYPH_INFO            *GlyphInfo
+);
+
+struct _EFI_HII_FONT_EX_PROTOCOL {
+  EFI_HII_STRING_TO_IMAGE_EX           StringToImageEx;
+  EFI_HII_STRING_ID_TO_IMAGE_EX        StringIdToImageEx;
+  EFI_HII_GET_GLYPH_EX                 GetGlyphEx;
+  EFI_HII_GET_FONT_INFO_EX             GetFontInfoEx;
+  EFI_HII_GET_GLYPH_INFO               GetGlyphInfo;
 };
 
 
@@ -268,6 +355,80 @@ struct _EFI_HII_IMAGE_PROTOCOL {
   EFI_HII_SET_IMAGE                  SetImage;
   EFI_HII_DRAW_IMAGE                 DrawImage;
   EFI_HII_DRAW_IMAGE_ID              DrawImageId;
+};
+
+//
+// The definition for HIIImageEx protocol
+//
+typedef struct _EFI_HII_IMAGE_EX_PROTOCOL EFI_HII_IMAGE_EX_PROTOCOL;;
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_NEW_IMAGE_EX) (
+  IN CONST EFI_HII_IMAGE_EX_PROTOCOL *This,
+  IN EFI_HII_HANDLE                  PackageList,
+  OUT EFI_IMAGE_ID                   *ImageId,
+  IN CONST EFI_IMAGE_INPUT           *Image
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_GET_IMAGE_EX) (
+  IN CONST EFI_HII_IMAGE_EX_PROTOCOL *This,
+  IN EFI_HII_HANDLE                  PackageList,
+  IN EFI_IMAGE_ID                    ImageId,
+  OUT EFI_IMAGE_INPUT                *Image
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_SET_IMAGE_EX) (
+  IN CONST EFI_HII_IMAGE_EX_PROTOCOL *This,
+  IN EFI_HII_HANDLE                  PackageList,
+  IN EFI_IMAGE_ID                    ImageId,
+  IN CONST EFI_IMAGE_INPUT           *Image
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_DRAW_IMAGE_EX) (
+  IN CONST EFI_HII_IMAGE_EX_PROTOCOL *This,
+  IN EFI_HII_DRAW_FLAGS              Flags,
+  IN CONST EFI_IMAGE_INPUT           *Image,
+  IN OUT EFI_IMAGE_OUTPUT            **Blt,
+  IN UINTN                           BltX,
+  IN UINTN                           BltY
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_DRAW_IMAGE_ID_EX) (
+  IN CONST EFI_HII_IMAGE_EX_PROTOCOL *This,
+  IN EFI_HII_DRAW_FLAGS              Flags,
+  IN EFI_HII_HANDLE                  PackageList,
+  IN EFI_IMAGE_ID                    ImageId,
+  IN OUT EFI_IMAGE_OUTPUT            **Blt,
+  IN UINTN                           BltX,
+  IN UINTN                           BltY
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_HII_GET_IMAGE_INFO)(
+  IN CONST  EFI_HII_IMAGE_EX_PROTOCOL       *This,
+  IN        EFI_HII_HANDLE                  PackageList,
+  IN        EFI_IMAGE_ID                    ImageId,
+  OUT       EFI_IMAGE_INPUT                 *Image
+);
+
+
+struct _EFI_HII_IMAGE_EX_PROTOCOL {
+  EFI_HII_NEW_IMAGE_EX                  NewImageEx;
+  EFI_HII_GET_IMAGE_EX                  GetImageEx;
+  EFI_HII_SET_IMAGE_EX                  SetImageEx;
+  EFI_HII_DRAW_IMAGE_EX                 DrawImageEx;
+  EFI_HII_DRAW_IMAGE_ID_EX              DrawImageIdEx;
+  EFI_HII_GET_IMAGE_INFO                GetImageInfo;
 };
 
 

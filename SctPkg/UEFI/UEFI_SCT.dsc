@@ -42,6 +42,12 @@
 #                                                             
 # Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
+#  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
+#  This software contains information confidential and proprietary to
+#  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
+#  or transferred to other documents, or disclosed to third parties, or used
+#  for any purpose other than that for which it was obtained without the prior
+#  written consent of Hewlett Packard Enterprise.
 #
 #/*++
 #
@@ -283,7 +289,9 @@ SctPkg/TestCase/UEFI/EFI/Protocol/ComponentName2/BlackBoxTest/ComponentName2BBTe
 SctPkg/TestCase/UEFI/EFI/Protocol/HIIDatabase/BlackBoxTest/HIIDatabaseBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/HIIString/BlackBoxTest/HIIStringBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/HIIImage/BlackBoxTest/HIIImageBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/HIIImageEx/BlackBoxTest/HIIImageExBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/HIIFont/BlackBoxTest/HIIFontBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/HIIFontEx/BlackBoxTest/HIIFontExBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/HIIConfigAccess/BlackBoxTest/HIIConfigAccessBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/HIIConfigRouting/BlackBoxTest/HIIConfigRoutingBBTest.inf
 
