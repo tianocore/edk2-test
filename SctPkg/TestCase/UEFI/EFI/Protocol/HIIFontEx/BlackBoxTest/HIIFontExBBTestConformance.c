@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 -2016, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -677,7 +669,7 @@ BBTestStringIdToImageExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid013,     //DSA modify it and replace it in the case spec and guidfile.txt
+                 gHIIFontExBBTestConformanceAssertionGuid007,
                  L"HII_FONT_EX_PROTOCOL.StringIdToImageEx - StringIdToImageEx() returns EFI_NOT_FOUND with PackageList not in Database.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -715,7 +707,7 @@ BBTestStringIdToImageExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid007,
+                 gHIIFontExBBTestConformanceAssertionGuid008,
                  L"HII_FONT_EX_PROTOCOL.StringIdToImageEx - StringIdToImageEx() returns EFI_NOT_FOUND with StringId not in PackageList.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -753,7 +745,7 @@ BBTestStringIdToImageExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid008,
+                 gHIIFontExBBTestConformanceAssertionGuid009,
                  L"HII_FONT_EX_PROTOCOL.StringIdToImageEx - StringIdToImageEx() returns EFI_INVALID_PARAMETER with invalid Flags combination.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -790,7 +782,7 @@ BBTestStringIdToImageExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid009,
+                 gHIIFontExBBTestConformanceAssertionGuid010,
                  L"HII_FONT_EX_PROTOCOL.StringIdToImageEx - StringIdToImageEx() returns EFI_INVALID_PARAMETER with invalid Flags combination.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -857,7 +849,7 @@ BBTestGetGlyphExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid010,
+                 gHIIFontExBBTestConformanceAssertionGuid012,
                  L"HII_FONT_EX_PROTOCOL.GetGlyphEx - GetGlyphEx() returns EFI_INVALID_PARAMETER with Blt being NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -897,7 +889,7 @@ BBTestGetGlyphExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid014,
+                 gHIIFontExBBTestConformanceAssertionGuid013,
                  L"HII_FONT_EX_PROTOCOL.GetGlyphEx - GetGlyphEx() returns EFI_INVALID_PARAMETER with *Blt being non NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -988,7 +980,7 @@ BBTestGetFontInfoExConformanceTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gHIIFontExBBTestConformanceAssertionGuid012,
+                   gHIIFontExBBTestConformanceAssertionGuid014,
                    L"HII_FONT_EX_PROTOCOL.GetFontInfoEx - GetFontInfoEx() returns EFI_INVALID_PARAMETER with invalid EFI_FONT_INFO_MASK Combination.",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -1054,7 +1046,7 @@ BBTestGetGlyphInfoConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid016,
+                 gHIIFontExBBTestConformanceAssertionGuid015,
                  L"HII_FONT_EX_PROTOCOL.GetGlyphInfo - GetGlyphInfo() returns EFI_INVALID_PARAMETER with GlyphInfo being NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1086,7 +1078,7 @@ BBTestGetGlyphInfoConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestConformanceAssertionGuid015,
+                 gHIIFontExBBTestConformanceAssertionGuid016,
                  L"HII_FONT_EX_PROTOCOL.GetGlyphInfo - GetGlyphInfo() returns EFI_INVALID_PARAMETER with FontDisplayInfo being NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,

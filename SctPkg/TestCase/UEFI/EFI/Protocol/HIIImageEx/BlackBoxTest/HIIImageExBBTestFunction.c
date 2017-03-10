@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -105,12 +97,6 @@ BBTestDrawImageExFunctionTestCheckpoint2 (
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
   );
 
-EFI_STATUS
-BBTestDrawImageExFunctionTestCheckpoint3 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_GRAPHICS_OUTPUT_PROTOCOL               *GraphicsOutput,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  );
 
 EFI_STATUS
 BBTestDrawImageIdExFunctionTestCheckpoint1 (
@@ -126,13 +112,6 @@ BBTestDrawImageIdExFunctionTestCheckpoint2 (
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
   );
 
-EFI_STATUS
-BBTestDrawImageIdExFunctionTestCheckpoint3 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
-  IN EFI_GRAPHICS_OUTPUT_PROTOCOL               *GraphicsOutput,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  );
 
 EFI_STATUS
 BBTestGetImageInfoFunctionTestCheckpoint1 (
@@ -314,8 +293,6 @@ BBTestDrawImageExFunctionTest (
   BBTestDrawImageExFunctionTestCheckpoint1 (StandardLib, HIIImageEx);
 
   BBTestDrawImageExFunctionTestCheckpoint2 (StandardLib, HIIImageEx);
-
-//  BBTestDrawImageExFunctionTestCheckpoint3 (StandardLib, GraphicsOutput, HIIImageEx);
   
   return EFI_SUCCESS;
 }
@@ -368,9 +345,7 @@ BBTestDrawImageIdExFunctionTest (
 
   BBTestDrawImageIdExFunctionTestCheckpoint2 (StandardLib, HIIDatabase, HIIImageEx);
 
-//  BBTestDrawImageIdExFunctionTestCheckpoint3 (StandardLib, HIIDatabase, GraphicsOutput, HIIImageEx);
-  
-  
+ 
   return EFI_SUCCESS;
 }
 
@@ -413,6 +388,7 @@ BBTestGetImageInfoFunctionTest (
   //Call check points
   //
   BBTestGetImageInfoFunctionTestCheckpoint1 (StandardLib, HIIDatabase, HIIImageEx);
+  
   
   return EFI_SUCCESS;
 }
@@ -998,110 +974,6 @@ BBTestDrawImageExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
-BBTestDrawImageExFunctionTestCheckpoint3 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_GRAPHICS_OUTPUT_PROTOCOL               *GraphicsOutput,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  )
-{
-
-  EFI_STATUS                     Status;
-  EFI_TEST_ASSERTION             AssertionType;
-  
-  EFI_HII_DRAW_FLAGS             Flag;
-  EFI_IMAGE_OUTPUT               *Blt;
-  UINTN                          BltX;
-  UINTN                          BltY;
-  EFI_IMAGE_INPUT                *Image;
-  EFI_GRAPHICS_OUTPUT_BLT_PIXEL  *Bitmap; 
-  UINT32                         HorizontalResolution;
-  UINT32                         VerticalResolution;
-  UINT32                         CurrentMode;
-  
-  
-  //
-  // Init the Flag and Blt
-  //
-  Flag = EFI_HII_DIRECT_TO_SCREEN;
-  BltX = 0;
-  BltY = 0;
-
-  if (GraphicsOutput != NULL) {
-    HorizontalResolution = GraphicsOutput->Mode->Info->HorizontalResolution;
-    VerticalResolution = GraphicsOutput->Mode->Info->VerticalResolution;
-  } else {
-    return EFI_UNSUPPORTED;
-  }
-
-  Blt = (EFI_IMAGE_OUTPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_OUTPUT));
-  if (Blt == NULL)
-    return  EFI_UNSUPPORTED;
-  
-  Blt->Width = (UINT16) (HorizontalResolution);
-  Blt->Height = (UINT16) (VerticalResolution);
-  Blt->Image.Screen = GraphicsOutput;
-
-  //
-  // Init the Image
-  //
-  Image = (EFI_IMAGE_INPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_INPUT));
-  if ( Image == NULL ){
-	gtBS->FreePool (Blt);
-  	return EFI_UNSUPPORTED;
-  }
-  Image->Flags = 0;
-  Image->Width = 50;
-  Image->Height = 60;
-  Bitmap = (EFI_GRAPHICS_OUTPUT_BLT_PIXEL *) SctAllocateZeroPool (Image->Width * Image->Height * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL));
-  if ( Bitmap == NULL ) {
-	gtBS->FreePool (Blt);
-    gtBS->FreePool (Image);
-	return EFI_UNSUPPORTED;
-  }
-  Image->Bitmap = Bitmap;
-
-  CurrentMode = GraphicsOutput->Mode->Mode;
-
-
-  //
-  // Call DrawImageEx with with valid parameter
-  //
-  Status = HIIImageEx->DrawImageEx(
-                       HIIImageEx,
-                       Flag,
-                       Image,
-                       &Blt,
-                       BltX,
-                       BltY
-                       );
-
-  Status = GraphicsOutput->SetMode (GraphicsOutput, CurrentMode);
-  
-  if ( EFI_SUCCESS != Status && EFI_OUT_OF_RESOURCES != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gHIIImageExBBTestFunctionAssertionGuid006,
-                 L"HII_IMAGE_EX_PROTOCOL.DrawImageEx - DrawImageEx() returns EFI_SUCCESS with valid parameter.",
-                 L"%a:%d: Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
-  
-  gtBS->FreePool (Blt);
-  gtBS->FreePool (Image->Bitmap);
-  gtBS->FreePool (Image);
-  
-  return EFI_SUCCESS;
-}
-
-
-EFI_STATUS
 BBTestDrawImageIdExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -1205,7 +1077,7 @@ BBTestDrawImageIdExFunctionTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestFunctionAssertionGuid007,
+                 gHIIImageExBBTestFunctionAssertionGuid006,
                  L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_SUCCESS with valid parameter.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1387,7 +1259,7 @@ BBTestDrawImageIdExFunctionTestCheckpoint2 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gHIIImageExBBTestFunctionAssertionGuid008,
+                   gHIIImageExBBTestFunctionAssertionGuid007,
                    L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_SUCCESS with valid parameter.",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -1412,155 +1284,6 @@ BBTestDrawImageIdExFunctionTestCheckpoint2 (
 
 }
 
-EFI_STATUS
-BBTestDrawImageIdExFunctionTestCheckpoint3 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
-  IN EFI_GRAPHICS_OUTPUT_PROTOCOL               *GraphicsOutput,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  )
-{
-  EFI_STATUS                     Status;
-  EFI_STATUS                     TempStatus;
-  EFI_TEST_ASSERTION             AssertionType;
-
-  EFI_HII_HANDLE                 Handle;
-  EFI_HII_PACKAGE_LIST_HEADER    *PackageList;    
-  EFI_HII_DRAW_FLAGS             Flag;
-  EFI_IMAGE_OUTPUT               *Blt;
-  UINTN                          BltX;
-  UINTN                          BltY;
-  EFI_IMAGE_INPUT                *Image;
-  EFI_IMAGE_ID                   ImageId;
-  EFI_GRAPHICS_OUTPUT_BLT_PIXEL  *Bitmap; 
-  UINT32                         HorizontalResolution;
-  UINT32                         VerticalResolution;
-  
-  
-  //
-  // Init the Flag and Blt
-  //
-  Flag = EFI_HII_DIRECT_TO_SCREEN;
-  BltX = 0;
-  BltY = 0;
-
-  if (GraphicsOutput != NULL) {
-    HorizontalResolution = GraphicsOutput->Mode->Info->HorizontalResolution;
-    VerticalResolution = GraphicsOutput->Mode->Info->VerticalResolution;
-  } else {
-    return EFI_UNSUPPORTED;
-  }
-
-  Blt = (EFI_IMAGE_OUTPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_OUTPUT));
-  if (Blt == NULL)
-    return  EFI_UNSUPPORTED;
-  
-  Blt->Width = (UINT16) (HorizontalResolution);
-  Blt->Height = (UINT16) (VerticalResolution);
-  Blt->Image.Screen = GraphicsOutput;
-
-
-  //
-  // Init the Image
-  //
-  Image = (EFI_IMAGE_INPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_INPUT));
-  if ( Image == NULL ){
-	gtBS->FreePool (Blt);
-  	return EFI_UNSUPPORTED;
-  }
-  Image->Flags = 0;
-  Image->Width = 50;
-  Image->Height = 60;
-  Bitmap = (EFI_GRAPHICS_OUTPUT_BLT_PIXEL *) SctAllocateZeroPool (Image->Width * Image->Height * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL));
-  if ( Bitmap == NULL ) {
-	gtBS->FreePool (Blt);
-    gtBS->FreePool (Image);
-	return EFI_UNSUPPORTED;
-  }
-  Image->Bitmap = Bitmap;
-
-  PackageList = (EFI_HII_PACKAGE_LIST_HEADER*) mPackageList1;
-  //
-  // Add the PackageList to HII database
-  //
-  Status = HIIDatabase->NewPackageList (
-                          HIIDatabase,
-                          PackageList,
-                          NULL,
-                          &Handle
-                          );
-  if ( EFI_ERROR(Status) ) {
-  	gtBS->FreePool (Blt);
-    gtBS->FreePool (Image->Bitmap);
-    gtBS->FreePool (Image);
-    return Status;
-  }
-
-  //
-  // Call NewImageEx to get the ImageId
-  //
-  Status = HIIImageEx->NewImageEx (
-                       HIIImageEx,
-                       Handle,
-                       &ImageId,
-                       Image
-                       );
-  if ( EFI_ERROR(Status) ) {
-  	gtBS->FreePool (Blt);
-    gtBS->FreePool (Image->Bitmap);
-    gtBS->FreePool (Image);
-    TempStatus = HIIDatabase->RemovePackageList (
-                                HIIDatabase,
-                                Handle
-                                );
-	if ( EFI_ERROR(TempStatus) ) {
-      return TempStatus;
-	}                                
-    return Status;
-  }
-
-  //
-  // Call DrawImageIdEx with with valid parameter
-  //
-  Status = HIIImageEx->DrawImageIdEx(
-                       HIIImageEx,
-                       Flag,
-                       Handle,
-                       ImageId,
-                       &Blt,
-                       BltX,
-                       BltY
-                       );
-  
-  if ( EFI_SUCCESS != Status && EFI_OUT_OF_RESOURCES != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gHIIImageExBBTestFunctionAssertionGuid009,
-                 L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_SUCCESS with valid parameter.",
-                 L"%a:%d: Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
-  gtBS->FreePool (Blt);
-  gtBS->FreePool (Image->Bitmap);
-  gtBS->FreePool (Image);
-
-  Status = HIIDatabase->RemovePackageList (
-                          HIIDatabase,
-                          Handle
-                          );
-  if ( EFI_ERROR(Status) ) {
-    return Status;
-  }  
-
-  return EFI_SUCCESS;
-}
 
 
 EFI_STATUS
@@ -1705,7 +1428,7 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestFunctionAssertionGuid010,
+                 gHIIImageExBBTestFunctionAssertionGuid008,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageInfo - GetImageInfo() returns EFI_SUCCESS with valid parameters.",
                  L"%a:%d: Status - %r",
                  __FILE__,

@@ -42,12 +42,7 @@
 @REM                                                             
 @REM Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 @REM
-@REM   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-@REM   This software contains information confidential and proprietary to
-@REM   Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-@REM   or transferred to other documents, or disclosed to third parties, or used
-@REM   for any purpose other than that for which it was obtained without the prior
-@REM   written consent of Hewlett Packard Enterprise.
+@REM (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 @REM
 @echo %DEBUG% OFF
 

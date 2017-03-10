@@ -43,6 +43,7 @@
 # Copyright (c) 2014 - 2017, Intel Corporation. All rights reserved.
 # Copyright (c) 2011, 2012 ARM Ltd All rights reserved. 
 #
+# (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 #
 #
 # 
@@ -221,7 +222,9 @@ then
     cp $ProcessorType/HIIDatabaseBBTest.efi                    $Framework/Test/ > NUL
     cp $ProcessorType/HIIStringBBTest.efi                      $Framework/Test/ > NUL
     cp $ProcessorType/HIIFontBBTest.efi                        $Framework/Test/ > NUL
+    cp $ProcessorType/HIIFontExBBTest.efi                      $Framework/Test/ > NUL
     cp $ProcessorType/HIIImageBBTest.efi                       $Framework/Test/ > NUL
+    cp $ProcessorType/HIIImageExBBTest.efi                     $Framework/Test/ > NUL
 
     cp $ProcessorType/AbsolutePointerBBTest.efi                $Framework/Test/ > NUL
 #   cp $ProcessorType/DriverSupportedEfiVersionBBTest.efi      $Framework/Test/ > NUL

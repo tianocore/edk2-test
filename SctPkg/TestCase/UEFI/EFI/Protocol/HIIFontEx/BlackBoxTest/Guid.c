@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -82,8 +74,6 @@ EFI_GUID gHIIFontExBBTestConformanceAssertionGuid008 = EFI_TEST_HIIFONTEXBBTESTC
 EFI_GUID gHIIFontExBBTestConformanceAssertionGuid009 = EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_009_GUID;
 
 EFI_GUID gHIIFontExBBTestConformanceAssertionGuid010 = EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_010_GUID;
-
-EFI_GUID gHIIFontExBBTestConformanceAssertionGuid011 = EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_011_GUID;
 
 EFI_GUID gHIIFontExBBTestConformanceAssertionGuid012 = EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_012_GUID;
 

@@ -43,11 +43,6 @@
   Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
   
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -546,7 +541,8 @@ struct _EFI_HII_DATABASE_PROTOCOL {
 
 extern EFI_GUID gBlackBoxEfiHIIDatabaseProtocolGuid;
 extern EFI_GUID gBlackBoxEfiHIIStringProtocolGuid;
-
 extern EFI_GUID gBlackBoxEfiHIIPackageListProtocolGuid;
+extern EFI_GUID gBlackBoxEfiHIIImageExProtocolGuid;
+extern EFI_GUID gBlackBoxEfiHIIFontExProtocolGuid;
 
 #endif

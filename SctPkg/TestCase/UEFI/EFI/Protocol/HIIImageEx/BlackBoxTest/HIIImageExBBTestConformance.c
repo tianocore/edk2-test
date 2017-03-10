@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -87,23 +79,9 @@ BBTestGetImageExConformanceTestCheckpoint2 (
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
   );
-  
+
 EFI_STATUS
 BBTestGetImageExConformanceTestCheckpoint3 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  );
-
-EFI_STATUS
-BBTestGetImageExConformanceTestCheckpoint4 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  );
-
-EFI_STATUS
-BBTestGetImageExConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -183,13 +161,6 @@ BBTestDrawImageIdExConformanceTestCheckpoint3(
 
 EFI_STATUS
 BBTestDrawImageIdExConformanceTestCheckpoint4(
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_DATABASE_PROTOCOL                  *HIIDataBase,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  );
-
-EFI_STATUS
-BBTestDrawImageIdExConformanceTestCheckpoint5(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDataBase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -289,13 +260,9 @@ BBTestGetImageExConformanceTest (
   //
   BBTestGetImageExConformanceTestCheckpoint1 (StandardLib, HIIDatabase, HIIImageEx);
   
-//  BBTestGetImageExConformanceTestCheckpoint2 (StandardLib, HIIDatabase, HIIImageEx);
-  
+  BBTestGetImageExConformanceTestCheckpoint2 (StandardLib, HIIDatabase, HIIImageEx);
+
   BBTestGetImageExConformanceTestCheckpoint3 (StandardLib, HIIDatabase, HIIImageEx);
-
-//  BBTestGetImageExConformanceTestCheckpoint4 (StandardLib, HIIDatabase, HIIImageEx);
-
-  BBTestGetImageExConformanceTestCheckpoint5 (StandardLib, HIIDatabase, HIIImageEx);
   
   return EFI_SUCCESS;
 }
@@ -440,11 +407,9 @@ BBTestDrawImageIdExConformanceTest (
 
   BBTestDrawImageIdExConformanceTestCheckpoint2 (StandardLib, HIIDatabase, HIIImageEx);
 
-//  BBTestDrawImageIdExConformanceTestCheckpoint3 (StandardLib, HIIDatabase, HIIImageEx);
+  BBTestDrawImageIdExConformanceTestCheckpoint3 (StandardLib, HIIDatabase, HIIImageEx);
 
   BBTestDrawImageIdExConformanceTestCheckpoint4 (StandardLib, HIIDatabase, HIIImageEx);
-
-  BBTestDrawImageIdExConformanceTestCheckpoint5 (StandardLib, HIIDatabase, HIIImageEx);
   return EFI_SUCCESS;
 }
 
@@ -488,10 +453,6 @@ BBTestGetImageInfoConformanceTest (
   //
   BBTestGetImageInfoConformanceTestCheckpoint1 (StandardLib, HIIDatabase, HIIImageEx);
   
-/*   BBTestGetImageInfoConformanceTestCheckpoint2 (StandardLib, HIIDatabase, HIIImageEx);
-
-  BBTestGetImageInfoConformanceTestCheckpoint3 (StandardLib, HIIDatabase, HIIImageEx);
-   */
   return EFI_SUCCESS;
 }
 
@@ -784,13 +745,9 @@ BBTestGetImageExConformanceTestCheckpoint1 (
 }
 
 
-//
-// Remove Checkpoint2 to be compatible with Update7a
-//
-
 
 EFI_STATUS
-BBTestGetImageExConformanceTestCheckpoint3 (
+BBTestGetImageExConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -890,7 +847,7 @@ BBTestGetImageExConformanceTestCheckpoint3 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid006,
+                 gHIIImageExBBTestConformanceAssertionGuid005,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageEx - GetImageEx() returns EFI_INVALID_PARAMETER with Image been NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -915,12 +872,9 @@ BBTestGetImageExConformanceTestCheckpoint3 (
   return EFI_SUCCESS;  
 }
 
-//
-// Remove Checkpoint4 to be compatible with Update7a
-//
 
 EFI_STATUS
-BBTestGetImageExConformanceTestCheckpoint5 (
+BBTestGetImageExConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -1022,7 +976,7 @@ BBTestGetImageExConformanceTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid024,
+                 gHIIImageExBBTestConformanceAssertionGuid006,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageEx - GetImageEx() returns EFI_NOT_FOUND with PackageList is not in Database.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1048,7 +1002,7 @@ BBTestGetImageExConformanceTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid008,
+                 gHIIImageExBBTestConformanceAssertionGuid007,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageEx - GetImageEx() returns EFI_NOT_FOUND with PackageList been NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1214,7 +1168,7 @@ BBTestSetImageExConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid009,
+                 gHIIImageExBBTestConformanceAssertionGuid008,
                  L"HII_IMAGE_EX_PROTOCOL.SetImageEx - SetImageEx() returns EFI_NOT_FOUND with ImageId been invalid.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1343,7 +1297,7 @@ BBTestSetImageExConformanceTestCheckpoint2 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid010,
+                 gHIIImageExBBTestConformanceAssertionGuid009,
                  L"HII_IMAGE_EX_PROTOCOL.SetImageEx - SetImageEx() returns EFI_INVALID_PARAMETER with Image been NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -1507,7 +1461,7 @@ BBTestSetImageExConformanceTestCheckpoint3 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid025,
+                 gHIIImageExBBTestConformanceAssertionGuid010,
                  L"HII_IMAGE_EX_PROTOCOL.SetImageEx - SetImageEx() returns EFI_NOT_FOUND with PackageList is not in Database.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2099,7 +2053,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint1(
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid026,
+                 gHIIImageExBBTestConformanceAssertionGuid017,
                  L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_NOT_FOUND with PackageList is not in Database.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2128,7 +2082,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint1(
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid017,
+                 gHIIImageExBBTestConformanceAssertionGuid018,
                  L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_NOT_FOUND with PackageList been NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2157,7 +2111,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint1(
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid018,
+                 gHIIImageExBBTestConformanceAssertionGuid019,
                  L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_NOT_FOUND with invalid ImageId.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2186,7 +2140,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint1(
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid019,
+                 gHIIImageExBBTestConformanceAssertionGuid020,
                  L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_NOT_FOUND with invalid PackageList.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2325,8 +2279,8 @@ BBTestDrawImageIdExConformanceTestCheckpoint2(
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid020,
-                 L"HII_IMAGE_EX_PROTOCOL.DrawImageEx - DrawImageEx() returns EFI_INVALID_PARAMETER with EFI_HII_DRAW_FLAG_TRANSPARENT and Blt been NULL.",
+                 gHIIImageExBBTestConformanceAssertionGuid021,
+                 L"HII_IMAGE_EX_PROTOCOL.DrawImageIdEx - DrawImageIdEx() returns EFI_INVALID_PARAMETER with EFI_HII_DRAW_FLAG_TRANSPARENT and Blt been NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -2346,185 +2300,11 @@ BBTestDrawImageIdExConformanceTestCheckpoint2(
 
   return EFI_SUCCESS;
 }
+
 
 
 EFI_STATUS
 BBTestDrawImageIdExConformanceTestCheckpoint3(
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
-  IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
-  )
-{
-  EFI_STATUS                     Status;
-  EFI_STATUS                     TempStatus;
-  EFI_TEST_ASSERTION             AssertionType;
-
-  EFI_HII_HANDLE                 Handle;
-  EFI_HII_PACKAGE_LIST_HEADER    *PackageList;  
-  EFI_HII_DRAW_FLAGS             Flag;
-  EFI_IMAGE_OUTPUT               *Blt;
-  UINTN                          BltX;
-  UINTN                          BltY;
-  EFI_IMAGE_INPUT                *Image;
-  EFI_IMAGE_ID                   ImageId;
-  EFI_GRAPHICS_OUTPUT_BLT_PIXEL  *Bitmap; 
-
-  BltX = 0;
-  BltY = 0;
-  Flag = EFI_HII_DIRECT_TO_SCREEN;
-  
-  PackageList = (EFI_HII_PACKAGE_LIST_HEADER*) mPackageList1;
-  //
-  // Add the PackageList to HII database
-  //
-  Status = HIIDatabase->NewPackageList (
-                          HIIDatabase,
-                          PackageList,
-                          NULL,
-                          &Handle
-                          );
-  if ( EFI_ERROR(Status) ) {
-    return Status;
-  }
-
-  //
-  // Init Blt
-  //
-  Blt = (EFI_IMAGE_OUTPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_OUTPUT));
-  if (Blt == NULL){
-  	Status = HIIDatabase->RemovePackageList (
-                            HIIDatabase,
-                            Handle
-                            );
-    if ( EFI_ERROR(Status) ) {
-      return Status;
-    }             
-    return  EFI_UNSUPPORTED;
-  }
-
-  Blt->Width = 50;
-  Blt->Height = 40;
-  Blt->Image.Bitmap = (EFI_GRAPHICS_OUTPUT_BLT_PIXEL *)SctAllocateZeroPool (Blt->Width * Blt->Height * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL));
-  if (Blt->Image.Bitmap == NULL){
-  	gtBS->FreePool (Blt);
-	Status = HIIDatabase->RemovePackageList (
-                            HIIDatabase,
-                            Handle
-                            );
-    if ( EFI_ERROR(Status) ) {
-      return Status;
-    }  
-    return  EFI_UNSUPPORTED;
-  }
-
-  
-  //
-  // Init the Image
-  //
-  Image = (EFI_IMAGE_INPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_INPUT));
-  if ( Image == NULL ) {
-  	gtBS->FreePool (Blt->Image.Bitmap);
-    gtBS->FreePool (Blt);
-	Status = HIIDatabase->RemovePackageList (
-                            HIIDatabase,
-                            Handle
-                            );
-    if ( EFI_ERROR(Status) ) {
-      return Status;
-    }
-    return EFI_UNSUPPORTED;
-  }
-  Image->Flags = 0;
-  Image->Width = 50;
-  Image->Height = 60;
-  Bitmap = (EFI_GRAPHICS_OUTPUT_BLT_PIXEL *) SctAllocateZeroPool (Image->Width * Image->Height * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL));
-  if ( Bitmap == NULL ) {
-  	gtBS->FreePool (Blt->Image.Bitmap);
-    gtBS->FreePool (Blt);  	
-    gtBS->FreePool (Image);
-	Status = HIIDatabase->RemovePackageList (
-                            HIIDatabase,
-                            Handle
-                            );
-    if ( EFI_ERROR(Status) ) {
-      return Status;
-    }
-	return EFI_UNSUPPORTED;
-  }
-  Image->Bitmap = Bitmap;
-
-  //
-  // Call NewImageEx to get the ImageId
-  //
-  Status = HIIImageEx->NewImageEx (
-                       HIIImageEx,
-                       Handle,
-                       &ImageId,
-                       Image
-                       );
-  if ( EFI_ERROR(Status) ) {
-  	gtBS->FreePool (Blt->Image.Bitmap);
-    gtBS->FreePool (Blt);
-    gtBS->FreePool (Image->Bitmap);
-    gtBS->FreePool (Image);
-    TempStatus = HIIDatabase->RemovePackageList (
-                                HIIDatabase,
-                                Handle
-                                );
-	if ( EFI_ERROR(TempStatus) ) {
-      return TempStatus;
-	}                                
-    return Status;
-  }
-
-  //
-  // Call DrawImageIdEx with EFI_HII_DIRECT_TO_SCREEN and no screen
-  //
-  Status = HIIImageEx->DrawImageIdEx (
-                       HIIImageEx,
-                       Flag,
-                       Handle,
-                       ImageId,
-                       &Blt,
-                       BltX,
-                       BltY
-                       );
-  
-  if ( EFI_INVALID_PARAMETER != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid021,
-                 L"HII_IMAGE_EX_PROTOCOL.DrawImageEx - DrawImageEx() returns EFI_INVALID_PARAMETER with EFI_HII_DIRECT_TO_SCREEN and no screen.",
-                 L"%a:%d: Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
-
-  gtBS->FreePool (Blt->Image.Bitmap);
-  gtBS->FreePool (Blt);
-  gtBS->FreePool (Bitmap);
-  gtBS->FreePool (Image);
-
-  Status = HIIDatabase->RemovePackageList (
-                          HIIDatabase,
-                          Handle
-                          );
-  if ( EFI_ERROR(Status) ) {
-    return Status;
-  }
-
-  return EFI_SUCCESS;
-}
-
-
-EFI_STATUS
-BBTestDrawImageIdExConformanceTestCheckpoint4(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -2661,7 +2441,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint4(
 }
 
 EFI_STATUS
-BBTestDrawImageIdExConformanceTestCheckpoint5(
+BBTestDrawImageIdExConformanceTestCheckpoint4(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -2940,7 +2720,7 @@ BBTestGetImageInfoConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid027,
+                 gHIIImageExBBTestConformanceAssertionGuid024,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageInfo - GetImageInfo() returns EFI_NOT_FOUND with ImageId been invalid.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2966,7 +2746,7 @@ BBTestGetImageInfoConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid028,
+                 gHIIImageExBBTestConformanceAssertionGuid025,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageInfo - GetImageInfo() returns EFI_INVALID_PARAMETER with Image been NULL.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -2992,7 +2772,7 @@ BBTestGetImageInfoConformanceTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIImageExBBTestConformanceAssertionGuid029,
+                 gHIIImageExBBTestConformanceAssertionGuid026,
                  L"HII_IMAGE_EX_PROTOCOL.GetImageInfo - GetImageInfo() returns EFI_INVALID_PARAMETER with ImageId been 0.",
                  L"%a:%d: Status - %r",
                  __FILE__,

@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -60,7 +52,7 @@
    GUIDs auto-generated for EFI test assertion.
 
 --*/
-//Guide is updated by Anoop
+
 #define EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_001_GUID \
 { 0xb604ba95, 0xf054, 0x49fd, { 0xba, 0xd1, 0xd4, 0x5e, 0xd4, 0x72, 0x56, 0x74 } }
 
@@ -191,21 +183,6 @@ extern EFI_GUID gHIIImageExBBTestConformanceAssertionGuid025;
 
 extern EFI_GUID gHIIImageExBBTestConformanceAssertionGuid026;
 
-#define EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_027_GUID \
-{ 0x9f944a67, 0x1f45, 0x4213, { 0xaf, 0x65, 0x2a, 0x47, 0xff, 0x0, 0xf4, 0x75 } }
-
-extern EFI_GUID gHIIImageExBBTestConformanceAssertionGuid027;
-
-#define EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_028_GUID \
-{ 0x8c74014f, 0xb0c5, 0x4d1c, { 0xa1, 0xec, 0xfd, 0x8f, 0x2e, 0x48, 0x64, 0x51 } }
-
-extern EFI_GUID gHIIImageExBBTestConformanceAssertionGuid028;
-
-#define EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_029_GUID \
-{ 0x16cbb646, 0x5cee, 0x4b70, { 0xa9, 0x5a, 0x19, 0x55, 0xf, 0x37, 0x28, 0xc } }
-
-extern EFI_GUID gHIIImageExBBTestConformanceAssertionGuid029;
-
 
 
 #define EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_001_GUID \
@@ -248,12 +225,3 @@ extern EFI_GUID gHIIImageExBBTestFunctionAssertionGuid007;
 
 extern EFI_GUID gHIIImageExBBTestFunctionAssertionGuid008;
 
-#define EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_009_GUID \
-{ 0xe774517d, 0x54, 0x4bfd, { 0xa9, 0x32, 0xab, 0xe4, 0xf0, 0xc3, 0x98, 0x6c } }
-
-extern EFI_GUID gHIIImageExBBTestFunctionAssertionGuid009;
-
-#define EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_010_GUID \
-{ 0xca2cb004, 0x5322, 0x46ce, { 0x82, 0x23, 0x75, 0x39, 0x57, 0xd0, 0x99, 0xf9 } }
-
-extern EFI_GUID gHIIImageExBBTestFunctionAssertionGuid010;

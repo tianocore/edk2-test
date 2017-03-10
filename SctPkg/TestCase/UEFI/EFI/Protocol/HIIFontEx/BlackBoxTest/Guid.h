@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
  Module Name:
@@ -109,11 +101,6 @@ extern EFI_GUID gHIIFontExBBTestConformanceAssertionGuid009;
 { 0x16b7317e, 0x1196, 0x4323, { 0x9d, 0xeb, 0xe8, 0xc7, 0x44, 0x32, 0x7e, 0x20 } }
 
 extern EFI_GUID gHIIFontExBBTestConformanceAssertionGuid010;
-
-#define EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_011_GUID \
-{ 0xfec2edb4, 0xed05, 0x4692, { 0x9b, 0xb0, 0x95, 0xaf, 0x6f, 0x87, 0x2, 0x68 } }
-
-extern EFI_GUID gHIIFontExBBTestConformanceAssertionGuid011;
 
 #define EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_012_GUID \
 { 0x4e1b65f1, 0xa0c1, 0x4f13, { 0xb6, 0xfb, 0x2a, 0xdc, 0xaa, 0x21, 0x8d, 0x89 } }

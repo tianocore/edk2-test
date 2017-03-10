@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
  Module Name:
@@ -114,12 +106,6 @@ EFI_GUID gHIIImageExBBTestConformanceAssertionGuid025 = EFI_TEST_HIIIMAGEEXBBTES
 
 EFI_GUID gHIIImageExBBTestConformanceAssertionGuid026 = EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_026_GUID;
 
-EFI_GUID gHIIImageExBBTestConformanceAssertionGuid027 = EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_027_GUID;
-
-EFI_GUID gHIIImageExBBTestConformanceAssertionGuid028 = EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_028_GUID;
-
-EFI_GUID gHIIImageExBBTestConformanceAssertionGuid029 = EFI_TEST_HIIIMAGEEXBBTESTCONFORMANCE_ASSERTION_029_GUID;
-
 
 EFI_GUID gHIIImageExBBTestFunctionAssertionGuid001 = EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_001_GUID;
 
@@ -137,6 +123,3 @@ EFI_GUID gHIIImageExBBTestFunctionAssertionGuid007 = EFI_TEST_HIIIMAGEEXBBTESTFU
 
 EFI_GUID gHIIImageExBBTestFunctionAssertionGuid008 = EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_008_GUID;
 
-EFI_GUID gHIIImageExBBTestFunctionAssertionGuid009 = EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_009_GUID;
-
-EFI_GUID gHIIImageExBBTestFunctionAssertionGuid010 = EFI_TEST_HIIIMAGEEXBBTESTFUNCTION_ASSERTION_010_GUID;

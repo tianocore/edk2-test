@@ -35,19 +35,11 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
-  matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
-                                                                
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
-   
+  Copyright 2017 Unified EFI, Inc. All Rights Reserved, subject 
+  to all existing rights in all matters included within this 
+  Test Suite, to which United EFI, Inc. makes no claim of right.
+  
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
-  This software contains information confidential and proprietary to
-  Hewlett Packard Enterprise. It shall not be reproduced in whole or in part,
-  or transferred to other documents, or disclosed to third parties, or used
-  for any purpose other than that for which it was obtained without the prior
-  written consent of Hewlett Packard Enterprise.
 --*/
 /*++
 
@@ -775,7 +767,7 @@ BBTestStringToImageExFunctionTestCheckpoint3 (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gHIIFontExBBTestFunctionAssertionGuid008,
+                   gHIIFontExBBTestFunctionAssertionGuid003,
                    L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx() returns EFI_SUCCESS with valid parameters.",
                    L"%a:%d: ",
                    __FILE__,
@@ -1005,7 +997,7 @@ BBTestStringToImageExFunctionTestCheckpoint4 (
   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gHIIFontExBBTestFunctionAssertionGuid023,
+                   gHIIFontExBBTestFunctionAssertionGuid004,
                    L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx() returns EFI_SUCCESS with valid parameters.",
                    L"%a:%d: ",
                    __FILE__,
@@ -1186,7 +1178,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid009,
+                 gHIIFontExBBTestFunctionAssertionGuid005,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx() EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
                  __FILE__,
@@ -1270,7 +1262,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid010,
+                 gHIIFontExBBTestFunctionAssertionGuid006,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_OUT_FLAG_CLIP | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -1352,7 +1344,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid011,
+                 gHIIFontExBBTestFunctionAssertionGuid007,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"   \
                  L"EFI_HII_OUT_FLAG_CLIP | EFI_HII_OUT_FLAG_CLIP_CLEAN_X | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -1433,7 +1425,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid012,
+                 gHIIFontExBBTestFunctionAssertionGuid008,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"   \
                  L"EFI_HII_OUT_FLAG_CLIP | EFI_HII_OUT_FLAG_CLIP_CLEAN_Y | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -1521,7 +1513,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid013,
+                 gHIIFontExBBTestFunctionAssertionGuid009,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"   \
                  L"EFI_HII_IGNORE_IF_NO_GLYPH | EFI_HII_OUT_FLAG_WRAP | EFI_HII_DIRECT_TO_SCREEN"   \
                  L"and String with line break opportunity returns EFI_SUCCESS.",
@@ -1608,7 +1600,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid014,
+                 gHIIFontExBBTestFunctionAssertionGuid010,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"   \
                  L"EFI_HII_OUT_FLAG_WRAP | EFI_HII_DIRECT_TO_SCREEN and String without line break opportunity "    \
                  L"returns EFI_SUCCESS.",
@@ -1700,7 +1692,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid015,
+                 gHIIFontExBBTestFunctionAssertionGuid011,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"   \
                  L"EFI_HII_IGNORE_LINE_BREAK | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -1960,7 +1952,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid016,
+                 gHIIFontExBBTestFunctionAssertionGuid012,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx() EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
                  __FILE__,
@@ -2045,7 +2037,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid017,
+                 gHIIFontExBBTestFunctionAssertionGuid013,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx() EFI_HII_OUT_FLAG_CLIP returns EFI_SUCCESS.",
                  L"%a:%d: ",
                  __FILE__,
@@ -2126,7 +2118,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid018,
+                 gHIIFontExBBTestFunctionAssertionGuid014,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_OUT_FLAG_CLIP | EFI_HII_OUT_FLAG_CLIP_CLEAN_X | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -2206,7 +2198,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid019,
+                 gHIIFontExBBTestFunctionAssertionGuid015,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_OUT_FLAG_CLIP | EFI_HII_OUT_FLAG_CLIP_CLEAN_Y | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -2293,7 +2285,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid020,
+                 gHIIFontExBBTestFunctionAssertionGuid016,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_IGNORE_IF_NO_GLYPH | EFI_HII_OUT_FLAG_WRAP | EFI_HII_DIRECT_TO_SCREEN"   \
                  L"and String with line break opportunity returns EFI_SUCCESS.",
@@ -2380,7 +2372,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid021,
+                 gHIIFontExBBTestFunctionAssertionGuid017,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_OUT_FLAG_WRAP | EFI_HII_DIRECT_TO_SCREEN and String without line break opportunity "    \
                  L"returns EFI_SUCCESS.",
@@ -2472,7 +2464,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid022,
+                 gHIIFontExBBTestFunctionAssertionGuid018,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_IGNORE_LINE_BREAK | EFI_HII_DIRECT_TO_SCREEN returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -2600,7 +2592,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid024,
+                 gHIIFontExBBTestFunctionAssertionGuid019,
                  L"HII_FONT_EX_PROTOCOL.StringToImageEx - StringToImageEx()"    \
                  L"EFI_HII_OUT_FLAG_TRANSPARENT returns EFI_SUCCESS.",
                  L"%a:%d: ",
@@ -2803,7 +2795,7 @@ BBTestStringIdToImageExFunctionTestCheckpoint1 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gHIIFontExBBTestFunctionAssertionGuid003,
+                   gHIIFontExBBTestFunctionAssertionGuid020,
                    L"HII_FONT_EX_PROTOCOL.StringIdToImageEx - StringIdToImageEx() returns EFI_SUCCESS with valid parameters.",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -2958,7 +2950,7 @@ BBTestStringIdToImageExFunctionTestCheckpoint2 (
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
-                   gHIIFontExBBTestFunctionAssertionGuid004,
+                   gHIIFontExBBTestFunctionAssertionGuid021,
                    L"HII_FONT_EX_PROTOCOL.StringIdToImageEx - StringIdToImageEx() returns EFI_SUCCESS with valid parameters.",
                    L"%a:%d: Status - %r",
                    __FILE__,
@@ -3022,7 +3014,7 @@ BBTestGetGlyphExFunctionTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid005,
+                 gHIIFontExBBTestFunctionAssertionGuid022,
                  L"HII_FONT_EX_PROTOCOL.GetGlyphEx - GetGlyphEx() returns EFI_SUCCESS with valid parameters.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -3100,7 +3092,7 @@ BBTestGetFontInfoExFunctionTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid006,
+                 gHIIFontExBBTestFunctionAssertionGuid023,
                  L"HII_FONT_EX_PROTOCOL.GetFontInfoEx - GetFontInfoEx() returns EFI_SUCCESS with valid parameters.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -3162,7 +3154,7 @@ BBTestGetFontInfoExFunctionTestCheckpoint2 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIFontExBBTestFunctionAssertionGuid007,
+                 gHIIFontExBBTestFunctionAssertionGuid024,
                  L"HII_FONT_EX_PROTOCOL.GetFontInfoEx - GetFontInfoEx() returns EFI_SUCCESS with valid parameters.",
                  L"%a:%d: Status - %r",
                  __FILE__,
