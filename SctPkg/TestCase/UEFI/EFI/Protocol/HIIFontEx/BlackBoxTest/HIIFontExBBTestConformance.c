@@ -1020,7 +1020,7 @@ BBTestGetGlyphInfoConformanceTestCheckpoint1 (
     return  EFI_UNSUPPORTED;
   }
   
-  FontDisplayInfo->FontInfo.FontStyle = EFI_FONT_INFO_SYS_FONT;
+  FontDisplayInfo->FontInfo.FontStyle = EFI_HII_FONT_STYLE_NORMAL;
   FontDisplayInfo->FontInfo.FontSize = 20;
   FontDisplayInfo->ForegroundColor.Blue= 0;
   FontDisplayInfo->ForegroundColor.Green = 0;

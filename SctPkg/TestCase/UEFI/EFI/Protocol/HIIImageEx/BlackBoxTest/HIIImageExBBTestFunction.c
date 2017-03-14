@@ -1301,10 +1301,8 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
   EFI_HII_PACKAGE_LIST_HEADER    *PackageList; 
   EFI_IMAGE_ID                   ImageId;
   EFI_IMAGE_INPUT                *Image1;
-  EFI_IMAGE_INPUT                *Image2;
-  EFI_IMAGE_OUTPUT               Image3;
+  EFI_IMAGE_OUTPUT               Image2;
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL  *Bitmap1; 
-  EFI_GRAPHICS_OUTPUT_BLT_PIXEL  *Bitmap2;
 
   PackageList = (EFI_HII_PACKAGE_LIST_HEADER*) mPackageList1;
   //
@@ -1331,8 +1329,8 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
                             );
     if ( EFI_ERROR(Status) ) {
       return Status;
-    }  	  	
-  	return EFI_UNSUPPORTED;
+    }  
+    return EFI_UNSUPPORTED;
   }
   Image1->Flags = 0;
   Image1->Width = 50;
@@ -1346,8 +1344,8 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
                             );
     if ( EFI_ERROR(Status) ) {
       return Status;
-    }  		
-	return EFI_UNSUPPORTED;
+    }  
+  return EFI_UNSUPPORTED;
   }
   Image1->Bitmap = Bitmap1;
   
@@ -1361,55 +1359,19 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
                        Image1
                        );
   if ( EFI_ERROR(Status) ) {
-  	gtBS->FreePool (Bitmap1);
-	gtBS->FreePool (Image1);
+    gtBS->FreePool (Bitmap1);
+    gtBS->FreePool (Image1);
     TempStatus = HIIDatabase->RemovePackageList (
                                 HIIDatabase,
                                 Handle
                                 );
-	if ( EFI_ERROR(TempStatus) ) {
-		return TempStatus;
-	}
+    if ( EFI_ERROR(TempStatus) ) {
+      return TempStatus;
+    }
     return Status;
   }
   
-  //
-  // Init the Image2
-  //
-  Image2 = (EFI_IMAGE_INPUT *) SctAllocateZeroPool (sizeof(EFI_IMAGE_INPUT));
-  if ( Image2 == NULL ) {
-  	gtBS->FreePool (Bitmap1);
-	gtBS->FreePool (Image1);
-	Status = HIIDatabase->RemovePackageList (
-                            HIIDatabase,
-                            Handle
-                            ); 
-    if ( EFI_ERROR (Status) ) {
-      return Status;
-    }
-  	return EFI_UNSUPPORTED;
-  }
 
-  Image2->Flags = 0;
-  Image2->Width = 30;
-  Image2->Height = 40;
-  Bitmap2= (EFI_GRAPHICS_OUTPUT_BLT_PIXEL *) SctAllocateZeroPool (Image2->Width * Image2->Height * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL));
-  if ( Bitmap2 == NULL ) {
-  	gtBS->FreePool (Bitmap1);
-	gtBS->FreePool (Image1);
-    gtBS->FreePool (Image2);
-    Status = HIIDatabase->RemovePackageList (
-                            HIIDatabase,
-                            Handle
-                            );
-    if ( EFI_ERROR (Status) ) {
-      return Status;
-    }
-	return EFI_UNSUPPORTED;
-  }
-  Image2->Bitmap = Bitmap2;
-
-  
   //
   // Call GetImageInfo with valid parameters
   //
@@ -1417,10 +1379,14 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
                        HIIImageEx,
                        Handle,
                        ImageId,
-                       &Image3
+                       &Image2
                        );
   
-  if ( EFI_SUCCESS != Status ) {
+  if ( ( EFI_SUCCESS         != Status )         ||
+       ( Image2.Width        != Image1->Width )  ||
+       ( Image2.Height       != Image1->Height ) ||
+       ( Image2.Image.Bitmap != NULL ) )
+  {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1441,8 +1407,6 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
   //
   gtBS->FreePool (Bitmap1);
   gtBS->FreePool (Image1);
-  gtBS->FreePool (Bitmap2);
-  gtBS->FreePool (Image2);
   
   Status = HIIDatabase->RemovePackageList (
                           HIIDatabase,
