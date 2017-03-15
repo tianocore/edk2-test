@@ -51,7 +51,7 @@
    GUIDs auto-generated for EFI test assertion.
 
 --*/
-//Guide is updated by Anoop.
+
 #define EFI_TEST_HIIFONTEXBBTESTCONFORMANCE_ASSERTION_001_GUID \
 { 0x81b18c28, 0x7d09, 0x4794, { 0xab, 0x4e, 0x92, 0x9b, 0xb7, 0x2f, 0x19, 0x67 } }
 
