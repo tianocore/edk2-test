@@ -42,6 +42,7 @@
 @REM                                                             
 @REM Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 @REM
+@REM (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 @REM
 @echo %DEBUG% OFF
 
@@ -185,7 +186,9 @@ copy %ProcessorType%\DriverDiagnostics2BBTest.efi             %Framework%\Test\ 
 copy %ProcessorType%\HIIDatabaseBBTest.efi                    %Framework%\Test\ > NUL
 copy %ProcessorType%\HIIStringBBTest.efi                      %Framework%\Test\ > NUL
 copy %ProcessorType%\HIIFontBBTest.efi                        %Framework%\Test\ > NUL
+copy %ProcessorType%\HIIFontExBBTest.efi                      %Framework%\Test\ > NUL
 copy %ProcessorType%\HIIImageBBTest.efi                       %Framework%\Test\ > NUL
+copy %ProcessorType%\HIIImageExBBTest.efi                     %Framework%\Test\ > NUL
 
 copy %ProcessorType%\AbsolutePointerBBTest.efi                %Framework%\Test\ > NUL
 rem copy %ProcessorType%\DriverSupportedEfiVersionBBTest.efi      %Framework%\Test\ > NUL
