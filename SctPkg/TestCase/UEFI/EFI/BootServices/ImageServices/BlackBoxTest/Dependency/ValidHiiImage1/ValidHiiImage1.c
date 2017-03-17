@@ -55,8 +55,6 @@ Abstract:
 
 --*/
 
-#include    "Tiano.h"
-
 //
 // data definition here
 //
