@@ -1,0 +1,53 @@
+================================================================================
+UEFI2.5 A Self Certification Test II(SCTII) Final Release Note
+Date: 06/05/2017
+================================================================================
+
+
+================================================================================
+                                    INDEX
+================================================================================
+1. FILES LIST
+2. UPDATE
+3. SOURCE AND HOW TO BUILD
+
+
+
+================================================================================
+                                  FILES LIST
+================================================================================
+1. ReleaseNote.txt
+   --Release note for the entire package
+2. Documents.zip
+   --The User Guide/Case Spec
+3. UEFISCT.zip
+   --UEFI Sct Binary Package
+4. IHVSCT.zip
+   --IHV Sct Binary Package
+5. EMS.zip
+   --EMS Package
+
+================================================================================
+                                   UPDATE
+================================================================================
+
+1. SCT framwark is enhanced to be more stable
+2. Support the build environment with UDK2015, build tools with VS2013&GCC
+3. EMS starts to support Window 7 and Window 8.1
+4. Test cases updated to align with UEFI2.5A Spec
+   1) New test case for HASH2 Protocols
+   2) New test case for Pkcs7 Verify Protocol
+   3) New test case for Configuration Keyword Handler Protocol
+   4) New test case for Regular Expression Protocol
+   5) New test case for NVMEPassThru  Protocol
+   6) Misc Enhancement/Fix for UEFI 2.5 A Spec compliance    
+
+================================================================================
+                           SOURCE AND HOW TO BUILD
+================================================================================
+UEFI SCT source repository is @ https://github.com/UEFI/UEFI-SCT.git
+Please ask the UEFI Admin to help you get the access right with your github account.
+The corresponding source of binary in this release are available at 
+https://github.com/UEFI/UEFI-SCT/releases/tag/UEFI-2.5A-SCT-II
+Please refer the "HowToBuild/How to build SCT in UDK2015.txt" to build the binary if 
+you want to know the detail of test case or do the debug work.  
