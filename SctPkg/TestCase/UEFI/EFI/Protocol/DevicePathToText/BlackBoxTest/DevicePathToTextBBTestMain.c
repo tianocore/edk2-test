@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2015 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -3843,6 +3843,35 @@ InValidText:
   return NULL;
 }
 
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildEMMCDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS            Status;
+  CHAR16                *ParamIdentifierStr;
+  CHAR16                *ParamIdentifierVal;
+  EMMC_DEVICE_PATH      *EMMC;
+
+  EMMC = (EMMC_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1D, sizeof (EMMC_DEVICE_PATH));
+  if (EMMC == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"SlotNumber", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    EMMC->SlotNumber = (UINT8) SctStrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) EMMC;
+InValidText:
+  SctFreePool(EMMC);
+  return NULL;
+}
+
 
 STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   L"PciRoot",
@@ -3933,6 +3962,8 @@ STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   BuildBluetoothDeviceNode,
   L"Wi-Fi",
   BuildWiFiDeviceNode,
+  L"eMMC",
+  BuildEMMCDeviceNode,  
   L"Uart",
   BuildUartDeviceNode,
   L"UsbClass",
@@ -4112,6 +4143,8 @@ SctConvertTextToDeviceNode (
   if (BuildDevPathNodeFunc != NULL) {
     DeviceNode = BuildDevPathNodeFunc(DeviceNodeParamStr);
   }
+
+  SctFreePool (DeviceNodeStr);
 
   return DeviceNode;
 ConvertError:

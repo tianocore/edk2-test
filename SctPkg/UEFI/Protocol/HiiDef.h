@@ -35,12 +35,14 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
-  Rights Reserved, subject to all existing rights in all        
+  Copyright 2006, 2007, 2008, 2009, 2010, 2017 Unified EFI, Inc.
+  All Rights Reserved, subject to all existing rights in all    
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
   Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  
+  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
    
 --*/
 /*++
@@ -135,7 +137,8 @@ typedef struct _EFI_HII_SIMPLE_FONT_PACKAGE_HDR {
 //
 // Font Package
 //
-
+typedef UINT32        EFI_HII_FONT_STYLE;
+#define EFI_HII_FONT_STYLE_NORMAL            0x00000000
 #define EFI_HII_FONT_STYLE_BOLD              0x00000001
 #define EFI_HII_FONT_STYLE_ITALIC            0x00000002
 #define EFI_HII_FONT_STYLE_EMBOSS            0x00010000

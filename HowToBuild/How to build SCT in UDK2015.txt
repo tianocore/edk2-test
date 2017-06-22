@@ -50,6 +50,7 @@ Linux Environment：
    6) Execute ". edksetup.sh" in Home/Dev/MyWorkSpace
    7) Execute ". SctPkg/build.sh X64 GCC" in Home/Dev/MyWorkSpace
 
+
 Build Instructions for UEFI SCTII AARCH64 (Linux)
    1) mkdir "sct_workspace"
    2) cd sct_workspace
@@ -67,6 +68,7 @@ Build Instructions for UEFI SCTII AARCH64 (Linux)
   14) export PATH=$PATH:"$PWD/tools/gcc/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu/bin"
   15) export CROSS_COMPILE="$PWD/tools/gcc/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-"
   16) ./SctPkg/build.sh AARCH64 GCC
+
 
 Build EMS :
   Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 

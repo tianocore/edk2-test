@@ -74,7 +74,10 @@ Abstract:
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_40_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.4B Self Certification Test(SCT2)"
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_50_SYSTEM_TABLE_REVISION)
-#define EFI_SCT_NAME                        L"UEFI2.5 Self Certification Test(SCT2)"
+// will correct the 2.6 to 2.5 after NanjingPlugfest
+#define EFI_SCT_NAME                        L"UEFI2.6 Self Certification Test(SCT2)"
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_60_SYSTEM_TABLE_REVISION)
+#define EFI_SCT_NAME                        L"UEFI2.6 Self Certification Test(SCT2)"
 #else
 #error Unknown EFI_SPECIFICATION_VERSION
 #endif

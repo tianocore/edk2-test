@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -911,7 +911,30 @@ BBTestDevicePathNodeConformanceAutoTest (
                     (UINTN)SubType,
                     (UINTN)Length
                     );
-    }	
+    }
+    //
+    // Add a new checkpoint for eMMC Device Path
+    // Check Messaging Device Path: eMMC Device Path
+    //
+    else if ((Type == 3) && (SubType == 29)) {
+      if (Length  == 5) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid060,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - eMMC (Embedded Multi-Media Card) Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length
+                    );
+    }
     //
     // Assertion Point 3.1.2.23
     // Check Messaging Device Path: InfiniBand Device Path

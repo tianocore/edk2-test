@@ -35,14 +35,15 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2015 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2014 - 2015, Intel Corporation. All rights reserved.
+# Copyright (c) 2014 - 2017, Intel Corporation. All rights reserved.
 # Copyright (c) 2011, 2012 ARM Ltd All rights reserved. 
 #
+# (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 #
 #
 # 
@@ -127,7 +128,7 @@ CopyDependency()
     ls -h $ProcessorType/$1_*.cmp   >> temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.ucmp  >> temp.txt 2>NUL
 
-    while read line 																																												 
+    while read line 
       do 
         CopyDependencyFile $1 $line
       done < temp.txt
@@ -221,7 +222,9 @@ then
     cp $ProcessorType/HIIDatabaseBBTest.efi                    $Framework/Test/ > NUL
     cp $ProcessorType/HIIStringBBTest.efi                      $Framework/Test/ > NUL
     cp $ProcessorType/HIIFontBBTest.efi                        $Framework/Test/ > NUL
+    cp $ProcessorType/HIIFontExBBTest.efi                      $Framework/Test/ > NUL
     cp $ProcessorType/HIIImageBBTest.efi                       $Framework/Test/ > NUL
+    cp $ProcessorType/HIIImageExBBTest.efi                     $Framework/Test/ > NUL
 
     cp $ProcessorType/AbsolutePointerBBTest.efi                $Framework/Test/ > NUL
 #   cp $ProcessorType/DriverSupportedEfiVersionBBTest.efi      $Framework/Test/ > NUL
@@ -243,7 +246,12 @@ then
     cp $ProcessorType/Pkcs7BBTest.efi                          $Framework/Test/ > NUL
     cp $ProcessorType/ConfigKeywordHandlerBBTest.efi           $Framework/Test/ > NUL
     cp $ProcessorType/RegularExpressionBBTest.efi              $Framework/Test/ > NUL
+
+    cp $ProcessorType/RamDiskProtocolBBTest.efi                $Framework/Test/ > NUL
     cp $ProcessorType/NVMEPassThruBBTest.efi                   $Framework/Test/ > NUL
+    cp $ProcessorType/EraseBlockBBTest.efi                     $Framework/Test/ > NUL
+    cp $ProcessorType/SDMMCPassThruBBTest.efi                  $Framework/Test/ > NUL
+
 
     # *********************************************
     # Copy ENTS binary
