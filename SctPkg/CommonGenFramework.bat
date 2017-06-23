@@ -211,7 +211,6 @@ copy %ProcessorType%\Hash2BBTest.efi                          %Framework%\Test\ 
 copy %ProcessorType%\Pkcs7BBTest.efi                          %Framework%\Test\ > NUL
 copy %ProcessorType%\ConfigKeywordHandlerBBTest.efi           %Framework%\Test\ > NUL
 copy %ProcessorType%\RegularExpressionBBTest.efi              %Framework%\Test\ > NUL
-copy %ProcessorType%\NVMEPassThruBBTest.efi                   %Framework%\Test\ > NUL
 
 copy %ProcessorType%\RamDiskProtocolBBTest.efi                %Framework%\Test\ > NUL
 copy %ProcessorType%\NVMEPassThruBBTest.efi                   %Framework%\Test\ > NUL

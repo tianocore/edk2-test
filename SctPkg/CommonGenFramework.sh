@@ -252,7 +252,6 @@ then
     cp $ProcessorType/EraseBlockBBTest.efi                     $Framework/Test/ > NUL
     cp $ProcessorType/SDMMCPassThruBBTest.efi                  $Framework/Test/ > NUL
 
-
     # *********************************************
     # Copy ENTS binary
     # *********************************************
