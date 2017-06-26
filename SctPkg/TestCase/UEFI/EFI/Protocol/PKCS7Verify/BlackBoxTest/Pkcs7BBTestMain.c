@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2016 Unified EFI, Inc. All  
+  Copyright 2016 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -216,7 +216,7 @@ InitializePkcs7VerifyBBTest (
   //
   // Signature List of Certificate Hash for Timestamp Signature Checking
   //
-  DbEntry5 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + 16 + 48);
+  DbEntry5 = SctAllocateZeroPool (sizeof (EFI_SIGNATURE_LIST) + 16 + 48);
   DbEntry5->SignatureType       = gBlackBoxEfiCertX509Sha256Guid;
   DbEntry5->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + 16 + 48;
   DbEntry5->SignatureHeaderSize = 0;
@@ -225,7 +225,7 @@ InitializePkcs7VerifyBBTest (
   RevokedTime = (EFI_TIME *) ((UINT8 *)DbEntry5 + sizeof (EFI_SIGNATURE_LIST) + 16 + 32);
   RevokedTime->Year  = 2015;
   RevokedTime->Month = 8;
-  RevokedTime->Day   = 19;  
+  RevokedTime->Day   = 20;
 
   return Status;
 }
