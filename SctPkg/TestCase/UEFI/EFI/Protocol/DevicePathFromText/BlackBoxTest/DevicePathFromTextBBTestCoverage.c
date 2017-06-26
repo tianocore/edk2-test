@@ -1627,10 +1627,6 @@ CreateBlueToothDeviceNode (
   CHAR16                   *BDAddrStr;
   BLUETOOTH_DEVICE_PATH    *BLUETOOTH;
   UINTN                    Length;
-  UINTN                    StrLength;
-  UINTN                    Index;
-  UINT8                    Digit;
-  UINT8                    Byte;
 
 
   BDAddrStr = SctSplitStr (&TextDeviceNode, L',');
@@ -1642,29 +1638,7 @@ CreateBlueToothDeviceNode (
 
   Length = sizeof (BLUETOOTH_ADDRESS);
 
-  //
-  // Two hex char make up one byte
-  //
-  StrLength = Length * sizeof (CHAR16);
-
-  for(Index = 0; Index < StrLength; Index++, BDAddrStr++) {
-
-    SctIsHexDigit (&Digit, *BDAddrStr);
-
-    //
-    // For odd charaters, write the upper nibble for each buffer byte,
-    // and for even characters, the lower nibble.
-    //
-    if ((Index & 1) == 0) {
-      Byte = Digit << 4;
-    } else {
-      Byte = BLUETOOTH->BD_ADDR.Address[Length - 1 - Index / 2];
-      Byte &= 0xF0;
-      Byte |= Digit;
-    }
-
-    BLUETOOTH->BD_ADDR.Address[Length - 1 - Index / 2] = Byte;
-  }
+  StrToBuf (&BLUETOOTH->BD_ADDR.Address[0], Length, BDAddrStr);
 
   return (EFI_DEVICE_PATH_PROTOCOL *) BLUETOOTH;
 }

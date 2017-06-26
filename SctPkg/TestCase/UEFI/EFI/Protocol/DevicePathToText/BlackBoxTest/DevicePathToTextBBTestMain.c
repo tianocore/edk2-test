@@ -3758,10 +3758,6 @@ BuildBluetoothDeviceNode (
   CHAR16                       *ParamIdentifierStr;
   CHAR16                       *ParamIdentifierVal;
   BLUETOOTH_DEVICE_PATH        *Bluetooth;
-  UINTN                        StrLength;
-  UINTN                        Index;
-  UINT8                        Digit;
-  UINT8                        Byte;
 
   Bluetooth = (BLUETOOTH_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1B, sizeof (BLUETOOTH_DEVICE_PATH));
   if (Bluetooth == NULL) {
@@ -3770,33 +3766,7 @@ BuildBluetoothDeviceNode (
 
   Status = GetNextRequiredParam(&TextDeviceNode, L"BD_ADDR", &ParamIdentifierStr, &ParamIdentifierVal);
   if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
-
-    //
-    // Two hex char make up one byte
-    //
-    StrLength = sizeof (BLUETOOTH_ADDRESS) * sizeof (CHAR16);
-
-    for(Index = 0; Index < StrLength; Index++, ParamIdentifierVal++) {
-
-      SctIsHexDigit (&Digit, *ParamIdentifierVal);
-
-      //
-      // For odd charaters, write the upper nibble for each buffer byte,
-      // and for even characters, the lower nibble.
-      //
-      if ((Index & 1) == 0) {
-        Byte = Digit << 4;
-      } else {
-        Byte = Bluetooth->BD_ADDR.Address[sizeof(BLUETOOTH_ADDRESS) - 1 - Index / 2];
-        Byte &= 0xF0;
-        Byte |= Digit;
-      }
-
-      Bluetooth->BD_ADDR.Address[sizeof(BLUETOOTH_ADDRESS) - 1 - Index / 2] = Byte;
-    }
-
-
-    
+    StrToBuf (&Bluetooth->BD_ADDR.Address[0], sizeof (BLUETOOTH_ADDRESS), ParamIdentifierVal);
   } else {
   	goto InValidText;
   }

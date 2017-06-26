@@ -1993,7 +1993,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   }
 
   //
-  // Bluetooth(001320F5FA77) 
+  // Bluetooth(77FAF5201300) 
   //
   pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1B, 10);  
   ((BLUETOOTH_DEVICE_PATH *)pDeviceNode1)->BD_ADDR.Address[0] = 0x77;
@@ -2017,7 +2017,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
                 AssertionType,
                 gDevicePathToTextBBTestFunctionAssertionGuid129,
                 L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
-                L"%a:%d: Convert result: %s - Expected: Bluetooth(001320F5FA77)",
+                L"%a:%d: Convert result: %s - Expected: Bluetooth(77FAF5201300)",
                 __FILE__,
                 (UINTN)__LINE__,
                 Text
