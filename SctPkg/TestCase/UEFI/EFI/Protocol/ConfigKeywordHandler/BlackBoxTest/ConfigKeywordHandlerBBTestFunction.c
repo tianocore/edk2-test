@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2016 Unified EFI, Inc. All  
+  Copyright 2016 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -440,7 +440,7 @@ BBTestGetDataFunctionTest (
                  );
 
   if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
-    if (0 == SctStrCmp (Results, FullStr))
+    if (NULL != SctStrStr (Results, FullStr))
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     else
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -449,8 +449,8 @@ BBTestGetDataFunctionTest (
                    StandardLib,
                    AssertionType,
                    gConfigKeywordHandlerBBTestFunctionAssertionGuid008 ,
-                   L"CONFIG_KEYWORD_HANDLER_PROTOCOL.GetData - The preinstalled Str should be same in the Results outputted from the GetData().",
-                   L"%a:%d:",
+                   L"CONFIG_KEYWORD_HANDLER_PROTOCOL.GetData - The preinstalled Str should be in the Results outputted from the GetData().",
+                   L"%a:%d: ",
                    __FILE__,
                    (UINTN)__LINE__
                    );
