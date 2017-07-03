@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -389,7 +389,7 @@ Returns:
                   (VOID **) &MnpSb
                   );
   if (EFI_ERROR (Status)) {
-  	return Status;
+    return Status;
   }
 
   //
@@ -401,7 +401,7 @@ Returns:
                     &mMnpInstanceHandle
                     );
   if (EFI_ERROR (Status)) {
-	EntsPrint(L"CreateChild Error\n");
+    EntsPrint(L"CreateChild Error\n");
     return Status;
   }
 
@@ -616,8 +616,8 @@ ManagedNetworkSaveContext (
              &mDestinationAddress
              );
   if (EFI_ERROR(Status)) {
-  	EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Can not Save the Destination MAC ADDRESS - %r", Status));
-	return Status;
+    EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Can not Save the Destination MAC ADDRESS - %r", Status));
+    return Status;
   }
 
   //
@@ -647,7 +647,7 @@ ManagedNetworkSaveContext (
              );
   if (EFI_ERROR(Status)) {
     EFI_ENTS_DEBUG((EFI_ENTS_D_ERROR, L"Can not set SendSequence - %r\n", Status));
-	return Status;
+    return Status;
   }
 
   return EFI_SUCCESS;
@@ -785,9 +785,6 @@ Returns:
 --*/
 {
   EFI_STATUS                    Status;
-  EFI_MANAGED_NETWORK_PROTOCOL  *Mnp;
-
-  Mnp = This->MonitorIo;
 
   EntsOutput (L"MNP Send ...\n");
   if (LinkStatus == SendoutPacket) {
@@ -910,8 +907,8 @@ Returns:
     //
     // Build data
     //
-   	FragmentBuffer = EntsAllocatePool (PacketLength + sizeof (EAS_MNP_FRAG_FLAG) + sizeof (EAS_APP_FLAG));
-	if(NULL == FragmentBuffer) {
+    FragmentBuffer = EntsAllocatePool (PacketLength + sizeof (EAS_MNP_FRAG_FLAG) + sizeof (EAS_APP_FLAG));
+    if(NULL == FragmentBuffer) {
       EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"EntsAllocatePool Error"));
       return EFI_OUT_OF_RESOURCES;
     }
@@ -965,7 +962,7 @@ Returns:
 STATIC
 EFI_STATUS
 StartInitMnp (
-  IN EFI_MANAGED_NETWORK_PROTOCOL  *Mnp
+  IN EFI_MANAGED_NETWORK_PROTOCOL  *MnpProtocol
   )
 /*++
 
@@ -987,31 +984,31 @@ Returns:
   EFI_STATUS              Status;
   EFI_SIMPLE_NETWORK_MODE SnpModeData;
 
-  Status = Mnp->Configure (
-                  Mnp,
-                  &mMnpConfigDataTemplate
-                  );
+  Status = MnpProtocol->Configure (
+                          MnpProtocol,
+                          &mMnpConfigDataTemplate
+                          );
 
   if (EFI_ERROR (Status)) {
-	EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"StartInitMnp: Mnp->Configure fail - %r", Status));
+    EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"StartInitMnp: Mnp->Configure fail - %r", Status));
     return Status;
   }
 
-  Status = Mnp->GetModeData (
-                  Mnp,
-                  NULL,
-                  &SnpModeData
-                  );
+  Status = MnpProtocol->GetModeData (
+                          MnpProtocol,
+                          NULL,
+                          &SnpModeData
+                          );
   if (EFI_ERROR (Status) && (Status != EFI_NOT_STARTED)) {
-	EFI_ENTS_DEBUG((EFI_ENTS_D_ERROR, L"StartInitMnp: Mnp->GetModeData fail - %r", Status));
+    EFI_ENTS_DEBUG((EFI_ENTS_D_ERROR, L"StartInitMnp: Mnp->GetModeData fail - %r", Status));
     return Status;
   }
 
   EntsCopyMem (&mSourceAddress, &SnpModeData.CurrentAddress, sizeof (EFI_MAC_ADDRESS));
   EFI_ENTS_DEBUG ((EFI_ENTS_D_TRACE, L"mSourceAddress : %x:%x:%x:%x:%x:%x", 
-  	mSourceAddress.Addr[0], mSourceAddress.Addr[1], 
-  	mSourceAddress.Addr[2], mSourceAddress.Addr[3], 
-  	mSourceAddress.Addr[4], mSourceAddress.Addr[5]));
+  mSourceAddress.Addr[0], mSourceAddress.Addr[1], 
+  mSourceAddress.Addr[2], mSourceAddress.Addr[3], 
+  mSourceAddress.Addr[4], mSourceAddress.Addr[5]));
   mMnpConfigDataTemplate.ProtocolTypeFilter = EAS_MNP_PROT_RIVL_TYPE;
 
   RxToken.Packet.RxData = NULL;
@@ -1029,7 +1026,7 @@ Returns:
     return Status;
   }
 
-  Status = Mnp->Receive (Mnp, &RxToken);
+  Status = MnpProtocol->Receive (MnpProtocol, &RxToken);
   if (EFI_ERROR (Status)) {
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Mnp Receive Error"));
     goto Error1;
@@ -1085,7 +1082,7 @@ Error1:
 VOID
 NotifyFunctionSend (
   EFI_EVENT Event,
-  VOID      *Context
+  VOID      *EventContext
   )
 /*++
 
@@ -1095,8 +1092,8 @@ Routine Description:
 
 Arguments:
 
-  Event   - Event to be singaled.
-  Context - Context.
+  Event        - Event to be singaled.
+  EventContext - EventContext.
 
 Returns:
 
@@ -1106,11 +1103,11 @@ Returns:
 {
   UINTN *NotifyTimes;
 
-  if (Context == NULL) {
+  if (EventContext == NULL) {
     return ;
   }
 
-  NotifyTimes = (UINTN *) Context;
+  NotifyTimes = (UINTN *) EventContext;
   (*NotifyTimes)++;
 
   return ;
@@ -1152,7 +1149,7 @@ ManagedNetworkRefresh(
 VOID
 NotifyFunctionListen (
   EFI_EVENT Event,
-  VOID      *Context
+  VOID      *EventContext
   )
 /*++
 
@@ -1162,8 +1159,8 @@ Routine Description:
 
 Arguments:
 
-  Event   - Event to be singaled.
-  Context - Context.
+  Event        - Event to be singaled.
+  EventContext - EventContext.
 
 Returns:
 
@@ -1233,12 +1230,12 @@ Returns:
     // Record the Destination address (EFI Management Side) into variable for late use.
     //
     if ((mDestinationAddress.Addr[0] != ((CHAR8 *)(RxData->SourceAddress))[0]) ||
-		(mDestinationAddress.Addr[1] != ((CHAR8 *)(RxData->SourceAddress))[1]) ||
-		(mDestinationAddress.Addr[2] != ((CHAR8 *)(RxData->SourceAddress))[2]) ||
-		(mDestinationAddress.Addr[3] != ((CHAR8 *)(RxData->SourceAddress))[3]) ||
-		(mDestinationAddress.Addr[4] != ((CHAR8 *)(RxData->SourceAddress))[4]) ||
-		(mDestinationAddress.Addr[5] != ((CHAR8 *)(RxData->SourceAddress))[5])
-		) {
+        (mDestinationAddress.Addr[1] != ((CHAR8 *)(RxData->SourceAddress))[1]) ||
+        (mDestinationAddress.Addr[2] != ((CHAR8 *)(RxData->SourceAddress))[2]) ||
+        (mDestinationAddress.Addr[3] != ((CHAR8 *)(RxData->SourceAddress))[3]) ||
+        (mDestinationAddress.Addr[4] != ((CHAR8 *)(RxData->SourceAddress))[4]) ||
+        (mDestinationAddress.Addr[5] != ((CHAR8 *)(RxData->SourceAddress))[5])
+        ) {
       EntsCopyMem(&mDestinationAddress, RxData->SourceAddress, sizeof(EFI_MAC_ADDRESS));
       Status = SetContextRecord(
                  gntDevicePath,
@@ -1247,10 +1244,10 @@ Returns:
                  sizeof(EFI_MAC_ADDRESS),
                  &mDestinationAddress
                  );
-	  if (EFI_ERROR(Status)) {
-	  	EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Can not Save the MAC ADDRESS\n"));
-		return ;
-	  }
+      if (EFI_ERROR(Status)) {
+        EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Can not Save the MAC ADDRESS\n"));
+        return ;
+      }
     }
     mCurrentReceiveOffset = PacketLength;
     mCurrentOpCode        = OpCode;
@@ -1300,7 +1297,7 @@ Returns:
     MnpBufferIn[mCurrentReceiveOffset] = '\0';
 
     switch (LinkStatus) {
-	case SendoutPacket:
+    case SendoutPacket:
       //
       // treat the new rpc command as the ACK for ACK_P 
       //
@@ -1322,8 +1319,8 @@ Returns:
         HasReceivePacket           = TRUE;
         LinkStatus                 = WaitForPacket;
       }
-	  else
-	  {
+      else
+      {
         if (SequenceId == LastReceiveSequence) {
           //
           // Resend ACK out
@@ -1380,38 +1377,38 @@ Returns:
       );
     MnpBufferIn[mCurrentReceiveOffset] = '\0';
       
-  	//
-  	// Check the valid of the Reset message.
-  	//
+    //
+    // Check the valid of the Reset message.
+    //
     TimeStamp = GetPktTimeStamp((UINT64 *)(MnpBufferIn + PacketStartPoint));
 
-  	if (LastCleanupPktTimeStamp < TimeStamp)
+    if (LastCleanupPktTimeStamp < TimeStamp)
     {
-  	  //
-  	  // Set CleanUpEnvironmentFlag to trigger Eas to cleanup environment.
-  	  //
-  	  gManagedNetworkMonitorInterface->CleanUpEnvironmentFlag = TRUE;
+      //
+      // Set CleanUpEnvironmentFlag to trigger Eas to cleanup environment.
+      //
+      gManagedNetworkMonitorInterface->CleanUpEnvironmentFlag = TRUE;
 
-  	  //
-  	  // Cleanup environment for MNP monitor.
-  	  //
-  	  ManagedNetworkRefresh();
-  	  HasReceivePacket        = TRUE;
-	  //
-	  // Save the new cleanup package
-	  //
-	  LastCleanupPktTimeStamp = TimeStamp;
-  	}
+      //
+      // Cleanup environment for MNP monitor.
+      //
+      ManagedNetworkRefresh();
+      HasReceivePacket        = TRUE;
+      //
+      // Save the new cleanup package
+      //
+      LastCleanupPktTimeStamp = TimeStamp;
+    }
     LinkStatus                = WaitForPacket;
-	SendOutAck(SequenceId, LINK_OPERATION_CLEANUP_ACK);
+    SendOutAck(SequenceId, LINK_OPERATION_CLEANUP_ACK);
 
-  	break;
-   case LINK_OPERATION_CLEANUP_ACK:
-  	//
-  	// Something wrong, ignore the packet.
-  	//
-  	break;
-  	
+    break;
+  case LINK_OPERATION_CLEANUP_ACK:
+    //
+    // Something wrong, ignore the packet.
+    //
+    break;
+    
   default:
     //
     // Other frames!
@@ -1430,7 +1427,7 @@ RESTART_RECEIVE:
 VOID
 ReSendTimer (
   IN EFI_EVENT    Event,
-  IN VOID         *Context
+  IN VOID         *EventContext
   )
 /*++
 
@@ -1440,8 +1437,8 @@ Routine Description:
 
 Arguments:
 
-  Event   - Event to be singaled.
-  Context - Context.
+  Event        - Event to be singaled.
+  EventContext - EventContext.
 
 Returns:
 
@@ -1566,9 +1563,9 @@ Returns:
 
   Status                  = Mnp->Transmit (Mnp, &TxLLToken);
   if (EFI_ERROR (Status)) {
-  	RecycleTxBuffer(Buffer);
+    RecycleTxBuffer(Buffer);
     EFI_ENTS_DEBUG ((EFI_ENTS_D_ERROR, L"Mnp->Transmit Error"));
-	return Status;
+    return Status;
   }
 
   RecycleTxBuffer(Buffer);

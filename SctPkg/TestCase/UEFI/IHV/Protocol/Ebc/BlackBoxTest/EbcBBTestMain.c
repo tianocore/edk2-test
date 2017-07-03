@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -420,21 +420,21 @@ Returns:
 --*/
 {
   UINTN               EndPossition;
-  IMAGE_FILE_HANDLE  *FHand;
+  IMAGE_FILE_HANDLE  *FileHand;
 
-  FHand = UserHandle;
+  FileHand = UserHandle;
   //
   // Move data from our local copy of the file
   //
   EndPossition = Offset + *ReadSize;
-  if (EndPossition > FHand->SourceSize) {
-    *ReadSize = (UINT32)(FHand->SourceSize - Offset);
-    if (Offset >= FHand->SourceSize) {
+  if (EndPossition > FileHand->SourceSize) {
+    *ReadSize = (UINT32)(FileHand->SourceSize - Offset);
+    if (Offset >= FileHand->SourceSize) {
       *ReadSize = 0;
     }
   }
 
-  SctCopyMem (Buffer, (CHAR8 *)FHand->Source + Offset, *ReadSize);
+  SctCopyMem (Buffer, (CHAR8 *)FileHand->Source + Offset, *ReadSize);
   return EFI_SUCCESS;
 }
 

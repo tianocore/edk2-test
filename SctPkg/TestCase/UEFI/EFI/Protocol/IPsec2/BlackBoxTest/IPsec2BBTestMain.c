@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -166,7 +166,7 @@ UnloadIPsec2BBTest (
 EFI_STATUS 
 IP4ProcessPacket(
   IN  EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
-  IN  VOID                                 *Ip4Packet,
+  IN  VOID                                 *Ip4Pack,
   IN  UINT32                               PacketLen,
   OUT EFI_IP4_HEADER                       **Ip4Head,
   OUT VOID                                 **OptionsBuffer,
@@ -184,9 +184,9 @@ IP4ProcessPacket(
   EFI_IPSEC_FRAGMENT_DATA         *FragTable = NULL;
   
 
-  ASSERT(Ip4Packet!=NULL && Ip4Head != NULL && OptionsBuffer != NULL && FragmentTable != NULL);
+  ASSERT(Ip4Pack != NULL && Ip4Head != NULL && OptionsBuffer != NULL && FragmentTable != NULL);
 
-  HeaderSrc = (EFI_IP4_HEADER *)Ip4Packet;
+  HeaderSrc = (EFI_IP4_HEADER *)Ip4Pack;
    
   //
   // Create a IP4 Packet Header

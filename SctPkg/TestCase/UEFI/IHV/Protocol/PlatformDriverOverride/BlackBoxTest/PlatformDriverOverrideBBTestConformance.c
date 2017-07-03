@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -85,7 +85,7 @@ BBTestGetDriverConformanceAutoTest (
   EFI_HANDLE                             *Handles;
   UINTN                                  HandlesNo;
   UINTN                                  HandleIndex;
-  EFI_HANDLE                             DriverImageHandle;
+  EFI_HANDLE                             ImageHandle;
 
   //
   // Get the Standard Library Interface
@@ -117,12 +117,12 @@ BBTestGetDriverConformanceAutoTest (
   // Check Point 1
   // Invoke GetDriver() with invalide controller handle
   //
-  DriverImageHandle = NULL;
+  ImageHandle = NULL;
   Handles = NULL;
   Status = PlatformDriverOverride->GetDriver (
                                      PlatformDriverOverride,
                                      Handles,
-                                     &DriverImageHandle
+                                     &ImageHandle
                                      );
   if(Status == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -150,11 +150,11 @@ BBTestGetDriverConformanceAutoTest (
   SctLocateHandle (AllHandles, NULL, NULL, &HandlesNo, &Handles);
 
   for (HandleIndex = 0; HandleIndex < HandlesNo; HandleIndex++) {
-    DriverImageHandle = NULL;
+    ImageHandle = NULL;
     Status = PlatformDriverOverride->GetDriver (
                                        PlatformDriverOverride,
                                        Handles[HandleIndex],
-                                       &DriverImageHandle
+                                       &ImageHandle
                                        );
     
     if (Status == EFI_SUCCESS){
@@ -350,7 +350,7 @@ BBTestDriverLoadedConformanceAutoTest (
   UINTN                                  HandleIndex;
   EFI_DEVICE_PATH_PROTOCOL               *DriverImagePath;
   EFI_DEVICE_PATH_PROTOCOL               *NewDriverImagePath;
-  EFI_HANDLE                             DriverImageHandle;
+  EFI_HANDLE                             ImageHandle;
   EFI_DEVICE_PATH_PROTOCOL               *FilePath;
   CHAR16                                 *TempFileName;
 
@@ -385,7 +385,7 @@ BBTestDriverLoadedConformanceAutoTest (
   ControllerHandle = NULL;
   DriverImagePath = NULL;
   NewDriverImagePath = NULL;
-  DriverImageHandle = NULL;
+  ImageHandle = NULL;
   FilePath = NULL;
   TempFileName = L"PlatformDriverOverrideBBTest.efi";
 
@@ -428,11 +428,11 @@ BBTestDriverLoadedConformanceAutoTest (
   FilePath = SctFileDevicePath (NULL, TempFileName);
   Status = gtBS->LoadImage(
                    FALSE,
-                   DriverImageHandle,
+                   ImageHandle,
                    FilePath,
                    NULL,
                    0,
-                   &DriverImageHandle
+                   &ImageHandle
                    );
 
   //
@@ -443,7 +443,7 @@ BBTestDriverLoadedConformanceAutoTest (
                                      PlatformDriverOverride,
                                      ControllerHandle,
                                      DriverImagePath,
-                                     DriverImageHandle
+                                     ImageHandle
                                      );
 
   if ((Status == EFI_NOT_FOUND) || (Status == EFI_UNSUPPORTED)) {
@@ -473,7 +473,7 @@ BBTestDriverLoadedConformanceAutoTest (
                                      PlatformDriverOverride,
                                      NULL,
                                      DriverImagePath,
-                                     DriverImageHandle
+                                     ImageHandle
                                      );
 
   if ((Status == EFI_INVALID_PARAMETER) || (Status == EFI_UNSUPPORTED)) {
@@ -500,7 +500,7 @@ BBTestDriverLoadedConformanceAutoTest (
                                      PlatformDriverOverride,
                                      ControllerHandle,
                                      NULL,
-                                     DriverImageHandle
+                                     ImageHandle
                                      );
 
   if ((Status == EFI_INVALID_PARAMETER) || (Status == EFI_UNSUPPORTED)) {
