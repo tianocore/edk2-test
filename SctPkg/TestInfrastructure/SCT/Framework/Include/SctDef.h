@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -74,8 +74,7 @@ Abstract:
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_40_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.4B Self Certification Test(SCT2)"
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_50_SYSTEM_TABLE_REVISION)
-// will correct the 2.6 to 2.5 after NanjingPlugfest
-#define EFI_SCT_NAME                        L"UEFI2.6 Self Certification Test(SCT2)"
+#define EFI_SCT_NAME                        L"UEFI2.5 Self Certification Test(SCT2)"
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_60_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.6 Self Certification Test(SCT2)"
 #else
