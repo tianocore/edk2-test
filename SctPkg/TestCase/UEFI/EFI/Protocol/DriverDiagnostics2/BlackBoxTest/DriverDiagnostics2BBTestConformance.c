@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -115,6 +115,9 @@ BBTestRunDiagnosticsConformanceTest (
   EFI_STATUS                            Status;
   EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2;
 
+  EFI_DEVICE_PATH_PROTOCOL              *DevicePath;
+  CHAR16                                *DevicePathStr;
+
   //
   // init
   //
@@ -130,6 +133,28 @@ BBTestRunDiagnosticsConformanceTest (
                    );
   if (EFI_ERROR(Status)) {
     return Status;
+  }
+
+  //
+  // Get Loaded Image Device Path of current EFI_DRIVER_DIAGNOSTICS2_PROTOCOL
+  // And out put device path or device name
+  //
+  Status = LocateLoadedImageDevicePathFromDriverDiagnostisc2 (DriverDiagnostics2, &DevicePath, StandardLib);
+  if (Status == EFI_SUCCESS) {
+    DevicePathStr = NULL;
+    DevicePathStr = SctDevicePathToStr (DevicePath);
+    if (DevicePathStr != NULL) {
+      StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"Device Path: %s\r\n",
+                     DevicePathStr
+                     );
+      Status = gtBS->FreePool (DevicePathStr);
+      if (EFI_ERROR(Status))
+        return Status;
+      DevicePathStr=NULL;
+    }     
   }
 
   //

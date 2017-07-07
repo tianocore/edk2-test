@@ -35,13 +35,13 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF
   THE POSSIBILITY OF SUCH DAMAGES.
 
-  Copyright 2006 - 2016 Unified EFI, Inc. All
+  Copyright 2006 - 2017 Unified EFI, Inc. All
   Rights Reserved, subject to all existing rights in all
   matters included within this Test Suite, to which United
   EFI, Inc. makes no claim of right.
 
   Copyright (c) 2013-2014, ARM Ltd. All rights reserved.
-  Copyright (c) 2015 - 2016, Intel Corporation. All rights reserved.
+  Copyright (c) 2015 - 2017, Intel Corporation. All rights reserved.
 
 --*/
 
@@ -1100,6 +1100,50 @@ _DevPathMediaProtocol (
     SctCatPrint(Str, L"%g", &MediaProt->Protocol);
 }
 
+STATIC
+VOID
+_DevPathToTextFv (
+  IN OUT SCT_POOL_PRINT  *Str,
+  IN VOID            *DevPath
+  )
+{
+  MEDIA_FW_VOL_DEVICE_PATH  *Fv;
+
+  Fv = DevPath;
+  SctCatPrint (Str, L"Fv(%g)", &Fv->FvName);
+}
+
+STATIC
+VOID
+_DevPathToTextFvFile (
+  IN OUT SCT_POOL_PRINT  *Str,
+  IN VOID            *DevPath
+  )
+{
+  MEDIA_FW_VOL_FILEPATH_DEVICE_PATH  *FvFile;
+
+  FvFile = DevPath;
+  SctCatPrint (Str, L"FvFile(%g)", &FvFile->FvFileName);
+}
+
+STATIC
+VOID
+_DevPathRelativeOffsetRange (
+  IN OUT SCT_POOL_PRINT       *Str,
+  IN VOID                 *DevPath
+  )
+{
+  MEDIA_RELATIVE_OFFSET_RANGE_DEVICE_PATH *Offset;
+
+  Offset = DevPath;
+  SctCatPrint (
+    Str,
+    L"Offset(0x%lx,0x%lx)",
+    Offset->StartingOffset,
+    Offset->EndingOffset
+    );
+}
+
 #if (EFI_SPECIFICATION_VERSION < 0x00020000)
 VOID
 _DevPathFvFilePath (
@@ -1188,6 +1232,9 @@ struct {
   { MEDIA_DEVICE_PATH,      MEDIA_VENDOR_DP,                  _DevPathVendor },
   { MEDIA_DEVICE_PATH,      MEDIA_FILEPATH_DP,                _DevPathFilePath },
   { MEDIA_DEVICE_PATH,      MEDIA_PROTOCOL_DP,                _DevPathMediaProtocol },
+  { MEDIA_DEVICE_PATH,      MEDIA_PIWG_FW_VOL_DP,             _DevPathToTextFv },
+  { MEDIA_DEVICE_PATH,      MEDIA_PIWG_FW_FILE_DP,            _DevPathToTextFvFile },  
+  { MEDIA_DEVICE_PATH,      MEDIA_RELATIVE_OFFSET_RANGE_DP,   _DevPathRelativeOffsetRange },
 #if (EFI_SPECIFICATION_VERSION < 0x00020000)
   { MEDIA_DEVICE_PATH,      MEDIA_FV_FILEPATH_DP,             _DevPathFvFilePath },
 #endif

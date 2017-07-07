@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -76,8 +76,10 @@ BBTestGetDriverNameFuncTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
-  EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName;
+  EFI_COMPONENT_NAME2_PROTOCOL          *ComponentName;
 
+  EFI_DEVICE_PATH_PROTOCOL              *DevicePath;
+  CHAR16                                *DevicePathStr;
   //
   // init
   //
@@ -93,6 +95,28 @@ BBTestGetDriverNameFuncTest (
                    );
   if (EFI_ERROR (Status)) {
     return Status;
+  }
+
+  //
+  // Get Loaded Image Device Path of current EFI_COMPONENT_NAME2_PROTOCOL
+  // And out put device path or device name
+  //
+  Status = LocateLoadedImageDevicePathFromComponentName2 (ComponentName, &DevicePath, StandardLib);
+  if (Status == EFI_SUCCESS) {
+    DevicePathStr = NULL;
+    DevicePathStr = SctDevicePathToStr (DevicePath);
+    if (DevicePathStr != NULL) {
+      StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"Device Path: %s\r\n",
+                     DevicePathStr
+                     );
+      Status = gtBS->FreePool (DevicePathStr);
+      if (EFI_ERROR(Status))
+        return Status;
+      DevicePathStr=NULL;
+    }
   }
 
   BBTestGetDriverNameFuncTestCheckpoint1 (StandardLib, ComponentName);
@@ -121,8 +145,10 @@ BBTestGetControllerNameFuncTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
-  EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName;
+  EFI_COMPONENT_NAME2_PROTOCOL          *ComponentName;
 
+  EFI_DEVICE_PATH_PROTOCOL              *DevicePath;
+  CHAR16                                *DevicePathStr;
   //
   // init
   //
@@ -138,6 +164,28 @@ BBTestGetControllerNameFuncTest (
                    );
   if (EFI_ERROR (Status)) {
     return Status;
+  }
+
+  //
+  // Get Loaded Image Device Path of current EFI_COMPONENT_NAME2_PROTOCOL
+  // And out put device path or device name
+  //
+  Status = LocateLoadedImageDevicePathFromComponentName2 (ComponentName, &DevicePath, StandardLib);
+  if (Status == EFI_SUCCESS) {
+    DevicePathStr = NULL;
+    DevicePathStr = SctDevicePathToStr (DevicePath);
+    if (DevicePathStr != NULL) {
+      StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"Device Path: %s\r\n",
+                     DevicePathStr
+                     );
+      Status = gtBS->FreePool (DevicePathStr);
+      if (EFI_ERROR(Status))
+        return Status;
+      DevicePathStr=NULL;
+    }
   }
 
   BBTestGetControllerNameFuncTestCheckpoint1 (StandardLib, ComponentName);

@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010, 2011 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -146,4 +146,105 @@ BBTestDriverDiagnostics2Unload (
            ImageHandle,
            gBBTestProtocolInterface
            );
+}
+
+EFI_STATUS
+LocateLoadedImageDevicePathFromDriverDiagnostisc2 (
+  IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL         *DriverDiagnostisc2,
+  IN EFI_DEVICE_PATH_PROTOCOL                 **DevicePath,      //reuse the structure of EFI_DEVICE_PATH_PROTOCOL as EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib
+  )
+{
+  EFI_STATUS                          Status;
+
+  UINTN                               NoHandles, Index;
+  EFI_HANDLE                          *HandleBuffer;
+  EFI_DRIVER_DIAGNOSTICS2_PROTOCOL    *OtherDriverDiagnostisc2;
+
+  //
+  // Locate the Handle that the DriverDiagnostisc2 interface is bound to
+  //
+  Status = gtBS->LocateHandleBuffer (
+                        ByProtocol,
+                        &gBlackBoxEfiDriverDiagnostics2ProtocolGuid,
+                        NULL,
+                        &NoHandles,
+                        &HandleBuffer
+                        );
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"BS.LocateHandle - LocateHandle",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                );
+    return Status;
+  }
+
+  if (NoHandles<=0) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"BS.LocateHandle - LocateHandle",
+                  L"%a:%d:Device Error",
+                  __FILE__,
+                  (UINTN)__LINE__
+                );
+    return EFI_DEVICE_ERROR;
+  }
+
+  //
+  // Find the exact handle that DriverDiagnostisc2 bound to
+  //
+  for (Index=0;Index<NoHandles;Index++) {
+    Status = gtBS->HandleProtocol (
+                        HandleBuffer[Index],
+                        &gBlackBoxEfiDriverDiagnostics2ProtocolGuid,
+                        (VOID **) &OtherDriverDiagnostisc2
+                        );
+    if (EFI_ERROR (Status)) {
+      StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"BS.HandleProtocol - HandleProtocol",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                );
+
+      gtBS->FreePool (HandleBuffer);
+      return Status;
+    }
+
+    if (OtherDriverDiagnostisc2 == DriverDiagnostisc2) {
+      break;
+    }
+  }
+
+  //
+  // Locate the Loaded Image DevicePath Protocol bound to DriverDiagnostisc2 Protocol
+  //
+  if (Index>=NoHandles) {
+    //
+    // No Handle Found!!
+    //
+    gtBS->FreePool (HandleBuffer);
+    return EFI_DEVICE_ERROR;
+  }
+
+  Status = gtBS->HandleProtocol (
+                      HandleBuffer[Index],
+                      &gBlackBoxEfiLoadedImageDevicePathProtocolGuid,
+                      (VOID **) DevicePath
+                      );
+
+  gtBS->FreePool (HandleBuffer);
+  return Status;
 }
