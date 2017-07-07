@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 ################################################################################
@@ -186,7 +186,8 @@ CreateDhcpOpt ack1_opt1 mesg_type  5;    #Message Type = DHCPACK
 CreateDhcpOpt ack1_opt2 server_id  "192.168.2.1"
 CreateDhcpOpt ack1_opt3 ip_lease_t 120
 CreateDhcpOpt ack1_opt4 req_ip_addr "192.168.2.4"
-ConcatPayload ack1_opt1 ack1_opt1 ack1_opt2 ack1_opt3 ack1_opt4
+CreateDhcpOpt ack1_opt5 subnet_mask "255.255.255.0"
+ConcatPayload ack1_opt1 ack1_opt1 ack1_opt2 ack1_opt3 ack1_opt4 ack1_opt5
 CreatePacket  ack -t dhcp -dhcp_xid $xid -dhcp_op 2 -dhcp_htype $htype         \
               -dhcp_hlen $hlen -dhcp_chaddr $chaddr -dhcp_yiaddr 192.168.2.4   \
               -dhcp_options ack1_opt1

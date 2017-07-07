@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 ################################################################################
@@ -55,7 +55,7 @@ CaseGuid          5B2FE361-36E7-4a1d-BF8F-A68EC1410C7E
 CaseName          Configure.Conf2.Case3
 CaseCategory      TCP
 CaseDescription   {This case is to test the conformance - EFI_INVALID_PARAMETER.\
-                  -- TcpConfigDat->AccessPoint.StationAddress isn¡¯t a valid     \
+                  -- TcpConfigDat->AccessPoint.StationAddress isn't a valid     \
                   unicast IPv4 address when                                     \
                   TcpConfigDat->AccessPoint.UseDefaultAddress is FALSE.}
 ################################################################################
@@ -110,7 +110,7 @@ SetVar          R_Configure_AccessPoint.StationPort        $DEF_EUT_PRT
 #
 # Given a not unicast IPv4 address, Class D, or E, here is Class E.
 #
-SetIpv4Address  R_Configure_AccessPoint.RemoteAddress      255.123.111.8
+SetIpv4Address  R_Configure_AccessPoint.RemoteAddress      0.0.0.0
 SetVar          R_Configure_AccessPoint.RemotePort         $DEF_ENTS_PRT
 SetVar          R_Configure_AccessPoint.ActiveFlag         TRUE
 

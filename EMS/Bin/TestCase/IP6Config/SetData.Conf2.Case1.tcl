@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 ################################################################################
@@ -309,34 +309,6 @@ GetAck
 set assert [VerifyReturnStatus R_Status $EFI_INVALID_PARAMETER]
 RecordAssertion $assert $Ip6ConfigSetDataConf2AssertionGuid005                   \
                 "Ip6Config.SetData - Call SetData to set dns server with multicast address."            \
-                "ReturnStatus - $R_Status, ExpectedStatus - $EFI_INVALID_PARAMETER"
-
-DelVar R_Ip6ConfigDnsServer
-
-#
-# Check Point : Set Dns Server with duplication of list entries
-#
-set L_DnsServerListLen 3
-EFI_IPv6_ADDRESS                 R_Ip6ConfigDnsServer($L_DnsServerListLen)
-set L_UnitLen [Sizeof EFI_IPv6_ADDRESS]
-set L_ListLen [expr {$L_UnitLen * $L_DnsServerListLen}]
-SetVar R_Ip6ConfigDataType   $IP6CDT(DnsServer)
-SetVar R_Ip6ConfigDataSize   $L_ListLen
-
-SetIpv6Address R_Temp_Ip6ConfigDnsServer "2002::5000"
-SetVar R_Ip6ConfigDnsServer(0) @R_Temp_Ip6ConfigDnsServer
-
-SetIpv6Address R_Temp_Ip6ConfigDnsServer "2002::5001"
-SetVar R_Ip6ConfigDnsServer(1) @R_Temp_Ip6ConfigDnsServer
-
-SetIpv6Address R_Temp_Ip6ConfigDnsServer "2002::5000"
-SetVar R_Ip6ConfigDnsServer(2) @R_Temp_Ip6ConfigDnsServer
-
-Ip6Config->SetData "@R_Ip6ConfigDataType,@R_Ip6ConfigDataSize,&@R_Ip6ConfigDnsServer,&@R_Status"
-GetAck
-set assert [VerifyReturnStatus R_Status $EFI_INVALID_PARAMETER]
-RecordAssertion $assert $Ip6ConfigSetDataConf2AssertionGuid006                   \
-                "Ip6Config.SetData - Call SetData to set dns server with duplication of list entries."            \
                 "ReturnStatus - $R_Status, ExpectedStatus - $EFI_INVALID_PARAMETER"
 
 DelVar R_Ip6ConfigDnsServer

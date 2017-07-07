@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 ################################################################################
@@ -60,7 +60,7 @@ CaseDescription {This case is to test the Conformance - EFI_INVALID_PATAMETER  \
                    B). RequestTryCount > 0 and RequestTimeout is NULL.         \
                    C). OptionCount >0 and OptionList is NULL.                  \
                    D). ClientAddress is not a valid unicast address.           \
-                   - 192.168.1.255,234.0.0.1}
+                   - 255.255.255.255}
 
 ################################################################################
 
@@ -178,7 +178,7 @@ SetVar         R_ClientIdOpt(8)           05
 POINTER        R_OptionPtr
 SetVar         R_OptionPtr                &@R_ClientIdOpt
 SetVar         R_ConfigData.OptionList    &@R_OptionPtr
-SetIpv4Address R_ConfigData.ClientAddress "192.168.1.255"
+SetIpv4Address R_ConfigData.ClientAddress "255.255.255.255"
 
 #
 # Check Point: Call Dhcp4.Configure for an DHCP instance,
@@ -192,19 +192,6 @@ RecordAssertion $assert $Dhcp4ConfigureConf3AssertionGuid004                   \
                 "ReturnStatus - $R_Status, ExpectedStatus -                    \
                 $EFI_INVALID_PARAMETER"
 
-SetIpv4Address R_ConfigData.ClientAddress "234.0.0.1"
-
-#
-# Check Point: Call Dhcp4.Configure for an DHCP instance,
-#              with a invalid unicast address.
-#
-Dhcp4->Configure "&@R_ConfigData, &@R_Status"
-GetAck
-set assert [VerifyReturnStatus R_Status $EFI_INVALID_PARAMETER]
-RecordAssertion $assert $Dhcp4ConfigureConf3AssertionGuid004                   \
-                "Dhcp4.Configure - ClientAddress = 234.0.0.1"                  \
-                "ReturnStatus - $R_Status, ExpectedStatus -                    \
-                $EFI_INVALID_PARAMETER"
 
 #
 # Clean up the environment on EUT side.

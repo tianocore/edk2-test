@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 ################################################################################
@@ -107,11 +107,11 @@ UINTN                            R_Accept_NewChildHandle
 #
 # Initialization of TCB related on OS side.
 #
-CreateTcb TCB 234.5.6.7 $DEF_ENTS_PRT $DEF_EUT_IP_ADDR $DEF_EUT_PRT
+CreateTcb TCB 255.255.255.255 $DEF_ENTS_PRT $DEF_EUT_IP_ADDR $DEF_EUT_PRT
 
 LocalEther  01:00:5e:05:06:07
 RemoteEther $DEF_EUT_MAC_ADDR
-LocalIp     234.5.6.7
+LocalIp     255.255.255.255
 RemoteIp    $DEF_EUT_IP_ADDR
 
 #

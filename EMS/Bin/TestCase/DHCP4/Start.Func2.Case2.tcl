@@ -35,12 +35,12 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All
+# Copyright 2006 - 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010, Intel Corporation. All rights reserved.<BR> 
+# Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR> 
 #
 #
 ################################################################################
@@ -182,7 +182,8 @@ LocalIp      192.168.2.1
 CreateDhcpOpt offer1_opt1 mesg_type   2;    #Message Type = DHCPOFFER
 CreateDhcpOpt offer1_opt2 server_id   "192.168.2.1"
 CreateDhcpOpt offer1_opt3 ip_lease_t  120
-ConcatPayload offer1_opt1 offer1_opt1 offer1_opt2 offer1_opt3
+CreateDhcpOpt offer1_opt4 subnet_mask "255.255.255.0"
+ConcatPayload offer1_opt1 offer1_opt1 offer1_opt2 offer1_opt3 offer1_opt4
 CreatePacket  offer1 -t dhcp -dhcp_xid $xid -dhcp_op 2 -dhcp_htype $htype      \
               -dhcp_hlen $hlen -dhcp_chaddr $chaddr -dhcp_yiaddr 192.168.2.4   \
               -dhcp_options offer1_opt1
