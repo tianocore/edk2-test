@@ -244,6 +244,7 @@ copy %ProcessorType%\Mtftp4*_ENTSTest.efi             %Framework%\Ents\Test\    
 copy %ProcessorType%\Mtftp6*_ENTSTest.efi             %Framework%\Ents\Test\    > NUL
 copy %ProcessorType%\Tcp4*_ENTSTest.efi               %Framework%\Ents\Test\    > NUL
 copy %ProcessorType%\Tcp6*_ENTSTest.efi               %Framework%\Ents\Test\    > NUL
+copy %ProcessorType%\Http*_ENTSTest.efi               %Framework%\Ents\Test\    > NUL
 
 rem *********************************************
 rem Copy the test dependency files

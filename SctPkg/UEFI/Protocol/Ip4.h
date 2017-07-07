@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 
@@ -687,7 +687,100 @@ extern EFI_GUID gBlackBoxEfiIp4ProtocolGuid;
 #define IP4_MIN_HEADLEN        20
 #define IP4_MAX_HEADLEN        60
 
-extern EFI_GUID gBlackBoxEfiIp4ServiceBindingProtocolGuid;
 extern EFI_GUID gBlackBoxEfiIp4ConfigProtocolGuid;
+extern EFI_GUID gBlackBoxEfiIp4Config2ProtocolGuid;
+
+
+//***********************************************************
+// EFI_IP4_CONFIG2_DATA_TYPE
+//***********************************************************
+typedef enum {
+Ip4Config2DataTypeInterfaceInfo,
+Ip4Config2DataTypePolicy,
+Ip4Config2DataTypeManualAddress,
+Ip4Config2DataTypeGateway,
+Ip4Config2DataTypeDnsServer,
+Ip4Config2DataTypeMaximum
+} EFI_IP4_CONFIG2_DATA_TYPE;
+
+//***********************************************************
+// EFI_IP4_CONFIG2_INTERFACE_INFO related definitions
+//***********************************************************
+#define EFI_IP4_CONFIG2_INTERFACE_INFO_NAME_SIZE 32
+
+//*************************************************************
+// EFI_IP4_CONFIG2_INTERFACE_INFO
+//***********************************************************
+typedef struct {
+  CHAR16 Name[EFI_IP4_CONFIG2_INTERFACE_INFO_NAME_SIZE];
+  UINT8 IfType;
+  UINT32 HwAddressSize;
+  EFI_MAC_ADDRESS HwAddress;
+  EFI_IPv4_ADDRESS StationAddress;
+  EFI_IPv4_ADDRESS SubnetMask;
+  UINT32 RouteTableSize;
+  EFI_IP4_ROUTE_TABLE *RouteTable OPTIONAL;
+} EFI_IP4_CONFIG2_INTERFACE_INFO;
+
+//***********************************************************
+// EFI_IP4_CONFIG2_POLICY
+//***********************************************************
+typedef enum {
+  Ip4Config2PolicyStatic,
+  Ip4Config2PolicyDhcp,
+  Ip4Config2PolicyMax
+} EFI_IP4_CONFIG2_POLICY;
+
+//***********************************************************
+// EFI_IP4_CONFIG2_MANUAL_ADDRESS
+//***********************************************************
+typedef struct {
+  EFI_IPv4_ADDRESS Address;
+  EFI_IPv4_ADDRESS SubnetMask;
+} EFI_IP4_CONFIG2_MANUAL_ADDRESS;
+
+typedef struct _EFI_IP4_CONFIG2_PROTOCOL EFI_IP4_CONFIG2_PROTOCOL;
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_IP4_CONFIG2_SET_DATA) (
+  IN EFI_IP4_CONFIG2_PROTOCOL *This,
+  IN EFI_IP4_CONFIG2_DATA_TYPE DataType,
+  IN UINTN DataSize,
+  IN VOID *Data
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_IP4_CONFIG2_GET_DATA) (
+  IN EFI_IP4_CONFIG2_PROTOCOL *This,
+  IN EFI_IP4_CONFIG2_DATA_TYPE DataType,
+  IN OUT UINTN *DataSize,
+  IN VOID *Data OPTIONAL
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_IP4_CONFIG2_REGISTER_NOTIFY) (
+  IN EFI_IP4_CONFIG2_PROTOCOL *This,
+  IN EFI_IP4_CONFIG2_DATA_TYPE DataType,
+  IN EFI_EVENT Event
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_IP4_CONFIG2_UNREGISTER_NOTIFY) (
+  IN EFI_IP4_CONFIG2_PROTOCOL *This,
+  IN EFI_IP4_CONFIG2_DATA_TYPE DataType,
+  IN EFI_EVENT Event
+);
+
+typedef struct _EFI_IP4_CONFIG2_PROTOCOL {
+EFI_IP4_CONFIG2_SET_DATA SetData;
+EFI_IP4_CONFIG2_GET_DATA GetData;
+EFI_IP4_CONFIG2_REGISTER_NOTIFY RegisterDataNotify;
+EFI_IP4_CONFIG2_UNREGISTER_NOTIFY UnregisterDataNotify;
+} EFI_IP4_CONFIG2_PROTOCOL;
+
 
 #endif

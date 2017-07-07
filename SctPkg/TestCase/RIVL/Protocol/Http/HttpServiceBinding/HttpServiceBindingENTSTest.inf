@@ -35,46 +35,54 @@
 # DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF   
 # THE POSSIBILITY OF SUCH DAMAGES.                            
 #                                                             
-# Copyright 2006 - 2012 Unified EFI, Inc. All
+# Copyright 2017 Unified EFI, Inc. All
 # Rights Reserved, subject to all existing rights in all      
 # matters included within this Test Suite, to which United    
 # EFI, Inc. makes no claim of right.                          
 #                                                             
-# Copyright (c) 2010 - 2012, Byosoft Corporation. All rights reserved.<BR> 
 # Copyright (c) 2017, Intel Corporation. All rights reserved.<BR> 
+#
 #
 #/*++
 #
-# Module Name:
+#  Module Name:
 #
-#   ValidHiiImage1.inf
+#    HttpServiceBindingENTSTest.inf
 #
-# Abstract:
+#  Abstract:
 #
-#   Dependency component for Image Services Black-Box Test.
+#    Component description file for HttpServiceBinding module
 #
 #--*/
 
 [defines]
-  INF_VERSION               = 0x00010005
-  BASE_NAME                 = ImageServices_ValidHiiImage1
-  FILE_GUID                 = E106D131-E5F2-4670-A4F5-7BA4FC0829C0
-  MODULE_TYPE               = UEFI_APPLICATION
-  VERSION_STRING            = 1.0
-  ENTRY_POINT               = InitializeValidHiiImage1
-  UEFI_HII_RESOURCE_SECTION = TRUE
+BASE_NAME            = HttpServiceBinding_ENTSTest
+FILE_GUID            = FB06CDB4-10D0-45a0-A1C8-159B221088C9
+COMPONENT_TYPE       = BS_DRIVER
 
 [sources.common]
-  ValidHiiImage1.c
-  ../../ProtocolDefinition.c
-  ../../Misc.c
-  SampleStrings.uni
-  Sample.vfr
+  HttpServiceBindingENTSTest.c
+  HttpServiceBindingENTSTestCase.h
+  HttpServiceBindingENTSTestCase.c
 
-[Packages]
-  MdePkg/MdePkg.dec
-  SctPkg/SctPkg.dec
+[includes.common]
+  .
+  $(WORKSPACE)/SctPkg
+  $(WORKSPACE)/SctPkg/UEFI
+  $(WORKSPACE)/SctPkg/Include
+  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/EasDispatcher/Include
+  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/Rivl
+  $(WORKSPACE)/MdePkg/Include
 
-[LibraryClasses]
-  UefiApplicationEntryPoint
+[libraries.common]
   SctLib
+  SctGuidLib
+  EfiTestLib
+  EntsLib
+  BaseDebugLibNull
+  CompilerIntrinsicsLib
+
+[nmake.common]
+  C_STD_INCLUDE=
+  IMAGE_ENTRY_POINT=HttpServiceBindingENTSTestMain
+

@@ -473,6 +473,7 @@ SctPkg/TestCase/RIVL/Protocol/AddressResolutionProtocol/ArpServiceBinding/ArpSer
 
 SctPkg/TestCase/RIVL/Protocol/InternetProtocol4/Ip4/Ip4ENTSTest.inf
 SctPkg/TestCase/RIVL/Protocol/InternetProtocol4/Ip4Config/Ip4ConfigENTSTest.inf
+SctPkg/TestCase/RIVL/Protocol/InternetProtocol4/Ip4Config2/Ip4Config2ENTSTest.inf
 SctPkg/TestCase/RIVL/Protocol/InternetProtocol4/Ip4ServiceBinding/Ip4ServiceBindingENTSTest.inf
 
 SctPkg/TestCase/RIVL/Protocol/InternetProtocol6/Ip6/Ip6ENTSTest.inf
@@ -505,7 +506,8 @@ SctPkg/TestCase/RIVL/Protocol/Tcp4/Tcp4ServiceBinding/Tcp4ServiceBindingENTSTest
 SctPkg/TestCase/RIVL/Protocol/Tcp6/Tcp6/Tcp6ENTSTest.inf
 SctPkg/TestCase/RIVL/Protocol/Tcp6/Tcp6ServiceBinding/Tcp6ServiceBindingENTSTest.inf
 
-
+SctPkg/TestCase/RIVL/Protocol/Http/Http/HttpENTSTest.inf
+SctPkg/TestCase/RIVL/Protocol/Http/HttpServiceBinding/HttpServiceBindingENTSTest.inf
 
 [Components.IA32, Components.X64]
   SctPkg/TestCase/UEFI/EFI/Generic/ExeMode/BlackBoxTest/ExeModeBBTest.inf
