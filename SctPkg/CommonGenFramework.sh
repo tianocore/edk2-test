@@ -279,7 +279,8 @@ then
     cp $ProcessorType/Mtftp6*_ENTSTest.efi             $Framework/Ents/Test/    > NUL
     cp $ProcessorType/Tcp4*_ENTSTest.efi               $Framework/Ents/Test/    > NUL
     cp $ProcessorType/Tcp6*_ENTSTest.efi               $Framework/Ents/Test/    > NUL
-
+    cp $ProcessorType/Http*_ENTSTest.efi               $Framework/Ents/Test/    > NUL
+	
     # *********************************************
     # Copy the test dependency files
     # *********************************************
