@@ -59,7 +59,7 @@ Abstract:
 #include <Base.h>
 #include "SctLib.h"
 #include "Eas.h"
-#include <UEFI/Protocol/HTTP.h>
+#include <UEFI/Protocol/Http.h>
 
 EFI_STATUS
 HttpServiceBindingCreateChild_EntsTest (
