@@ -1,49 +1,53 @@
 ================================================================================
                                  HOW TO BUILD
 ================================================================================
-This section provides the build steps for UEFI/IHV SCT2, Shell2 on one X64/IA32 
-Desktop/Laptop pre-installed with Windows 8 and VS2013. The current EMS build need 
+This section provides the build steps for UEFI/IHV SCT2, Shell2 on one X64/IA32
+Desktop/Laptop pre-installed with Windows 8 and VS2015. The current EMS build need
 pre-installed VS2005.
 
 1. Prepare the build environment
-   1) Download the UDK2015(UDK2015.Complete.MyWorkSpace.zip) from the link and extract it
-      https://github.com/tianocore/udk/releases/download/UDK2015/UDK2015.Complete.MyWorkSpace.zip
-   2) Extract UDK2015.MyWorkSpace.zip to C:\MyWorkSpace
-   3) Extract BaseTools(Windows).zip to C:\MyWorkSpace
-   4) Copy SctPkg to C:\MyWorkSpace
-   5) Copy C:\MyWorkSpace\SctPkg\Tools\Bin\GenBin.exe C:\MyWorkSpace\BaseTools\Bin\Win32\
+    1) Download the UDK2017 source code from the link
+        https://github.com/tianocore/edk2/archive/vUDK2017.zip
+    2) Extract vUDK2017.zip to C:\MyWorkSpace
+    3) cd C:\MyWorkspace and Run "git clone https://github.com/tianocore/edk2-BaseTools-win32.git"
+    4) Enter folder edk2-BaseTools-win32 and Run the command
+        "git checkout 0e088c19ab31fccd1d2f55d9e4fe0314b57c0097"
+    5) cd C:\MyWorkspace and Rename this folder from edk2-BaseTools-win32 to Win32
+    6) Move the Win32 directory into the BaseTools/Bin directory under the workspace
+       (e.g. "C:\MyWorkspace\BaseTools\Bin")
+    7) Extract SctPkg.zip to C:\MyWorkSpace
+    8) Copy C:\MyWorkSpace\SctPkg\Tools\Bin\GenBin.exe C:\MyWorkSpace\BaseTools\Bin\Win32\
 
 2. Build Instructions for UEFI SCTII X64
-   1) Open the Visual Studio 2013 Command Prompt
+   1) Open the Visual Studio 2015 Command Prompt
    2) Execute "edksetup.bat"
-   3) Execute "build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2013x86"
-   4) Execute "cd c:\MyWorkSpace\Build\UefiSct\DEBUG_VS2013x86"
+   3) Execute "build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2015x86"
+   4) Execute "cd c:\MyWorkSpace\Build\UefiSct\DEBUG_VS2015x86"
    5) Execute "..\..\..\SctPkg\CommonGenFramework.bat uefi_sct X64 InstallX64.efi"
-   6) The target subdirectory named as SctPackageX64 which includes test cases and 
-      UEFI SCT II applications will be generated and located at 
-      C:\MyWorkSpace\Build\UefiSct\DEBUG_VS2013x86
+   6) The target subdirectory named as SctPackageX64 which includes test cases and
+      UEFI SCT II applications will be generated and located at
+      C:\MyWorkSpace\Build\UefiSct\DEBUG_VS2015x86
 
-Notice: The example shows the build process of X64 only. For other architecture, 
+Notice: The example shows the build process of X64 only. For other architecture,
         please change the keyword, X64, in build step to IA32.
 
 3. Build Instructions for IHV SCT II X64
-   1) Open the Visual Studio 2013 Command Prompt
+   1) Open the Visual Studio 2015 Command Prompt
    2) Execute "edksetup.bat"
-   3) Execute "build -p SctPkg\UEFI\IHV_SCT.dsc -a X64 -t VS2013x86"
-   4) Execute "cd C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2013x86"
+   3) Execute "build -p SctPkg\UEFI\IHV_SCT.dsc -a X64 -t VS2015x86"
+   4) Execute "cd C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2015x86"
    5) Execute "..\..\..\SctPkg\CommonGenFramework.bat ihv_sct X64 InstallX64.efi"
-   6) The target subdirectory named as SctPackageX64 which includes test cases and 
-      IHV SCT II applications will be generated and located at 
-      C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2013x86
+   6) The target subdirectory named as SctPackageX64 which includes test cases and
+      IHV SCT II applications will be generated and located at
+      C:\MyWorkSpace\Build\IhvSct\DEBUG_VS2015x86
 
-Notice: The example shows the build process of X64 only. For other architecture, 
+Notice: The example shows the build process of X64 only. For other architecture,
         please change the keyword, X64, in build step to IA32.
 
 
 Linux Environment：
-   1) Download the UDK2015(UDK2015.Complete.MyWorkSpace.zip) from the link and extract it
-      https://github.com/tianocore/udk/releases/download/UDK2015/UDK2015.Complete.MyWorkSpace.zip
-   2) Extract UDK2015.MyWorkSpace.zip to Home/Dev/MyWorkSpace
+   1) Download the UDK2017 and extract it
+   2) Extract UDK2017.MyWorkSpace.zip to Home/Dev/MyWorkSpace
    3) Extract BaseTools(Unix).tar to Home/Dev/MyWorkSpace
    4) Copy SctPkg to Home/Dev/MyWorkSpace
    5) Copy SctPkg/Tools/Bin/GenBin_lin_64 to Home/Dev/MyWorkSpace/Bin/BaseTools/BinWrappers/PosixLike
@@ -57,8 +61,8 @@ Build Instructions for UEFI SCTII AARCH64 (Linux)
    3) git clone https://github.com/UEFI/UEFI-SCT
    4) git clone https://github.com/tianocore/edk2
    5) cd edk2
-   6) git checkout UDK2015
-   7) ln -s ../SctPkg SctPkg
+   6) git checkout UDK2017
+   7) ln -s ../UEFI-SCT/SctPkg SctPkg
    8) cd ..
    9) mkdir -p "tools/gcc"
   10) cd "tools/gcc"
@@ -71,15 +75,15 @@ Build Instructions for UEFI SCTII AARCH64 (Linux)
 
 
 Build EMS :
-  Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 
+  Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct,
   after this step, a subdirectory named as Ems is generated.
-  Default Ems packages use ActiveTcl8.4.19.5-threaded, Winpcap4.1.3, WpdPack3.0 
-  and co-released libnet for building. 
-  
+  Default Ems packages use ActiveTcl8.4.19.5-threaded, Winpcap4.1.3, WpdPack3.0
+  and co-released libnet for building.
+
   1. Setup Build Environment
      1) Install Microsoft Windows 7 and VS2005 in build machine.
      2) Download ActiveTCL8.4.19.5 and install it into C:\Tcl
-     3) Copy all *.lib from C:\Tcl\Lib to C:\UefiSct\Ems\Lib\Tcl\Lib 
+     3) Copy all *.lib from C:\Tcl\Lib to C:\UefiSct\Ems\Lib\Tcl\Lib
      4) Copy C:\Tcl\Include folder to C:\UefiSct\Ems\Lib\Tcl
      5) Download the WinPcap_4_1_3.exe and install it to system
      6) Download the 3.0-WpdPack.zip and extract it to C:\WpdPack
@@ -87,18 +91,18 @@ Build EMS :
      8) Copy C:\WpdPack\Lib folder into C:\UefiSct\Ems\Lib\WpdPack
 
   2. Build Step
-     1) Run Visual Studio 2005 Command Prompt to go to the command line environment. 
-     2) Execute follow commands in turn. 
+     1) Run Visual Studio 2005 Command Prompt to go to the command line environment.
+     2) Execute follow commands in turn.
          a) cd C:\UefiSct\Ems\src
          b) set ems_dir=C:\UefiSct\Ems
          c) nmake
      3) an Ems.exe executable file will be generated under the bin directory.
 
   Notice:
-  1. When running UEFI SCT remote validation, user needs to keep the test topology 
-     environment clean. Users could use one network cable to connect the EFI target 
+  1. When running UEFI SCT remote validation, user needs to keep the test topology
+     environment clean. Users could use one network cable to connect the EFI target
      machine and management host machine directly.
-  2. If you want to run UEFI SCT with local execution usage, you need to make 
+  2. If you want to run UEFI SCT with local execution usage, you need to make
      sure the "\Sct\.passive.mode" file is removed.
   3. The passive mode of the UEFI SCT depends on network stacks.
 
