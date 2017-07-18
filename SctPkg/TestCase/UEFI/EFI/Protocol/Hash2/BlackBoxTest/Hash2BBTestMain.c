@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2016 Unified EFI, Inc. All  
+  Copyright 2016 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -190,6 +190,7 @@ EFI_GUID gHashAlgorithmGuids[6]={
 //
 
 EFI_STATUS
+EFIAPI
 InitializeHash2BBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -216,6 +217,7 @@ InitializeHash2BBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadHash2BBTest (
   IN EFI_HANDLE                   ImageHandle
   )

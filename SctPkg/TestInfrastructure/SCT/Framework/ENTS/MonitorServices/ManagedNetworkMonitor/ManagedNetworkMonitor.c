@@ -222,6 +222,7 @@ ReSendTimer (
   );
 
 EFI_STATUS
+EFIAPI
 ManagedNetworkMonitorUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -230,6 +231,7 @@ ManagedNetworkMonitorUnload (
 // External functions implementations
 //
 EFI_STATUS
+EFIAPI
 ManagedNetworkMonitorEntryPoint (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -307,6 +309,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 ManagedNetworkMonitorUnload (
   IN EFI_HANDLE                ImageHandle
   )

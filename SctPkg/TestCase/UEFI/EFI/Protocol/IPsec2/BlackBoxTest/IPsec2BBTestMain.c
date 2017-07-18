@@ -108,6 +108,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 //
 
 EFI_STATUS
+EFIAPI
 InitializeIPsec2BBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -134,6 +135,7 @@ InitializeIPsec2BBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadIPsec2BBTest (
   IN EFI_HANDLE                   ImageHandle
   )

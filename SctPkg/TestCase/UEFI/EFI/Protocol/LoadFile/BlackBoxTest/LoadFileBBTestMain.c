@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -102,6 +102,7 @@ EFI_BB_TEST_PROTOCOL *gLoadFileTestProt;
  *  @return EFI_INVALID_PARAMETER: One of the parameters has an invalid value.
  */
 EFI_STATUS
+EFIAPI
 InitializeLoadFileTest (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -128,6 +129,7 @@ InitializeLoadFileTest (
 }
 
 EFI_STATUS
+EFIAPI
 UnloadLoadFileTest (
   IN EFI_HANDLE       ImageHandle
   )

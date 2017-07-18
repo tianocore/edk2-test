@@ -35,12 +35,13 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Byosoft Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010, Byosoft Corporation. All rights reserved.<BR>
+  Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>  
    
 --*/
 /*++
@@ -60,6 +61,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 InitializeValidHiiImage1 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -67,6 +69,7 @@ InitializeValidHiiImage1 (
 
 
 EFI_STATUS
+EFIAPI
 InitializeValidHiiImage1 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

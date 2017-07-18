@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -420,6 +420,7 @@ EFI_BB_TEST_PROTOCOL *gBBTestPciIoProtocolInterface;
  *  @return  EFI_SUCCESS the BBTest Interface was installed successfully.
  */
 EFI_STATUS
+EFIAPI
 InitializeBBTestPciIo (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -449,6 +450,7 @@ InitializeBBTestPciIo (
  *  @return EFI_SUCCESS the BBTest Protocol and relative resource was cleaned successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestPciIoUnload (
   IN EFI_HANDLE       ImageHandle
   )

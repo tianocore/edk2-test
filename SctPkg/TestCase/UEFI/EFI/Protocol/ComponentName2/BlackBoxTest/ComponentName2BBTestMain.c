@@ -122,6 +122,7 @@ EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
  *  @return EFI_INVALID_PARAMETER: One of the parameters has an invalid value.
  */
 EFI_STATUS
+EFIAPI
 InitializeBBTestComponentName2 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -151,6 +152,7 @@ InitializeBBTestComponentName2 (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BBTestComponentName2Unload (
   IN EFI_HANDLE       ImageHandle
   )

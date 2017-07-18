@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -79,12 +79,14 @@ typedef struct {
 DEVICE_DRIVER_4_PRIVATE_DATA          *mPrivateData;
 
 EFI_STATUS
+EFIAPI
 InitializeDeviceDriver4 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -92,6 +94,7 @@ DeviceDriver4BindingSupported (
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -99,6 +102,7 @@ DeviceDriver4BindingStart (
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -123,6 +127,7 @@ InitializeInterfaceFunctionTestProtocol3 (
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4Unload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -133,6 +138,7 @@ DeviceDriver4Unload (
 //
 
 EFI_STATUS
+EFIAPI
 InitializeDeviceDriver4 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -183,6 +189,7 @@ InitializeDeviceDriver4 (
 }
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -207,6 +214,7 @@ DeviceDriver4BindingSupported (
 }
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -243,6 +251,7 @@ DeviceDriver4BindingStart (
 }
 
 EFI_STATUS
+EFIAPI
 DeviceDriver4BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -308,6 +317,7 @@ InitializeInterfaceFunctionTestProtocol3 (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 DeviceDriver4Unload (
   IN EFI_HANDLE       ImageHandle
   )

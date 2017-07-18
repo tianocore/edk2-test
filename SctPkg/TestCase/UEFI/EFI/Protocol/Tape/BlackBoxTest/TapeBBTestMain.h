@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Phoenix Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Phoenix Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -74,12 +74,14 @@ Abstract:
   { 0x1e93e633, 0xd65a, 0x459e, {0xab, 0x84, 0x93, 0xd9, 0xec, 0x26, 0x6d, 0x18 }}
 
 EFI_STATUS
+EFIAPI
 InitializeTapeTest (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 UnloadTapeTest (
   IN EFI_HANDLE       ImageHandle
   );

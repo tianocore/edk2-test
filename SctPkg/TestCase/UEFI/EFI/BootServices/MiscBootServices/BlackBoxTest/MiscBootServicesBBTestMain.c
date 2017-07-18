@@ -246,6 +246,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
 
 EFI_STATUS
+EFIAPI
 BBTestMiscBootServicesUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -258,6 +259,7 @@ BBTestMiscBootServicesUnload (
  *  @return EFI_SUCCESS the driver is loaded successfully.
  */
 EFI_STATUS
+EFIAPI
 InitializeBBTestMiscBootServices (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -281,6 +283,7 @@ InitializeBBTestMiscBootServices (
  *  @return EFI_SUCCESS unload successfully.
 */
 EFI_STATUS
+EFIAPI
 BBTestMiscBootServicesUnload (
   IN EFI_HANDLE       ImageHandle
   )

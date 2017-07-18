@@ -137,6 +137,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 
 
 EFI_STATUS
+EFIAPI
 InitializePkcs7VerifyBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -232,6 +233,7 @@ InitializePkcs7VerifyBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadPkcs7VerifyBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

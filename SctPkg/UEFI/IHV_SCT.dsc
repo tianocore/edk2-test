@@ -98,16 +98,19 @@
   MSFT:*_*_X64_APP_FLAGS   = /D EFI_SPECIFICATION_VERSION=0x00020028 /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
   MSFT:*_*_X64_PP_FLAGS    = /D EFI_SPECIFICATION_VERSION=0x00020028 /D TIANO_RELEASE_VERSION=0x00080006 /D EFIX64
 
-  GCC:*_*_IA32_CC_FLAGS     = -D EFI32 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error -DEFI_SPECIFICATION_VERSION=0x00020028 -mno-red-zone -Wno-address -mno-stack-arg-probe "-DEFIAPI=__attribute__((ms_abi))" -m32 -mabi=ms -D MDE_CPU_X32
-  GCC:*_*_IA32_VFRPP_FLAGS  = -D EFI32 $(GCC_VER_MACRO)
-  GCC:*_*_IA32_APP_FLAGS    = -D EFI32 $(GCC_VER_MACRO)
-  GCC:*_*_IA32_PP_FLAGS     = -D EFI32 $(GCC_VER_MACRO)
+#  GCC:*_*_IA32_CC_FLAGS     = -D EFI32 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error -DEFI_SPECIFICATION_VERSION=0x00020028 -mno-red-zone -Wno-address -mno-stack-arg-probe "-DEFIAPI=__attribute__((ms_abi))" -m32 -mabi=ms -D MDE_CPU_X32
+   GCC:*_*_IA32_CC_FLAGS     = -D EFIX64 $(GCC_VER_MACRO) -Wno-error 
+#  GCC:*_*_IA32_VFRPP_FLAGS  = -D EFI32 $(GCC_VER_MACRO)
+#  GCC:*_*_IA32_APP_FLAGS    = -D EFI32 $(GCC_VER_MACRO)
+#  GCC:*_*_IA32_PP_FLAGS     = -D EFI32 $(GCC_VER_MACRO)
 
-  GCC:*_*_X64_CC_FLAGS     = -D EFIX64 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error -DEFI_SPECIFICATION_VERSION=0x00020028 -mno-red-zone -Wno-address -mno-stack-arg-probe "-DEFIAPI=__attribute__((ms_abi))" -m64 -mcmodel=large -mabi=ms -D MDE_CPU_X64
-  GCC:*_*_X64_VFRPP_FLAGS  = -D EFIX64 $(GCC_VER_MACRO)
-  GCC:*_*_X64_APP_FLAGS    = -D EFIX64 $(GCC_VER_MACRO)
-  GCC:*_*_X64_PP_FLAGS     = -D EFIX64 $(GCC_VER_MACRO)
-  GCC:*_*_X64_ASM_FLAGS    = -DEFIX64
+#  GCC:*_*_X64_CC_FLAGS     = -D EFIX64 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error -DEFI_SPECIFICATION_VERSION=0x00020028 -mno-red-zone -Wno-address -mno-stack-arg-probe "-DEFIAPI=__attribute__((ms_abi))" -m64 -mcmodel=large -mabi=ms -D MDE_CPU_X64
+
+   GCC:*_*_X64_CC_FLAGS     = -D EFIX64 $(GCC_VER_MACRO) -Wno-error 
+#  GCC:*_*_X64_VFRPP_FLAGS  = -D EFIX64 $(GCC_VER_MACRO)
+#  GCC:*_*_X64_APP_FLAGS    = -D EFIX64 $(GCC_VER_MACRO)
+#  GCC:*_*_X64_PP_FLAGS     = -D EFIX64 $(GCC_VER_MACRO)
+#  GCC:*_*_X64_ASM_FLAGS    = -DEFIX64
 
   #TODO: OM - fixme RVCT:*_*_ARM_CC_FLAGS = -D EFIARM $(GCC_VER_MACRO)
   *_*_ARM_CC_FLAGS = -D EFIARM

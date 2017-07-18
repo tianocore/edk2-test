@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -233,12 +233,14 @@ EFI_GUID gTestVendor2Guid = TEST_VENDOR2_GUID;
 //
 
 EFI_STATUS
+EFIAPI
 InitializeVariableServicesBbTest (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 UnloadVariableServicesBbTest (
   IN EFI_HANDLE       ImageHandle
   );
@@ -257,6 +259,7 @@ UnloadVariableServicesBbTest (
  *  @return EFI_INVALID_PARAMETER   One of parameters is invalid.
  */
 EFI_STATUS
+EFIAPI
 InitializeVariableServicesBbTest (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -281,6 +284,7 @@ InitializeVariableServicesBbTest (
  *  @return EFI_SUCCESS   The interface was uninstalled successfully.
  */
 EFI_STATUS
+EFIAPI
 UnloadVariableServicesBbTest (
   IN EFI_HANDLE       ImageHandle
   )

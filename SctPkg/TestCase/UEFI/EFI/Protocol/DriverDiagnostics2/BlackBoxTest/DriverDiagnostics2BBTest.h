@@ -104,12 +104,14 @@ extern EFI_GUID mTestNoInterfaceProtocol2Guid;
 //
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestDriverDiagnostics2 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDriverDiagnostics2Unload (
   IN EFI_HANDLE       ImageHandle
   );

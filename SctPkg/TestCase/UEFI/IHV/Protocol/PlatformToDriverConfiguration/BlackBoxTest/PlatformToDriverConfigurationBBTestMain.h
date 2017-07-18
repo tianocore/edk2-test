@@ -67,8 +67,6 @@ Abstract:
 
 #define  PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL_TEST_REVISION    0x00010000
 
-EFI_HANDLE DriverImageHandle;
-
 #define IHV_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL_GUID    \
 {   \
   0xf0b5e017, 0xcfc9, 0x4b37, 0x98, 0xb8, 0xd9, 0xaa, 0x9b, 0x7e, 0x1f, 0xec    \
@@ -120,12 +118,14 @@ typedef struct{
 
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestPlatformToDriverConfiguration (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPlatformToDriverConfigurationProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );

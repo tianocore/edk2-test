@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -78,12 +78,14 @@ typedef struct {
 DEVICE_DRIVER_14_PRIVATE_DATA          *mPrivateData;
 
 EFI_STATUS
+EFIAPI
 InitializeDeviceDriver14 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -91,6 +93,7 @@ DeviceDriver14BindingSupported (
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -98,6 +101,7 @@ DeviceDriver14BindingStart (
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -122,6 +126,7 @@ InitializeInterfaceFunctionTestProtocol7 (
   );
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14Unload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -131,6 +136,7 @@ DeviceDriver14Unload (
 //
 
 EFI_STATUS
+EFIAPI
 InitializeDeviceDriver14 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -180,6 +186,7 @@ InitializeDeviceDriver14 (
 }
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -204,6 +211,7 @@ DeviceDriver14BindingSupported (
 }
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -240,6 +248,7 @@ DeviceDriver14BindingStart (
 }
 
 EFI_STATUS
+EFIAPI
 DeviceDriver14BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -305,6 +314,7 @@ InitializeInterfaceFunctionTestProtocol7 (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 DeviceDriver14Unload (
   IN EFI_HANDLE       ImageHandle
   )

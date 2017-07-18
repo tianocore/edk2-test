@@ -85,7 +85,7 @@ BBTestGetDriverConformanceAutoTest (
   EFI_HANDLE                             *Handles;
   UINTN                                  HandlesNo;
   UINTN                                  HandleIndex;
-  EFI_HANDLE                             ImageHandle;
+  EFI_HANDLE                             DriverImageHandle;
 
   //
   // Get the Standard Library Interface
@@ -117,12 +117,12 @@ BBTestGetDriverConformanceAutoTest (
   // Check Point 1
   // Invoke GetDriver() with invalide controller handle
   //
-  ImageHandle = NULL;
+  DriverImageHandle = NULL;
   Handles = NULL;
   Status = PlatformDriverOverride->GetDriver (
                                      PlatformDriverOverride,
                                      Handles,
-                                     &ImageHandle
+                                     &DriverImageHandle
                                      );
   if(Status == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -150,11 +150,11 @@ BBTestGetDriverConformanceAutoTest (
   SctLocateHandle (AllHandles, NULL, NULL, &HandlesNo, &Handles);
 
   for (HandleIndex = 0; HandleIndex < HandlesNo; HandleIndex++) {
-    ImageHandle = NULL;
+    DriverImageHandle = NULL;
     Status = PlatformDriverOverride->GetDriver (
                                        PlatformDriverOverride,
                                        Handles[HandleIndex],
-                                       &ImageHandle
+                                       &DriverImageHandle
                                        );
     
     if (Status == EFI_SUCCESS){
@@ -350,7 +350,7 @@ BBTestDriverLoadedConformanceAutoTest (
   UINTN                                  HandleIndex;
   EFI_DEVICE_PATH_PROTOCOL               *DriverImagePath;
   EFI_DEVICE_PATH_PROTOCOL               *NewDriverImagePath;
-  EFI_HANDLE                             ImageHandle;
+  EFI_HANDLE                             DriverImageHandle;
   EFI_DEVICE_PATH_PROTOCOL               *FilePath;
   CHAR16                                 *TempFileName;
 
@@ -385,7 +385,7 @@ BBTestDriverLoadedConformanceAutoTest (
   ControllerHandle = NULL;
   DriverImagePath = NULL;
   NewDriverImagePath = NULL;
-  ImageHandle = NULL;
+  DriverImageHandle = NULL;
   FilePath = NULL;
   TempFileName = L"PlatformDriverOverrideBBTest.efi";
 
@@ -428,11 +428,11 @@ BBTestDriverLoadedConformanceAutoTest (
   FilePath = SctFileDevicePath (NULL, TempFileName);
   Status = gtBS->LoadImage(
                    FALSE,
-                   ImageHandle,
+                   DriverImageHandle,
                    FilePath,
                    NULL,
                    0,
-                   &ImageHandle
+                   &DriverImageHandle
                    );
 
   //
@@ -443,7 +443,7 @@ BBTestDriverLoadedConformanceAutoTest (
                                      PlatformDriverOverride,
                                      ControllerHandle,
                                      DriverImagePath,
-                                     ImageHandle
+                                     DriverImageHandle
                                      );
 
   if ((Status == EFI_NOT_FOUND) || (Status == EFI_UNSUPPORTED)) {
@@ -473,7 +473,7 @@ BBTestDriverLoadedConformanceAutoTest (
                                      PlatformDriverOverride,
                                      NULL,
                                      DriverImagePath,
-                                     ImageHandle
+                                     DriverImageHandle
                                      );
 
   if ((Status == EFI_INVALID_PARAMETER) || (Status == EFI_UNSUPPORTED)) {
@@ -500,7 +500,7 @@ BBTestDriverLoadedConformanceAutoTest (
                                      PlatformDriverOverride,
                                      ControllerHandle,
                                      NULL,
-                                     ImageHandle
+                                     DriverImageHandle
                                      );
 
   if ((Status == EFI_INVALID_PARAMETER) || (Status == EFI_UNSUPPORTED)) {
