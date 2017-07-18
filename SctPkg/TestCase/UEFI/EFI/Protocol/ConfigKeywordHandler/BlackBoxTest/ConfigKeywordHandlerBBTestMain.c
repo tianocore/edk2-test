@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2016 Unified EFI, Inc. All  
+  Copyright 2016 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -122,6 +122,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 CONST EFI_STRING FullStr = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=00&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortEnable:1&VALUE=01&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortEnable:2&VALUE=01&READONLY";
 
 EFI_STATUS
+EFIAPI
 InitializeConfigKeywordHandlerBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -148,6 +149,7 @@ InitializeConfigKeywordHandlerBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadConfigKeywordHandlerBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

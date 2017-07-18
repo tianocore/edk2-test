@@ -114,12 +114,14 @@ extern EFI_GUID mTestNoInterfaceProtocol2Guid;
 //
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestComponentName2 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestComponentName2Unload (
   IN EFI_HANDLE       ImageHandle
   );

@@ -89,12 +89,14 @@ Abstract:
 //
 //
 EFI_STATUS
+EFIAPI
 InitializeEraseBlockBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
   );
   
 EFI_STATUS
+EFIAPI
 UnloadEraseBlockBBTest (
   IN EFI_HANDLE                   ImageHandle
   ); 

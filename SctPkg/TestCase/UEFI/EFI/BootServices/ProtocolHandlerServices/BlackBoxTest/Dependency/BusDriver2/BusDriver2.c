@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -79,12 +79,14 @@ typedef struct {
 BUS_DRIVER_2_PRIVATE_DATA          *mPrivateData;
 
 EFI_STATUS
+EFIAPI
 InitializeBusDriver2 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver2BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -92,6 +94,7 @@ BusDriver2BindingSupported (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver2BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -99,6 +102,7 @@ BusDriver2BindingStart (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver2BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -123,6 +127,7 @@ InitializeInterfaceFunctionTestProtocol2 (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver2Unload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -133,6 +138,7 @@ BusDriver2Unload (
 
 
 EFI_STATUS
+EFIAPI
 InitializeBusDriver2 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -182,6 +188,7 @@ InitializeBusDriver2 (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver2BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -206,6 +213,7 @@ BusDriver2BindingSupported (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver2BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -280,6 +288,7 @@ BusDriver2BindingStart (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver2BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -374,6 +383,7 @@ InitializeInterfaceFunctionTestProtocol2 (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BusDriver2Unload (
   IN EFI_HANDLE       ImageHandle
   )

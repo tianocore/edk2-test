@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  (C) Copyright 2016 Hewlett Packard Enterprise Development LP<BR>
+  (C) Copyright 2016 - 2017 Hewlett Packard Enterprise Development LP<BR>
    
 --*/
 /*++
@@ -98,12 +98,14 @@ typedef struct {
 // functions declaration
 //
 EFI_STATUS
+EFIAPI
 InitializeBBTestRegularExpression (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegularExpressionUnload (
   IN EFI_HANDLE       ImageHandle
   );

@@ -36,12 +36,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2012 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2012, Dell Inc.  All rights reserved.   
+  Copyright (c) 2010 - 2017, Dell Inc.  All rights reserved.   
    
 --*/
 
@@ -218,6 +218,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 
 
 EFI_STATUS
+EFIAPI
 InitializeFirmwareManagementBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -243,6 +244,7 @@ InitializeFirmwareManagementBBTest (
 }
 
 EFI_STATUS
+EFIAPI
 UnloadFirmwareManagementBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

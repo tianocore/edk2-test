@@ -120,12 +120,14 @@ typedef struct{
 
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestPlatformToDriverConfiguration (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPlatformToDriverConfigurationProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );

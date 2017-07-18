@@ -109,6 +109,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 
 
 EFI_STATUS
+EFIAPI
 InitializeEraseBlockBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -137,6 +138,7 @@ InitializeEraseBlockBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadEraseBlockBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

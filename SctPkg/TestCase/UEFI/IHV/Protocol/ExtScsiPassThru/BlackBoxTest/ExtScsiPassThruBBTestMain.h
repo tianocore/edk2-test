@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006, 2007, 2008, 2009, 2010 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -71,12 +71,14 @@ Abstract:
   { 0x9d5fc9db, 0x2f5d, 0x4a92, { 0xa4, 0x2a, 0xef, 0xc0, 0xb7, 0x1e, 0xa1, 0x3d } }
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestExtScsiPassThru (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtScsiPassThruProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );

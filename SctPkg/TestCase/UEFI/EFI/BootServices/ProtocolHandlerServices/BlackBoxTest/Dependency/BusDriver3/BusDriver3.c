@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -80,12 +80,14 @@ typedef struct {
 BUS_DRIVER_3_PRIVATE_DATA          *mPrivateData;
 
 EFI_STATUS
+EFIAPI
 InitializeBusDriver3 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver3BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -93,6 +95,7 @@ BusDriver3BindingSupported (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver3BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -100,6 +103,7 @@ BusDriver3BindingStart (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver3BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -135,6 +139,7 @@ InitializeInterfaceFunctionTestProtocol3 (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver3Unload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -145,6 +150,7 @@ BusDriver3Unload (
 
 
 EFI_STATUS
+EFIAPI
 InitializeBusDriver3 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -194,6 +200,7 @@ InitializeBusDriver3 (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver3BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -218,6 +225,7 @@ BusDriver3BindingSupported (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver3BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -316,6 +324,7 @@ BusDriver3BindingStart (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver3BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -439,6 +448,7 @@ InitializeInterfaceFunctionTestProtocol3 (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BusDriver3Unload (
   IN EFI_HANDLE       ImageHandle
   )

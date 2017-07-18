@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2014 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -193,6 +193,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
 
 EFI_STATUS
+EFIAPI
 BBTestScsiPassThruProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -205,6 +206,7 @@ BBTestScsiPassThruProtocolUnload (
  *  @return EFI_SUCCESS the driver is loaded successfully.
  */
 EFI_STATUS
+EFIAPI
 InitializeBBTestScsiPassThru (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -229,6 +231,7 @@ InitializeBBTestScsiPassThru (
  *  @return EFI_SUCCESS unload successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestScsiPassThruProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   )

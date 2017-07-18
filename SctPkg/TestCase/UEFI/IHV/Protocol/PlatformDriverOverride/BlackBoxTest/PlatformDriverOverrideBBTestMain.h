@@ -71,12 +71,14 @@ Abstract:
   { 0x5e344e28, 0x3bc0, 0x4c23, 0x8d, 0x5f, 0xfb, 0xed, 0x3f, 0xb2, 0x7e, 0x72 }
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestPlatformDriverOverride (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPlatformDriverOverrideProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );

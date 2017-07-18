@@ -188,6 +188,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 
 
 EFI_STATUS
+EFIAPI
 InitializeSDMMCPassThruBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -216,6 +217,7 @@ InitializeSDMMCPassThruBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadSDMMCPassThruBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

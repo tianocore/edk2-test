@@ -117,12 +117,14 @@ Abstract:
 //
 //
 EFI_STATUS
+EFIAPI
 InitializeSDMMCPassThruBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
   );
   
 EFI_STATUS
+EFIAPI
 UnloadSDMMCPassThruBBTest (
   IN EFI_HANDLE                   ImageHandle
   ); 

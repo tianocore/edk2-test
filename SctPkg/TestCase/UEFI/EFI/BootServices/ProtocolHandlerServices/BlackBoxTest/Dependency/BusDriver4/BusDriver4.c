@@ -35,12 +35,12 @@
   DOCUMENT, WHETHER OR NOT SUCH PARTY HAD ADVANCE NOTICE OF     
   THE POSSIBILITY OF SUCH DAMAGES.                              
                                                                 
-  Copyright 2006 - 2016 Unified EFI, Inc. All  
+  Copyright 2006 - 2017 Unified EFI, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
   EFI, Inc. makes no claim of right.                            
                                                                 
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
    
 --*/
 /*++
@@ -86,12 +86,14 @@ typedef struct {
 BUS_DRIVER_4_PRIVATE_DATA          *mPrivateData;
 
 EFI_STATUS
+EFIAPI
 InitializeBusDriver4 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver4BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -99,6 +101,7 @@ BusDriver4BindingSupported (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver4BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -106,6 +109,7 @@ BusDriver4BindingStart (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver4BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -119,6 +123,7 @@ InitializeDriverBinding (
   );
 
 EFI_STATUS
+EFIAPI
 BusDriver4Unload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -128,6 +133,7 @@ BusDriver4Unload (
 //
 
 EFI_STATUS
+EFIAPI
 InitializeBusDriver4 (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
@@ -177,6 +183,7 @@ InitializeBusDriver4 (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver4BindingSupported (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -201,6 +208,7 @@ BusDriver4BindingSupported (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver4BindingStart (
   IN EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN EFI_HANDLE                     Controller,
@@ -279,6 +287,7 @@ BusDriver4BindingStart (
 }
 
 EFI_STATUS
+EFIAPI
 BusDriver4BindingStop (
   IN  EFI_DRIVER_BINDING_PROTOCOL    *This,
   IN  EFI_HANDLE                     Controller,
@@ -377,6 +386,7 @@ InitializeDriverBinding (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BusDriver4Unload (
   IN EFI_HANDLE       ImageHandle
   )
