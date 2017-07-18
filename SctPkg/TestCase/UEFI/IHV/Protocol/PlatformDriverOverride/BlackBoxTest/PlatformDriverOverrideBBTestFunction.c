@@ -87,7 +87,7 @@ BBTestGetDriverFunctionAutoTest (
   EFI_HANDLE                             *Handles;
   UINTN                                  HandlesNo;
   UINTN                                  HandleIndex;
-  EFI_HANDLE                             ImageHandle;
+  EFI_HANDLE                             DriverImageHandle;
 
   //
   // Get the Standard Library Interface
@@ -123,12 +123,12 @@ BBTestGetDriverFunctionAutoTest (
   SctLocateHandle (AllHandles, NULL, NULL, &HandlesNo, &Handles);
 
   for (HandleIndex = 0; HandleIndex < HandlesNo; HandleIndex++) {
-    ImageHandle = NULL;
+    DriverImageHandle = NULL;
     while(!EFI_ERROR(Status)) {
       Status = PlatformDriverOverride->GetDriver (
                                          PlatformDriverOverride,
                                          Handles[HandleIndex],
-                                         &ImageHandle
+                                         &DriverImageHandle
                                          );
     }
 
@@ -282,7 +282,7 @@ BBTestDriverLoadedFunctionAutoTest (
   UINTN                                  HandlesNo;
   UINTN                                  HandleIndex;
   EFI_DEVICE_PATH_PROTOCOL               *DriverImagePath;
-  EFI_HANDLE                             ImageHandle;
+  EFI_HANDLE                             DriverImageHandle;
   EFI_HANDLE                             NewDriverImageHandle;
   EFI_DEVICE_PATH_PROTOCOL               *FilePath;
   CHAR16                                 *TempFileName;
@@ -322,7 +322,7 @@ BBTestDriverLoadedFunctionAutoTest (
 
   ControllerHandle = NULL;
   DriverImagePath = NULL;
-  ImageHandle = NULL;
+  DriverImageHandle = NULL;
   FilePath = NULL;
   TempFileName = L"PlatformDriverOverrideBBTest.efi";
 
@@ -356,18 +356,18 @@ BBTestDriverLoadedFunctionAutoTest (
   FilePath = SctFileDevicePath (NULL, TempFileName);
   Status = gtBS->LoadImage(
                    FALSE,
-                   ImageHandle,
+                   DriverImageHandle,
                    FilePath,
                    NULL,
                    0,
-                   &ImageHandle
+                   &DriverImageHandle
                    );
 
   Status = PlatformDriverOverride->DriverLoaded (
                                      PlatformDriverOverride,
                                      ControllerHandle,
                                      DriverImagePath,
-                                     ImageHandle
+                                     DriverImageHandle
                                      );
 
   if(Status == EFI_SUCCESS) {
@@ -397,7 +397,7 @@ BBTestDriverLoadedFunctionAutoTest (
     return Status;
   }
 
-  if(NewDriverImageHandle == ImageHandle) {
+  if(NewDriverImageHandle == DriverImageHandle) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
