@@ -201,13 +201,13 @@ BBTestMemoryMapTest (
     //
     // Checking for identity mapping
     //
-    if (MemoryMapDescriptor->PhysicalStart != MemoryMapDescriptor->VirtualStart) {
+    if (MemoryMapDescriptor->PhysicalStart == MemoryMapDescriptor->VirtualStart) {
       StandardLib->RecordAssertion (
                   StandardLib,
-                  EFI_TEST_ASSERTION_FAILED,
+                  EFI_TEST_ASSERTION_WARNING,
                   gSbbrBootServicesAssertion001Guid,
                   L"MemoryMap",
-                  L"%a:%d - MemoryMap 0x%X Not Identity Mapped",
+                  L"%a:%d - MemoryMap 0x%X is Identity Mapped. UEFI runtime environment must not be written with any assumption of an identity mapping between virtual and physical memory maps.",
                   __FILE__,
                   __LINE__,
                   MemoryMapDescriptor
