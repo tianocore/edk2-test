@@ -205,6 +205,44 @@ SctPkg/TestCase/UEFI/EFI/BootServices/EventTimerTaskPriorityServices/BlackBoxTes
 ## 12. EFI_IMAGE_UNLOAD
 ## 13. EFI_EXIT_BOOT_SERVICES
 SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/ImageBBTest.inf
+##
+## Dependency files for Image Services Test
+##
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/LoadFile/LoadFile.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/Application1/Application1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/Application2/Application2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/Application3/Application3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/Application4/Application4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/BootServicesDriver1/BootServicesDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/BootServicesDriver2/BootServicesDriver2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/BootServicesDriver3/BootServicesDriver3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/BootServicesDriver4/BootServicesDriver4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/BootServicesDriver5/BootServicesDriver5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/BootServicesDriver6/BootServicesDriver6.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/RuntimeServicesDriver1/RuntimeServicesDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/RuntimeServicesDriver2/RuntimeServicesDriver2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/RuntimeServicesDriver3/RuntimeServicesDriver3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/RuntimeServicesDriver4/RuntimeServicesDriver4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/RuntimeServicesDriver5/RuntimeServicesDriver5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/RuntimeServicesDriver6/RuntimeServicesDriver6.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage1/CombinationImage1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage2/CombinationImage2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage3/CombinationImage3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage4/CombinationImage4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage5/CombinationImage5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage6/CombinationImage6.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage7/CombinationImage7.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage8/CombinationImage8.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage9/CombinationImage9.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/CombinationImage10/CombinationImage10.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage1/InvalidImage1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage2/InvalidImage2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage3/InvalidImage3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage4/InvalidImage4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage5/InvalidImage5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage6/InvalidImage6.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/InvalidImage7/InvalidImage7.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ImageServices/BlackBoxTest/Dependency/ValidHiiImage1/ValidHiiImage1.inf
 #
 ## 14. EFI_ALLOCATE_PAGES
 ## 15. EFI_FREE_PAGES
@@ -240,6 +278,41 @@ SctPkg/TestCase/UEFI/EFI/BootServices/MiscBootServices/BlackBoxTest/MiscBootServ
 ## 41. EFI_INSTALL_MULTIPLE_PROTOCOL_INTERFACES
 ## 42. EFI_UNINSTALL_MULTIPLE_PROTOCOL_INTERFACES
 SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/ProtocolHandlerBBTest.inf
+##
+## Dependency files for Protocol Handler Services Test
+##
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/BusDriver1/BusDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/BusDriver2/BusDriver2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/BusDriver3/BusDriver3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/BusDriver4/BusDriver4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DBindingDriver1/DBindingDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DBindingDriver2/DBindingDriver2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DBindingDriver3/DBindingDriver3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DBindingDriver4/DBindingDriver4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DBindingDriver5/DBindingDriver5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver1/DeviceDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver2/DeviceDriver2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver3/DeviceDriver3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver4/DeviceDriver4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver5/DeviceDriver5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver6/DeviceDriver6.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver7/DeviceDriver7.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver11/DeviceDriver11.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver12/DeviceDriver12.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver13/DeviceDriver13.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver14/DeviceDriver14.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver15/DeviceDriver15.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver18/DeviceDriver18.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver19/DeviceDriver19.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver110/DeviceDriver110.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/DeviceDriver111/DeviceDriver111.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/TestDriver1/TestDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/TestDriver2/TestDriver2.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/TestDriver3/TestDriver3.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/TestDriver4/TestDriver4.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/TestDriver5/TestDriver5.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/PlatformOverrideDriver1/PlatformOverrideDriver1.inf
+SctPkg/TestCase/UEFI/EFI/BootServices/ProtocolHandlerServices/BlackBoxTest/Dependency/BusOverrideDriver1/BusOverrideDriver1.inf
 # End of Boot Services Tests - SBBR v1.0 Appendix A
 
 #
@@ -292,11 +365,11 @@ SctPkg/TestCase/UEFI/EFI/RuntimeServices/SBBRRuntimeServices/BlackBoxTest/SBBRRu
 #
 SctPkg/TestCase/UEFI/EFI/Generic/SbbrRequiredUefiProtocols/BlackBoxTest/RequiredUefiProtocolsBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Generic/EfiCompliant/BlackBoxTest/EfiCompliantBBTest_uefi.inf
+##
+## Dependency files for UEFI/EFI Compliant Test
+##
+SctPkg/TestCase/UEFI/EFI/Generic/EfiCompliant/BlackBoxTest/Dependency/Config/Config.inf
 # End of UEFI Required Protocols Tests - SBBR Appendix C
-
-#
-# Dependency files
-#
 
 #
 # Support Files
