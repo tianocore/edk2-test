@@ -1546,18 +1546,6 @@
     │           ├── Io.h
     │           ├── Port80.asm
     │           └── Port80.S
-    ├── SctPackage
-    │   ├── Application
-    │   ├── Data
-    │   ├── Dependency
-    │   ├── Ents
-    │   │   ├── Support
-    │   │   └── Test
-    │   ├── Proxy
-    │   ├── Report
-    │   ├── Sequence
-    │   ├── Support
-    │   └── Test
     ├── SctPkg.dec
     ├── TestCase
     │   ├── RIVL
