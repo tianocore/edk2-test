@@ -1,6 +1,21 @@
-The files originally contributed to this project in September 2018 (the “FILES”) relate to Unified EFI Forum, Inc. (“UEFI”) Self-Certification Test 2.6 A.   The FILES are, include, or depend upon contributions originally made under the UEFI Promoters Agreement and UEFI Contributors Agreement (the “UEFI Contributions”) by a number of contributors.  In 2018, the relevant contributors — Arm, Dell, HPE, Intel, Nanjing Byosoft, Phoenix — consented to donation of the FILES to this project, consented to disclosure of the FILES consistent with TianoCore Contribution Agreement 1.1, and granted copyright and patent licenses consistent with Section 2 of TianoCore Contribution Agreement 1.1 as to any of their respective UEFI Contributions that were incorporated into or were necessarily required by the published UEFI Self-Certification Test 2.6 A.
+The files originally contributed to this project in September 2018
+(the "FILES") relate to Unified EFI Forum, Inc.
+("UEFI") Self-Certification Test 2.6 A. The FILES are, include, or
+depend upon contributions originally made under the UEFI Promoters
+Agreement and UEFI Contributors Agreement (the "UEFI Contributions")
+by a number of contributors.  In 2018, the relevant contributors -
+Arm, Dell, HPE, Intel, Nanjing Byosoft, Phoenix - consented to
+donation of the FILES to this project, consented to disclosure of 
+the FILES consistent with TianoCore Contribution Agreement 1.1,
+and granted copyright and patent licenses consistent with Section 2
+of TianoCore Contribution Agreement 1.1 as to any of their respective
+UEFI Contributions that were incorporated into or were necessarily
+required by the published UEFI Self-Certification Test 2.6 A.
  
-The FILES as donated (and modified versions thereof) are subject to TianoCore Contribution Agreement 1.1, and also continue to be subject to a requirement that their distribution include the following disclosure of terms and conditions:
+The FILES as donated (and modified versions thereof) are subject to
+TianoCore Contribution Agreement 1.1, and also continue to be subject
+to a requirement that their distribution include the following 
+disclosure of terms and conditions:
  
   The material contained herein is not a license, either        
   expressly or impliedly, to any intellectual property owned    
@@ -41,6 +56,7 @@ The FILES as donated (and modified versions thereof) are subject to TianoCore Co
   Copyright 2006 - 2017 Unified EFI Forum, Inc. All  
   Rights Reserved, subject to all existing rights in all        
   matters included within this Test Suite, to which United      
-  EFI, Inc. makes no claim of right.                            
- 
-For additional information about the UEFI Promoters Agreement and UEFI Contributors Agreement, please contact UEFI.
+  EFI, Inc. makes no claim of right.                     
+
+For additional information about the UEFI Promoters Agreement 
+and UEFI Contributors Agreement, please contact UEFI.

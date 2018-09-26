@@ -11,11 +11,12 @@ UEFI SCT open source code.
 Contributions to the UEFI-SCT open source project are covered by the
 [TianoCore Contribution Agreement 1.1](Contributions.txt)
 
-The content in the UEFI-SCT open source project uses a
-[BSD 2-Clause License](License.txt).
+The majority of the content in the UEFI-SCT open source project uses a
+[BSD 2-Clause License] (https://github.com/tianocore/edk2-test/blob/License.txt).  
 
-The files listed in https://github.com/tianocore/edk2-test/blob/master/uefi-sct/FILES 
-are contributed by Arm, Dell, HPE, Intel, Nanjing Byosoft, Phoenix, approved by UEFI forum. 
+The files listed in https://github.com/tianocore/edk2-test/blob/master/uefi-sct/FILES
+are covered by additional licenses:
+https://github.com/tianocore/edk2-test/blob/master/uefi-sct/License.txt
 
 The UEFI-SCT is composed of tests that test against UEFI specification.
 The maintainers for the test suite
