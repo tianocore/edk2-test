@@ -9,14 +9,14 @@ user-defined tests that were developed using the
 UEFI SCT open source code.
 
 Contributions to the UEFI-SCT open source project are covered by the
-[TianoCore Contribution Agreement 1.1](Contributions.txt)
+TianoCore Contribution Agreement 1.1.
 
 The majority of the content in the UEFI-SCT open source project uses a
-[BSD 2-Clause License] (https://github.com/tianocore/edk2-test/blob/License.txt).  
+[BSD 2-Clause License] (License.txt).
 
-The files listed in https://github.com/tianocore/edk2-test/blob/master/uefi-sct/FILES
+The files listed in [FILES](FILES)
 are covered by additional licenses:
-https://github.com/tianocore/edk2-test/blob/master/uefi-sct/License.txt
+License.txt
 
 The UEFI-SCT is composed of tests that test against UEFI specification.
 The maintainers for the test suite
@@ -25,5 +25,5 @@ are listed in [Maintainers.txt](Maintainers.txt).
 # Resources
 * [TianoCore](http://www.tianocore.org)
 * [Getting Started with UEFI-SCT](https://github.com/tianocore/tianocore.github.io/wiki/UEFI-SCT)
-* [Mailing Lists](edk2 mailing lists )
+* [Mailing Lists](edk2-devel@lists.01.org)
 * [UEFI-SCT BugTracker](https://bugzilla.tianocore.org/)
