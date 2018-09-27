@@ -7,7 +7,7 @@
 4.Run "set EDK_TOOLS_PATH=<Work>\BaseTools"
 5.Run "BaseTools\toolsetup.bat"
 6.Change the current directory to <Work>\BaseTools\Source\C\Common, and run "nmake"
-7.Change the current directory to <Work>\BaseTools\Source\C\GenBiosId, and run "nmake"
-8.Then, GenBiosId.exe will be generated in <Work>\BaseTools\Bin\Win32
+7.Change the current directory to <Work>\BaseTools\Source\C\GenBin, and run "nmake"
+8.Then, GenBin.exe will be generated in <Work>\BaseTools\Bin\Win32
 
 ============================================================================

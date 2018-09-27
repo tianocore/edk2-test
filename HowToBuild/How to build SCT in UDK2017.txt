@@ -16,7 +16,7 @@ pre-installed VS2005.
     6) Move the Win32 directory into the BaseTools/Bin directory under the workspace
        (e.g. "C:\MyWorkspace\BaseTools\Bin")
     7) Copy SctPkg to C:\MyWorkSpace
-    8) Copy C:\MyWorkSpace\SctPkg\Tools\Bin\GenBin.exe C:\MyWorkSpace\BaseTools\Bin\Win32\
+    8) Refer to SctPkg\Tools\Source\GenBin\HowTo.txt to gen the GenBin.exe
 
 2. Build Instructions for UEFI SCTII X64
    1) Open the Visual Studio 2015 Command Prompt
