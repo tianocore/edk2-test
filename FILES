@@ -61,7 +61,6 @@
 |   |   |       |-- VifUp.em
 |   |   |       `-- XorPayload.em
 |   |   |-- Init.conf
-|   |   |-- Libnet.dll
 |   |   |-- Main.tcl
 |   |   |-- Script
 |   |   |   |-- About.tcl
@@ -1221,8 +1220,6 @@
 |   |       |       |-- in_systm.h
 |   |       |       `-- libnet.h
 |   |       `-- Lib
-|   |           |-- Libnet.dll
-|   |           `-- Libnet.lib
 |   `-- Src
 |       |-- EmsEftp
 |       |   |-- EmsEftp.c
@@ -3595,10 +3592,12 @@
     |               |-- TestNodeMenu.h
     |               `-- UI.h
     |-- Tools
-    |   `-- Bin
-    |       |-- GenBin.exe
-    |       |-- GenBin_lin_32
-    |       `-- GenBin_lin_64
+    |   `-- Source
+    |       `-- GenBin
+    |           |-- GenBin.c
+    |           |-- GNUmakefile
+    |           |-- HowTo.txt
+    |           `-- Makefile
     `-- UEFI
         |-- Guid
         |   |-- FileInfo.h
