@@ -1,6 +1,7 @@
 ============================================================================
                     HOW TO BUILD THE GENBIN TOOL
 ============================================================================
+a)Windows
 1.Copy the GenBin folder to <Work>\BaseTools\Source\C
 2.Open a command prompt(VS2015/VS2013/VS2008), change the current directory to <Work>
 3.Run "set BASE_TOOLS_PATH=<Work>\BaseTools"
@@ -9,5 +10,13 @@
 6.Change the current directory to <Work>\BaseTools\Source\C\Common, and run "nmake"
 7.Change the current directory to <Work>\BaseTools\Source\C\GenBin, and run "nmake"
 8.Then, GenBin.exe will be generated in <Work>\BaseTools\Bin\Win32
+
+b)Linux
+1.Copy the GenBin folder to <Work>/BaseTools/Source/C
+2.Open Terminal, change the directory to <Work>/BaseTools/Source/C/GenBin
+3.Run "export BASE_TOOLS_PATH=<Work>/BaseTools"
+4.Run "export EDK_TOOLS_PATH=<Work>/BaseTools"
+5.Run "make"
+6.Then, GenBin will be generated in <Work>/BaseTools/Source/C/bin
 
 ============================================================================
