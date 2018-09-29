@@ -65,7 +65,7 @@ LIB                  = lib
 WPCAP_INCPATH     = $(EMSLIBPATH)\WpdPack\Include
 WPCAP_LIBPATH     = $(EMSLIBPATH)\WpdPack\Lib
 
-LIBNET_INCPATH     = $(EMSLIBPATH)\Libnet\Include\Win32
+LIBNET_INCPATH     = $(EMSLIBPATH)\Libnet\Include
 LIBNET_LIBPATH     = $(EMSLIBPATH)\Libnet\Lib
                    
 TCL_INCPATH        = $(EMSLIBPATH)\Tcl\Include
