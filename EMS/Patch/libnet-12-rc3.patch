@@ -1,0 +1,294 @@
+ libnet/include/libnet/libnet-functions.h | 1 +
+ libnet/include/libnet/libnet-headers.h   | 3 ++-
+ libnet/msvcbuild.bat                     | 1 +
+ libnet/sample/icmp_echo_cq.c             | 5 +++--
+ libnet/sample/smurf.c                    | 3 ++-
+ libnet/src/libnet_checksum.c             | 3 ++-
+ libnet/src/libnet_cq.c                   | 9 +++++++++
+ libnet/src/libnet_init.c                 | 6 +++++-
+ libnet/src/libnet_pblock.c               | 1 +
+ libnet/win32/libnet.h                    | 2 +-
+ libnet/win32/stdint.h                    | 1 +
+ lua/net.c                                | 5 +++--
+ 12 files changed, 31 insertions(+), 9 deletions(-)
+
+diff --git c/libnet/include/libnet/libnet-functions.h w/libnet/include/libnet/libnet-functions.h
+index 631fc40..e717cfa 100644
+--- c/libnet/include/libnet/libnet-functions.h
++++ w/libnet/include/libnet/libnet-functions.h
+@@ -2212,10 +2212,11 @@ libnet_adv_free_packet(libnet_t *l, uint8_t *packet);
+  * @param l pointer to a libnet context
+  * @param label a canonical name given to recognize the new context, no longer than LIBNET_LABEL_SIZE
+  * @retval 1 on success
+  * @retval -1 on failure
+ */
++LIBNET_API
+ int 
+ libnet_cq_add(libnet_t *l, char *label);
+ 
+ /**
+  * [Context Queue] 
+diff --git c/libnet/include/libnet/libnet-headers.h w/libnet/include/libnet/libnet-headers.h
+index e1076e9..048ee53 100644
+--- c/libnet/include/libnet/libnet-headers.h
++++ w/libnet/include/libnet/libnet-headers.h
+@@ -829,10 +829,11 @@ struct libnet_ipv6_hbhopts_hdr
+ #endif
+ struct libnet_icmpv6_hdr
+ {
+     uint8_t icmp_type;       /* ICMP type */
+ /* Don't define if <netinet/icmp6.h> has defined them. */
++/*
+ #ifndef ICMP6_ECHO_REQUEST
+ #define ICMP6_ECHO_REQUEST           128
+ #endif
+ #ifndef ICMP6_ECHO_REPLY
+ #define ICMP6_ECHO_REPLY             129
+@@ -860,11 +861,11 @@ struct libnet_icmpv6_hdr
+ #define ND_NEIGHBOR_SOLICIT         135
+ #endif
+ #ifndef ND_NEIGHBOR_ADVERT
+ #define ND_NEIGHBOR_ADVERT          136
+ #endif
+-
++*/
+     uint8_t icmp_code;       /* ICMP code */
+ #ifndef ICMP6_DST_UNREACH_NOROUTE
+ #define ICMP6_DST_UNREACH_NOROUTE     0
+ #endif
+ #ifndef ICMP6_DST_UNREACH_ADMIN
+diff --git c/libnet/msvcbuild.bat w/libnet/msvcbuild.bat
+index 5284e64..f5268b6 100644
+--- c/libnet/msvcbuild.bat
++++ w/libnet/msvcbuild.bat
+@@ -10,10 +10,11 @@
+ @rem relative to C code in src/
+ @set WINPCAP=..\..\..\WpdPack
+ 
+ copy win32\libnet.h include\
+ copy win32\stdint.h include\libnet\
++copy win32\stdint.h include\
+ copy win32\config.h include\
+ copy win32\getopt.h include\
+ 
+ cd src
+ %MYCOMPILE% /I..\include /I%WINPCAP%\Include libnet_a*.c libnet_build_*.c libnet_c*.c libnet_dll.c libnet_error.c libnet_i*.c libnet_link_win32.c libnet_p*.c libnet_raw.c libnet_resolve.c libnet_version.c libnet_write.c
+diff --git c/libnet/sample/icmp_echo_cq.c w/libnet/sample/icmp_echo_cq.c
+index 7947c48..79a91eb 100644
+--- c/libnet/sample/icmp_echo_cq.c
++++ w/libnet/sample/icmp_echo_cq.c
+@@ -173,17 +173,18 @@ main(int argc, char **argv)
+         else
+         {
+             fprintf(stderr, "Wrote %d byte ICMP packet from context \"%s\"; "
+                     "check the wire.\n", c, libnet_cq_getlabel(l));
+         }
+-  }
++    }
+ 
+     libnet_cq_destroy();
+     return (EXIT_SUCCESS);
+ bad:
+-    libnet_cq_destroy();
++    libnet_cq_remove(l);
+     libnet_destroy(l);
++    libnet_cq_destroy();
+     return (EXIT_FAILURE);
+ }
+ 
+ void
+ usage(char *name)
+diff --git c/libnet/sample/smurf.c w/libnet/sample/smurf.c
+index ccaebdc..9644e53 100644
+--- c/libnet/sample/smurf.c
++++ w/libnet/sample/smurf.c
+@@ -178,12 +178,13 @@ main(int argc, char **argv)
+ 
+ 
+   libnet_cq_destroy();
+   return (EXIT_SUCCESS);
+ bad:
+-  libnet_cq_destroy();
++  libnet_cq_remove(l);
+   libnet_destroy(l);
++  libnet_cq_destroy();
+   return (EXIT_FAILURE);
+ }
+ 
+ void
+ usage(char *name)
+diff --git c/libnet/src/libnet_checksum.c w/libnet/src/libnet_checksum.c
+index faf6d44..bd9e5d7 100644
+--- c/libnet/src/libnet_checksum.c
++++ w/libnet/src/libnet_checksum.c
+@@ -180,10 +180,11 @@ libnet_inet_checksum(libnet_t *l, uint8_t *iphdr, int protocol, int h_len, const
+     /* will need to update this for ipv6 at some point */
+     struct libnet_ipv4_hdr *iph_p = (struct libnet_ipv4_hdr *)iphdr;
+     struct libnet_ipv6_hdr *ip6h_p = NULL; /* default to not using IPv6 */
+     int ip_hl   = 0;
+     int sum     = 0;
++    uint8_t ip_nh = 0;
+ 
+     /* Check for memory under/over reads/writes. */
+     if(iphdr < beg || (iphdr+sizeof(*iph_p)) > end)
+     {
+         snprintf(l->err_buf, LIBNET_ERRBUF_SIZE,
+@@ -199,11 +200,11 @@ libnet_inet_checksum(libnet_t *l, uint8_t *iphdr, int protocol, int h_len, const
+     if (iph_p->ip_v == 6)
+     {
+         ip6h_p = (struct libnet_ipv6_hdr *)iph_p;
+         iph_p = NULL;
+         ip_hl   = 40;
+-        uint8_t ip_nh = ip6h_p->ip_nh;
++        ip_nh = ip6h_p->ip_nh;
+ 
+         if((uint8_t*)(ip6h_p+1) > end)
+         {
+             snprintf(l->err_buf, LIBNET_ERRBUF_SIZE,
+                     "%s(): ipv6 hdr not inside packet", __func__);
+diff --git c/libnet/src/libnet_cq.c w/libnet/src/libnet_cq.c
+index 6ff5266..51e00c3 100644
+--- c/libnet/src/libnet_cq.c
++++ w/libnet/src/libnet_cq.c
+@@ -201,10 +201,11 @@ libnet_cq_remove(libnet_t *l)
+         p->next->prev = p->prev;
+     }
+ 
+     ret = p->context;
+     free(p);
++    p = NULL;
+ 
+     /* track the number of nodes in the cq */
+     l_cqd.node--;
+   
+     return (ret);
+@@ -241,10 +242,11 @@ libnet_cq_remove_by_label(char *label)
+         p->next->prev = p->prev;
+     }
+ 
+     ret = p->context;
+     free(p);
++    p = NULL;
+ 
+     /* track the number of nodes in the cq */
+     l_cqd.node--;
+   
+     return (ret);
+@@ -328,17 +330,24 @@ void
+ libnet_cq_destroy() 
+ {
+     libnet_cq_t *p = l_cq;
+     libnet_cq_t *tmp;
+ 
++    if (cq_is_locked()){
++      return ;
++    }
++
+     while (p)
+     {
+         tmp = p;
+         p = p->next;
+         libnet_destroy(tmp->context);
+         free(tmp);
++        tmp = NULL;
+     }
++    l_cq = NULL;
++    l_cqd.current = NULL;
+ }
+ 
+ libnet_t *
+ libnet_cq_head()
+ {
+diff --git c/libnet/src/libnet_init.c w/libnet/src/libnet_init.c
+index 10b8de7..c49c285 100644
+--- c/libnet/src/libnet_init.c
++++ w/libnet/src/libnet_init.c
+@@ -120,13 +120,17 @@ void
+ libnet_destroy(libnet_t *l)
+ {
+     if (l)
+     {
+         close(l->fd);
+-        free(l->device);
++        if(l->device){
++          free(l->device);
++          l->device = NULL;
++        }
+         libnet_clear_packet(l);
+         free(l);
++        l = NULL;
+     }
+ }
+ 
+ void
+ libnet_clear_packet(libnet_t *l)
+diff --git c/libnet/src/libnet_pblock.c w/libnet/src/libnet_pblock.c
+index bf2a548..9b52171 100644
+--- c/libnet/src/libnet_pblock.c
++++ w/libnet/src/libnet_pblock.c
+@@ -553,10 +553,11 @@ libnet_pblock_delete(libnet_t *l, libnet_pblock_t *p)
+             free(p->buf);
+             p->buf = NULL;
+         }
+ 
+         free(p);
++        p = NULL;
+     }
+ }
+ 
+ int
+ libnet_pblock_p2p(uint8_t type)
+diff --git c/libnet/win32/libnet.h w/libnet/win32/libnet.h
+index 18a5d6c..2c3d171 100644
+--- c/libnet/win32/libnet.h
++++ w/libnet/win32/libnet.h
+@@ -101,11 +101,11 @@ extern "C" {
+ #include <errno.h>
+ #include <stdarg.h>
+ 
+ #define LIBNET_API __declspec(dllexport)
+ 
+-#include "libnet/stdint.h"
++#include "stdint.h"
+ #include "libnet/libnet-macros.h"
+ #include "libnet/libnet-headers.h"
+ #include "libnet/libnet-structures.h"
+ #include "libnet/libnet-asn1.h"
+ #include "libnet/libnet-functions.h"
+diff --git c/libnet/win32/stdint.h w/libnet/win32/stdint.h
+index d02608a..f81efee 100644
+--- c/libnet/win32/stdint.h
++++ w/libnet/win32/stdint.h
+@@ -121,10 +121,11 @@ typedef uint64_t  uint_fast64_t;
+ 
+ // 7.18.1.5 Greatest-width integer types
+ typedef int64_t   intmax_t;
+ typedef uint64_t  uintmax_t;
+ 
++typedef	uint32_t  n_time;		/* ms since 00:00 GMT, byte rev */
+ 
+ // 7.18.2 Limits of specified-width integer types
+ 
+ #if !defined(__cplusplus) || defined(__STDC_LIMIT_MACROS) // [   See footnote 220 at page 257 and footnote 221 at page 259
+ 
+diff --git c/lua/net.c w/lua/net.c
+index bbfa710..db9a951 100644
+--- c/lua/net.c
++++ w/lua/net.c
+@@ -322,13 +322,14 @@ on garbage collection if not done explicitly).
+ */
+ static int lnet_destroy (lua_State *L)
+ {
+     libnet_t** ud = luaL_checkudata(L, 1, L_NET_REGID);
+ 
+-    if(*ud)
++    if(*ud){
++        libnet_cq_remove(*ud);
+         libnet_destroy(*ud);
+-
++    }
+     *ud = NULL;
+ 
+     return 0;
+ }
+ 
