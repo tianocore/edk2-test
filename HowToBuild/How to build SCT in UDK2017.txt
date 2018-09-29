@@ -3,7 +3,7 @@
 ================================================================================
 This section provides the build steps for UEFI/IHV SCT2, Shell2 on one X64/IA32
 Desktop/Laptop pre-installed with Windows 8 and VS2015. The current EMS build need
-pre-installed VS2005.
+pre-installed VS2008.
 
 1. Prepare the build environment
     1) Download the UDK2017 source code from the link
@@ -76,36 +76,7 @@ Build Instructions for UEFI SCTII AARCH64 (Linux)
 
 
 Build EMS :
-  Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct,
-  after this step, a subdirectory named as Ems is generated.
-  Default Ems packages use ActiveTcl8.4.19.5-threaded, Winpcap4.1.3, WpdPack3.0
-  and co-released libnet for building.
-
-  1. Setup Build Environment
-     1) Install Microsoft Windows 7 and VS2005 in build machine.
-     2) Download ActiveTCL8.4.19.5 and install it into C:\Tcl
-     3) Copy all *.lib from C:\Tcl\Lib to C:\UefiSct\Ems\Lib\Tcl\Lib
-     4) Copy C:\Tcl\Include folder to C:\UefiSct\Ems\Lib\Tcl
-     5) Download the WinPcap_4_1_3.exe and install it to system
-     6) Download the 3.0-WpdPack.zip and extract it to C:\WpdPack
-     7) Copy C:\WpdPack\Include folder into C:\UefiSct\Ems\Lib\WpdPack
-     8) Copy C:\WpdPack\Lib folder into C:\UefiSct\Ems\Lib\WpdPack
-
-  2. Build Step
-     1) Run Visual Studio 2005 Command Prompt to go to the command line environment.
-     2) Execute follow commands in turn.
-         a) cd C:\UefiSct\Ems\src
-         b) set ems_dir=C:\UefiSct\Ems
-         c) nmake
-     3) an Ems.exe executable file will be generated under the bin directory.
-
-  Notice:
-  1. When running UEFI SCT remote validation, user needs to keep the test topology
-     environment clean. Users could use one network cable to connect the EFI target
-     machine and management host machine directly.
-  2. If you want to run UEFI SCT with local execution usage, you need to make
-     sure the "\Sct\.passive.mode" file is removed.
-  3. The passive mode of the UEFI SCT depends on network stacks.
+  Please refer to HowToBuildEms.txt.
 
 
 

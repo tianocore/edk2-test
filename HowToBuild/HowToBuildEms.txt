@@ -1,0 +1,53 @@
+How to Build EMS :
+  Extract Ems-Dev.zip to certain dir, for example, extract to c:\UefiSct, 
+  after this step, a subdirectory named as Ems is generated.
+  Default Ems packages use ActiveTcl8.4.19.5-threaded, Winpcap4.1.3, WpdPack3.0
+  and libnet-1.2-rc3 for building.
+  
+  1. Setup Build Environment
+     1) Install Microsoft Windows 7 and VS2008 in build machine
+     2) Download ActiveTCL8.4.19.5 and install it into C:\Tcl
+     3) Copy all *.lib from C:\Tcl\Lib to C:\UefiSct\Ems\Lib\Tcl\Lib
+     4) Copy C:\Tcl\Include folder to C:\UefiSct\Ems\Lib\Tcl
+     5) Download the WinPcap_4_1_3.exe and install it to system
+     6) Download the 3.0-WpdPack.zip and extract it to C:\WpdPack
+     7) Copy C:\WpdPack\Include folder into C:\UefiSct\Ems\Lib\WpdPack
+     8) Copy C:\WpdPack\Lib folder into C:\UefiSct\Ems\Lib\WpdPack
+     9) Download libnet-1.2-rc3 and build it to generate the required dll/lib file.
+       (see How to Build Libnet below)
+     10) Copy C:\libnet\libnet\include folder into C:\UefiSct\Ems\Lib\libnet
+     11) Copy all *.h from C:\libnet\libnet\win32 to C:\UefiSct\Ems\Lib\libnet\include
+     12) Copy C:\libnet\libnet\src\libnet.dll into C:\UefiSct\Ems\Lib\libnet\lib
+     13) Copy C:\libnet\libnet\src\libnet.dll into C:\UefiSct\Ems\Bin
+     14) Copy C:\libnet\libnet\src\libnet.lib into C:\UefiSct\Ems\Lib\libnet\lib
+ 
+  2. Build Step
+     1) Run Visual Studio 2008 Command Prompt to go to the command line environment.
+     2) Execute follow commands in turn.
+         a) cd C:\UefiSct\Ems\src
+         b) set ems_dir=C:\UefiSct\Ems
+         c) nmake
+     3) an Ems.exe executable file will be generated under the bin directory.
+
+  Notice:
+  1. When running UEFI SCT remote validation, user needs to keep the test topology
+     environment clean. Users could use one network cable to connect the EFI target
+     machine and management host machine directly.
+  2. If you want to run UEFI SCT with local execution usage, you need to make
+     sure the "\Sct\.passive.mode" file is removed.
+  3. The passive mode of the UEFI SCT depends on network stacks.
+  
+-------------------------------------------------------------------------------
+How to Build Libnet:
+  Default Libnet-1.2-rc3 depends on WinPcap-4.1.2 developer's pack for building.
+  
+  1. Download libnet-1.2-rc3 from http://github.com/sam-github/libnet (eg.to C:\libnet).   
+  2. Download WinPcap-4.1.2 developer's pack from https://www.winpcap.org/devel.htm 
+     and extract it into the same directory as libnet-1.2-rc3 (eg. If libnet-1.2-rc3 
+     is downloaded to C:\libnet, copy the WpdPack folder to C:\).
+  3. Copy C:\UefiSct\Ems\Patch\libnet-12-rc3.patch into the downloaded libnet
+  4. Apply the patch with the git command: "git apply libnet-12-rc3.patch"
+  5. Open Visual Studio 2008 Command Prompt and run
+     C:\libnet\libnet\msvcbuild.bat, then the required libnet.dll and libnet.lib files 
+     have been generated in C:\libnet\libnet\src\
+-------------------------------------------------------------------------------
