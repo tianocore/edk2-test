@@ -45,7 +45,7 @@ Notice: The example shows the build process of X64 only. For other architecture,
         please change the keyword, X64, in build step to IA32.
 
 
-Linux Environment£º
+Linux Environment
    1) Download the UDK2017 source code from the link
         https://github.com/tianocore/edk2/archive/vUDK2017.tar.gz
    2) Extract it to Home/Dev/SctWorkspace
