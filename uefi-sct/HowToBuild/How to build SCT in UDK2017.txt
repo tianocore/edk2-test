@@ -59,11 +59,11 @@ Linux Environment
 Build Instructions for UEFI SCTII AARCH64 (Linux)
    1) mkdir "sct_workspace"
    2) cd sct_workspace
-   3) git clone https://github.com/UEFI/UEFI-SCT
+   3) git clone https://github.com/tianocore/edk2-test.git
    4) git clone https://github.com/tianocore/edk2
    5) cd edk2
    6) git checkout UDK2017
-   7) ln -s ../UEFI-SCT/SctPkg SctPkg
+   7) ln -s ../edk2-test/uefi-sct/SctPkg SctPkg
    8) cd ..
    9) mkdir -p "tools/gcc"
   10) cd "tools/gcc"
