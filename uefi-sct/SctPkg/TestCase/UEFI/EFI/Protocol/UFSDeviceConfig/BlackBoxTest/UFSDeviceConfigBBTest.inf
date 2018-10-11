@@ -1,0 +1,53 @@
+## @file
+#
+#  Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at 
+#  http://opensource.org/licenses/bsd-license.php
+# 
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+# 
+##
+#/*++
+#
+# Module Name:
+#
+#   UFSDeviceConfigBBTest.inf
+#
+# Abstract:
+#
+#   Component description file for UFS Device Config Protocol Black-Box Test.
+#
+#--*/
+
+[defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = UFSDeviceConfigBBTest
+  FILE_GUID            = FDDC6693-45C7-43D6-B752-F5B57032D37F
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeUFSDeviceConfigBBTest
+
+[sources.common]
+  UFSDeviceConfigBBTestConformance.c
+  UFSDeviceConfigBBTestMain.c
+  Guid.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SctLib
+  EfiTestLib
+
+[Protocols]
+  gBlackBoxEfiUFSDeviceConfigProtocolGuid
+
+[Guids]
+

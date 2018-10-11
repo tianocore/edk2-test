@@ -186,6 +186,7 @@ copy %ProcessorType%\RamDiskProtocolBBTest.efi                %Framework%\Test\ 
 copy %ProcessorType%\NVMEPassThruBBTest.efi                   %Framework%\Test\ > NUL
 copy %ProcessorType%\EraseBlockBBTest.efi                     %Framework%\Test\ > NUL
 copy %ProcessorType%\SDMMCPassThruBBTest.efi                  %Framework%\Test\ > NUL
+copy %ProcessorType%\UFSDeviceConfigBBTest.efi                %Framework%\Test\ > NUL
 copy %ProcessorType%\ResetNotificationBBTest.efi              %Framework%\Test\ > NUL
 
 rem *********************************************
