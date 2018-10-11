@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -3811,6 +3811,102 @@ InValidText:
   return NULL;
 }
 
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildBluetoothLEDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS                      Status;
+  CHAR16                          *ParamIdentifierStr;
+  CHAR16                          *ParamIdentifierVal;
+  BLUETOOTH_LE_DEVICE_PATH        *BluetoothLE;
+
+  BluetoothLE = (BLUETOOTH_LE_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1E, sizeof (BLUETOOTH_LE_DEVICE_PATH));
+  if (BluetoothLE == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"LEAddress", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    StrToBuf (&BluetoothLE->LEAddress.Address[0], sizeof (BLUETOOTH_ADDRESS), ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"Type", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    BluetoothLE->LEAddress.Type = (UINT8) SctStrToUInt (ParamIdentifierVal);
+  } else {
+  	goto InValidText;
+  }
+
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) BluetoothLE;
+InValidText:
+  SctFreePool(BluetoothLE);
+  return NULL;
+}
+
+
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+BuildDNSDeviceNode (
+  IN CHAR16                      *TextDeviceNode
+  )
+{
+  EFI_STATUS            Status;
+  CHAR16                *ParamIdentifierStr;
+  CHAR16                *ParamIdentifierVal;
+  CHAR16                *Temp;
+  DNS_DEVICE_PATH       *DNS;
+
+  DNS = (DNS_DEVICE_PATH *) CreateDeviceNode (0x3, 0x1F, sizeof (DNS_DEVICE_PATH) + 2 * sizeof (EFI_IP_ADDRESS));
+  if (DNS == NULL) {
+    return NULL;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DnsServerIp", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    Temp = ParamIdentifierVal;
+    while(*Temp != L'\0') {
+      if (*Temp == L'.') {
+        DNS->IsIPv6 = 0;
+        break;
+      }
+
+      if (*Temp == L':') {
+        DNS->IsIPv6 = 1;
+        break;
+      }
+      Temp++;
+    }
+
+    if (DNS->IsIPv6 == 0)  	
+      SctStrToIPv4Addr (&ParamIdentifierVal, (EFI_IPv4_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH)));
+    else
+      SctStrToIPv6Addr (&ParamIdentifierVal, (EFI_IPv6_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH)));
+  } else {
+  	goto InValidText;
+  }
+
+  Status = GetNextRequiredParam(&TextDeviceNode, L"DnsServerIp", &ParamIdentifierStr, &ParamIdentifierVal);
+  if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
+    if (DNS->IsIPv6 == 0)  	
+      SctStrToIPv4Addr (&ParamIdentifierVal, (EFI_IPv4_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
+    else
+      SctStrToIPv6Addr (&ParamIdentifierVal, (EFI_IPv6_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
+  } else {
+  	goto InValidText;
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) DNS;
+InValidText:
+  SctFreePool(DNS);
+  return NULL;
+}
 
 STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   L"PciRoot",
@@ -3902,7 +3998,11 @@ STATIC DEVICE_PATH_FROM_TEXT_TABLE BuildDevPathNodeFuncTable[] = {
   L"Wi-Fi",
   BuildWiFiDeviceNode,
   L"eMMC",
-  BuildEMMCDeviceNode,  
+  BuildEMMCDeviceNode,
+  L"BluetoothLE",
+  BuildBluetoothLEDeviceNode,  
+  L"Dns",
+  BuildDNSDeviceNode,
   L"Uart",
   BuildUartDeviceNode,
   L"UsbClass",

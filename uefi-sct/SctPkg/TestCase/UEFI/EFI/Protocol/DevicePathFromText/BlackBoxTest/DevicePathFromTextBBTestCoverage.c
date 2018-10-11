@@ -1665,6 +1665,89 @@ CreateEMMCDeviceNode (
   return (EFI_DEVICE_PATH_PROTOCOL *) EMMC;
 }
 
+
+#define BlueToothLENodeType    3
+#define BlueToothLENodeSubType 30
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateBlueToothLEDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16                      *BDAddrStr;
+  CHAR16                      *TypeStr;
+  BLUETOOTH_LE_DEVICE_PATH    *BLUETOOTHLE;
+  UINTN                       Length;
+
+
+  BDAddrStr = SctSplitStr (&TextDeviceNode, L',');
+  TypeStr = SctSplitStr (&TextDeviceNode, L',');
+  BLUETOOTHLE  = (BLUETOOTH_LE_DEVICE_PATH *) CreateDeviceNode (
+                                                BlueToothLENodeType,
+                                                BlueToothLENodeSubType,
+                                                sizeof (BLUETOOTH_LE_DEVICE_PATH)
+                                                );
+
+  Length = sizeof (BLUETOOTH_ADDRESS);
+
+  StrToBuf (&BLUETOOTHLE->LEAddress.Address[0], Length, BDAddrStr);
+  BLUETOOTHLE->LEAddress.Type = (UINT8) SctStrToUInt (TypeStr);
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) BLUETOOTHLE;
+}
+
+
+#define DNSNodeType    3
+#define DNSNodeSubType 31
+
+STATIC
+EFI_DEVICE_PATH_PROTOCOL *
+CreateDNSDeviceNode (
+  IN CHAR16 *TextDeviceNode
+  )
+{
+  CHAR16             *IpStr1;
+  CHAR16             *IpStr2;
+  CHAR16             *Temp;
+  DNS_DEVICE_PATH    *DNS;
+
+  IpStr1           = SctSplitStr (&TextDeviceNode, L',');
+  IpStr2           = SctSplitStr (&TextDeviceNode, L',');
+  DNS  = (DNS_DEVICE_PATH *) CreateDeviceNode (
+                                 DNSNodeType,
+                                 DNSNodeSubType,
+                                 sizeof (DNS_DEVICE_PATH) + 2 * sizeof(EFI_IP_ADDRESS)
+                                 );
+
+  Temp = IpStr1;
+  while(*Temp != L'\0') {
+    if (*Temp == L'.') {
+      DNS->IsIPv6 = 0;
+      break;
+    }
+
+    if (*Temp == L':') {
+      DNS->IsIPv6 = 1;
+      break;
+    }
+    Temp++;
+  }
+
+  if (DNS->IsIPv6 == 0) {
+    SctStrToIPv4Addr (&IpStr1, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH));
+    SctStrToIPv4Addr (&IpStr2, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS));
+  }
+
+  if (DNS->IsIPv6 == 1) {
+    SctStrToIPv6Addr (&IpStr1, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH));
+    SctStrToIPv6Addr (&IpStr2, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS));
+  }
+
+  return (EFI_DEVICE_PATH_PROTOCOL *) DNS;
+}
+
+
 #define HdNodeType     4
 #define HdNodeSubType  1
 
@@ -3410,8 +3493,86 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 L"%a:%d, Convert eMMC(0)",
                 __FILE__,
                 (UINTN)__LINE__
-                ); 
+                );
 
+  //
+  // BluetoothLE(001320F5FA77, 0) 
+  //
+  SctStrCpy (text, L"001320F5FA77");
+  pDevicePath = CreateBlueToothLEDeviceNode(text);
+
+  SctStrCpy (text, L"BluetoothLE(001320F5FA77,0)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid141,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert BluetoothLE(001320F5FA77, 0)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // Dns(192.168.22.100,192.168.22.101)
+  //
+  SctStrCpy (text, L"192.168.22.100,192.168.22.101");
+  pDevicePath = CreateDNSDeviceNode(text);
+
+  SctStrCpy (text, L"Dns(192.168.22.100,192.168.22.101)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid140,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert Dns(192.168.22.100,192.168.22.101)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+
+  //
+  // Dns(1234:5678:ABCD:1234:5678:ABCD:1234:5678,5678:ABCD:1234:5678:ABCD:1234:5678:ABCD)
+  //
+  SctStrCpy (text, L"1234:5678:ABCD:1234:5678:ABCD:1234:5678,5678:ABCD:1234:5678:ABCD:1234:5678:ABCD");
+  pDevicePath = CreateDNSDeviceNode(text);
+
+  SctStrCpy (text, L"Dns(1234:5678:ABCD:1234:5678:ABCD:1234:5678,5678:ABCD:1234:5678:ABCD:1234:5678:ABCD)");
+  pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
+  if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  SctFreePool (pDevicePath);
+  SctFreePool (pReDevicePath);
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathFromTextBBTestFunctionAssertionGuid140,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d, Convert Dns(1234:5678:ABCD:1234:5678:ABCD:1234:5678,5678:ABCD:1234:5678:ABCD:1234:5678:ABCD)",
+                __FILE__,
+                (UINTN)__LINE__
+                );
+  
   //
   // RamDisk(0xABCD1234C0000000,0xABCD1234CFFFFFFF,1,E8AAED38-1815-4E4F-BCB5-2E3DBD160C9C)
   //

@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2011 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -45,7 +45,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
   {
     DEVICE_PATH_PROTOCOL_DEVICEPATHNODE_CONFORMANCE_AUTO_GUID,
     L"PathNode_Conf",
-    L"Check whether device path node is consistent with the UEFI2.0 Spec.",
+    L"Check whether device path node is consistent with the UEFI Spec.",
     EFI_TEST_LEVEL_MINIMAL,
     gSupportProtocolGuid1,
     EFI_TEST_CASE_AUTO,

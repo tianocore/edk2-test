@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -380,3 +380,23 @@ extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid130;
 
 extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid131;
 
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_132_GUID \
+  { \
+    0x5a9904c6, 0xed34, 0x43ca, { 0xbf, 0x58, 0x3a, 0xc0, 0x43, 0x90, 0xf1, 0xd0 } \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid132;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_133_GUID \
+  { \
+    0x8236178a, 0x1a6, 0x4454, { 0xa9, 0xc9, 0x18, 0xe9, 0xa, 0xa5, 0xfe, 0x29 } \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid133;
+
+#define EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_134_GUID \
+  { \
+    0xc57ad77d, 0x53dd, 0x4669, { 0x94, 0x9f, 0xe6, 0x33, 0xa1, 0x91, 0xb7, 0x71 } \
+  }
+
+extern EFI_GUID gDevicePathToTextBBTestFunctionAssertionGuid134;

@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -71,6 +71,8 @@ BBTestDevicePathNodeConformanceAutoTest (
   HARDDRIVE_DEVICE_PATH               *Hd;
   CHAR16                              *DevStr;
   BMC_DEVICE_PATH                     *BMC;
+  DNS_DEVICE_PATH                     *DNS;
+  BLUETOOTH_LE_DEVICE_PATH            *BlueToothLE;
 
   //
   // Get the Standard Library Interface
@@ -264,7 +266,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid051,
+                    gDevicePathBBTestFunctionAssertionGuid042,
                     L"EFI_DEVICE_PATH_PROTOCOL - Hardware Device Path - Controller Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d, InterfaceType - %x",
                     __FILE__,
@@ -340,7 +342,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid040,
+                    gDevicePathBBTestFunctionAssertionGuid031,
                     L"EFI_DEVICE_PATH_PROTOCOL - ACPI _ADR Device Path - ACPI _ADR Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -491,7 +493,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid048,
+                    gDevicePathBBTestFunctionAssertionGuid039,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - SATA Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -516,7 +518,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid041,
+                    gDevicePathBBTestFunctionAssertionGuid032,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - USB Device Path(WWID)",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -540,7 +542,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid042,
+                    gDevicePathBBTestFunctionAssertionGuid033,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - USB Device Path(WWID)",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -687,7 +689,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid052,
+                    gDevicePathBBTestFunctionAssertionGuid043,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Vlan Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, VlanId - %d",
                     __FILE__,
@@ -710,7 +712,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid045,
+                    gDevicePathBBTestFunctionAssertionGuid036,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Fibre Channel Ex device path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -733,7 +735,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid046,
+                    gDevicePathBBTestFunctionAssertionGuid037,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Serial Attached SCSI(SAS) Ex device path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -756,7 +758,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid047,
+                    gDevicePathBBTestFunctionAssertionGuid038,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - NVM Express Namespace Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -779,7 +781,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid053,
+                    gDevicePathBBTestFunctionAssertionGuid044,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Uniform Resource Identifiers (URI) Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -802,7 +804,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid054,
+                    gDevicePathBBTestFunctionAssertionGuid045,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Universal Flash Storage (UFS) Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -825,7 +827,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid055,
+                    gDevicePathBBTestFunctionAssertionGuid046,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Secure Digital (SD) Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -848,7 +850,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid056,
+                    gDevicePathBBTestFunctionAssertionGuid047,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Bluetooth Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -871,7 +873,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid057,
+                    gDevicePathBBTestFunctionAssertionGuid048,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - WIFI Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -894,7 +896,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid060,
+                    gDevicePathBBTestFunctionAssertionGuid051,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - eMMC (Embedded Multi-Media Card) Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -902,6 +904,56 @@ BBTestDevicePathNodeConformanceAutoTest (
                     (UINTN)Type,
                     (UINTN)SubType,
                     (UINTN)Length
+                    );
+    }
+    //
+    // Add a new checkpoint for BlueToothLE Device Path
+    // Check Messaging Device Path: BlueToothLE Device Path
+    //
+    else if ((Type == 3) && (SubType == 30)) {
+      BlueToothLE = (BLUETOOTH_LE_DEVICE_PATH *) DevicePath;   	
+      if ((Length  == 11) && ((BlueToothLE->LEAddress.Type == 0) || (BlueToothLE->LEAddress.Type == 1))) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid052,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - BlueToothLE Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d, Type - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length,
+                    (UINTN)BlueToothLE->LEAddress.Type
+                    );
+    }
+    //
+    // Add a new checkpoint for DNS Device Path
+    // Check Messaging Device Path: DNS Device Path
+    //
+    else if ((Type == 3) && (SubType == 31)) {
+      DNS = (DNS_DEVICE_PATH *) DevicePath;
+      if (((Length - 5) % sizeof(EFI_IP_ADDRESS) == 0) && ((DNS->IsIPv6 == 0) || (DNS->IsIPv6 == 1))) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+      StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gDevicePathBBTestFunctionAssertionGuid030,
+                    L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - DNS Device Path",
+                    L"%a:%d:Type - %d, Subtype - %d, Length - %d, IsIPv6 - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    (UINTN)Type,
+                    (UINTN)SubType,
+                    (UINTN)Length,
+                    (UINTN)DNS->IsIPv6
                     );
     }
     //
@@ -1000,7 +1052,7 @@ BBTestDevicePathNodeConformanceAutoTest (
         StandardLib->RecordAssertion (
                       StandardLib,
                       AssertionType,
-                      gDevicePathBBTestFunctionAssertionGuid043,
+                      gDevicePathBBTestFunctionAssertionGuid034,
                       L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path - Serial Attached SCSI (SAS) Device Path",
                       L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                       __FILE__,
@@ -1051,7 +1103,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid044,
+                    gDevicePathBBTestFunctionAssertionGuid035,
                     L"EFI_DEVICE_PATH_PROTOCOL - Messaging Device Path -  iSCSI Device Path",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -1201,7 +1253,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid049,
+                    gDevicePathBBTestFunctionAssertionGuid040,
                     L"EFI_DEVICE_PATH_PROTOCOL - Media Device Path - PIWG Firmware Volume",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -1225,7 +1277,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid050,
+                    gDevicePathBBTestFunctionAssertionGuid041,
                     L"EFI_DEVICE_PATH_PROTOCOL - Media Device Path - PIWG Firmware File",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -1250,7 +1302,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid058,
+                    gDevicePathBBTestFunctionAssertionGuid049,
                     L"EFI_DEVICE_PATH_PROTOCOL - Media Device Path - Relative Offset Range",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,
@@ -1274,7 +1326,7 @@ BBTestDevicePathNodeConformanceAutoTest (
       StandardLib->RecordAssertion (
                     StandardLib,
                     AssertionType,
-                    gDevicePathBBTestFunctionAssertionGuid059,
+                    gDevicePathBBTestFunctionAssertionGuid050,
                     L"EFI_DEVICE_PATH_PROTOCOL - Media Device Path - RAM Disk",
                     L"%a:%d:Type - %d, Subtype - %d, Length - %d",
                     __FILE__,

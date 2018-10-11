@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>   
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -828,6 +828,12 @@ typedef struct {
   UINT8                           SlotNumber;
 } EMMC_DEVICE_PATH;
 
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  UINT8                           IsIPv6;
+} DNS_DEVICE_PATH;
+
 ///
 /// BLUETOOTH_ADDRESS
 ///
@@ -842,6 +848,16 @@ typedef struct {
   EFI_DEVICE_PATH_PROTOCOL        Header;
   BLUETOOTH_ADDRESS               BD_ADDR;
 } BLUETOOTH_DEVICE_PATH;
+
+typedef struct {
+UINT8 Address[6];
+UINT8 Type;
+} BLUETOOTH_LE_ADDRESS;
+
+typedef struct {
+  EFI_DEVICE_PATH_PROTOCOL        Header;
+  BLUETOOTH_LE_ADDRESS            LEAddress;
+} BLUETOOTH_LE_DEVICE_PATH;
 
 typedef struct {
   UINT8      Id[32];

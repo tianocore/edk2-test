@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -1909,7 +1909,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
-                gDevicePathToTextBBTestFunctionAssertionGuid127,
+                gDevicePathToTextBBTestFunctionAssertionGuid133,
                 L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
                 L"%a:%d: Convert result: %s - Expected: UFS(0,3)",
                 __FILE__,
@@ -2081,6 +2081,127 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   if (Text != NULL) {
     SctFreePool (Text);
   }
+
+
+  //
+  // BluetoothLE(77FAF5201300,0) 
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1E, 11);  
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Address[0] = 0x77;
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Address[1] = 0xFA;
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Address[2] = 0xF5;
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Address[3] = 0x20;
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Address[4] = 0x13;
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Address[5] = 0x00;
+  ((BLUETOOTH_LE_DEVICE_PATH *)pDeviceNode1)->LEAddress.Type = 0;
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid134,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: BluetoothLE(77FAF5201300,0)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // Dns(192.168.22.100,192.168.22.101)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1F, sizeof(DNS_DEVICE_PATH) + 2 * sizeof(EFI_IP_ADDRESS));
+  ((DNS_DEVICE_PATH *)pDeviceNode1)->IsIPv6 = 0;
+
+  ConvertStrToIPv4Addr (L"192.168.22.100", ((EFI_IPv4_ADDRESS *)((UINT8 *)pDeviceNode1 + sizeof(DNS_DEVICE_PATH))));
+  ConvertStrToIPv4Addr (L"192.168.22.101", ((EFI_IPv4_ADDRESS *)((UINT8 *)pDeviceNode1 + sizeof(DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS))));
+
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);  
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid132,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: Dns(192.168.22.100,192.168.22.101)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
+  //
+  // Dns(1234:5678:ABCD:1234:5678:ABCD:1234:5678,5678:ABCD:1234:5678:ABCD:1234:5678:ABCD)
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x1F, sizeof(DNS_DEVICE_PATH) + 2 * sizeof(EFI_IP_ADDRESS));
+  ((DNS_DEVICE_PATH *)pDeviceNode1)->IsIPv6 = 1;
+
+  ConvertStrToIPv6Addr (L"1234:5678:ABCD:1234:5678:ABCD:1234:5678", ((EFI_IPv6_ADDRESS *)((UINT8 *)pDeviceNode1 + sizeof(DNS_DEVICE_PATH))));
+  ConvertStrToIPv6Addr (L"5678:ABCD:1234:5678:ABCD:1234:5678:ABCD", ((EFI_IPv6_ADDRESS *)((UINT8 *)pDeviceNode1 + sizeof(DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS))));
+
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);  
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid132,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected: Dns(1234:5678:ABCD:1234:5678:ABCD:1234:5678,5678:ABCD:1234:5678:ABCD:1234:5678:ABCD)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
   
   return EFI_SUCCESS;
 }
