@@ -2,7 +2,7 @@
 #
 #  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
 #  Copyright (c) 2011 - 2012, ARM Ltd. All rights reserved.<BR>
-#  Copyright (c) 2014 - 2017, Intel Corporation. All rights reserved.<CR>
+#  Copyright (c) 2014 - 2018, Intel Corporation. All rights reserved.<CR>
 #  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 #
 #  This program and the accompanying materials
@@ -219,6 +219,7 @@ then
     cp $ProcessorType/NVMEPassThruBBTest.efi                   $Framework/Test/ > NUL
     cp $ProcessorType/EraseBlockBBTest.efi                     $Framework/Test/ > NUL
     cp $ProcessorType/SDMMCPassThruBBTest.efi                  $Framework/Test/ > NUL
+    cp $ProcessorType/ResetNotificationBBTest.efi              $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary

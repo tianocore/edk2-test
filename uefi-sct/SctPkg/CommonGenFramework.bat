@@ -1,6 +1,6 @@
 @REM
 @REM  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-@REM  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<CR>
+@REM  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<CR>
 @REM  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 @REM
 @REM  This program and the accompanying materials
@@ -186,6 +186,7 @@ copy %ProcessorType%\RamDiskProtocolBBTest.efi                %Framework%\Test\ 
 copy %ProcessorType%\NVMEPassThruBBTest.efi                   %Framework%\Test\ > NUL
 copy %ProcessorType%\EraseBlockBBTest.efi                     %Framework%\Test\ > NUL
 copy %ProcessorType%\SDMMCPassThruBBTest.efi                  %Framework%\Test\ > NUL
+copy %ProcessorType%\ResetNotificationBBTest.efi              %Framework%\Test\ > NUL
 
 rem *********************************************
 rem Copy ENTS binary

@@ -1,7 +1,7 @@
 ## @file
 #
 #  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-#  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 #  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 #
 #  This program and the accompanying materials
@@ -284,6 +284,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/NVMEPassThru/BlackBoxTest/NVMEPassThruBBTest.i
 SctPkg/TestCase/UEFI/EFI/Protocol/EraseBlock/BlackBoxTest/EraseBlockBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/SDMMCPassThru/BlackBoxTest/SDMMCPassThruBBTest.inf
 
+SctPkg/TestCase/UEFI/EFI/Protocol/ResetNotification/BlackBoxTest/ResetNotificationBBTest.inf
 #
 # Dependency files for UEFI/EFI Compliant Test
 #
