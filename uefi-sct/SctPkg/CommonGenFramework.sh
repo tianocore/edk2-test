@@ -219,6 +219,7 @@ then
     cp $ProcessorType/NVMEPassThruBBTest.efi                   $Framework/Test/ > NUL
     cp $ProcessorType/EraseBlockBBTest.efi                     $Framework/Test/ > NUL
     cp $ProcessorType/SDMMCPassThruBBTest.efi                  $Framework/Test/ > NUL
+    cp $ProcessorType/PartitionInfoBBTest.efi                  $Framework/Test/ > NUL
     cp $ProcessorType/UFSDeviceConfigBBTest.efi                $Framework/Test/ > NUL
     cp $ProcessorType/ResetNotificationBBTest.efi              $Framework/Test/ > NUL
 
