@@ -1654,7 +1654,7 @@ CreateEMMCDeviceNode (
   EMMC_DEVICE_PATH    *EMMC;
 
   SlotNumberStr = SctSplitStr (&TextDeviceNode, L',');
-  EMMC  = (SD_DEVICE_PATH *) CreateDeviceNode (
+  EMMC  = (EMMC_DEVICE_PATH *) CreateDeviceNode (
                                  EMMCNodeType,
                                  EMMCNodeSubType,
                                  sizeof (EMMC_DEVICE_PATH)
