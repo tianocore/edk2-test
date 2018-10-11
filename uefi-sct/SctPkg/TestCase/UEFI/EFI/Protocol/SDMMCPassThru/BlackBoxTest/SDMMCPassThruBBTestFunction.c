@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2017 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -416,7 +416,7 @@ BBTestBuildDevicePathFunctionTest (
                      (UINTN)DevicePath->SubType,
                      (UINTN)(DevicePath->Length[0] | DevicePath->Length[1] << 8)
                      );
-    } else if (Status == EFI_OUT_OF_RESOURCES)
+    } else if ((Status == EFI_OUT_OF_RESOURCES) || (Status == EFI_NOT_FOUND))
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     else
       AssertionType = EFI_TEST_ASSERTION_FAILED;
