@@ -1,6 +1,6 @@
 # 
 #  Copyright 2017 Unified EFI, Inc.<BR> 
-#  Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2017 - 2018, Intel Corporation. All rights reserved.<BR>
 # 
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -39,6 +39,9 @@ set Ip4Config2SetDataFunc1AssertionGuid008  00FBB58A-4BB3-499F-AE6B-744B6B9932E6
 set Ip4Config2SetDataFunc1AssertionGuid009  DB8EF05C-085F-45D1-A0B1-DC2F307B6F1E
 set Ip4Config2SetDataFunc1AssertionGuid010  29143621-896C-4FB9-9E70-7A4D2DA6BEE0
 set Ip4Config2SetDataFunc1AssertionGuid011  72FEDF83-6755-4212-AF0F-780F457EFAA7
+set Ip4Config2SetDataFunc1AssertionGuid012  EB7769D1-A31F-4F37-86F3-2BBF54834785
+set Ip4Config2SetDataFunc1AssertionGuid013  78F3A664-A8E4-43B8-961F-71033E9145F2
+set Ip4Config2SetDataFunc1AssertionGuid014  7F717D50-3A7C-4E2A-9F15-0A802E9BAFE6
 
 #
 # Guid for GetData() interface
