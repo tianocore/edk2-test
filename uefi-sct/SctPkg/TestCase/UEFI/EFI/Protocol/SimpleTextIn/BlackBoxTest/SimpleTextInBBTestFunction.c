@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -59,6 +59,7 @@ BBTestResetFunctionAutoTest (
 
   UINTN                                Index;
   EFI_INPUT_KEY                        Key;
+  EFI_TPL                              OldTpl;
 
   //
   // Get the Standard Library Interface
@@ -136,83 +137,122 @@ BBTestResetFunctionAutoTest (
     //
     // Call SimpleTextIn.Reset() with ExtendedVerification as FALSE
     //
-    Status = SimpleIn->Reset (SimpleIn, FALSE);
-    if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    } else {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+    gtBS->RestoreTPL (OldTpl);
+    if (OldTpl <= TPL_APPLICATION) {
+      if (OldTpl < TPL_APPLICATION) {
+        OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+        Status = SimpleIn->Reset (SimpleIn, FALSE);
+        gtBS->RestoreTPL (OldTpl);
+       } else {
+        Status = SimpleIn->Reset (SimpleIn, FALSE);
+       }
+      if (EFI_ERROR(Status)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      }
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleTextInInterfaceTestAssertionGuid001,
+                     L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as FALSE",
+                     L"%a:%d: Status = %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleTextInInterfaceTestAssertionGuid001,
-                   L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as FALSE",
-                   L"%a:%d: Status = %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
-   //
-   //Auto test, after reset(), no key input, ReadKeyStroke() should return EFI_NOT_READY
-   //
-   Status = SimpleIn->ReadKeyStroke (SimpleIn, &Key);
-
-   if (Status != EFI_NOT_READY) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-   } else {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
-   }
-   StandardLib->RecordAssertion (
-                  StandardLib,
-                  AssertionType,
-                  gSimpleTextInInterfaceTestAssertionGuid012,
-                  L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as FALSE, ReadKeyStroke() verification with no key input",
-                  L"%a:%d: Status = %r, Expected = %r",
-                  __FILE__,
-                  (UINTN)__LINE__,
-                  Status,
-                  EFI_NOT_READY
-                  );
+    //
+    //Auto test, after reset(), no key input, ReadKeyStroke() should return EFI_NOT_READY
+    //
+    OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+    gtBS->RestoreTPL (OldTpl);
+    if (OldTpl <= TPL_APPLICATION) {
+      if (OldTpl < TPL_APPLICATION) {
+        OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+        Status = SimpleIn->ReadKeyStroke (SimpleIn, &Key);
+        gtBS->RestoreTPL (OldTpl);
+      } else {
+        Status = SimpleIn->ReadKeyStroke (SimpleIn, &Key);
+      }
+      if (Status != EFI_NOT_READY) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      }
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleTextInInterfaceTestAssertionGuid012,
+                     L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as FALSE, ReadKeyStroke() verification with no key input",
+                     L"%a:%d: Status = %r, Expected = %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status,
+                     EFI_NOT_READY
+                     );
+    } 
     //
     // Call SimpleTextIn.Reset() with ExtendedVerification as TRUE
     //
-    Status = SimpleIn->Reset (SimpleIn, TRUE);
-    if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    } else {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+    gtBS->RestoreTPL (OldTpl);
+    if (OldTpl <= TPL_APPLICATION) {
+       if (OldTpl < TPL_APPLICATION) {
+        OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+        Status = SimpleIn->Reset (SimpleIn, TRUE);
+        gtBS->RestoreTPL (OldTpl);
+       } else {
+        Status = SimpleIn->Reset (SimpleIn, TRUE);
+       }
+      if (EFI_ERROR(Status)) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      }
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleTextInInterfaceTestAssertionGuid002,
+                     L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as TRUE",
+                     L"%a:%d: Status = %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleTextInInterfaceTestAssertionGuid002,
-                   L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as TRUE",
-                   L"%a:%d: Status = %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
-   //
-   //Auto test, after reset(), no key input, ReadKeyStroke() should return EFI_NOT_READY
-   //
-    Status = SimpleIn->ReadKeyStroke (SimpleIn, &Key);
 
-   if (Status!=EFI_NOT_READY) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-   } else {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
-   }
-   StandardLib->RecordAssertion (
-                  StandardLib,
-                  AssertionType,
-                  gSimpleTextInInterfaceTestAssertionGuid013,
-                  L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as TRUE, ReadKeyStroke() verification with no key input",
-                  L"%a:%d: Status = %r, Expected = %r",
-                  __FILE__,
-                  (UINTN)__LINE__,
-                  Status,
-                  EFI_NOT_READY
-                  );
+    //
+    //Auto test, after reset(), no key input, ReadKeyStroke() should return EFI_NOT_READY
+    //
+    OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+    gtBS->RestoreTPL (OldTpl);
+    if (OldTpl <= TPL_APPLICATION) {
+       if (OldTpl < TPL_APPLICATION) {
+         OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+        Status = SimpleIn->ReadKeyStroke (SimpleIn, &Key);
+        gtBS->RestoreTPL (OldTpl);
+       } else {
+        Status = SimpleIn->ReadKeyStroke (SimpleIn, &Key);
+       }
+      if (Status != EFI_NOT_READY) {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      }
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleTextInInterfaceTestAssertionGuid013,
+                     L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset() with ExtendedVerification as TRUE, ReadKeyStroke() verification with no key input",
+                     L"%a:%d: Status = %r, Expected = %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status,
+                     EFI_NOT_READY
+                     );
+    } 
   }
 
   return EFI_SUCCESS;

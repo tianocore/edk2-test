@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -292,7 +292,7 @@ BBTestSetStateFunctionManualTest (
         Status = gtBS->FreePool (DevicePathStr);
         return Status;
       }
-	  BBTestSetStateFunctionManualTestCheckpoint1 ( StandardLib, SimpleTextInputEx );
+      BBTestSetStateFunctionManualTestCheckpoint1 ( StandardLib, SimpleTextInputEx );
       Status = gtBS->FreePool (DevicePathStr);
       if (EFI_ERROR(Status))
         return Status;
@@ -307,7 +307,7 @@ BBTestSetStateFunctionManualTest (
                    L"\r\nCurrent Device: ConsoleSplitter/TxtIn"
                    );
     BBTestSetStateFunctionManualTestCheckpoint1 ( StandardLib, SimpleTextInputEx );
-	
+  
   }
   
   return EFI_SUCCESS;
@@ -471,6 +471,8 @@ BBTestResetFunctionAutoTestCheckpoint1 (
   UINTN                 Index;
   UINTN                 ExtendedIndex;
   EFI_KEY_DATA          Key;
+  EFI_TPL               OldTpl;
+  
   BOOLEAN               ExtendedVerification[] = {
                           TRUE,
                           FALSE
@@ -478,33 +480,67 @@ BBTestResetFunctionAutoTestCheckpoint1 (
 
   ResetStatus = EFI_SUCCESS;
   ReadKeyStatus = EFI_NOT_READY;
+
   //
   // Call Reset with ExtendedVerification being TRUE or FALSE
   //
   for ( ExtendedIndex=0; ExtendedIndex<2; ExtendedIndex++ ) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
     for ( Index=0; Index<REPEAT_RESET; Index++ ) {
-    //
-    //Call Reset to reset to console
-    //
-      ResetStatus = SimpleTextInputEx->Reset (
+      //
+      //Call Reset to reset to console
+      //
+      OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+      gtBS->RestoreTPL (OldTpl);
+
+      if (OldTpl <= TPL_APPLICATION) {
+        if (OldTpl < TPL_APPLICATION) {
+          OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+          ResetStatus = SimpleTextInputEx->Reset (
                                     SimpleTextInputEx,
                                     ExtendedVerification[ExtendedIndex]
                                     );
-      if ( EFI_SUCCESS != ResetStatus ) {
-        AssertionType = EFI_TEST_ASSERTION_FAILED;
-        break;
+          gtBS->RestoreTPL (OldTpl);
+        } else {
+          ResetStatus = SimpleTextInputEx->Reset (
+                                    SimpleTextInputEx,
+                                    ExtendedVerification[ExtendedIndex]
+                                    );
+        }
+      
+
+        if ( EFI_SUCCESS != ResetStatus ) {
+          AssertionType = EFI_TEST_ASSERTION_FAILED;
+          break;
+        }
       }
-    //
-    //Call ReadKeyStrokeEx to check if the console has been reset
-    //
-      ReadKeyStatus = SimpleTextInputEx->ReadKeyStrokeEx (
+      
+      //
+      //Call ReadKeyStrokeEx to check if the console has been reset
+      //
+      OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+      gtBS->RestoreTPL (OldTpl);
+
+      if (OldTpl <= TPL_APPLICATION) {
+        if (OldTpl < TPL_APPLICATION) {
+          OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+          ReadKeyStatus = SimpleTextInputEx->ReadKeyStrokeEx (
                                     SimpleTextInputEx,
                                     &Key
                                     );
-      if ( EFI_NOT_READY != ReadKeyStatus ) {
-        AssertionType = EFI_TEST_ASSERTION_FAILED;
-        break;
+          gtBS->RestoreTPL (OldTpl);
+        } else {
+          ReadKeyStatus = SimpleTextInputEx->ReadKeyStrokeEx (
+                                    SimpleTextInputEx,
+                                    &Key
+                                    );
+        }
+      
+
+        if ( EFI_NOT_READY != ReadKeyStatus ) {
+          AssertionType = EFI_TEST_ASSERTION_FAILED;
+          break;
+        }
       }
     }
     

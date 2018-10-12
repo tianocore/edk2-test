@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -153,7 +153,7 @@ BBTestSetStateConformanceTest (
         return Status;
       }
       BBTestSetStateConformanceTestCheckpoint2 ( StandardLib, SimpleTextInputEx );
-	  
+  
       Status = gtBS->FreePool (DevicePathStr);
       if (EFI_ERROR(Status))
         return Status;
@@ -338,6 +338,7 @@ BBTestReadKeyStrokeExConformanceTestCheckpoint1 (
 {
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
+  EFI_TPL               OldTpl;
 
   //
   //Call Reset to reset to console
@@ -350,11 +351,25 @@ BBTestReadKeyStrokeExConformanceTestCheckpoint1 (
   //
   //Call ReadKeyStrokeEx with KeyData being NULL
   //
-  Status = SimpleTextInputEx->ReadKeyStrokeEx (
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_APPLICATION) {
+    if (OldTpl < TPL_APPLICATION) {
+      OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+      Status = SimpleTextInputEx->ReadKeyStrokeEx (
                           SimpleTextInputEx,
                           NULL
                           );
-  
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx->ReadKeyStrokeEx (
+                          SimpleTextInputEx,
+                          NULL
+                          );
+    }
+  }
+
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
@@ -384,6 +399,7 @@ BBTestReadKeyStrokeExConformanceTestCheckpoint2 (
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
   EFI_KEY_DATA          Key;
+  EFI_TPL               OldTpl;
 
   //
   //Call Reset to reset to console
@@ -396,10 +412,24 @@ BBTestReadKeyStrokeExConformanceTestCheckpoint2 (
   //
   //Call ReadKeyStrokeEx with console just been reseted
   //
-  Status = SimpleTextInputEx->ReadKeyStrokeEx (
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_APPLICATION) {
+    if (OldTpl < TPL_APPLICATION) {
+      OldTpl = gtBS->RaiseTPL (TPL_APPLICATION);
+      Status = SimpleTextInputEx->ReadKeyStrokeEx (
                           SimpleTextInputEx,
                           &Key
                           );
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx->ReadKeyStrokeEx (
+                          SimpleTextInputEx,
+                          &Key
+                          );
+    }
+  }
   
   if ( EFI_NOT_READY != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -429,14 +459,30 @@ BBTestSetStateConformanceTestCheckpoint1 (
 {
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
+  EFI_TPL               OldTpl;
 
   //
   //Call SetState with KeyToggleState being NULL
   //
-  Status = SimpleTextInputEx-> SetState (
+
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx->SetState (
                         SimpleTextInputEx,
                         NULL
                         );
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx->SetState (
+                        SimpleTextInputEx,
+                        NULL
+                        );
+    }
+  }
   
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -467,6 +513,7 @@ BBTestSetStateConformanceTestCheckpoint2 (
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
   UINTN                 Index;
+  EFI_TPL               OldTpl;
   
   EFI_KEY_TOGGLE_STATE  UnsupportedState[] = {
                           EFI_SCROLL_LOCK_ACTIVE,
@@ -491,10 +538,25 @@ BBTestSetStateConformanceTestCheckpoint2 (
   //Call SetState with KeyToggleState being a unsupported bit set
   //
   for ( Index=0; UnsupportedState[Index]; Index++ ) {
-    Status = SimpleTextInputEx->SetState (
+
+    OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+    gtBS->RestoreTPL (OldTpl);
+
+    if (OldTpl <= TPL_CALLBACK) {
+      if (OldTpl < TPL_CALLBACK) {
+        OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+        Status = SimpleTextInputEx->SetState (
                             SimpleTextInputEx,
                             UnsupportedState+Index
                             );
+        gtBS->RestoreTPL (OldTpl);
+      } else {
+        Status = SimpleTextInputEx->SetState (
+                            SimpleTextInputEx,
+                            UnsupportedState+Index
+                            );
+      }
+    }
   
     if ( EFI_UNSUPPORTED != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -526,18 +588,35 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint1 (
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
   VOID                  *NotifyHandle;
-
+  EFI_TPL               OldTpl;
 
   //
   //Call RegisterKeyNotify with KeyData being NULL
   //
-  Status = SimpleTextInputEx-> RegisterKeyNotify (
+
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx->RegisterKeyNotify (
                         SimpleTextInputEx,
                         NULL,
                         TestRegisterNotifyFunction,
                         &NotifyHandle
                         );
-  
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx->RegisterKeyNotify (
+                        SimpleTextInputEx,
+                        NULL,
+                        TestRegisterNotifyFunction,
+                        &NotifyHandle
+                        );
+    }
+  }
+
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
@@ -568,6 +647,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint2 (
   EFI_TEST_ASSERTION    AssertionType;
   EFI_KEY_DATA          Key;
   VOID                  *NotifyHandle;
+  EFI_TPL               OldTpl; 
 
   Key.Key.UnicodeChar = 'R';
   Key.Key.ScanCode = 0X00;
@@ -575,12 +655,29 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint2 (
   //
   //Call RegisterKeyNotify with KeyNotificationFunction being NULL
   //
-  Status = SimpleTextInputEx-> RegisterKeyNotify (
+
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx-> RegisterKeyNotify (
                         SimpleTextInputEx,
                         &Key,
                         NULL,
                         &NotifyHandle
                         );
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx-> RegisterKeyNotify (
+                        SimpleTextInputEx,
+                        &Key,
+                        NULL,
+                        &NotifyHandle
+                        );
+    }
+  }
   
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -611,6 +708,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint3 (
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
   EFI_KEY_DATA          Key;
+  EFI_TPL               OldTpl;
 
   Key.Key.UnicodeChar = 'R';
   Key.Key.ScanCode = 0X00;
@@ -618,12 +716,28 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint3 (
   //
   //Call RegisterKeyNotify with NotifyHandle being NULL
   //
-  Status = SimpleTextInputEx-> RegisterKeyNotify (
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx-> RegisterKeyNotify (
                         SimpleTextInputEx,
                         &Key,
                         TestRegisterNotifyFunction,
                         NULL
                         );
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx-> RegisterKeyNotify (
+                        SimpleTextInputEx,
+                        &Key,
+                        TestRegisterNotifyFunction,
+                        NULL
+                        );
+    }
+  }
   
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -653,14 +767,29 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint1 (
 {
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
+  EFI_TPL               OldTpl;
 
   //
   //Call UnregisterKeyNotify with NotifyHandle being NULL
   //
-  Status = SimpleTextInputEx-> UnregisterKeyNotify (
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx-> UnregisterKeyNotify (
                         SimpleTextInputEx,
                         NULL
                         );
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx-> UnregisterKeyNotify (
+                        SimpleTextInputEx,
+                        NULL
+                        );
+    }
+  }
   
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -692,6 +821,7 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint2 (
   EFI_TEST_ASSERTION    AssertionType;
   EFI_KEY_DATA          Key;
   VOID                  *NotifyHandle;
+  EFI_TPL               OldTpl;
 
   Key.Key.UnicodeChar = 'R';
   Key.Key.ScanCode = 0X00;
@@ -723,11 +853,25 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint2 (
   //
   //Call UnregisterKeyNotify with the invalid NotifyHandle
   //
-  Status = SimpleTextInputEx-> UnregisterKeyNotify (
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx->UnregisterKeyNotify (
                         SimpleTextInputEx,
                         NotifyHandle
                         );
-  
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx->UnregisterKeyNotify (
+                        SimpleTextInputEx,
+                        NotifyHandle
+                        );
+    }
+  }
+
   //
   // Invalid Parameter or Not Found
   //
@@ -762,6 +906,7 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint3 (
   EFI_KEY_DATA          Key;
   VOID                  *NotifyHandle;
   VOID                  *InvalidNotifyHandle;
+  EFI_TPL               OldTpl;
   
   Key.Key.UnicodeChar = 'R';
   Key.Key.ScanCode = 0X00;
@@ -798,10 +943,25 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint3 (
   //
   //Call UnregisterKeyNotify with NotifyHandle with a illegal format
   //
-  Status = SimpleTextInputEx-> UnregisterKeyNotify (
+  OldTpl = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
+  gtBS->RestoreTPL (OldTpl);
+
+  if (OldTpl <= TPL_CALLBACK) {
+    if (OldTpl < TPL_CALLBACK) {
+      OldTpl = gtBS->RaiseTPL (TPL_CALLBACK);
+      Status = SimpleTextInputEx-> UnregisterKeyNotify (
                         SimpleTextInputEx,
                         InvalidNotifyHandle
                         );
+      gtBS->RestoreTPL (OldTpl);
+    } else {
+      Status = SimpleTextInputEx-> UnregisterKeyNotify (
+                        SimpleTextInputEx,
+                        InvalidNotifyHandle
+                        );
+    }
+  }
+
   
   if ( EFI_INVALID_PARAMETER != Status) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
