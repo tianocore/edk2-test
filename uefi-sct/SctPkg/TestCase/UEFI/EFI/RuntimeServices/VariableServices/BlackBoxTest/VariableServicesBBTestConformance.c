@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -142,6 +142,20 @@ GetNextVariableNameConfTestSub4 (
 
 EFI_STATUS
 GetNextVariableNameConfTestSub5 (
+  IN EFI_RUNTIME_SERVICES                 *RT,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL    *LoggingLib
+  );
+
+EFI_STATUS
+GetNextVariableNameConfTestSub6 (
+  IN EFI_RUNTIME_SERVICES                 *RT,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL    *LoggingLib
+  );
+
+EFI_STATUS
+GetNextVariableNameConfTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL    *LoggingLib
@@ -392,6 +406,15 @@ GetNextVariableNameConfTest (
   //
   Status = GetNextVariableNameConfTestSub5 (RT, StandardLib, LoggingLib);
 
+  //
+  // GetNextVariableName when a VariableName buffer on input is not a Null-terminated string
+  //
+  Status = GetNextVariableNameConfTestSub6 (RT, StandardLib, LoggingLib);
+
+  //
+  // GetNextVariableName when input values of VariableName and VendorGuid are not a name and GUID of an existing variable
+  //
+  Status = GetNextVariableNameConfTestSub7 (RT, StandardLib, LoggingLib);
   //
   // Done
   //
@@ -2024,6 +2047,369 @@ GetNextVariableNameConfTestSub5 (
                   LoggingLib,
                   L"GetNextVariableNameConfTestSub5",
                   L"TDS 3.2.2.5"
+                  );
+  }
+
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+
+/**
+ *  GetNextVariableName when a VariableName buffer on input is not a Null-terminated string.
+ *  @param StandardLib    A pointer to EFI_STANDARD_TEST_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @param LoggingLib     A pointer to EFI_TEST_LOGGING_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @return EFI_SUCCESS   Successfully.
+ *  @return Other value   Something failed.
+ */
+EFI_STATUS
+GetNextVariableNameConfTestSub6 (
+  IN EFI_RUNTIME_SERVICES                 *RT,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL    *LoggingLib
+  )
+{
+  EFI_STATUS            Status;
+  EFI_TEST_ASSERTION    Result;
+  UINTN                 DataIndex;
+  UINT8                 Data[MAX_BUFFER_SIZE];
+  UINTN                 VariableNameSize;
+  CHAR16                VariableName[MAX_BUFFER_SIZE];
+  EFI_GUID              VendorGuid;
+
+  //
+  // Trace ...
+  //
+  if (LoggingLib != NULL) {
+    LoggingLib->EnterFunction (
+                  LoggingLib,
+                  L"GetNextVariableNameConfTestSub6",
+                  L"TDS"
+                  );
+  }
+
+  //
+  // Insert a variable
+  //
+  for (DataIndex = 0; DataIndex < 10; DataIndex++) {
+    Data[DataIndex] = (UINT8)DataIndex;
+  }
+
+  Status = RT->SetVariable (
+                 L"TestVariable",         // VariableName
+                 &gTestVendor1Guid,       // VendorGuid
+                 EFI_VARIABLE_BOOTSERVICE_ACCESS,
+                 10,                      // DataSize
+                 Data                     // Data
+                 );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gTestGenericFailureGuid,
+                   L"RT.GetNextVariableName - Cannot insert a variable",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    if (LoggingLib != NULL) {
+      LoggingLib->ExitFunction (
+                    LoggingLib,
+                    L"GetNextVariableNameConfTestSub6",
+                    L"TDS - Cannot insert a variable"
+                    );
+    }
+
+    return Status;
+  }
+
+  //
+  // Walk through all variables
+  //
+  VariableName[0] = L'\0';
+  VariableNameSize = MAX_BUFFER_SIZE * sizeof (CHAR16);
+  Result = EFI_TEST_ASSERTION_PASSED;
+
+  while (TRUE) {
+    Status = RT->GetNextVariableName (
+                   &VariableNameSize,       // VariableNameSize
+                   VariableName,            // VariableName
+                   &VendorGuid              // VendorGuid
+                   );
+    if (EFI_ERROR(Status)) {
+      if (Status != EFI_INVALID_PARAMETER) {
+        Result = EFI_TEST_ASSERTION_FAILED;
+      }
+      break;
+    }
+
+    if ((SctStrCmp (VariableName, L"TestVariable")       == 0) &&
+        (SctCompareGuid (&VendorGuid, &gTestVendor1Guid) == 0)) {
+      VariableNameSize = 8;
+    } else {
+      VariableNameSize = MAX_BUFFER_SIZE * sizeof (CHAR16);
+    }
+  }
+
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gVariableServicesBbTestConformanceAssertionGuid019,
+                 L"RT.GetNextVariableName - when a VariableName buffer on input is not a Null-terminated string",
+                 L"%a:%d:Status - %r, Expected - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,      EFI_INVALID_PARAMETER
+                 );
+
+  Status = RT->SetVariable (
+                 L"TestVariable",         // VariableName
+                 &gTestVendor1Guid,       // VendorGuid
+                 EFI_VARIABLE_BOOTSERVICE_ACCESS,
+                 0,                       // DataSize
+                 Data                     // Data
+                 );
+
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gTestGenericFailureGuid,
+                   L"RT.GetNextVariableName - Cannot delete a variable",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    if (LoggingLib != NULL) {
+      LoggingLib->ExitFunction (
+                    LoggingLib,
+                    L"GetNextVariableNameConfTestSub6",
+                    L"TDS - Cannot delete a variable"
+                    );
+    }
+
+    return Status;
+  }
+  //
+  // Trace ...
+  //
+  if (LoggingLib != NULL) {
+    LoggingLib->ExitFunction (
+                  LoggingLib,
+                  L"GetNextVariableNameConfTestSub6",
+                  L"TDS"
+                  );
+  }
+
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+/**
+ *  GetNextVariableName when input values of VariableName and VendorGuid are not a name and GUID of an existing variable.
+ *  @param StandardLib    A pointer to EFI_STANDARD_TEST_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @param LoggingLib     A pointer to EFI_TEST_LOGGING_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @return EFI_SUCCESS   Successfully.
+ *  @return Other value   Something failed.
+ */
+EFI_STATUS
+GetNextVariableNameConfTestSub7 (
+  IN EFI_RUNTIME_SERVICES                 *RT,
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_TEST_LOGGING_LIBRARY_PROTOCOL    *LoggingLib
+  )
+{
+  EFI_STATUS            Status;
+  EFI_TEST_ASSERTION    Result;
+  UINTN                 DataIndex;
+  UINT8                 Data[MAX_BUFFER_SIZE];
+  UINTN                 VariableNameSize;
+  CHAR16                VariableName[MAX_BUFFER_SIZE];
+  EFI_GUID              VendorGuid;
+
+  //
+  // Trace ...
+  //
+  if (LoggingLib != NULL) {
+    LoggingLib->EnterFunction (
+                  LoggingLib,
+                  L"GetNextVariableNameConfTestSub7",
+                  L"TDS"
+                  );
+  }
+
+  //
+  // Insert a variable
+  //
+  for (DataIndex = 0; DataIndex < 10; DataIndex++) {
+    Data[DataIndex] = (UINT8)DataIndex;
+  }
+
+  Status = RT->SetVariable (
+                 L"TestVariable",         // VariableName
+                 &gTestVendor1Guid,       // VendorGuid
+                 EFI_VARIABLE_BOOTSERVICE_ACCESS,
+                 10,                      // DataSize
+                 Data                     // Data
+                 );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gTestGenericFailureGuid,
+                   L"RT.GetNextVariableName - Cannot insert a variable",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    if (LoggingLib != NULL) {
+      LoggingLib->ExitFunction (
+                    LoggingLib,
+                    L"GetNextVariableNameConfTestSub7",
+                    L"TDS - Cannot insert a variable"
+                    );
+    }
+
+    return Status;
+  }
+
+  //
+  // Walk through all variables
+  //
+  VariableName[0] = L'\0';
+  
+  Result = EFI_TEST_ASSERTION_PASSED;
+
+  while (TRUE) {
+    VariableNameSize = MAX_BUFFER_SIZE * sizeof (CHAR16);  	
+    Status = RT->GetNextVariableName (
+                   &VariableNameSize,       // VariableNameSize
+                   VariableName,            // VariableName
+                   &VendorGuid              // VendorGuid
+                   );
+    if (EFI_ERROR(Status)) {
+      if (Status != EFI_INVALID_PARAMETER) {
+        Result = EFI_TEST_ASSERTION_FAILED;
+      }
+      break;
+    }
+
+    if ((SctStrCmp (VariableName, L"TestVariable")       == 0) &&
+        (SctCompareGuid (&VendorGuid, &gTestVendor1Guid) == 0)) {
+      VariableName[8] = L'e';
+    }
+  }
+
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gVariableServicesBbTestConformanceAssertionGuid020,
+                 L"RT.GetNextVariableName - when input values of VariableName and VendorGuid are not a name and GUID of an existing variable",
+                 L"%a:%d:Status - %r, Expected - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,      EFI_INVALID_PARAMETER
+                 );
+
+  //
+  // Walk through all variables
+  //
+  VariableName[0] = L'\0';
+  
+  Result = EFI_TEST_ASSERTION_PASSED;
+
+  while (TRUE) {
+    VariableNameSize = MAX_BUFFER_SIZE * sizeof (CHAR16);  	
+    Status = RT->GetNextVariableName (
+                   &VariableNameSize,       // VariableNameSize
+                   VariableName,            // VariableName
+                   &VendorGuid              // VendorGuid
+                   );
+    if (EFI_ERROR(Status)) {
+      if (Status != EFI_INVALID_PARAMETER) {
+        Result = EFI_TEST_ASSERTION_FAILED;
+      }
+      break;
+    }
+
+    if ((SctStrCmp (VariableName, L"TestVariable")       == 0) &&
+        (SctCompareGuid (&VendorGuid, &gTestVendor1Guid) == 0)) {
+      VendorGuid = gTestVendor2Guid;
+    }
+  }
+
+  //
+  // Record assertion
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gVariableServicesBbTestConformanceAssertionGuid020,
+                 L"RT.GetNextVariableName - when input values of VariableName and VendorGuid are not a name and GUID of an existing variable",
+                 L"%a:%d:Status - %r, Expected - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,      EFI_INVALID_PARAMETER
+                 );
+
+  Status = RT->SetVariable (
+                 L"TestVariable",         // VariableName
+                 &gTestVendor1Guid,       // VendorGuid
+                 EFI_VARIABLE_BOOTSERVICE_ACCESS,
+                 0,                       // DataSize
+                 Data                     // Data
+                 );
+
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gTestGenericFailureGuid,
+                   L"RT.GetNextVariableName - Cannot delete a variable",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    if (LoggingLib != NULL) {
+      LoggingLib->ExitFunction (
+                    LoggingLib,
+                    L"GetNextVariableNameConfTestSub6",
+                    L"TDS - Cannot delete a variable"
+                    );
+    }
+
+    return Status;
+  }
+  //
+  // Trace ...
+  //
+  if (LoggingLib != NULL) {
+    LoggingLib->ExitFunction (
+                  LoggingLib,
+                  L"GetNextVariableNameConfTestSub6",
+                  L"TDS"
                   );
   }
 
