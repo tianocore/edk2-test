@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -63,6 +63,7 @@ EFI_GUID gEfiAdapterInfoNetworkBootGuid             = EFI_ADAPTER_INFO_NETWORK_B
 
 EFI_GUID gEfiAdapterInfoUndiIPv6SupportGuid         = EFI_ADAPTER_INFO_NETWORK_BOOT_GUID;
 
+EFI_GUID gEfiAdapterInfoMediaTypeGuid               = EFI_ADAPTER_INFO_MEDIA_TYPE_GUID;
 
 EFI_GUID gEfiUnSupportedGuid                        = EFI_UNSUPPORTED_GUID;
 

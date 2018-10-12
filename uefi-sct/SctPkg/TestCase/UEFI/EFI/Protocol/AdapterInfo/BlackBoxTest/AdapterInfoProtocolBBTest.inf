@@ -1,7 +1,7 @@
 ## @file
 #
 #  Copyright 2006 - 2013 Unified EFI, Inc.<BR>
-#  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -20,7 +20,7 @@
 #
 # Abstract:
 #
-#   Component description file for Acpi Table Protocol Black-Box Test.
+#   Component description file for Adapter Info Protocol Black-Box Test.
 #
 #--*/
 

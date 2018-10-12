@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>   
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -96,8 +96,13 @@ typedef struct {
 } EFI_ADAPTER_INFO_SAN_MAC_ADDRESS;
 
 typedef struct {
-BOOLEAN Ipv6Support;
+  BOOLEAN Ipv6Support;
 } EFI_ADAPTER_INFO_UNDI_IPV6_SUPPORT;
+
+typedef struct { 
+  UINT8 MediaType; 
+} EFI_ADAPTER_INFO_MEDIA_TYPE;
+
 
 extern EFI_GUID gEfiAdapterInformationProtocolGuid;
 

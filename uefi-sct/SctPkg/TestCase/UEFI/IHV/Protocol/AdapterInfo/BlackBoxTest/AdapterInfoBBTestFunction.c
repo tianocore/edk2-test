@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2013 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -333,7 +333,7 @@ BBTestSetInformationFunctionTestCheckpoint1 (
     Status = AdapterInfo->GetInformation(
                               AdapterInfo,
                               InfoType,
-                              &InformationBlockGet1,
+                              (VOID **) &InformationBlockGet1,
                               &InformationBlockSize1
                               );
     
@@ -408,7 +408,7 @@ BBTestSetInformationFunctionTestCheckpoint1 (
       Status = AdapterInfo->GetInformation(
                                 AdapterInfo,
                                 InfoType,
-                                &InformationBlockGet2,
+                                (VOID **) &InformationBlockGet2,
                                 &InformationBlockSize2
                                 );
       
@@ -512,7 +512,8 @@ BBTestGetSupportedTypesFunctionTestCheckpoint1 (
     if (!GuidCmp (*InfoType, gEfiAdapterInfoMediaStateGuid) || 
         !GuidCmp (*InfoType, gEfiAdapterInfoNetworkBootGuid)  || 
         !GuidCmp (*InfoType, gEfiAdapterInfoSanMacAddressGuid) ||
-        !GuidCmp (*InfoType, gEfiAdapterInfoUndiIPv6SupportGuid))
+        !GuidCmp (*InfoType, gEfiAdapterInfoUndiIPv6SupportGuid) ||
+        !GuidCmp (*InfoType, gEfiAdapterInfoMediaTypeGuid))
         AssertionType = EFI_TEST_ASSERTION_PASSED;
     else
         AssertionType = EFI_TEST_ASSERTION_WARNING;

@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2013 - 2015, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -120,6 +120,10 @@ extern EFI_GUID gEfiAdapterInfoSanMacAddressGuid;
 
 extern EFI_GUID gEfiAdapterInfoUndiIPv6SupportGuid;
 
+#define EFI_ADAPTER_INFO_MEDIA_TYPE_GUID \
+{ 0x8484472f, 0x71ec, 0x411a, { 0xb3, 0x9c, 0x62, 0xcd, 0x94, 0xd9, 0x91, 0x6e }}
+
+extern EFI_GUID gEfiAdapterInfoMediaTypeGuid;
 
 #define EFI_UNSUPPORTED_GUID \
 { 0xa86aeb76, 0x3104, 0x45fb, { 0x8a, 0x9f, 0x72, 0x2d, 0x6e, 0x55, 0x3d, 0x74 }}

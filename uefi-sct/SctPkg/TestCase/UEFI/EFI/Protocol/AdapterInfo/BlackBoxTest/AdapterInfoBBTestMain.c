@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2013 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -158,7 +158,8 @@ InfoTypeAndBlockSizeCmp(
   if ((!GuidCmp (InformationType,gEfiAdapterInfoMediaStateGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_MEDIA_STATE)) || 
       (!GuidCmp (InformationType,gEfiAdapterInfoNetworkBootGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_NETWORK_BOOT)) || 
       (!GuidCmp (InformationType,gEfiAdapterInfoSanMacAddressGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_SAN_MAC_ADDRESS)) ||
-      (!GuidCmp (InformationType,gEfiAdapterInfoUndiIPv6SupportGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_UNDI_IPV6_SUPPORT)) ) 
+      (!GuidCmp (InformationType,gEfiAdapterInfoUndiIPv6SupportGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_UNDI_IPV6_SUPPORT)) ||
+      (!GuidCmp (InformationType,gEfiAdapterInfoMediaTypeGuid) && InformationBlockSize != sizeof(EFI_ADAPTER_INFO_MEDIA_TYPE))) 
     return FALSE;
   else
     return TRUE;  
