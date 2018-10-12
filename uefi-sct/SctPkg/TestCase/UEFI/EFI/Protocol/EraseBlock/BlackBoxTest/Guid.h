@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2017 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -70,4 +70,13 @@ extern EFI_GUID gEraseBlockBBTestFunctionAssertionGuid001;
 #define EFI_TEST_ERASEBLOCKBBTESTFUNCTION_ASSERTION_002_GUID \
 { 0x2af1346c, 0xf3d8, 0x48d9, { 0x94, 0x61, 0x6e, 0xef, 0xf6, 0xb2, 0x48, 0x3c } }
 extern EFI_GUID gEraseBlockBBTestFunctionAssertionGuid002;
+
+#define EFI_TEST_ERASEBLOCKBBTESTFUNCTION_ASSERTION_003_GUID \
+{ 0x467c9548, 0x726, 0x45b5, { 0xb8, 0x59, 0xd1, 0x8c, 0x1c, 0xf7, 0xf3, 0x93 } }
+extern EFI_GUID gEraseBlockBBTestFunctionAssertionGuid003;
+
+#define EFI_TEST_ERASEBLOCKBBTESTFUNCTION_ASSERTION_004_GUID \
+{ 0x402a045e, 0xa67b, 0x4a3e, { 0x89, 0x9e, 0x2d, 0xe4, 0x71, 0x75, 0x6e, 0x16 } }
+extern EFI_GUID gEraseBlockBBTestFunctionAssertionGuid004;
+
 
