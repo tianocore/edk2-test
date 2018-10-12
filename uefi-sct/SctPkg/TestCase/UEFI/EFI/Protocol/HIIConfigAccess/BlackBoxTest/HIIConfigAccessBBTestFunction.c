@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -305,9 +305,6 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
     if (Results == NULL) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     } else {
-      if (NULL == SctStrStr (MultiConfigAltResp, Results)) {
-        AssertionType = EFI_TEST_ASSERTION_FAILED;
-      }
       gtBS->FreePool (Results);
     }
   } else if (EFI_OUT_OF_RESOURCES == Status) {
@@ -375,7 +372,7 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIConfigAccessBBTestFunctionAssertionGuid001,
+                 gHIIConfigAccessBBTestFunctionAssertionGuid002,
                  L"HII_CONFIG_ACCESS_PROTOCOL.ExtractConfig- ExtractConfig() returns EFI_SUCCESS and vaild Results with valid parameters .",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -401,7 +398,6 @@ BBTestExtractConfigFunctionTestCheckpoint2 (
   EFI_STATUS            Status;
   EFI_TEST_ASSERTION    AssertionType;
 
-  //UINTN                 Len = 0;
   EFI_STRING            Request = NULL;
   EFI_STRING            Progress = NULL;
   EFI_STRING            Results = NULL;
@@ -427,78 +423,33 @@ BBTestExtractConfigFunctionTestCheckpoint2 (
                   &Results
                   );
 
-  if ( EFI_OUT_OF_RESOURCES == Status) {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;  
+  if (EFI_OUT_OF_RESOURCES == Status) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else if ((EFI_NOT_FOUND == Status) && (Progress == NULL) && (Results == NULL)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else if ( EFI_SUCCESS != Status ) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
     if (Results != NULL) {
       gtBS->FreePool (Results);
     }
-    return Status;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-    if ( (Results != NULL) && (NULL == SctStrStr (MultiConfigAltResp, Results)) ) {
+    if (Results == NULL) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
   }
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gHIIConfigAccessBBTestFunctionAssertionGuid002,
-                 L"HII_CONFIG_ACCESS_PROTOCOL.ExtractConfig- ExtractConfig() returns EFI_SUCCESS with Request been NULL .",
+                 gHIIConfigAccessBBTestFunctionAssertionGuid003,
+                 L"HII_CONFIG_ACCESS_PROTOCOL.ExtractConfig- ExtractConfig() returns EFI_SUCCESS or EFI_NOT_FOUND with Request been NULL .",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
                  );
-
-
-/*
-  //
-  // build <MultiConfigRequest> out of <MultiConfigAltResp> 
-  //
-  Len = SctStrLen (MultiConfigAltResp);
-  Request = (EFI_STRING) SctAllocateZeroPool (2 * Len + 2);
-  if (Request == NULL) {
-    goto FUNC_EXIT;
-  }
- 
-
-  Status = MultiAltRespToMultiReq (MultiConfigAltResp, Request);
-  if (Status != EFI_SUCCESS) {
-    goto FUNC_EXIT;
-  }
-
-  Status = HIIConfigRouting->ExtractConfig(
-                               HIIConfigRouting,
-                               Request,
-                               &Progress,
-                               &Results
-                               );
-  // 
-  // Since ExtractConfig may not append <AltResp> at string tail.  
-  // We check whether Results is a substring of MultiConfigAltResp from ExportConfig 
-  //
-  if (Status == EFI_SUCCESS && SctStrStr (MultiConfigAltResp, Results) != NULL) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  } else if (EFI_OUT_OF_RESOURCES == Status){
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gHIIConfigAccessBBTestFunctionAssertionGuid004,
-                 L"HII_CONFIG_ACCESS_PROTOCOL.ExtractConfig - ExtractConfig() Check if Results is in <MultiConfigAltResp> format.",
-                 L"%a:%d:",
-                 __FILE__,
-                 (UINTN)__LINE__
-                 );
    
 
-FUNC_EXIT:
-*/
   if ( NULL != MultiConfigAltResp ){
     gtBS->FreePool (MultiConfigAltResp);
   }
