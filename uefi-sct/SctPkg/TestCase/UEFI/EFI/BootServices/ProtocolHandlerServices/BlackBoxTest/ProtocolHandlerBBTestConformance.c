@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -2480,6 +2480,31 @@ BBTestLocateProtocolConsistencyTest (
                  AssertionType,
                  gConsistencyTestAssertionGuid035,
                  L"BS.LocateProtocol - ConsistencyTestCheckpoint1",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Add a checkpoint from the 1559
+  // If Protocol is NULL, then EFI_INVALID_PARAMETER is returned
+  //
+  Status = gtBS->LocateProtocol (
+                   NULL,
+                   NULL,
+                   (VOID **) &TestProtocol2
+                   );
+  if (Status == EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gConsistencyTestAssertionGuid009,
+                 L"BS.LocateProtocol - ConsistencyTestCheckpoint4",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,

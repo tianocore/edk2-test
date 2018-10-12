@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -65,12 +65,10 @@ extern EFI_GUID gConsistencyTestAssertionGuid007;
 
 extern EFI_GUID gConsistencyTestAssertionGuid008;
 
-/*
 #define EFI_TEST_CONSISTENCYTEST_ASSERTION_009_GUID \
 { 0xe9712c64, 0x302e, 0x4984, {0x9e, 0xc2, 0xb9, 0x91, 0xd3, 0x5e, 0x2e, 0x11 }}
 
 extern EFI_GUID gConsistencyTestAssertionGuid009;
-*/
 
 #define EFI_TEST_CONSISTENCYTEST_ASSERTION_010_GUID \
 { 0xf7c8a812, 0x97c8, 0x4283, {0xa7, 0x79, 0x9c, 0x3a, 0x0d, 0xf9, 0x9b, 0x44 }}
@@ -131,12 +129,12 @@ extern EFI_GUID gConsistencyTestAssertionGuid020;
 { 0x0df6b782, 0xbb9c, 0x40e1, {0x99, 0x31, 0xfa, 0x07, 0xce, 0x4e, 0xf3, 0x2d }}
 
 extern EFI_GUID gConsistencyTestAssertionGuid021;
-
+/*
 #define EFI_TEST_CONSISTENCYTEST_ASSERTION_022_GUID \
 { 0x8508de3d, 0x795d, 0x4833, {0x8c, 0xe2, 0x3c, 0xf9, 0x60, 0x05, 0x50, 0x5b }}
 
 extern EFI_GUID gConsistencyTestAssertionGuid022;
-
+*/
 #define EFI_TEST_CONSISTENCYTEST_ASSERTION_023_GUID \
 { 0x6cad11b3, 0x9ea5, 0x4d60, {0xb0, 0x6c, 0xaf, 0xf3, 0xfd, 0xef, 0x90, 0x8d }}
 
@@ -306,12 +304,12 @@ extern EFI_GUID gConsistencyTestAssertionGuid055;
 { 0x357d40b9, 0xa9b0, 0x4462, {0xa4, 0xc7, 0x40, 0xca, 0x18, 0xcb, 0x17, 0x34 }}
 
 extern EFI_GUID gConsistencyTestAssertionGuid056;
-
+/*
 #define EFI_TEST_CONSISTENCYTEST_ASSERTION_057_GUID \
 { 0xf4f96d88, 0x1924, 0x4d35, {0x94, 0xc9, 0x7f, 0x7b, 0x6e, 0x42, 0xc2, 0xd4 }}
 
 extern EFI_GUID gConsistencyTestAssertionGuid057;
-
+*/
 #define EFI_TEST_CONSISTENCYTEST_ASSERTION_058_GUID \
 { 0x4f733e46, 0xdacb, 0x4f6f, {0x80, 0x2b, 0x05, 0x45, 0x00, 0x3a, 0x6a, 0x64 }}
 

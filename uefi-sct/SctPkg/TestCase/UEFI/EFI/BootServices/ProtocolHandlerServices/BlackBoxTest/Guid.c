@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -44,7 +44,7 @@ EFI_GUID gConsistencyTestAssertionGuid007 = EFI_TEST_CONSISTENCYTEST_ASSERTION_0
 
 EFI_GUID gConsistencyTestAssertionGuid008 = EFI_TEST_CONSISTENCYTEST_ASSERTION_008_GUID;
 
-//EFI_GUID gConsistencyTestAssertionGuid009 = EFI_TEST_CONSISTENCYTEST_ASSERTION_009_GUID;
+EFI_GUID gConsistencyTestAssertionGuid009 = EFI_TEST_CONSISTENCYTEST_ASSERTION_009_GUID;
 
 EFI_GUID gConsistencyTestAssertionGuid010 = EFI_TEST_CONSISTENCYTEST_ASSERTION_010_GUID;
 
@@ -70,7 +70,7 @@ EFI_GUID gConsistencyTestAssertionGuid020 = EFI_TEST_CONSISTENCYTEST_ASSERTION_0
 
 EFI_GUID gConsistencyTestAssertionGuid021 = EFI_TEST_CONSISTENCYTEST_ASSERTION_021_GUID;
 
-EFI_GUID gConsistencyTestAssertionGuid022 = EFI_TEST_CONSISTENCYTEST_ASSERTION_022_GUID;
+//EFI_GUID gConsistencyTestAssertionGuid022 = EFI_TEST_CONSISTENCYTEST_ASSERTION_022_GUID;
 
 EFI_GUID gConsistencyTestAssertionGuid023 = EFI_TEST_CONSISTENCYTEST_ASSERTION_023_GUID;
 
@@ -140,7 +140,7 @@ EFI_GUID gConsistencyTestAssertionGuid055 = EFI_TEST_CONSISTENCYTEST_ASSERTION_0
 
 EFI_GUID gConsistencyTestAssertionGuid056 = EFI_TEST_CONSISTENCYTEST_ASSERTION_056_GUID;
 
-EFI_GUID gConsistencyTestAssertionGuid057 = EFI_TEST_CONSISTENCYTEST_ASSERTION_057_GUID;
+//EFI_GUID gConsistencyTestAssertionGuid057 = EFI_TEST_CONSISTENCYTEST_ASSERTION_057_GUID;
 
 EFI_GUID gConsistencyTestAssertionGuid058 = EFI_TEST_CONSISTENCYTEST_ASSERTION_058_GUID;
 
