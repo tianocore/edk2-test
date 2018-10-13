@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -316,9 +316,13 @@ BBTestReadBlocksFunctionAutoTest (
           NewLba = IndexJ;
         } else if (IndexJ < 2 * MAX_DIFFERENT_LBA_FOR_TEST) {
           // from (LastBlock - MAX_DIFFERENT_LBA_FOR_TEST - MAX_DIFFERENT_BUFFERSIZE_FOR_TEST)  to (LastBlock - MAX_DIFFERENT_BUFFERSIZE_FOR_TEST)
+          if (LastBlock < MAX_DIFFERENT_LBA_FOR_TEST + MAX_DIFFERENT_BUFFERSIZE_FOR_TEST)
+            continue;
           NewLba = IndexJ + LastBlock - 2 * MAX_DIFFERENT_LBA_FOR_TEST - MAX_DIFFERENT_BUFFERSIZE_FOR_TEST;
         } else {
           // from (LastBlock/2 - MAX_DIFFERENT_LBA_FOR_TEST/2) to (LastBlock/2 + MAX_DIFFERENT_LBA_FOR_TEST/2)
+          if (LastBlock < MAX_DIFFERENT_LBA_FOR_TEST)
+            continue;
           NewLba = IndexJ - 2 * MAX_DIFFERENT_LBA_FOR_TEST + (SctDivU64x32 (LastBlock, 2, &Remainder) - MAX_DIFFERENT_LBA_FOR_TEST / 2);
         }
 
