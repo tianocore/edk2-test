@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2011 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -87,8 +87,6 @@ EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid008 = EFI_TEST_HIICONFIGROU
 EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid009 = EFI_TEST_HIICONFIGROUTINGBBTESTFUNCTION_ASSERTION_009_GUID;
 
 EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid010 = EFI_TEST_HIICONFIGROUTINGBBTESTFUNCTION_ASSERTION_010_GUID;
-
-EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid011 = EFI_TEST_HIICONFIGROUTINGBBTESTFUNCTION_ASSERTION_011_GUID;
 
 EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid012 = EFI_TEST_HIICONFIGROUTINGBBTESTFUNCTION_ASSERTION_012_GUID;
 

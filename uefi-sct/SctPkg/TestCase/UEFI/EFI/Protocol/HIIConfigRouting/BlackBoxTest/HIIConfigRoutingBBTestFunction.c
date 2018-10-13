@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -416,27 +416,6 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );
-
-  // 
-  // Since ExtractConfig may not append <AltResp> at string tail.  
-  // We check whether Results is a substring of MultiConfigAltResp from ExportConfig 
-  //
-  if (Status == EFI_SUCCESS && (SctStrStr (MultiConfigAltResp, Results) != NULL)) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  } else if (EFI_OUT_OF_RESOURCES == Status){
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gHIIConfigRoutingBBTestFunctionAssertionGuid011,
-                 L"HII_CONFIG_ROUTING_PROTOCOL.ExtractConfig - ExtractConfig() Check if Results is in <MultiConfigAltResp> format.",
-                 L"%a:%d:",
-                 __FILE__,
-                 (UINTN)__LINE__
                  );
 
 FUNC_EXIT:

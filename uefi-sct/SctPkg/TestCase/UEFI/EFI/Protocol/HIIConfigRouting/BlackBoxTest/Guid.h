@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2011 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2011, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -180,10 +180,6 @@ extern EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid009;
 
 extern EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid010;
 
-#define EFI_TEST_HIICONFIGROUTINGBBTESTFUNCTION_ASSERTION_011_GUID \
-{ 0xf91ef5f3, 0xe0c6, 0x4aca, { 0xa0, 0xd0, 0x5, 0xf9, 0xb1, 0x6a, 0x13, 0xbd } }
-
-extern EFI_GUID gHIIConfigRoutingBBTestFunctionAssertionGuid011;
 
 #define EFI_TEST_HIICONFIGROUTINGBBTESTFUNCTION_ASSERTION_012_GUID \
 { 0xf732d246, 0x9fa5, 0x4ed3, { 0x88, 0x95, 0x28, 0x63, 0xba, 0xf4, 0x68, 0x5d } }
