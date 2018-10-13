@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -167,6 +167,15 @@ extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid021;
 
 extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid022;
 
+#define EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_023_GUID \
+{ 0x55af8fad, 0x1b12, 0x45ad, { 0xb0, 0x42, 0xa6, 0x43, 0x96, 0x2f, 0x4, 0x70 }}
+
+extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid023;
+
+#define EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_024_GUID \
+{ 0x6d0740fb, 0x388a, 0x491f, { 0xb8, 0x18, 0x9b, 0x5c, 0xb5, 0x17, 0xf, 0x95 }}
+
+extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid024;
 
 
 #define EFI_TEST_VARIABLESERVICESBBTESTFUNCTION_ASSERTION_001_GUID \

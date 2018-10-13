@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -83,6 +83,10 @@ EFI_GUID gVariableServicesBbTestConformanceAssertionGuid020 = EFI_TEST_VARIABLES
 EFI_GUID gVariableServicesBbTestConformanceAssertionGuid021 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_021_GUID;
 
 EFI_GUID gVariableServicesBbTestConformanceAssertionGuid022 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_022_GUID;
+
+EFI_GUID gVariableServicesBbTestConformanceAssertionGuid023 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_023_GUID;
+
+EFI_GUID gVariableServicesBbTestConformanceAssertionGuid024 = EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_024_GUID;
 
 EFI_GUID gVariableServicesBbTestFunctionAssertionGuid001 = EFI_TEST_VARIABLESERVICESBBTESTFUNCTION_ASSERTION_001_GUID;
 

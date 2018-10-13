@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -151,6 +151,44 @@ AuthVariableDERConfTest (
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL   *LoggingLib;
   UINT32                              Attr;
   EFI_TEST_ASSERTION                  Result;
+  UINTN                               Index;
+  UINTN                               MaximumVariableStorageSize;
+  UINTN                               RemainingVariableStorageSize;
+  UINTN                               MaximumVariableSize;
+  UINT32                              AttrArray[] = {
+    //
+    //  For 1 attribute.
+    //
+    EFI_VARIABLE_NON_VOLATILE,
+    EFI_VARIABLE_RUNTIME_ACCESS,
+    EFI_VARIABLE_BOOTSERVICE_ACCESS,
+    EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+
+    //
+    //  For 2 attributes.
+    //
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS,
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+
+    EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+    EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+
+    EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+
+    //
+    //  For 3 attributes.
+    //
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+    EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+
+    //
+    //  For 4 attributes.
+    //
+    EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS,
+  };
 
   Status = GetTestSupportLibrary (
              SupportHandle,
@@ -192,33 +230,86 @@ AuthVariableDERConfTest (
                  Status
                  );
 
-  Attr = EFI_VARIABLE_NON_VOLATILE | 
-         EFI_VARIABLE_RUNTIME_ACCESS | 
-         EFI_VARIABLE_BOOTSERVICE_ACCESS |
-         EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS;
+  for (Index = 0; Index < sizeof (AttrArray) / sizeof (AttrArray[0]); Index = Index + 1) {
+    Attr = AttrArray[Index];
+    Attr |= EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS;
 
-  Status = RT->SetVariable(
-                 L"AuthVarDER", 
-                 &mVarVendorGuid, 
-                 Attr, 
-                 sizeof(mValidAuthVarDERCreate), 
-                 (VOID*) mValidAuthVarDERCreate
-                 );
-  if (Status == EFI_SECURITY_VIOLATION) {
-    Result = EFI_TEST_ASSERTION_PASSED;
-  } else {
-    Result = EFI_TEST_ASSERTION_FAILED;
+    Status = RT->SetVariable (
+                   L"AuthVarDER",
+                   &mVarVendorGuid,
+                   Attr,
+                   sizeof (mValidAuthVarDERCreate),
+                   (VOID *) mValidAuthVarDERCreate
+                   );
+    if (Status == EFI_UNSUPPORTED) {
+      Result = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      Result = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   Result,
+                   gVariableServicesBbTestConformanceAssertionGuid020,
+                   L"RT.SetVariable - Set Auth Variable with valid cert.",
+                   L"Attributes = Array[%d]. %a:%d:Status - %r",
+                   Index,
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    Status = RT->SetVariable (
+                   L"AuthVarDER",
+                   &mVarVendorGuid,
+                   Attr,
+                   sizeof (mInvalidAuthVarDERCreate),
+                   (VOID *) mInvalidAuthVarDERCreate
+                   );
+    if (Status == EFI_UNSUPPORTED) {
+      Result = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      Result = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   Result,
+                   gVariableServicesBbTestConformanceAssertionGuid023,
+                   L"RT.SetVariable - Set Auth Variable with invalid cert.",
+                   L"Attributes = Array[%d]. %a:%d:Status - %r",
+                   Index,
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    Status = RT->QueryVariableInfo (
+                   Attr,
+                   &MaximumVariableStorageSize,
+                   &RemainingVariableStorageSize,
+                   &MaximumVariableSize
+                   );
+
+    if (Status == EFI_UNSUPPORTED) {
+      Result = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      Result = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   Result,
+                   gVariableServicesBbTestConformanceAssertionGuid024,
+                   L"RT.QueryVariableInfo - Query Auth Variable.",
+                   L"Attributes = Array[%d]. %a:%d:Status - %r",
+                   Index,
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
   }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 Result,
-                 gVariableServicesBbTestConformanceAssertionGuid020,
-                 L"RT.SetVariable - Set Auth Variable with invalid Attr",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
 
   return EFI_SUCCESS;
 }
