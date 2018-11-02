@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -2855,7 +2855,7 @@ HardwareErrorRecordFuncTest (
   UINT64                RemainingVariableStorageSize;
   UINT64                MaximumVariableSize;
   
-  CHAR16                HwErrRecVariableName[13];
+  CHAR16                HwErrRecVariableName[HwErrRecVariableNameLength];
   CHAR16                HwErrRecVariable[] = L"This is a HwErrRec variable!";
   
   CHAR16                GetVariableName[MAX_BUFFER_SIZE];
@@ -2864,7 +2864,7 @@ HardwareErrorRecordFuncTest (
   
   UINTN                 Num;
   UINTN                 MaxNum = 0;
-  CHAR16                ErrorNum[5];
+  CHAR16                ErrorNum[HwErrRecVariableNameIndexLength+1];
   
   CHAR16                HwErrRecGetVariable[255];
   
@@ -2908,7 +2908,11 @@ HardwareErrorRecordFuncTest (
   }
 
   //
-  // Read reset record
+  // Try to read reset record from the RecoveryData,
+  // and the magic num is saved in the RecoveryData[0]. 
+  // When the status is EFI_SUCCESS and magic num is 2,
+  // it means useful data has been saved before the reset
+  // and the date should be retrived goto particular process
   //
   Status = RecoveryLib->ReadResetRecord (
                           RecoveryLib,
@@ -2916,12 +2920,12 @@ HardwareErrorRecordFuncTest (
                           RecoveryData
                           );
   if ( !EFI_ERROR(Status) && (RecoveryDataSize > 0) ) {
-      switch (RecoveryData[0]) {
-      case 2:
-        goto step2;
-      default:
-        goto step3;
-      }
+    switch (RecoveryData[0]) {
+    case 2:
+      goto step2;
+    default:
+      goto step3;
+    }
   }
   
   //
@@ -2978,7 +2982,7 @@ HardwareErrorRecordFuncTest (
   // Get a useable variable name
   //
   GetVariableName[0] = L'\0';
-  ErrorNum[4] = L'\0';
+  ErrorNum[HwErrRecVariableNameIndexLength] = L'\0';
   
 
   while (TRUE) {
@@ -3001,9 +3005,9 @@ HardwareErrorRecordFuncTest (
       break;
     }
 
-    if ( (SctStrnCmp (GetVariableName, L"HwErrRec", 8) == 0) &&
+    if ( (SctStrnCmp (GetVariableName, L"HwErrRec", HwErrRecVariableNamePrefixLength) == 0) &&
          (SctCompareGuid (&VendorGuid, &gHwErrRecGuid) == 0) ) {
-      SctStrnCpy (ErrorNum, &GetVariableName[8], 4);
+      SctStrnCpy (ErrorNum, &GetVariableName[HwErrRecVariableNamePrefixLength], HwErrRecVariableNameIndexLength);
       Num = SctXtoi (ErrorNum);
       if (MaxNum < Num)
         MaxNum = Num;
@@ -3014,7 +3018,8 @@ HardwareErrorRecordFuncTest (
     
   HwErrRecVariableName[0] = L'\0';
   SctStrCat ( HwErrRecVariableName, L"HwErrRec" );
-  Myitox( MaxNum, HwErrRecVariableName+8 );
+  Myitox( MaxNum, HwErrRecVariableName+HwErrRecVariableNamePrefixLength );
+  HwErrRecVariableName[HwErrRecVariableNameLength-1] = L'\0';
   
   //
   // Set the new HwErrRec variable to the global variable
@@ -3033,11 +3038,12 @@ HardwareErrorRecordFuncTest (
   }
   
   //
-  // Write reset record
+  // Before the reset, test writes magic num 2 in RecoveryData[0]
+  // and writes the useful data - HwErrRecVariableName - to RecoveryData[2]
   //
   RecoveryData[0] = 2;
-  SctStrnCpy ( (CHAR16*)(&RecoveryData[2]), HwErrRecVariableName, 12 );
-  RecoveryLib->WriteResetRecord( RecoveryLib, 13*sizeof(CHAR16)+2, RecoveryData );
+  SctStrnCpy ( (CHAR16*)(&RecoveryData[2]), HwErrRecVariableName, HwErrRecVariableNameLength-1 );
+  RecoveryLib->WriteResetRecord( RecoveryLib, HwErrRecVariableNameLength*sizeof(CHAR16)+2, RecoveryData );
   
   //
   // Prompt the user about the cold reset and reset the system
@@ -3048,11 +3054,13 @@ HardwareErrorRecordFuncTest (
   gtRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
   
   //
-  // After the cold reset
+  // The particular process after the reset
+  // retrive the useful data - HwErrRecVariableName - from RecoveryData[2]
   //
 step2:
   DataSize = 255;
-  SctStrnCpy ( HwErrRecVariableName, (CHAR16*)(RecoveryData+2), 12 );
+  HwErrRecVariableName[HwErrRecVariableNameLength-1] = L'\0';
+  SctStrnCpy ( HwErrRecVariableName, (CHAR16*)(RecoveryData+2), HwErrRecVariableNameLength-1 );
   Status = RT->GetVariable (
                         HwErrRecVariableName,
                         &gHwErrRecGuid,

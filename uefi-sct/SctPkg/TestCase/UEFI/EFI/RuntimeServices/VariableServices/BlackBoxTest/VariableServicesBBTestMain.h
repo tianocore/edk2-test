@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -123,6 +123,17 @@ Abstract:
   { 0x28155531, 0x80c5, 0x4ad0, {0x84, 0x71, 0xa5, 0xe2, 0xae, 0xcf, 0x23, 0x6c }}
 
 #endif
+
+//
+// The Variable Name of Hardware Error Record Variables 
+// defined in the UEFI Spec is HwErrRec####. For example,
+// HwErrRec0001, HwErrRec0002, HwErrRecF31A, etc.
+// The prefix length is 8, index length is 4.
+// Consider the tail of string, the name length is 13.
+//
+#define HwErrRecVariableNameLength       13
+#define HwErrRecVariableNamePrefixLength 8
+#define HwErrRecVariableNameIndexLength  4
 
 //
 // Global Variables
