@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -1445,6 +1445,7 @@ CreateiScsiDeviceNode (
   UINT64                      LunNum;
   ISCSI_DEVICE_PATH_WITH_NAME *iSCSI;
 
+  LunNum            = 0;
   NameStr           = SctSplitStr (&TextDeviceNode, L',');
   PortalGroupStr    = SctSplitStr (&TextDeviceNode, L',');
   LunStr            = SctSplitStr (&TextDeviceNode, L',');
@@ -1459,7 +1460,7 @@ CreateiScsiDeviceNode (
                                                         );
   SctUnicodeToAscii (iSCSI->iSCSITargetName, NameStr, SctStrLen (NameStr));
   iSCSI->TargetPortalGroupTag = (UINT16) SctStrToUInt (PortalGroupStr);
-  SctStrToUInt64 (LunStr, &LunNum);
+  StrToUInt8Array(LunStr, &LunNum);
   iSCSI->Lun = LunNum;
 
   Options = 0x0000;
@@ -2846,12 +2847,12 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 (UINTN)__LINE__
                 );
   //
-  // TDS 3.10.1.2.26
+  // TDS 3.10.1.2.26   In Lun 0x0000005678000000, byte 3 is 0x56 and byte4 is 0x78
   //
-  SctStrCpy (text, L"MyTargetName,0x12AB,5678,CRC32C,None,CHAP_BI,TCP");
+  SctStrCpy (text, L"MyTargetName,0x12AB,0x0000005678000000,CRC32C,None,CHAP_BI,TCP");
   pDevicePath = CreateiScsiDeviceNode(text);
 
-  SctStrCpy (text, L"iSCSI(MyTargetName,0x12AB,5678,CRC32C,None,CHAP_BI,TCP)");
+  SctStrCpy (text, L"iSCSI(MyTargetName,0x12AB,0x0000005678000000,CRC32C,None,CHAP_BI,TCP)");
   pReDevicePath = DevicePathFromText->ConvertTextToDeviceNode (text);
   if (SctCompareMem (pDevicePath, pReDevicePath, SctDevicePathNodeLength ((EFI_DEVICE_PATH_PROTOCOL *) pReDevicePath)) == 0) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -2866,7 +2867,7 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 AssertionType,
                 gDevicePathFromTextBBTestFunctionAssertionGuid114,
                 L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
-                L"%a:%d, Convert iSCSI(MyTargetName,0x12AB,5678,CRC32C,None,CHAP_BI,TCP)",
+                L"%a:%d, Convert iSCSI(MyTargetName,0x12AB,0x0000005678000000,CRC32C,None,CHAP_BI,TCP)",
                 __FILE__,
                 (UINTN)__LINE__
                 );
