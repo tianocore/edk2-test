@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -105,6 +105,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     BBTestUnregisterKeyNotifyFunctionManualTest
   },
 #endif
+  {
+    EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_TEST_ENTRY_GUID0107,
+    L"ReadKeyStrokeExFunctionAuto",
+    L"Function Auto test for Simple Text Input Ex Protocol ReadKeyStrokeEx().",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    BBTestReadKeyStrokeExFunctionAutoTest
+  },
   {
     EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_TEST_ENTRY_GUID0201,
     L"ReadKeyStrokeExConformance",

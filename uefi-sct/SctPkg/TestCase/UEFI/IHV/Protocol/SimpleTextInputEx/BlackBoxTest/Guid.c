@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -63,3 +63,7 @@ EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid007 = EFI_TEST_SIMPLETEXTI
 EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid008 = EFI_TEST_SIMPLETEXTINPUTEXBBTESTFUNCTION_ASSERTION_008_GUID;
 
 EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid009 = EFI_TEST_SIMPLETEXTINPUTEXBBTESTFUNCTION_ASSERTION_009_GUID;
+
+EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid010 = EFI_TEST_SIMPLETEXTINPUTEXBBTESTFUNCTION_ASSERTION_010_GUID;
+
+EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid011 = EFI_TEST_SIMPLETEXTINPUTEXBBTESTFUNCTION_ASSERTION_011_GUID;

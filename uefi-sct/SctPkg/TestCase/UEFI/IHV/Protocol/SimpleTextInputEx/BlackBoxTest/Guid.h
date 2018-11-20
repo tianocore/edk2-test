@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2010 Unified EFI, Inc.<BR>
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -119,3 +119,13 @@ extern EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid008;
 { 0x534369f7, 0x8399, 0x4353, { 0x94, 0xad, 0xc4, 0x48, 0xfa, 0xda, 0xeb, 0x84 } }
 
 extern EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid009;
+
+#define EFI_TEST_SIMPLETEXTINPUTEXBBTESTFUNCTION_ASSERTION_010_GUID \
+{ 0xcf4d54eb, 0x6696, 0x4794, { 0x91, 0x74, 0x59, 0xd, 0x1c, 0x22, 0xa8, 0x67 } }
+
+extern EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid010;
+
+#define EFI_TEST_SIMPLETEXTINPUTEXBBTESTFUNCTION_ASSERTION_011_GUID \
+{ 0xf8e8f879, 0xa6d4, 0x4fd3, { 0x8b, 0x8e, 0xba, 0x1d, 0x18, 0xf1, 0x40, 0x71 } }
+
+extern EFI_GUID gSimpleTextInputExBBTestFunctionAssertionGuid011;
