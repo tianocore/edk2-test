@@ -26,6 +26,8 @@ Abstract:
 
 #define REPEAT_RESET    5
 
+#define VALIDSTATENUM_READKEYTEST    7
+
 //
 //Test Cases
 //
@@ -454,6 +456,79 @@ BBTestUnregisterKeyNotifyFunctionManualTest (
   
   return EFI_SUCCESS;
 }
+
+
+EFI_STATUS
+BBTestReadKeyStrokeExFunctionAutoTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  )
+{
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
+  EFI_STATUS                            Status;
+  EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL     *SimpleTextInputEx;
+
+  EFI_DEVICE_PATH_PROTOCOL             *DevicePath;
+  CHAR16                               *DevicePathStr;
+
+  //
+  // init
+  //
+  SimpleTextInputEx = (EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL*)ClientInterface;
+
+  //
+  // Get the Standard Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+                   SupportHandle,
+                   &gEfiStandardTestLibraryGuid,
+                   (VOID **) &StandardLib
+                   );
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  //
+  // Get Device Path of current Simple_Text_Input_Ex_Protocol
+  // And out put device path or device name
+  //
+  Status = LocateDevicePathFromSimpleTextInputEx (SimpleTextInputEx, &DevicePath, StandardLib);
+  if (Status == EFI_SUCCESS) {
+    DevicePathStr = SctDevicePathToStr (DevicePath);
+    if (DevicePathStr != NULL) {
+      StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"\r\nCurrent Device: %s",
+                     DevicePathStr
+                     );
+      Status = gtBS->FreePool (DevicePathStr);
+      if (EFI_ERROR(Status))
+        return Status;
+      DevicePathStr=NULL;
+    }
+  } else {
+    //
+    // Console Splitter/StdErr
+    //
+    StandardLib->RecordMessage (
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_DEFAULT,
+                   L"\r\nCurrent Device: %s",
+                   L"ConsoleSplitter/TxtIn"
+                   );
+  }
+
+  //
+  // Call check point
+  //
+  BBTestReadKeyStrokeExFunctionAutoTestCheckpoint1 ( StandardLib, SimpleTextInputEx );
+
+  return EFI_SUCCESS;
+}
+
 
 
 //
@@ -1058,6 +1133,147 @@ BBTestUnregisterKeyNotifyFunctionManualTestCheckpoint1 (
            (UINTN)__LINE__,
            Status
            );
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+BBTestReadKeyStrokeExFunctionAutoTestCheckpoint1 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
+  IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
+  )
+{
+  EFI_STATUS            Status;
+  EFI_TEST_ASSERTION    AssertionType;
+  EFI_KEY_DATA          Key;
+  UINT8                 Index;
+  EFI_KEY_TOGGLE_STATE  State;
+  EFI_KEY_TOGGLE_STATE  ValidState[VALIDSTATENUM_READKEYTEST];
+
+  State = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED;
+
+  ValidState[0] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_SCROLL_LOCK_ACTIVE;
+  ValidState[1] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_NUM_LOCK_ACTIVE;
+  ValidState[2] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_CAPS_LOCK_ACTIVE;
+  ValidState[3] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_SCROLL_LOCK_ACTIVE | EFI_NUM_LOCK_ACTIVE;
+  ValidState[4] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_SCROLL_LOCK_ACTIVE | EFI_CAPS_LOCK_ACTIVE;
+  ValidState[5] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_NUM_LOCK_ACTIVE | EFI_CAPS_LOCK_ACTIVE;
+  ValidState[6] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_SCROLL_LOCK_ACTIVE |EFI_NUM_LOCK_ACTIVE | EFI_CAPS_LOCK_ACTIVE;
+
+  //
+  //Read next keystroke from the input device
+  //
+  Status = SimpleTextInputEx->ReadKeyStrokeEx (
+                                SimpleTextInputEx,
+                                &Key
+                                );
+  if ((Status != EFI_SUCCESS) && (Status != EFI_NOT_READY)) {
+    return Status;
+  }
+
+  if ((Key.KeyState.KeyToggleState & EFI_TOGGLE_STATE_VALID) == 0) {
+    return EFI_UNSUPPORTED;
+  }
+
+  //
+  //Set the KEY_STATE_EXPOSED to check the imcomplete keystroke support
+  //
+  Status = SimpleTextInputEx->SetState (
+                                SimpleTextInputEx,
+                                &State
+                                );
+
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gTestGenericFailureGuid,
+                   L"EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL.SetState - SetState() doesn't return EFI_SUCCESS with EFI_KEY_STATE_EXPOSED",
+                   L"%a:%d, Status = %r\n",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    return Status;
+  }
+
+  for (Index=0; Index<VALIDSTATENUM_READKEYTEST; Index++) {
+
+    //
+    // Set the valid KeyToggleState
+    // With EFI_KEY_STATE_EXPOSED bit enabled
+    //
+    Status = SimpleTextInputEx->SetState (
+                                  SimpleTextInputEx,
+                                  ValidState + Index
+                                  );
+
+    if (Status != EFI_SUCCESS) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_FAILED,
+                     gTestGenericFailureGuid,
+                     L"EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL.SetState - SetState() doesn't return EFI_SUCCESS with the valid KeyToggleState",
+                     L"%a:%d, Status = %r, KeyToggleState = %x\n",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status,
+                     ValidState[Index]
+                     );
+      continue;
+    }
+
+    //
+    // Get the KeyToggleState, and return status should be EFI_NOT_READY.
+    // the ReadKeyStrokeEx function will allow the return of
+    // incomplete keystrokes such as there is no Key data.
+    //
+    Status = SimpleTextInputEx->ReadKeyStrokeEx (
+                                  SimpleTextInputEx,
+                                  &Key
+                                  );
+
+    if (Status != EFI_NOT_READY) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleTextInputExBBTestFunctionAssertionGuid010,
+                     L"EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL.ReadKeyStrokeEx - ReadKeyStrokeEx() doesn't return EFI_NOT_READY when there is no Key data and EFI_KEY_STATE_EXPOSED is enabled",
+                     L"%a:%d, Status = %r, Index = %d, KeyToggleState = %x\n",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status,
+                     Index,
+                     ValidState[Index]
+                     );
+
+    } else {
+      if ((Key.KeyState.KeyToggleState == ValidState[Index]) &&
+        ((Key.KeyState.KeyShiftState == 0) || (Key.KeyState.KeyShiftState == EFI_SHIFT_STATE_VALID)) &&
+        ((Key.Key.ScanCode == 0) && (Key.Key.UnicodeChar == 0))) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleTextInputExBBTestFunctionAssertionGuid011,
+                     L"EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL.ReadKeyStrokeEx - ReadKeyStrokeEx() should get the ValidState with EFI_NOT_READY and other field is zero",
+                     L"%a:%d, Status = %r, Index = %d, KeyToggleState = %x, expect State = %x\n",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status,
+                     Index,
+                     Key.KeyState.KeyToggleState,
+                     ValidState[Index]
+                     );
+
+    }
+  }
 
   return EFI_SUCCESS;
 }

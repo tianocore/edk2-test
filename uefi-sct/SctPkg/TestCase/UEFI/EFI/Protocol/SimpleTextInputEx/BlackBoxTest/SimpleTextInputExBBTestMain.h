@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -57,6 +57,8 @@ Abstract:
 #define EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_TEST_ENTRY_GUID0106 \
 { 0xdbc6e659, 0xb0e0, 0x4471, { 0x94, 0x13, 0x45, 0x1b, 0xdc, 0xe2, 0xad, 0xc7 } }
 
+#define EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_TEST_ENTRY_GUID0107 \
+{ 0x2c3ca282, 0x5644, 0x41b6, { 0xaf, 0xc9, 0x43, 0x87, 0xf2, 0x53, 0x89, 0xbd } }
 //
 // Entry GUIDs for Conf Test
 //
@@ -155,6 +157,15 @@ BBTestUnregisterKeyNotifyFunctionManualTest (
   IN EFI_TEST_LEVEL             TestLevel,
   IN EFI_HANDLE                 SupportHandle
   );
+
+
+EFI_STATUS
+BBTestReadKeyStrokeExFunctionAutoTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
   
   
 EFI_STATUS
@@ -233,6 +244,13 @@ BBTestRegisterKeyNotifyFunctionManualTestCheckpoint1 (
 
 EFI_STATUS
 BBTestUnregisterKeyNotifyFunctionManualTestCheckpoint1 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
+  IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
+  );
+
+
+EFI_STATUS
+BBTestReadKeyStrokeExFunctionAutoTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   );
