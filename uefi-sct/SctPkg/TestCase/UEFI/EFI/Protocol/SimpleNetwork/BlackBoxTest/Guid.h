@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -234,6 +234,11 @@ extern EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid041;
 { 0x6a319f34, 0x0e40, 0x41aa, {0xae, 0x50, 0x16, 0x9c, 0x4d, 0xe7, 0xb8, 0xc7 }}
 
 extern EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid042;
+
+#define EFI_TEST_SIMPLENETWORKBBTESTCONFORMANCE_ASSERTION_043_GUID \
+{ 0x8cec0b86, 0x7773, 0x4d3c, {0x84, 0x13, 0x26, 0x37, 0xfb, 0xd0, 0x8e, 0x1b }}
+
+extern EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid043;
 
 #define EFI_TEST_SIMPLENETWORKBBTESTFUNCTION_ASSERTION_001_GUID \
 { 0xf58651fe, 0x0538, 0x4407, {0x88, 0xe0, 0x88, 0xb8, 0xda, 0x18, 0x38, 0x3a }}

@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -581,10 +581,9 @@ BBTestReceiveFilterConformanceTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
-  EFI_STATUS                            StatusBuf[5];
-  EFI_TEST_ASSERTION                    AssertionType[5];
+  EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
-  EFI_SIMPLE_NETWORK_STATE              State1, State2;
+  EFI_MAC_ADDRESS                       MAC;
 
   //
   // Get the Standard Library Interface
@@ -608,16 +607,14 @@ BBTestReceiveFilterConformanceTest (
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
   //
-  State1 = SnpInterface->Mode->State;
-  if (State1 == EfiSimpleNetworkInitialized) {
+  if (SnpInterface->Mode->State == EfiSimpleNetworkInitialized) {
     Status = SnpInterface->Shutdown (SnpInterface);
     if (EFI_ERROR(Status)) {
       return Status;
     }
   }
 
-  State2 = SnpInterface->Mode->State;
-  if (State2 == EfiSimpleNetworkStarted) {
+  if (SnpInterface->Mode->State == EfiSimpleNetworkStarted) {
     Status = SnpInterface->Stop (SnpInterface);
     if (EFI_ERROR(Status)) {
       return Status;
@@ -628,12 +625,23 @@ BBTestReceiveFilterConformanceTest (
   // Assertion Point 5.6.2.1
   // Call ReceiveFilters() function if network interface not start.
   //
-  StatusBuf[0] = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
-  if ((StatusBuf[0] == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
-    AssertionType[0] = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
+  if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType[0] = EFI_TEST_ASSERTION_FAILED;
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gSimpleNetworkBBTestConformanceAssertionGuid006,
+                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not start.",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
 
   //
   // Assertion Point 5.6.2.2
@@ -644,13 +652,24 @@ BBTestReceiveFilterConformanceTest (
     return Status;
   }
 
-  StatusBuf[1] = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
-  if (StatusBuf[1] == EFI_DEVICE_ERROR) {
-    AssertionType[1] = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
+  if (Status == EFI_DEVICE_ERROR) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType[1] = EFI_TEST_ASSERTION_FAILED;
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gSimpleNetworkBBTestConformanceAssertionGuid007,
+                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not initialized.",
+                 L"%a:%d:Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
   //
   // Assertion Point 5.6.2.3
   // Call ReceiveFilters() function with invalid parameters.
@@ -663,93 +682,96 @@ BBTestReceiveFilterConformanceTest (
   //
   //  Call ReceiveFilters with invalide Enable
   //
-  StatusBuf[2] = SnpInterface->ReceiveFilters (SnpInterface, ~(SnpInterface->Mode->ReceiveFilterMask), 0, FALSE, 0, NULL);
-  if (StatusBuf[2] == EFI_INVALID_PARAMETER) {
-    AssertionType[2] = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->ReceiveFilters (SnpInterface, ~(SnpInterface->Mode->ReceiveFilterMask), 0, FALSE, 0, NULL);
+  if (Status == EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType[2] = EFI_TEST_ASSERTION_FAILED;
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-
-  //
-  //  Call ReceiveFilters with invalide MCastFilterCnt
-  //
-  StatusBuf[3] = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, SnpInterface->Mode->MaxMCastFilterCount + 1, NULL);
-  if (StatusBuf[3] == EFI_INVALID_PARAMETER) {
-    AssertionType[3] = EFI_TEST_ASSERTION_PASSED;
-  } else {
-    AssertionType[3] = EFI_TEST_ASSERTION_FAILED;
-  }
-
-  //
-  //  Call ReceiveFilters with MCastFilterCnt not match MCastFilter
-  //
-  StatusBuf[4] = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 1, NULL);
-  if (StatusBuf[4] == EFI_INVALID_PARAMETER) {
-    AssertionType[4] = EFI_TEST_ASSERTION_PASSED;
-  } else {
-    AssertionType[4] = EFI_TEST_ASSERTION_FAILED;
-  }
-
- 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[0],
-                 gSimpleNetworkBBTestConformanceAssertionGuid006,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not start.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[0]
-                 );
 
   StandardLib->RecordAssertion (
                  StandardLib,
-                 AssertionType[1],
-                 gSimpleNetworkBBTestConformanceAssertionGuid007,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not initialized.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[1]
-                 );
-  
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[2],
+                 AssertionType,
                  gSimpleNetworkBBTestConformanceAssertionGuid008,
                  L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid Enable.",
                  L"%a:%d:Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
-                 StatusBuf[2]
+                 Status
                  );  
 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[3],
-                 gSimpleNetworkBBTestConformanceAssertionGuid009,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[3]
-                 );
+  //
+  //  Call ReceiveFilters with invalide MCastFilterCnt
+  //
+  if ((SnpInterface->Mode->ReceiveFilterMask & EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST) != 0) {
+    SctSetMem (&MAC, sizeof (MAC), 0x00);
+    MAC.Addr[0] = 0x01;
+    MAC.Addr[1] = 0x00;
+    MAC.Addr[2] = 0x5e;
+    MAC.Addr[3] = 0x00;
+    MAC.Addr[4] = 0x00;
+    MAC.Addr[5] = 0x02;
 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[4],
-                 gSimpleNetworkBBTestConformanceAssertionGuid010,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with MCastFilterCnt not match MCastFilter.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[4]
-                 );
+    Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, SnpInterface->Mode->MaxMCastFilterCount + 1, &MAC);
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid009,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is greater than Snp->Mode->MaxMCastFilterCount.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, 0, &MAC);
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid043,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is 0.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+    Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, 1, NULL);
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid010,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with MCastFilterCnt not match MCastFilter.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+
+  }
 
   //
   // Restore SNP State
   //
-  if (State1 == EfiSimpleNetworkStopped) {
+  if (SnpInterface->Mode->State == EfiSimpleNetworkStopped) {
     Status = SnpInterface->Shutdown (SnpInterface);
     if (EFI_ERROR(Status)) {
       return Status;
@@ -760,7 +782,7 @@ BBTestReceiveFilterConformanceTest (
       return Status;
     }
   }
-  
+
   return EFI_SUCCESS;
 }
 
