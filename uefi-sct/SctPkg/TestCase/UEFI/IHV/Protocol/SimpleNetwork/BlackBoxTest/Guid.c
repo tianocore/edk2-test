@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -111,6 +111,8 @@ EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid040 = EFI_TEST_SIMPLENETWOR
 EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid041 = EFI_TEST_SIMPLENETWORKBBTESTCONFORMANCE_ASSERTION_041_GUID;
 
 EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid042 = EFI_TEST_SIMPLENETWORKBBTESTCONFORMANCE_ASSERTION_042_GUID;
+
+EFI_GUID gSimpleNetworkBBTestConformanceAssertionGuid043 = EFI_TEST_SIMPLENETWORKBBTESTCONFORMANCE_ASSERTION_043_GUID;
 
 EFI_GUID gSimpleNetworkBBTestFunctionAssertionGuid001 = EFI_TEST_SIMPLENETWORKBBTESTFUNCTION_ASSERTION_001_GUID;
 
