@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2010 Unified EFI, Inc.<BR>
   Copyright (c) 2010 Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2018 ARM Ltd. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -32,6 +33,7 @@ Abstract:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 //
 // Definitions
@@ -49,7 +51,7 @@ PrintUsage (
   void
   );
 
-void
+char *
 Trim (
   char        *String
   );
@@ -159,50 +161,42 @@ PrintUsage (
 }
 
 
-void
+char *
 Trim (
   char        *String
   )
 {
-  int   Index1;
-  int   Index2;
   int   Length;
+  char  *end;
 
   Length = strlen (String);
 
-  //
-  // Remove the space characters from the beginning of this string
-  //
-  for (Index1 = 0; Index1 < Length; Index1++) {
-    if ((String[Index1] != ' ' ) &&
-        (String[Index1] != '\t') &&
-        (String[Index1] != '\n')) {
-      break;
-    }
+  if (!Length) {
+    return String;
   }
 
-  for (Index2 = Index1; Index2 < Length; Index2++) {
-    String[Index2 - Index1] = String[Index2];
-  }
-
-  Length = Length - Index1;
+  end = String + Length - 1;
 
   //
   // Remove the space characters from the end of this string
   //
-  for (Index1 = 0; Index1 < Length; Index1++) {
-    if ((String[Length - 1 - Index1] != ' ' ) &&
-        (String[Length - 1 - Index1] != '\t') &&
-        (String[Length - 1 - Index1] != '\n')) {
-      break;
-    }
+  while (end >= String && isspace (*end)) {
+    end--;
   }
 
-  String[Length - Index1] = '\0';
+  *(end + 1) = '\0';
+
+  //
+  // Remove the space characters from the beginning of this string
+  //
+  while (*String && isspace (*String)) {
+    String++;
+  }
 
   //
   // Done
   //
+  return String;
 }
 
 
@@ -232,14 +226,14 @@ GetLine (
     //
     // Remove the beginning and ending space characters
     //
-    Trim (String);
+    String = Trim (Result);
 
     //
-    // Ignore the empty line and comment line
+    // Skip the empty line and comment line
     //
-    if ((String[0] != '\0') &&
-        (String[0] != '#' )) {
-      break;
+    if ((String[0] == '\0') ||
+        (String[0] == '#' )) {
+      continue;
     }
   }
 
