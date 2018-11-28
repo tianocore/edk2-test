@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-#  Copyright (c) 2011 - 2015, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2011 - 2018, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -228,21 +228,23 @@ else
   echo using prebuilt tools
 fi
 
-# Copy GenBin file to Base tools directory
+rm -f $EDK_TOOLS_PATH/Source/C/bin/GenBin
+
+# build the GenBin if it doesn't yet exist
+echo Building GenBin
+make -C SctPkg/Tools/Source/GenBin
+status=$?
+if test $status -ne 0
+then
+echo Error while building GenBin
+  exit -1
+fi
+
+# Copy GenBin file to Base tools bin directory
 DEST_DIR=`GetEdkToolsPathBinDirectory`
 # Ensure the directory exist
 mkdir -p $DEST_DIR
-case `uname -m` in 
-	x86_64)
-		cp SctPkg/Tools/Bin/GenBin_lin_64 $DEST_DIR/GenBin
-		;;
-	x86_32)
-		cp SctPkg/Tools/Bin/GenBin_lin_32 $DEST_DIR/GenBin
-		;;
-	*)
-		cp SctPkg/Tools/Bin/GenBin_lin_32 $DEST_DIR/GenBin
-		;;
-esac
+cp $EDK_TOOLS_PATH/Source/C/bin/GenBin $DEST_DIR/GenBin
 
 #
 # Build the SCT package
