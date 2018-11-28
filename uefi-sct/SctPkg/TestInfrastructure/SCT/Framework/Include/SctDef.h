@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2018, ARM Ltd. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -46,6 +47,8 @@ Abstract:
 #define EFI_SCT_NAME                        L"UEFI2.5 Self Certification Test(SCT2)"
 #elif (EFI_SPECIFICATION_VERSION == EFI_2_60_SYSTEM_TABLE_REVISION)
 #define EFI_SCT_NAME                        L"UEFI2.6 Self Certification Test(SCT2)"
+#elif (EFI_SPECIFICATION_VERSION == EFI_2_70_SYSTEM_TABLE_REVISION)
+#define EFI_SCT_NAME                        L"UEFI2.7 Self Certification Test(SCT2)"
 #else
 #error Unknown EFI_SPECIFICATION_VERSION
 #endif
