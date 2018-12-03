@@ -97,6 +97,14 @@ BBTestVerifyBufferConformanceTest (
   );
 
 EFI_STATUS
+BBTestVerifySignatureConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+EFI_STATUS
 BBTestVerifyBufferFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -502,3 +502,304 @@ BBTestVerifyBufferConformanceTest (
 
   return EFI_SUCCESS;
 }
+
+EFI_STATUS
+BBTestVerifySignatureConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL    *This,
+  IN VOID                    *ClientInterface,
+  IN EFI_TEST_LEVEL          TestLevel,
+  IN EFI_HANDLE              SupportHandle
+  )
+{
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
+  EFI_STATUS                            Status;
+  EFI_PKCS7_VERIFY_PROTOCOL             *Pkcs7Verify;
+  EFI_TEST_ASSERTION                    AssertionType;
+
+  Pkcs7Verify = (EFI_PKCS7_VERIFY_PROTOCOL*)ClientInterface;
+  if (Pkcs7Verify == NULL)
+    return EFI_UNSUPPORTED;
+
+  //
+  // Get the Standard Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+                   SupportHandle,
+                   &gEfiStandardTestLibraryGuid,
+                   (VOID **) &StandardLib
+                   );
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  AllowedDb[0] = DbEntry1;
+
+  //
+  // Checkpoint 1 - EFI_INVALID_PARAMETER
+  //
+
+  // Signature is NULL
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, NULL, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), AllowedDb, NULL, NULL);
+  if (Status == EFI_INVALID_PARAMETER)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid011,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_INVALID_PARAMETER when Signature is NULL.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  // SignatureSize is 0
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, 0, TestInHash, sizeof(TestInHash), AllowedDb, NULL, NULL);
+  if (Status == EFI_INVALID_PARAMETER)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid011,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_INVALID_PARAMETER when SignatureSize is 0.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  // InHash is NULL.
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), NULL, sizeof(TestInHash), AllowedDb, NULL, NULL);
+  if (Status == EFI_INVALID_PARAMETER)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid011,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_INVALID_PARAMETER when InHash is NULL.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  // InHashSize is 0.
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, 0, AllowedDb, NULL, NULL);
+  if (Status == EFI_INVALID_PARAMETER)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid011,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_INVALID_PARAMETER when InHashSize is 0.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  // AllowedDb is NULL
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), NULL, NULL, NULL);
+  if (Status == EFI_INVALID_PARAMETER)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid011,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_INVALID_PARAMETER when AllowedDb is NULL.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Checkpoint 2 - EFI_UNSUPPORTED
+  //    NOTE: It's hard to distinguish unsupported Signature or security-violated signature for VerifySignature() interface
+  //          since we don't need to extra the attached content from input signature as VerifyBuffer() interface.
+  //          So it's OK to bypass this check or just check the EFI_SECURITY_VIOLATION result.
+  //
+
+  //
+  // Modify the Data in the P7TestSignature to make it the invalid one
+  //
+  P7TestSignature[0] = 0x40;
+
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), AllowedDb, NULL, NULL);
+
+  if ((Status == EFI_UNSUPPORTED) || (Status == EFI_SECURITY_VIOLATION))
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid012,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_UNSUPPORTED when Signature buffer was not clrrectly formatted.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Restore the P7TestSignature to the valid one
+  //
+  P7TestSignature[0] = 0x30;
+
+  //
+  // Checkpoint 4 - EFI_COMPROMISED_DATA
+  //     NOTE: P7Verify leverage OpenSSL for pkcs7 signature verification
+  //           It's hard for EFI_COMPROMISED_DATA check. Just use EFI_SECURITY_VIOLATION for wrong InHash input.
+  //
+
+  //
+  // Modify the Data in the InHash to make it the invalid one
+  //
+  TestInHash[0] = 0x3E;
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), AllowedDb, RevokedDb, TimestampDb);
+  if (Status == EFI_SECURITY_VIOLATION)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid013,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_SECURITY_VIOLATION when hash differs from signed hash.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  //
+  // Restore the InHash
+  //
+  TestInHash[0] = 0x3D;
+
+  //
+  // Input the invalid Hashsize
+  //
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash)- 2, AllowedDb, RevokedDb, TimestampDb);
+  if (Status == EFI_SECURITY_VIOLATION)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid013,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_SECURITY_VIOLATION when encrypted hash is different size.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Checkpoint 5 - EFI_SECURITY_VIOLATION
+  //
+
+  //
+  // The SignedData buffer was correctly formatted but signer was in RevokedDb
+  //
+  AllowedDb[0] = DbEntry1;
+  RevokedDb[0] = DbEntry1;
+
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), AllowedDb, RevokedDb, TimestampDb);
+
+  AllowedDb[0] = NULL;
+  RevokedDb[0] = NULL;
+
+  if (Status == EFI_SECURITY_VIOLATION)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid014,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_SECURITY_VIOLATION when the SignedData buffer was correctly formatted but signer was in RevokedDb.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // The SignedData buffer was correctly formatted but signer was not in AllowedDb
+  //
+  AllowedDb[0] = NULL;
+
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), AllowedDb, RevokedDb, TimestampDb);
+
+  if (Status == EFI_SECURITY_VIOLATION)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid014,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_SECURITY_VIOLATION when the SignedData buffer was correctly formatted but signer was not in AllowedDb.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  //
+  // Matching content hash found in the RevokedDb
+  //
+  SctCopyMem ((UINT8 *)DbEntry4 + sizeof (EFI_SIGNATURE_LIST) + sizeof(EFI_GUID), TestInHash, sizeof(TestInHash));
+  RevokedDb[0] = DbEntry4;
+  AllowedDb[0] = DbEntry1;
+  Status = Pkcs7Verify->VerifySignature (Pkcs7Verify, P7TestSignature, sizeof(P7TestSignature), TestInHash, sizeof(TestInHash), AllowedDb, RevokedDb, TimestampDb);
+
+  RevokedDb[0] = NULL;
+  AllowedDb[0] = NULL;
+
+  if (Status == EFI_SECURITY_VIOLATION)
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gPkcs7BBTestConformanceAssertionGuid014,
+                 L"PKCS7_VERIFY_PROTOCOL.VerifySignature - VerifySignature() should returns EFI_SECURITY_VIOLATION when matching content hash found in the RevokedDb.",
+                 L"%a:%d: Status - %r\n",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Clean the Data in all Dbs
+  //
+  AllowedDb[0]   = NULL;
+  RevokedDb[0]   = NULL;
+  TimestampDb[0] = NULL;
+
+  return EFI_SUCCESS;
+}

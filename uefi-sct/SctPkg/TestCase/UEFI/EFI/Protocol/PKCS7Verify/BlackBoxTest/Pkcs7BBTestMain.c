@@ -88,6 +88,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestVerifyBufferConformanceTest
   },
+  {
+    EFI_PKCS7_VERIFY_PROTOCOL_TEST_ENTRY_GUID0202,
+    L"VerifySignatureConformance",
+    L"Conformance auto test for Pkcs7 Verify Protocol VerifySignature().",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    BBTestVerifySignatureConformanceTest
+  },
   0
 };
 
