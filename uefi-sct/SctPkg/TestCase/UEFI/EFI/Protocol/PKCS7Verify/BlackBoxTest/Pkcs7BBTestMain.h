@@ -1,16 +1,16 @@
 /** @file
 
   Copyright 2016 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2016 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -56,8 +56,6 @@ Abstract:
 { 0xaf5e33d1, 0x3e08, 0x451a, {0xb1, 0x92, 0xe7, 0xb9, 0x91, 0x67, 0x83, 0xae }}
 
 
-
-
 extern UINT8 TestBin[64];
 extern UINT8 TestBinHash[32];
 extern UINT8 TestSubCert[755];
@@ -77,13 +75,13 @@ InitializePkcs7VerifyBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
   );
-  
+
 EFI_STATUS
 EFIAPI
 UnloadPkcs7VerifyBBTest (
   IN EFI_HANDLE                   ImageHandle
-  ); 
-  
+  );
+
 //
 //Test Cases
 //
@@ -94,17 +92,7 @@ BBTestVerifyBufferConformanceTest (
   IN EFI_TEST_LEVEL             TestLevel,
   IN EFI_HANDLE                 SupportHandle
   );
-  
-EFI_STATUS
-BBTestHashConformanceTest (
-  IN EFI_BB_TEST_PROTOCOL       *This,
-  IN VOID                       *ClientInterface,
-  IN EFI_TEST_LEVEL             TestLevel,
-  IN EFI_HANDLE                 SupportHandle
-  );
-  
 
-  
 EFI_STATUS
 BBTestVerifyBufferFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
@@ -113,13 +101,4 @@ BBTestVerifyBufferFunctionTest (
   IN EFI_HANDLE                 SupportHandle
   );
 
-EFI_STATUS
-BBTestVerifySignatureFunctionTest (
-  IN EFI_BB_TEST_PROTOCOL       *This,
-  IN VOID                       *ClientInterface,
-  IN EFI_TEST_LEVEL             TestLevel,
-  IN EFI_HANDLE                 SupportHandle
-  );
-  
 #endif
-

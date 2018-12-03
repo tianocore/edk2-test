@@ -1,16 +1,16 @@
 /** @file
 
   Copyright 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2016 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -52,7 +52,7 @@ BBTestVerifyBufferConformanceTest (
 
   Pkcs7Verify = (EFI_PKCS7_VERIFY_PROTOCOL*)ClientInterface;
   if (Pkcs7Verify == NULL)
-  	return EFI_UNSUPPORTED;
+    return EFI_UNSUPPORTED;
 
   //
   // Get the Standard Library Interface
@@ -84,10 +84,10 @@ BBTestVerifyBufferConformanceTest (
   AllowedDb[0] = NULL;
   Status7 = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Embedded, sizeof(P7Embedded), NULL, 0, NULL, RevokedDb, TimestampDb, NULL, 0);
   Status8 = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), TestBin, sizeof(TestBin), NULL, RevokedDb, TimestampDb, NULL, 0);
-  
-  
+
+
   if ((Status1 == EFI_INVALID_PARAMETER) && (Status2 == EFI_INVALID_PARAMETER) && (Status3 == EFI_INVALID_PARAMETER) && (Status4 == EFI_INVALID_PARAMETER) &&
-  	(Status5 == EFI_INVALID_PARAMETER) && (Status6 == EFI_INVALID_PARAMETER) && (Status7 == EFI_INVALID_PARAMETER) && (Status8 == EFI_INVALID_PARAMETER))
+    (Status5 == EFI_INVALID_PARAMETER) && (Status6 == EFI_INVALID_PARAMETER) && (Status7 == EFI_INVALID_PARAMETER) && (Status8 == EFI_INVALID_PARAMETER))
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -113,12 +113,12 @@ BBTestVerifyBufferConformanceTest (
   //
   // Conformance test with EmbeddedData
   //
-  
+
   // SignedData buffer is not correctly formatted for processing by the function.
   P7Embedded[0] = 0x40;
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Embedded, sizeof(P7Embedded), NULL, 0, AllowedDb, RevokedDb, TimestampDb, NULL, 0);
   P7Embedded[0] = 0x30;
-  
+
   if (Status == EFI_UNSUPPORTED)
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
@@ -138,7 +138,7 @@ BBTestVerifyBufferConformanceTest (
   // Unsupported or invalid format in AllowedDb
   DbEntry1->SignatureListSize = 16;
   AllowedDb[0] = DbEntry1;
-  
+
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Embedded, sizeof(P7Embedded), NULL, 0, AllowedDb, RevokedDb, TimestampDb, NULL, 0);
   AllowedDb[0] = NULL;
   DbEntry1->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert);;
@@ -162,7 +162,7 @@ BBTestVerifyBufferConformanceTest (
   // Unsupported or invalid format in RevokedDb
   DbEntry1->SignatureListSize = 16;
   RevokedDb[0] = DbEntry1;
-  
+
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Embedded, sizeof(P7Embedded), NULL, 0, AllowedDb, RevokedDb, TimestampDb, NULL, 0);
   RevokedDb[0] = NULL;
   DbEntry1->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert);
@@ -183,7 +183,7 @@ BBTestVerifyBufferConformanceTest (
                  Status
                  );
 
-  
+
   // Unsupported or invalid format in TimeStampDb
   DbEntry3->SignatureListSize = 16;
   RevokedDb[0]   = DbEntry1;
@@ -193,7 +193,7 @@ BBTestVerifyBufferConformanceTest (
   RevokedDb[0]   = NULL;
   AllowedDb[0]   = NULL;
   TimestampDb[0] = NULL;
-  
+
   DbEntry3->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TSRootCert);
 
   if (Status == EFI_ABORTED)
@@ -236,7 +236,7 @@ BBTestVerifyBufferConformanceTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   // Buffer is correctly formatted but signer is in RevokedDb.
   AllowedDb[0] = DbEntry2;
@@ -277,10 +277,6 @@ BBTestVerifyBufferConformanceTest (
                  (UINTN)__LINE__,
                  Status
                  );
-
-
-  
-
 
   // Signed data embedded in SignedData but InData is not NULL
   AllowedDb[0] = DbEntry1;
@@ -317,7 +313,7 @@ BBTestVerifyBufferConformanceTest (
   P7Detached[0] = 0x40;
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), NULL, 0, AllowedDb, RevokedDb, TimestampDb, NULL, 0);
   P7Detached[0] = 0x30;
-  
+
   if (Status == EFI_UNSUPPORTED)
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
@@ -350,12 +346,12 @@ BBTestVerifyBufferConformanceTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );    
+                 );
 
   // Unsupported or invalid format in AllowedDb
   DbEntry1->SignatureListSize = 16;
   AllowedDb[0] = DbEntry1;
-  
+
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), TestBin, sizeof(TestBin), AllowedDb, RevokedDb, TimestampDb, NULL, 0);
   AllowedDb[0] = NULL;
   DbEntry1->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert);;
@@ -380,9 +376,9 @@ BBTestVerifyBufferConformanceTest (
   // Unsupported or invalid format in RevokedDb
   DbEntry1->SignatureListSize = 16;
   RevokedDb[0] = DbEntry1;
-  
+
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), TestBin, sizeof(TestBin), AllowedDb, RevokedDb, TimestampDb, NULL, 0);
-  RevokedDb[0] = NULL;  
+  RevokedDb[0] = NULL;
   DbEntry1->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert);
 
   if (Status == EFI_ABORTED)
@@ -411,7 +407,7 @@ BBTestVerifyBufferConformanceTest (
   RevokedDb[0]   = NULL;
   AllowedDb[0]   = NULL;
   TimestampDb[0] = NULL;
-  
+
   DbEntry3->SignatureListSize = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TSRootCert);
 
   if (Status == EFI_ABORTED)
@@ -438,7 +434,7 @@ BBTestVerifyBufferConformanceTest (
   AllowedDb[0]   = NULL;
   RevokedDb[0]   = NULL;
   TimestampDb[0] = NULL;
-  
+
   // Buffer is correctly formatted but signer is not in AllowedDb.
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), TestBin, sizeof(TestBin), AllowedDb, RevokedDb, TimestampDb, NULL, 0);
   if (Status == EFI_SECURITY_VIOLATION)
@@ -455,7 +451,7 @@ BBTestVerifyBufferConformanceTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   // Buffer is correctly formatted but signer is in RevokedDb.
   AllowedDb[0] = DbEntry2;
@@ -503,8 +499,6 @@ BBTestVerifyBufferConformanceTest (
   AllowedDb[0]   = NULL;
   RevokedDb[0]   = NULL;
   TimestampDb[0] = NULL;
-  
+
   return EFI_SUCCESS;
 }
-
-

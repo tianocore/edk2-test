@@ -1,16 +1,16 @@
 /** @file
 
   Copyright 2016 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2016 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2016 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -70,17 +70,6 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestVerifyBufferFunctionTest
   },
-#if 0  
-  {
-    EFI_PKCS7_VERIFY_PROTOCOL_TEST_ENTRY_GUID0102,
-    L"VerifySignatureFunction",
-    L"Function auto test for Pkcs7 Verify  Protocol VerifySignature().",
-    EFI_TEST_LEVEL_MINIMAL,
-    gSupportProtocolGuid,
-    EFI_TEST_CASE_AUTO,
-    BBTestVerifySignatureFunctionTest
-  },
-#endif  
   {
     EFI_PKCS7_VERIFY_PROTOCOL_TEST_ENTRY_GUID0201,
     L"VerifyBufferConformance",
@@ -90,17 +79,6 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestVerifyBufferConformanceTest
   },
-#if 0   
-  {
-    EFI_PKCS7_VERIFY_PROTOCOL_TEST_ENTRY_GUID0202,
-    L"VerifySignatureConformance",
-    L"Conformance auto test for Pkcs7 Verify Protocol VerifySignature().",
-    EFI_TEST_LEVEL_MINIMAL,
-    gSupportProtocolGuid,
-    EFI_TEST_CASE_AUTO,
-    BBTestVerifySignatureConformanceTest
-  },
-#endif  
   0
 };
 
@@ -113,7 +91,7 @@ InitializePkcs7VerifyBBTest (
   )
 {
   EFI_STATUS    Status;
-  EFI_TIME      *RevokedTime;  
+  EFI_TIME      *RevokedTime;
 
   EfiInitializeTestLib (ImageHandle, SystemTable);
 
@@ -142,8 +120,8 @@ InitializePkcs7VerifyBBTest (
   DbEntry4 = NULL;
   DbEntry5 = NULL;
   RevokedTime = NULL;
-  
-  
+
+
   // Signature List of TestRoot Certificate
   //
   DbEntry1 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert));
@@ -228,5 +206,3 @@ UnloadPkcs7VerifyBBTest (
            gBBTestProtocolInterface
            );
 }
-
-

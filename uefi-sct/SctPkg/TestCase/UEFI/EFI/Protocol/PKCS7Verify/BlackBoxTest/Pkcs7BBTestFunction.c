@@ -1,16 +1,16 @@
 /** @file
 
   Copyright 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2016 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -53,7 +53,7 @@ BBTestVerifyBufferFunctionTest (
 
   Pkcs7Verify = (EFI_PKCS7_VERIFY_PROTOCOL*)ClientInterface;
   if (Pkcs7Verify == NULL)
-  	return EFI_UNSUPPORTED;
+    return EFI_UNSUPPORTED;
 
   //
   // Get the Standard Library Interface
@@ -109,14 +109,13 @@ BBTestVerifyBufferFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
-
+                 );
 
   Content = SctAllocateZeroPool(ContentSize);
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Embedded, sizeof(P7Embedded), NULL, 0, AllowedDb, RevokedDb, TimestampDb, Content, &ContentSize);
 
   AssertionType = EFI_TEST_ASSERTION_FAILED;
-  
+
   if ((Status == EFI_SUCCESS) && (ContentSize == sizeof(TestBin)) && (!SctCompareMem(TestBin, Content, ContentSize)))
     AssertionType = EFI_TEST_ASSERTION_PASSED;
 
@@ -131,7 +130,7 @@ BBTestVerifyBufferFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   // Content signature was verified against hash of content, signer is found in both AllowedDb and RevokedDb, the signing was allowed by reference to TimeStampDb.
   AllowedDb[0]   = DbEntry2;
@@ -164,8 +163,8 @@ BBTestVerifyBufferFunctionTest (
 
   //
   // Function test with DetachedData
-  //  
-  // Content signature was verified against hash of content, the signer¡¯certificate was not found in RevokedDb, and was found in AllowedDb.
+  //
+  // Content signature was verified against hash of content, the signer's certificate was not found in RevokedDb, and was found in AllowedDb.
   AllowedDb[0] = DbEntry2;
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), TestBin, sizeof(TestBin), AllowedDb, RevokedDb, TimestampDb, NULL, 0);
 
@@ -203,14 +202,13 @@ BBTestVerifyBufferFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
-
+                 );
 
   Content = SctAllocateZeroPool(ContentSize);
   Status = Pkcs7Verify->VerifyBuffer (Pkcs7Verify, P7Detached, sizeof(P7Detached), TestBin, sizeof(TestBin), AllowedDb, RevokedDb, TimestampDb, Content, &ContentSize);
 
   AssertionType = EFI_TEST_ASSERTION_FAILED;
-  
+
   if ((Status == EFI_SUCCESS) && (ContentSize == sizeof(TestBin)) && (!SctCompareMem(TestBin, Content, ContentSize)))
     AssertionType = EFI_TEST_ASSERTION_PASSED;
 
@@ -225,7 +223,7 @@ BBTestVerifyBufferFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
 
   //
@@ -237,4 +235,3 @@ BBTestVerifyBufferFunctionTest (
 
   return EFI_SUCCESS;
 }
-

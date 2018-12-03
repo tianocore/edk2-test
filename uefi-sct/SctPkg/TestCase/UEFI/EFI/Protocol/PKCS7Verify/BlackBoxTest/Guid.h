@@ -1,16 +1,16 @@
 /** @file
 
   Copyright 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2016 - 2018, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -81,5 +81,3 @@ extern EFI_GUID gPkcs7BBTestFunctionAssertionGuid003;
 #define EFI_TEST_PKCS7BBTESTFUNCTION_ASSERTION_004_GUID \
 { 0x912e23ef, 0x299c, 0x41ab, {0xa0, 0xf5, 0xfc, 0xbc, 0xf6, 0xfd, 0xd3, 0x32 }}
 extern EFI_GUID gPkcs7BBTestFunctionAssertionGuid004;
-
-
