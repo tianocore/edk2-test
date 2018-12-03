@@ -71,6 +71,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     BBTestVerifyBufferFunctionTest
   },
   {
+    EFI_PKCS7_VERIFY_PROTOCOL_TEST_ENTRY_GUID0102,
+    L"VerifySignatureFunction",
+    L"Function auto test for Pkcs7 Verify  Protocol VerifySignature().",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    BBTestVerifySignatureFunctionTest
+  },
+  {
     EFI_PKCS7_VERIFY_PROTOCOL_TEST_ENTRY_GUID0201,
     L"VerifyBufferConformance",
     L"Conformance auto test for Pkcs7 Verify Protocol VerifyBuffer().",
@@ -124,56 +133,56 @@ InitializePkcs7VerifyBBTest (
 
   // Signature List of TestRoot Certificate
   //
-  DbEntry1 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert));
+  DbEntry1 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestRootCert));
   DbEntry1->SignatureType       = gBlackBoxEfiCertX509Guid;
-  DbEntry1->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestRootCert);
+  DbEntry1->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestRootCert);
   DbEntry1->SignatureHeaderSize = 0;
-  DbEntry1->SignatureSize       = 16 + sizeof (TestRootCert);
-  SctCopyMem ((UINT8 *)DbEntry1 + sizeof (EFI_SIGNATURE_LIST) + 16, TestRootCert, sizeof (TestRootCert));
+  DbEntry1->SignatureSize       = sizeof (EFI_GUID) + sizeof (TestRootCert);
+  SctCopyMem ((UINT8 *)DbEntry1 + sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID), TestRootCert, sizeof (TestRootCert));
 
   //
   // Signature List of TestSub Certificate
   //
-  DbEntry2 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestSubCert));
+  DbEntry2 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestSubCert));
   DbEntry2->SignatureType       = gBlackBoxEfiCertX509Guid;
-  DbEntry2->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TestSubCert);
+  DbEntry2->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestSubCert);
   DbEntry2->SignatureHeaderSize = 0;
-  DbEntry2->SignatureSize       = 16 + sizeof (TestSubCert);
-  SctCopyMem ((UINT8 *)DbEntry2 + sizeof (EFI_SIGNATURE_LIST) + 16, TestSubCert, sizeof (TestSubCert));
+  DbEntry2->SignatureSize       = sizeof (EFI_GUID) + sizeof (TestSubCert);
+  SctCopyMem ((UINT8 *)DbEntry2 + sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID), TestSubCert, sizeof (TestSubCert));
 
   //
   // Signature List of TSRoot Certificate
   //
-  DbEntry3 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TSRootCert));
+  DbEntry3 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TSRootCert));
   DbEntry3->SignatureType       = gBlackBoxEfiCertX509Guid;
-  DbEntry3->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + 16 + sizeof (TSRootCert);
+  DbEntry3->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TSRootCert);
   DbEntry3->SignatureHeaderSize = 0;
-  DbEntry3->SignatureSize       = 16 + sizeof (TSRootCert);
-  SctCopyMem ((UINT8 *)DbEntry3 + sizeof (EFI_SIGNATURE_LIST) + 16, TSRootCert, sizeof (TSRootCert));
+  DbEntry3->SignatureSize       = sizeof (EFI_GUID) + sizeof (TSRootCert);
+  SctCopyMem ((UINT8 *)DbEntry3 + sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID), TSRootCert, sizeof (TSRootCert));
 
   //
   // Signature List of Binary Data Hash for Revocation Checking
   //
-  DbEntry4 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + 16 + 32);
+  DbEntry4 = SctAllocatePool (sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestBinHash));
   DbEntry4->SignatureType       = gBlackBoxEfiCertSha256Guid;
-  DbEntry4->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + 16 + 32;
+  DbEntry4->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestBinHash);
   DbEntry4->SignatureHeaderSize = 0;
-  DbEntry4->SignatureSize       = 16 + 32;
-  SctCopyMem ((UINT8 *)DbEntry4 + sizeof (EFI_SIGNATURE_LIST) + 16, TestBinHash, 32);
+  DbEntry4->SignatureSize       = sizeof (EFI_GUID) + sizeof (TestBinHash);
+  SctCopyMem ((UINT8 *)DbEntry4 + sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID), TestBinHash, sizeof (TestBinHash));
 
   //
   // Signature List of Certificate Hash for Timestamp Signature Checking
   //
-  DbEntry5 = SctAllocateZeroPool (sizeof (EFI_SIGNATURE_LIST) + 16 + 48);
+  DbEntry5 = SctAllocateZeroPool (sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestSubCertHash) + sizeof (EFI_TIME));
   DbEntry5->SignatureType       = gBlackBoxEfiCertX509Sha256Guid;
-  DbEntry5->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + 16 + 48;
+  DbEntry5->SignatureListSize   = sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestSubCertHash) + sizeof (EFI_TIME);
   DbEntry5->SignatureHeaderSize = 0;
-  DbEntry5->SignatureSize       = 16 + 48;
-  SctCopyMem ((UINT8 *)DbEntry5 + sizeof (EFI_SIGNATURE_LIST) + 16, TestSubHash, 32);
-  RevokedTime = (EFI_TIME *) ((UINT8 *)DbEntry5 + sizeof (EFI_SIGNATURE_LIST) + 16 + 32);
-  RevokedTime->Year  = 2015;
-  RevokedTime->Month = 8;
-  RevokedTime->Day   = 20;
+  DbEntry5->SignatureSize       = sizeof (EFI_GUID) + sizeof (TestSubCertHash) + sizeof (EFI_TIME);
+  SctCopyMem ((UINT8 *)DbEntry5 + sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID), TestSubCertHash, sizeof (TestSubCertHash));
+  RevokedTime = (EFI_TIME *) ((UINT8 *)DbEntry5 + sizeof (EFI_SIGNATURE_LIST) + sizeof (EFI_GUID) + sizeof (TestSubCertHash));
+  RevokedTime->Year  = 2018;
+  RevokedTime->Month = 2;
+  RevokedTime->Day   = 1;
 
   return Status;
 }

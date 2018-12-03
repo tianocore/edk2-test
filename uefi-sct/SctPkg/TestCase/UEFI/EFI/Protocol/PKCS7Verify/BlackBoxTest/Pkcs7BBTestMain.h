@@ -56,15 +56,18 @@ Abstract:
 { 0xaf5e33d1, 0x3e08, 0x451a, {0xb1, 0x92, 0xe7, 0xb9, 0x91, 0x67, 0x83, 0xae }}
 
 
+extern UINT8 TestRootCert[781];
+extern UINT8 TestSubCert[780];
+extern UINT8 TestSubCertHash[32];
+extern UINT8 TSRootCert[1181];
+
 extern UINT8 TestBin[64];
 extern UINT8 TestBinHash[32];
-extern UINT8 TestSubCert[755];
-extern UINT8 TestRootCert[756];
-extern UINT8 P7Embedded[3330];
-extern UINT8 P7Detached[1138];
-extern UINT8 TSRootCert[1176];
-extern UINT8 TBSCert[479];
-extern UINT8 TestSubHash[32];
+extern UINT8 TestInHash[32];
+
+extern UINT8 P7Embedded[3365];
+extern UINT8 P7Detached[1163];
+extern UINT8 P7TestSignature[3480];
 
 //
 //
@@ -95,6 +98,14 @@ BBTestVerifyBufferConformanceTest (
 
 EFI_STATUS
 BBTestVerifyBufferFunctionTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+EFI_STATUS
+BBTestVerifySignatureFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,

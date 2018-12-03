@@ -81,3 +81,11 @@ extern EFI_GUID gPkcs7BBTestFunctionAssertionGuid003;
 #define EFI_TEST_PKCS7BBTESTFUNCTION_ASSERTION_004_GUID \
 { 0x912e23ef, 0x299c, 0x41ab, {0xa0, 0xf5, 0xfc, 0xbc, 0xf6, 0xfd, 0xd3, 0x32 }}
 extern EFI_GUID gPkcs7BBTestFunctionAssertionGuid004;
+
+#define EFI_TEST_PKCS7BBTESTFUNCTION_ASSERTION_005_GUID \
+{ 0x93740b06, 0xa186, 0x47ff, { 0xba, 0xc3, 0xdd, 0xa8, 0xcb, 0x7b, 0x18, 0x5e }}
+extern EFI_GUID gPkcs7BBTestFunctionAssertionGuid005;
+
+#define EFI_TEST_PKCS7BBTESTFUNCTION_ASSERTION_006_GUID \
+{ 0x37253616, 0xca42, 0x4082, { 0x90, 0xda, 0xdb, 0x69, 0x98, 0x22, 0xa0, 0xe6 }}
+extern EFI_GUID gPkcs7BBTestFunctionAssertionGuid006;
