@@ -131,9 +131,9 @@ Abstract:
 // The prefix length is 8, index length is 4.
 // Consider the tail of string, the name length is 13.
 //
-#define HwErrRecVariableNameLength       13
-#define HwErrRecVariableNamePrefixLength 8
-#define HwErrRecVariableNameIndexLength  4
+#define HW_ERR_REC_VARIABLE_NAME_LEN           13
+#define HW_ERR_REC_VARIABLE_NAME_PREFIX_LEN    8
+#define HW_ERR_REC_VARIABLE_NAME_INDEX_LEN     4
 
 //
 // Global Variables

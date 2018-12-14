@@ -2855,7 +2855,7 @@ HardwareErrorRecordFuncTest (
   UINT64                RemainingVariableStorageSize;
   UINT64                MaximumVariableSize;
   
-  CHAR16                HwErrRecVariableName[HwErrRecVariableNameLength];
+  CHAR16                HwErrRecVariableName[HW_ERR_REC_VARIABLE_NAME_LEN];
   CHAR16                HwErrRecVariable[] = L"This is a HwErrRec variable!";
   
   CHAR16                GetVariableName[MAX_BUFFER_SIZE];
@@ -2864,7 +2864,7 @@ HardwareErrorRecordFuncTest (
   
   UINTN                 Num;
   UINTN                 MaxNum = 0;
-  CHAR16                ErrorNum[HwErrRecVariableNameIndexLength+1];
+  CHAR16                ErrorNum[HW_ERR_REC_VARIABLE_NAME_INDEX_LEN + 1];
   
   CHAR16                HwErrRecGetVariable[255];
   
@@ -2982,7 +2982,7 @@ HardwareErrorRecordFuncTest (
   // Get a useable variable name
   //
   GetVariableName[0] = L'\0';
-  ErrorNum[HwErrRecVariableNameIndexLength] = L'\0';
+  ErrorNum[HW_ERR_REC_VARIABLE_NAME_INDEX_LEN] = L'\0';
   
 
   while (TRUE) {
@@ -3005,9 +3005,9 @@ HardwareErrorRecordFuncTest (
       break;
     }
 
-    if ( (SctStrnCmp (GetVariableName, L"HwErrRec", HwErrRecVariableNamePrefixLength) == 0) &&
+    if ( (SctStrnCmp (GetVariableName, L"HwErrRec", HW_ERR_REC_VARIABLE_NAME_PREFIX_LEN) == 0) &&
          (SctCompareGuid (&VendorGuid, &gHwErrRecGuid) == 0) ) {
-      SctStrnCpy (ErrorNum, &GetVariableName[HwErrRecVariableNamePrefixLength], HwErrRecVariableNameIndexLength);
+      SctStrnCpy (ErrorNum, &GetVariableName[HW_ERR_REC_VARIABLE_NAME_PREFIX_LEN], HW_ERR_REC_VARIABLE_NAME_INDEX_LEN);
       Num = SctXtoi (ErrorNum);
       if (MaxNum < Num)
         MaxNum = Num;
@@ -3018,8 +3018,8 @@ HardwareErrorRecordFuncTest (
     
   HwErrRecVariableName[0] = L'\0';
   SctStrCat ( HwErrRecVariableName, L"HwErrRec" );
-  Myitox( MaxNum, HwErrRecVariableName+HwErrRecVariableNamePrefixLength );
-  HwErrRecVariableName[HwErrRecVariableNameLength-1] = L'\0';
+  Myitox( MaxNum, HwErrRecVariableName + HW_ERR_REC_VARIABLE_NAME_PREFIX_LEN );
+  HwErrRecVariableName[HW_ERR_REC_VARIABLE_NAME_LEN - 1] = L'\0';
   
   //
   // Set the new HwErrRec variable to the global variable
@@ -3042,8 +3042,8 @@ HardwareErrorRecordFuncTest (
   // and writes the useful data - HwErrRecVariableName - to RecoveryData[2]
   //
   RecoveryData[0] = 2;
-  SctStrnCpy ( (CHAR16*)(&RecoveryData[2]), HwErrRecVariableName, HwErrRecVariableNameLength-1 );
-  RecoveryLib->WriteResetRecord( RecoveryLib, HwErrRecVariableNameLength*sizeof(CHAR16)+2, RecoveryData );
+  SctStrnCpy ( (CHAR16*)(&RecoveryData[2]), HwErrRecVariableName, HW_ERR_REC_VARIABLE_NAME_LEN - 1 );
+  RecoveryLib->WriteResetRecord( RecoveryLib, HW_ERR_REC_VARIABLE_NAME_LEN * sizeof(CHAR16) + 2, RecoveryData );
   
   //
   // Prompt the user about the cold reset and reset the system
@@ -3059,8 +3059,8 @@ HardwareErrorRecordFuncTest (
   //
 step2:
   DataSize = 255;
-  HwErrRecVariableName[HwErrRecVariableNameLength-1] = L'\0';
-  SctStrnCpy ( HwErrRecVariableName, (CHAR16*)(RecoveryData+2), HwErrRecVariableNameLength-1 );
+  HwErrRecVariableName[HW_ERR_REC_VARIABLE_NAME_LEN - 1] = L'\0';
+  SctStrnCpy ( HwErrRecVariableName, (CHAR16*)(RecoveryData+2), HW_ERR_REC_VARIABLE_NAME_LEN - 1 );
   Status = RT->GetVariable (
                         HwErrRecVariableName,
                         &gHwErrRecGuid,
