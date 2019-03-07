@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -81,6 +81,8 @@ EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid025 = EFI_TEST_EFICOMPLIANTBBTE
 EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid026 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_026_GUID;
 
 EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid027 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_027_GUID;
+
+EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid028 = EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_028_GUID;
 
 EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid001 = EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_001_GUID;
 

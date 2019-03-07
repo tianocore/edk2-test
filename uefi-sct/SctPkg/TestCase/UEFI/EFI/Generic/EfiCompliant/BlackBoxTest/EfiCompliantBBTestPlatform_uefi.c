@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -165,6 +165,17 @@ EFI_GUID gEfiEapConfigProtocolGuid = { 0xe5b58dbb, 0x7688, 0x44b4, {0x97, 0xbf, 
 EFI_GUID gEfiIPSecConfigProtocolGuid = { 0xce5e5929, 0xc7a3, 0x4602, {0xad, 0x9e, 0xc9, 0xda, 0xf9, 0x4e, 0xbf, 0xcf }};
 
 EFI_GUID gEfiIPSec2ProtocolGuid = { 0xa3979e64, 0xace8, 0x4ddc, {0xbc, 0x07, 0x4d, 0x66, 0xb8, 0xfd, 0x09, 0x77 }};
+
+EFI_GUID gEfiBlueToothAttributeProtocolGuid = { 0x898890e9, 0x84b2, 0x4f3a, { 0x8c, 0x58, 0xd8, 0x57, 0x78, 0x13, 0xe0, 0xac }};
+
+EFI_GUID gEfiBlueToothLEConfigProtocolGuid = { 0x8f76da58, 0x1f99, 0x4275, { 0xa4, 0xec, 0x47, 0x56, 0x51, 0x5b, 0x1c, 0xe8 }};
+
+//
+// The Max length of pre-defined string value(yes or no)
+// in the EfiCompliant.ini
+// which is the platform specific configuration
+//
+#define MAX_LENGTH  10
 
 //
 // Internal functions declarations
@@ -353,7 +364,13 @@ CheckEAPProtocols (
   );
 
 EFI_STATUS
-CheckBlueToothProtocols (
+CheckBlueToothClassicProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  );
+
+EFI_STATUS
+CheckBlueToothLEProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
@@ -564,7 +581,8 @@ Routine Description:
   //
   // Check the BlueTooth protocols
   //
-  CheckBlueToothProtocols (StandardLib, IniFile);
+  CheckBlueToothClassicProtocols (StandardLib, IniFile);
+  CheckBlueToothLEProtocols (StandardLib, IniFile);
 
   //
   // Check the IPSec protocols
@@ -722,7 +740,7 @@ CheckConsoleProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -780,9 +798,8 @@ CheckConsoleProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -823,7 +840,7 @@ CheckHiiProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   UINTN               Index;
   EFI_GUID            Guid[5];
   BOOLEAN             Value[5];
@@ -859,9 +876,8 @@ CheckHiiProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -902,9 +918,8 @@ CheckHiiProtocols (
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     }
     
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL )) {
+      MaxLength = MAX_LENGTH;
       Status = IniFile->GetString (
                           IniFile,
                           SECTION_NAME_PLATFORM_SPECIFIC,
@@ -943,7 +958,7 @@ CheckGraphicalConsoleProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -1001,9 +1016,8 @@ CheckGraphicalConsoleProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1044,7 +1058,7 @@ CheckPointerProtocol (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
@@ -1072,9 +1086,8 @@ CheckPointerProtocol (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1113,7 +1126,7 @@ CheckBootFromDiskProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -1186,9 +1199,8 @@ CheckBootFromDiskProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1230,7 +1242,7 @@ CheckBootFromNetworkProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             Value[3];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
@@ -1329,9 +1341,8 @@ CheckBootFromNetworkProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1369,9 +1380,8 @@ CheckBootFromNetworkProtocols (
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     }
     
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
       Status = IniFile->GetString (
                           IniFile,
                           SECTION_NAME_PLATFORM_SPECIFIC,
@@ -1413,7 +1423,7 @@ CheckUefiNetworkApplication (
 
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   UINTN               Index;
   EFI_GUID            Guid[15];
   BOOLEAN             Value[15];
@@ -1459,9 +1469,8 @@ CheckUefiNetworkApplication (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1561,9 +1570,8 @@ CheckUefiNetworkApplication (
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     }
 
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
@@ -1615,7 +1623,7 @@ CheckUefiV6NetworkApplication (
 
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   UINTN               Index;
   EFI_GUID            Guid[15];
   BOOLEAN             Value[15];
@@ -1659,9 +1667,8 @@ CheckUefiV6NetworkApplication (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1755,9 +1762,8 @@ CheckUefiV6NetworkApplication (
     //
     // If warning, check with INI file to decide they must exist or not
     //
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
@@ -1812,9 +1818,8 @@ CheckUefiV6NetworkApplication (
       //
       // If warning, check with INI file to decide they must exist or not
       //
-      if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile       != NULL               )) {
-        MaxLength = 10;
+      if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL )) {
+        MaxLength = MAX_LENGTH;
 
         Status = IniFile->GetString (
                             IniFile,
@@ -1857,7 +1862,7 @@ CheckUartProtocol (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
@@ -1885,9 +1890,8 @@ CheckUartProtocol (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -1926,7 +1930,7 @@ CheckPciProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -1970,9 +1974,8 @@ CheckPciProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2012,7 +2015,7 @@ CheckUsbProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -2055,9 +2058,8 @@ CheckUsbProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2097,7 +2099,7 @@ CheckNVMeProtocol (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
@@ -2125,9 +2127,8 @@ CheckNVMeProtocol (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2166,7 +2167,7 @@ CheckBootFromNVMe (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -2209,9 +2210,8 @@ CheckBootFromNVMe (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2246,9 +2246,8 @@ CheckBootFromNVMe (
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     }
 
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
 
       Status = IniFile->GetString (
                           IniFile,
@@ -2291,7 +2290,7 @@ CheckScsiProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
@@ -2319,9 +2318,8 @@ CheckScsiProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2360,7 +2358,7 @@ CheckBootFromScsi (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -2418,9 +2416,8 @@ CheckBootFromScsi (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2456,9 +2453,8 @@ CheckBootFromScsi (
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     }
 
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
 
       Status = IniFile->GetString (
                           IniFile,
@@ -2499,7 +2495,7 @@ CheckBootFromIScsi (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;  
   VOID                *Interface;
@@ -2542,9 +2538,8 @@ CheckBootFromIScsi (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2587,7 +2582,7 @@ CheckDebugProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -2630,9 +2625,8 @@ CheckDebugProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2672,7 +2666,7 @@ CheckDriverOverrideProtocol (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
@@ -2700,9 +2694,8 @@ CheckDriverOverrideProtocol (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2741,7 +2734,7 @@ CheckATAProtocol (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   VOID                *Interface;
   EFI_TEST_ASSERTION  AssertionType;
@@ -2769,9 +2762,8 @@ CheckATAProtocol (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2812,7 +2804,7 @@ CheckEbcProtocol (
   EFI_EBC_PROTOCOL    *Ebc;
   EFI_TEST_ASSERTION  AssertionType;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   CHAR16              *AssertString = NULL;               
   
   //
@@ -2841,9 +2833,8 @@ CheckEbcProtocol (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && 
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2909,7 +2900,7 @@ CheckDNS4Protocols (
 
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -2938,9 +2929,8 @@ CheckDNS4Protocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -2996,9 +2986,8 @@ CheckDNS4Protocols (
     //
     // If warning, check with INI file to decide they must exist or not
     //
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
@@ -3037,7 +3026,7 @@ CheckDNS6Protocols (
 
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -3066,9 +3055,8 @@ CheckDNS6Protocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -3124,9 +3112,8 @@ CheckDNS6Protocols (
     //
     // If warning, check with INI file to decide they must exist or not
     //
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
@@ -3165,7 +3152,7 @@ CheckTLSProtocols (
 
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -3206,9 +3193,8 @@ CheckTLSProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -3265,9 +3251,8 @@ CheckTLSProtocols (
     //
     // If warning, check with INI file to decide they must exist or not
     //
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
@@ -3308,7 +3293,7 @@ CheckHTTPProtocols (
 
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -3349,9 +3334,8 @@ CheckHTTPProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile != NULL)) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -3408,9 +3392,8 @@ CheckHTTPProtocols (
     //
     // If warning, check with INI file to decide they must exist or not
     //
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
@@ -3449,7 +3432,7 @@ CheckEAPProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;  
@@ -3498,9 +3481,8 @@ CheckEAPProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
@@ -3534,14 +3516,14 @@ CheckEAPProtocols (
 }
 
 EFI_STATUS
-CheckBlueToothProtocols (
+CheckBlueToothClassicProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
   )
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   BOOLEAN             ValueC;
@@ -3594,14 +3576,13 @@ CheckBlueToothProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,
                         SECTION_NAME_PLATFORM_SPECIFIC,
-                        L"BlueToothSupport",
+                        L"BlueToothClassicSupport",
                         String,
                         &MaxLength
                         );
@@ -3616,7 +3597,7 @@ CheckBlueToothProtocols (
                    StandardLib,
                    AssertionType,
                    gEfiCompliantBbTestPlatformAssertionGuid026,
-                   L"UEFI Compliant - BlueTooth Support protocols must be implemented",
+                   L"UEFI Compliant - BlueTooth Classic Support protocols must be implemented",
                    L"%a:%d:BLUETOOTH HC - %s, BLUETOOTH Service Binding - %s, BLUETOOTH Config - %s",
                    __FILE__,
                    (UINTN)__LINE__,
@@ -3659,14 +3640,13 @@ CheckBlueToothProtocols (
     //
     // If warning, check with INI file to decide they must exist or not
     //
-    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-        (IniFile != NULL)) {
-      MaxLength = 10;
+    if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+      MaxLength = MAX_LENGTH;
   
       Status = IniFile->GetString (
                           IniFile,
                           SECTION_NAME_PLATFORM_SPECIFIC,
-                          L"BlueToothSupport",
+                          L"BlueToothClassicSupport",
                           String,
                           &MaxLength
                           );
@@ -3679,7 +3659,7 @@ CheckBlueToothProtocols (
                    StandardLib,
                    AssertionType,
                    gEfiCompliantBbTestPlatformAssertionGuid026,
-                   L"UEFI Compliant - BlueTooth Support protocols must be implemented",
+                   L"UEFI Compliant - BlueTooth Classic Support protocols must be implemented",
                    L"%a:%d:BLUETOOTH HC - %s, BLUETOOTH Service Binding - %s, BLUETOOTH Config - %s, BLUETOOTH IO - %s",
                    __FILE__,
                    (UINTN)__LINE__,
@@ -3695,6 +3675,100 @@ CheckBlueToothProtocols (
 }
 
 EFI_STATUS
+CheckBlueToothLEProtocols (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
+  IN EFI_INI_FILE_HANDLE                  IniFile
+  )
+{
+  EFI_STATUS          Status;
+  UINT32              MaxLength;
+  CHAR16              String[MAX_LENGTH];
+  BOOLEAN             ValueA;
+  BOOLEAN             ValueB;
+  BOOLEAN             ValueC;
+  VOID                *Interface;
+  EFI_TEST_ASSERTION  AssertionType;
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlueToothHcProtocolGuid,
+                   NULL,
+                   (VOID **) &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueA = TRUE;
+  } else {
+    ValueA = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlueToothAttributeProtocolGuid,
+                   NULL,
+                   (VOID **) &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueB = TRUE;
+  } else {
+    ValueB = FALSE;
+  }
+
+  Status = gtBS->LocateProtocol (
+                   &gEfiBlueToothLEConfigProtocolGuid,
+                   NULL,
+                   (VOID **) &Interface
+                   );
+  if (!EFI_ERROR (Status)) {
+    ValueC = TRUE;
+  } else {
+    ValueC = FALSE;
+  }
+
+  AssertionType = NeedThreeOrWarning (ValueA, ValueB, ValueC);
+
+  if (AssertionType == EFI_TEST_ASSERTION_FAILED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  //
+  // If warning, check with INI file to decide they must exist or not
+  //
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
+
+    Status = IniFile->GetString (
+                        IniFile,
+                        SECTION_NAME_PLATFORM_SPECIFIC,
+                        L"BlueToothLESupport",
+                        String,
+                        &MaxLength
+                        );
+    if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+  }
+
+  //
+  // Record test result
+  //
+  StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestPlatformAssertionGuid028,
+                   L"UEFI Compliant - BlueTooth LE Support protocols must be implemented",
+                   L"%a:%d:BLUETOOTH HC - %s, BLUETOOTH Attribute - %s, BLUETOOTH LE Config - %s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   ValueA ? L"Yes" : L"No",
+                   ValueB ? L"Yes" : L"No",
+                   ValueC ? L"Yes" : L"No"
+                   );
+
+
+  return EFI_SUCCESS;
+}
+
+
+
+EFI_STATUS
 CheckIPSecProtocols (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
   IN EFI_INI_FILE_HANDLE                  IniFile
@@ -3702,7 +3776,7 @@ CheckIPSecProtocols (
 {
   EFI_STATUS          Status;
   UINT32              MaxLength;
-  CHAR16              String[10];
+  CHAR16              String[MAX_LENGTH];
   BOOLEAN             ValueA;
   BOOLEAN             ValueB;
   VOID                *Interface;
@@ -3746,9 +3820,8 @@ CheckIPSecProtocols (
   //
   // If warning, check with INI file to decide they must exist or not
   //
-  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) &&
-      (IniFile       != NULL               )) {
-    MaxLength = 10;
+  if ((AssertionType == EFI_TEST_ASSERTION_WARNING) && (IniFile != NULL)) {
+    MaxLength = MAX_LENGTH;
 
     Status = IniFile->GetString (
                         IniFile,

@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -159,6 +159,11 @@ extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid026;
 { 0xb27660e2, 0xe87, 0x4794, {0x82, 0xf1, 0xe6, 0xbd, 0xbd, 0x8b, 0x74, 0x42 }}
 
 extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid027;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTPLATFORM_ASSERTION_028_GUID \
+{ 0xeff461eb, 0x4f56, 0x44a5, { 0x89, 0x5e, 0xee, 0x5e, 0xe4, 0x2a, 0xd3, 0x9 }}
+
+extern EFI_GUID gEfiCompliantBbTestPlatformAssertionGuid028;
 
 #define EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_001_GUID \
 { 0xf6a871e3, 0xef8a, 0x420f, {0x82, 0x01, 0x35, 0xb6, 0x1c, 0xe2, 0xe8, 0xdb }}
