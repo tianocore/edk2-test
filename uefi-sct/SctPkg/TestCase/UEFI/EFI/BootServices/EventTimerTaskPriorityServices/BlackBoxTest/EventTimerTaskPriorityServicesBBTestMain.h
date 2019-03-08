@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -49,7 +49,8 @@ Abstract:
                  Status                                     \
                  );
 
-#define MAX_TEST_EVENT_NUM 3
+#define MAX_TEST_EVENT_NUM    3
+#define SIGNAL_CONTEXT        0xAA    //To check the buffer content is modifed by exception or not
 //
 // Prototypes: Test Cases
 //

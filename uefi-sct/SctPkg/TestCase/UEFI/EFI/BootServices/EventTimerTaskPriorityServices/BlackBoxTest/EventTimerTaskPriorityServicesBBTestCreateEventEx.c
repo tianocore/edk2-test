@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -192,6 +192,10 @@ BBTestCreateEventEx_Func (
   BBTestCreateEventEx_Func_Sub2 (StandardLib);
 #endif
 
+  //
+  // The test for the EFI_EVENT_GROUP_MEMORY_MAP_CHANGE
+  // This event group is notified by the system when the memory map has changed.
+  //
   BBTestCreateEventEx_Func_Sub3 (StandardLib);
 
   //
@@ -599,12 +603,12 @@ BBTestCreateEventEx_Func_Sub1 (
   UINTN               Buffer[MAX_TEST_EVENT_NUM + MAX_TEST_EVENT_NUM*2];
 
   //
-  // Initialize Buffer
+  // Initialize Buffer as SIGNAL_CONTEXT
   //
   for (Index = 0; Index < MAX_TEST_EVENT_NUM; Index ++) {
     Buffer[Index] = Index;
-    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(-1);
-    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(-1);
+    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(SIGNAL_CONTEXT);
+    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(SIGNAL_CONTEXT);
   }
 
   //
@@ -755,12 +759,12 @@ BBTestCreateEventEx_Func_Sub2 (
   UINTN               Buffer[MAX_TEST_EVENT_NUM + MAX_TEST_EVENT_NUM*2];
 
   //
-  // Initialize Buffer
+  // Initialize Buffer as SIGNAL_CONTEXT
   //
   for (Index = 0; Index < MAX_TEST_EVENT_NUM; Index ++) {
     Buffer[Index] = Index;
-    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(-1);
-    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(-1);
+    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(SIGNAL_CONTEXT);
+    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(SIGNAL_CONTEXT);
   }
 
   //
@@ -914,12 +918,12 @@ BBTestCreateEventEx_Func_Sub3 (
   UINTN               Buffer[MAX_TEST_EVENT_NUM + MAX_TEST_EVENT_NUM*2];
 
   //
-  // Initialize Buffer
+  // Initialize Buffer as SIGNAL_CONTEXT
   //
   for (Index = 0; Index < MAX_TEST_EVENT_NUM; Index ++) {
     Buffer[Index] = Index;
-    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(-1);
-    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(-1);
+    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(SIGNAL_CONTEXT);
+    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(SIGNAL_CONTEXT);
   }
 
   //
@@ -974,7 +978,7 @@ BBTestCreateEventEx_Func_Sub3 (
   }
   
   //
-  // Install a configuration table at TPL_NOTIFY
+  // Call AllocatePage to change the memorymap
   //
   OldTpl = gtBS->RaiseTPL (TPL_NOTIFY);
   
