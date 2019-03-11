@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2017 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2017 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -128,8 +128,8 @@ BBTestEraseBlocksFunctionTest (
     // allocate aligned buffer
     //
     Buffer1 = AllocateAlignedPool(
-                EfiBootServicesData, 
-                BufferSize, 
+                EfiBootServicesData,
+                BufferSize,
                 IoAlign
                 );
     if (Buffer1 == NULL) {
@@ -147,8 +147,8 @@ BBTestEraseBlocksFunctionTest (
     }
 
     Buffer2 = AllocateAlignedPool(
-                EfiBootServicesData, 
-                BufferSize, 
+                EfiBootServicesData,
+                BufferSize,
                 IoAlign
                 );
     if (Buffer2 == NULL) {
@@ -166,7 +166,7 @@ BBTestEraseBlocksFunctionTest (
       return EFI_OUT_OF_RESOURCES;
     }
 
-    if ((MediaPresent == TRUE) && (ReadOnly == FALSE) && (LastBlock != 0)) { 
+    if ((MediaPresent == TRUE) && (ReadOnly == FALSE) && (LastBlock != 0)) {
       //
       // Read the data at first with ReadBlocks
       //
@@ -189,10 +189,10 @@ BBTestEraseBlocksFunctionTest (
       }
 
       //
-      // Write 1 
+      // Write 1
       //
       for (Index1 = 0; Index1 < BufferSize; Index1++) {
-      	 Buffer2[Index1] = 1;
+        Buffer2[Index1] = 1;
       }
 
       Status = BlockIo->WriteBlocks (BlockIo, MediaId, Lba, BufferSize, (VOID*)Buffer2);
@@ -211,57 +211,59 @@ BBTestEraseBlocksFunctionTest (
         FreeAlignedPool(Buffer1);
         FreeAlignedPool(Buffer2);
         goto BlockIo2;
-      }      
-
-      // Erase Blocks with non-EraseLengthGranularity blocks
-      Token.Event = NULL;
-      Token.TransactionStatus = EFI_NOT_READY;
-      EraseStatus = EraseBlock->EraseBlocks (EraseBlock, MediaId, Lba+1, &Token, BufferSize - 2 * BlockSize);
-
-      // Read the data with 0, the first/last block should not be erased
-      ReadStatus = BlockIo->ReadBlocks (BlockIo, MediaId, Lba, BufferSize, (VOID*)Buffer2);
-      if (ReadStatus == EFI_SUCCESS) {
-        for (Index1 = 0; Index1 < BlockSize; Index1++) {
-          if (Buffer2[Index1] != 0) {
-            IsZero1 = FALSE;
-            break;
-          }
-        }
-
-        for (Index1 = BlockSize; Index1 < BufferSize - BlockSize; Index1++) {
-          if (Buffer2[Index1] != 0) {
-            IsZero2 = FALSE;
-            break;
-          }
-        }
-
-        for (Index1 = BufferSize - BlockSize; Index1 < BufferSize; Index1++) {
-          if (Buffer2[Index1] != 0) {
-            IsZero3 = FALSE;
-            break;
-          }
-        }
-
-        if ((EraseStatus == EFI_SUCCESS) && (IsZero1 == FALSE) && (IsZero2 == TRUE) && ((IsZero3 == FALSE)))
-       	  AssertionType = EFI_TEST_ASSERTION_PASSED;
-        else
-          AssertionType = EFI_TEST_ASSERTION_FAILED;
-
-        
-        StandardLib->RecordAssertion (
-                       StandardLib,
-                       AssertionType,
-                       gEraseBlockBBTestFunctionAssertionGuid003,
-                       L"EraseBlocks - EraseBlocks for testing, the first/last block should not be erased",
-                       L"%a:%d:EraseBlocks Status - %r, IsZero1 - %d, IsZero2 - %d, IsZero3 - %d",
-                       __FILE__,
-                       (UINTN)__LINE__,
-                       Status,
-                       IsZero1, IsZero2, IsZero3
-                       );   
-
       }
 
+      // Erase Blocks with non-EraseLengthGranularity blocks
+      if (BufferSize > 2 * BlockSize) {
+        Token.Event = NULL;
+        Token.TransactionStatus = EFI_NOT_READY;
+
+        EraseStatus = EraseBlock->EraseBlocks (EraseBlock, MediaId, Lba+1, &Token, BufferSize - 2 * BlockSize);
+
+        // Read the data with 0, the first/last block should not be erased
+        ReadStatus = BlockIo->ReadBlocks (BlockIo, MediaId, Lba, BufferSize, (VOID*)Buffer2);
+        if (ReadStatus == EFI_SUCCESS) {
+          for (Index1 = 0; Index1 < BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0) {
+              IsZero1 = FALSE;
+              break;
+            }
+          }
+
+          for (Index1 = BlockSize; Index1 < BufferSize - BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0) {
+              IsZero2 = FALSE;
+              break;
+            }
+          }
+
+          for (Index1 = BufferSize - BlockSize; Index1 < BufferSize; Index1++) {
+            if (Buffer2[Index1] != 0) {
+              IsZero3 = FALSE;
+              break;
+            }
+          }
+
+          if ((EraseStatus == EFI_SUCCESS) && (IsZero1 == FALSE) && (IsZero2 == TRUE) && ((IsZero3 == FALSE)))
+            AssertionType = EFI_TEST_ASSERTION_PASSED;
+          else
+            AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+
+          StandardLib->RecordAssertion (
+                         StandardLib,
+                         AssertionType,
+                         gEraseBlockBBTestFunctionAssertionGuid003,
+                         L"EraseBlocks - EraseBlocks for testing, the first/last block should not be erased",
+                         L"%a:%d:EraseBlocks Status - %r, IsZero1 - %d, IsZero2 - %d, IsZero3 - %d",
+                         __FILE__,
+                         (UINTN)__LINE__,
+                         EraseStatus,
+                         IsZero1, IsZero2, IsZero3
+                         );
+
+        }
+      }
       //
       // Erase Blocks with the EraseLengthGranularity blocks
       //
@@ -283,7 +285,7 @@ BBTestEraseBlocksFunctionTest (
         }
 
         if ((EraseStatus == EFI_SUCCESS) && (IsZero == TRUE))
-       	  AssertionType = EFI_TEST_ASSERTION_PASSED;
+          AssertionType = EFI_TEST_ASSERTION_PASSED;
         else
           AssertionType = EFI_TEST_ASSERTION_FAILED;
 
@@ -297,7 +299,7 @@ BBTestEraseBlocksFunctionTest (
                        (UINTN)__LINE__,
                        Status,
                        IsZero
-                       );   
+                       );
 
 
       }
@@ -305,7 +307,7 @@ BBTestEraseBlocksFunctionTest (
       //
       // Restore the data with WriteBlocks and FlushBlocks
       //
-      WriteStatus = BlockIo->WriteBlocks (BlockIo, MediaId, Lba, BufferSize, (VOID*)Buffer1);  
+      WriteStatus = BlockIo->WriteBlocks (BlockIo, MediaId, Lba, BufferSize, (VOID*)Buffer1);
       FlushStatus = EFI_SUCCESS;
       if (WriteCaching == TRUE)
         FlushStatus = BlockIo->FlushBlocks(BlockIo);
@@ -325,8 +327,8 @@ BBTestEraseBlocksFunctionTest (
 
       FreeAlignedPool(Buffer1);
       FreeAlignedPool(Buffer2);
-    }   
-  } 
+    }
+  }
 
 BlockIo2:
 
@@ -361,8 +363,8 @@ BlockIo2:
     // allocate aligned buffer
     //
     Buffer1 = AllocateAlignedPool(
-                EfiBootServicesData, 
-                BufferSize, 
+                EfiBootServicesData,
+                BufferSize,
                 IoAlign
                 );
     if (Buffer1 == NULL) {
@@ -380,8 +382,8 @@ BlockIo2:
     }
 
     Buffer2 = AllocateAlignedPool(
-                EfiBootServicesData, 
-                BufferSize, 
+                EfiBootServicesData,
+                BufferSize,
                 IoAlign
                 );
     if (Buffer2 == NULL) {
@@ -399,7 +401,7 @@ BlockIo2:
       return EFI_OUT_OF_RESOURCES;
     }
 
-    if ((MediaPresent == TRUE) && (ReadOnly == FALSE) && (LastBlock != 0)) { 
+    if ((MediaPresent == TRUE) && (ReadOnly == FALSE) && (LastBlock != 0)) {
       BlockIo2Token.Event = NULL;
       BlockIo2Token.TransactionStatus = EFI_NOT_READY;
 
@@ -453,13 +455,13 @@ BlockIo2:
       //
       // Erase Blocks with non EraseLengthGranularity blocks
       //
+      if (BufferSize > 2 * BlockSize) {
+        Token.Event             = NULL;
+        Token.TransactionStatus = EFI_NOT_READY;
 
-      Token.Event             = NULL;
-      Token.TransactionStatus = EFI_NOT_READY;
+        EnterEvent = 0;
 
-      EnterEvent = 0;
-
-      Status = gtBS->CreateEvent (
+        Status = gtBS->CreateEvent (
                    EVT_NOTIFY_SIGNAL,
                    TPL_CALLBACK,
                    (EFI_EVENT_NOTIFY) NotifyFunction,
@@ -467,8 +469,8 @@ BlockIo2:
                    &Token.Event
                    );
 
-      if (EFI_ERROR (Status)) {
-        StandardLib->RecordAssertion (
+        if (EFI_ERROR (Status)) {
+          StandardLib->RecordAssertion (
                        StandardLib,
                        EFI_TEST_ASSERTION_FAILED,
                        gTestGenericFailureGuid,
@@ -478,46 +480,46 @@ BlockIo2:
                        (UINTN)__LINE__,
                        Status
                        );
-        FreeAlignedPool(Buffer1);
-        FreeAlignedPool(Buffer2);
-        goto End;
-      }
-
-      EraseStatus = EraseBlock->EraseBlocks (EraseBlock, MediaId, Lba+1, &Token, BufferSize - 2 * BlockSize);
-
-      while(Token.TransactionStatus == EFI_NOT_READY);
-
-      // Read the data with 0, the first/last block should not be erased
-      ReadStatus = BlockIo2->ReadBlocksEx (BlockIo2, MediaId, Lba, &BlockIo2Token, BufferSize, (VOID*)Buffer2);
-      if (ReadStatus == EFI_SUCCESS) {
-        for (Index1 = 0; Index1 < BlockSize; Index1++) {
-          if (Buffer2[Index1] != 0) {
-            IsZero1 = FALSE;
-            break;
-          }
+          FreeAlignedPool(Buffer1);
+          FreeAlignedPool(Buffer2);
+          goto End;
         }
 
-        for (Index1 = BlockSize; Index1 < BufferSize - BlockSize; Index1++) {
-          if (Buffer2[Index1] != 0) {
-            IsZero2 = FALSE;
-            break;
+        EraseStatus = EraseBlock->EraseBlocks (EraseBlock, MediaId, Lba+1, &Token, BufferSize - 2 * BlockSize);
+
+        while(Token.TransactionStatus == EFI_NOT_READY);
+
+        // Read the data with 0, the first/last block should not be erased
+        ReadStatus = BlockIo2->ReadBlocksEx (BlockIo2, MediaId, Lba, &BlockIo2Token, BufferSize, (VOID*)Buffer2);
+        if (ReadStatus == EFI_SUCCESS) {
+          for (Index1 = 0; Index1 < BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0) {
+              IsZero1 = FALSE;
+              break;
+            }
           }
-        }
 
-        for (Index1 = BufferSize - BlockSize; Index1 < BufferSize; Index1++) {
-          if (Buffer2[Index1] != 0) {
-            IsZero3 = FALSE;
-            break;
+          for (Index1 = BlockSize; Index1 < BufferSize - BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0) {
+              IsZero2 = FALSE;
+              break;
+            }
           }
-        }
 
-        if ((EraseStatus == EFI_SUCCESS) && (IsZero1 == FALSE) && (IsZero2 == TRUE) && ((IsZero3 == FALSE)))
-       	  AssertionType = EFI_TEST_ASSERTION_PASSED;
-        else
-          AssertionType = EFI_TEST_ASSERTION_FAILED;
+          for (Index1 = BufferSize - BlockSize; Index1 < BufferSize; Index1++) {
+            if (Buffer2[Index1] != 0) {
+              IsZero3 = FALSE;
+              break;
+            }
+          }
 
-        
-        StandardLib->RecordAssertion (
+          if ((EraseStatus == EFI_SUCCESS) && (IsZero1 == FALSE) && (IsZero2 == TRUE) && ((IsZero3 == FALSE)))
+            AssertionType = EFI_TEST_ASSERTION_PASSED;
+          else
+            AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+
+          StandardLib->RecordAssertion (
                        StandardLib,
                        AssertionType,
                        gEraseBlockBBTestFunctionAssertionGuid004,
@@ -525,12 +527,12 @@ BlockIo2:
                        L"%a:%d:EraseBlocks Status - %r, IsZero1 - %d, IsZero2 - %d, IsZero3 - %d",
                        __FILE__,
                        (UINTN)__LINE__,
-                       Status,
+                       EraseStatus,
                        IsZero1, IsZero2, IsZero3
                        );   
 
+        }
       }
-
       //
       // Erase Blocks with the EraseLengthGranularity blocks
       //
@@ -580,7 +582,7 @@ BlockIo2:
         }
 
         if ((EraseStatus == EFI_SUCCESS) && (IsZero == TRUE) && (EnterEvent == 1))
-       	  AssertionType = EFI_TEST_ASSERTION_PASSED;
+          AssertionType = EFI_TEST_ASSERTION_PASSED;
         else
           AssertionType = EFI_TEST_ASSERTION_FAILED;
 
@@ -605,7 +607,7 @@ BlockIo2:
       WriteStatus = BlockIo2->WriteBlocksEx (BlockIo2, MediaId, Lba, &BlockIo2Token, BufferSize, (VOID*)Buffer1);
       FlushStatus = EFI_SUCCESS;
       if (WriteCaching == TRUE)
-        FlushStatus = BlockIo2->FlushBlocksEx (BlockIo2, &BlockIo2Token);      
+        FlushStatus = BlockIo2->FlushBlocksEx (BlockIo2, &BlockIo2Token);
 
       if ((WriteStatus != EFI_SUCCESS) || (FlushStatus != EFI_SUCCESS))
         StandardLib->RecordAssertion (
