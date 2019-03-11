@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2017 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -51,8 +51,8 @@ BBTestEraseBlocksConformanceTest (
   UINT32                                BlockSize;
   UINT32                                IoAlign;
   EFI_LBA                               LastBlock;
-
-  UINT32                                BlockNumber;
+  UINT32                                EraseLengthGranularity;
+  UINTN                                 EraseSize;
 
   EFI_ERASE_BLOCK_TOKEN                 Token;
 
@@ -121,10 +121,11 @@ BBTestEraseBlocksConformanceTest (
   IoAlign           = Media->IoAlign;
   LastBlock         = Media->LastBlock;
 
-  BlockNumber       = (UINT32) MINIMUM(LastBlock, MAX_NUMBER_OF_READ_BLOCK_BUFFER);
+  EraseLengthGranularity = EraseBlock->EraseLengthGranularity;
+  EraseSize              = (UINTN)SctMultU64x32 (EraseLengthGranularity, BlockSize);
 
   if (MediaPresent == FALSE) {
-    Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, 0, &Token, BlockNumber);
+    Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, 0, &Token, EraseSize);
     if (Status == EFI_NO_MEDIA)
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     else
@@ -141,7 +142,7 @@ BBTestEraseBlocksConformanceTest (
                      Status
                      );
 
-    Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock + 1, &Token, BlockNumber);
+    Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock + 1, &Token, EraseSize);
     if (Status == EFI_NO_MEDIA)
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     else
@@ -158,7 +159,7 @@ BBTestEraseBlocksConformanceTest (
                      Status
                      );
 
-    Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock - 10, &Token, BlockNumber + 1);
+    Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock - 10, &Token, EraseSize + 1);
     if (Status == EFI_NO_MEDIA)
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     else
@@ -177,7 +178,7 @@ BBTestEraseBlocksConformanceTest (
  
   } else {
     if (ReadOnly == TRUE) {
-      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, 0, &Token, BlockNumber);
+      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, 0, &Token, EraseSize);
       if (Status == EFI_WRITE_PROTECTED)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -195,7 +196,7 @@ BBTestEraseBlocksConformanceTest (
                      );      
 
     } else {
-      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, 0, &Token, BlockNumber);
+      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, 0, &Token, EraseSize);
       if (Status == EFI_MEDIA_CHANGED)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -212,7 +213,7 @@ BBTestEraseBlocksConformanceTest (
                      Status
                      );  
 
-      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, LastBlock + 1, &Token, BlockNumber);
+      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, LastBlock + 1, &Token, EraseSize);
       if (Status == EFI_MEDIA_CHANGED)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -229,7 +230,7 @@ BBTestEraseBlocksConformanceTest (
                      Status
                      );  
 
-      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, LastBlock - 10, &Token, BlockNumber + 1);
+      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, LastBlock - 10, &Token, EraseSize + 1);
       if (Status == EFI_MEDIA_CHANGED)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
@@ -246,7 +247,7 @@ BBTestEraseBlocksConformanceTest (
                      Status
                      );  
 
-      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock + 1, &Token, BlockNumber);
+      Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock + 1, &Token, EraseSize);
       if (Status == EFI_INVALID_PARAMETER)
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       else
