@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -2437,34 +2437,40 @@ BuildiSCSIDeviceNode (
   CHAR16                         *LunStr;
   UINT16                         Options;
   UINT64                         LunNum;
+  UINT64                         TempLunNum;
 
   Status = GetNextRequiredParam(&TextDeviceNode, L"TargetName", &ParamIdentifierStr, &ParamIdentifierVal);
   if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
     NameStr = ParamIdentifierVal;
   } else {
-  	return NULL;
+    return NULL;
   }
 
   Status = GetNextRequiredParam(&TextDeviceNode, L"PortalGroup", &ParamIdentifierStr, &ParamIdentifierVal);
   if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
     PortalGroupStr = ParamIdentifierVal;
   } else {
-  	return NULL;
+    return NULL;
   }
 
   Status = GetNextRequiredParam(&TextDeviceNode, L"LUN", &ParamIdentifierStr, &ParamIdentifierVal);
   if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
     LunStr = ParamIdentifierVal;
   } else {
-  	return NULL;
+    return NULL;
   }
 
-  Length = sizeof (ISCSI_DEVICE_PATH_WITH_NAME) + (UINT16) (SctStrLen (NameStr) * 2 + 2);
+  Length = sizeof (ISCSI_DEVICE_PATH_WITH_NAME) + (UINT16) (SctStrLen (NameStr));
   iSCSI = (ISCSI_DEVICE_PATH_WITH_NAME *) CreateDeviceNode (0x3, 0x13, Length);
   if (iSCSI == NULL) {
-  	return NULL;
+    return NULL;
   }
 
+
+  //
+  // The iSCSI Device Node Options describe iSCSI login options for the key values
+  // Please refer to the section 10.3.5.21 of the UEFI 2.7 spec for the detail
+  //
   Options = 0x0000;
 
   for (OptionalParamIndex = 0;OptionalParamIndex < 5; OptionalParamIndex++) {
@@ -2499,7 +2505,7 @@ BuildiSCSIDeviceNode (
         if (SctStrCmp (ParamIdentifierVal, L"CRC32C") == 0) {
           Options |= 0x0002;
         }
-		break;
+        break;
 
       case 1:  // DataDigest
         if (SctStrCmp (ParamIdentifierVal, L"CRC32C") == 0) {
@@ -2513,6 +2519,9 @@ BuildiSCSIDeviceNode (
         }
         if (SctStrCmp (ParamIdentifierVal, L"CHAP_UNI") == 0) {
           Options |= 0x1000;
+        }
+        if (SctStrCmp (ParamIdentifierVal, L"CHAP_BI") == 0) {
+          Options |= 0x0000;
         }
         break;
 
@@ -2533,8 +2542,24 @@ BuildiSCSIDeviceNode (
 
   SctUnicodeToAscii (iSCSI->iSCSITargetName, NameStr, SctStrLen (NameStr));
   iSCSI->TargetPortalGroupTag = (UINT16) SctStrToUInt (PortalGroupStr);
-  SctStrToUInt64 (LunStr, &LunNum);
+
+  //
+  // The LUN is an 8 byte array that is displayed in hexadecimal format with byte
+  // 0 first (i.e., on the left) and byte 7 last (i.e, on the right), and is required.
+  //
+  SctStrToUInt64 (LunStr, &TempLunNum);
+  LunNum = 0;
+
+  LunNum = SctLShiftU64((TempLunNum & 0x00000000000000FF), 56);;
+  LunNum = LunNum | SctLShiftU64((TempLunNum & 0x000000000000FF00), 40);
+  LunNum = LunNum | SctLShiftU64((TempLunNum & 0x0000000000FF0000), 24);
+  LunNum = LunNum | SctLShiftU64((TempLunNum & 0x00000000FF000000), 8);
+  LunNum = LunNum | SctRShiftU64((TempLunNum & 0x000000FF00000000), 8);
+  LunNum = LunNum | SctRShiftU64((TempLunNum & 0x0000FF0000000000), 24);
+  LunNum = LunNum | SctRShiftU64((TempLunNum & 0x00FF000000000000), 40);
+  LunNum = LunNum | SctRShiftU64((TempLunNum & 0xFF00000000000000), 56);
   iSCSI->Lun = LunNum;
+
   iSCSI->LoginOption = (UINT16) Options;
 
   return (EFI_DEVICE_PATH_PROTOCOL *) iSCSI;

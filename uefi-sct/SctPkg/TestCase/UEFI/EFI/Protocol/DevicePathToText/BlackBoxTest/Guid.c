@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -136,3 +136,4 @@ EFI_GUID  gDevicePathToTextBBTestFunctionAssertionGuid133 = EFI_TEST_DEVICEPATHT
 
 EFI_GUID  gDevicePathToTextBBTestFunctionAssertionGuid134 = EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_134_GUID;
 
+EFI_GUID  gDevicePathToTextBBTestFunctionAssertionGuid135 = EFI_TEST_DEVICEPATHTOTEXTBBTESTFUNCTION_ASSERTION_135_GUID;

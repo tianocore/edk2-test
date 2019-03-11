@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -2202,7 +2202,56 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
     SctFreePool (Text);
   }
 
-  
+  //
+  // The stardand Text in spec is iSCSI(TargetName, PortalGroup, LUN, HeaderDigest, DataDigest, Authentication, Protocol)
+  // The test use iSCSI(Name,0x12AB,0x0000005678000000,CRC32C,None,CHAP_BI,TCP) as the input to check binary/text convertion
+  //
+  // sizeof (ISCSI_DEVICE_PATH_WITH_NAME) + 4 is the length of iSCSI Device Path Node plus Target Name
+  // The Targat Name is "Name" in this case
+  // The default protocol used by iSCSI is TCP(0), and 1+ is reserved in UEFI 2.7 spec
+  // The combination of HeaderDigest, DataDigest and Authentication in this case is 0002
+  // The Lun is 0x0000007856000000 in this case to detect the possible display order issue
+  // please refer to section 10.3.5.21 and Table 102 of UEFI 2.7 Spec for detail.
+  //
+  pDeviceNode1 = DevicePathUtilities->CreateDeviceNode (0x3, 0x13, sizeof (ISCSI_DEVICE_PATH_WITH_NAME) + 4);
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->NetworkProtocol = 0x0;
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->LoginOption = 0x0002;
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->Lun = 0x0000007856000000;
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->TargetPortalGroupTag = 0x12AB;
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->iSCSITargetName[0] = 'N';
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->iSCSITargetName[1] = 'a';
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->iSCSITargetName[2] = 'm';
+  ((ISCSI_DEVICE_PATH_WITH_NAME *)pDeviceNode1)->iSCSITargetName[3] = 'e';
+
+  Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
+  pDeviceNode2 = SctConvertTextToDeviceNode(Text);
+
+  if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType,
+                gDevicePathToTextBBTestFunctionAssertionGuid135,
+                L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
+                L"%a:%d: Convert result: %s - Expected:iSCSI(MyTargetName,0x12AB,0x0000005678000000,CRC32C,None,CHAP_BI,TCP)",
+                __FILE__,
+                (UINTN)__LINE__,
+                Text
+                );
+  if (pDeviceNode1 != NULL) {
+    SctFreePool (pDeviceNode1);
+  }
+  if (pDeviceNode2 != NULL) {
+    SctFreePool (pDeviceNode2);
+  }
+  if (Text != NULL) {
+    SctFreePool (Text);
+  }
+
   return EFI_SUCCESS;
 }
 
