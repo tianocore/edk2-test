@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -27,7 +28,7 @@
 [defines]
 BASE_NAME            = Decompress_DecompressBbTest
 FILE_GUID            = 9EE6BF79-03CD-407e-B108-96D1F5C90DA6
-COMPONENT_TYPE       = BS_DRIVER
+MODULE_TYPE          = UEFI_DRIVER
 #BUILD_TYPE           = CUSTOM_MAKEFILE
 CUSTOM_MAKEFILE      = MSFT| makefile
 CUSTOM_MAKEFILE      = GCC | GNUmakefile
