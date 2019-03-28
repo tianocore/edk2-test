@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-#  Copyright (c) 2011 - 2018, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2011 - 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -315,5 +315,5 @@ then
 echo Could not generate IHV SCT binary
      exit -1
 else
-echo The SCT binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}"
+echo The IHV binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}"
 fi

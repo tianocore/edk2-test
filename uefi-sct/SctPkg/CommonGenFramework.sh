@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-#  Copyright (c) 2011 - 2012, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2011 - 2019, ARM Ltd. All rights reserved.<BR>
 #  Copyright (c) 2014 - 2018, Intel Corporation. All rights reserved.<CR>
 #  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 #
@@ -34,8 +34,6 @@ if [ -e $Framework ]
 then
   rm -rf $Framework
 fi
-
-echo "Generating SCT binary"
 
 mkdir -p $Framework
 mkdir -p $Framework/Data
@@ -109,6 +107,7 @@ CopyDependency()
 
 if [ $1 = "uefi_sct" ] 
 then 
+    echo "Generating UEFI SCT binary"
     # *********************************************
     # Copy the UEFI 2.1 Test Cases
     # *********************************************
@@ -275,6 +274,7 @@ fi
 
 if [ $1 = "ihv_sct" ]
 then
+  echo "Generating IHV SCT binary"
   # *********************************************
   # Copy the EFI 1.10 Test Cases for IHV
   # *********************************************
