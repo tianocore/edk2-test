@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -27,7 +28,7 @@
 [defines]
 BASE_NAME            = ImageServices_InvalidImage2
 FILE_GUID            = BAE70423-9A0E-418f-8A24-B61B95C8BD33
-COMPONENT_TYPE       = BS_DRIVER
+MODULE_TYPE          = UEFI_DRIVER
 #BUILD_TYPE           = CUSTOM_MAKEFILE
 CUSTOM_MAKEFILE      = MSFT| makefile
 CUSTOM_MAKEFILE      = GCC | GNUmakefile
