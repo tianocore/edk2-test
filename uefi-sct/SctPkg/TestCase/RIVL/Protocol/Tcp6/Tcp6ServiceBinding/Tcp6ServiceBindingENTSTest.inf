@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,33 +26,31 @@
 #--*/
 
 [defines]
+INF_VERSION          = 0x00010005
 BASE_NAME            = Tcp6ServiceBinding_ENTSTest
 FILE_GUID            = 6FA66944-99EB-4415-BD1A-BE8B56949D8D
-COMPONENT_TYPE       = BS_DRIVER
+MODULE_TYPE          = UEFI_DRIVER
+VERSION_STRING       = 1.0
+ENTRY_POINT          = Tcp6ServiceBindingENTSTestMain
 
 [sources.common]
   Tcp6ServiceBindingENTSTest.c
   Tcp6ServiceBindingENTSTestCase.h
   Tcp6ServiceBindingENTSTestCase.c
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/EasDispatcher/Include
-  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/Rivl
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
   EntsLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  C_STD_INCLUDE=
-  IMAGE_ENTRY_POINT=Tcp6ServiceBindingENTSTestMain
+[Protocols]
+  gEfiEntsProtocolGuid
+  gBlackBoxEfiLoadedImageProtocolGuid
+  gBlackBoxEfiTcp6ServiceBindingProtocolGuid
 
