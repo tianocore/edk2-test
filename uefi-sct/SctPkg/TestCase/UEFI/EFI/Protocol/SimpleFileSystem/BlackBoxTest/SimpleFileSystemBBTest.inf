@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2013 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,9 +26,12 @@
 #--*/
 
 [defines]
+INF_VERSION          = 0x00010005
 BASE_NAME            = SimpleFileSystemBBTest
 FILE_GUID            = 39E91E5F-B218-4f80-ADDC-37C0003C5326
-COMPONENT_TYPE       = BS_DRIVER
+MODULE_TYPE          = UEFI_DRIVER
+VERSION_STRING       = 1.0
+ENTRY_POINT          = InitializeBBTestSimpleFileSystem
 
 [sources.common]
   Guid.c
@@ -42,19 +46,19 @@ COMPONENT_TYPE       = BS_DRIVER
   SimpleFileSystemExBBTestFunction_FlushEx.c
   SimpleFileSystemExBBTestFunction_OpenEx.c
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  IMAGE_ENTRY_POINT=InitializeBBTestSimpleFileSystem
+[Guids]
+  gBlackBoxEfiFileInfoGuid
+  gBlackBoxEfiFileSystemInfoGuid
+  gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid
+
+[Protocols]
