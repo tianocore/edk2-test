@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,9 +26,12 @@
 #--*/
 
 [defines]
+INF_VERSION      = 0x00010005
 BASE_NAME        = DevicePathFromTextBBTest
 FILE_GUID        = 013941EE-C9B5-4c21-B10B-0C13921DA929
-COMPONENT_TYPE   = BS_DRIVER
+MODULE_TYPE      = UEFI_DRIVER
+VERSION_STRING   = 1.0
+ENTRY_POINT      = InitializeBBTestDevicePathFromTextProtocol
 
 [sources.common]
   DevicePathFromTextBBTestMain.c
@@ -37,19 +41,20 @@ COMPONENT_TYPE   = BS_DRIVER
   DevicePathFromTextBBTestCoverage.c
   Guid.c
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  IMAGE_ENTRY_POINT = InitializeBBTestDevicePathFromTextProtocol
+[Guids]
+  gBlackBoxEfiPcAnsiGuid
+
+[Protocols]
+  gBlackBoxEfiDevicePathUtilitiesProtocolGuid
+  gBlackBoxEfiDebugPortProtocolGuid
+  gBlackBoxEfiDevicePathToTextProtocolGuid

@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,29 +26,25 @@
 #--*/
 
 [defines]
-BASE_NAME        = DevicePathBBTest
-FILE_GUID        = 5E1013F6-302B-4628-BB28-B5FBB3FC4843
-COMPONENT_TYPE   = BS_DRIVER
+  INF_VERSION      = 0x00010005
+  BASE_NAME        = DevicePathBBTest
+  FILE_GUID        = 5E1013F6-302B-4628-BB28-B5FBB3FC4843
+  MODULE_TYPE      = UEFI_DRIVER
+  VERSION_STRING   = 1.0
+  ENTRY_POINT      = InitializeBBTestDevicePathProtocol
 
 [sources.common]
   DevicePathBBTestMain.c
   DevicePathBBTestMain.h
   DevicePathBBTestFunction.c
   Guid.c
-  
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/MdePkg/Include
 
-[libraries.common]
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
-
-[nmake.common]
-  IMAGE_ENTRY_POINT = InitializeBBTestDevicePathProtocol
