@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2014 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2014, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -26,9 +27,12 @@
 
 
 [defines]
+INF_VERSION          = 0x00010005
 BASE_NAME            = IhvSimpleTextInBBTest
 FILE_GUID            = F2B23429-F4F2-4f47-BC26-3E76B5C35DB6
-COMPONENT_TYPE       = BS_DRIVER
+MODULE_TYPE          = UEFI_DRIVER
+VERSION_STRING       = 1.0
+ENTRY_POINT          = InitializeBBTestSimpleTextIn
 
 [sources.common]
   SimpleTextInBBTestMain.c
@@ -39,20 +43,16 @@ COMPONENT_TYPE       = BS_DRIVER
   SimpleTextInBBTestData.c
   Guid.c
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/Include/Legacy
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  IMAGE_ENTRY_POINT = InitializeBBTestSimpleTextIn
+[Protocols]
+  gBlackBoxEfiSimpleTextInProtocolGuid
+  gBlackBoxEfiDevicePathProtocolGuid
