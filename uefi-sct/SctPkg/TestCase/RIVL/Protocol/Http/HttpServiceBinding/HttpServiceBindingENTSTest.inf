@@ -2,6 +2,7 @@
 #
 #  Copyright 2017 Unified EFI, Inc.<BR>
 #  Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,33 +26,30 @@
 #--*/
 
 [defines]
+INF_VERSION          = 0x00010005
 BASE_NAME            = HttpServiceBinding_ENTSTest
 FILE_GUID            = FB06CDB4-10D0-45a0-A1C8-159B221088C9
-COMPONENT_TYPE       = BS_DRIVER
+MODULE_TYPE          = UEFI_DRIVER
+VERSION_STRING       = 1.0
+ENTRY_POINT          = HttpServiceBindingENTSTestMain
 
 [sources.common]
   HttpServiceBindingENTSTest.c
   HttpServiceBindingENTSTestCase.h
   HttpServiceBindingENTSTestCase.c
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/EasDispatcher/Include
-  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/Rivl
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
   EntsLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  C_STD_INCLUDE=
-  IMAGE_ENTRY_POINT=HttpServiceBindingENTSTestMain
-
+[Protocols]
+  gEfiEntsProtocolGuid
+  gBlackBoxEfiLoadedImageProtocolGuid
+  gBlackBoxEfiHttpServiceBindingProtocolGuid
