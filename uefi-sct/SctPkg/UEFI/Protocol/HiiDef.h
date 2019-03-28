@@ -3,6 +3,7 @@
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
   Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
+  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -41,19 +42,6 @@ typedef UINT16  EFI_DEFAULT_ID;
 typedef UINT32  EFI_HII_FONT_STYLE;
 typedef VOID    *EFI_FONT_HANDLE;
 
-//
-// HII package list
-//
-typedef struct {
-  EFI_GUID               PackageListGuid;
-  UINT32                 PackageLength;
-} EFI_HII_PACKAGE_LIST_HEADER;
-
-typedef struct {
-  UINT32                 Length:24;
-  UINT32                 Type:8;
-} EFI_HII_PACKAGE_HEADER;
-
 #define EFI_HII_PACKAGE_TYPE_ALL             0x00
 #define EFI_HII_PACKAGE_TYPE_GUID            0x01
 #define EFI_HII_PACKAGE_FORM                 0x02
@@ -79,29 +67,6 @@ typedef struct {
 //
 #define EFI_GLYPH_NON_SPACING                0x01
 #define EFI_GLYPH_WIDE                       0x02
-
-
-typedef struct {
-  CHAR16                 UnicodeWeight;
-  UINT8                  Attributes;
-  UINT8                  GlyphCol1[EFI_GLYPH_HEIGHT];
-} EFI_NARROW_GLYPH;
-
-typedef struct {
-  CHAR16                 UnicodeWeight;
-  UINT8                  Attributes;
-  UINT8                  GlyphCol1[EFI_GLYPH_HEIGHT];
-  UINT8                  GlyphCol2[EFI_GLYPH_HEIGHT];
-  UINT8                  Pad[3];
-} EFI_WIDE_GLYPH;
-
-typedef struct _EFI_HII_SIMPLE_FONT_PACKAGE_HDR {
-  EFI_HII_PACKAGE_HEADER Header;
-  UINT16                 NumberOfNarrowGlyphs;
-  UINT16                 NumberOfWideGlyphs;
-  EFI_NARROW_GLYPH       *NarrowGlyphs;
-  EFI_WIDE_GLYPH         *WideGlyphs;
-} EFI_HII_SIMPLE_FONT_PACKAGE_HDR;
 
 //
 // Font Package
@@ -151,14 +116,6 @@ typedef struct _EFI_FONT_DISPLAY_INFO {
   EFI_FONT_INFO                     FontInfo;
 } EFI_FONT_DISPLAY_INFO;
 
-typedef struct _EFI_HII_GLYPH_INFO {
-  UINT16                 Width;
-  UINT16                 Height;
-  INT16                  OffsetX;
-  INT16                  OffsetY;
-  INT16                  AdvanceX;
-} EFI_HII_GLYPH_INFO;
-
 typedef struct _EFI_GRAPHICS_OUTPUT_PROTOCOL EFI_GRAPHICS_OUTPUT_PROTOCOL;;
 
 typedef struct _EFI_IMAGE_OUTPUT {
@@ -177,15 +134,6 @@ typedef struct _EFI_HII_ROW_INFO {
   UINTN                        LineWidth;
   UINTN                        BaselineOffset;
 } EFI_HII_ROW_INFO;
-
-typedef struct _EFI_HII_FONT_PACKAGE_HDR {
-  EFI_HII_PACKAGE_HEADER Header;
-  UINT32                 HdrSize;
-  UINT32                 GlyphBlockOffset;
-  EFI_HII_GLYPH_INFO     Cell;
-  EFI_HII_FONT_STYLE     FontStyle;
-  CHAR16                 FontFamily[1];
-} EFI_HII_FONT_PACKAGE_HDR;
 
 #define EFI_HII_GIBT_END                  0x00
 #define EFI_HII_GIBT_GLYPH                0x10
@@ -209,33 +157,11 @@ typedef struct _EFI_HII_DEVICE_PATH_PACKAGE {
 } EFI_HII_DEVICE_PATH_PACKAGE;
 
 //
-// GUID Package
-//
-typedef struct _EFI_HII_GUID_PACKAGE_HDR {
-  EFI_HII_PACKAGE_HEADER   Header;
-  EFI_GUID                 Guid;
-} EFI_HII_GUID_PACKAGE_HDR;
-
-//
 // String Package
 //
 
 #define UEFI_CONFIG_LANG       L"x-UEFI"
 #define UEFI_CONFIG_LANG2      L"x-i-UEFI"     // BUGBUG, spec need to be updated.
-
-typedef struct _EFI_HII_STRING_PACKAGE_HDR {
-  EFI_HII_PACKAGE_HEADER  Header;
-  UINT32                  HdrSize;
-  UINT32                  StringInfoOffset;
-  CHAR16                  LanguageWindow[16];
-  EFI_STRING_ID           LanguageName;
-  CHAR8                   Language[1];
-} EFI_HII_STRING_PACKAGE_HDR;
-
-typedef struct {
-  UINT8                   BlockType;
-  //UINT8                 BlockBody[];
-} EFI_HII_STRING_BLOCK;
 
 #define EFI_HII_SIBT_END                     0x00
 #define EFI_HII_SIBT_STRING_SCSU             0x10
@@ -257,16 +183,6 @@ typedef struct {
 //
 // Image Packages
 //
-
-typedef struct _EFI_HII_IMAGE_PACKAGE_HDR {
-  EFI_HII_PACKAGE_HEADER       Header;
-  UINT32                       ImageInfoOffset;
-  UINT32                       PaletteInfoOffset;
-} EFI_HII_IMAGE_PACKAGE_HDR;
-
-typedef struct _EFI_HII_IMAGE_BLOCK {
-  UINT8                        BlockType;
-} EFI_HII_IMAGE_BLOCK;
 
 #define EFI_IMAGE_TRANSPARENT          0x00000001
 
@@ -305,29 +221,6 @@ typedef UINT32    EFI_HII_DRAW_FLAGS;
 //
 // Forms Package
 //
-
-typedef struct {
-  UINT8 Hour;
-  UINT8 Minute;
-  UINT8 Second;
-} EFI_HII_TIME;
-
-typedef struct {
-  UINT16 Year;
-  UINT8  Month;
-  UINT8  Day;
-} EFI_HII_DATE;
-
-typedef union {
-  UINT8           u8;
-  UINT16          u16;
-  UINT32          u32;
-  UINT64          u64;
-  BOOLEAN         b;
-  EFI_HII_TIME    time;
-  EFI_HII_DATE    date;
-  EFI_STRING_ID   string;
-} EFI_IFR_TYPE_VALUE;
 
 #define EFI_IFR_FORM_OP                0x01
 #define EFI_IFR_SUBTITLE_OP            0x02
@@ -437,114 +330,6 @@ EFI_STATUS
   IN EFI_HII_DATABASE_NOTIFY_TYPE    NotifyType
 );
 
-typedef enum {    
-  EfiKeyLCtrl,    
-  EfiKeyA0,       
-  EfiKeyLAlt, 
-  EfiKeySpaceBar,
-  EfiKeyA2, 
-  EfiKeyA3, 
-  EfiKeyA4, 
-  EfiKeyRCtrl, 
-  EfiKeyLeftArrow,
-  EfiKeyDownArrow, 
-  EfiKeyRightArrow, 
-  EfiKeyZero,
-  EfiKeyPeriod, 
-  EfiKeyEnter, 
-  EfiKeyLShift, 
-  EfiKeyB0,
-  EfiKeyB1, 
-  EfiKeyB2, 
-  EfiKeyB3, 
-  EfiKeyB4, 
-  EfiKeyB5, 
-  EfiKeyB6,
-  EfiKeyB7, 
-  EfiKeyB8, 
-  EfiKeyB9, 
-  EfiKeyB10, 
-  EfiKeyRshift,
-  EfiKeyUpArrow, 
-  EfiKeyOne, 
-  EfiKeyTwo, 
-  EfiKeyThree,
-  EfiKeyCapsLock, 
-  EfiKeyC1, 
-  EfiKeyC2, 
-  EfiKeyC3, 
-  EfiKeyC4,
-  EfiKeyC5, 
-  EfiKeyC6, 
-  EfiKeyC7, 
-  EfiKeyC8, 
-  EfiKeyC9,
-  EfiKeyC10, 
-  EfiKeyC11, 
-  EfiKeyC12, 
-  EfiKeyFour, 
-  EfiKeyFive,
-  EfiKeySix, 
-  EfiKeyPlus, 
-  EfiKeyTab, 
-  EfiKeyD1, 
-  EfiKeyD2,
-  EfiKeyD3, 
-  EfiKeyD4, 
-  EfiKeyD5, 
-  EfiKeyD6, 
-  EfiKeyD7, 
-  EfiKeyD8,
-  EfiKeyD9, 
-  EfiKeyD10, 
-  EfiKeyD11, 
-  EfiKeyD12, 
-  EfiKeyD13,
-  EfiKeyDel, 
-  EfiKeyEnd, 
-  EfiKeyPgDn, 
-  EfiKeySeven, 
-  EfiKeyEight,
-  EfiKeyNine, 
-  EfiKeyE0, 
-  EfiKeyE1, 
-  EfiKeyE2,
-  EfiKeyE3,
-  EfiKeyE4, 
-  EfiKeyE5, 
-  EfiKeyE6, 
-  EfiKeyE7, 
-  EfiKeyE8, 
-  EfiKeyE9,
-  EfiKeyE10, 
-  EfiKeyE11, 
-  EfiKeyE12, 
-  EfiKeyBackSpace,
-  EfiKeyIns, 
-  EfiKeyHome, 
-  EfiKeyPgUp, 
-  EfiKeyNLck, 
-  EfiKeySlash,
-  EfiKeyAsterisk, 
-  EfiKeyMinus, 
-  EfiKeyEsc, 
-  EfiKeyF1, 
-  EfiKeyF2,
-  EfiKeyF3, 
-  EfiKeyF4, 
-  EfiKeyF5, 
-  EfiKeyF6, 
-  EfiKeyF7, 
-  EfiKeyF8,
-  EfiKeyF9, 
-  EfiKeyF10, 
-  EfiKeyF11, 
-  EfiKeyF12, 
-  EfiKeyPrint,
-  EfiKeySLck, 
-  EfiKeyPause
-} EFI_KEY;
-
 #define EFI_NULL_MODIFIER                  0x0000
 #define EFI_LEFT_CONTROL_MODIFIER          0x0001
 #define EFI_RIGHT_CONTROL_MODIFIER         0x0002
@@ -579,23 +364,5 @@ typedef enum {
 #define EFI_FUNCTION_KEY_TEN_MODIFIER      0x001F
 #define EFI_FUNCTION_KEY_ELEVEN_MODIFIER   0x0020
 #define EFI_FUNCTION_KEY_TWELVE_MODIFIER   0x0021
-
-typedef struct {
-  EFI_KEY               Key;
-  CHAR16                Unicode; 
-  CHAR16                ShiftedUnicode;
-  CHAR16                AltGrUnicode; 
-  CHAR16                ShiftedAltGrUnicode; 
-  UINT16                Modifier;
-  UINT16                AffectedAttribute;
-} EFI_KEY_DESCRIPTOR;
-
-typedef struct {
-  UINT16                  LayoutLength;
-  EFI_GUID                Guid;
-  UINT32                  LayoutDescriptorStringOffset;       
-  UINT8                   DescriptorCount;
-  EFI_KEY_DESCRIPTOR      Descriptors[1];
-} EFI_HII_KEYBOARD_LAYOUT;
 
 #endif
