@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,34 +26,30 @@
 #--*/
 
 [defines]
+INF_VERSION          = 0x00010005
 BASE_NAME            = Ip6Config_ENTSTest
-FILE_GUID            = 0280EF45-39FA-4437-BD41-1028531D654C                      
-
-COMPONENT_TYPE       = BS_DRIVER
+FILE_GUID            = 0280EF45-39FA-4437-BD41-1028531D654C
+MODULE_TYPE          = UEFI_DRIVER
+VERSION_STRING       = 1.0
+ENTRY_POINT          = Ip6ConfigENTSTestMain
 
 [sources.common]
   Ip6ConfigENTSTest.c
   Ip6ConfigENTSTestCase.h
   Ip6ConfigENTSTestCase.c
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/EasDispatcher/Include
-  $(WORKSPACE)/SctPkg/TestInfrastructure/SCT/Framework/ENTS/Rivl
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
   EntsLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  C_STD_INCLUDE=
-  IMAGE_ENTRY_POINT=Ip6ConfigENTSTestMain
-
+[Protocols]
+  gEfiEntsProtocolGuid
+  gBlackBoxEfiLoadedImageProtocolGuid
+  gBlackBoxEfiIp6ConfigProtocolGuid
