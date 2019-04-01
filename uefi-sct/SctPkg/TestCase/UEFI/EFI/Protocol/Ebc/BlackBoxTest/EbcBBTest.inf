@@ -1,7 +1,8 @@
 ## @file
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
-#  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -25,9 +26,12 @@
 #--*/
 
 [defines]
-BASE_NAME            = EbcBBTest
-FILE_GUID            = C4895001-EBD9-4521-A522-E9087DE83D39
-COMPONENT_TYPE       = BS_DRIVER
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = EbcBBTest
+  FILE_GUID         = C4895001-EBD9-4521-A522-E9087DE83D39
+  MODULE_TYPE       = UEFI_DRIVER
+  VERSION_STRING    = 1.0
+  ENTRY_POINT       = InitializeBBTestEbcProtocol
 
 [sources.common]
   EbcBBTestConformance.c
@@ -37,20 +41,23 @@ COMPONENT_TYPE       = BS_DRIVER
   Guid.c
   Guid.h
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/Include/Legacy
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  IMAGE_ENTRY_POINT=InitializeBBTestEbcProtocol
+[Guids]
+  gBlackBoxEfiFileInfoGuid
+
+[Protocols]
+  gBlackBoxEfiLoadedImageProtocolGuid
+  gBlackBoxEfiSimpleFileSystemProtocolGuid
+  gBlackBoxEfiEbcDriverProtocolGuid
+  gEfiTestProfileLibraryGuid
+  gEfiPeiFlushInstructionCacheGuid
+  gEfiPeiPeCoffLoaderGuid

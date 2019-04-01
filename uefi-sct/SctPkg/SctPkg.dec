@@ -1,8 +1,8 @@
 ## @file
 #
 #  Copyright 2014 - 2015 Unified EFI, Inc.<BR>
-#  Copyright (c) 2014 ARM Ltd. All rights reserved.<BR>
-#  Copyright (c) 2015, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2014 - 2019 ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2015 - 2019, Intel Corporation. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -32,6 +32,7 @@
 ################################################################################
 [Includes.common]
   Include                        # Root include for the package
+  Include/Legacy
   TestInfrastructure/SCT/Drivers/Include
   TestInfrastructure/SCT/Framework
   TestInfrastructure/SCT/Framework/Include
@@ -58,3 +59,5 @@
   gEfiTestProfileLibraryGuid = { 0x832c9023, 0x8e67, 0x453f, { 0x83, 0xea, 0xdf, 0x71, 0x05, 0xfa, 0x74, 0x66 }}
   gEfiWbTestGuid = { 0x0B486CED, 0x25EB, 0x448a, { 0xB2, 0xB2, 0x22, 0x4E, 0x7A, 0x20, 0xCF, 0x57 }}
   gEfiEntsProtocolGuid = { 0x5bfcffb2, 0x84c0, 0x49f0, { 0x9a, 0x3a, 0x0, 0x71, 0x5f, 0xec, 0xfb, 0x32 }}
+  gEfiPeiFlushInstructionCacheGuid = { 0xd8117cfc, 0x94a6, 0x11d4, { 0x9a, 0x3a, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d }}
+  gEfiPeiPeCoffLoaderGuid = { 0xd8117cff, 0x94a6, 0x11d4, { 0x9a, 0x3a, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d }}

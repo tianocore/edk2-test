@@ -25,9 +25,12 @@
 #--*/
 
 [defines]
+  INF_VERSION          = 0x00010005
   BASE_NAME            = IhvEbcBBTest
   FILE_GUID            = C3776D26-7DFE-4698-A52E-422C075ACA76
-  COMPONENT_TYPE       = BS_DRIVER
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeBBTestEbcProtocol
 
 [sources.common]
   EbcBBTestConformance.c
@@ -37,20 +40,23 @@
   Guid.c
   Guid.h
 
-[includes.common]
-  .
-  $(WORKSPACE)/SctPkg
-  $(WORKSPACE)/SctPkg/UEFI
-  $(WORKSPACE)/SctPkg/Include
-  $(WORKSPACE)/SctPkg/Include/Legacy
-  $(WORKSPACE)/MdePkg/Include
+[Packages]
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+  MdePkg/MdePkg.dec
 
-[libraries.common]
+[LibraryClasses]
+  UefiDriverEntryPoint
   SctLib
-  SctGuidLib
   EfiTestLib
-  BaseDebugLibNull
-  CompilerIntrinsicsLib
 
-[nmake.common]
-  IMAGE_ENTRY_POINT=InitializeBBTestEbcProtocol
+[Guids]
+  gBlackBoxEfiFileInfoGuid
+
+[Protocols]
+  gBlackBoxEfiLoadedImageProtocolGuid
+  gBlackBoxEfiSimpleFileSystemProtocolGuid
+  gBlackBoxEfiEbcDriverProtocolGuid
+  gEfiTestProfileLibraryGuid
+  gEfiPeiFlushInstructionCacheGuid
+  gEfiPeiPeCoffLoaderGuid
