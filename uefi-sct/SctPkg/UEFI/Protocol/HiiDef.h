@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
   (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
   Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 
@@ -155,13 +155,6 @@ typedef struct _EFI_HII_DEVICE_PATH_PACKAGE {
   EFI_HII_PACKAGE_HEADER   Header;
   EFI_DEVICE_PATH_PROTOCOL *DevicePath;
 } EFI_HII_DEVICE_PATH_PACKAGE;
-
-//
-// String Package
-//
-
-#define UEFI_CONFIG_LANG       L"x-UEFI"
-#define UEFI_CONFIG_LANG2      L"x-i-UEFI"     // BUGBUG, spec need to be updated.
 
 #define EFI_HII_SIBT_END                     0x00
 #define EFI_HII_SIBT_STRING_SCSU             0x10
@@ -329,40 +322,5 @@ EFI_STATUS
   IN EFI_HII_HANDLE                  Handle,
   IN EFI_HII_DATABASE_NOTIFY_TYPE    NotifyType
 );
-
-#define EFI_NULL_MODIFIER                  0x0000
-#define EFI_LEFT_CONTROL_MODIFIER          0x0001
-#define EFI_RIGHT_CONTROL_MODIFIER         0x0002
-#define EFI_LEFT_ALT_MODIFIER              0x0003
-#define EFI_RIGHT_ALT_MODIFIER             0x0004
-#define EFI_ALT_GR_MODIFIER                0x0005
-#define EFI_INSERT_MODIFIER                0x0006
-#define EFI_DELETE_MODIFIER                0x0007
-#define EFI_PAGE_DOWN_MODIFIER             0x0008
-#define EFI_PAGE_UP_MODIFIER               0x0009
-#define EFI_HOME_MODIFIER                  0x000A
-#define EFI_END_MODIFIER                   0x000B
-#define EFI_LEFT_SHIFT_MODIFIER            0x000C
-#define EFI_RIGHT_SHIFT_MODIFIER           0x000D
-#define EFI_CAPS_LOCK_MODIFIER             0x000E
-#define EFI_NUM_LOCK _MODIFIER             0x000F
-#define EFI_LEFT_ARROW_MODIFIER            0x0010
-#define EFI_RIGHT_ARROW_MODIFIER           0x0011
-#define EFI_DOWN_ARROW_MODIFIER            0x0012
-#define EFI_UP_ARROW_MODIFIER              0X0013
-#define EFI_NS_KEY_MODIFIER                0x0014
-#define EFI_NS_KEY_DEPENDENCY_MODIFIER     0x0015
-#define EFI_FUNCTION_KEY_ONE_MODIFIER      0x0016
-#define EFI_FUNCTION_KEY_TWO_MODIFIER      0x0017
-#define EFI_FUNCTION_KEY_THREE_MODIFIER    0x0018
-#define EFI_FUNCTION_KEY_FOUR_MODIFIER     0x0019
-#define EFI_FUNCTION_KEY_FIVE_MODIFIER     0x001A
-#define EFI_FUNCTION_KEY_SIX_MODIFIER      0x001B
-#define EFI_FUNCTION_KEY_SEVEN_MODIFIER    0x001C
-#define EFI_FUNCTION_KEY_EIGHT_MODIFIER    0x001D
-#define EFI_FUNCTION_KEY_NINE_MODIFIER     0x001E
-#define EFI_FUNCTION_KEY_TEN_MODIFIER      0x001F
-#define EFI_FUNCTION_KEY_ELEVEN_MODIFIER   0x0020
-#define EFI_FUNCTION_KEY_TWELVE_MODIFIER   0x0021
 
 #endif
