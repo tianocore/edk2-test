@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2010 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019 Intel Corporation. All rights reserved.<BR>
   Copyright (c) 2018 ARM Ltd. All rights reserved.<BR>
 
   This program and the accompanying materials
@@ -231,9 +231,9 @@ GetLine (
     //
     // Skip the empty line and comment line
     //
-    if ((String[0] == '\0') ||
-        (String[0] == '#' )) {
-      continue;
+    if ((String[0] != '\0') &&
+        (String[0] != '#' )) {
+      break;
     }
   }
 
