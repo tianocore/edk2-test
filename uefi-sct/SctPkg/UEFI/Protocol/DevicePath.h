@@ -1,7 +1,8 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>   
+  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2019, Insyde Software Corp. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -502,6 +503,14 @@ typedef struct {
   //
 } ACPI_ADR_DEVICE_PATH;
 
+
+///
+/// Messaging Device Paths.
+/// This Device Path is used to describe the connection of devices outside the resource domain of the
+/// system. This Device Path can describe physical messaging information like SCSI ID, or abstract
+/// information like networking protocol IP addresses.
+///
+#define MESSAGING_DEVICE_PATH 0x03
 ///
 /// SCSI Device Path SubType.
 ///
@@ -661,6 +670,12 @@ typedef struct {
   ///
   UINT8                         Lun;
 } DEVICE_LOGICAL_UNIT_DEVICE_PATH;
+
+///
+/// Use VENDOR_DEVICE_PATH struct
+///
+#define MSG_VENDOR_DP 0x0a
+typedef VENDOR_DEVICE_PATH VENDOR_DEFINED_DEVICE_PATH;
 
 ///
 /// CD-ROM Media Device Path SubType.

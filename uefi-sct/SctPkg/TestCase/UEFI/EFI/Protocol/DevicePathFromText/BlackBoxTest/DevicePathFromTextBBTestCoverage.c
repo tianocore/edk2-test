@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2019, Insyde Software Corp. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -1105,22 +1106,19 @@ CreateSASExDeviceNode (
   return (EFI_DEVICE_PATH_PROTOCOL *) SasEx;
 }
 
-#define DebugPortNodeType    3
-#define DebugPortNodeSubType 10
-
 STATIC
 EFI_DEVICE_PATH_PROTOCOL *
 CreateDebugPortDeviceNode (
   IN CHAR16 *TextDeviceNode
   )
 {
-  VENDOR_DEFINED_MESSAGING_DEVICE_PATH  *Vend;
+  VENDOR_DEVICE_PATH *Vend;
 
-  Vend = (VENDOR_DEFINED_MESSAGING_DEVICE_PATH *) CreateDeviceNode (
-                                                    DebugPortNodeType,
-                                                    DebugPortNodeSubType,
-                                                    sizeof(VENDOR_DEFINED_MESSAGING_DEVICE_PATH)
-                                                    );
+  Vend = (VENDOR_DEVICE_PATH *) CreateDeviceNode (
+                                  MESSAGING_DEVICE_PATH,
+                                  MSG_VENDOR_DP,
+                                  sizeof(VENDOR_DEVICE_PATH)
+                                  );
   Vend->Guid = gBlackBoxEfiDebugPortProtocolGuid;
 
   return (EFI_DEVICE_PATH_PROTOCOL *) Vend;
