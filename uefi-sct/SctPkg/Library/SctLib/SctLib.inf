@@ -2,7 +2,7 @@
 #
 #  Copyright 2006 - 2016 Unified EFI, Inc.<BR>
 #  Copyright (c) 2013 - 2014, ARM Ltd. All rights reserved.<BR>
-#  Copyright (c) 2014 - 2016, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2014 - 2019, Intel Corporation. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -70,13 +70,6 @@
   ia32/LShiftU64.S | GCC
   ia32/MultU64x32.S | GCC
   ia32/DivU64x32.S | GCC
-
-[sources.ipf]
-  Ipf/SctLibPlat.h
-  Ipf/initplat.c
-  Ipf/salpal.c
-  Ipf/libsalpal.h
-  Math.c
 
 [sources.ebc]
   ebc/SctLibPlat.h

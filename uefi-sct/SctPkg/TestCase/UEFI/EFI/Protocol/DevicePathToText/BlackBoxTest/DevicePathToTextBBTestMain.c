@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2019, Insyde Software Corp. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -1708,9 +1709,9 @@ BuildDebugPortDeviceNode (
   IN CHAR16                             *TextDeviceNode
   )
 {
-  VENDOR_DEFINED_MESSAGING_DEVICE_PATH  *Vend;
+  VENDOR_DEVICE_PATH *Vend;
 
-  Vend = (VENDOR_DEFINED_MESSAGING_DEVICE_PATH *) CreateDeviceNode (0x3, 0x0a, sizeof (VENDOR_DEFINED_MESSAGING_DEVICE_PATH));
+  Vend = (VENDOR_DEVICE_PATH *) CreateDeviceNode (MESSAGING_DEVICE_PATH, MSG_VENDOR_DP, sizeof (VENDOR_DEVICE_PATH));
 
   Vend->Guid = gBlackBoxEfiDebugPortProtocolGuid;
 

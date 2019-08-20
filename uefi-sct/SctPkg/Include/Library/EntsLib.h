@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2013 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -69,7 +70,6 @@ Abstract:
 #include EFI_GUID_DEFINITION (Mps)
 #include EFI_GUID_DEFINITION (Acpi)
 #include EFI_GUID_DEFINITION (SmBios)
-#include EFI_GUID_DEFINITION (SalSystemTable)
 
 extern EFI_GUID             gtEfiDevicePathProtocolGuid;
 extern EFI_GUID             gtEfiLoadedImageProtocolGuid;
@@ -109,7 +109,6 @@ extern EFI_GUID             gtEfiMpsTableGuid;
 extern EFI_GUID             gtEfiAcpiTableGuid;
 extern EFI_GUID             gtEfiAcpi20TableGuid;
 extern EFI_GUID             gtEfiSMBIOSTableGuid;
-extern EFI_GUID             gtEfiSalSystemTableGuid;
 
 //
 // Public read-only data in the EFI library

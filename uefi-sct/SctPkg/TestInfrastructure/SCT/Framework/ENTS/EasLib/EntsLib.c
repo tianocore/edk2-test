@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -118,7 +119,6 @@ EFI_GUID                        gtEfiMpsTableGuid       = EFI_MPS_TABLE_GUID;
 EFI_GUID                        gtEfiAcpiTableGuid      = EFI_ACPI_TABLE_GUID;
 EFI_GUID                        gtEfiAcpi20TableGuid    = EFI_ACPI_20_TABLE_GUID;
 EFI_GUID                        gtEfiSMBIOSTableGuid    = EFI_SMBIOS_TABLE_GUID;
-EFI_GUID                        gtEfiSalSystemTableGuid = EFI_SAL_SYSTEM_TABLE_GUID;
 
 EFI_HANDLE                      mImageHandle            = NULL;
 EFI_DEVICE_PATH_PROTOCOL        *gntDevicePath          = NULL;
