@@ -210,9 +210,11 @@ SctPkg/TestCase/UEFI/IHV/Protocol/UsbIo/BlackBoxTest/IhvUsbIoTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/GraphicsOutput/BlackBoxTest/IhvGraphicsOutputBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/ExtScsiPassThru/BlackBoxTest/IhvExtScsiPassThruBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/ScsiIo/BlackBoxTest/IhvScsiIoBBTest.inf
+SctPkg/TestCase/UEFI/IHV/Protocol/HIIConfigAccess/BlackBoxTest/IhvHIIConfigAccessBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/iScsiInitiatorName/BlackBoxTest/IhviScsiInitiatorNameBBTest.inf
 
 SctPkg/TestCase/UEFI/IHV/Protocol/AbsolutePointer/BlackBoxTest/IhvAbsolutePointerBBTest.inf
+SctPkg/TestCase/UEFI/IHV/Protocol/FirmwareManagement/BlackBoxTest/IhvFirmwareManagementBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/StorageSecurityCommand/BlackBoxTest/IhvStorageSecurityCommandBBTest.inf
 
 SctPkg/TestCase/UEFI/IHV/Protocol/AdapterInfo/BlackBoxTest/IhvAdapterInfoBBTest.inf
