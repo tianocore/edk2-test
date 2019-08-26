@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -35,6 +35,13 @@ Abstract:
 #include EFI_PROTOCOL_DEFINITION (LoadFile)
 
 #include EFI_TEST_PROTOCOL_DEFINITION (TestProfileLibrary)
+#include EFI_TEST_PROTOCOL_DEFINITION (TestRecoveryLibrary)
+
+typedef struct _RESET_DATA {
+  UINTN           Step;
+  UINTN           TplIndex;
+  UINT32          RepeatTimes;
+} RESET_DATA;
 
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)
 

@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -30,7 +30,8 @@ Abstract:
 #define TEST_VENDOR1_GUID                         \
   { 0xF6FAB04F, 0xACAF, 0x4af3, { 0xB9, 0xFA, 0xDC, 0xF9, 0x7F, 0xB4, 0x42, 0x6F } }
 
-#define MAX_BUFFER_SIZE  10
+#define STATUS_BUFFER_SIZE   8
+#define RECOVER_BUFFER_SIZE  1024
 
 EFI_GUID gTestVendor1Guid = TEST_VENDOR1_GUID;
 
@@ -778,19 +779,23 @@ BBTestExitBootServicesConsistencyTest (
   )
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
+  EFI_TEST_RECOVERY_LIBRARY_PROTOCOL   *RecoveryLib;
   EFI_STATUS                           Status;
   EFI_TEST_ASSERTION                   AssertionType;
   UINTN                                MapKey;
-
+  UINTN                                Size;
   UINTN                                Numbers;
   UINTN                                DataSize;
-  UINT8                                Data[MAX_BUFFER_SIZE];
+  RESET_DATA                           *ResetData;
+  UINT8                                Data[STATUS_BUFFER_SIZE];
+  UINT8                                Buffer[RECOVER_BUFFER_SIZE];
   EFI_STATUS                           ReturnStatus;
 
   //
   // Init
   //
   StandardLib = NULL;
+  RecoveryLib = NULL;
 
   //
   // Get the Standard Library Interface
@@ -799,6 +804,14 @@ BBTestExitBootServicesConsistencyTest (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
                    (VOID **) &StandardLib);
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  Status = gtBS->HandleProtocol (
+                   SupportHandle,
+                   &gEfiTestRecoveryLibraryGuid,
+                   (VOID **) &RecoveryLib);
   if (EFI_ERROR(Status)) {
     return Status;
   }
@@ -819,24 +832,101 @@ BBTestExitBootServicesConsistencyTest (
     return Status;
   }
 
-  DataSize = MAX_BUFFER_SIZE;
-  Status = gtRT->GetVariable (
-                 L"ExitBootServicesTestVariable",             // VariableName
-                 &gTestVendor1Guid,                           // VendorGuid
-                 NULL,                                        // Attributes
-                 &DataSize,                                   // DataSize
-                 &ReturnStatus                                // Data
-                 );
+  ResetData = (RESET_DATA *)Buffer;
 
-  if (Status == EFI_SUCCESS) {
-    goto CheckResult;
+  //
+  // Read reset record
+  //
+  Status = RecoveryLib->ReadResetRecord (
+                          RecoveryLib,
+                          &Size,
+                          Buffer
+                          );
+
+  //
+  // The workflow to check the recovery data
+  //
+  if (EFI_SUCCESS == Status) {
+    //
+    // To check the recovery data size
+    //
+    if (Size == sizeof(RESET_DATA)){
+      //
+      // To Check the recovery data
+      //
+      if (ResetData->Step == 1) {
+        //
+        // Step 1: find the valid recovery data, to retrive presaved status from variable
+        //
+        DataSize = STATUS_BUFFER_SIZE;
+        Status   = gtRT->GetVariable (
+                         L"ExitBootServicesTestVariable",    // VariableName
+                         &gTestVendor1Guid,                  // VendorGuid
+                         NULL,                               // Attributes
+                         &DataSize,                          // DataSize
+                         &ReturnStatus                       // Data
+                         );
+
+        if (EFI_ERROR(Status)) {
+          StandardLib->RecordAssertion (
+                       StandardLib,
+                       EFI_TEST_ASSERTION_FAILED,
+                       gTestGenericFailureGuid,
+                       L"GetVariable - Can't get the test variable - ExitBootServicesTestVariable",
+                       L"%a:%d:Status - %r",
+                       __FILE__,
+                       (UINTN)__LINE__,
+                       Status
+                       );
+          return Status;
+        }
+        goto CheckResult;
+      } else {
+        //
+        // It is invalid recovery data
+        //
+        return EFI_LOAD_ERROR;
+      }
+    } else {
+      //
+      // The size of recovery data is invalid
+      //
+      return EFI_LOAD_ERROR;
+    }
   }
+
+  //
+  // Step 0: No recovery data is found.
+  //
 
   //
   // Print out some information to avoid the user thought it is an error
   //
-  SctPrint (L"System will cold reset after 2 second. please run this test again...");
+  SctPrint (L"System will cold reset after 2 second and test will be resumed after reboot.");
   gtBS->Stall (2000000);
+
+
+  ResetData->Step = 1;
+  ResetData->TplIndex = 0;
+  Status = RecoveryLib->WriteResetRecord (
+                            RecoveryLib,
+                            sizeof (RESET_DATA),
+                            (UINT8*)ResetData
+                            );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"TestRecoveryLib - WriteResetRecord",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    return Status;
+  }
+
 
   //
   // Checkpoint 1:
@@ -885,7 +975,7 @@ BBTestExitBootServicesConsistencyTest (
   //reset system
   gtRT->ResetSystem (EfiResetCold, EFI_SUCCESS, 0, NULL);
 
-  // get var to get the status
+
 CheckResult:
 
   if (ReturnStatus == EFI_INVALID_PARAMETER) {
