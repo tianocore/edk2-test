@@ -451,7 +451,7 @@ BBTestStrUprFunctionAutoTest (
   CHAR16                               *TestData[] ={
                                              L"\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5Ax61\x62\x7D\x7E",
                                              L"\x30\x50[abcdzyxw!)(@#*]\x40\x20\x30\x50\ab\x40\x20",
-                                             L"\x30\x50[A-D]\x40\x20\x30\x50f\x40\x20",
+                                             L"\x30\x50[A-D]\x40\x20\x30\x50\x40\x20",
                                              L""
                                         };
 
