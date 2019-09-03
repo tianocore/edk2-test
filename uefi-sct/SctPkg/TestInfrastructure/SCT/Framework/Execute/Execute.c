@@ -608,10 +608,10 @@ Routine Description:
   //
   while (TRUE) {
     //
-    // Calculate the number of remained cases
+    // Calculate the number of remaining test cases
     //
     GetTestCaseRemainNum(&Remain);
-    SctPrint(L"  Remained test cases: %d\n", Remain);
+    SctPrint(L"  Remaining test cases: %d\n", Remain);
 
     //
     // Send assertion to remotion computer in passive mode to inform case begin.
