@@ -885,7 +885,7 @@ BBTestStationAddressConformanceTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supproted, Status - %r\n",
+                   L"StationAddress isn't supported, Status - %r\n",
                    StatusBuf[0]
                    );
   } else {
@@ -911,7 +911,7 @@ BBTestStationAddressConformanceTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supproted, Status - %r\n",
+                   L"StationAddress isn't supported, Status - %r\n",
                    StatusBuf[1]
                    );
   } else {
@@ -1369,7 +1369,7 @@ BBTestNVDataConformanceTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    StatusBuf[0]
                    );
   } else {
@@ -1394,7 +1394,7 @@ BBTestNVDataConformanceTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    StatusBuf[1]
                    );
   } else {
@@ -1419,7 +1419,7 @@ BBTestNVDataConformanceTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    StatusBuf[2]
                    );
   } else {
@@ -1444,7 +1444,7 @@ BBTestNVDataConformanceTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    StatusBuf[3]
                    );
   } else {

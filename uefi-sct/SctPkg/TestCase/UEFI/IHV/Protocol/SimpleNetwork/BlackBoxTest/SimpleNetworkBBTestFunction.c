@@ -1016,7 +1016,7 @@ BBTestStationAddressFunctionTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supproted, Status - %r\n",
+                   L"StationAddress isn't supported, Status - %r\n",
                    StatusBuf[0]
                    );
   } else {
@@ -1043,7 +1043,7 @@ BBTestStationAddressFunctionTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supproted, Status - %r\n",
+                   L"StationAddress isn't supported, Status - %r\n",
                    StatusBuf[1]
                    );
   } else {
@@ -1491,7 +1491,7 @@ BBTestNVDataFunctionTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    Status
                    );
   } else {
@@ -1522,7 +1522,7 @@ BBTestNVDataFunctionTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    Status
                    );
   } else {
@@ -1551,7 +1551,7 @@ BBTestNVDataFunctionTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    Status
                    );
   } else {
@@ -1603,7 +1603,7 @@ BBTestNVDataFunctionTest (
     StandardLib->RecordMessage(
                    StandardLib,
                    EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supproted, Status - %r\n",
+                   L"NvData isn't supported, Status - %r\n",
                    Status
                    );
   } else {

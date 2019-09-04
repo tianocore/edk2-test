@@ -999,7 +999,7 @@ GetAndSetBarAttributes_Stress (
                    StandardLib,
                    AssertionType,
                    gPciIoBBTestStressAssertionGuid021,
-                   L"EFI_PCI_IO_PROTOCOL.GetBarAttributes - Bar supported attributes must in the range of Device supproted attributes",
+                   L"EFI_PCI_IO_PROTOCOL.GetBarAttributes - Bar supported attributes must in the range of Device supported attributes",
                    L"%a:%d:Bar Supported - %lXh, Dev Supported - %lXh",
                    __FILE__,
                    (UINTN)__LINE__,
