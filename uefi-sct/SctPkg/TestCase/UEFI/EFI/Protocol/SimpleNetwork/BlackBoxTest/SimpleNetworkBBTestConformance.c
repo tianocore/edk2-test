@@ -964,8 +964,7 @@ BBTestStatisticsConformanceTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
-  EFI_STATUS                            StatusBuf[3];  
-  EFI_TEST_ASSERTION                    AssertionType[3];
+  EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
   EFI_NETWORK_STATISTICS                StatisticsTable;
@@ -1012,31 +1011,68 @@ BBTestStatisticsConformanceTest (
   StatisticsSize = sizeof (EFI_NETWORK_STATISTICS);
   //
   // Assertion Point 5.8.2.1
-  // Call Statistics() function if network interface not start.
+  // Call Statistics() function while network interface is not started.
   //
-  StatusBuf[0] = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
-  if ((StatusBuf[0] == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
-    AssertionType[0] = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
+  if (Status == EFI_UNSUPPORTED) {
+    StandardLib->RecordMessage(
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_QUIET,
+                   L"Statistics isn't supported, Status - %r\n",
+                   Status
+                   );
   } else {
-    AssertionType[0] = EFI_TEST_ASSERTION_FAILED;
+    if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid014,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() while network interface not started.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
   }
 
   //
   // Assertion Point 5.8.2.2
-  // Call Statistics() function if network interface not initialized.
+  // Call Statistics() function while network interface is not initialized.
   //
   Status = SnpInterface->Start (SnpInterface);
   if (EFI_ERROR(Status)) {
     return Status;
   }
 
-  StatusBuf[1] = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
-  if (StatusBuf[1] == EFI_DEVICE_ERROR) {
-    AssertionType[1] = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
+  if (Status == EFI_UNSUPPORTED) {
+    StandardLib->RecordMessage(
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_QUIET,
+                   L"Statistics isn't supported, Status - %r\n",
+                   Status
+                   );
   } else {
-    AssertionType[1] = EFI_TEST_ASSERTION_FAILED;
+    if (Status == EFI_DEVICE_ERROR) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid015,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() while network interface is not initialized.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
   }
- 
 
   //
   // Assertion Point 5.8.2.3
@@ -1053,46 +1089,31 @@ BBTestStatisticsConformanceTest (
   //
   StatisticsSize = 0;
 
-  StatusBuf[2] = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
-  if (StatusBuf[2] == EFI_BUFFER_TOO_SMALL || Status == EFI_UNSUPPORTED) {
-    AssertionType[2] = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
+  if (Status == EFI_UNSUPPORTED) {
+    StandardLib->RecordMessage(
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_QUIET,
+                   L"Statistics isn't supported, Status - %r\n",
+                   Status
+                   );
   } else {
-    AssertionType[2] = EFI_TEST_ASSERTION_FAILED;
+    if (Status == EFI_BUFFER_TOO_SMALL) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid017,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() with small buffer.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
   }
-
-  
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[0],
-                 gSimpleNetworkBBTestConformanceAssertionGuid014,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() when network interface not start.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[0]
-                 );
-  
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[1],
-                 gSimpleNetworkBBTestConformanceAssertionGuid015,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() when network interface not initialized.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[1]
-                 );
-
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType[2],
-                 gSimpleNetworkBBTestConformanceAssertionGuid017,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() with small buffer.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 StatusBuf[2]
-                 );
 
   //
   // Restore SNP State
