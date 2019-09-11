@@ -918,12 +918,11 @@ BBTestCreateEventEx_Func_Sub3 (
   UINTN               Buffer[MAX_TEST_EVENT_NUM + MAX_TEST_EVENT_NUM*2];
 
   //
-  // Initialize Buffer as SIGNAL_CONTEXT
+  // Initialize the event index. The event invocation records will be
+  // initialized later.
   //
   for (Index = 0; Index < MAX_TEST_EVENT_NUM; Index ++) {
     Buffer[Index] = Index;
-    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(SIGNAL_CONTEXT);
-    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(SIGNAL_CONTEXT);
   }
 
   //
@@ -976,7 +975,17 @@ BBTestCreateEventEx_Func_Sub3 (
     gtBS->CloseEvent (Event[1]);
     return Status;
   }
-  
+
+  //
+  // CreateEventEx() may lead to a change in the memory map and trigger
+  // EFI_EVENT_GROUP_MEMORY_MAP_CHANGE itself. So initialize the event
+  // invocation records after creating the events.
+  //
+  for (Index = 0; Index < MAX_TEST_EVENT_NUM; Index ++) {
+    Buffer[Index + MAX_TEST_EVENT_NUM + Index] = (UINTN)(SIGNAL_CONTEXT);
+    Buffer[Index + MAX_TEST_EVENT_NUM + 1 + Index] = (UINTN)(SIGNAL_CONTEXT);
+  }
+
   //
   // Call AllocatePage to change the memorymap
   //
@@ -997,14 +1006,6 @@ BBTestCreateEventEx_Func_Sub3 (
 	}
 	
   gtBS->RestoreTPL (OldTpl);
-
-  //
-  // Close all the events created and Free the pages
-  //
-  gtBS->CloseEvent (Event[0]);
-  gtBS->CloseEvent (Event[1]);
-  gtBS->CloseEvent (Event[2]);
-  gtBS->FreePages (Memory, 2);
 
   //
   // Compare the notify order
@@ -1029,6 +1030,14 @@ BBTestCreateEventEx_Func_Sub3 (
                  Buffer[MAX_TEST_EVENT_NUM + 3],
                  Buffer[MAX_TEST_EVENT_NUM + 5]
                  );
+
+  //
+  // Close all the events created and Free the pages
+  //
+  gtBS->CloseEvent (Event[0]);
+  gtBS->CloseEvent (Event[1]);
+  gtBS->CloseEvent (Event[2]);
+  gtBS->FreePages (Memory, 2);
 
   //
   // Done
