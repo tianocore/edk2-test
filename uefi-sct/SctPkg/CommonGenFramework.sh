@@ -4,6 +4,7 @@
 #  Copyright (c) 2011 - 2019, ARM Ltd. All rights reserved.<BR>
 #  Copyright (c) 2014 - 2018, Intel Corporation. All rights reserved.<CR>
 #  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
+#  Copyright (c) 2019,Microchip Technology Inc.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -312,7 +313,7 @@ then
   cp $ProcessorType/IhvUsb2HcTest.efi                        $Framework/Test/ > NUL
   cp $ProcessorType/IhviScsiInitiatorNameBBTest.efi          $Framework/Test/ > NUL
   cp $ProcessorType/IhvStorageSecurityCommandBBTest.efi      $Framework/Test/ > NUL
-
+..cp $ProcessorType/IhvFirmwareManagementBBTest.efi          $Framework/Test/ > NUL
   # *********************************************
   # Copy the UEFI 2.1 Test Cases for IHV
   # *********************************************

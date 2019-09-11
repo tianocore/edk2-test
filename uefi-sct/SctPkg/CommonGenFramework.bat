@@ -2,6 +2,7 @@
 @REM  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
 @REM  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<CR>
 @REM  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
+@REM  Copyright (c) 2019,Microchip Technology Inc.<BR>
 @REM
 @REM  This program and the accompanying materials
 @REM  are licensed and made available under the terms and conditions of the BSD License
@@ -279,7 +280,7 @@ rem  copy %ProcessorType%\IhvUsbHcTest.efi                         %Framework%\T
   copy %ProcessorType%\IhvUsb2HcTest.efi                        %Framework%\Test\ > NUL
   copy %ProcessorType%\IhviScsiInitiatorNameBBTest.efi          %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvStorageSecurityCommandBBTest.efi      %Framework%\Test\ > NUL
-  
+  copy %ProcessorType%\IhvFirmwareManagementBBTest.efi          %Framework%\Test\ > NUL
   rem *********************************************
   rem Copy the UEFI 2.1 Test Cases for IHV
   rem *********************************************
