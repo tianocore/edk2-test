@@ -2,6 +2,7 @@
 #
 #  Copyright 2006 - 2016 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2019,Microchip Technology Inc.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -213,6 +214,7 @@ SctPkg/TestCase/UEFI/IHV/Protocol/ScsiIo/BlackBoxTest/IhvScsiIoBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/iScsiInitiatorName/BlackBoxTest/IhviScsiInitiatorNameBBTest.inf
 
 SctPkg/TestCase/UEFI/IHV/Protocol/AbsolutePointer/BlackBoxTest/IhvAbsolutePointerBBTest.inf
+SctPkg/TestCase/UEFI/IHV/Protocol/FirmwareManagement/BlackBoxTest/IhvFirmwareManagementBBTest.inf
 SctPkg/TestCase/UEFI/IHV/Protocol/StorageSecurityCommand/BlackBoxTest/IhvStorageSecurityCommandBBTest.inf
 
 SctPkg/TestCase/UEFI/IHV/Protocol/AdapterInfo/BlackBoxTest/IhvAdapterInfoBBTest.inf
