@@ -483,8 +483,10 @@ BBTestSetStateConformanceTestCheckpoint1 (
                         );
     }
   }
-  
-  if ( EFI_INVALID_PARAMETER != Status) {
+
+  if (Status == EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else if (Status != EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
