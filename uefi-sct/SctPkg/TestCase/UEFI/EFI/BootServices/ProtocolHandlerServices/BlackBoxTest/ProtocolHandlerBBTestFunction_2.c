@@ -13108,7 +13108,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint7 (
     //
     // Step 1: check return status
     //
-    if (EFI_ACCESS_DENIED == Status) {
+    if (EFI_INVALID_PARAMETER == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -13453,7 +13453,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint8 (
     //
     // Step 1: check return status
     //
-    if (EFI_ACCESS_DENIED == Status) {
+    if (EFI_INVALID_PARAMETER == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -13807,7 +13807,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint9 (
     //
     // Step 1: check return status
     //
-    if (EFI_ACCESS_DENIED == Status) {
+    if (EFI_INVALID_PARAMETER == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
