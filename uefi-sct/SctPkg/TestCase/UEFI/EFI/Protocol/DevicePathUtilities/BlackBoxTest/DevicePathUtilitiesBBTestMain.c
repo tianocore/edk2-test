@@ -72,8 +72,8 @@ EFI_BB_TEST_ENTRY_FIELD     gBBTestEntryField[] = {
   },
   {
     DEVICE_PATH_UTILITIES_PROTOCOL_DUPLICATEDEVICEPATH_FUNCTION_GUID,
-    L"DupilicateDevicePath_Functionality",
-    L"Invoke the DupilicateDevicePath and verify service correctness within test case",
+    L"DuplicateDevicePath_Functionality",
+    L"Invoke the DuplicateDevicePath and verify service correctness within test case",
     EFI_TEST_LEVEL_DEFAULT,
     gSupportProtocolGuid1,
     EFI_TEST_CASE_AUTO,

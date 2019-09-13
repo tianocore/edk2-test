@@ -369,7 +369,7 @@ DevicePathUtilitiesDuplicateDevicePathFunctionTest (
                 StandardLib,
                 AssertionType,
                 gDevicePathUtilitiesBBTestFunctionAssertionGuid057,
-                L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - DupilicateDevicePath must correctly set the return EFI_DEVICE_PATH structure the same as the original one",
+                L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - DuplicateDevicePath must correctly set the return EFI_DEVICE_PATH structure the same as the original one",
                 L"%a:%d:Status - %r",
                 __FILE__,
                 (UINTN)__LINE__,
