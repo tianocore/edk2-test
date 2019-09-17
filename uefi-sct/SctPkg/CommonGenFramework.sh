@@ -314,6 +314,8 @@ then
   cp $ProcessorType/IhviScsiInitiatorNameBBTest.efi          $Framework/Test/ > NUL
   cp $ProcessorType/IhvStorageSecurityCommandBBTest.efi      $Framework/Test/ > NUL
 ..cp $ProcessorType/IhvFirmwareManagementBBTest.efi          $Framework/Test/ > NUL
+  cp $ProcessorType/IhvHIIConfigAccessBBTest.efi             $Framework/Test/ > NUL
+
   # *********************************************
   # Copy the UEFI 2.1 Test Cases for IHV
   # *********************************************

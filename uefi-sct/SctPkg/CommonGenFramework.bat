@@ -281,6 +281,8 @@ rem  copy %ProcessorType%\IhvUsbHcTest.efi                         %Framework%\T
   copy %ProcessorType%\IhviScsiInitiatorNameBBTest.efi          %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvStorageSecurityCommandBBTest.efi      %Framework%\Test\ > NUL
   copy %ProcessorType%\IhvFirmwareManagementBBTest.efi          %Framework%\Test\ > NUL
+  copy %ProcessorType%\IhvHIIConfigAccessBBTest.efi             %Framework%\Test\ > NUL
+
   rem *********************************************
   rem Copy the UEFI 2.1 Test Cases for IHV
   rem *********************************************
