@@ -626,22 +626,31 @@ BBTestReceiveFilterConformanceTest (
   // Call ReceiveFilters() function if network interface not start.
   //
   Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
-  if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  if (Status == EFI_UNSUPPORTED) {
+    StandardLib->RecordMessage(
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_QUIET,
+                   L"ReceiveFilters isn't supported, Status - %r\n",
+                   Status
+                   );
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
+    if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gSimpleNetworkBBTestConformanceAssertionGuid006,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not start.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid006,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not start.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  }
 
   //
   // Assertion Point 5.6.2.2
@@ -653,22 +662,31 @@ BBTestReceiveFilterConformanceTest (
   }
 
   Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
-  if (Status == EFI_DEVICE_ERROR) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  if (Status == EFI_UNSUPPORTED) {
+    StandardLib->RecordMessage(
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_QUIET,
+                   L"ReceiveFilters isn't supported, Status - %r\n",
+                   Status
+                   );
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
+    if (Status == EFI_DEVICE_ERROR) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gSimpleNetworkBBTestConformanceAssertionGuid007,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not initialized.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid007,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not initialized.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  }
 
   //
   // Assertion Point 5.6.2.3
@@ -683,22 +701,31 @@ BBTestReceiveFilterConformanceTest (
   //  Call ReceiveFilters with invalide Enable
   //
   Status = SnpInterface->ReceiveFilters (SnpInterface, ~(SnpInterface->Mode->ReceiveFilterMask), 0, FALSE, 0, NULL);
-  if (Status == EFI_INVALID_PARAMETER) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  if (Status == EFI_UNSUPPORTED) {
+    StandardLib->RecordMessage(
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_QUIET,
+                   L"ReceiveFilters isn't supported, Status - %r\n",
+                   Status
+                   );
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gSimpleNetworkBBTestConformanceAssertionGuid008,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid Enable.",
-                 L"%a:%d:Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );  
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleNetworkBBTestConformanceAssertionGuid008,
+                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid Enable.",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+  }
 
   //
   //  Call ReceiveFilters with invalide MCastFilterCnt
@@ -713,59 +740,85 @@ BBTestReceiveFilterConformanceTest (
     MAC.Addr[5] = 0x02;
 
     Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, SnpInterface->Mode->MaxMCastFilterCount + 1, &MAC);
-    if (Status == EFI_INVALID_PARAMETER) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    if (Status == EFI_UNSUPPORTED) {
+      StandardLib->RecordMessage(
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_QUIET,
+                     L"ReceiveFilters isn't supported, Status - %r\n",
+                     Status
+                     );
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
+      if (Status == EFI_INVALID_PARAMETER) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
 
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid009,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is greater than Snp->Mode->MaxMCastFilterCount.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleNetworkBBTestConformanceAssertionGuid009,
+                     L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is greater than Snp->Mode->MaxMCastFilterCount.",
+                     L"%a:%d:Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
+    }
 
     Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, 0, &MAC);
-    if (Status == EFI_INVALID_PARAMETER) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    if (Status == EFI_UNSUPPORTED) {
+      StandardLib->RecordMessage(
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_QUIET,
+                     L"ReceiveFilters isn't supported, Status - %r\n",
+                     Status
+                     );
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
+      if (Status == EFI_INVALID_PARAMETER) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
 
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid043,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is 0.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     AssertionType,
+                     gSimpleNetworkBBTestConformanceAssertionGuid043,
+                     L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is 0.",
+                     L"%a:%d:Status - %r",
+                     __FILE__,
+                     (UINTN)__LINE__,
+                     Status
+                     );
+    }
 
     Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, 1, NULL);
-    if (Status == EFI_INVALID_PARAMETER) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    if (Status == EFI_UNSUPPORTED) {
+      StandardLib->RecordMessage(
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_QUIET,
+                     L"ReceiveFilters isn't supported, Status - %r\n",
+                     Status
+                     );
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (Status == EFI_INVALID_PARAMETER) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
+
+      StandardLib->RecordAssertion (
+                       StandardLib,
+                       AssertionType,
+                       gSimpleNetworkBBTestConformanceAssertionGuid010,
+                       L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with MCastFilterCnt not match MCastFilter.",
+                       L"%a:%d:Status - %r",
+                       __FILE__,
+                       (UINTN)__LINE__,
+                       Status
+                       );
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid010,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with MCastFilterCnt not match MCastFilter.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
-
   }
 
   //
