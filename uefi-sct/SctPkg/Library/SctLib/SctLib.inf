@@ -108,7 +108,7 @@
   gEfiSimpleNetworkProtocolGuid
   gEfiSimpleTextInProtocolGuid
   gEfiSimpleTextOutProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
+  gEfiUnicodeCollation2ProtocolGuid
   gEfiDriverBindingProtocolGuid
   gEfiDriverConfigurationProtocolGuid
   gEfiDriverDiagnosticsProtocolGuid

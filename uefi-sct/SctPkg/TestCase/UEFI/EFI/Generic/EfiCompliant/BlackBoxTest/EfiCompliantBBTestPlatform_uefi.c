@@ -1180,7 +1180,7 @@ CheckBootFromDiskProtocols (
   // Check the UNICODE_COLLATION protocol
   //
   Status = gtBS->LocateProtocol (
-                   &gEfiUnicodeCollationProtocolGuid,
+                   &gEfiUnicodeCollation2ProtocolGuid,
                    NULL,
                    (VOID **) &Interface
                    );

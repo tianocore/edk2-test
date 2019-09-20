@@ -117,7 +117,7 @@ struct {
   { &gEfiFileInfoGuid,                   L"GenFileInfo" },
   { &gEfiFileSystemInfoGuid,            L"FileSysInfo" },
 
-  { &gEfiUnicodeCollationProtocolGuid,  L"UnicodeCollation" },
+  { &gEfiUnicodeCollation2ProtocolGuid, L"UnicodeCollation2" },
   { &gEfiSerialIoProtocolGuid,          L"serialio" },
   { &gEfiSimpleNetworkProtocolGuid,     L"net" },
   { &gEfiNetworkInterfaceIdentifierProtocolGuid,    L"nii" },

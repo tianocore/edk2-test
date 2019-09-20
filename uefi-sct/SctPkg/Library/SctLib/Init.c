@@ -81,7 +81,7 @@ InitializeUnicodeSupport (
   // If we don't know it, lookup the current language code
   //
 
-  SctLocateHandle (ByProtocol, &gEfiUnicodeCollationProtocolGuid, NULL, &NoHandles, &Handles);
+  SctLocateHandle (ByProtocol, &gEfiUnicodeCollation2ProtocolGuid, NULL, &NoHandles, &Handles);
   if (!LangCode || !NoHandles) {
     goto Done;
   }
@@ -91,7 +91,7 @@ InitializeUnicodeSupport (
   //
 
   for (Index=0; Index < NoHandles; Index++) {
-    Status = tBS->HandleProtocol (Handles[Index], &gEfiUnicodeCollationProtocolGuid, (VOID**)&Ui);
+    Status = tBS->HandleProtocol (Handles[Index], &gEfiUnicodeCollation2ProtocolGuid, (VOID**)&Ui);
     if (EFI_ERROR(Status)) {
       continue;
     }
@@ -180,7 +180,7 @@ SctInitializeLib (
     //
     // LangCode = LibGetVariable (VarLanguage, &EfiGlobalVariable);
     // InitializeUnicodeSupport (LangCode);
-    InitializeUnicodeSupport ("eng");
+    InitializeUnicodeSupport ("en");
     if (LangCode) {
       SctFreePool (LangCode);
     }
