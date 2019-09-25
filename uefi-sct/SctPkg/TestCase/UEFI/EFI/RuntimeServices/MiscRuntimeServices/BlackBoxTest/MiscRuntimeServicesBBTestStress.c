@@ -374,7 +374,9 @@ BBTestResetSystemManualStressTest (
       //
       // Print out some information to avoid the user thought it is an error
       //
-      SctPrint (L"System will shut down (or cold reset) after 1 second...");
+      SctPrint (L"System may shut down (or cold reset) after 1 second...");
+      SctPrint (L"Note: On some platforms, you may have to manually turn\
+    		    on the System again after few seconds...");
       gtBS->Stall (1000000);
 
       OldTpl = gtBS->RaiseTPL (TplArray[Index]);
