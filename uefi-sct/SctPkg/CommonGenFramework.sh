@@ -313,7 +313,7 @@ then
   cp $ProcessorType/IhvUsb2HcTest.efi                        $Framework/Test/ > NUL
   cp $ProcessorType/IhviScsiInitiatorNameBBTest.efi          $Framework/Test/ > NUL
   cp $ProcessorType/IhvStorageSecurityCommandBBTest.efi      $Framework/Test/ > NUL
-..cp $ProcessorType/IhvFirmwareManagementBBTest.efi          $Framework/Test/ > NUL
+  cp $ProcessorType/IhvFirmwareManagementBBTest.efi          $Framework/Test/ > NUL
   cp $ProcessorType/IhvHIIConfigAccessBBTest.efi             $Framework/Test/ > NUL
 
   # *********************************************
