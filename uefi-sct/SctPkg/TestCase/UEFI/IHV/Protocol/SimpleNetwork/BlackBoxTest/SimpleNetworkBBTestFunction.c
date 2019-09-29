@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -1888,38 +1888,40 @@ BBTestGetStatusFunctionTest (
   Status = SnpInterface->GetStatus (SnpInterface, &InterruptStatus, &TxBuf);
   Status1 = SnpInterface->GetStatus (SnpInterface, &InterruptStatus, &TxBuf);
 
-  if (SnpInterface->Mode->MediaPresent == FALSE) {
-    if ((Status1 == EFI_SUCCESS) && (Status == EFI_SUCCESS) && (InterruptStatus == 0)) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
-    } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
-  } else {
-    if ((Status1 == EFI_SUCCESS) && (Status == EFI_SUCCESS)) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
-      if (InterruptStatus &
-         ~( EFI_SIMPLE_NETWORK_RECEIVE_INTERRUPT |
-            EFI_SIMPLE_NETWORK_TRANSMIT_INTERRUPT |
-            EFI_SIMPLE_NETWORK_COMMAND_INTERRUPT |
-            EFI_SIMPLE_NETWORK_SOFTWARE_INTERRUPT)) {
-        AssertionType = EFI_TEST_ASSERTION_FAILED;
-      }
-    } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
+  if (SnpInterface->Mode-> MediaPresentSupported == TRUE) {
+     if (SnpInterface->Mode->MediaPresent == FALSE) {
+       if ((Status1 == EFI_SUCCESS) && (Status == EFI_SUCCESS) && (InterruptStatus == 0)) {
+         AssertionType = EFI_TEST_ASSERTION_PASSED;
+       } else {
+         AssertionType = EFI_TEST_ASSERTION_FAILED;
+       }
+     } else {
+       if ((Status1 == EFI_SUCCESS) && (Status == EFI_SUCCESS)) {
+         AssertionType = EFI_TEST_ASSERTION_PASSED;
+         if (InterruptStatus &
+            ~( EFI_SIMPLE_NETWORK_RECEIVE_INTERRUPT |
+               EFI_SIMPLE_NETWORK_TRANSMIT_INTERRUPT |
+               EFI_SIMPLE_NETWORK_COMMAND_INTERRUPT |
+               EFI_SIMPLE_NETWORK_SOFTWARE_INTERRUPT)) {
+           AssertionType = EFI_TEST_ASSERTION_FAILED;
+         }
+       } else {
+         AssertionType = EFI_TEST_ASSERTION_FAILED;
+       }
+     }
+     StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gSimpleNetworkBBTestFunctionAssertionGuid022,
+                    L"EFI_SIMPLE_NETWORK_PROTOCOL.GetStatus - Invoke GetStatus() and verify interface correctness within test case",
+                    L"%a:%d:Status - %r, Status1 - %r, InterruptStatus - %d",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    Status,
+                    Status1,
+                    InterruptStatus
+                    );
   }
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gSimpleNetworkBBTestFunctionAssertionGuid022,
-                 L"EFI_SIMPLE_NETWORK_PROTOCOL.GetStatus - Invoke GetStatus() and verify interface correctness within test case",
-                 L"%a:%d:Status - %r, Status1 - %r, InterruptStatus - %d",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status,
-                 Status1,
-                 InterruptStatus
-                 );
 
   //
   // Restore SNP State
