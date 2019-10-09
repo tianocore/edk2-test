@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -28,6 +28,43 @@ Abstract:
 #include "SctLib.h"
 #include "UnicodeCollation2BBTestMain.h"
 
+STATIC CONST STRICOLL_TEST_DATA_FIELD             mStriCollTestData[] ={
+ {
+   L"",
+   L"",
+   STRING_COMPARE_EQUAL
+ },
+ {
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5Ax61\x62\x7D\x7E",
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7Ax61\x62\x7D\x7E",
+   STRING_COMPARE_EQUAL
+ },
+ {
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7Ax61\x62\x7D\x7E",
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5Ax61\x62\x7D\x7E",
+   STRING_COMPARE_EQUAL
+ },
+ {
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7E",
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7D",
+   STRING_COMPARE_MORE
+ },
+ {
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7E",
+   L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7F",
+   STRING_COMPARE_LESS
+ },
+ {
+   L"\x01",
+   L"",
+   STRING_COMPARE_MORE
+ },
+ {
+   L"",
+   L"\x01\x02",
+   STRING_COMPARE_LESS
+ },
+};
 
 /**
  *  Entrypoint for EFI_UNICODE_COLLATOIN2_PROTOCOL.StriColl() Function Test.
@@ -59,45 +96,6 @@ BBTestStriCollFunctionAutoTest (
   //
   // Test Data
   //
-  STRICOLL_TEST_DATA_FIELD             TestData[] ={
-     {
-       L"",
-       L"",
-       STRING_COMPARE_EQUAL
-     },
-     {
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5Ax61\x62\x7D\x7E",
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7Ax61\x62\x7D\x7E",
-       STRING_COMPARE_EQUAL
-     },
-     {
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7Ax61\x62\x7D\x7E",
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5Ax61\x62\x7D\x7E",
-       STRING_COMPARE_EQUAL
-     },
-     {
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7E",
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7D",
-       STRING_COMPARE_MORE
-     },
-     {
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7E",
-       L"\x01\x02\x11\x12\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x7D\x7F",
-       STRING_COMPARE_LESS
-     },
-     {
-       L"\x01",
-       L"",
-       STRING_COMPARE_MORE
-     },
-     {
-       L"",
-       L"\x01\x02",
-       STRING_COMPARE_LESS
-     },
-  };
-
-
 
   //
   // Get the Standard Library Interface
@@ -123,19 +121,19 @@ BBTestStriCollFunctionAutoTest (
   }
 
   UnicodeCollation = (EFI_UNICODE_COLLATION2_PROTOCOL *)ClientInterface;
-  for (Index = 0; Index < sizeof (TestData) / sizeof (STRICOLL_TEST_DATA_FIELD); Index++) {
+  for (Index = 0; Index < sizeof (mStriCollTestData) / sizeof (STRICOLL_TEST_DATA_FIELD); Index++) {
     //
     // For each test data, test the StriColl functionality.
     //
     Result = UnicodeCollation->StriColl (
                                  UnicodeCollation,
-                                 TestData[Index].S1,
-                                 TestData[Index].S2
+                                 mStriCollTestData[Index].S1,
+                                 mStriCollTestData[Index].S2
                                  );
 
-    if ((Result < 0) && (TestData[Index].Result < 0) ||
-            (Result == 0) && (TestData[Index].Result == 0) ||
-            (Result > 0) && (TestData[Index].Result > 0)) {
+    if (((Result < 0) && (mStriCollTestData[Index].Result < 0)) ||
+    ((Result == 0) && (mStriCollTestData[Index].Result == 0)) ||
+    ((Result > 0) && (mStriCollTestData[Index].Result > 0))) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -149,8 +147,8 @@ BBTestStriCollFunctionAutoTest (
                    L"%a:%d: S1='%s', S2='%s', Result=%d",
                    __FILE__,
                    (UINTN)__LINE__,
-                   TestData[Index].S1,
-                   TestData[Index].S2,
+                   mStriCollTestData[Index].S1,
+                   mStriCollTestData[Index].S2,
                    Result
                    );
   };
@@ -158,6 +156,59 @@ BBTestStriCollFunctionAutoTest (
   return EFI_SUCCESS;
 }
 
+
+//
+// Test Data
+//
+STATIC CONST METAIMATCH_TEST_DATA_FIELD           mMetaiMatchTestData[] ={
+   {L"", L"\x30\x50zz\x40\x20", FALSE},
+   {L"\x30\x50*\x40\x20", L"", FALSE},
+   {L"", L"", TRUE},
+   {L"\x30\x50*\x40\x20", L"\x30\x50zz\x40\x20", TRUE},
+   {L"\x30\x50*\x40\x20", L"\x30\x50\x30\x20", FALSE},
+
+   {L"\x30\x50?\x40\x20", L"\x30\x50H\x40\x20", TRUE},
+   {L"\x30\x50?\x40\x20", L"\x30\x50\x40\x20", FALSE},
+
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50Z\x40\x20", TRUE},
+   {L"\x30\x50[abcdZyxw!)(@#*]\x40\x20", L"\x30\x50Z\x40\x20", TRUE},
+   {L"\x30\x50[abcdZyxw!)(@#*]\x40\x20", L"\x30\x50z\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50z\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50W\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50w\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50@\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50*\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*?]\x40\x20", L"\x30\x50?\x40\x20", TRUE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50g\x40\x20", FALSE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50q\x40\x20", FALSE},
+   {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50W\x40\x20", TRUE},
+
+//
+// Index = 19
+//
+   {L"[a-z]", L"b", TRUE},
+   {L"[a-z]", L"B", TRUE},
+   {L"[bcd]", L"B", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50r\x40\x20", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50R\x40\x20", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50Z\x40\x20", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50z\x40\x20", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50Y\x40\x20", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50s\x40\x20", TRUE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50k\x40\x20", FALSE},
+   {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50K\x40\x20", FALSE},
+
+
+//
+// Index = 30
+//
+
+   {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x20\x40\x20", TRUE},
+   {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x25\x40\x20", TRUE},
+   {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x22\x40\x20", TRUE},
+   {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x10\x40\x20", FALSE},
+
+};
 
 /**
  *  Entrypoint for EFI_UNICODE_COLLATOIN_PROTOCOL.MetaiMatch() Function Test.
@@ -187,61 +238,6 @@ BBTestMetaiMatchFunctionAutoTest (
   EFI_TEST_ASSERTION                   AssertionType;
 
   //
-  // Test Data
-  //
-  METAIMATCH_TEST_DATA_FIELD           TestData[] ={
-     {L"", L"\x30\x50zz\x40\x20", FALSE},
-     {L"\x30\x50*\x40\x20", L"", FALSE},
-     {L"", L"", TRUE},
-     {L"\x30\x50*\x40\x20", L"\x30\x50zz\x40\x20", TRUE},
-     {L"\x30\x50*\x40\x20", L"\x30\x50\x30\x20", FALSE},
-
-     {L"\x30\x50?\x40\x20", L"\x30\x50H\x40\x20", TRUE},
-     {L"\x30\x50?\x40\x20", L"\x30\x50\x40\x20", FALSE},
-
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50Z\x40\x20", TRUE},
-     {L"\x30\x50[abcdZyxw!)(@#*]\x40\x20", L"\x30\x50Z\x40\x20", TRUE},
-     {L"\x30\x50[abcdZyxw!)(@#*]\x40\x20", L"\x30\x50z\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50z\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50W\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50w\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50@\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50*\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*?]\x40\x20", L"\x30\x50?\x40\x20", TRUE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50g\x40\x20", FALSE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50q\x40\x20", FALSE},
-     {L"\x30\x50[abcdzyxw!)(@#*]\x40\x20", L"\x30\x50W\x40\x20", TRUE},
-
-//
-// Index = 19
-//
-     {L"[a-z]", L"b", TRUE},
-     {L"[a-z]", L"B", TRUE},
-     {L"[bcd]", L"B", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50r\x40\x20", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50R\x40\x20", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50Z\x40\x20", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50z\x40\x20", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50Y\x40\x20", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50s\x40\x20", TRUE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50k\x40\x20", FALSE},
-     {L"\x30\x50[R-Z]\x40\x20", L"\x30\x50K\x40\x20", FALSE},
-
-
-//
-// Index = 30
-//
-
-     {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x20\x40\x20", TRUE},
-     {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x25\x40\x20", TRUE},
-     {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x22\x40\x20", TRUE},
-     {L"\x30\x50[\x20-\x25]\x40\x20", L"\x30\x50\x10\x40\x20", FALSE},
-
-  };
-
-
-
-  //
   // Get the Standard Library Interface
   //
   Status = gtBS->HandleProtocol (
@@ -265,17 +261,17 @@ BBTestMetaiMatchFunctionAutoTest (
   }
 
   UnicodeCollation = (EFI_UNICODE_COLLATION2_PROTOCOL *)ClientInterface;
-  for (Index = 0; Index < sizeof (TestData) / sizeof (METAIMATCH_TEST_DATA_FIELD); Index ++) {
+  for (Index = 0; Index < sizeof (mMetaiMatchTestData) / sizeof (METAIMATCH_TEST_DATA_FIELD); Index ++) {
     //
     // For each test data, test the MetaiMatch functionality.
     //
     Result = UnicodeCollation->MetaiMatch (
                                  UnicodeCollation,
-                                 TestData[Index].String,
-                                 TestData[Index].Pattern
+                                 mMetaiMatchTestData[Index].String,
+                                 mMetaiMatchTestData[Index].Pattern
                                  );
 
-    if (Result == TestData[Index].Result) {
+    if (Result == mMetaiMatchTestData[Index].Result) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -290,10 +286,10 @@ BBTestMetaiMatchFunctionAutoTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Index,
-                   TestData[Index].String,
-                   TestData[Index].Pattern,
+                   mMetaiMatchTestData[Index].String,
+                   mMetaiMatchTestData[Index].Pattern,
                    Result,
-                   TestData[Index].Result
+                   mMetaiMatchTestData[Index].Result
                    );
   };
 
@@ -455,7 +451,7 @@ BBTestStrUprFunctionAutoTest (
   CHAR16                               *TestData[] ={
                                              L"\x21\x22\x31\x32\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5Ax61\x62\x7D\x7E",
                                              L"\x30\x50[abcdzyxw!)(@#*]\x40\x20\x30\x50\ab\x40\x20",
-                                             L"\x30\x50[A-D]\x40\x20\x30\x50f\x40\x20",
+                                             L"\x30\x50[A-D]\x40\x20\x30\x50\x40\x20",
                                              L""
                                         };
 
