@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -153,7 +153,7 @@ BBTestSetStateConformanceTest (
         return Status;
       }
       BBTestSetStateConformanceTestCheckpoint2 ( StandardLib, SimpleTextInputEx );
-  
+
       Status = gtBS->FreePool (DevicePathStr);
       if (EFI_ERROR(Status))
         return Status;
@@ -483,8 +483,10 @@ BBTestSetStateConformanceTestCheckpoint1 (
                         );
     }
   }
-  
-  if ( EFI_INVALID_PARAMETER != Status) {
+
+  if (Status == EFI_UNSUPPORTED) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else if (Status != EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
