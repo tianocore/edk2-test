@@ -87,6 +87,9 @@ extern EFI_GUID gGlobalVariableGuid;
 //
 
 #define SECTION_NAME_PLATFORM_SPECIFIC      L"Platform Specific"
+#define SECTION_NAME_CONFIGURATION_SPECIFIC L"Test Configuration Specific"
+#define CONFIN_TITLE_STRING                 L"|=================  Configuration Environment  =================|"
+#define MAX_SIZE                            0xFF
 
 #define EFI_DHCP6_SERVICE_BINDING_PROTOCOL_GUID \
  { 0x9fb9a8a1, 0x2f4a, 0x43a6, {0x88, 0x9c, 0xd0, 0xf7, 0xb6, 0xc4, 0x7a, 0xd5 }}
@@ -169,6 +172,12 @@ EFI_GUID gEfiIPSec2ProtocolGuid = { 0xa3979e64, 0xace8, 0x4ddc, {0xbc, 0x07, 0x4
 EFI_GUID gEfiBlueToothAttributeProtocolGuid = { 0x898890e9, 0x84b2, 0x4f3a, { 0x8c, 0x58, 0xd8, 0x57, 0x78, 0x13, 0xe0, 0xac }};
 
 EFI_GUID gEfiBlueToothLEConfigProtocolGuid = { 0x8f76da58, 0x1f99, 0x4275, { 0xa4, 0xec, 0x47, 0x56, 0x51, 0x5b, 0x1c, 0xe8 }};
+
+typedef struct CONFIG_ERROR_DATA {
+  UINT8                ErrorCount;
+  CHAR16               *TitleString;
+  EFI_INI_FILE_HANDLE  ConfigINI;
+} CONFIG_ERROR_DATA;
 
 //
 // The Max length of pre-defined string value(yes or no)
@@ -381,6 +390,25 @@ CheckIPSecProtocols (
   IN EFI_INI_FILE_HANDLE                  IniFile
   );
 
+CONFIG_ERROR_DATA*
+ConstructionAndAcquisition (
+  IN CHAR16                               *TitleString,
+  IN EFI_INI_FILE_HANDLE                  ConfigINI
+);
+
+EFI_STATUS
+GenTestConfigTitle (
+  IN      EFI_INI_FILE_HANDLE  IniFile,
+  IN OUT  EFI_TEST_ASSERTION   *AssertionType,
+  IN      CHAR16               *TestItemString
+);
+
+EFI_STATUS
+GenTestConfigContent (
+  IN CHAR16                               *ProtocolGUIDString,
+  IN BOOLEAN                              Value
+);
+
 //
 // External functions implementation
 //
@@ -405,6 +433,25 @@ Routine Description:
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib;
   EFI_TEST_PROFILE_LIBRARY_PROTOCOL   *ProfileLib;
   EFI_INI_FILE_HANDLE                 IniFile;
+  EFI_INI_FILE_HANDLE                 ConfigINI;
+  EFI_DEVICE_PATH_PROTOCOL            *DevicePath;
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL     *Volume;
+  EFI_HANDLE                          DeviceHandle;
+  EFI_FILE                            *Root;
+  EFI_FILE                            *OldFile;
+  CONFIG_ERROR_DATA                   *ErrorData;
+  UINT8                               Index;
+  BOOLEAN                             GenConfigINI;
+  CHAR16                              String[MAX_LENGTH];
+  CHAR16                              *FilePath;
+  CHAR16                              *TitleString[] = {
+    L"<|If fail item is not 0, it mean platform config  have error ___",
+    L"<|occur or EfiCompliant.ini setting have wrong. ________________",
+    L"<|Please sent this file and EfiCompliant.ini to platform owner .",
+    L"<|EfiCompliant.ini is in the : SCT\\Dependency\\EfiCompliantBBTest",
+    L"<|==============================================================",
+    NULL
+  };
 
   //
   // Locate the standard test library protocol
@@ -431,6 +478,68 @@ Routine Description:
   }
 
   //
+  //  Check PlatformConfig.ini file is exise or not.
+  //
+  ProfileLib->EfiGetSystemDevicePath (
+                         ProfileLib,
+                         &DevicePath,
+                         &FilePath
+                       );
+  Status = OpenIniFile (
+             ProfileLib,
+             L"Report",
+             L"PlatformConfig.ini",
+             &ConfigINI
+           );
+  if (ConfigINI != NULL) {
+    //
+    // If file exise, delete it.
+    //
+    CloseIniFile (ProfileLib, ConfigINI);
+
+    Status = gtBS->LocateDevicePath (
+                     &gEfiSimpleFileSystemProtocolGuid,
+                     &DevicePath,
+                     &DeviceHandle
+                   );
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
+     Status = gtBS->HandleProtocol (
+                      DeviceHandle,
+                      &gEfiSimpleFileSystemProtocolGuid,
+                      (VOID*)&Volume
+                    );
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
+    Status = Volume->OpenVolume(Volume, &Root);
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
+    Status = Root->Open (
+                     Root,
+                     &OldFile,
+                     SctPoolPrint (L"%s\\Report\\PlatformConfig.ini", FilePath),
+                     EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE,
+                     0
+                   );
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
+    Status = OldFile->Delete (OldFile);
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
+    Root->Close (Root);
+  }
+
+  //
   // Open the INI file
   //
   Status = OpenIniFile (
@@ -451,6 +560,68 @@ Routine Description:
                    );
 
     return Status;
+  }
+
+  GenConfigINI = FALSE;
+  Index = MAX_LENGTH;
+  Status = IniFile->GetString (
+                      IniFile,
+                      SECTION_NAME_CONFIGURATION_SPECIFIC,
+                      L"GEN_CONFIG_INI_FILE_ON",
+                      String,
+                      &Index
+                    );
+  if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+    GenConfigINI = TRUE;
+  }
+
+  if (GenConfigINI == TRUE) {
+    //
+    // Create the config.ini file.
+    //
+    ProfileLib->EfiGetSystemDevicePath (
+                         ProfileLib,
+                         &DevicePath,
+                         &FilePath
+                       );
+
+    Status = ProfileLib->EfiIniCreate (
+                           ProfileLib,
+                           DevicePath,
+                           SctPoolPrint (L"%s\\Report\\PlatformConfig.ini", FilePath),
+                           &ConfigINI
+                         );
+    if (EFI_ERROR (Status)) {
+      StandardLib->RecordAssertion (
+                     StandardLib,
+                     EFI_TEST_ASSERTION_FAILED,
+                     gTestGenericFailureGuid,
+                     L"UEFI Compliant - Cannot create or open INI file",
+                     L"%a:%d:",
+                     __FILE__,
+                     (UINTN)__LINE__
+                     );
+      return Status;
+    }
+    //
+    //  Gen PlatformConfig.ini title and description.
+    //
+    ConfigINI->SetStringByOrder (
+                    ConfigINI,
+                    0x00,
+                    CONFIN_TITLE_STRING,
+                    L"<|Unavailable (Fail) item have :",
+                    SctPoolPrint (L":   \"%02d\"   --", 0x00)
+                  );
+    for (Index=0; TitleString[Index] != NULL ;Index++) {
+      ConfigINI->SetString (
+                   ConfigINI,
+                   CONFIN_TITLE_STRING,
+                   TitleString[Index],
+                   L"|>"
+                 );
+    }
+    ConstructionAndAcquisition (NULL, ConfigINI);
   }
 
   //
@@ -594,6 +765,26 @@ Routine Description:
   //
   CloseIniFile (ProfileLib, IniFile);
 
+  //
+  // Save data to platform.ini
+  //
+  if (GenConfigINI == TRUE) {
+    ErrorData = ConstructionAndAcquisition (L"END", ConfigINI);
+    //
+    //  Update fail count.
+    //
+    ConfigINI->SetStringByOrder (
+                    ConfigINI,
+                    0x00,
+                    L"|=================  Configuration Environment  =================|",
+                    L"<|Unavailable (Fail) item have :",
+                    SctPoolPrint (L":   \"%02d\"   --", ErrorData->ErrorCount)
+                  );
+    //
+    // If have error occor and GenTestINI flag is on, gen the report file.
+    //
+    CloseIniFile (ProfileLib, ConfigINI);
+  }
   return EFI_SUCCESS;
 }
 
@@ -810,6 +1001,11 @@ CheckConsoleProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"ConsoleDevices")) {
+        GenTestConfigContent (L"gEfiSimpleTextInProtocolGuid     ", ValueA);
+        GenTestConfigContent (L"gEfiSimpleTextOutProtocolGuid    ", ValueB);
+        GenTestConfigContent (L"gEfiSimpleTextInputExProtocolGuid", ValueC);
+      }
     }
   }
 
@@ -888,6 +1084,12 @@ CheckHiiProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"HiiConfigSupport")) {
+        GenTestConfigContent (L"gEfiHiiDatabaseProtocolGuid     ", Value[0]);
+        GenTestConfigContent (L"gEfiHiiStringProtocolGuid       ", Value[1]);
+        GenTestConfigContent (L"gEfiHiiConfigRoutingProtocolGuid", Value[2]);
+        GenTestConfigContent (L"gEfiHiiFontProtocolGuid         ", Value[3]);
+      }
     }
   }
 
@@ -929,6 +1131,9 @@ CheckHiiProtocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"HiiFontSupport")) {
+          GenTestConfigContent (L"gEfiHiiFontProtocolGuid", Value[4]);
+        }
       }
     }
 
@@ -1028,6 +1233,11 @@ CheckGraphicalConsoleProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"GraphicalConsoleDevices")) {
+        GenTestConfigContent (L"gEfiGraphicsOutputProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiEdidDiscoveredProtocolGuid", ValueB);
+        GenTestConfigContent (L"gEfiEdidActiveProtocolGuid    ", ValueC);
+      }
     }
   }
 
@@ -1098,6 +1308,9 @@ CheckPointerProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"PointerDevices")) {
+        GenTestConfigContent (L"gEfiSimplePointerProtocolGuid", ValueA);
+      }
     }
   }
 
@@ -1211,6 +1424,12 @@ CheckBootFromDiskProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BootFromDiskDevices")) {
+        GenTestConfigContent (L"gEfiBlockIoProtocolGuid         ", ValueA);
+        GenTestConfigContent (L"gEfiDiskIoProtocolGuid          ", ValueB);
+        GenTestConfigContent (L"gEfiSimpleFileSystemProtocolGuid", ValueC);
+        GenTestConfigContent (L"gEfiUnicodeCollationProtocolGuid", ValueD);
+      }
     }
   }
 
@@ -1353,6 +1572,12 @@ CheckBootFromNetworkProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BootFromNetworkDevices")) {
+        GenTestConfigContent (L"gEfiPxeBaseCodeProtocolGuid               ", ValueA);
+        GenTestConfigContent (L"gEfiSimpleNetworkProtocolGuid             ", Value[0]);
+        GenTestConfigContent (L"gEfiManagedNetworkProtocolGuid            ", Value[1]);
+        GenTestConfigContent (L"gEfiNetworkInterfaceIdentifierProtocolGuid", Value[2]);
+      }
     }
   }
 
@@ -1391,6 +1616,9 @@ CheckBootFromNetworkProtocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"ValidateBootImageThruNet")) {
+          GenTestConfigContent (L"Variable \"SetupMode\"", ValueC);
+        }
       }
     }
 
@@ -1481,6 +1709,15 @@ CheckUefiNetworkApplication (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"UefiNetworkApplication")) {
+        GenTestConfigContent (L"gEfiManagedNetworkServiceBindingProtocolGuid", Value[0]);
+        GenTestConfigContent (L"gEfiArpServiceBindingProtocolGuid           ", Value[1]);
+        GenTestConfigContent (L"gEfiIp4ServiceBindingProtocolGuid           ", Value[2]);
+        GenTestConfigContent (L"gEfiDhcp4ServiceBindingProtocolGuid         ", Value[3]);
+        GenTestConfigContent (L"gEfiTcp4ServiceBindingProtocolGuid          ", Value[4]);
+        GenTestConfigContent (L"gEfiUdp4ServiceBindingProtocolGuid          ", Value[5]);
+        GenTestConfigContent (L"gEfiIp4Config2ProtocolGuid                  ", Value[6]);
+      }
     }
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1582,6 +1819,21 @@ CheckUefiNetworkApplication (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"UefiNetworkApplication")) {
+          GenTestConfigContent (L"gEfiManagedNetworkServiceBindingProtocolGuid", Value[0]);
+          GenTestConfigContent (L"gEfiArpServiceBindingProtocolGuid           ", Value[1]);
+          GenTestConfigContent (L"gEfiIp4ServiceBindingProtocolGuid           ", Value[2]);
+          GenTestConfigContent (L"gEfiDhcp4ServiceBindingProtocolGuid         ", Value[3]);
+          GenTestConfigContent (L"gEfiTcp4ServiceBindingProtocolGuid          ", Value[4]);
+          GenTestConfigContent (L"gEfiUdp4ServiceBindingProtocolGuid          ", Value[5]);
+          GenTestConfigContent (L"gEfiIp4Config2ProtocolGuid                  ", Value[6]);
+          GenTestConfigContent (L"gEfiManagedNetworkProtocolGuid              ", Value[7]);
+          GenTestConfigContent (L"gEfiArpProtocolGuid                         ", Value[8]);
+          GenTestConfigContent (L"gEfiIp4ProtocolGuid                         ", Value[9]);
+          GenTestConfigContent (L"gEfiDhcp4ProtocolGuid                       ", Value[10]);
+          GenTestConfigContent (L"gEfiTcp4ProtocolGuid                        ", Value[11]);
+          GenTestConfigContent (L"gEfiUdp4ProtocolGuid                        ", Value[12]);
+        }
       }
     }
 
@@ -1679,6 +1931,13 @@ CheckUefiV6NetworkApplication (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"UEFIIPv6Support")) {
+        GenTestConfigContent (L"gEfiDhcp6ServiceBindingProtocolGuid", Value[0]);
+        GenTestConfigContent (L"gEfiTcp6ServiceBindingProtocolGuid ", Value[1]);
+        GenTestConfigContent (L"gEfiIp6ServiceBindingProtocolGuid  ", Value[2]);
+        GenTestConfigContent (L"gEfiUdp6ServiceBindingProtocolGuid ", Value[3]);
+        GenTestConfigContent (L"gEfiIp6ConfigProtocolGuid          ", Value[4]);
+      }
     }
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -1774,6 +2033,17 @@ CheckUefiV6NetworkApplication (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"UEFIIPv6Support")) {
+          GenTestConfigContent (L"gEfiDhcp6ServiceBindingProtocolGuid", Value[0]);
+          GenTestConfigContent (L"gEfiTcp6ServiceBindingProtocolGuid ", Value[1]);
+          GenTestConfigContent (L"gEfiIp6ServiceBindingProtocolGuid  ", Value[2]);
+          GenTestConfigContent (L"gEfiUdp6ServiceBindingProtocolGuid ", Value[3]);
+          GenTestConfigContent (L"gEfiIp6ConfigProtocolGuid          ", Value[4]);
+          GenTestConfigContent (L"gEfiDhcp6ProtocolGuid              ", Value[5]);
+          GenTestConfigContent (L"gEfiTcp6ProtocolGuid               ", Value[6]);
+          GenTestConfigContent (L"gEfiIp6ProtocolGuid                ", Value[7]);
+          GenTestConfigContent (L"gEfiUdp6ProtocolGuid               ", Value[8]);
+        }
       }
     }
 
@@ -1830,6 +2100,9 @@ CheckUefiV6NetworkApplication (
                             );
         if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
           AssertionType = EFI_TEST_ASSERTION_FAILED;
+          if (!GenTestConfigTitle (IniFile, &AssertionType, L"VlanSupport")) {
+            GenTestConfigContent (L"gEfiVlanConfigProtocolGuid", Value[9]);
+          }
         }
       }
 
@@ -1902,6 +2175,9 @@ CheckUartProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"UartDevices")) {
+        GenTestConfigContent (L"gEfiSerialIoProtocolGuid", ValueA);
+      }
     }
   }
 
@@ -1986,6 +2262,10 @@ CheckPciProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"PciBusSupport")) {
+        GenTestConfigContent (L"gEfiPciRootBridgeIoProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiPciIoProtocolGuid          ", ValueB);
+      }
     }
   }
 
@@ -2070,6 +2350,10 @@ CheckUsbProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"UsbBusSupport")) {
+        GenTestConfigContent (L"gEfiUsb2HcProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiUsbIoProtocolGuid ", ValueB);
+      }
     }
   }
 
@@ -2139,6 +2423,9 @@ CheckNVMeProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"NVMExpressPassThru")) {
+        GenTestConfigContent (L"gEfiNvmExpressPassThruProtocolGuid", ValueA);
+      }
     }
   }
 
@@ -2222,6 +2509,9 @@ CheckBootFromNVMe (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BootFromNVMe")) {
+        GenTestConfigContent (L"gEfiBlockIoProtocolGuid", ValueB);
+      }
     }
   }
 
@@ -2258,6 +2548,9 @@ CheckBootFromNVMe (
                         );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"NVMExpressPassThru")) {
+          GenTestConfigContent (L"gEfiNvmExpressPassThruProtocolGuid", ValueA);
+        }
       }
     }
 
@@ -2330,6 +2623,9 @@ CheckScsiProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"ExtScsiPassThru")) {
+        GenTestConfigContent (L"gEfiExtScsiPassThruProtocolGuid", ValueA);
+      }
     }
   }
 
@@ -2428,6 +2724,10 @@ CheckBootFromScsi (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BootFromScsi")) {
+        GenTestConfigContent (L"gEfiBlockIoProtocolGuid", ValueB);
+        GenTestConfigContent (L"gEfiScsiIoProtocolGuid ", ValueC);
+      }
     }
   }
 
@@ -2465,6 +2765,9 @@ CheckBootFromScsi (
                         );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"ExtScsiPassThruSupport")) {
+          GenTestConfigContent (L"gEfiExtScsiPassThruProtocolGuid", ValueA);
+        }
       }
     }
 
@@ -2550,6 +2853,10 @@ CheckBootFromIScsi (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BootFromIscsi")) {
+        GenTestConfigContent (L"gEfiIScsiInitiatorNameProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiAuthenticationInfoProtocolGuid", ValueB);
+      }
     }
   }
 
@@ -2637,6 +2944,10 @@ CheckDebugProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"DebugSupport")) {
+        GenTestConfigContent (L"gEfiDebugSupportProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiDebugPortProtocolGuid   ", ValueB);
+      }
     }
   }
 
@@ -2706,6 +3017,9 @@ CheckDriverOverrideProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"PlatformDriverOverride")) {
+        GenTestConfigContent (L"gEfiPlatformDriverOverrideProtocolGuid", ValueA);
+      }
     }
   }
 
@@ -2774,6 +3088,9 @@ CheckATAProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"AtaPassThru")) {
+        GenTestConfigContent (L"gEfiAtaPassThruProtocolGuid", ValueA);
+      }
     }
   }
 
@@ -2845,6 +3162,12 @@ CheckEbcProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"EBCSupport")) {
+        GenTestConfigContent (L"Ebc->CreateThunk", Ebc->CreateThunk != NULL);
+        GenTestConfigContent (L"Ebc->UnloadImage", Ebc->UnloadImage != NULL);
+        GenTestConfigContent (L"Ebc->RegisterICacheFlush", Ebc->RegisterICacheFlush != NULL);
+        GenTestConfigContent (L"Ebc->GetVersion ", Ebc->GetVersion != NULL);
+      }
     }
   }
 
@@ -2941,6 +3264,9 @@ CheckDNS4Protocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"DNS4Support")) {
+        GenTestConfigContent (L"gEfiDns4ServiceBindingProtocolGuid", ValueA);
+      }
     }
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2998,6 +3324,10 @@ CheckDNS4Protocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"DNS4Support")) {
+          GenTestConfigContent (L"gEfiDns4ServiceBindingProtocolGuid", ValueA);
+          GenTestConfigContent (L"gEfiDns4ProtocolGuid              ", ValueB);
+        }
       }
     }
 
@@ -3067,6 +3397,9 @@ CheckDNS6Protocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"DNS6Support")) {
+        GenTestConfigContent (L"gEfiDns6ServiceBindingProtocolGuid", ValueA);
+      }
     }
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3124,6 +3457,10 @@ CheckDNS6Protocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"DNS6Support")) {
+          GenTestConfigContent (L"gEfiDns6ServiceBindingProtocolGuid", ValueA);
+          GenTestConfigContent (L"gEfiDns6ProtocolGuid              ", ValueB);
+        }
       }
     }
 
@@ -3205,6 +3542,10 @@ CheckTLSProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"TLSSupport")) {
+        GenTestConfigContent (L"gEfiTlsServiceBindingProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiTlsConfigurationProtocolGuid ", ValueB);
+      }
     }
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3263,6 +3604,11 @@ CheckTLSProtocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"TLSSupport")) {
+          GenTestConfigContent (L"gEfiTlsServiceBindingProtocolGuid", ValueA);
+          GenTestConfigContent (L"gEfiTlsConfigurationProtocolGuid ", ValueB);
+          GenTestConfigContent (L"gEfiTlsProtocolGuid              ", ValueC);
+        }
       }
     }
 
@@ -3346,6 +3692,10 @@ CheckHTTPProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"HTTPSupport")) {
+        GenTestConfigContent (L"gEfiHttpServiceBindingProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiHttpUtilitiesProtocolGuid     ", ValueB);
+      }
     }
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -3404,6 +3754,11 @@ CheckHTTPProtocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"HTTPSupport")) {
+          GenTestConfigContent (L"gEfiHttpServiceBindingProtocolGuid", ValueA);
+          GenTestConfigContent (L"gEfiHttpUtilitiesProtocolGuid     ", ValueB);
+          GenTestConfigContent (L"gEfiHttpProtocolGuid              ", ValueC);
+        }
       }
     }
 
@@ -3493,6 +3848,11 @@ CheckEAPProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"EAPSupport")) {
+        GenTestConfigContent (L"gEfiEapProtocolGuid           ", ValueA);
+        GenTestConfigContent (L"gEfiEapConfigProtocolGuid     ", ValueB);
+        GenTestConfigContent (L"gEfiEapManagement2ProtocolGuid", ValueC);
+      }
     }
   }
 
@@ -3588,6 +3948,11 @@ CheckBlueToothClassicProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BlueToothClassicSupport")) {
+        GenTestConfigContent (L"gEfiBlueToothHcProtocolGuid            ", ValueA);
+        GenTestConfigContent (L"gEfiBlueToothServiceBindingProtocolGuid", ValueB);
+        GenTestConfigContent (L"gEfiBlueToothConfigProtocolGuid        ", ValueC);
+      }
     }
 
     //
@@ -3652,6 +4017,12 @@ CheckBlueToothClassicProtocols (
                           );
       if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
+        if (!GenTestConfigTitle (IniFile, &AssertionType, L"BlueToothClassicSupport")) {
+          GenTestConfigContent (L"gEfiBlueToothHcProtocolGuid            ", ValueA);
+          GenTestConfigContent (L"gEfiBlueToothServiceBindingProtocolGuid", ValueB);
+          GenTestConfigContent (L"gEfiBlueToothConfigProtocolGuid        ", ValueC);
+          GenTestConfigContent (L"gEfiBlueToothIoProtocolGuid            ", ValueD);
+        }
       }
     }
 
@@ -3743,6 +4114,11 @@ CheckBlueToothLEProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"BlueToothLESupport")) {
+        GenTestConfigContent (L"gEfiBlueToothHcProtocolGuid       ", ValueA);
+        GenTestConfigContent (L"gEfiBlueToothAttributeProtocolGuid", ValueB);
+        GenTestConfigContent (L"gEfiBlueToothLEConfigProtocolGuid ", ValueC);
+      }
     }
   }
 
@@ -3832,6 +4208,10 @@ CheckIPSecProtocols (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (!GenTestConfigTitle (IniFile, &AssertionType, L"IPSecSupport")) {
+        GenTestConfigContent (L"gEfiIPSecConfigProtocolGuid", ValueA);
+        GenTestConfigContent (L"gEfiIPSec2ProtocolGuid     ", ValueB);
+      }
     }
   }
 
@@ -3852,3 +4232,119 @@ CheckIPSecProtocols (
 
   return EFI_SUCCESS;
 }
+
+CONFIG_ERROR_DATA*
+ConstructionAndAcquisition (
+  CHAR16               *TitleString,
+  EFI_INI_FILE_HANDLE  ConfigINI
+){
+  UINTN  Index;
+  static CONFIG_ERROR_DATA Data;
+
+  if (TitleString == NULL && ConfigINI != NULL) {
+    //
+    //  If only gave ConfigINI, init struct.
+    //
+    gtBS->AllocatePool (EfiBootServicesData ,MAX_SIZE, (VOID**)&(Data.TitleString));
+    Data.ConfigINI   = ConfigINI;
+    Data.ErrorCount  = 0;
+
+    return NULL;
+  } else if (TitleString != NULL && ConfigINI == NULL) {
+    //
+    // If Only gave TitleString, update the title and error count +1.
+    //
+    for (Index=0; Data.TitleString[Index]=TitleString[Index], TitleString[Index]!=0; Index++);
+    Data.ErrorCount++;
+
+    return &Data;
+  } else if (TitleString != NULL && ConfigINI != NULL) {
+    //
+    // If Both not NULL, end of the function, free the buffer.
+    //
+    gtBS->FreePool (Data.TitleString);
+    return &Data;
+  }
+  //
+  // If both NULL, just return struct data.
+  //
+  return &Data;
+}
+
+EFI_STATUS
+GenTestConfigTitle (
+  IN      EFI_INI_FILE_HANDLE  IniFile,
+  IN OUT  EFI_TEST_ASSERTION   *AssertionType,
+  IN      CHAR16               *TestItemString
+){
+  CONFIG_ERROR_DATA *ErrorData;
+  EFI_STATUS        Status;
+  CHAR16            String[MAX_LENGTH];
+  UINT32            MaxLength;
+
+  //
+  // Check need to gen config.ini or not.
+  //
+  MaxLength = MAX_LENGTH;
+  Status = IniFile->GetString (
+                      IniFile,
+                      SECTION_NAME_CONFIGURATION_SPECIFIC,
+                      L"GEN_CONFIG_INI_FILE_ON",
+                      String,
+                      &MaxLength
+                    );
+  if (EFI_ERROR (Status) || !(SctStriCmp (String, L"yes") == 0)) {
+    return EFI_UNSUPPORTED;
+  }
+
+  //
+  //  If platform owner is not sure platform config yet, this item can skip this test.
+  //
+  MaxLength = MAX_LENGTH;
+  Status = IniFile->GetString (
+                      IniFile,
+                      SECTION_NAME_CONFIGURATION_SPECIFIC,
+                      L"IGNORE_COMPLIANT_TEST_CSV",
+                      String,
+                      &MaxLength
+                    );
+  if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
+    *AssertionType = EFI_TEST_ASSERTION_WARNING;
+  }
+
+  ErrorData = ConstructionAndAcquisition (TestItemString, NULL);
+  //
+  // Set title
+  //
+  ErrorData->ConfigINI->SetStringByOrder (
+               ErrorData->ConfigINI,
+               ErrorData->ErrorCount,
+               SctPoolPrint (L"%02d. %s",ErrorData->ErrorCount, TestItemString),
+               L"Device Status  :",
+               L":  Unavailable"
+             );
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+GenTestConfigContent (
+  IN CHAR16   *ProtocolGUIDString,
+  IN BOOLEAN  Value
+){
+  CONFIG_ERROR_DATA *ErrorData;
+
+  ErrorData = ConstructionAndAcquisition (NULL, NULL);
+  //
+  // Gen content
+  //
+  ErrorData->ConfigINI->SetString (
+               ErrorData->ConfigINI,
+               SctPoolPrint (L"%02d. %s",ErrorData->ErrorCount, ErrorData->TitleString),
+               SctPoolPrint (L" %s  <-| Status  :", ProtocolGUIDString),
+               Value ? L":  Exist in system !": L":  Not exist in system !"
+             );
+
+  return EFI_SUCCESS;
+}
+
