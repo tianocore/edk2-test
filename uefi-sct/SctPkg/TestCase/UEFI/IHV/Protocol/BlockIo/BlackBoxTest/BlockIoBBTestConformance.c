@@ -101,7 +101,7 @@ BBTestReadBlocksConformanceAutoTest (
                    );
     return Status;
   }
-
+SctPrint("Microchip ");
   BlockIo = (EFI_BLOCK_IO_PROTOCOL *)ClientInterface;
 
   //
