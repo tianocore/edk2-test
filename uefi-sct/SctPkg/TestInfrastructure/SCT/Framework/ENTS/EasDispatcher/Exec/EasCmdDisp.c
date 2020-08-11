@@ -50,6 +50,8 @@ Abstract:
 
 EFI_CPU_ARCH_PROTOCOL *Cpu = NULL;
 
+static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
+
 //
 // Local Function Definition
 //
@@ -132,9 +134,11 @@ Returns:
   //
   // Perform EFTP operation.
   //
-  tRT->GetTime (&StartTime, NULL);
+  if (tRT->GetTime (&StartTime, NULL) != EFI_SUCCESS)
+    StartTime = Epoch;
   Status = EftpDispatchFileTransferComd (FileCmdType);
-  tRT->GetTime (&EndTime, NULL);
+  if (tRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+    EndTime = Epoch;
 
   if (Status == EFI_OUT_OF_RESOURCES) {
     return EFI_OUT_OF_RESOURCES;
@@ -365,9 +369,11 @@ Returns:
   //
   // Execute Shell Command
   //
-  tRT->GetTime (&StartTime, NULL);
+  if (tRT->GetTime (&StartTime, NULL) != EFI_SUCCESS)
+    StartTime = Epoch;
   Status = SctShellExecute (&mImageHandle, (gEasFT->Cmd)->ComdArg, FALSE, NULL, NULL);;
-  tRT->GetTime (&EndTime, NULL);
+  if (tRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+    EndTime = Epoch;
   EFI_ENTS_DEBUG ((EFI_ENTS_D_TRACE, L"dispatch:(%s)", (gEasFT->Cmd)->ComdArg));
   SctPrint (L"dispatch:(%s) - %r\n", (gEasFT->Cmd)->ComdArg, Status);
   if (Status == EFI_OUT_OF_RESOURCES) {
@@ -1483,9 +1489,11 @@ Returns:
   //
   // Resume SCT execution by executing "sct -c" in sct passive mode.
   //
-  tRT->GetTime (&StartTime, NULL);
+  if (tRT->GetTime (&StartTime, NULL) != EFI_SUCCESS)
+    StartTime = Epoch;
   Status = SctShellExecute (&mImageHandle, (gEasFT->Cmd)->ComdArg, FALSE, NULL, NULL);;
-  tRT->GetTime (&EndTime, NULL);
+  if (tRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+    EndTime = Epoch;
   EFI_ENTS_DEBUG ((EFI_ENTS_D_TRACE, L"dispatch:(%s)", (gEasFT->Cmd)->ComdArg));
   SctPrint (L"dispatch:(%s) - %r\n", (gEasFT->Cmd)->ComdArg, Status);
   if (Status == EFI_OUT_OF_RESOURCES) {

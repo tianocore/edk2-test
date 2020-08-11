@@ -27,6 +27,8 @@ Abstract:
 #include "SctLib.h"
 #include "MiscBootServicesBBTestMain.h"
 
+static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
+
 /**
  *  Entrypoint for gtBS->SetWatchdogTimer() Interface Test.
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
@@ -821,13 +823,15 @@ BBTestStallInterfaceTest (
     //
     // 4.2.2.1  Stall must succeed.
     //
-    gtRT->GetTime (&StartTime, NULL);
+    if (gtRT->GetTime (&StartTime, NULL) != EFI_SUCCESS)
+      StartTime = Epoch;
     OldTpl = gtBS->RaiseTPL (TplArray[Index]);
     Status = gtBS->Stall (
                      10000000
                      );
     gtBS->RestoreTPL (OldTpl);
-    gtRT->GetTime (&EndTime, NULL);
+    if (gtRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+      EndTime = Epoch;
     if (Status == EFI_SUCCESS) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {

@@ -36,6 +36,8 @@ static const UINTN  MonthLengths[2][12] = {
   { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
 };
 
+static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
+
 #define MINS_PER_HOUR       60
 #define HOURS_PER_DAY       24
 #define SECS_PER_MIN        60
@@ -1052,7 +1054,8 @@ EndLogging (
   WriteLogFile (Private, DashLine, SYSTEMLOG);
   WriteLogFile (Private, DashLine, CASELOG);
 
-  gtRT->GetTime (&CurrentTime, NULL);
+  if (gtRT->GetTime (&CurrentTime, NULL) != EFI_SUCCESS)
+    CurrentTime = Epoch;
   DBSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Finished: %t\n", &CurrentTime);
 
   WriteLogFile (Private, Buffer, SYSTEMLOG);

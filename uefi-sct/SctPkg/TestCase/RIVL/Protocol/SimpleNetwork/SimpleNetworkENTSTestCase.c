@@ -24,6 +24,8 @@ Abstract:
 
 #include "SimpleNetworkENTSTestCase.h"
 
+static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
+
 //
 // SimpleNetwork.Start
 //
@@ -928,7 +930,8 @@ Returns:
   Status          = EFI_SUCCESS;
   tBS->Stall (5000);
 
-  tRT->GetTime (&BeginTime, NULL);
+  if (tRT->GetTime (&BeginTime, NULL) != EFI_SUCCESS)
+    BeginTime = Epoch;
   for (Index = 0; Index < 1;) {
     Status = SimpleNetwork->Transmit (
                               SimpleNetwork,
@@ -964,7 +967,8 @@ Returns:
     }
   }
 
-  tRT->GetTime (&BeginTime, NULL);
+  if (tRT->GetTime (&BeginTime, NULL) != EFI_SUCCESS)
+    BeginTime = Epoch;
 
   for (Index = 1; Index < TransmitPattern1Number;) {
     Status = SimpleNetwork->Transmit (
@@ -1002,7 +1006,8 @@ Returns:
   }
 
 End:
-  tRT->GetTime (&EndTime, NULL);
+  if (tRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+    EndTime = Epoch;
 
   *TransmitPattern1Status = Status;
 
@@ -1125,7 +1130,8 @@ Returns:
   Status          = EFI_SUCCESS;
   tBS->Stall (5000);
 
-  tRT->GetTime (&BeginTime, NULL);
+  if (tRT->GetTime (&BeginTime, NULL) != EFI_SUCCESS)
+    BeginTime = Epoch;
   for (Index = 0; Index < 1;) {
     Status = SimpleNetwork->Transmit (
                               SimpleNetwork,
@@ -1161,7 +1167,8 @@ Returns:
     }
   }
 
-  tRT->GetTime (&BeginTime, NULL);
+  if (tRT->GetTime (&BeginTime, NULL) != EFI_SUCCESS)
+    BeginTime = Epoch;
 
   for (Index = 1; Index < TransmitPattern2Number;) {
     Status = SimpleNetwork->Transmit (
@@ -1199,7 +1206,8 @@ Returns:
   }
 
 End:
-  tRT->GetTime (&EndTime, NULL);
+  if (tRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+    EndTime = Epoch;
 
   *TransmitPattern1Status = Status;
 
@@ -1326,7 +1334,8 @@ Returns:
     }
   }
 
-  tRT->GetTime (&BeginTime, NULL);
+  if (tRT->GetTime (&BeginTime, NULL) != EFI_SUCCESS)
+    BeginTime = Epoch;
 
   for (Index = 1; Index < ReceivePattern1Number;) {
     *ReceivePattern1BufferSize = BufferSizeOrg;
@@ -1346,7 +1355,8 @@ Returns:
     }
   }
 
-  tRT->GetTime (&EndTime, NULL);
+  if (tRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
+    EndTime = Epoch;
 
   *ReceivePattern1Status = Status;
 

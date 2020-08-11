@@ -24,7 +24,10 @@ Abstract:
 
 
 #include "Sct.h"
+#include "Sct.h"
 #include EFI_TEST_PROTOCOL_DEFINITION (EntsMonitorProtocol)
+
+static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
 
 STATIC
 EFI_STATUS
@@ -310,7 +313,8 @@ DelaySctAgentCmdPost (
   }
   SctAgentCmdDelayedPost->CmdReturn      = CmdReturn;
   SctAgentCmdDelayedPost->Cmd.ComdResult = CmdResult;
-  tRT->GetTime (&SctAgentCmdDelayedPost->StartTime, NULL);
+  if (tRT->GetTime (&SctAgentCmdDelayedPost->StartTime, NULL) != EFI_SUCCESS)
+    SctAgentCmdDelayedPost->StartTime = Epoch;
 
   return Status;
 }
@@ -327,7 +331,8 @@ PostSctAgentDelayedCmd (
     return EFI_SUCCESS;
   }
 
-  tRT->GetTime (&SctAgentCmdDelayedPost->EndTime, NULL);
+  if (tRT->GetTime (&SctAgentCmdDelayedPost->EndTime, NULL) != EFI_SUCCESS)
+    SctAgentCmdDelayedPost->EndTime = Epoch;
 
   Status = RecordMessage (
             &SctAgentCmdDelayedPost->Cmd.ComdRuntimeInfo,
