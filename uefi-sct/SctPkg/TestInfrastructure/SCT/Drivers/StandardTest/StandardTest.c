@@ -30,6 +30,8 @@ Abstract:
 #include "StandardTest.h"
 #include <Library/EntsLib.h>
 
+static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
+
 //
 // Prototypes
 //
@@ -1081,7 +1083,8 @@ Returns:
     StslWriteLogFile (Private, Buffer);
 
     CurrentTime = &Private->StartTime;
-    tRT->GetTime (CurrentTime, NULL);
+    if (tRT->GetTime (CurrentTime, NULL) != EFI_SUCCESS)
+      *CurrentTime = Epoch;
 
   } else {
     StslWriteLogFile (Private, DashLine);
@@ -1118,7 +1121,8 @@ Returns:
 
     StslWriteLogFileName (Private);
     CurrentTime = &Private->StartTime;
-    tRT->GetTime (CurrentTime, NULL);
+    if (tRT->GetTime (CurrentTime, NULL) != EFI_SUCCESS)
+      *CurrentTime = Epoch;
     SctSPrint (Buffer, EFI_MAX_PRINT_BUFFER, L"Test Started: %t\n", CurrentTime);
     StslWriteLogFile (Private, Buffer);
 
@@ -1238,7 +1242,8 @@ Returns:
 
   StslWriteLogFileName (Private);
 
-  tRT->GetTime (&CurrentTime, NULL);
+  if (tRT->GetTime (&CurrentTime, NULL) != EFI_SUCCESS)
+    CurrentTime = Epoch;
 
   SecondsElapsed = SecondsElapsedFromBaseYear (
                      Private->StartTime.Year,
