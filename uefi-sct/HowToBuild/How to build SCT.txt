@@ -1,0 +1,15 @@
+================================================================================
+                                 HOW TO BUILD
+================================================================================
+
+Build Instructions for UEFI SCTII AARCH64 (Linux)
+
+Pre-requisite: install required tools. For example, on WSL running Ubuntu:
+$ sudo apt-get install build-essential uuid-dev python3-distutils gcc-aarch64-linux-gnu
+
+   1) mkdir "sct_workspace"
+   2) cd sct_workspace
+   3) git clone https://github.com/tianocore/edk2-test.git
+   4) git clone --recursive https://github.com/tianocore/edk2.git
+   5) ln -s edk2-test/uefi-sct/SctPkg/ SctPkg
+   6) SctPkg/build.sh AARCH64 GCC RELEASE
