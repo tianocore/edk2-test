@@ -1893,7 +1893,7 @@ DriverSampleInit (
   EFI_STRING                      NameRequestHdr;
   MY_EFI_VARSTORE_DATA            *VarStoreConfig;
   EFI_INPUT_KEY                   HotKey;
-  EFI_FORM_BROWSER_EXTENSION_PROTOCOL *FormBrowserEx;
+  EDKII_FORM_BROWSER_EXTENSION_PROTOCOL *FormBrowserEx;
 #if 1
     EFI_STRING                      Progress;
   EFI_STRING                      Results;
@@ -2190,7 +2190,7 @@ DriverSampleInit (
   //
   // Example of how to use BrowserEx protocol to register HotKey.
   // 
-  Status = gBS->LocateProtocol (&gEfiFormBrowserExProtocolGuid, NULL, (VOID **) &FormBrowserEx);
+  Status = gBS->LocateProtocol (&gEdkiiFormBrowserExProtocolGuid, NULL, (VOID **) &FormBrowserEx);
   if (!EFI_ERROR (Status)) {
     //
     // First unregister the default hot key F9 and F10.
