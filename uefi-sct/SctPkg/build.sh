@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-#  Copyright (c) 2011 - 2019, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2011 - 2020, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -13,7 +13,7 @@
 # 
 ##
 
-SctpackageDependencyList=(EdkCompatibilityPkg SctPkg BaseTools)
+SctpackageDependencyList=(SctPkg BaseTools)
 
 function get_build_arch
 {
@@ -55,8 +55,13 @@ function set_cross_compile
 function get_gcc_version
 {
 	gcc_version=$($1 -dumpversion)
+
+    if [ "$gcc_version" -gt "5" ]; then
+        gcc_version="5"
+    fi
+
 	case $gcc_version in
-		4.6*|4.7*|4.8*|4.9*)
+		4.6*|4.7*|4.8*|4.9*|5*)
 			echo GCC$(echo ${gcc_version} | awk -F. '{print $1$2}')
 			;;
 		*)
@@ -122,7 +127,6 @@ do
 done
 
 export EFI_SOURCE=`pwd`
-export EDK_SOURCE=`pwd`/EdkCompatibilityPkg
 
 # check if the last command was successful
 status=$?
@@ -201,14 +205,13 @@ fi
 #
 if [ -z "${WORKSPACE:-}" ]; then
 	echo Initializing workspace
-	# Uses an external BaseTools project
-	# Uses the BaseTools in edk2
-	export EDK_TOOLS_PATH=`pwd`/BaseTools
+	export WORKSPACE=$PWD
+	export PACKAGES_PATH=$WORKSPACE/edk2:$WORKSPACE/SctPkg
 	# We do not pass BuildArmSct.sh arguments to edksetup.sh
 	while (( "$#" )); do
 		shift
 	done
-	source ./edksetup.sh
+	. edk2/edksetup.sh
 else
 	echo Building from: $WORKSPACE
 fi
