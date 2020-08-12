@@ -354,6 +354,7 @@ BBTestAllocatePagesInterfaceTest (
   EFI_TPL                              OldTpl;
   EFI_MEMORY_DESCRIPTOR                Descriptor;
   UINTN                                PageNum;
+  UINTN                                Alignment;
 
   //
   // Get the Standard Library Interface
@@ -700,14 +701,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory  = Start;
 
@@ -830,14 +840,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory  = Start;
 
@@ -953,14 +972,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory = Start + (SctLShiftU64 (PageNum/3, EFI_PAGE_SHIFT) & 0xFFFFFFFFFFFF0000);
 
@@ -1076,14 +1104,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory  = Start + (SctLShiftU64 (PageNum * 2 / 3, EFI_PAGE_SHIFT) & 0xFFFFFFFFFFFF0000);
 
@@ -1206,14 +1243,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory  = Start;
 
@@ -1329,14 +1375,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory  = Start;
 
@@ -1468,14 +1523,23 @@ BBTestAllocatePagesInterfaceTest (
         PageNum = (UINTN)Descriptor.NumberOfPages;
         Start   = Descriptor.PhysicalStart;
 
-        //
-        // Some memory types need more alignment than 4K, so
-        //
-        if (PageNum <= 0x10) {
+        Alignment = DEFAULT_PAGE_ALLOCATION_GRANULARITY;
+
+        if  (AllocatePagesMemoryType[TypeIndex] == EfiACPIReclaimMemory   ||
+             AllocatePagesMemoryType[TypeIndex] == EfiACPIMemoryNVS       ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesCode ||
+             AllocatePagesMemoryType[TypeIndex] == EfiRuntimeServicesData) {
+
+          Alignment = RUNTIME_PAGE_ALLOCATION_GRANULARITY;
+        }
+
+        Start   = (Start + Alignment - 1) & ~(Alignment - 1);
+        PageNum -= EFI_SIZE_TO_PAGES (Start - Descriptor.PhysicalStart);
+
+        PageNum &= ~(EFI_SIZE_TO_PAGES (Alignment) - 1);
+        if (PageNum <= EFI_SIZE_TO_PAGES (Alignment)) {
           break;
         }
-        Start   = (Start + 0x10000) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
 
         Memory  = Start;
 
