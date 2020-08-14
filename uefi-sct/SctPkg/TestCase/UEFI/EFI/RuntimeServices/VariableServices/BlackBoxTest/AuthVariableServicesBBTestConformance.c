@@ -287,7 +287,7 @@ AuthVariableDERConfTest (
                    &MaximumVariableSize
                    );
 
-    if (Status == EFI_UNSUPPORTED) {
+    if (Status == EFI_SUCCESS || Status == EFI_UNSUPPORTED) {
       Result = EFI_TEST_ASSERTION_PASSED;
     } else {
       Result = EFI_TEST_ASSERTION_FAILED;
