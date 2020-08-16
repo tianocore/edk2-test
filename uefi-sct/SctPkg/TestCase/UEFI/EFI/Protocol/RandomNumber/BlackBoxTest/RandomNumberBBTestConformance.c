@@ -169,7 +169,8 @@ BBTestGetInfoConformanceTestCheckpoint1 (
     return Status;
   }
 
-  if (EFI_BUFFER_TOO_SMALL == Status && RNGAlgorithmListSize % sizeof(EFI_RNG_ALGORITHM) == 0) {
+  if (EFI_BUFFER_TOO_SMALL == Status && RNGAlgorithmListSize &&
+      RNGAlgorithmListSize % sizeof(EFI_RNG_ALGORITHM) == 0) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
