@@ -56,8 +56,8 @@ function get_gcc_version
 {
 	gcc_version=$($1 -dumpversion)
 
-    if [ "$gcc_version" -gt "5" ]; then
-        gcc_version="5"
+    if [ ${gcc_version%%.*} -gt 5 ]; then
+        gcc_version=5
     fi
 
 	case $gcc_version in
