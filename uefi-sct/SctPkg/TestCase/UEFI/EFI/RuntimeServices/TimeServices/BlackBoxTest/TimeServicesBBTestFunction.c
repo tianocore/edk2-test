@@ -379,7 +379,7 @@ step1:
                      (Index == 1? \
                       gTimeServicesBBTestFunctionAssertionGuid017: \
                       gTimeServicesBBTestFunctionAssertionGuid018),
-                     L"RT.SetTime - Verity year after change",
+                     L"RT.SetTime - Verify year after change",
                      L"%a:%d:Status - %r, TPL - %d",
                      __FILE__,
                      (UINTN)__LINE__,
@@ -491,7 +491,7 @@ step2:
                      (Index == 1? \
                       gTimeServicesBBTestFunctionAssertionGuid023: \
                       gTimeServicesBBTestFunctionAssertionGuid024),
-                     L"RT.SetTime - Verity month after change",
+                     L"RT.SetTime - Verify month after change",
                      L"%a:%d:Status - %r, TPL - %d",
                      __FILE__,
                      (UINTN)__LINE__,
@@ -600,7 +600,7 @@ step3:
                      (Index == 1? \
                       gTimeServicesBBTestFunctionAssertionGuid029: \
                       gTimeServicesBBTestFunctionAssertionGuid030),
-                     L"RT.SetTime - Verity daylight after change",
+                     L"RT.SetTime - Verify daylight after change",
                      L"%a:%d:Status - %r, TPL - %d",
                      __FILE__,
                      (UINTN)__LINE__,
@@ -708,7 +708,7 @@ step4:
                      (Index == 1? \
                       gTimeServicesBBTestFunctionAssertionGuid035: \
                       gTimeServicesBBTestFunctionAssertionGuid036),
-                     L"RT.SetTime - Verity time zone after change",
+                     L"RT.SetTime - Verify time zone after change",
                      L"%a:%d:Status - %r, TPL - %d",
                      __FILE__,
                      (UINTN)__LINE__,
