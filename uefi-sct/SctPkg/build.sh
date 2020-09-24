@@ -151,7 +151,7 @@ case `uname` in
 			TARGET_TOOLS=ARMGCC
 		;;
 		
-		GCC | gcc)
+		GCC* | gcc*)
             set_cross_compile
 	        CROSS_COMPILE="$TEMP_CROSS_COMPILE"
             export TARGET_TOOLS=`get_gcc_version "$CROSS_COMPILE"gcc`
