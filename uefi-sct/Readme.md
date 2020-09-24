@@ -24,5 +24,5 @@ are listed in [Maintainers.txt](Maintainers.txt).
 # Resources
 * [TianoCore](http://www.tianocore.org)
 * [Getting Started with UEFI-SCT](https://github.com/tianocore/tianocore.github.io/wiki/UEFI-SCT)
-* [Mailing List](mailto:edk2-devel@lists.01.org?subject=[edk2-test])
+* [Mailing List](mailto:devel@edk2.groups.io?subject=[edk2-test])
 * [UEFI-SCT BugTracker](https://bugzilla.tianocore.org/)

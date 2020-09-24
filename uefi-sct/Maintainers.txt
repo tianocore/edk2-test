@@ -47,4 +47,4 @@ R: Samer El-Haj-Mahmoud <Samer.El-Haj-Mahmoud@arm.com>
 
 
 General questions on UEFI-SCT with the subject [edk2-test] can be sent to
-L: edk2-list <edk2-devel@lists.01.org>
+L: edk2-devel <devel@edk2.groups.io>
