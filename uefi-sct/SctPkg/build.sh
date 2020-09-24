@@ -56,9 +56,9 @@ function get_gcc_version
 {
 	gcc_version=$($1 -dumpversion)
 
-    if [ ${gcc_version%%.*} -gt 5 ]; then
-        gcc_version=5
-    fi
+	if [ ${gcc_version%%.*} -gt 5 ]; then
+		gcc_version=5
+	fi
 
 	case $gcc_version in
 		4.6*|4.7*|4.8*|4.9*|5*)
@@ -152,10 +152,9 @@ case `uname` in
 		;;
 		
 		GCC* | gcc*)
-            set_cross_compile
-	        CROSS_COMPILE="$TEMP_CROSS_COMPILE"
-            export TARGET_TOOLS=`get_gcc_version "$CROSS_COMPILE"gcc`
-
+			set_cross_compile
+			CROSS_COMPILE="$TEMP_CROSS_COMPILE"
+			export TARGET_TOOLS=`get_gcc_version "$CROSS_COMPILE"gcc`
 		;;
 
 		*)
@@ -224,7 +223,7 @@ then
   status=$?
   if test $status -ne 0
   then
-  echo Error while building EDK tools
+    echo Error while building EDK tools
     exit -1
   fi
 else
@@ -239,7 +238,7 @@ make -C SctPkg/Tools/Source/GenBin
 status=$?
 if test $status -ne 0
 then
-echo Error while building GenBin
+  echo Error while building GenBin
   exit -1
 fi
 
@@ -258,8 +257,8 @@ build -p SctPkg/UEFI/UEFI_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_B
 status=$?
 if test $status -ne 0
 then
-echo Could not build the UEFI SCT package
-        exit -1
+  echo Could not build the UEFI SCT package
+  exit -1
 fi
 
 build -p SctPkg/UEFI/IHV_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
@@ -268,8 +267,8 @@ build -p SctPkg/UEFI/IHV_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BU
 status=$?
 if test $status -ne 0
 then
-echo Could not build the IHV SCT package
-        exit -1
+  echo Could not build the IHV SCT package
+  exit -1
 fi
 
 
@@ -299,8 +298,8 @@ pwd
 status=$?
 if test $status -ne 0
 then
-echo Could not generate UEFI SCT binary
-     exit -1
+  echo Could not generate UEFI SCT binary
+  exit -1
 else
 echo The SCT binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/UefiSct/${SCT_BUILD}_${TARGET_TOOLS}"
 fi
@@ -315,8 +314,8 @@ pwd
 status=$?
 if test $status -ne 0
 then
-echo Could not generate IHV SCT binary
-     exit -1
+  echo Could not generate IHV SCT binary
+  exit -1
 else
 echo The IHV binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}"
 fi
