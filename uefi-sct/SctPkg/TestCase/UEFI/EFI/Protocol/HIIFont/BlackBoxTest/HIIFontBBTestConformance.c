@@ -602,8 +602,7 @@ BBTestStringIdToImageConformanceTestCheckpoint1 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
-
+                 );
   //
   // Call StringIdToImage with StringId not in PackageList, EFI_NOT_FOUND should be returned.
   //

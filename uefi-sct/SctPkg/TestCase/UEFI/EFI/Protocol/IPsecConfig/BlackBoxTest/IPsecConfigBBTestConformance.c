@@ -693,7 +693,7 @@ BBTestGetDataConformanceTestCheckpoint3 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   //
   //  Clean Environment: Call IPsec->SetData with the same DataType(0)/Selector.  
@@ -902,7 +902,7 @@ BBTestGetDataConformanceTestCheckpoint4 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   //
   //  Clean Environment: Call IPsec->SetData with the same DataType(1)/Selector.  
@@ -1066,7 +1066,7 @@ BBTestGetDataConformanceTestCheckpoint4 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   //
   //  Clean Environment: Call IPsec->SetData with the same DataType(1)/Selector.  
@@ -1244,7 +1244,7 @@ BBTestGetDataConformanceTestCheckpoint5 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   //
   //  Clean Environment: Call IPsec->SetData with the same DataType(2)/Selector.  

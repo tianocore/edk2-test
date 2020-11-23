@@ -1608,7 +1608,7 @@ BBTestReadOnlyTestCheckPoints (
                    AssertionType,
                    gReadOnlyFileSystemBBTestAssertionGuid005,
                    L"ReadOnly System: Dir SetInfo should return EFI_WRITE_PROTECTED",
-                   L"%a:%d: Status - %r",
+                   L"%a:%d: Status1 - %r, Status2 - %r",
                    __FILE__,
                    (UINTN)__LINE__,
                    Status1,

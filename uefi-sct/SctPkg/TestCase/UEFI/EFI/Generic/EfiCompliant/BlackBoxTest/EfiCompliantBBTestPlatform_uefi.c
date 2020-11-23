@@ -1017,7 +1017,7 @@ CheckConsoleProtocols (
                  AssertionType,
                  gEfiCompliantBbTestPlatformAssertionGuid001,
                  L"UEFI Compliant - Console protocols must be implemented",
-                 L"%a:%d:Text Input - %s, Text Output - %s, Text InputEx",
+                 L"%a:%d:Text Input - %s, Text Output - %s, Text InputEx - %s",
                  __FILE__,
                  (UINTN)__LINE__,
                  ValueA ? L"Yes" : L"No",

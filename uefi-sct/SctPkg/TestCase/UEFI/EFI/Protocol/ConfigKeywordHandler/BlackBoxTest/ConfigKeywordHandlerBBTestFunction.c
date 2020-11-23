@@ -447,7 +447,7 @@ BBTestGetDataFunctionTest (
                  (UINTN)__LINE__,
                  Status,
                  ProgressErr
-                 );  
+                 );
 
   Status = ConfigKeywordHandler->GetData (ConfigKeywordHandler, L"NAMESPACE=x-UEFI-ns&", KeywordString2, &Progress, &ProgressErr, &Results2);
   if (Status != EFI_SUCCESS || ProgressErr != KEYWORD_HANDLER_NO_ERROR || Progress != KeywordString2 + SctStrLen(KeywordString2)) {

@@ -171,7 +171,7 @@ Returns:
                      AssertionType,
                      gEfiGraphicsOutputQueryModeBBTestFunctionAssertionGuid,
                      L"EFI_GRAPHICS_OUTPUT_PROTOCOL.QueryMode - SetMode() then QueryMode(), compare Info structure",
-                     L"%a:%d: Status",
+                     L"%a:%d: Status - %r",
                      (UINTN) __FILE__,
                      (UINTN) (UINTN)__LINE__,
                      Status
@@ -752,7 +752,8 @@ Returns:
                      L"%a:%d:Status:%r, Expected:%r",
                      (UINTN) __FILE__,
                      (UINTN) (UINTN)__LINE__,
-                     (UINTN) Status
+                     (UINTN) Status,
+                     EFI_SUCCESS
                      );
       return Status;
     }
@@ -1473,7 +1474,8 @@ Returns:
                      L"%a:%d:Status:%r, Expected:%r",
                      (UINTN) __FILE__,
                      (UINTN) (UINTN)__LINE__,
-                     (UINTN) Status
+                     (UINTN) Status,
+                     EFI_SUCCESS
                      );
       continue;
     }

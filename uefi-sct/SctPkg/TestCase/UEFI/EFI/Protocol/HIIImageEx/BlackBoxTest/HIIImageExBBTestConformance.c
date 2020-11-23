@@ -2030,7 +2030,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint1(
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );    
+                 );
 
   //
   // Call DrawImageIdEx with PackageList been NULL
@@ -2059,7 +2059,7 @@ BBTestDrawImageIdExConformanceTestCheckpoint1(
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   //
   // Call DrawImageIdEx with invalid ImageId

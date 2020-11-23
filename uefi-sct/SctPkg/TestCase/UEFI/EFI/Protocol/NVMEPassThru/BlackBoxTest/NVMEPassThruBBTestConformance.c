@@ -405,7 +405,7 @@ BBTestPassThruConformanceTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    EFI_UNSUPPORTED
-                   ); 
+                   );
     return EFI_UNSUPPORTED; 
   }
   

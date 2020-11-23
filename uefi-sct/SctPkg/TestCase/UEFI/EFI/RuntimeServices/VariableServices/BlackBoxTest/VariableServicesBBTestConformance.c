@@ -3653,8 +3653,10 @@ HardwareErrorRecordConfTest (
                      L"RT.SetVariable - Retrive the Hardware Error Record variables, check the name of them",
                      L"%a:%d:Status - %r, Expected - %r",
                      __FILE__,
-                     (UINTN)__LINE__
-                     );  
+                     (UINTN)__LINE__,
+                     Status,
+                     EFI_SUCCESS
+                     );
 
 
   if (AssertionType == EFI_TEST_ASSERTION_FAILED)

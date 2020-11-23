@@ -4686,7 +4686,8 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
                    __FILE__,
                    (UINTN)__LINE__,
                    4,
-                   EFI_SUCCESS
+                   EFI_SUCCESS,
+                   BlockIo2TokenBuffer[IndexI].TransactionStatus
                    );
     
     Status = gtBS->SetTimer (TimerEvent, TimerCancel, 0);
