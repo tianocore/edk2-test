@@ -90,7 +90,8 @@ DevicePathUtilitiesCreateDeviceNodeConformanceTest (
                 L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - CreatDeviceNode should not succeed with invalid NodeLength set",
                 L"%a:%d:Status - %r",
                 __FILE__,
-                (UINTN)__LINE__
+                (UINTN)__LINE__,
+                Status
                 );
 
   return EFI_SUCCESS;
@@ -284,7 +285,8 @@ DevicePathUtilitiesAppendDevicePathConformanceTest (
                 L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - SctAppendDevicePath should ignore Src1 when it is set NULL",
                 L"%a:%d:Status - %r",
                 __FILE__,
-                (UINTN)__LINE__
+                (UINTN)__LINE__,
+                Status
                 );
 
   //
@@ -326,7 +328,8 @@ DevicePathUtilitiesAppendDevicePathConformanceTest (
                 L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - SctAppendDevicePath should ignore Src2 when it is set NULL",
                 L"%a:%d:Status - %r",
                 __FILE__,
-                (UINTN)__LINE__
+                (UINTN)__LINE__,
+                Status
                 );
 
   pDevicePath1    = DevicePathUtilities->AppendDevicePath (NULL, NULL);
@@ -417,7 +420,8 @@ DevicePathUtilitiesAppendDevicePathInstanceConformanceTest (
                 L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - AppendDevicePathInstance should not succeed with DevicePathInstance set to be NULL",
                 L"%a:%d:Status - %r",
                 __FILE__,
-                (UINTN)__LINE__
+                (UINTN)__LINE__,
+                Status
                 );
 
   return EFI_SUCCESS;
@@ -473,7 +477,8 @@ DevicePathUtilitiesGetNextDevicePathInstanceConformanceTest (
                 L"EFI_DEVICE_PATH_UTILITIES_PROTOCOL - GetNextDevicePathInstance should not succeed with DevicePathInstance set to be NULL",
                 L"%a:%d:Status - %r",
                 __FILE__,
-                (UINTN)__LINE__
+                (UINTN)__LINE__,
+                Status
                 );
 
   return EFI_SUCCESS;

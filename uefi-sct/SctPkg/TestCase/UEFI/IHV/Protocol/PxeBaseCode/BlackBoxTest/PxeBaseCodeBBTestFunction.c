@@ -1252,7 +1252,7 @@ BBTestNewStopFunctionTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Status
-                   );    
+                   );
   }
 
   //

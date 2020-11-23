@@ -2233,7 +2233,8 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 L"EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL - ConvertDeviceNodeToText must correctly recover the converting ConvertTextToDeviceNode has acted on the device node string",
                 L"%a:%d, Convert MemoryMapped(%d,0x123456789ABCDEF,0xFEDCBA9876543210)",
                 __FILE__,
-                (UINTN)__LINE__
+                (UINTN)__LINE__,
+                EfiMaxMemoryType
                 );
 
   //
@@ -3414,7 +3415,7 @@ DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
                 L"%a:%d, Convert SD(0)",
                 __FILE__,
                 (UINTN)__LINE__
-                );  
+                );
 
   //
   // Bluetooth(001320F5FA77) 

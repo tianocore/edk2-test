@@ -2333,7 +2333,7 @@ BBTestDrawImageIdConformanceTestCheckpoint1(
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );    
+                 );
 
   //
   // Call DrawImageId with PackageList been NULL
@@ -2362,7 +2362,7 @@ BBTestDrawImageIdConformanceTestCheckpoint1(
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   //
   // Call DrawImageId with invalid ImageId

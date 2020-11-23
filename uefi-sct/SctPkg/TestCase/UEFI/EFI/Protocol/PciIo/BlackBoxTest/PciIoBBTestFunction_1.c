@@ -4480,7 +4480,7 @@ IoWrite_Func (
       //
       //then read out the data in destination address range.
       //
-      PciIo->Io.Read (
+      Status = PciIo->Io.Read (
                   PciIo,
                   PciIoWidth,
                   BarIndex,
@@ -4508,7 +4508,8 @@ IoWrite_Func (
                      L"EFI_PCI_IO_PROTOCOL.Io.Write - the data read must equal with the data written",
                      L"%a:%d:Status - %r",
                      __FILE__,
-                     (UINTN)__LINE__
+                     (UINTN)__LINE__,
+                     Status
                      );
       //
       //write the data using EfiPciIoWidthFifoUintX.

@@ -1945,7 +1945,7 @@ BBTestTransmitConformanceTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  StatusBuf[1]
-                 );  
+                 );
 
   StandardLib->RecordAssertion (
                  StandardLib,

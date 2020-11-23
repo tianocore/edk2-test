@@ -193,7 +193,7 @@ BBTestEraseBlocksConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     );      
+                     );
 
     } else {
       Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, 0, &Token, EraseSize);
@@ -211,7 +211,7 @@ BBTestEraseBlocksConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     );  
+                     );
 
       Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, LastBlock + 1, &Token, EraseSize);
       if (Status == EFI_MEDIA_CHANGED)
@@ -228,7 +228,7 @@ BBTestEraseBlocksConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     );  
+                     );
 
       Status = EraseBlock->EraseBlocks(EraseBlock, MediaId + 1, LastBlock - 10, &Token, EraseSize + 1);
       if (Status == EFI_MEDIA_CHANGED)
@@ -245,7 +245,7 @@ BBTestEraseBlocksConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     );  
+                     );
 
       Status = EraseBlock->EraseBlocks(EraseBlock, MediaId, LastBlock + 1, &Token, EraseSize);
       if (Status == EFI_INVALID_PARAMETER)

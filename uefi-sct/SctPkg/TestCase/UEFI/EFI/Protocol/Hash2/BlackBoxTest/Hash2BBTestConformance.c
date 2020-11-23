@@ -299,7 +299,7 @@ BBTestHashInitConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
+                     );
  
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
@@ -320,8 +320,7 @@ BBTestHashInitConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
-
+                     );
     }
   }
   
@@ -384,7 +383,7 @@ BBTestHashUpdateConformanceTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   for (Index = 0; Index < 6; Index++) {
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
@@ -407,7 +406,7 @@ BBTestHashUpdateConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
+                     );
  
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
@@ -428,8 +427,7 @@ BBTestHashUpdateConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
-
+                     );
     }
   }
 
@@ -492,7 +490,7 @@ BBTestHashFinalConformanceTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   for (Index = 0; Index < 6; Index++) {
     Status = Hash2->GetHashSize (Hash2, &gHashAlgorithmGuids[Index], &HashSize);
@@ -513,7 +511,7 @@ BBTestHashFinalConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
+                     );
 
       Status = Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
       Status = Hash2->HashUpdate (Hash2, Message, MessageSize);
@@ -533,7 +531,7 @@ BBTestHashFinalConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
+                     );
  
 
       Status= Hash2->HashInit (Hash2, &gHashAlgorithmGuids[Index]);
@@ -554,7 +552,7 @@ BBTestHashFinalConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
+                     );
       
       Status = Hash2->HashFinal (Hash2,  (EFI_HASH2_OUTPUT *) Hash2Out);
       Status = Hash2->HashFinal (Hash2, (EFI_HASH2_OUTPUT*) Hash2Out);;
@@ -572,8 +570,7 @@ BBTestHashFinalConformanceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      Status
-                     ); 
-
+                     );
     }
   }
 

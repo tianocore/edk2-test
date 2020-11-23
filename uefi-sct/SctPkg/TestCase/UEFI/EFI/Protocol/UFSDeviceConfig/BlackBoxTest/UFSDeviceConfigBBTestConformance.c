@@ -81,7 +81,7 @@ BBTestRwUfsDescriptorConfTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
   
   Status = UFSDeviceConfig->RwUfsDescriptor(UFSDeviceConfig, TRUE, 0, 0, 0, &Descriptor, NULL);
   if (Status == EFI_INVALID_PARAMETER) 
@@ -159,7 +159,7 @@ BBTestRwUfsFlagConfTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
   
   Status = UFSDeviceConfig->RwUfsFlag(UFSDeviceConfig, TRUE, 1, NULL);
   if (Status == EFI_INVALID_PARAMETER) 
@@ -237,7 +237,7 @@ BBTestRwUfsAttributeConfTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
   
   Status = UFSDeviceConfig->RwUfsAttribute(UFSDeviceConfig, TRUE, 0, 0, 0, &Attribute, NULL);
   if (Status == EFI_INVALID_PARAMETER) 

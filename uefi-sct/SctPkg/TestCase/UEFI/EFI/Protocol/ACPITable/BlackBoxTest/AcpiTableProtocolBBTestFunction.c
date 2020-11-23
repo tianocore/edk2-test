@@ -303,7 +303,7 @@ BBTestInstallAcpiTableFunctionTestCheckpoint1 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 ); 
+                 );
 
   if (EFI_SUCCESS == Status) {
     Status = AcpiTable->UninstallAcpiTable (

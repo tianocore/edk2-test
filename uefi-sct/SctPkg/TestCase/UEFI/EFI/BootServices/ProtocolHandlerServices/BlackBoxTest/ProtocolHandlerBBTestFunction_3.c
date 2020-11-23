@@ -11672,7 +11672,6 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
                      L"%a:%d:TPL - %d",
                      __FILE__,
                      (UINTN)__LINE__,
-                     EntryCount,
                      TplArray[Index]
                      );
       //
@@ -11825,7 +11824,6 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
                    L"%a:%d:TPL - %d",
                    __FILE__,
                    (UINTN)__LINE__,
-                   EntryCount,
                    TplArray[Index]
                    );
     //
@@ -15398,11 +15396,11 @@ BBTestConnectControllerInterfaceTestCheckPoint14 (
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
                    L"GetPlatformOverrideDriverImages - build environment",
-                   L"%a:%d:Status - %r, NoHandles - %d",
+                   L"%a:%d:Status - %r",
                    __FILE__,
                    (UINTN)__LINE__,
                    Status
-                     );
+                   );
     goto Done;
   }
 
@@ -15699,7 +15697,7 @@ BBTestConnectControllerInterfaceTestCheckPoint15 (
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
                    L"GetPlatformOverrideDriverImages - build environment",
-                   L"%a:%d:Status - %r, NoHandles - %d",
+                   L"%a:%d:Status - %r",
                    __FILE__,
                    (UINTN)__LINE__,
                    Status

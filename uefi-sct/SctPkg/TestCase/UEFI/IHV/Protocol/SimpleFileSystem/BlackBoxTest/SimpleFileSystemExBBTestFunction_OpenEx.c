@@ -10216,7 +10216,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
                    FileIoEntity->StatusAsync,
                    FileIoEntity->OpenMode,
                    FileIoEntity->Name
-                   ); 
+                   );
     if (FileIoEntity->OpenMode == EFI_FILE_MODE_READ){
       DirHandle2->Open (
               DirHandle2,

@@ -607,8 +607,7 @@ BBTestGetStringConformanceTestCheckpoint1 (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
-
+                 );
   //
   // Remove the PackageList from the HII database
   //

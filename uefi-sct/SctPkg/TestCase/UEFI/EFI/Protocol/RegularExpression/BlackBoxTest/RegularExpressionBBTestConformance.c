@@ -193,7 +193,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
                  (UINTN)__LINE__,
                  Status,
                  SyntaxTypeListSize
-               );  
+               );
   
   //
   // REGULAR_EXPRESSION_PROTOCOL.GetInfo() with SyntaxTypeListSize = NULL.
