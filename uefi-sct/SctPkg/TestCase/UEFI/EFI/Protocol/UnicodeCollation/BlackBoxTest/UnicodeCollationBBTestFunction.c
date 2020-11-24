@@ -337,6 +337,7 @@ BBTestStrLwrFunctionAutoTest (
                                         };
 
   CHAR16                               TestDataSav[MAX_SIZE_OF_STRING + 1];
+  CHAR16                               TestDataRw[MAX_SIZE_OF_STRING + 1];
 
 
 
@@ -368,14 +369,15 @@ BBTestStrLwrFunctionAutoTest (
     //
     // Backup current test data
     //
+    CopyUnicodeString (TestDataRw, TestData[Index]);
     CopyUnicodeString (TestDataSav, TestData[Index]);
 
     //
     // For each test data, test the StrLwr functionality.
     //
-    UnicodeCollation->StrLwr (UnicodeCollation, TestData[Index]);
+    UnicodeCollation->StrLwr (UnicodeCollation, TestDataRw);
 
-    if (CheckStrLwr (TestDataSav, TestData[Index])) {
+    if (CheckStrLwr (TestDataSav, TestDataRw)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -390,15 +392,15 @@ BBTestStrLwrFunctionAutoTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    TestDataSav,
-                   TestData[Index]
+                   TestDataRw
                    );
 
 
-    CopyUnicodeString (TestDataSav, TestData[Index]);
-    UnicodeCollation->StrUpr (UnicodeCollation, TestData[Index]);
-    UnicodeCollation->StrLwr (UnicodeCollation, TestData[Index]);
+    CopyUnicodeString (TestDataSav, TestDataRw);
+    UnicodeCollation->StrUpr (UnicodeCollation, TestDataRw);
+    UnicodeCollation->StrLwr (UnicodeCollation, TestDataRw);
 
-    if (CheckStrEql (TestDataSav, TestData[Index])) {
+    if (CheckStrEql (TestDataSav, TestDataRw)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -413,7 +415,7 @@ BBTestStrLwrFunctionAutoTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    TestDataSav,
-                   TestData[Index]
+                   TestDataRw
                    );
   };
 
@@ -458,6 +460,7 @@ BBTestStrUprFunctionAutoTest (
                                         };
 
   CHAR16                               TestDataSav[MAX_SIZE_OF_STRING + 1];
+  CHAR16                               TestDataRw[MAX_SIZE_OF_STRING + 1];
 
 
 
@@ -490,13 +493,14 @@ BBTestStrUprFunctionAutoTest (
     // Backup current test data
     //
     CopyUnicodeString (TestDataSav, TestData[Index]);
+    CopyUnicodeString (TestDataRw, TestData[Index]);
 
     //
     // For each test data, test the StrUpr functionality.
     //
-    UnicodeCollation->StrUpr (UnicodeCollation, TestData[Index]);
+    UnicodeCollation->StrUpr (UnicodeCollation, TestDataRw);
 
-    if (CheckStrUpr (TestDataSav, TestData[Index])) {
+    if (CheckStrUpr (TestDataSav, TestDataRw)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -511,14 +515,14 @@ BBTestStrUprFunctionAutoTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    TestDataSav,
-                   TestData[Index]
+                   TestDataRw
                    );
 
-    CopyUnicodeString (TestDataSav, TestData[Index]);
-    UnicodeCollation->StrLwr (UnicodeCollation, TestData[Index]);
-    UnicodeCollation->StrUpr (UnicodeCollation, TestData[Index]);
+    CopyUnicodeString (TestDataSav, TestDataRw);
+    UnicodeCollation->StrLwr (UnicodeCollation, TestDataRw);
+    UnicodeCollation->StrUpr (UnicodeCollation, TestDataRw);
 
-    if (CheckStrEql (TestDataSav, TestData[Index])) {
+    if (CheckStrEql (TestDataSav, TestDataRw)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -533,7 +537,7 @@ BBTestStrUprFunctionAutoTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    TestDataSav,
-                   TestData[Index]
+                   TestDataRw
                    );
   };
 
