@@ -3162,12 +3162,6 @@ CheckEbcProtocol (
                         );
     if (!EFI_ERROR (Status) && (SctStriCmp (String, L"yes") == 0)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
-      if (!GenTestConfigTitle (IniFile, &AssertionType, L"EBCSupport")) {
-        GenTestConfigContent (L"Ebc->CreateThunk", Ebc->CreateThunk != NULL);
-        GenTestConfigContent (L"Ebc->UnloadImage", Ebc->UnloadImage != NULL);
-        GenTestConfigContent (L"Ebc->RegisterICacheFlush", Ebc->RegisterICacheFlush != NULL);
-        GenTestConfigContent (L"Ebc->GetVersion ", Ebc->GetVersion != NULL);
-      }
     }
   }
 
