@@ -1198,8 +1198,12 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode1)->EndingOffset = 0x1234;
   Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
   pDeviceNode2 = SctConvertTextToDeviceNode(Text);
-  ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Reserved = 0;
-
+  SctPrint(L"pDeviceNode2 = %p\n", pDeviceNode2);
+  if (pDeviceNode2 &&
+      ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Length ==
+      sizeof(MEDIA_OFFSET_DEVICE_PATH)) {
+    ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Reserved = 0;
+  }
   if ((pDeviceNode2 != NULL) && (SctCompareMem (pDeviceNode2, pDeviceNode1, SctDevicePathNodeLength(pDeviceNode1)) == 0)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
