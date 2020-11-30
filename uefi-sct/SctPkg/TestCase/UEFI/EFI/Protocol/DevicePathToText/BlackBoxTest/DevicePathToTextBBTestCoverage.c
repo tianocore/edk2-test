@@ -1198,7 +1198,6 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode1)->EndingOffset = 0x1234;
   Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
   pDeviceNode2 = SctConvertTextToDeviceNode(Text);
-  SctPrint(L"pDeviceNode2 = %p\n", pDeviceNode2);
   if (pDeviceNode2 &&
       ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Header.Length ==
       sizeof(MEDIA_OFFSET_DEVICE_PATH)) {
