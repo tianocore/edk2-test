@@ -71,6 +71,7 @@ BBTestEraseBlocksFunctionTest (
   UINT64                                Index;
   UINTN                                 Index1;
   UINTN                                 Remainder;
+  UINT64                                EraseCounter;
 
   EFI_ERASE_BLOCK_TOKEN                 Token;
   EFI_BLOCK_IO2_TOKEN                   BlockIo2Token;
@@ -223,25 +224,40 @@ BBTestEraseBlocksFunctionTest (
         // Read the data with 0, the first/last block should not be erased
         ReadStatus = BlockIo->ReadBlocks (BlockIo, MediaId, Lba, BufferSize, (VOID*)Buffer2);
         if (ReadStatus == EFI_SUCCESS) {
-          for (Index1 = 0; Index1 < BlockSize; Index1++) {
-            if (Buffer2[Index1] != 0) {
+          for (Index1 = 0, EraseCounter = 0; Index1 < BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0x00 && Buffer2[Index1] != 0xFF) {
               IsZero1 = FALSE;
               break;
+            } else if (Buffer2[Index1] == 0x00) {
+              EraseCounter++;
             }
           }
+          if (EraseCounter!=0 && EraseCounter!=BlockSize) {
+            IsZero1 = FALSE;
+          }
 
-          for (Index1 = BlockSize; Index1 < BufferSize - BlockSize; Index1++) {
-            if (Buffer2[Index1] != 0) {
+          for (Index1 = BlockSize, EraseCounter = 0; Index1 < BufferSize - BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0x00 && Buffer2[Index1] != 0xFF) {
               IsZero2 = FALSE;
               break;
+            } else if (Buffer2[Index1] == 0x00) {
+              EraseCounter++;
             }
           }
+          if (EraseCounter!=0 && EraseCounter!=(BufferSize - (BlockSize*2))) {
+            IsZero2 = FALSE;
+          }
 
-          for (Index1 = BufferSize - BlockSize; Index1 < BufferSize; Index1++) {
-            if (Buffer2[Index1] != 0) {
+          for (Index1 = BufferSize - BlockSize, EraseCounter = 0; Index1 < BufferSize; Index1++) {
+            if (Buffer2[Index1] != 0x00 && Buffer2[Index1] != 0xFF) {
               IsZero3 = FALSE;
               break;
+            } else if (Buffer2[Index1] == 0x00) {
+              EraseCounter++;
             }
+          }
+          if (EraseCounter!=0 && EraseCounter!=BlockSize) {
+            IsZero3 = FALSE;
           }
 
           if ((EraseStatus == EFI_SUCCESS) && (IsZero1 == FALSE) && (IsZero2 == TRUE) && ((IsZero3 == FALSE)))
@@ -492,25 +508,40 @@ BlockIo2:
         // Read the data with 0, the first/last block should not be erased
         ReadStatus = BlockIo2->ReadBlocksEx (BlockIo2, MediaId, Lba, &BlockIo2Token, BufferSize, (VOID*)Buffer2);
         if (ReadStatus == EFI_SUCCESS) {
-          for (Index1 = 0; Index1 < BlockSize; Index1++) {
-            if (Buffer2[Index1] != 0) {
+          for (Index1 = 0, EraseCounter = 0; Index1 < BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0x00 && Buffer2[Index1] != 0xFF) {
               IsZero1 = FALSE;
               break;
+            } else if (Buffer2[Index1] == 0x00) {
+              EraseCounter++;
             }
           }
+          if (EraseCounter!=0 && EraseCounter!=BlockSize) {
+            IsZero1 = FALSE;
+          }
 
-          for (Index1 = BlockSize; Index1 < BufferSize - BlockSize; Index1++) {
-            if (Buffer2[Index1] != 0) {
+          for (Index1 = BlockSize, EraseCounter = 0; Index1 < BufferSize - BlockSize; Index1++) {
+            if (Buffer2[Index1] != 0x00 && Buffer2[Index1] != 0xFF) {
               IsZero2 = FALSE;
               break;
+            } else if (Buffer2[Index1] == 0x00) {
+              EraseCounter++;
             }
           }
+          if (EraseCounter!=0 && EraseCounter!=(BufferSize - (BlockSize*2))) {
+            IsZero2 = FALSE;
+          }
 
-          for (Index1 = BufferSize - BlockSize; Index1 < BufferSize; Index1++) {
-            if (Buffer2[Index1] != 0) {
+          for (Index1 = BufferSize - BlockSize, EraseCounter = 0; Index1 < BufferSize; Index1++) {
+            if (Buffer2[Index1] != 0x00 && Buffer2[Index1] != 0xFF) {
               IsZero3 = FALSE;
               break;
+            } else if (Buffer2[Index1] == 0x00) {
+              EraseCounter++;
             }
+          }
+          if (EraseCounter!=0 && EraseCounter!=BlockSize) {
+            IsZero3 = FALSE;
           }
 
           if ((EraseStatus == EFI_SUCCESS) && (IsZero1 == FALSE) && (IsZero2 == TRUE) && ((IsZero3 == FALSE)))
