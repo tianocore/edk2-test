@@ -2901,7 +2901,8 @@ BBTestCheckImageConformanceTestCheckpoint2 (
   UINTN                                          i;
   EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *p;
   UINTN                                          FunctionTested;
-
+  EFI_FIRMWARE_IMAGE_AUTHENTICATION              *EFIA;
+  EFI_GUID                                       gEfiCertPkcs7Guid;
   //
   // Init
   //
@@ -2909,6 +2910,7 @@ BBTestCheckImageConformanceTestCheckpoint2 (
   Status = EFI_SUCCESS;
   AssertionType = EFI_TEST_ASSERTION_PASSED;
   TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid012;
+  gEfiCertPkcs7Guid = gFirmwareManagementBBTestConformanceSupportGuid005;
   ResultMessageLabel = L"CheckImage, conformance checkpoint #2";
 
   BufferImageInfo = NULL;
@@ -3020,6 +3022,13 @@ BBTestCheckImageConformanceTestCheckpoint2 (
       ResultMessageData = L"test case initialization failure.";
       goto Exit;
     }
+
+    EFIA                                = Image;
+    EFIA->AuthInfo.Hdr.dwLength         = sizeof(WIN_CERTIFICATE_UEFI_GUID)+0x10;
+    EFIA->AuthInfo.Hdr.wRevision        = 0x0200;
+    EFIA->AuthInfo.Hdr.wCertificateType = WIN_CERT_TYPE_EFI_GUID;
+    for (i=0; i<sizeof(EFI_GUID); ((UINT8*)&EFIA->AuthInfo.CertType)[i]=((UINT8*)&gEfiCertPkcs7Guid)[i], i++);
+
     BufferImage = Image;
     FunctionTested++;
     Status = FirmwareManagement->CheckImage ( 

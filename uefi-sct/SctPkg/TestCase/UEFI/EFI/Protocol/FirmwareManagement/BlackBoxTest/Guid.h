@@ -67,6 +67,11 @@ extern EFI_GUID gFirmwareManagementBBTestConformanceSupportGuid003;
 
 extern EFI_GUID gFirmwareManagementBBTestConformanceSupportGuid004;
 
+#define EFI_TEST_FIRMWAREMANAGEMENTBBTESTCONFORMANCE_SUPPORT_005_GUID \
+{ 0x4aafd29d, 0x68df, 0x49ee, {0x8a, 0xa9, 0x34, 0x7d, 0x37, 0x56, 0x65, 0xa7 }}
+
+extern EFI_GUID gFirmwareManagementBBTestConformanceSupportGuid005;
+
 // ****************************************************************************
 //   Conformance - Assertion
 // ****************************************************************************

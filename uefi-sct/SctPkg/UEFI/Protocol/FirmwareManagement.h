@@ -58,6 +58,22 @@ UINT64    AttributesSetting;
 UINT64    Compatibilities;
 } EFI_FIRMWARE_IMAGE_DESCRIPTOR;
 
+typedef struct {
+  ///
+  /// It is included in the signature of AuthInfo. It is used to ensure freshness/no replay.
+  /// It is incremented during each firmware image operation.
+  ///
+  UINT64                                  MonotonicCount;
+  ///
+  /// Provides the authorization for the firmware image operations. It is a signature across
+  /// the image data and the Monotonic Count value. Caller uses the private key that is
+  /// associated with a public key that has been provisioned via the key exchange.
+  /// Because this is defined as a signature, WIN_CERTIFICATE_UEFI_GUID.CertType must
+  /// be EFI_CERT_TYPE_PKCS7_GUID.
+  ///
+  WIN_CERTIFICATE_UEFI_GUID               AuthInfo;
+} EFI_FIRMWARE_IMAGE_AUTHENTICATION;
+
 //
 // Image Attribute Definitions
 //
@@ -78,6 +94,13 @@ UINT64    Compatibilities;
 //
 
 #define EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION  1
+
+//
+// _WIN_CERTIFICATE.wCertificateType
+//
+#define WIN_CERT_TYPE_PKCS_SIGNED_DATA 0x0002
+#define WIN_CERT_TYPE_EFI_PKCS115      0x0EF0
+#define WIN_CERT_TYPE_EFI_GUID         0x0EF1
 
 /*++
 //
