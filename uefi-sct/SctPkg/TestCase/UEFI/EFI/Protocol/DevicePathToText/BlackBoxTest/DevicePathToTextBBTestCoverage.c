@@ -1199,7 +1199,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   Text = DevicePathToText->ConvertDeviceNodeToText (pDeviceNode1, FALSE, FALSE);
   pDeviceNode2 = SctConvertTextToDeviceNode(Text);
   if (pDeviceNode2 &&
-      ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Header.Length ==
+      *((UINT16*)((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Header.Length) ==
       sizeof(MEDIA_OFFSET_DEVICE_PATH)) {
     ((MEDIA_OFFSET_DEVICE_PATH *)pDeviceNode2)->Reserved = 0;
   }
