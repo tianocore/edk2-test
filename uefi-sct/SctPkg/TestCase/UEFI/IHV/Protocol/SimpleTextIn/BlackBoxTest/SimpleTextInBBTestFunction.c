@@ -812,7 +812,7 @@ BBTestWaitForKeyFunctionManualTest (
                    StandardLib,
                    AssertionType,
                    gTestGenericFailureGuid,
-                   L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset with ExtendedVeirification as TRUE",
+                   L"EFI_SIMPLE_TEXT_IN_PROTOCOL.Reset - Reset with ExtendedVerification as TRUE",
                    L"%a:%d, Status = %r",
                    __FILE__,
                    (UINTN)__LINE__,
