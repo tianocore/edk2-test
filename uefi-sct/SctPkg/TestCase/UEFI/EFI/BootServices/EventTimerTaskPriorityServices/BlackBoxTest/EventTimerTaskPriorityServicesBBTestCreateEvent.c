@@ -190,6 +190,7 @@ BBTestCreateEvent_Conf_Sub1 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
+                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
@@ -263,6 +264,7 @@ BBTestCreateEvent_Conf_Sub2 (
   EFI_TPL             InvalidNotifyTpls[] = {
                         (EFI_TPL) (TPL_HIGH_LEVEL + 1),
                         (EFI_TPL) (TPL_APPLICATION - 1),
+                        (EFI_TPL) TPL_APPLICATION,
                         (EFI_TPL) -1,
                         0
                       };
@@ -340,6 +342,7 @@ BBTestCreateEvent_Conf_Sub3 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
+                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
@@ -404,6 +407,7 @@ BBTestCreateEvent_Conf_Sub4 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
+                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
@@ -478,6 +482,7 @@ BBTestCreateEvent_Func_Sub1 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
+                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
