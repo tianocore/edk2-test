@@ -249,28 +249,20 @@ mkdir -p $DEST_DIR
 cp $EDK_TOOLS_PATH/Source/C/bin/GenBin $DEST_DIR/GenBin
 
 #
-# Build the SCT package
+# Build the packages needed for the SCT
+# Set $DSC_EXTRA to any extra packages needed for the build
 #
-build -p SctPkg/UEFI/UEFI_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
-
-# Check if there is any error
-status=$?
-if test $status -ne 0
-then
-  echo Could not build the UEFI SCT package
-  exit -1
-fi
-
-build -p SctPkg/UEFI/IHV_SCT.dsc -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
-
-# Check if there is any error
-status=$?
-if test $status -ne 0
-then
-  echo Could not build the IHV SCT package
-  exit -1
-fi
-
+for DSC in SctPkg/UEFI/UEFI_SCT.dsc SctPkg/UEFI/IHV_SCT.dsc $DSC_EXTRA
+do
+	build -p $DSC -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
+	# Check if there is any error
+	status=$?
+	if test $status -ne 0
+	then
+		echo Could not build package $DSC
+		exit -1
+	fi
+done
 
 #
 # If the argument is clean, then don't have to generate Sct binary.
