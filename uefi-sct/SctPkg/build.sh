@@ -189,13 +189,16 @@ case `uname` in
    ;;
 esac
 
+# Drop parsed command line arguments
+shift 2
+
 echo "TOOLCHAIN is ${TARGET_TOOLS}"
 export ${TARGET_TOOLS}_${SCT_TARGET_ARCH}_PREFIX=$CROSS_COMPILE
 echo "Toolchain prefix: ${TARGET_TOOLS}_${SCT_TARGET_ARCH}_PREFIX=$CROSS_COMPILE"
 
 SCT_BUILD=DEBUG
-if [ "$3" = "RELEASE" -o "$3" = "DEBUG" ]; then
-  SCT_BUILD=$3
+if [ "$1" = "RELEASE" -o "$1" = "DEBUG" ]; then
+  SCT_BUILD=$1
   shift
 fi
 
@@ -254,7 +257,7 @@ cp $EDK_TOOLS_PATH/Source/C/bin/GenBin $DEST_DIR/GenBin
 #
 for DSC in SctPkg/UEFI/UEFI_SCT.dsc SctPkg/UEFI/IHV_SCT.dsc $DSC_EXTRA
 do
-	build -p $DSC -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $3 $4 $5 $6 $7 $8 $9
+	build -p $DSC -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
 	# Check if there is any error
 	status=$?
 	if test $status -ne 0
