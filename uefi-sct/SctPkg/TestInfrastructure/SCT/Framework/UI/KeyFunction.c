@@ -1862,7 +1862,7 @@ Argument:
   X0          - the top left X position in screen
   Y0          - the top left Y position in screen
   X1          - the bottom right X position in screen
-  Y1          - the bottom right Y positoin in screen
+  Y1          - the bottom right Y position in screen
 
 Returns:
 
