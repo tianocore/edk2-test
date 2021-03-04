@@ -1,6 +1,7 @@
 #
 #  Copyright 2006 - 2010 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 Intel Corporation. All rights reserved.<BR>
+#  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -30,6 +31,9 @@ ifndef ARCH
   endif
   ifneq (,$(findstring arm,$(uname_m)))
     ARCH=ARM
+  endif
+  ifneq (,$(findstring riscv64,$(uname_m)))
+    ARCH=RISCV64
   endif
   ifndef ARCH
     $(info Could not detected ARCH from uname results)

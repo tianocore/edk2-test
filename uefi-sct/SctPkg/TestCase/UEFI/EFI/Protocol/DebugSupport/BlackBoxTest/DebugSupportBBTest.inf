@@ -3,6 +3,7 @@
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
 #  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
+#  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -66,6 +67,11 @@
   Aarch64/PlatformIsa.c
   Aarch64/DebugSupportBBTestExceptionCallbackFunction.c
   Aarch64/DebugSupportBBTestCacheFunction.c
+
+[sources.RISCV64]
+  Riscv64/PlatformIsa.c
+  Riscv64/DebugSupportBBTestExceptionCallbackFunction.c
+  Riscv64/DebugSupportBBTestCacheFunction.c
 
 [Packages]
   SctPkg/SctPkg.dec

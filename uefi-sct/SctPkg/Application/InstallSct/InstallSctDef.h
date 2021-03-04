@@ -3,6 +3,7 @@
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
   Portions copyright (c) 2014, ARM Ltd. All rights reserved.<BR>
+  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -32,6 +33,9 @@
 #elif defined(EFIAARCH64)
   #define INSTALL_SCT_PLATFORM_SHORT_NAME   L"aarch64"
   #define INSTALL_SCT_PLATFORM_NAME         L"AARCH64"
+#elif defined(EFIRISCV64)
+  #define INSTALL_SCT_PLATFORM_SHORT_NAME   L"riscv64"
+  #define INSTALL_SCT_PLATFORM_NAME         L"RISCV64"
 #else
   #error "Architecture not supported"
 #endif
