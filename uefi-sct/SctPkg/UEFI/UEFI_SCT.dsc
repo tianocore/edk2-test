@@ -2,7 +2,7 @@
 #
 #  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
-#  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
+#  (C) Copyright 2017 - 2021 Hewlett Packard Enterprise Development LP<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -42,7 +42,7 @@
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
   OUTPUT_DIRECTORY               = Build/UefiSct
-  SUPPORTED_ARCHITECTURES        = IA32|X64|ARM|AARCH64
+  SUPPORTED_ARCHITECTURES        = IA32|X64|ARM|AARCH64|RISCV64
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   
@@ -112,6 +112,12 @@
   *_*_AARCH64_PP_FLAGS         = -D EFIAARCH64 $(GCC_VER_MACRO)
   RVCT:*_*_AARCH64_DLINK_FLAGS = --muldefweak
 
+  *_*_RISCV64_CC_FLAGS         = -D EFIRISCV64 $(GCC_VER_MACRO)
+  GCC:*_*_RISCV64_CC_FLAGS     = -D EFIRISCV64 $(GCC_VER_MACRO) -ffreestanding -nostdinc -nostdlib -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error
+  *_*_RISCV64_VFRPP_FLAGS      = -D EFIRISCV64 $(GCC_VER_MACRO)
+  *_*_RISCV64_APP_FLAGS        = -D EFIRISCV64 $(GCC_VER_MACRO)
+  *_*_RISCV64_PP_FLAGS         = -D EFIRISCV64 $(GCC_VER_MACRO)
+
   DEBUG_*_*_CC_FLAGS  = -DEFI_DEBUG
   RELEASE_*_*_CC_FLAGS  = -DMDEPKG_NDEBUG
 
@@ -127,6 +133,9 @@
   ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 [Libraries.AARCH64]
+  ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
+
+[Libraries.RISCV64]
   ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 [LibraryClasses.common]
@@ -155,6 +164,9 @@
   NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 [LibraryClasses.AARCH64]
+  NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
+
+[LibraryClasses.RISCV64]
   NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 ###############################################################################

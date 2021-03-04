@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>   
+  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -607,6 +608,60 @@ typedef struct {
   UINT64  FAR;  // Fault Address Register
 } EFI_SYSTEM_CONTEXT_AARCH64;
 
+///
+/// RISC-V processor exception types.
+///
+#define EXCEPT_RISCV_INST_MISALIGNED              0
+#define EXCEPT_RISCV_INST_ACCESS_FAULT            1
+#define EXCEPT_RISCV_ILLEGAL_INST                 2
+#define EXCEPT_RISCV_BREAKPOINT                   3
+#define EXCEPT_RISCV_LOAD_ADDRESS_MISALIGNED      4
+#define EXCEPT_RISCV_LOAD_ACCESS_FAULT            5
+#define EXCEPT_RISCV_STORE_AMO_ADDRESS_MISALIGNED 6
+#define EXCEPT_RISCV_STORE_AMO_ACCESS_FAULT       7
+#define EXCEPT_RISCV_ENV_CALL_FROM_UMODE          8
+#define EXCEPT_RISCV_ENV_CALL_FROM_SMODE          9
+#define EXCEPT_RISCV_ENV_CALL_FROM_HMODE          10
+#define EXCEPT_RISCV_ENV_CALL_FROM_MMODE          11
+
+#define EXCEPT_RISCV_SOFTWARE_INT       0x0
+#define EXCEPT_RISCV_TIMER_INT          0x1
+
+typedef struct {
+  UINT64  X0;
+  UINT64  X1;
+  UINT64  X2;
+  UINT64  X3;
+  UINT64  X4;
+  UINT64  X5;
+  UINT64  X6;
+  UINT64  X7;
+  UINT64  X8;
+  UINT64  X9;
+  UINT64  X10;
+  UINT64  X11;
+  UINT64  X12;
+  UINT64  X13;
+  UINT64  X14;
+  UINT64  X15;
+  UINT64  X16;
+  UINT64  X17;
+  UINT64  X18;
+  UINT64  X19;
+  UINT64  X20;
+  UINT64  X21;
+  UINT64  X22;
+  UINT64  X23;
+  UINT64  X24;
+  UINT64  X25;
+  UINT64  X26;
+  UINT64  X27;
+  UINT64  X28;
+  UINT64  X29;
+  UINT64  X30;
+  UINT64  X31;
+} EFI_SYSTEM_CONTEXT_RISCV64;
+
 //
 // Universal EFI_SYSTEM_CONTEXT definition
 //
@@ -618,6 +673,7 @@ union {
   EFI_SYSTEM_CONTEXT_IPF                  *SystemContextIpf;
   EFI_SYSTEM_CONTEXT_ARM                  *SystemContextArm;
   EFI_SYSTEM_CONTEXT_AARCH64              *SystemContextAArch64;
+  EFI_SYSTEM_CONTEXT_RISCV64              *SystemContextRiscV64;
 } EFI_SYSTEM_CONTEXT;
 
 //
@@ -645,6 +701,8 @@ VOID
 #define IMAGE_FILE_MACHINE_EBC             0x0EBC
 #define IMAGE_FILE_MACHINE_ARMTHUMB_MIXED  0x01c2
 #define IMAGE_FILE_MACHINE_ARM64           0xAA64
+#define IMAGE_FILE_MACHINE_RISCV64         0x5064
+
 
 typedef
 enum {
@@ -653,7 +711,8 @@ enum {
   IsaIpf  = IMAGE_FILE_MACHINE_IA64,
   IsaEbc  = IMAGE_FILE_MACHINE_EBC,
   IsaArm  = IMAGE_FILE_MACHINE_ARMTHUMB_MIXED, ///< 0x01c2
-  IsaAArch64  = IMAGE_FILE_MACHINE_ARM64       ///< 0xAA64
+  IsaAArch64  = IMAGE_FILE_MACHINE_ARM64,      ///< 0xAA64
+  IsaRiscv64  = IMAGE_FILE_MACHINE_RISCV64     ///< 0x5064
 } EFI_INSTRUCTION_SET_ARCHITECTURE;
 
 typedef struct _EFI_DEBUG_SUPPORT_PROTOCOL EFI_DEBUG_SUPPORT_PROTOCOL;;
