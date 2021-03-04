@@ -2,6 +2,7 @@
 #
 #  Copyright 2010 - 2012 Unified EFI, Inc.<BR>
 #  Copyright (c) 2012, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2021, Hewlett Packard Enterprise Development LP.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -23,8 +24,6 @@
 #--*/
 #start of the code section
 .text
-/* FIXME: Should alignment be different on Aarch64? */
-.align 3
 
 .global JumpToTestFunc
 .type JumpToTestFunc, %function
@@ -37,8 +36,8 @@
 #   )
 #
 JumpToTestFunc:
-	mov x2, x0
-	mov x0, x1
+	mv x2, x0
+	mv x0, x1
 
 	// Jump to Virtual function
-	blr x2
+	jalr x2

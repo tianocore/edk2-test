@@ -1,7 +1,8 @@
 /** @file
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
-  Copyright (c) 2011 - 2012 ARM Ltd. All rights reserved.<BR>   
+  Copyright (c) 2011 - 2012 ARM Ltd. All rights reserved.<BR>
+  Copyright (c) 2021 Hewlett Packard Enterprise Development LP. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -24,7 +25,6 @@ Module Name:
 #include "SCRTDriver.h"
 
 UINTN                 mHandOffPtr        =  0;
-EFI_PHYSICAL_ADDRESS  mIoPortSpaceAddress = 0;
 
 
 EFI_STATUS
@@ -42,18 +42,10 @@ ConsumeHandOff (
    HandOffPtr  = (RUNTIME_HANDOFF*)mHandOffPtr;
    *ConfigData =  HandOffPtr->ConfigureInfo;
 
-   if (!HandOffPtr->DebuggerInfo.MmioFlag){
-     //
-     // If debug port is I/O mapped, fix IoBase Address.
-     //
-     FixAddress(&HandOffPtr->DebuggerInfo.IoBase);
-     mIoPortSpaceAddress = HandOffPtr->DebuggerInfo.IoBase;
-   } else {
-     //
-     // If debug port is MMIO, fix MmioBase Address.
-     //
-     FixAddress(&HandOffPtr->DebuggerInfo.MmioBase);
-   }
+   //
+   // Fix MmioBase Address.
+   //
+   FixAddress(&HandOffPtr->DebuggerInfo.MmioBase);
 
    return EFI_SUCCESS;
 }
@@ -65,7 +57,7 @@ Send2UART (
   )
 {
   //
-  // TODO: On ARM platforms use platform specific functions to
+  // TODO: On RISC-V platforms use platform specific functions to
   // write the data to UART.
   //
   return EFI_SUCCESS;

@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
   Copyright (c) 2011 - 2012 ARM Ltd. All rights reserved.<BR>   
+  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -21,7 +22,7 @@ Module Name:
 
 --*/
 
-#include "Io.h"
+#include "SCRTDriver.h"
 
 EFI_STATUS
 EFIAPI
@@ -119,11 +120,11 @@ FixAddress (
   )
 {
 		//
-		//Note: On ARM platforms don't have to do this as all the functions are virtually mapped.
+		//Note: On RISC-V platforms don't have to do this as all the functions are virtually mapped.
 		//
 }
 
-// Quick port to ARM
+// Quick port to RISC-V. It doesn't have traditional I/O-Port 80h POST Codes
 
 VOID
 Port80 (

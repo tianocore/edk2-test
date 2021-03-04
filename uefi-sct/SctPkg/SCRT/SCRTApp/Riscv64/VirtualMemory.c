@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
   Copyright (c) 2012, ARM Ltd. All rights reserved.<BR>
+  Copyright (c) 2021, Hewlett Packard Enterprise Development LP. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -22,9 +23,6 @@ Module Name:
 
 #include "SCRTApp.h"
 
-#define VIRT_TO_PHYS_OFFSET       (0x80000000)     //2G
-
-BOOLEAN     HighAddress = FALSE;
 UINTN       PageTable   = 0;
 
 
@@ -49,11 +47,10 @@ Returns:
 
 --*/
 {
-	/*Note: It is presumed that on ARM v5, V6 and V7 architectures
-	 * the MMU is configured and enabled in PEI phase. As VirtualFunc
-	 * is already mapped to virtual memory, don't have to do anything here.
+  /* Note: It is presumed that on RISCV architectures the MMU is configured and
+   * enabled in PEI phase. As VirtualFunc is already mapped to virtual memory,
+   * don't have to do anything here.
 	 */
-  /* FIXME: Is it the same on ARM v8? */
 }
 
 
@@ -174,9 +171,8 @@ Returns:
 --*/
 {
   //
-  // Note: It is assumed that the MMU and page tables are configured on ARM platforms
-  // based on ARM v5 v6 and v7 architecture.
+  // Note: It is assumed that the MMU and page tables are configured on RISC-V
+  // platforms.
   //
-  /* FIXME: Is it the same on ARM v8? */
 	JumpToTestFunc(VirtualFunc, HandOffAddr);
 }

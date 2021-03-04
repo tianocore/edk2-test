@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2012, ARM Ltd. All rights reserved.<BR>
+  Copyright (c) 2021 Hewlett Packard Enterprise Development LP. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -20,7 +21,7 @@ Module Name:
 
 Abstract:
 
-  AArch64 specific defines
+  RISCV64 specific defines
 
 --*/
 
