@@ -838,7 +838,7 @@ BBTestSetCursorPositionConformanceAutoTest (
                      AssertionType,
                      gSimpleTextOutputConformanceTestAssertionGuid009,
                      L"EFI_SIMPLE_TEXT_OUT_PROTOCOL.SetCursorPosition - SetCursorPosition() with invalid position, mode position integrity",
-                     L"%a:%d: Mode=%d, Positoin=(%d x %d) Current: Cursor Position(%d x %d), Mode=%d, MaxMode=%d, Attribute=%d, CursorVisible=%d. "\
+                     L"%a:%d: Mode=%d, Position=(%d x %d) Current: Cursor Position(%d x %d), Mode=%d, MaxMode=%d, Attribute=%d, CursorVisible=%d. "\
                      L" Expected:Cursor Position(%d x %d), Mode=%d, MaxMode=%d, Attribute=%d, CursorVisible=%d.",
                      __FILE__,
                      (UINTN)__LINE__,
@@ -871,7 +871,7 @@ BBTestSetCursorPositionConformanceAutoTest (
                      StandardLib,
                      AssertionType,
                      gSimpleTextOutputConformanceTestAssertionGuid010,
-                     L"EFI_SIMPLE_TEXT_OUT_PROTOCOL.SetCursorPosition - SetCursorPositoin() with invalid Position",
+                     L"EFI_SIMPLE_TEXT_OUT_PROTOCOL.SetCursorPosition - SetCursorPosition() with invalid Position",
                      L"%a:%d: Status = %r, Mode = %d, Position = (%d x %d)",
                      __FILE__,
                      (UINTN)__LINE__,

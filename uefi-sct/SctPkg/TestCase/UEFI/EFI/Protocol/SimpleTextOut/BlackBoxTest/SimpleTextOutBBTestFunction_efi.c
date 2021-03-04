@@ -4835,7 +4835,7 @@ BBTestSetCursorPositionFunctionManualTest (
       BackupMode (SimpleOut, &ModeExpected);
 
       //
-      // Set cursor positoin to (IndexRow * IndexColumn)
+      // Set cursor position to (IndexRow * IndexColumn)
       //
       Status = SimpleOut->SetCursorPosition (SimpleOut, IndexColumn, IndexRow);
 
@@ -5155,7 +5155,7 @@ BBTestSetCursorPositionFunctionAutoTest (
         BackupMode (SimpleOut, &ModeExpected);
 
         //
-        // Set cursor positoin to (IndexRow * IndexColumn)
+        // Set cursor position to (IndexRow * IndexColumn)
         //
         Status = SimpleOut->SetCursorPosition (SimpleOut, IndexColumn, IndexRow);
 
