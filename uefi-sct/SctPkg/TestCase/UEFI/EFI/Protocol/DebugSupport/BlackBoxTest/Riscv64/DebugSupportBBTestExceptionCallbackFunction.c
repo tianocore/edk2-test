@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2011 - 2016, ARM Ltd. All rights reserved.<BR>
+  Copyright (c) 2021, Hewlett Packard Enterprise Development LP. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -37,7 +38,7 @@ SoftwareBreak (
   void
   )
 {
-  // Not ported to ARM yet
+  // Not ported to RISC-V yet
   ASSERT (FALSE);
 }
 
@@ -99,9 +100,7 @@ BBTestRegisterExceptionCallbackFunctionManualTest (
   // Invoke RegisterExceptionCallback() to install an interrupt handler function.
   //
   InvokedExceptionCallback = FALSE;
-  // FIXME: Is it normal that we use EXCEPT_IA32_BREAKPOINT here?
-  // Shouldn't we define proper constants for ARM exceptions in DebugSupportProtocol.h file?
-  Status = DebugSupport->RegisterExceptionCallback (DebugSupport, 0, ExceptionCallback, EXCEPT_IA32_BREAKPOINT);
+  Status = DebugSupport->RegisterExceptionCallback (DebugSupport, 0, ExceptionCallback, EXCEPT_RISCV_BREAKPOINT);
 
   if ((Status == EFI_SUCCESS) || (Status == EFI_ALREADY_STARTED)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -205,7 +204,7 @@ BBTestRegisterExceptionCallbackFunctionManualTest (
   // Assertion Point 3.4.2.3
   // Invoke RegisterExceptionCallback() to install another interrupt handler function.
   //
-  Status = DebugSupport->RegisterExceptionCallback (DebugSupport, 0, ExceptionCallback1, EXCEPT_IA32_BREAKPOINT);
+  Status = DebugSupport->RegisterExceptionCallback (DebugSupport, 0, ExceptionCallback1, EXCEPT_RISCV_BREAKPOINT);
 
   if (Status != EFI_ALREADY_STARTED) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -228,7 +227,7 @@ BBTestRegisterExceptionCallbackFunctionManualTest (
   // Assertion Point 3.4.2.4
   // Invoke RegisterExceptionCallback() to unstall the interrupt handler function.
   //
-  Status = DebugSupport->RegisterExceptionCallback (DebugSupport, 0, NULL, EXCEPT_IA32_BREAKPOINT);
+  Status = DebugSupport->RegisterExceptionCallback (DebugSupport, 0, NULL, EXCEPT_RISCV_BREAKPOINT);
 
   if (EFI_ERROR(Status)) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -273,4 +272,3 @@ BBTestRegisterExceptionCallbackFunctionManualTest (
 
   return EFI_SUCCESS;
 }
-

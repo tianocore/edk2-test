@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
   Copyright (c) 2011 - 2012, ARM Ltd. All rights reserved.<BR>
+  Copyright (c) 2021, Hewlett Packard Enterprise Development LP. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -26,5 +27,4 @@ Abstract:
 
 #include "DebugSupportBBTestMain.h"
 
-EFI_INSTRUCTION_SET_ARCHITECTURE PlatformIsa = IsaAArch64;
-
+EFI_INSTRUCTION_SET_ARCHITECTURE PlatformIsa = IsaRiscv64;
