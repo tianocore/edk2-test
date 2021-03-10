@@ -775,7 +775,7 @@ BBTestReceiveFilterFunctionTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Status,
-                   SnpInterface->Mode->ReceiveFilterSetting
+                   (UINTN)SnpInterface->Mode->ReceiveFilterSetting
                    );
 
     // Check point A. Enable Specified bit.
@@ -797,7 +797,7 @@ BBTestReceiveFilterFunctionTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Status,
-                   SnpInterface->Mode->ReceiveFilterSetting
+                   (UINTN)SnpInterface->Mode->ReceiveFilterSetting
                    );
 
     // Check point C. Enable and Disable Specified bit together.
@@ -819,7 +819,7 @@ BBTestReceiveFilterFunctionTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Status,
-                   SnpInterface->Mode->ReceiveFilterSetting
+                   (UINTN)SnpInterface->Mode->ReceiveFilterSetting
                    );
   }
 
@@ -856,12 +856,12 @@ BBTestReceiveFilterFunctionTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Status,
-                   SnpInterface->Mode->ReceiveFilterSetting,
-                   SnpInterface->Mode->ReceiveFilterMask,
-                   SnpInterface->Mode->MCastFilterCount,
-                   SnpInterface->Mode->MCastFilter[0].Addr[0],
-                   SnpInterface->Mode->MCastFilter[0].Addr[5],
-                   SnpInterface->Mode->MCastFilter[1].Addr[0]
+                   (UINTN)SnpInterface->Mode->ReceiveFilterSetting,
+                   (UINTN)SnpInterface->Mode->ReceiveFilterMask,
+                   (UINTN)SnpInterface->Mode->MCastFilterCount,
+                   (UINTN)SnpInterface->Mode->MCastFilter[0].Addr[0],
+                   (UINTN)SnpInterface->Mode->MCastFilter[0].Addr[5],
+                   (UINTN)SnpInterface->Mode->MCastFilter[1].Addr[0]
                    );
   }
 
@@ -889,13 +889,13 @@ BBTestReceiveFilterFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status,
-                 SnpInterface->Mode->ReceiveFilterSetting,
-                 SnpInterface->Mode->ReceiveFilterMask,
-                 SnpInterface->Mode->MCastFilterCount,
-                 Mode.MCastFilterCount,
-                 SnpInterface->Mode->MCastFilter[0].Addr[0],
-                 SnpInterface->Mode->MCastFilter[0].Addr[5],
-                 SnpInterface->Mode->MCastFilter[1].Addr[0]
+                 (UINTN)SnpInterface->Mode->ReceiveFilterSetting,
+                 (UINTN)SnpInterface->Mode->ReceiveFilterMask,
+                 (UINTN)SnpInterface->Mode->MCastFilterCount,
+                 (UINTN)Mode.MCastFilterCount,
+                 (UINTN)SnpInterface->Mode->MCastFilter[0].Addr[0],
+                 (UINTN)SnpInterface->Mode->MCastFilter[0].Addr[5],
+                 (UINTN)SnpInterface->Mode->MCastFilter[1].Addr[0]
                  );
   //
   // Restore SNP State
@@ -1358,12 +1358,12 @@ BBTestMCastIpToMacFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status,
-                 MAC1.Addr[0],
-                 MAC1.Addr[1],
-                 MAC1.Addr[2],
-                 MAC1.Addr[3],
-                 MAC1.Addr[4],
-                 MAC1.Addr[5]
+                 (UINTN)MAC1.Addr[0],
+                 (UINTN)MAC1.Addr[1],
+                 (UINTN)MAC1.Addr[2],
+                 (UINTN)MAC1.Addr[3],
+                 (UINTN)MAC1.Addr[4],
+                 (UINTN)MAC1.Addr[5]
                  );
 
   //
@@ -1510,8 +1510,8 @@ BBTestNVDataFunctionTest (
                    __FILE__,
                    (UINTN)__LINE__,
                    Status,
-                   SnpInterface->Mode->NvRamSize,
-                   SnpInterface->Mode->NvRamAccessSize
+                   (UINTN)SnpInterface->Mode->NvRamSize,
+                   (UINTN)SnpInterface->Mode->NvRamAccessSize
                    );
   }
 
@@ -1919,7 +1919,7 @@ BBTestGetStatusFunctionTest (
                     (UINTN)__LINE__,
                     Status,
                     Status1,
-                    InterruptStatus
+                    (UINTN)InterruptStatus
                     );
   }
 
