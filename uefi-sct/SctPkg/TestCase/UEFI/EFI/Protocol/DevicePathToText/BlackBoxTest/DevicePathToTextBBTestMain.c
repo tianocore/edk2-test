@@ -1162,9 +1162,9 @@ BuildAtaDeviceNode (
 
   Status = GetNextRequiredParam(&TextDeviceNode, L"Controller", &ParamIdentifierStr, &ParamIdentifierVal);
   if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
-  	if ((SctStrCmp (ParamIdentifierVal, L"Primary") == 0) || (SctStrCmp(ParamIdentifierVal, L"0"))) {
+    if ((SctStrCmp (ParamIdentifierVal, L"Primary") == 0) || (SctStrCmp(ParamIdentifierVal, L"0") == 0)) {
       Atapi->PrimarySecondary = 0;
-    } else if ((SctStrCmp (ParamIdentifierVal, L"Secondary") == 0) || (SctStrCmp(ParamIdentifierVal, L"1"))) {
+    } else if ((SctStrCmp (ParamIdentifierVal, L"Secondary") == 0) || (SctStrCmp(ParamIdentifierVal, L"1") == 0)) {
       Atapi->PrimarySecondary = 1;
     } else {
       goto InValidText;
@@ -1175,9 +1175,9 @@ BuildAtaDeviceNode (
 
   Status = GetNextRequiredParam(&TextDeviceNode, L"Drive", &ParamIdentifierStr, &ParamIdentifierVal);
   if ((!EFI_ERROR(Status)) && (ParamIdentifierVal != NULL)) {
-  	if ((SctStrCmp (ParamIdentifierVal, L"Master") == 0) || (SctStrCmp(ParamIdentifierVal, L"0"))) {
+    if ((SctStrCmp (ParamIdentifierVal, L"Master") == 0) || (SctStrCmp(ParamIdentifierVal, L"0") == 0)) {
       Atapi->SlaveMaster = 0;
-    } else if ((SctStrCmp (ParamIdentifierVal, L"Slave") == 0) || (SctStrCmp(ParamIdentifierVal, L"1"))) {
+    } else if ((SctStrCmp (ParamIdentifierVal, L"Slave") == 0) || (SctStrCmp(ParamIdentifierVal, L"1") == 0)) {
       Atapi->SlaveMaster = 1;
     } else {
       goto InValidText;
