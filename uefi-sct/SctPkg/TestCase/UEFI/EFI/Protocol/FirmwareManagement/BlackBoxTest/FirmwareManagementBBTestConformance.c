@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Dell Inc. All rights reserved.<BR>
+  Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -208,7 +209,7 @@ CheckForSupportGetImage (
   TestGuid = gFirmwareManagementBBTestConformanceSupportGuid001;
   ResultMessageLabel = L"GetImage, function support check";
 
-  ImageIndex = 0;
+  ImageIndex = 1;
   Image = NULL;
   ImageSize = 0;
 
@@ -283,7 +284,7 @@ CheckForSupportSetImage (
   TestGuid = gFirmwareManagementBBTestConformanceSupportGuid002;
   ResultMessageLabel = L"SetImage, function support check";
 
-  ImageIndex = 0;
+  ImageIndex = 1;
   Image = NULL;
   ImageSize = 0;
   AbortReason = NULL;
@@ -362,7 +363,7 @@ CheckForSupportCheckImage (
   TestGuid = gFirmwareManagementBBTestConformanceSupportGuid003;
   ResultMessageLabel = L"CheckImage, function support check";
 
-  ImageIndex = 0;
+  ImageIndex = 1;
   Image = NULL;
   ImageSize = 0;
 
