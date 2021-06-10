@@ -136,6 +136,8 @@
 
 [Libraries.IA32,Libraries.X64]
 
+!include MdePkg/MdeLibs.dsc.inc
+
 [LibraryClasses.common]
   UefiApplicationEntryPoint|MdePkg/Library/UefiApplicationEntryPoint/UefiApplicationEntryPoint.inf
   UefiDriverEntryPoint|MdePkg/Library/UefiDriverEntryPoint/UefiDriverEntryPoint.inf
