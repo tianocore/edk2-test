@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2012 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2021, ARM Limited. All rights reserved.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -190,7 +191,6 @@ BBTestCreateEvent_Conf_Sub1 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
@@ -342,7 +342,6 @@ BBTestCreateEvent_Conf_Sub3 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
@@ -407,7 +406,6 @@ BBTestCreateEvent_Conf_Sub4 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
@@ -482,7 +480,6 @@ BBTestCreateEvent_Func_Sub1 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_TEST_ASSERTION  AssertionType;
