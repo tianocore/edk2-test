@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2021, ARM Limited. All rights reserved.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -228,7 +229,6 @@ BBTestCreateEventEx_Conf_Sub1 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_GUID            *EventGroups[] = {
@@ -318,7 +318,6 @@ BBTestCreateEventEx_Conf_Sub2 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_GUID            *EventGroups[] = {
@@ -413,7 +412,6 @@ BBTestCreateEventEx_Conf_Sub3 (
   EFI_TPL             NotifyTpls[] = {
                         TPL_CALLBACK,
                         TPL_NOTIFY,
-                        TPL_HIGH_LEVEL,
                         0
                       };
   EFI_GUID            *EventGroups[] = {
