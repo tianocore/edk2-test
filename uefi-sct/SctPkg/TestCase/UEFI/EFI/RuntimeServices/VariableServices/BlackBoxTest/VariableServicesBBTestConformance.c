@@ -3399,6 +3399,7 @@ QueryVariableInfoConfTestSub5 (
 {
   EFI_STATUS            Status;
   UINT32                InvalidAttributes[] = {
+                          EFI_VARIABLE_NON_VOLATILE,
                           EFI_VARIABLE_RUNTIME_ACCESS,
                           EFI_VARIABLE_NON_VOLATILE|EFI_VARIABLE_RUNTIME_ACCESS,
                           0
