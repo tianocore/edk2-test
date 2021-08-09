@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2013 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2013, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2021, ARM Limited. All rights reserved.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -701,13 +702,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory  = Start;
 
@@ -831,13 +835,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory  = Start;
 
@@ -954,13 +961,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory = Start + (SctLShiftU64 (PageNum/3, EFI_PAGE_SHIFT) & 0xFFFFFFFFFFFF0000);
 
@@ -1077,13 +1087,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory  = Start + (SctLShiftU64 (PageNum * 2 / 3, EFI_PAGE_SHIFT) & 0xFFFFFFFFFFFF0000);
 
@@ -1207,13 +1220,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory  = Start;
 
@@ -1330,13 +1346,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory  = Start;
 
@@ -1469,13 +1488,16 @@ BBTestAllocatePagesInterfaceTest (
         Start   = Descriptor.PhysicalStart;
 
         //
-        // Some memory types need more alignment than 4K, so
+        // Calculate New Start address and PageNum with 64k alignment to
+        // cover the case that some memory types' alignment is more than
+        // 4k. If the available memory is less than 192k, the memory
+        // allocation call will be skipped.
         //
-        if (PageNum <= 0x10) {
+        if (PageNum < (3 * EFI_SIZE_TO_PAGES(0x10000))) {
           break;
         }
         Start   = (Start + 0xFFFF) & 0xFFFFFFFFFFFF0000;
-        PageNum = PageNum - EFI_SIZE_TO_PAGES(0x10000);
+        PageNum = PageNum - (2 * EFI_SIZE_TO_PAGES(0x10000));
 
         Memory  = Start;
 
