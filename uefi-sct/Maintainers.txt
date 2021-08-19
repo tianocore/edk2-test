@@ -41,10 +41,12 @@ UEFI-SCT:
 
 M: G Edhaya Chandran <Edhaya.Chandran@arm.com>
 M: Barton Gao <gaojie@byosoft.com.cn>
+M: Carolyn Gjertsen <Carolyn.Gjertsen@amd.com>
 
 R: Samer El-Haj-Mahmoud <Samer.El-Haj-Mahmoud@arm.com>
 R: Eric Jin <eric.jin@intel.com>
 R: Arvin Chen <arvinx.chen@intel.com>
+R: Supreeth Venkatesh <Supreeth.Venkatesh@amd.com>
 
 General questions on UEFI-SCT with the subject [edk2-test] can be sent to
 L: edk2-devel <devel@edk2.groups.io>
