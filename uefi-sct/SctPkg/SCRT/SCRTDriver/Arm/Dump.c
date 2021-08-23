@@ -27,43 +27,43 @@ Module Name:
 VOID
 DumpRuntimeTable()
 {
-  SctAPrint ("\n================Dump Runtime Table===============\n");
-  SctAPrint ("Header Signature = 0x%x\n", VRT->Hdr.Signature);
+  Printf ("\n================Dump Runtime Table===============\n");
+  Printf ("Header Signature = 0x%x\n", VRT->Hdr.Signature);
 
-  SctAPrint ("\n================GetTime Service==============\n");
-  SctAPrint ("GetTime @ 0x%x\n", VRT->GetTime);
+  Printf ("\n================GetTime Service==============\n");
+  Printf("GetTime @ 0x%x\n", VRT->GetTime);
 
-  SctAPrint ("\n================SetTime Service==============\n");
-  SctAPrint ("SetTime @ 0x%x\n", VRT->SetTime);
+  Printf ("\n================SetTime Service==============\n");
+  Printf ("SetTime @ 0x%x\n", VRT->SetTime);
 
-  SctAPrint ("\n================GetWakeupTime Service==============\n");
-  SctAPrint ("GetWakeupTime @ 0x%x\n", VRT->GetWakeupTime);
+  Printf ("\n================GetWakeupTime Service==============\n");
+ Printf ("GetWakeupTime @ 0x%x\n", VRT->GetWakeupTime);
 
-  SctAPrint ("\n================SetWakeupTime Service==============\n");
-  SctAPrint ("SetWakeupTime @ 0x%x\n", VRT->SetWakeupTime);
+  Printf ("\n================SetWakeupTime Service==============\n");
+ Printf ("SetWakeupTime @ 0x%x\n", VRT->SetWakeupTime);
 
-  SctAPrint ("\n================GetVariable Service==============\n");
-  SctAPrint ("GetVariable @ 0x%x\n", VRT->GetVariable);
+  Printf ("\n================GetVariable Service==============\n");
+ Printf ("GetVariable @ 0x%x\n", VRT->GetVariable);
 
-  SctAPrint ("\n================GetNextVariableName Service==============\n");
-  SctAPrint ("GetNextVariableName @ 0x%x\n", VRT->GetNextVariableName);
+  Printf ("\n================GetNextVariableName Service==============\n");
+  Printf ("GetNextVariableName @ 0x%x\n", VRT->GetNextVariableName);
 
-  SctAPrint ("\n================SetVariable Service==============\n");
-  SctAPrint ("SetVariable @ 0x%x\n", VRT->SetVariable);
+  Printf ("\n================SetVariable Service==============\n");
+  Printf ("SetVariable @ 0x%x\n", VRT->SetVariable);
 
-  SctAPrint ("\n================GetNextHighMonotonicCount Service==============\n");
-  SctAPrint ("GetNextHighMonotonicCount @ 0x%x\n", VRT->GetNextHighMonotonicCount);
+  Printf ("\n================GetNextHighMonotonicCount Service==============\n");
+  Printf ("GetNextHighMonotonicCount @ 0x%x\n", VRT->GetNextHighMonotonicCount);
 
-  SctAPrint ("\n================ResetSystem Service==============\n");
-  SctAPrint ("ResetSystem @ 0x%x\n", VRT->ResetSystem);
+  Printf ("\n================ResetSystem Service==============\n");
+  Printf ("ResetSystem @ 0x%x\n", VRT->ResetSystem);
 #if 0
-  SctAPrint ("\n================UpdateCapsule Service==============\n");
-  SctAPrint ("UpdateCapsule @ 0x%x\n", VRT->UpdateCapsule);
+  Printf ("\n================UpdateCapsule Service==============\n");
+  Printf ("UpdateCapsule @ 0x%x\n", VRT->UpdateCapsule);
 
-  SctAPrint ("\n================QueryCapsuleCapabilities Service==============\n");
-  SctAPrint ("QueryCapsuleCapabilities @ 0x%x\n", VRT->QueryCapsuleCapabilities);
+  Printf ("\n================QueryCapsuleCapabilities Service==============\n");
+  Printf ("QueryCapsuleCapabilities @ 0x%x\n", VRT->QueryCapsuleCapabilities);
 
-  SctAPrint ("\n================QueryVariableInfo Service==============\n");
-  SctAPrint ("QueryVariableInfo @ 0x%x\n", VRT->QueryVariableInfo);
+  Printf ("\n================QueryVariableInfo Service==============\n");
+  Printf ("QueryVariableInfo @ 0x%x\n", VRT->QueryVariableInfo);
 #endif
 }
