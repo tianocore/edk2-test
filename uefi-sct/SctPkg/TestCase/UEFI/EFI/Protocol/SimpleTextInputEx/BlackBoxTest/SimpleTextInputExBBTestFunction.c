@@ -1182,6 +1182,9 @@ BBTestReadKeyStrokeExFunctionAutoTestCheckpoint1 (
                                 SimpleTextInputEx,
                                 &State
                                 );
+  if (Status == EFI_UNSUPPORTED) {
+    return EFI_UNSUPPORTED;
+  }
 
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
