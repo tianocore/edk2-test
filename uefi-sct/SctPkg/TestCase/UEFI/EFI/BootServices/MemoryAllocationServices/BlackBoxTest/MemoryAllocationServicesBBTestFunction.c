@@ -417,7 +417,7 @@ BBTestAllocatePagesInterfaceTest (
                      (UINTN)__LINE__,
                      Status,
                      TplArray[Index],
-                     AllocatePagesMemoryType[TypeIndex]
+                     (UINTN)AllocatePagesMemoryType[TypeIndex]
                      );
       if (!(Memory & EFI_PAGE_MASK)) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -437,7 +437,7 @@ BBTestAllocatePagesInterfaceTest (
                      __FILE__,
                      (UINTN)__LINE__,
                      TplArray[Index],
-                     AllocatePagesMemoryType[TypeIndex]
+                     (UINTN)AllocatePagesMemoryType[TypeIndex]
                      );
       if (Memory != 0) {
         Status = gtBS->FreePages (
@@ -455,7 +455,7 @@ BBTestAllocatePagesInterfaceTest (
                          (UINTN)__LINE__,
                          Status,
                          TplArray[Index],
-                         AllocatePagesMemoryType[TypeIndex]
+                         (UINTN)AllocatePagesMemoryType[TypeIndex]
                          );
         }
       }
@@ -478,7 +478,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -512,7 +512,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -532,7 +532,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory <= Descriptor.PhysicalStart +
              SctLShiftU64 (Descriptor.NumberOfPages, EFI_PAGE_SHIFT) -
@@ -554,7 +554,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex],
+                       (UINTN)AllocatePagesMemoryType[TypeIndex],
                        Descriptor.PhysicalStart,
                        Descriptor.NumberOfPages,
                        Memory
@@ -589,7 +589,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory2 & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -609,7 +609,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if ( Memory2 <= Descriptor.PhysicalStart +
              SctLShiftU64 (Descriptor.NumberOfPages, EFI_PAGE_SHIFT) -
@@ -631,7 +631,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex],
+                       (UINTN)AllocatePagesMemoryType[TypeIndex],
                        Memory2
                        );
         if (Memory != 0) {
@@ -650,7 +650,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -670,7 +670,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -694,7 +694,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -739,7 +739,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -759,7 +759,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -779,7 +779,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           Status = gtBS->FreePages (
@@ -797,7 +797,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -824,7 +824,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -869,7 +869,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -889,7 +889,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -909,7 +909,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           Status = gtBS->FreePages (
@@ -927,7 +927,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -947,7 +947,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -992,7 +992,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1012,7 +1012,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start + (SctLShiftU64 (PageNum/3, EFI_PAGE_SHIFT) & 0xFFFFFFFFFFFF0000)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1032,7 +1032,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           Status = gtBS->FreePages (
@@ -1050,7 +1050,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -1070,7 +1070,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -1115,7 +1115,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1135,7 +1135,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start + (SctLShiftU64 (PageNum * 2 / 3, EFI_PAGE_SHIFT) & 0xFFFFFFFFFFFF0000)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1155,7 +1155,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           Status = gtBS->FreePages (
@@ -1173,7 +1173,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -1200,7 +1200,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -1245,7 +1245,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1265,7 +1265,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1285,7 +1285,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           Status = gtBS->FreePages (
@@ -1303,7 +1303,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -1323,7 +1323,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -1377,7 +1377,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1397,7 +1397,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1417,7 +1417,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           if (PageNum != 1) {
@@ -1442,7 +1442,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -1462,7 +1462,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
       } else {
         PageNum = (UINTN)Descriptor.NumberOfPages;
@@ -1507,7 +1507,7 @@ BBTestAllocatePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (!(Memory & EFI_PAGE_MASK)) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1527,7 +1527,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory == Start) {
           AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1547,7 +1547,7 @@ BBTestAllocatePagesInterfaceTest (
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         if (Memory != 0) {
           Status = gtBS->FreePages (
@@ -1565,7 +1565,7 @@ BBTestAllocatePagesInterfaceTest (
                            (UINTN)__LINE__,
                            Status,
                            TplArray[Index],
-                           AllocatePagesMemoryType[TypeIndex]
+                           (UINTN)AllocatePagesMemoryType[TypeIndex]
                            );
           }
         }
@@ -1656,7 +1656,7 @@ BBTestFreePagesInterfaceTest (
                        (UINTN)__LINE__,
                        Status,
                        TplArray[Index],
-                       AllocatePagesMemoryType[TypeIndex]
+                       (UINTN)AllocatePagesMemoryType[TypeIndex]
                        );
         continue;
       }
@@ -1685,7 +1685,7 @@ BBTestFreePagesInterfaceTest (
                      (UINTN)__LINE__,
                      Status,
                      TplArray[Index],
-                     AllocatePagesMemoryType[TypeIndex]
+                     (UINTN)AllocatePagesMemoryType[TypeIndex]
                      );
     }
 
