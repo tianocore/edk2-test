@@ -817,7 +817,7 @@ BBTestSetWakeupTimeConsistencyTest (
                    );
   } else {
     Time = OldTime;
-    Time.Year = 1997;
+    Time.Year = 1899;
     Status = gtRT->SetWakeupTime (
                      TRUE,
                      &Time
@@ -844,7 +844,7 @@ BBTestSetWakeupTimeConsistencyTest (
                    StandardLib,
                    AssertionType,
                    gTimeServicesBBTestConformanceAssertionGuid026,
-                   L"RT.SetWakeupTime - Time.Year is 1997",
+                   L"RT.SetWakeupTime - Time.Year is 1899",
                    L"%a:%d:Status - %r",
                    __FILE__,
                    (UINTN)__LINE__,
@@ -852,7 +852,7 @@ BBTestSetWakeupTimeConsistencyTest (
                    );
 
     Time = OldTime;
-    Time.Year = 2100;
+    Time.Year = 10000;
     Status = gtRT->SetWakeupTime (
                      TRUE,
                      &Time
@@ -866,7 +866,7 @@ BBTestSetWakeupTimeConsistencyTest (
                    StandardLib,
                    AssertionType,
                    gTimeServicesBBTestConformanceAssertionGuid027,
-                   L"RT.SetWakeupTime - Time.Year is 2100",
+                   L"RT.SetWakeupTime - Time.Year is 10000",
                    L"%a:%d:Status - %r",
                    __FILE__,
                    (UINTN)__LINE__,
