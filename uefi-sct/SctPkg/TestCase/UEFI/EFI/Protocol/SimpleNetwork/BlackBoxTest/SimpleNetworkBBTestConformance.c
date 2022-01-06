@@ -2,15 +2,16 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2022, ARM Limited. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -100,7 +101,7 @@ BBTestStartConformanceTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // restore SNP status
   //
@@ -108,7 +109,7 @@ BBTestStartConformanceTest (
     Status1 = SnpInterface->Initialize(SnpInterface, 0, 0);
     if (EFI_ERROR(Status1)) {
       return Status1;
-    }  
+    }
   }
 
   StandardLib->RecordAssertion (
@@ -206,7 +207,7 @@ BBTestStopConformanceTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // Restore SNP status
   //
@@ -311,10 +312,10 @@ BBTestInitializeConformanceTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // Restore SNP status
-  // 
+  //
   if (State1 != EfiSimpleNetworkStopped) {
     Status1 = SnpInterface->Start (SnpInterface);
     if (EFI_ERROR(Status1)) {
@@ -332,7 +333,7 @@ BBTestInitializeConformanceTest (
     }
   }
 
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
@@ -416,16 +417,19 @@ BBTestResetConformanceTest (
   // Call Reset() function when network interface not start.
   //
   Status = SnpInterface->Reset (SnpInterface, FALSE);
-
   if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
-  
+
   //
   // Restore SNP status
-  // 
+  //
   if (State1 != EfiSimpleNetworkStopped) {
     Status1 = SnpInterface->Start (SnpInterface);
     if (EFI_ERROR(Status1)) {
@@ -450,7 +454,7 @@ BBTestResetConformanceTest (
                  (UINTN)__LINE__,
                  Status
                  );
- 
+
 
   return EFI_SUCCESS;
 }
@@ -528,7 +532,7 @@ BBTestShutdownConformanceTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // Restore SNP status
   //
@@ -626,31 +630,26 @@ BBTestReceiveFilterConformanceTest (
   // Call ReceiveFilters() function if network interface not start.
   //
   Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"ReceiveFilters isn't supported, Status - %r\n",
-                   Status
-                   );
+  if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid006,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not start.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid006,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not start.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
 
   //
   // Assertion Point 5.6.2.2
@@ -662,31 +661,25 @@ BBTestReceiveFilterConformanceTest (
   }
 
   Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, FALSE, 0, NULL);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"ReceiveFilters isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_DEVICE_ERROR) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_DEVICE_ERROR) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid007,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not initialized.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid007,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() when network interface not initialized.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   //
   // Assertion Point 5.6.2.3
@@ -701,31 +694,25 @@ BBTestReceiveFilterConformanceTest (
   //  Call ReceiveFilters with invalide Enable
   //
   Status = SnpInterface->ReceiveFilters (SnpInterface, ~(SnpInterface->Mode->ReceiveFilterMask), 0, FALSE, 0, NULL);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"ReceiveFilters isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_INVALID_PARAMETER) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid008,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid Enable.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid008,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid Enable.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   //
   //  Call ReceiveFilters with invalide MCastFilterCnt
@@ -740,85 +727,67 @@ BBTestReceiveFilterConformanceTest (
     MAC.Addr[5] = 0x02;
 
     Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, SnpInterface->Mode->MaxMCastFilterCount + 1, &MAC);
-    if (Status == EFI_UNSUPPORTED) {
-      StandardLib->RecordMessage(
-                     StandardLib,
-                     EFI_VERBOSE_LEVEL_QUIET,
-                     L"ReceiveFilters isn't supported, Status - %r\n",
-                     Status
-                     );
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      if (Status == EFI_INVALID_PARAMETER) {
+      if (EFI_UNSUPPORTED == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       } else {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-
-      StandardLib->RecordAssertion (
-                     StandardLib,
-                     AssertionType,
-                     gSimpleNetworkBBTestConformanceAssertionGuid009,
-                     L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is greater than Snp->Mode->MaxMCastFilterCount.",
-                     L"%a:%d:Status - %r",
-                     __FILE__,
-                     (UINTN)__LINE__,
-                     Status
-                     );
     }
+    StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gSimpleNetworkBBTestConformanceAssertionGuid009,
+                    L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is greater than Snp->Mode->MaxMCastFilterCount.",
+                    L"%a:%d:Status - %r",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    Status
+                    );
 
     Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, 0, &MAC);
-    if (Status == EFI_UNSUPPORTED) {
-      StandardLib->RecordMessage(
-                     StandardLib,
-                     EFI_VERBOSE_LEVEL_QUIET,
-                     L"ReceiveFilters isn't supported, Status - %r\n",
-                     Status
-                     );
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      if (Status == EFI_INVALID_PARAMETER) {
+      if (EFI_UNSUPPORTED == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       } else {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-
-      StandardLib->RecordAssertion (
-                     StandardLib,
-                     AssertionType,
-                     gSimpleNetworkBBTestConformanceAssertionGuid043,
-                     L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is 0.",
-                     L"%a:%d:Status - %r",
-                     __FILE__,
-                     (UINTN)__LINE__,
-                     Status
-                     );
     }
+    StandardLib->RecordAssertion (
+                    StandardLib,
+                    AssertionType,
+                    gSimpleNetworkBBTestConformanceAssertionGuid043,
+                    L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with invalid MCastFilterCnt is 0.",
+                    L"%a:%d:Status - %r",
+                    __FILE__,
+                    (UINTN)__LINE__,
+                    Status
+                    );
 
     Status = SnpInterface->ReceiveFilters (SnpInterface, EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST, 0, FALSE, 1, NULL);
-    if (Status == EFI_UNSUPPORTED) {
-      StandardLib->RecordMessage(
-                     StandardLib,
-                     EFI_VERBOSE_LEVEL_QUIET,
-                     L"ReceiveFilters isn't supported, Status - %r\n",
-                     Status
-                     );
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      if (Status == EFI_INVALID_PARAMETER) {
+      if (EFI_UNSUPPORTED == Status) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       } else {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
       }
-
-      StandardLib->RecordAssertion (
-                       StandardLib,
-                       AssertionType,
-                       gSimpleNetworkBBTestConformanceAssertionGuid010,
-                       L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with MCastFilterCnt not match MCastFilter.",
-                       L"%a:%d:Status - %r",
-                       __FILE__,
-                       (UINTN)__LINE__,
-                       Status
-                       );
     }
+    StandardLib->RecordAssertion (
+                      StandardLib,
+                      AssertionType,
+                      gSimpleNetworkBBTestConformanceAssertionGuid010,
+                      L"EFI_SIMPLE_NETWORK_PROTOCOL.ReceiveFilters - Invoke ReceiveFilters() with MCastFilterCnt not match MCastFilter.",
+                      L"%a:%d:Status - %r",
+                      __FILE__,
+                      (UINTN)__LINE__,
+                      Status
+                      );
   }
 
   //
@@ -912,7 +881,7 @@ BBTestStationAddressConformanceTest (
   // save current snp state
   //
   State2 = SnpInterface->Mode->State;
-  
+
   //
   // Assertion Point 5.7.2.2
   // Call StationAddress() function if network interface not initialized.
@@ -923,71 +892,60 @@ BBTestStationAddressConformanceTest (
   }
 
   StatusBuf[1] = SnpInterface->StationAddress (SnpInterface, TRUE, NULL);
-  
+
   //
   // Restore SNP Status
   //
   if (State1 == EfiSimpleNetworkInitialized) {
-    Status = SnpInterface->Initialize(SnpInterface, 0, 0); 
+    Status = SnpInterface->Initialize(SnpInterface, 0, 0);
     if (EFI_ERROR(Status)){
       return Status;
     }
   }
-  
-  if ((StatusBuf[0] == EFI_INVALID_PARAMETER) || (StatusBuf[0] == EFI_UNSUPPORTED)) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supported, Status - %r\n",
-                   StatusBuf[0]
-                   );
+
+  if ((StatusBuf[0] == EFI_NOT_STARTED) && (State2 == EfiSimpleNetworkStopped)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((StatusBuf[0] == EFI_NOT_STARTED) && (State2 == EfiSimpleNetworkStopped)) {
+    if ((StatusBuf[0] == EFI_INVALID_PARAMETER) || (StatusBuf[0] == EFI_UNSUPPORTED)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid011,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke StationAddress() when network interface not start.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[0]
-                   );
   }
-  
-  if ((StatusBuf[1] == EFI_INVALID_PARAMETER) || (StatusBuf[1] == EFI_UNSUPPORTED)) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supported, Status - %r\n",
-                   StatusBuf[1]
-                   );
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid011,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke StationAddress() when network interface not start.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[0]
+                  );
+
+
+  if (StatusBuf[1] == EFI_DEVICE_ERROR) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (StatusBuf[1] == EFI_DEVICE_ERROR) {
+    if ((StatusBuf[1] == EFI_INVALID_PARAMETER) || (StatusBuf[1] == EFI_UNSUPPORTED)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid012,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke StationAddress() when network interface not initialized.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[1]
-                   );
   }
-  
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid012,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke StationAddress() when network interface not initialized.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[1]
+                  );
+
   if (State1 == EfiSimpleNetworkStopped) {
-    Status = SnpInterface->Stop (SnpInterface); 
+    Status = SnpInterface->Stop (SnpInterface);
     if (EFI_ERROR(Status)){
       return Status;
     }
@@ -1067,30 +1025,25 @@ BBTestStatisticsConformanceTest (
   // Call Statistics() function while network interface is not started.
   //
   Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"Statistics isn't supported, Status - %r\n",
-                   Status
-                   );
+  if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid014,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() while network interface not started.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid014,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() while network interface not started.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   //
   // Assertion Point 5.8.2.2
@@ -1102,30 +1055,25 @@ BBTestStatisticsConformanceTest (
   }
 
   Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"Statistics isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_DEVICE_ERROR) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_DEVICE_ERROR) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid015,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() while network interface is not initialized.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid015,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() while network interface is not initialized.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   //
   // Assertion Point 5.8.2.3
@@ -1143,30 +1091,25 @@ BBTestStatisticsConformanceTest (
   StatisticsSize = 0;
 
   Status = SnpInterface->Statistics (SnpInterface, FALSE, &StatisticsSize, &StatisticsTable);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"Statistics isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_BUFFER_TOO_SMALL) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_BUFFER_TOO_SMALL) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestConformanceAssertionGuid017,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() with small buffer.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestConformanceAssertionGuid017,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.Statistics - Invoke Statistics() with small buffer.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   //
   // Restore SNP State
@@ -1182,7 +1125,7 @@ BBTestStatisticsConformanceTest (
       return Status;
     }
   }
-  
+
   return EFI_SUCCESS;
 }
 
@@ -1267,7 +1210,7 @@ BBTestMCastIpToMacConformanceTest (
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // Restore SNP status
   //
@@ -1405,7 +1348,7 @@ BBTestNVDataConformanceTest (
 
   StatusBuf[0] = SnpInterface->NvData (SnpInterface, TRUE, 0, SnpInterface->Mode->NvRamAccessSize, Buffer);
   CheckPoint1State = SnpInterface->Mode->State;
-  
+
 
   //
   // Assertion Point 5.10.2.2
@@ -1425,119 +1368,102 @@ BBTestNVDataConformanceTest (
   // Check Point A: "Offset" not be a multiple of NvRamAccessSize
   //
   StatusBuf[1] = SnpInterface->NvData (SnpInterface, TRUE, (SnpInterface->Mode->NvRamAccessSize/2), SnpInterface->Mode->NvRamAccessSize, Buffer);
- 
+
 
   //
   // Check Point B: "BufferSize" not be a multiple of NvRamAccessSize
   //
   StatusBuf[2] = SnpInterface->NvData (SnpInterface, TRUE, 0, (SnpInterface->Mode->NvRamAccessSize/2), Buffer);
- 
+
 
   //
   // Check Point C: "BufferSize" + "Offset" exceeds "NvRamSize"
   //
-  StatusBuf[3] = SnpInterface->NvData (SnpInterface, TRUE, 0, SnpInterface->Mode->NvRamSize+100, Buffer); 
+  StatusBuf[3] = SnpInterface->NvData (SnpInterface, TRUE, 0, SnpInterface->Mode->NvRamSize+100, Buffer);
 
 
-  if (StatusBuf[0] == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   StatusBuf[0]
-                   );
+
+  if ((StatusBuf[0] == EFI_NOT_STARTED) && (CheckPoint1State == EfiSimpleNetworkStopped)) {
+    AssertionType[0] = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((StatusBuf[0] == EFI_NOT_STARTED) && (CheckPoint1State == EfiSimpleNetworkStopped)) {
+    if (EFI_UNSUPPORTED == StatusBuf[0]) {
       AssertionType[0] = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType[0] = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType[0],
-                   gSimpleNetworkBBTestConformanceAssertionGuid020,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() when network interface not start.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[0]
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType[0],
+                  gSimpleNetworkBBTestConformanceAssertionGuid020,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() when network interface not start.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[0]
+                  );
 
-  if (StatusBuf[1] == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   StatusBuf[1]
-                   );
+
+  if (StatusBuf[1] == EFI_INVALID_PARAMETER) {
+    AssertionType[1] = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (StatusBuf[1] == EFI_INVALID_PARAMETER) {
+    if (EFI_UNSUPPORTED == StatusBuf[1]) {
       AssertionType[1] = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType[1] = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType[1],
-                   gSimpleNetworkBBTestConformanceAssertionGuid021,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() with Offset not be a multiple of NvRamAccessSize.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[1]
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType[1],
+                  gSimpleNetworkBBTestConformanceAssertionGuid021,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() with Offset not be a multiple of NvRamAccessSize.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[1]
+                  );
 
-  if (StatusBuf[2] == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   StatusBuf[2]
-                   );
+
+  if (StatusBuf[2] == EFI_INVALID_PARAMETER) {
+    AssertionType[2] = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (StatusBuf[2] == EFI_INVALID_PARAMETER) {
+    if (EFI_UNSUPPORTED == StatusBuf[2]) {
       AssertionType[2] = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType[2] = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType[2],
-                   gSimpleNetworkBBTestConformanceAssertionGuid022,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() with BufferSize not be a multiple of NvRamAccessSize.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[2]
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType[2],
+                  gSimpleNetworkBBTestConformanceAssertionGuid022,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() with BufferSize not be a multiple of NvRamAccessSize.",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[2]
+                  );
 
-  if (StatusBuf[3] == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   StatusBuf[3]
-                   );
+  if (StatusBuf[3] == EFI_INVALID_PARAMETER) {
+    AssertionType[3] = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (StatusBuf[3] == EFI_INVALID_PARAMETER) {
+    if (EFI_UNSUPPORTED == StatusBuf[3]) {
       AssertionType[3] = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType[3] = EFI_TEST_ASSERTION_FAILED;
     }
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType[3],
-                   gSimpleNetworkBBTestConformanceAssertionGuid023,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() with BufferSize + Offset exceeds NvRamSize.",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[3]
-                   );
   }
+  StandardLib->RecordAssertion (
+                StandardLib,
+                AssertionType[3],
+                gSimpleNetworkBBTestConformanceAssertionGuid023,
+                L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() with BufferSize + Offset exceeds NvRamSize.",
+                L"%a:%d:Status - %r",
+                __FILE__,
+                (UINTN)__LINE__,
+                StatusBuf[3]
+                );
 
   //
   // Restore SNP Status
@@ -1552,8 +1478,8 @@ BBTestNVDataConformanceTest (
     if (EFI_ERROR(Status)) {
       return Status;
     }
-  } 
-  
+  }
+
   Status = gtBS->FreePool (Buffer);
   if (EFI_ERROR(Status)) {
     return Status;
@@ -1641,7 +1567,7 @@ BBTestGetStatusConformanceTest (
   } else {
     AssertionType[0] = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // Assertion Point 5.11.2.2
   // Call GetStatus () function if network interface not initialized.
@@ -1667,7 +1593,7 @@ BBTestGetStatusConformanceTest (
   } else {
     AssertionType[1] = EFI_TEST_ASSERTION_FAILED;
   }
- 
+
 /*
   //
   // Assertion Point 5.11.2.3
@@ -1696,7 +1622,7 @@ BBTestGetStatusConformanceTest (
     AssertionType[2] = EFI_TEST_ASSERTION_FAILED;
   }
 */
-    
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[0],
@@ -1707,7 +1633,7 @@ BBTestGetStatusConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[0]
                  );
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[1],
@@ -1718,7 +1644,7 @@ BBTestGetStatusConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[1]
                  );
-/*  
+/*
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[2],
@@ -1729,7 +1655,7 @@ BBTestGetStatusConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[2]
                  );
-*/                 
+*/
   //
   // Restore SNP State
   //
@@ -1902,7 +1828,7 @@ BBTestTransmitConformanceTest (
   } else {
     AssertionType[4] = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
 
   //
   // Check Point D: HeaderSize is nonzero and DestAddr is NULL.
@@ -1913,7 +1839,7 @@ BBTestTransmitConformanceTest (
   } else {
     AssertionType[5] = EFI_TEST_ASSERTION_FAILED;
   }
- 
+
 
   //
   // Check Point E: HeaderSize is nonzero and Protocol is NULL.
@@ -1935,7 +1861,7 @@ BBTestTransmitConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[0]
                  );
-   
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[1],
@@ -1957,7 +1883,7 @@ BBTestTransmitConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[2]
                  );
-  
+
    StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[3],
@@ -1978,7 +1904,7 @@ BBTestTransmitConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[4]
                  );
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[5],
@@ -1989,7 +1915,7 @@ BBTestTransmitConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[5]
                  );
-   
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[6],
@@ -2119,7 +2045,7 @@ BBTestReceiveConformanceTest (
   } else {
     AssertionType[0] = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
 
   //
   // Assertion Point 5.13.2.2
@@ -2136,7 +2062,7 @@ BBTestReceiveConformanceTest (
   } else {
     AssertionType[1] = EFI_TEST_ASSERTION_FAILED;
   }
-  
+
   //
   // Assertion Point 5.13.2.3
   // Call Receive() function with invalid parameters.
@@ -2171,7 +2097,7 @@ BBTestReceiveConformanceTest (
                  (UINTN)__LINE__,
                  StatusBuf[0]
                  );
-  
+
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType[1],
@@ -2208,22 +2134,22 @@ BBTestReceiveConformanceTest (
       return Status;
     }
   }
-  
+
 #if 0
   //
   // Assertion Point 5.13.2.4
   // No Packet Received in the Network Interface when Receive().
   //
   // We should disable the muticast and broadcast receive filters first. because
-  // some muticast or broadcast packets maybe on the LAN 
+  // some muticast or broadcast packets maybe on the LAN
   //
   Status = SnpInterface->ReceiveFilters (
-  	                       SnpInterface, 
-  	                       0, 
-  	                       EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST | EFI_SIMPLE_NETWORK_RECEIVE_BROADCAST, 
-  	                       TRUE, 
-  	                       0, 
-  	                       NULL);
+                           SnpInterface,
+                           0,
+                           EFI_SIMPLE_NETWORK_RECEIVE_MULTICAST | EFI_SIMPLE_NETWORK_RECEIVE_BROADCAST,
+                           TRUE,
+                           0,
+                           NULL);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
@@ -2235,7 +2161,7 @@ BBTestReceiveConformanceTest (
                    (UINTN)__LINE__,
                    Status
                    );
-	return Status;
+    return Status;
   }
 
   Status = EFI_SUCCESS;
