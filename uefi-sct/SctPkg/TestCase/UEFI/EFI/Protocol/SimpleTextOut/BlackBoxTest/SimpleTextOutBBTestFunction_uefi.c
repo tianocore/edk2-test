@@ -2,15 +2,16 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2022, ARM Limited. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -50,7 +51,7 @@ BBTestResetFunctionManualTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
   EFI_STATUS                           Status;
   EFI_SIMPLE_TEXT_OUT_PROTOCOL         *SimpleOut;
-  
+
   EFI_TEST_ASSERTION                   AssertionType;
   EFI_SIMPLE_TEXT_OUTPUT_MODE          ModeOrg, ModeExpected;
   EFI_GRAPHICS_OUTPUT_PROTOCOL         *GraphicsOutput;
@@ -146,7 +147,7 @@ BBTestResetFunctionManualTest (
   //
   SctPrint (L"\n\rVGA Reset without extended verification start...\n\r");
   WaitTimeOrKey (5);
-  
+
   //
   // Prepare expected Mode after call Reset.
   //
@@ -455,7 +456,11 @@ BBTestResetFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -2738,7 +2743,11 @@ BBTestSetModeFunctionManualTest (
     // Return status check
     //
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
     } else {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     }
@@ -3003,7 +3012,7 @@ BBTestSetModeFunctionAutoTest (
                    );
 
   }
-  
+
   Status = RestoreMode (SimpleOut, &ModeOrg, StandardLib);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -3152,17 +3161,17 @@ BBTestSetAttributeFunctionManualTest (
     for (IndexFore = 0; IndexFore < 16; IndexFore++) {
 
       Attribute = EFI_TEXT_ATTR(IndexFore, IndexBack);
-      
+
       BackupMode (SimpleOut, &ModeExpected);
       ModeExpected.Attribute = (INT32)Attribute;
-      
+
       Status = SimpleOut->SetAttribute (SimpleOut, Attribute);
-      
+
       //
       // Wait for some time to change next background color
       //
       gtBS->Stall (100000);
-        
+
       if (EFI_ERROR(Status)) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
         StandardLib->RecordAssertion (
@@ -3206,7 +3215,7 @@ BBTestSetAttributeFunctionManualTest (
                        (UINTN)ModeExpected.Attribute,
                        (UINTN)ModeExpected.CursorVisible
                        );
-        Result = FALSE;		
+        Result = FALSE;
       }
     }
   }
@@ -3388,7 +3397,11 @@ BBTestSetAttributeFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -3434,7 +3447,7 @@ BBTestSetAttributeFunctionAutoTest (
                          Status,
                          Attribute
                          );
-		  Result = FALSE;
+          Result = FALSE;
         }
         if (EFI_ERROR(Status)) {
           continue;
@@ -3464,12 +3477,12 @@ BBTestSetAttributeFunctionAutoTest (
                          (UINTN)ModeExpected.Attribute,
                          (UINTN)ModeExpected.CursorVisible
                          );
-		  Result = FALSE;
+          Result = FALSE;
         }
       }
     }
 
-	if ( Result == TRUE ) {
+    if ( Result == TRUE ) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -3629,7 +3642,7 @@ BBTestClearScreenFunctionManualTest (
   //
   BackupMode (SimpleOut, &ModeExpected);
   ModeExpected.CursorRow = 0;
-  ModeExpected.CursorColumn = 0;  
+  ModeExpected.CursorColumn = 0;
 
   //
   // Clear screen with current background color
@@ -3846,7 +3859,11 @@ BBTestClearScreenFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -3929,7 +3946,7 @@ BBTestClearScreenFunctionAutoTest (
                    Status
                    );
   }
-  
+
   Status = RestoreMode (SimpleOut, &ModeOrg, StandardLib);
   if (EFI_ERROR(Status)) {
     StandardLib->RecordAssertion (
@@ -4158,7 +4175,7 @@ BBTestSetCursorPositionFunctionManualTest (
                        );
         Result = FALSE;
       }
-	  
+
       //
       // Returned status check
       //
@@ -4177,7 +4194,7 @@ BBTestSetCursorPositionFunctionManualTest (
                        IndexRow
                        );
         Result = FALSE;
-      } 
+      }
       //
       // Wait for a little time
       //
@@ -4362,7 +4379,11 @@ BBTestSetCursorPositionFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -4447,7 +4468,7 @@ BBTestSetCursorPositionFunctionAutoTest (
                          (UINTN)ModeExpected.Attribute,
                          (UINTN)ModeExpected.CursorVisible
                          );
-		  Result = FALSE;
+          Result = FALSE;
         }
 
         //
@@ -4467,7 +4488,7 @@ BBTestSetCursorPositionFunctionAutoTest (
                          IndexColumn,
                          IndexRow
                          );
-		  Result = FALSE;
+          Result = FALSE;
         }
       }
     }
@@ -4501,7 +4522,7 @@ BBTestSetCursorPositionFunctionAutoTest (
                    Status
                    );
   }
-  
+
   return Status;
 }
 
@@ -4931,7 +4952,7 @@ BBTestEnableCursorFunctionManualTest (
                    Status
                    );
   }
-  
+
   return Status;
 }
 
@@ -5058,7 +5079,11 @@ BBTestEnableCursorFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -5254,6 +5279,6 @@ BBTestEnableCursorFunctionAutoTest (
                    Status
                    );
   }
-  
+
   return Status;
 }

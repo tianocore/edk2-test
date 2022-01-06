@@ -2,15 +2,16 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2022, ARM Limited. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -647,7 +648,11 @@ BBTestResetFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -3150,7 +3155,11 @@ BBTestSetModeFunctionManualTest (
     // Return status check
     //
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
     } else {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     }
@@ -3177,7 +3186,6 @@ BBTestSetModeFunctionManualTest (
     } else {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     }
-
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -3989,7 +3997,11 @@ BBTestSetAttributeFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -4547,7 +4559,11 @@ BBTestClearScreenFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -5062,7 +5078,11 @@ BBTestSetCursorPositionFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
@@ -5818,7 +5838,11 @@ BBTestEnableCursorFunctionAutoTest (
     //
     Status = SimpleOut->SetMode (SimpleOut, Mode);
     if (EFI_ERROR(Status)) {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
       StandardLib->RecordAssertion (
                      StandardLib,
                      AssertionType,
