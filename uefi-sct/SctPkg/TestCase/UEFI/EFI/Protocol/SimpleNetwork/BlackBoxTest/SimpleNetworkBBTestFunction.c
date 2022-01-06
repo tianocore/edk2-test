@@ -2,15 +2,16 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2022, ARM Limited. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -347,7 +348,8 @@ BBTestInitializeFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );
+                 );
+
 
   //
   // Restore SNP State
@@ -463,11 +465,14 @@ BBTestResetFunctionTest (
     return Status;
   }
 
-  Status = SnpInterface->Reset (SnpInterface, FALSE);
-
   AssertionType = EFI_TEST_ASSERTION_PASSED;
+  Status = SnpInterface->Reset (SnpInterface, FALSE);
   if (EFI_ERROR(Status)) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
 
   if ((Mode.State != SnpInterface->Mode->State) ||
@@ -529,7 +534,11 @@ BBTestResetFunctionTest (
   if (Status == EFI_SUCCESS) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
   StandardLib->RecordAssertion (
                  StandardLib,
@@ -758,14 +767,16 @@ BBTestReceiveFilterFunctionTest (
 
     // Check point B. Disable Specified bit.
     Status = SnpInterface->ReceiveFilters (SnpInterface, 0, SupportedFilter, FALSE, 0, NULL);
-
     if ((Status == EFI_SUCCESS) &&
       ((SnpInterface->Mode->ReceiveFilterSetting & SupportedFilter) == 0)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
     }
-
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -780,14 +791,16 @@ BBTestReceiveFilterFunctionTest (
 
     // Check point A. Enable Specified bit.
     Status = SnpInterface->ReceiveFilters (SnpInterface, SupportedFilter, 0, FALSE, 0, NULL);
-
     if ((Status == EFI_SUCCESS) &&
       ((SnpInterface->Mode->ReceiveFilterSetting & SupportedFilter) != 0)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
     }
-
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -802,14 +815,16 @@ BBTestReceiveFilterFunctionTest (
 
     // Check point C. Enable and Disable Specified bit together.
     Status = SnpInterface->ReceiveFilters (SnpInterface, SupportedFilter, SupportedFilter, FALSE, 0, NULL);
-
     if ((Status == EFI_SUCCESS) &&
       ((SnpInterface->Mode->ReceiveFilterSetting & SupportedFilter) == 0)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
     }
-
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -844,9 +859,12 @@ BBTestReceiveFilterFunctionTest (
     } else if ((Status == EFI_INVALID_PARAMETER) && (SnpInterface->Mode->MaxMCastFilterCount == 0)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      if (EFI_UNSUPPORTED == Status) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else {
+        AssertionType = EFI_TEST_ASSERTION_FAILED;
+      }
     }
-
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
@@ -871,15 +889,17 @@ BBTestReceiveFilterFunctionTest (
   //
 
   Status = SnpInterface->ReceiveFilters (SnpInterface, 0, 0, TRUE, 0, NULL);
-
   if ((Status == EFI_SUCCESS) &&
       (SnpInterface->Mode->State == EfiSimpleNetworkInitialized) &&
       (SnpInterface->Mode->MCastFilterCount == 0)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
-
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
@@ -1012,59 +1032,49 @@ BBTestStationAddressFunctionTest (
   //
   SnpInterface->StationAddress (SnpInterface, FALSE, &BackMacAddress);
 
-  if ((StatusBuf[0] == EFI_INVALID_PARAMETER) || (StatusBuf[0] == EFI_UNSUPPORTED)) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supported, Status - %r\n",
-                   StatusBuf[0]
-                   );
+  if ((StatusBuf[0] == EFI_SUCCESS) &&
+      (!CheckPoint1)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((StatusBuf[0] == EFI_SUCCESS) &&
-        (!CheckPoint1)) {
+    if ((StatusBuf[0] == EFI_INVALID_PARAMETER) || (StatusBuf[0] == EFI_UNSUPPORTED)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestFunctionAssertionGuid013,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke ReceiveFilters() to reset its MAC Address and verify interface correctness within test case",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[0]
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestFunctionAssertionGuid013,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke ReceiveFilters() to reset its MAC Address and verify interface correctness within test case",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[0]
+                  );
 
-  if ((StatusBuf[1] == EFI_INVALID_PARAMETER) || (StatusBuf[1] == EFI_UNSUPPORTED)) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"StationAddress isn't supported, Status - %r\n",
-                   StatusBuf[1]
-                   );
+
+  if ((StatusBuf[1] == EFI_SUCCESS) &&
+      (!CheckPoint2)) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((StatusBuf[1] == EFI_SUCCESS) &&
-        (!CheckPoint2)) {
+    if ((StatusBuf[1] == EFI_INVALID_PARAMETER) || (StatusBuf[1] == EFI_UNSUPPORTED)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestFunctionAssertionGuid014,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke ReceiveFilters() to modify its MAC Address and verify interface correctness within test case",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   StatusBuf[1]
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestFunctionAssertionGuid014,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.StationAddress - Invoke ReceiveFilters() to modify its MAC Address and verify interface correctness within test case",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  StatusBuf[1]
+                  );
+
 
   //
   // Restore SNP State
@@ -1181,11 +1191,11 @@ BBTestStatisticsFunctionTest (
       (!SctCompareMem (&StatisticsTable1, &StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS)))) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
-
-  if (Status == EFI_UNSUPPORTED) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
 
   StandardLib->RecordAssertion (
@@ -1218,11 +1228,11 @@ BBTestStatisticsFunctionTest (
       (!SctCompareMem (&StatisticsTable1, &StatisticsTable2, sizeof (EFI_NETWORK_STATISTICS)))) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
-
-  if (Status == EFI_UNSUPPORTED) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
   }
 
   StandardLib->RecordAssertion (
@@ -1487,91 +1497,74 @@ BBTestNVDataFunctionTest (
   //Check Point A(0, n*NvRamAccessSize)
   SctSetMem (Buffer, SnpInterface->Mode->NvRamSize, 0x0);
   Status = SnpInterface->NvData (SnpInterface, TRUE, 0, SnpInterface->Mode->NvRamSize, Buffer);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_SUCCESS) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestFunctionAssertionGuid018,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to read(0, n*NvRamAccessSize) and verify interface correctness within test case",
-                   L"%a:%d:Status - %r, NvRamSize - %d, NvRamAccessSize - %d",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status,
-                   (UINTN)SnpInterface->Mode->NvRamSize,
-                   (UINTN)SnpInterface->Mode->NvRamAccessSize
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestFunctionAssertionGuid018,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to read(0, n*NvRamAccessSize) and verify interface correctness within test case",
+                  L"%a:%d:Status - %r, NvRamSize - %d, NvRamAccessSize - %d",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status,
+                  (UINTN)SnpInterface->Mode->NvRamSize,
+                  (UINTN)SnpInterface->Mode->NvRamAccessSize
+                  );
 
   //Check Point B(NvRamAccessSize, (n-1)*NvRamAccessSize)
   SctSetMem (Buffer, SnpInterface->Mode->NvRamSize, 0x0);
   Status = SnpInterface->NvData (SnpInterface, TRUE, SnpInterface->Mode->NvRamAccessSize, (SnpInterface->Mode->NvRamSize - SnpInterface->Mode->NvRamAccessSize), Buffer);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_SUCCESS) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestFunctionAssertionGuid019,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to read(NvRamAccessSize, (n-1)*NvRamAccessSize) and verify interface correctness within test case",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestFunctionAssertionGuid019,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to read(NvRamAccessSize, (n-1)*NvRamAccessSize) and verify interface correctness within test case",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
 
   //Check Point C((n-1)*NvRamAccessSize, NvRamAccessSize)
   SctSetMem (Buffer, SnpInterface->Mode->NvRamSize, 0x0);
   Status = SnpInterface->NvData (SnpInterface, TRUE, (SnpInterface->Mode->NvRamSize - SnpInterface->Mode->NvRamAccessSize), SnpInterface->Mode->NvRamAccessSize, Buffer);
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   Status
-                   );
+  if (Status == EFI_SUCCESS) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (Status == EFI_SUCCESS) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestFunctionAssertionGuid020,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to read((n-1)*NvRamAccessSize, NvRamAccessSize) and verify interface correctness within test case",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestFunctionAssertionGuid020,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to read((n-1)*NvRamAccessSize, NvRamAccessSize) and verify interface correctness within test case",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   //
   // Assertion Point 4.10.2.2
@@ -1599,31 +1592,26 @@ BBTestNVDataFunctionTest (
     goto End;
   }
 
-  if (Status == EFI_UNSUPPORTED) {
-    StandardLib->RecordMessage(
-                   StandardLib,
-                   EFI_VERBOSE_LEVEL_QUIET,
-                   L"NvData isn't supported, Status - %r\n",
-                   Status
-                   );
+  if ((Status == EFI_SUCCESS) && (!SctCompareMem (Buffer, Buffer1, SnpInterface->Mode->NvRamSize))) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if ((Status == EFI_SUCCESS) && (!SctCompareMem (Buffer, Buffer1, SnpInterface->Mode->NvRamSize))) {
+    if (EFI_UNSUPPORTED == Status) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
     }
-
-    StandardLib->RecordAssertion (
-                   StandardLib,
-                   AssertionType,
-                   gSimpleNetworkBBTestFunctionAssertionGuid021,
-                   L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to write and verify interface correctness within test case",
-                   L"%a:%d:Status - %r",
-                   __FILE__,
-                   (UINTN)__LINE__,
-                   Status
-                   );
   }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gSimpleNetworkBBTestFunctionAssertionGuid021,
+                  L"EFI_SIMPLE_NETWORK_PROTOCOL.NvData - Invoke NvData() to write and verify interface correctness within test case",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
 End:
   //
@@ -2322,9 +2310,14 @@ BBTestReceiveFunctionTest (
                            NULL
                            );
   if (EFI_ERROR(Status)) {
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
     StandardLib->RecordAssertion (
                    StandardLib,
-                   EFI_TEST_ASSERTION_FAILED,
+                   AssertionType,
                    gTestGenericFailureGuid,
                    L"EFI_SIMPLE_NETWORK_PROTOCOL.Receive - Enable ReceiveFilters",
                    L"%a:%d:Status - %r",
