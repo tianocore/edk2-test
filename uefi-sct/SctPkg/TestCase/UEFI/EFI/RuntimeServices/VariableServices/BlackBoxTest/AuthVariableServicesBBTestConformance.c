@@ -228,6 +228,10 @@ AuthVariableDERConfTest (
 
   for (Index = 0; Index < sizeof (AttrArray) / sizeof (AttrArray[0]); Index = Index + 1) {
     Attr = AttrArray[Index];
+    //According to UEFI Specifications: EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS is deprecated and should not be used. 
+    //Platforms should return EFI_UNSUPPORTED if a caller to SetVariable() specifies this attribute.
+    //The below case of appending EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS to the Attr verifies the same.
+    //Expected return value is EFI_UNSUPPORTED
     Attr |= EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS;
 
     Status = RT->SetVariable (
