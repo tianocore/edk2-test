@@ -2,15 +2,16 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2022, ARM Limited. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -203,7 +204,7 @@ BBTestUdpReadFuncSrcPortFilter (
 
 /**
  *  Entrypoint for EFI_PXE_BASE_CODE_PROTOCOL.Start() Function Test.
- *  It is the new case to add IPv6 into the test scope. The original test case is switched off. 
+ *  It is the new case to add IPv6 into the test scope. The original test case is switched off.
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
  *  @param ClientInterface a pointer to the interface to be tested.
  *  @param TestLevel test "thoroughness" control.
@@ -380,7 +381,7 @@ BBTestNewStartFunctionTest (
                      L"Mode->PxeBisReplyReceived - %s\r\n",
                      BcInterface->Mode->PxeBisReplyReceived ? L"TRUE" : L"FALSE"
                      );
-    }   
+    }
     if (BcInterface->Mode->IcmpErrorReceived != FALSE) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
       StandardLib->RecordMessage (
@@ -605,7 +606,7 @@ BBTestNewStartFunctionTest (
         return Status;
       }
     }
-    
+
     //
     // Enable EFI_PXE_BASE_CODE_PROTOCOL Protocol interface in IPv6
     //
@@ -627,8 +628,8 @@ BBTestNewStartFunctionTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    
-    
+
+
     if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
       if (BcInterface->Mode->Started != TRUE) {
@@ -720,7 +721,7 @@ BBTestNewStartFunctionTest (
                        L"Mode->PxeBisReplyReceived - %s\r\n",
                        BcInterface->Mode->PxeBisReplyReceived ? L"TRUE" : L"FALSE"
                        );
-      }   
+      }
       if (BcInterface->Mode->IcmpErrorReceived != FALSE) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
         StandardLib->RecordMessage (
@@ -797,7 +798,7 @@ BBTestNewStartFunctionTest (
                        L"IS_PXE_PACKET_ZEROED(Mode->ProxyOffer) - Fail\r\n"
                        );
       }
-    
+
       if (IS_PXE_PACKET_ZEROED(&BcInterface->Mode->PxeDiscover) == FALSE) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
         StandardLib->RecordMessage (
@@ -944,13 +945,13 @@ BBTestNewStartFunctionTest (
                      );
     }
   }
-  
+
   return Status;
 }
 
 /**
  *  Entrypoint for EFI_PXE_BASE_CODE_PROTOCOL.Statistics() Function Test.
- *  It is the new case to add IPv6 into the test scope. The original test case is switched off. 
+ *  It is the new case to add IPv6 into the test scope. The original test case is switched off.
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
  *  @param ClientInterface a pointer to the interface to be tested.
  *  @param TestLevel test "thoroughness" control.
@@ -974,7 +975,7 @@ BBTestNewSetIpFilterFunctionTest (
   UINT8                                  Index;
 
   Index = 0;
-  
+
   //
   // Get the Standard Library Interface
   //
@@ -1091,7 +1092,7 @@ BBTestNewSetIpFilterFunctionTest (
         return Status;
       }
     }
-    
+
     //
     // Enable EFI_PXE_BASE_CODE_PROTOCOL Protocol interface in IPv6
     //
@@ -1109,16 +1110,16 @@ BBTestNewSetIpFilterFunctionTest (
                      );
       return Status;
     }
-    
+
     SctSetMem (&BcIpFilter, sizeof (BcIpFilter), 0);
     BcIpFilter.Filters = EFI_PXE_BASE_CODE_IP_FILTER_STATION_IP;
     BcIpFilter.IpCnt = 2;
-    
+
     for (Index = 0; Index < 16; Index++) {
       BcIpFilter.IpList[0].v6.Addr[Index] = Index;
       BcIpFilter.IpList[1].v6.Addr[Index] = 16 - Index;
     }
-    
+
     Status = BcInterface->SetIpFilter (BcInterface, &BcIpFilter);
     if (Status == EFI_SUCCESS) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1135,7 +1136,7 @@ BBTestNewSetIpFilterFunctionTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    
+
     if (TRUE == IsIpFilterEqual (&BcIpFilter, &(BcInterface->Mode->IpFilter))){
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
@@ -1158,7 +1159,7 @@ BBTestNewSetIpFilterFunctionTest (
 
 /**
  *  Entrypoint for EFI_PXE_BASE_CODE_PROTOCOL.Stop() Function Test.
- *  It is the new case to add IPv6 into the test scope. The original test case is switched off. 
+ *  It is the new case to add IPv6 into the test scope. The original test case is switched off.
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL.
  *  @param ClientInterface a pointer to the interface to be tested.
  *  @param TestLevel test "thoroughness" control.
@@ -1290,7 +1291,7 @@ BBTestNewStopFunctionTest (
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
-                 );  
+                 );
 
   return Status;
 }
@@ -1607,8 +1608,8 @@ BBTestStartFunctionTest (
                    );
   }
   if  ((0 != BcInterface->Mode->IpFilter.Filters) || (0 != BcInterface->Mode->IpFilter.IpCnt)) {
-  	AssertionType = EFI_TEST_ASSERTION_FAILED;
-	StandardLib->RecordMessage (
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    StandardLib->RecordMessage (
                    StandardLib,
                    EFI_VERBOSE_LEVEL_DEFAULT,
                    L"The Mode->IpFilter.Filters or Mode->IpFilter.IpCnt field is not 0\r\n");
@@ -2025,14 +2026,14 @@ BBTestMtftpFunctionTest (
   )
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
-  EFI_TEST_PROFILE_LIBRARY_PROTOCOL    *ProfileLib;
+  EFI_TEST_PROFILE_LIBRARY_PROTOCOL     *ProfileLib;
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   UINTN                                  FileSize;
-
+  EFI_TEST_ASSERTION                     AssertionType;
   //
   // Get support library (Standard Lib, Profile Lib, Logging Lib)
   //
@@ -2098,8 +2099,12 @@ BBTestMtftpFunctionTest (
   }
 
   Status = SnpInterface->StationAddress (SnpInterface, TRUE, NULL);
-  if (EFI_ERROR(Status))
-  {
+  if (EFI_ERROR(Status)) {
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
@@ -2202,12 +2207,13 @@ BBTestUdpWriteFunctionTest (
   )
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
-  EFI_TEST_PROFILE_LIBRARY_PROTOCOL    *ProfileLib;
+  EFI_TEST_PROFILE_LIBRARY_PROTOCOL     *ProfileLib;
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
+  EFI_TEST_ASSERTION                     AssertionType;
 
   //
   // Get the Standard Library Interface
@@ -2296,8 +2302,12 @@ BBTestUdpWriteFunctionTest (
   }
 
   Status = SnpInterface->StationAddress (SnpInterface, TRUE, NULL);
-  if (EFI_ERROR(Status))
-  {
+  if (EFI_ERROR(Status)) {
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
@@ -2371,13 +2381,14 @@ BBTestUdpReadFunctionTest (
   )
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
-  EFI_TEST_PROFILE_LIBRARY_PROTOCOL    *ProfileLib;
+  EFI_TEST_PROFILE_LIBRARY_PROTOCOL     *ProfileLib;
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
   EFI_PXE_BASE_CODE_IP_FILTER            BcIpFilter;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
+  EFI_TEST_ASSERTION                     AssertionType;
 
   //
   // Get the Support Library Interface
@@ -2473,8 +2484,12 @@ BBTestUdpReadFunctionTest (
   }
 
   Status = SnpInterface->StationAddress (SnpInterface, TRUE, NULL);
-  if (EFI_ERROR(Status))
-  {
+  if (EFI_ERROR(Status)) {
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
@@ -2644,7 +2659,7 @@ BBTestArpFunctionTest (
   )
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
-  EFI_TEST_PROFILE_LIBRARY_PROTOCOL    *ProfileLib;
+  EFI_TEST_PROFILE_LIBRARY_PROTOCOL     *ProfileLib;
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
@@ -2755,8 +2770,12 @@ BBTestArpFunctionTest (
   }
 
   Status = SnpInterface->StationAddress (SnpInterface, TRUE, NULL);
-  if (EFI_ERROR(Status))
-  {
+  if (EFI_ERROR(Status)) {
+    if (EFI_UNSUPPORTED == Status) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
