@@ -210,6 +210,7 @@ then
     cp $ProcessorType/DiskIo2BBTest.efi                        $Framework/Test/ > NUL
     cp $ProcessorType/TimeStampBBTest.efi                      $Framework/Test/ > NUL
     cp $ProcessorType/RandomNumberBBTest.efi                   $Framework/Test/ > NUL
+    cp $ProcessorType/TCG2ProtocolBBTest.efi                   $Framework/Test/ > NUL
     cp $ProcessorType/Hash2BBTest.efi                          $Framework/Test/ > NUL
     cp $ProcessorType/Pkcs7BBTest.efi                          $Framework/Test/ > NUL
     cp $ProcessorType/ConfigKeywordHandlerBBTest.efi           $Framework/Test/ > NUL

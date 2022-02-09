@@ -1,0 +1,51 @@
+## @file
+#
+#  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
+#  Copyright (c) 2013, Intel Corporation. All rights reserved.<BR>
+#  Copyright (c) 2021 - 2023, Arm Inc. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+#/*++
+#
+# Module Name:
+#
+#   TCG2ProtocolBBTest.inf
+#
+# Abstract:
+#
+#   Component description file for TCG2 Protocol Black-Box Test.
+#
+#--*/
+
+[defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = TCG2ProtocolBBTest
+  FILE_GUID            = BD8CB762-3935-434C-AC3F-462244910A2D
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeBBTestTCG2Protocol
+
+[sources.common]
+  Guid.c
+  TCG2ProtocolBBTestMain.c
+  TCG2ProtocolBBTestConformance.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SctLib
+  EfiTestLib
+
+[Protocols]
