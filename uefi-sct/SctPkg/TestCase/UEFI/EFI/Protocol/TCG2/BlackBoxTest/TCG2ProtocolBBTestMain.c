@@ -47,6 +47,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestGetCapabilityConformanceTest
   },
+  {
+    EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0102,
+    L"GetActivePcrBanks_Conf",
+    L"Test the GetActivePcrBanks API",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestGetActivePcrBanksConformanceTest
+  },
   0
 };
 
