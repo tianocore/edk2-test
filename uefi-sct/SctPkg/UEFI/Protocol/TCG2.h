@@ -50,6 +50,8 @@ Abstract:
 
 #define EFI_TCG2_EVENT_LOG_FORMAT_TCG_2 0x00000002
 
+#define HASH_NUMBER 0x04
+
 typedef struct _EFI_TCG2_PROTOCOL EFI_TCG2_PROTOCOL;
 
 typedef UINT32 EFI_TCG2_EVENT_LOG_BITMAP;
@@ -114,6 +116,50 @@ typedef struct tdEFI_TCG2_EVENT {
   EFI_TCG2_EVENT_HEADER Header;
   UINT8 Event[];
 } EFI_TCG2_EVENT;
+
+typedef struct {
+  UINT16     hashAlg;
+  UINT8      digest[];
+} TPMT_HA;
+
+typedef struct tdTPML_DIGEST_VALUES {
+  UINT32 Count;                    // number of digests
+  TPMT_HA Digests[HASH_NUMBER];    // Count digests
+} TPML_DIGEST_VALUES;
+
+// This Declaration is for parsing the eventlog header which is defined to be 20 bytes in TCG EFI Protocol Spec
+typedef UINT8 TCG_DIGEST[20];
+
+typedef struct tdTCG_PCR_EVENT2 {
+  TCG_PCRINDEX PCRIndex;       // PCRIndex event extended to
+  TCG_EVENTTYPE EventType;     // Type of event (see [2])
+  TPML_DIGEST_VALUES Digests;  // List of digests extended to //PCRIndex
+  UINT32 EventSize;            // Size of the event data
+  UINT8 *Event;                // The event data
+} TCG_PCR_EVENT2;
+
+typedef struct tdTCG_PCR_EVENT {
+  UINT32 PCRIndex; // PCRIndex event extended to
+  UINT32 EventType; // Type of event (see EFI specs)
+  TCG_DIGEST Digest; // Value extended into PCRIndex
+  UINT32 EventSize; // Size of the event data
+  UINT8 Event[0]; // The event data
+} TCG_PCR_EVENT;
+// Structure to be added to the Event Log
+
+typedef struct tdTCG_EfiSpecIdEventAlgorithmSize {
+  UINT16 algorithmId;
+  UINT16 digestSize;
+} TCG_EfiSpecIdEventAlgorithmSize;
+
+typedef struct tdTCG_EfiSpecIdEventStruct {
+   UINT8 signature[16];
+   UINT32 platformClass;
+   UINT8 specVersionMinor;
+   UINT8 specVersionMajor;
+   UINT8 specErrata;
+   UINT8 uintnSize;
+} TCG_EfiSpecIDEventStruct;
 
 #pragma pack()
 
