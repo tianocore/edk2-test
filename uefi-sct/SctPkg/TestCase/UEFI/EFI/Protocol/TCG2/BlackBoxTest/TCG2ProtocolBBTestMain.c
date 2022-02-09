@@ -56,6 +56,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestGetActivePcrBanksConformanceTest
   },
+  {
+    EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0103,
+    L"HashLogExtendEvent_Conf",
+    L"Test the HashLogExtendEvent API",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestHashLogExtendEventConformanceTest
+  },
   0
 };
 
