@@ -43,7 +43,12 @@ Abstract:
 #define EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0103 \
  {0x907a7878, 0xb294, 0xf147, {0xe9, 0x0a, 0x65, 0x43, 0xab, 0x55, 0x76, 0x46} }
 
+#define EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0104 \
+ {0x9087ad78, 0x9ad2, 0x4172, {0x9a, 0xbc, 0x98, 0x23, 0x08, 0xf5, 0x6d, 0x26} }
+
 #define EV_POST_CODE 0x01
+
+#define EV_NO_ACTION 0x03
 
 #define EFI_TCG2_EXTEND_ONLY 0x0000000000000001
 
@@ -99,6 +104,18 @@ BBTestHashLogExtendEventConformanceTestCheckpoint1 (
 
 EFI_STATUS
 BBTestHashLogExtendEventConformanceTestCheckpoint2 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TCG2_PROTOCOL                     *TCG2
+  );
+
+EFI_STATUS
+BBTestGetEventLogConformanceTestCheckpoint1 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TCG2_PROTOCOL                     *TCG2
+  );
+
+EFI_STATUS
+BBTestGetEventLogConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_TCG2_PROTOCOL                     *TCG2
   );
