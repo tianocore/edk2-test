@@ -40,6 +40,15 @@ Abstract:
 #define EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0102 \
  {0x847f1ae0, 0xb429, 0x49f1, {0x9e, 0x0c, 0x8f, 0x43, 0xfb, 0x55, 0x34, 0x54} }
 
+#define EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0103 \
+ {0x907a7878, 0xb294, 0xf147, {0xe9, 0x0a, 0x65, 0x43, 0xab, 0x55, 0x76, 0x46} }
+
+#define EV_POST_CODE 0x01
+
+#define EFI_TCG2_EXTEND_ONLY 0x0000000000000001
+
+#define PE_COFF_IMAGE 0x0000000000000010
+
 EFI_STATUS
 EFIAPI
 BBTestTCG2ProtocolUnload (
@@ -83,6 +92,18 @@ BBTestGetActivePcrBanksConformanceTestCheckpoint2 (
   );
 
 EFI_STATUS
+BBTestHashLogExtendEventConformanceTestCheckpoint1 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TCG2_PROTOCOL                     *TCG2
+  );
+
+EFI_STATUS
+BBTestHashLogExtendEventConformanceTestCheckpoint2 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TCG2_PROTOCOL                     *TCG2
+  );
+
+EFI_STATUS
 BBTestGetCapabilityConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -92,6 +113,14 @@ BBTestGetCapabilityConformanceTest (
 
 EFI_STATUS
 BBTestGetActivePcrBanksConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+EFI_STATUS
+BBTestHashLogExtendEventConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
