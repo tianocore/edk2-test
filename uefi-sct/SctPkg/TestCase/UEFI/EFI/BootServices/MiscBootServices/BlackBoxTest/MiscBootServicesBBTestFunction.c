@@ -1707,12 +1707,20 @@ GetNextMonotonicCountStep2:
                    TplArray[Index]
                    );
 
-    if (SctRShiftU64 (Count2, 32) == SctRShiftU64 (Count, 32) + 1) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
-    } else {
+    //The new count of upper 32 bits must be atleast 1 more than the old count.
+    //Pass case: new count is equal to old count + 1
+    if (SctRShiftU64 (Count2, 32) <= SctRShiftU64 (Count, 32)) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
-    }
-    StandardLib->RecordAssertion (
+    } else {
+      //If new count is more that old count + 1, then print warning.
+      if (SctRShiftU64 (Count2, 32) > SctRShiftU64 (Count, 32) + 1) {
+        AssertionType = EFI_TEST_ASSERTION_WARNING;
+      } else {
+        //new count == old count + 1
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      }
+   }
+   StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
                    Index==0? \
