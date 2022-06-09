@@ -498,3 +498,6 @@ SctPkg/TestCase/RIVL/Protocol/Http/HttpServiceBinding/HttpServiceBindingENTSTest
 
 [Components.IA32, Components.X64]
 SctPkg/TestCase/UEFI/EFI/Generic/ExeMode/BlackBoxTest/ExeModeBBTest.inf
+
+[Components.RISCV64]
+SctPkg/TestCase/UEFI/EFI/Protocol/RiscV/BlackBoxTest/RiscVBootProtocolBBTest.inf
