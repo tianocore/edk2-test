@@ -91,6 +91,7 @@ BBTestDriverDiagnostics2Unload (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +105,7 @@ BBTestRunDiagnosticsConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
@@ -111,6 +113,7 @@ BBTestRunDiagnosticsConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
@@ -118,12 +121,14 @@ BBTestRunDiagnosticsConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -132,12 +137,14 @@ BBTestRunDiagnosticsFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFuncTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFuncTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2

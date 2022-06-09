@@ -154,6 +154,7 @@ BBTestImageBootServicesUnload (
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestLoadImageConsistencyTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -165,6 +166,7 @@ BBTestLoadImageConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStartImageConsistencyTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -176,6 +178,7 @@ BBTestStartImageConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageConsistencyTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -187,6 +190,7 @@ BBTestUnloadImageConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestExitConsistencyTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -198,6 +202,7 @@ BBTestExitConsistencyTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestExitBootServicesConsistencyTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -209,6 +214,7 @@ BBTestExitBootServicesConsistencyTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -220,6 +226,7 @@ BBTestLoadImageInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -231,6 +238,7 @@ BBTestStartImageInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -242,6 +250,7 @@ BBTestUnloadImageInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -253,6 +262,7 @@ BBTestExitInterfaceTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestImageServicesCombinationTest1 (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -264,46 +274,55 @@ BBTestImageServicesCombinationTest1 (
 // Checkpoint functions for TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadImageInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -312,31 +331,37 @@ BBTestLoadImageInterfaceTestCheckPoint9 (
 // Checkpoint functions for TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStartImageInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -345,51 +370,61 @@ BBTestStartImageInterfaceTestCheckPoint6 (
 // Checkpoint functions for TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -398,51 +433,61 @@ BBTestUnloadImageInterfaceTestCheckPoint10 (
 // Checkpoint functions for TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExitInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );

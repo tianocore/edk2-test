@@ -111,6 +111,7 @@ InitializeUFSDeviceConfigBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadUFSDeviceConfigBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

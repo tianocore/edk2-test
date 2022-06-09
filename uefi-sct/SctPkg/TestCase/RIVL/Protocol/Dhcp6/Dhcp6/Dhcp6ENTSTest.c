@@ -83,6 +83,7 @@ ENTS_INTERFACE    gDhcp6EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gDhcp6EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Dhcp6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -165,6 +166,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Dhcp6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

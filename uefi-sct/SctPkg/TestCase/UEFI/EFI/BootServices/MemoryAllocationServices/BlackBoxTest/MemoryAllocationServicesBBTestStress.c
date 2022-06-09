@@ -51,6 +51,7 @@ INTN FreeSeqIndex2[SEQ_NUM] = {
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMemoryMapStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -148,6 +149,7 @@ BBTestGetMemoryMapStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestPagesStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -389,6 +391,7 @@ BBTestPagesStressTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestPoolStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

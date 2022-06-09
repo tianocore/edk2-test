@@ -54,6 +54,7 @@ ENTS_ARG_FIELD        tRTResetSystemArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_ResetSystem_EntsTest (
   VOID *ClientInterface
   )

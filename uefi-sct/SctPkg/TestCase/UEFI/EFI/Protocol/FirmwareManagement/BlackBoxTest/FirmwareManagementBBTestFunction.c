@@ -36,18 +36,21 @@ Abstract:
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -61,6 +64,7 @@ BBTestGetPackageInfoFunctionTestCheckpoint1 (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -77,6 +81,7 @@ BBTestUnitTest (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -117,6 +122,7 @@ BBTestGetImageInfoFunctionTest (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageFunctionTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -157,6 +163,7 @@ BBTestGetImageFunctionTest (
 // ****************************************************************************
  
 EFI_STATUS
+EFIAPI
 BBTestGetPackageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -216,6 +223,7 @@ BBTestGetPackageInfoFunctionTest (
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -507,6 +515,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -746,6 +755,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement

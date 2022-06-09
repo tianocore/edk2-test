@@ -39,6 +39,7 @@ Abstract:
 // TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

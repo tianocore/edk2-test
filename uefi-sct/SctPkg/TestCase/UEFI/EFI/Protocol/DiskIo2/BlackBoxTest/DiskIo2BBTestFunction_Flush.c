@@ -30,6 +30,7 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -39,6 +40,7 @@ BBTestFlushDiskExFunctionAutoTestCheckpoint1(
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -47,6 +49,7 @@ BBTestFlushDiskExFunctionAutoTestCheckpoint2(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -373,6 +376,7 @@ DiskIo2AsyncBatchFlush (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -497,6 +501,7 @@ BBTestFlushDiskExFunctionAutoTest (
    */
   
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib,
   EFI_DISK_IO_PROTOCOL                *DiskIo,
@@ -829,6 +834,7 @@ BBTestFlushDiskExFunctionAutoTestCheckpoint1(
    */
   
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib,
   EFI_DISK_IO_PROTOCOL                *DiskIo,
@@ -1033,6 +1039,7 @@ BBTestFlushDiskExFunctionAutoTestCheckpoint2(
  */
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL	  *StandardLib,
   EFI_DISK_IO_PROTOCOL				  *DiskIo,

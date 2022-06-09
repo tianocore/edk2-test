@@ -78,6 +78,7 @@ InitializeResetNotificationBBTest (
   );
   
 EFI_STATUS
+EFIAPI
 UnloadResetNotificationBBTest (
   IN EFI_HANDLE                   ImageHandle
   ); 
@@ -86,6 +87,7 @@ UnloadResetNotificationBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterResetNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +96,7 @@ BBTestRegisterResetNotifyConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterResetNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -103,6 +106,7 @@ BBTestUnregisterResetNotifyConformanceTest (
 
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterResetNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -111,6 +115,7 @@ BBTestRegisterResetNotifyFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterResetNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

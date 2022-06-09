@@ -1512,6 +1512,7 @@ GetSystemDevicePathAndFilePath (
  *  @param Contex the Event context.
  */
 VOID
+EFIAPI
 EventNotifyWriteMem (
   IN EFI_EVENT      Event,
   IN  VOID          *Context
@@ -1592,6 +1593,7 @@ EventNotifyWriteMem (
  *  @param Contex the Event context.
  */
 VOID
+EFIAPI
 EventNotifyWriteIo (
   IN EFI_EVENT      Event,
   IN  VOID          *Context

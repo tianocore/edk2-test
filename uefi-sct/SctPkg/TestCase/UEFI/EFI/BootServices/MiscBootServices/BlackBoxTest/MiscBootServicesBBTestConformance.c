@@ -39,6 +39,7 @@ Abstract:
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWatchdogTimerConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -61,6 +62,7 @@ BBTestSetWatchdogTimerConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextMonotonicCountConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -122,6 +124,7 @@ BBTestGetNextMonotonicCountConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallConfigurationTableConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -208,6 +211,7 @@ BBTestInstallConfigurationTableConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestCalculateCrc32ConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

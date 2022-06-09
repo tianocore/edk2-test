@@ -56,6 +56,7 @@ NotifyFunc (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -490,6 +491,7 @@ BBTestReadDiskExConformanceAutoTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -973,6 +975,7 @@ BBTestWriteDiskExConformanceAutoTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

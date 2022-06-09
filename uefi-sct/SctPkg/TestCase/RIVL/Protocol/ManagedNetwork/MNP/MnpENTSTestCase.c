@@ -39,12 +39,14 @@ RegenerateToken (
   );
 
 VOID
+EFIAPI
 MnpCallBackFunction0 (
   EFI_EVENT Event,
   VOID      *Context
   );
 
 VOID
+EFIAPI
 MnpCallBackFunction1 (
   EFI_EVENT Event,
   VOID      *Context
@@ -74,6 +76,7 @@ ENTS_ARG_FIELD                          gMnpConfigArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpConfig_EntsTest (
   VOID *ClientInterface
   )
@@ -128,6 +131,7 @@ ENTS_ARG_FIELD                          gMnpGetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpGetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -188,6 +192,7 @@ ENTS_ARG_FIELD          gMnpMCastIpToMacArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpMCastIpToMac_EntsTest (
   VOID *ClientInterface
   )
@@ -244,6 +249,7 @@ ENTS_ARG_FIELD          gMnpGroupArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpGroup_EntsTest (
   VOID *ClientInterface
   )
@@ -293,6 +299,7 @@ ENTS_ARG_FIELD                              gMnpTransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpTransmit_EntsTest (
   VOID *ClientInterface
   )
@@ -353,6 +360,7 @@ ENTS_ARG_FIELD                              gMnpTransmitMultiPacketArgField[] = 
 };
 
 EFI_STATUS
+EFIAPI
 MnpTransmitMultiPacket_EntsTest (
   VOID *ClientInterface
   )
@@ -466,6 +474,7 @@ RegenerateToken (
 }
 
 VOID
+EFIAPI
 MnpCallBackFunction0 (
   EFI_EVENT Event,
   VOID      *Context
@@ -476,6 +485,7 @@ MnpCallBackFunction0 (
 }
 
 VOID
+EFIAPI
 MnpCallBackFunction1 (
   EFI_EVENT Event,
   VOID      *Context
@@ -514,6 +524,7 @@ ENTS_ARG_FIELD                              gMnpReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpReceive_EntsTest (
   VOID *ClientInterface
   )
@@ -572,6 +583,7 @@ ENTS_ARG_FIELD    gMnpReceiveMultiArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpReceiveMultiPacket_EntsTest (
   VOID *ClientInterface
   )
@@ -676,6 +688,7 @@ ENTS_ARG_FIELD    gMnpPollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpPoll_EntsTest (
   VOID *ClientInterface
   )
@@ -721,6 +734,7 @@ ENTS_ARG_FIELD    gMnpPollPattern1ArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpPollPattern1_EntsTest (
   VOID *ClientInterface
   )
@@ -798,6 +812,7 @@ ENTS_ARG_FIELD                              gMnpCancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpCancel_EntsTest (
   VOID *ClientInterface
   )

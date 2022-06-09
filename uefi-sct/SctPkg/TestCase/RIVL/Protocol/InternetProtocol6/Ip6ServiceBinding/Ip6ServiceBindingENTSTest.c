@@ -48,6 +48,7 @@ ENTS_INTERFACE    gIp6ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gIp6ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Ip6ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -139,6 +140,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Ip6ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

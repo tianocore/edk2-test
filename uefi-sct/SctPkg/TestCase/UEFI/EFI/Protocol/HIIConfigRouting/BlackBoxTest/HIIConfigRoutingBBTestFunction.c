@@ -25,36 +25,42 @@ Abstract:
 #include "HIIConfigRoutingBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -62,6 +68,7 @@ BBTestGetAltCfgFunctionTestCheckpoint1 (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -131,6 +138,7 @@ BBTestUnitAutoTest (
 */
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -168,6 +176,7 @@ BBTestExtractConfigFunctionAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -205,6 +214,7 @@ BBTestExportConfigFunctionAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -243,6 +253,7 @@ BBTestRouteConfigFunctionAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -281,6 +292,7 @@ BBTestBlockToConfigFunctionAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -318,6 +330,7 @@ BBTestConfigToBlockFunctionAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -355,6 +368,7 @@ BBTestGetAltCfgFunctionAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -438,6 +452,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -499,6 +514,7 @@ BBTestExportConfigFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -571,6 +587,7 @@ BBTestRouteConfigFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -626,6 +643,7 @@ BBTestBlockToConfigFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -676,6 +694,7 @@ BBTestConfigToBlockFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgFunctionTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting

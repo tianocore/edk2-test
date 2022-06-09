@@ -39,6 +39,7 @@ Abstract:
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestInvalidateInstructionCacheFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

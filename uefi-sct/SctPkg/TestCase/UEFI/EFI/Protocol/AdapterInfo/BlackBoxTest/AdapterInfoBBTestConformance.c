@@ -25,18 +25,21 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -45,12 +48,14 @@ BBTestGetInformationConformanceTestCheckpoint3 (
 
   
 EFI_STATUS
+EFIAPI
 BBTestSetInformationConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetInformationConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -59,12 +64,14 @@ BBTestSetInformationConformanceTestCheckpoint2 (
 
   
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -75,6 +82,7 @@ BBTestGetSupportedTypesConformanceTestCheckpoint2 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -118,6 +126,7 @@ BBTestGetInformationConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -158,6 +167,7 @@ BBTestSetInformationConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -202,6 +212,7 @@ BBTestGetSupportedTypesConformanceTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -256,6 +267,7 @@ BBTestGetInformationConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -342,6 +354,7 @@ BBTestGetInformationConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL           *AdapterInfo
@@ -433,6 +446,7 @@ BBTestGetInformationConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -477,6 +491,7 @@ BBTestSetInformationConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -590,6 +605,7 @@ BBTestSetInformationConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -632,6 +648,7 @@ BBTestGetSupportedTypesConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo

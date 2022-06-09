@@ -211,6 +211,7 @@ InitializeBBTestHIIConfigRouting (
  *  @return EFI_SUCCESS unload successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestHIIConfigRoutingProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   )

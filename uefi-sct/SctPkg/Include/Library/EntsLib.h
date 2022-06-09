@@ -292,6 +292,7 @@ EntsStrDuplicate (
 ;
 
 INTN
+EFIAPI
 EntsLibStubStriCmp (
   IN EFI_UNICODE_COLLATION_PROTOCOL   *This,
   IN CHAR16                           *s1,
@@ -300,6 +301,7 @@ EntsLibStubStriCmp (
 ;
 
 VOID
+EFIAPI
 EntsLibStubStrLwrUpr (
   IN EFI_UNICODE_COLLATION_PROTOCOL   *This,
   IN CHAR16                           *Str
@@ -307,6 +309,7 @@ EntsLibStubStrLwrUpr (
 ;
 
 BOOLEAN
+EFIAPI
 EntsLibStubMetaiMatch (
   IN EFI_UNICODE_COLLATION_PROTOCOL   *This,
   IN CHAR16                           *String,

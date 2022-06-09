@@ -139,6 +139,7 @@ BBTestBlockIoProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -147,6 +148,7 @@ BBTestReadBlocksConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -155,6 +157,7 @@ BBTestReadBlocksConformanceManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -163,6 +166,7 @@ BBTestWriteBlocksConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -171,6 +175,7 @@ BBTestWriteBlocksConformanceManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -180,6 +185,7 @@ BBTestFlushBlocksConformanceAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -192,6 +198,7 @@ BBTestFlushBlocksConformanceManualTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -200,6 +207,7 @@ BBTestResetFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -208,6 +216,7 @@ BBTestReadBlocksFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -216,6 +225,7 @@ BBTestWriteBlocksFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -224,6 +234,7 @@ BBTestFlushBlocksFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestMediaInfoCheckAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -232,6 +243,7 @@ BBTestMediaInfoCheckAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestMediaIntegrityManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -244,6 +256,7 @@ BBTestMediaIntegrityManualTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestResetStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -252,6 +265,7 @@ BBTestResetStressAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -260,6 +274,7 @@ BBTestReadBlocksStressAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -82,31 +82,37 @@ DisplayLog(
   );
 
 EFI_STATUS
-MainMenuEnterFunc (
+EFIAPI
+MainMenuEnterFunc  (
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 MainMenuEscFunc (
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 MainMenuLoadSeqFunc (
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 MainMenuSaveSeqFunc (
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 MainMenuF9Func(
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 MainMenuClearFunc (
   IN EFI_MENU_PAGE                *Page
   );
@@ -456,7 +462,8 @@ Returns:
 }
 
 EFI_STATUS
-MainMenuEnterFunc (
+EFIAPI
+MainMenuEnterFunc  (
   IN EFI_MENU_PAGE                *Page
   )
 /*++
@@ -512,6 +519,7 @@ Reutrns
 
 
 EFI_STATUS
+EFIAPI
 MainMenuEscFunc (
   IN EFI_MENU_PAGE                *Page
   )
@@ -805,6 +813,7 @@ DisplayLog (
 }
 
 EFI_STATUS
+EFIAPI
 MainMenuLoadSeqFunc (
   IN EFI_MENU_PAGE                *Page
   )
@@ -891,6 +900,7 @@ MainMenuLoadSeqFunc (
 
 
 EFI_STATUS
+EFIAPI
 MainMenuSaveSeqFunc (
   IN EFI_MENU_PAGE                *Page
   )
@@ -982,6 +992,7 @@ MainMenuSaveSeqFunc (
 }
 
 EFI_STATUS
+EFIAPI
 MainMenuF9Func(
   IN EFI_MENU_PAGE                *Page
   )
@@ -1042,6 +1053,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 MainMenuClearFunc (
   IN EFI_MENU_PAGE                *Page
   )

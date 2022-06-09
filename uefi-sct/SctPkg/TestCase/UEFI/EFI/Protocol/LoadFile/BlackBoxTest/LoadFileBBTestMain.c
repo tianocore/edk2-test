@@ -124,6 +124,7 @@ UnloadLoadFileTest (
  *  @return EFI_SUCCESS Finish the test successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestLoadFileFunctionTest (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,

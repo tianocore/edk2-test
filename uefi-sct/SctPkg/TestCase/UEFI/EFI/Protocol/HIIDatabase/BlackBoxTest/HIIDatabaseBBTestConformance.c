@@ -51,234 +51,273 @@ ReleaseDeviceHandle (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint4(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -288,6 +327,7 @@ BBTestGetPackageListHandleConformanceTestCheckpoint4 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -327,6 +367,7 @@ BBTestNewPackageListConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -368,6 +409,7 @@ BBTestRemovePackageListConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -411,6 +453,7 @@ BBTestUpdatePackageListConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -458,6 +501,7 @@ BBTestListPackageListsConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -503,6 +547,7 @@ BBTestExportPackageListsConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -544,6 +589,7 @@ BBTestRegisterPackageNotifyConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -585,6 +631,7 @@ BBTestUnregisterPackageNotifyConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -626,6 +673,7 @@ BBTestFindKeyboardLayoutsConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -669,6 +717,7 @@ BBTestGetKeyboardLayoutConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -708,6 +757,7 @@ BBTestSetKeyboardLayoutConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -755,6 +805,7 @@ BBTestGetPackageListHandleConformanceTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -795,6 +846,7 @@ BBTestNewPackageListConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -838,6 +890,7 @@ BBTestNewPackageListConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -875,6 +928,7 @@ BBTestRemovePackageListConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -939,6 +993,7 @@ BBTestRemovePackageListConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1009,6 +1064,7 @@ BBTestRemovePackageListConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1049,6 +1105,7 @@ BBTestUpdatePackageListConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1117,6 +1174,7 @@ BBTestUpdatePackageListConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1190,6 +1248,7 @@ BBTestUpdatePackageListConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1257,6 +1316,7 @@ BBTestUpdatePackageListConformanceTestCheckpoint4 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1341,6 +1401,7 @@ BBTestListPackageListsConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1421,6 +1482,7 @@ BBTestListPackageListsConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1497,6 +1559,7 @@ BBTestListPackageListsConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1619,6 +1682,7 @@ BBTestListPackageListsConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1695,6 +1759,7 @@ BBTestListPackageListsConformanceTestCheckpoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1769,6 +1834,7 @@ BBTestListPackageListsConformanceTestCheckpoint6 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1840,6 +1906,7 @@ BBTestExportPackageListsConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1915,6 +1982,7 @@ BBTestExportPackageListsConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1991,6 +2059,7 @@ BBTestExportPackageListsConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2072,6 +2141,7 @@ BBTestExportPackageListsConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2160,6 +2230,7 @@ BBTestExportPackageListsConformanceTestCheckpoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2215,6 +2286,7 @@ BBTestRegisterPackageNotifyConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2276,6 +2348,7 @@ BBTestRegisterPackageNotifyConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2336,6 +2409,7 @@ BBTestRegisterPackageNotifyConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2413,6 +2487,7 @@ BBTestUnregisterPackageNotifyConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2497,6 +2572,7 @@ BBTestUnregisterPackageNotifyConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2546,6 +2622,7 @@ BBTestUnregisterPackageNotifyConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2585,6 +2662,7 @@ BBTestFindKeyboardLayoutsConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2636,6 +2714,7 @@ BBTestFindKeyboardLayoutsConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2711,6 +2790,7 @@ BBTestFindKeyboardLayoutsConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2751,6 +2831,7 @@ BBTestGetKeyboardLayoutConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2793,6 +2874,7 @@ BBTestGetKeyboardLayoutConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2871,6 +2953,7 @@ BBTestGetKeyboardLayoutConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2946,6 +3029,7 @@ BBTestGetKeyboardLayoutConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -2982,6 +3066,7 @@ BBTestSetKeyboardLayoutConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -3046,6 +3131,7 @@ BBTestSetKeyboardLayoutConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -3114,6 +3200,7 @@ BBTestGetPackageListHandleConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -3199,6 +3286,7 @@ BBTestGetPackageListHandleConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -3284,6 +3372,7 @@ BBTestGetPackageListHandleConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase

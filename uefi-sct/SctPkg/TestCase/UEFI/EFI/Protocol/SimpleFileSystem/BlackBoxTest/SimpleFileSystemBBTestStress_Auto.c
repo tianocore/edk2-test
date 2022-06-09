@@ -51,6 +51,7 @@ BBTestSimpleFileSytemExtensiveTest6_ReadWriteInternal (
 // TDS 5.3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemExtensiveTest5 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -540,6 +541,7 @@ Done:
 // TDS 5.3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemExtensiveTest6 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -613,6 +615,7 @@ BBTestSimpleFileSytemExtensiveTest6 (
 // TDS 5.3.7
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemOpenStress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -669,6 +672,7 @@ BBTestSimpleFileSytemOpenStress (
 // TDS 5.3.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemGetInfoStress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -719,6 +723,7 @@ BBTestSimpleFileSytemGetInfoStress (
 // TDS 5.3.9
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemSetInfoStress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

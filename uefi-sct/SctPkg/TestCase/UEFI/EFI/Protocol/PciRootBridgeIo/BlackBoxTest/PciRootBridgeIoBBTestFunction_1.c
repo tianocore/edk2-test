@@ -51,6 +51,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 PollMem_Func_Manual (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -261,6 +262,7 @@ PollMem_Func_Manual (
  *  @return EFI_SUCCESS the check point was checked successfully.
  */
 EFI_STATUS
+EFIAPI
 PollMemCheckPoint (
   IN  EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL       *RootBridgeIo,
   IN  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -673,6 +675,7 @@ PollMemCheckPoint (
 //
 
 EFI_STATUS
+EFIAPI
 PollMem_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1053,6 +1056,7 @@ PollMem_Func (
 //TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 PollIo_Func_Manual (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1266,6 +1270,7 @@ PollIo_Func_Manual (
  *  @return EFI_SUCCESS the check point was checked successfully.
  */
 EFI_STATUS
+EFIAPI
 PollIoCheckPoint (
   IN  EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL       *RootBridgeIo,
   IN  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1678,6 +1683,7 @@ PollIoCheckPoint (
 //TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 PollIo_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2048,6 +2054,7 @@ PollIo_Func (
 //TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 MemRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2719,6 +2726,7 @@ MemRead_Func (
 //TDS 4.1.6
 //
 EFI_STATUS
+EFIAPI
 MemWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3445,6 +3453,7 @@ MemWrite_Func (
 //TDS 4.1.7
 //
 EFI_STATUS
+EFIAPI
 IoRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4111,6 +4120,7 @@ IoRead_Func (
 //TDS 4.1.8
 //
 EFI_STATUS
+EFIAPI
 IoWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

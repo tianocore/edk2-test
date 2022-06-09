@@ -41,6 +41,7 @@ Abstract:
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -277,6 +278,7 @@ BBTestInstallProtocolInterfaceConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -505,6 +507,7 @@ BBTestUninstallProtocolInterfaceConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -752,6 +755,7 @@ BBTestReinstallProtocolInterfaceConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -933,6 +937,7 @@ BBTestRegisterProtocolNotifyConsistencyTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1334,6 +1339,7 @@ Done:
 // TDS 3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1517,6 +1523,7 @@ BBTestUninstallMultipleProtocolInterfacesConsistencyTest (
 // TDS 3.7
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1914,6 +1921,7 @@ BBTestLocateHandleConsistencyTest (
 // TDS 3.8
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2145,6 +2153,7 @@ BBTestLocateHandleBufferConsistencyTest (
 // TDS 3.9
 //
 EFI_STATUS
+EFIAPI
 BBTestHandleProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2380,6 +2389,7 @@ BBTestHandleProtocolConsistencyTest (
 // TDS 3.10
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2650,6 +2660,7 @@ Done:
 // TDS 3.11
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateDevicePathConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3028,6 +3039,7 @@ Done:
 // TDS 3.12
 //
 EFI_STATUS
+EFIAPI
 BBTestProtocolsPerHandleConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3248,6 +3260,7 @@ BBTestProtocolsPerHandleConsistencyTest (
 // TDS 3.13
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3853,6 +3866,7 @@ BBTestOpenProtocolConsistencyTest (
 // TDS 3.14
 //
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4288,6 +4302,7 @@ Done:
 // TDS 3.15
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInformationConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4438,6 +4453,7 @@ BBTestOpenProtocolInformationConsistencyTest (
 // TDS 3.16
 //
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4629,6 +4645,7 @@ BBTestConnectControllerConsistencyTest (
 // TDS 3.17
 //
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -98,6 +98,7 @@ InitializeDriverBinding (
   );
 
 EFI_STATUS
+EFIAPI
 PlatformOverrideDriver1GetDriver (
   IN     EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN     EFI_HANDLE                             ControllerHandle,
@@ -105,6 +106,7 @@ PlatformOverrideDriver1GetDriver (
   );
 
 EFI_STATUS
+EFIAPI
 PlatformOverrideDriver1GetDriverPath (
   IN     EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN     EFI_HANDLE                             ControllerHandle,
@@ -112,6 +114,7 @@ PlatformOverrideDriver1GetDriverPath (
   );
 
 EFI_STATUS
+EFIAPI
 PlatformOverrideDriver1DriverLoaded (
   IN EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN EFI_HANDLE                             ControllerHandle,
@@ -440,6 +443,7 @@ InitializeDriverBinding (
 }
 
 EFI_STATUS
+EFIAPI
 PlatformOverrideDriver1GetDriver (
   IN     EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN     EFI_HANDLE                             ControllerHandle,
@@ -479,6 +483,7 @@ PlatformOverrideDriver1GetDriver (
 }
 
 EFI_STATUS
+EFIAPI
 PlatformOverrideDriver1GetDriverPath (
   IN     EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN     EFI_HANDLE                             ControllerHandle,
@@ -519,6 +524,7 @@ PlatformOverrideDriver1GetDriverPath (
 }
 
 EFI_STATUS
+EFIAPI
 PlatformOverrideDriver1DriverLoaded (
   IN EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN EFI_HANDLE                             ControllerHandle,

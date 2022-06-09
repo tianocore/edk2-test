@@ -100,6 +100,7 @@ CHAR8     IsoLatinTable[][4] = {
 // TDS 5.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -158,6 +159,7 @@ BBTestSetOptionsConformanceTest (
 // TDS 5.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestOptionsValidConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -213,6 +215,7 @@ BBTestOptionsValidConformanceTest (
 // TDS 5.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestForceDefaultsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -266,6 +269,7 @@ BBTestForceDefaultsConformanceTest (
 // 5.2.1.2.1 call SetOptions() with invalid parameters
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -410,6 +414,7 @@ BBTestSetOptionsConformanceTestCheckpoint1 (
 // 5.2.1.2.2 Call SetOptions() with all unsupported languages
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -503,6 +508,7 @@ BBTestSetOptionsConformanceTestCheckpoint2 (
 // 5.2.1.2.3 Call SetOptions() with  unsupported controller
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -579,6 +585,7 @@ BBTestSetOptionsConformanceTestCheckpoint3 (
 // 5.2.2.2.1  Call OptionsValid() with invalid parameters.
 //
 EFI_STATUS
+EFIAPI
 BBTestOptionsValidConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -659,6 +666,7 @@ BBTestOptionsValidConformanceTestCheckpoint1 (
 // 5.2.2.2.2  Call OptionsValid() with unsupported controller
 //
 EFI_STATUS
+EFIAPI
 BBTestOptionsValidConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -721,6 +729,7 @@ BBTestOptionsValidConformanceTestCheckpoint2 (
 // 5.2.3.2.1  Call ForceDefaults() with invalid parameters.
 //
 EFI_STATUS
+EFIAPI
 BBTestForceDefaultsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -830,6 +839,7 @@ BBTestForceDefaultsConformanceTestCheckpoint1 (
 // 5.2.3.2.2  Call ForceDefaults() with unsupported controller
 //
 EFI_STATUS
+EFIAPI
 BBTestForceDefaultsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig

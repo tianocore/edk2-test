@@ -33,6 +33,7 @@ Abstract:
 #include <UEFI/Protocol/Ip4.h>
 
 EFI_STATUS
+EFIAPI
 Ip4Config2SetData_EntsTest (
   VOID *ClientInterface
   )
@@ -54,6 +55,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Config2GetData_EntsTest (
   VOID *ClientInterface
   )
@@ -75,6 +77,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Config2RegisterDataNotify_EntsTest (
   VOID *ClientInterface
   )
@@ -96,6 +99,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Config2UnregisterDataNotify_EntsTest (
   VOID *ClientInterface
   )

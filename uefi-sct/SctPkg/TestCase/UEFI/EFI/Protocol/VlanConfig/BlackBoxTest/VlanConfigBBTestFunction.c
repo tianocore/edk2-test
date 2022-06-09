@@ -25,24 +25,28 @@ Abstract:
 #include "VlanConfigBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestSetFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFindFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemoveFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -51,6 +55,7 @@ BBTestRemoveFunctionTestCheckpoint1 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestSetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +93,7 @@ BBTestSetFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -127,6 +133,7 @@ BBTestFindFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemoveFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -168,6 +175,7 @@ BBTestRemoveFunctionTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestSetFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -336,6 +344,7 @@ BBTestSetFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -382,6 +391,7 @@ BBTestFindFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -532,6 +542,7 @@ BBTestFindFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRemoveFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig

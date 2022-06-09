@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gArpServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gArpServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

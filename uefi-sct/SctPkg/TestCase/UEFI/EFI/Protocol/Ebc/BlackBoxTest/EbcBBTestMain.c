@@ -415,6 +415,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 FlushICache (
   IN EFI_PHYSICAL_ADDRESS     Start,
   IN UINT64                   Length
@@ -431,6 +432,7 @@ FlushICache (
 }
 
 EFI_STATUS
+EFIAPI
 TestFlushICache (
   IN EFI_PHYSICAL_ADDRESS     Start,
   IN UINT64                   Length

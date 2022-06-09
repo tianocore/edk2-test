@@ -65,6 +65,7 @@ ENTS_INTERFACE    gHttpEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gHttpEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 HttpENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -148,6 +149,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 HttpENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

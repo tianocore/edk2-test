@@ -74,6 +74,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpSendPacket (
   EFTP_IO_PRIVATE    *Private,
   EFTP_PACKET_BUFFER *Buf
@@ -269,6 +270,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpStartRcv (
   IN EFTP_IO_PRIVATE*Private
   )
@@ -291,6 +293,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpSendError (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFTP_ERRINFO     *Err,
@@ -318,6 +321,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpResendPacket (
   IN EFTP_IO_PRIVATE     *Private,
   IN EFTP_PACKET_BUFFER  *Buf,

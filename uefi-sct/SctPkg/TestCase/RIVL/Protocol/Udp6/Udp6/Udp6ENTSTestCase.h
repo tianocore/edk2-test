@@ -34,6 +34,7 @@ Abstract:
 #include <UEFI/Protocol/Udp6.h>
 
 EFI_STATUS
+EFIAPI
 Udp6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -55,6 +56,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -76,6 +78,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -97,6 +100,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6Poll_EntsTest (
   VOID *ClientInterface
   )
@@ -118,6 +122,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -139,6 +144,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -160,6 +166,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -181,6 +188,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp6SignalRecycleEvent_EntsTest (
   VOID *ClientInterface
   )

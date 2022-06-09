@@ -28,6 +28,7 @@ Abstract:
 
 
 VOID
+EFIAPI
 NotifyFunction (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
@@ -49,6 +50,7 @@ NotifyFunction (
 
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
 VOID
+EFIAPI
 NotifyFunctionTplEx(
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
@@ -85,6 +87,7 @@ NotifyFunctionTplEx(
 #endif
 
 VOID
+EFIAPI
 NotifyFunctionTpl (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
@@ -110,6 +113,7 @@ NotifyFunctionTpl (
 
 
 VOID
+EFIAPI
 NotifyFunctionSignal (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
@@ -120,6 +124,7 @@ NotifyFunctionSignal (
 }
 
 VOID
+EFIAPI
 NotifyFunctionNoSignal (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context

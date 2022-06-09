@@ -150,6 +150,7 @@ extern EFI_GUID gTestVendor2Guid;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 GetVariableConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -161,6 +162,7 @@ GetVariableConfTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -172,6 +174,7 @@ GetNextVariableNameConfTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 SetVariableConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -184,6 +187,7 @@ SetVariableConfTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 QueryVariableInfoConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -192,6 +196,7 @@ QueryVariableInfoConfTest (
   );
 
 EFI_STATUS
+EFIAPI
 AuthVariableDERConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -200,6 +205,7 @@ AuthVariableDERConfTest (
   );
 
 EFI_STATUS
+EFIAPI
 AuthVariableDERFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -213,6 +219,7 @@ AuthVariableDERFuncTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 GetVariableFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -224,6 +231,7 @@ GetVariableFuncTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 GetNextVariableNameFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -235,6 +243,7 @@ GetNextVariableNameFuncTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 SetVariableFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -247,6 +256,7 @@ SetVariableFuncTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 QueryVariableInfoFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -255,6 +265,7 @@ QueryVariableInfoFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 HardwareErrorRecordFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -263,6 +274,7 @@ HardwareErrorRecordFuncTest (
   );
   
 EFI_STATUS
+EFIAPI
 HardwareErrorRecordConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -276,6 +288,7 @@ HardwareErrorRecordConfTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 MultipleStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -287,6 +300,7 @@ MultipleStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 OverflowStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -298,6 +312,7 @@ OverflowStressTest (
 // Support functions
 //
 EFI_STATUS
+EFIAPI
 GetTestSupportLibrary (
   IN EFI_HANDLE                           SupportHandle,
   OUT EFI_STANDARD_TEST_LIBRARY_PROTOCOL  **StandardLib,
@@ -308,6 +323,7 @@ GetTestSupportLibrary (
 
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)  
 EFI_STATUS
+EFIAPI
 Myitox (
   IN UINTN        Num,
   OUT CHAR16      *StringNum

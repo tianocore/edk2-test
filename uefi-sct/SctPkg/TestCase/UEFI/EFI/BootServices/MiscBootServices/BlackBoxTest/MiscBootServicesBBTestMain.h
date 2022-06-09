@@ -77,6 +77,7 @@ static const UINTN  mon_lengths[2][12] = {
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWatchdogTimerConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +89,7 @@ BBTestSetWatchdogTimerConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextMonotonicCountConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -99,6 +101,7 @@ BBTestGetNextMonotonicCountConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallConfigurationTableConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +113,7 @@ BBTestInstallConfigurationTableConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestCalculateCrc32ConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -121,6 +125,7 @@ BBTestCalculateCrc32ConsistencyTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWatchdogTimerInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -132,6 +137,7 @@ BBTestSetWatchdogTimerInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStallInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -143,6 +149,7 @@ BBTestStallInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCopyMemInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -154,6 +161,7 @@ BBTestCopyMemInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetMemInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -165,6 +173,7 @@ BBTestSetMemInterfaceTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextMonotonicCountInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -176,6 +185,7 @@ BBTestGetNextMonotonicCountInterfaceTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallConfigurationTableInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -187,6 +197,7 @@ BBTestInstallConfigurationTableInterfaceTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestCalculateCrc32InterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -198,6 +209,7 @@ BBTestCalculateCrc32InterfaceTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWatchdogTimerStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -209,6 +221,7 @@ BBTestSetWatchdogTimerStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStallStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -220,6 +233,7 @@ BBTestStallStressTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCopyMemStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -231,6 +245,7 @@ BBTestCopyMemStressTest (
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetMemStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -242,6 +257,7 @@ BBTestSetMemStressTest (
 // TDS 5.5
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextMonotonicCountStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

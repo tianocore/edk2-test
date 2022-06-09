@@ -50,6 +50,7 @@ MATCHSTRING_TEST_DATA_FIELD           MatchStringSampleTestData[] ={
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -97,6 +98,7 @@ BBTestGetInfoConformanceTest (
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestMatchStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -140,6 +142,7 @@ BBTestMatchStringConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -239,6 +242,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -459,6 +463,7 @@ BBTestMatchStringConformanceTestCheckpoint1 (
 //REGULAR_EXPRESSION_PROTOCOL.MatchString() with unsupported SyntaxType should return EFI_UNSUPPORTED.
 //
 EFI_STATUS
+EFIAPI
 BBTestMatchStringConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression

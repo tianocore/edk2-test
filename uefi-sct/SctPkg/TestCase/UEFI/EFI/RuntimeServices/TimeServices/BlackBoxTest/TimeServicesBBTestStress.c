@@ -41,6 +41,7 @@ Abstract:
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimeStressTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -133,6 +134,7 @@ BBTestGetTimeStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetWakeupTimeStressTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

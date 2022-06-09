@@ -39,6 +39,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -184,6 +185,7 @@ BBTestGetTimeInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestSetTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -756,6 +758,7 @@ step5:
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetWakeupTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -870,6 +873,7 @@ BBTestGetWakeupTimeInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWakeupTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

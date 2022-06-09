@@ -31,6 +31,7 @@ Abstract:
 // Checkpoint Functions for SctLocateHandle ()
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -366,6 +367,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -709,6 +711,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -977,6 +980,7 @@ BBTestLocateHandleInterfaceTestCheckPoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -1445,6 +1449,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -1747,6 +1752,7 @@ BBTestLocateHandleBufferInterfaceTestCheckPoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -2035,6 +2041,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -2291,6 +2298,7 @@ BBTestLocateHandleBufferInterfaceTestCheckPoint3 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestHandleProtocolInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -2543,6 +2551,7 @@ NextLoop:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -2700,6 +2709,7 @@ NextLoop:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -2946,6 +2956,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -3072,6 +3083,7 @@ NextLoop:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateDevicePathInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -3389,6 +3401,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestProtocolsPerHandleInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -3767,6 +3780,7 @@ BBTestProtocolsPerHandleInterfaceTestCheckPoint1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -3955,6 +3969,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -4143,6 +4158,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -4330,6 +4346,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -4537,6 +4554,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -4682,6 +4700,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -4836,6 +4855,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint6 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -4990,6 +5010,7 @@ BBTestOpenProtocolInterfaceTest111CheckPoint7 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -5302,6 +5323,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -5613,6 +5635,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -5927,6 +5950,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -6225,6 +6249,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -6524,6 +6549,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -6824,6 +6850,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -7141,6 +7168,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -7518,6 +7546,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -7898,6 +7927,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -8283,6 +8313,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -8642,6 +8673,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -9013,6 +9045,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -9394,6 +9427,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -9624,6 +9658,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -9855,6 +9890,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -10086,6 +10122,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -10334,6 +10371,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -10582,6 +10620,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -10831,6 +10870,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint6 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -11084,6 +11124,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint7 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -11971,6 +12012,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -12113,6 +12155,7 @@ BBTestConnectControllerInterfaceTestCheckPoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -12328,6 +12371,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -12694,6 +12738,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -12947,6 +12992,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -13199,6 +13245,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -13431,6 +13478,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint7_13 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -13654,6 +13702,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -14052,6 +14101,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -14248,6 +14298,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -14466,6 +14517,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint11 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -14898,6 +14950,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint12 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -15186,6 +15239,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint14 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -15547,6 +15601,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint15 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -15858,6 +15913,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint16 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -16083,6 +16139,7 @@ Done:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -16205,6 +16262,7 @@ BBTestDisconnectControllerInterfaceTestCheckPoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -16327,6 +16385,7 @@ BBTestDisconnectControllerInterfaceTestCheckPoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -16533,6 +16592,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -16758,6 +16818,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -17042,6 +17103,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

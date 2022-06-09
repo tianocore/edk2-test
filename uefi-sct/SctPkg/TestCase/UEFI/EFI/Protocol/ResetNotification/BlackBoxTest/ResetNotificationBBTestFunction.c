@@ -28,6 +28,7 @@ Abstract:
 extern UINT8 EnterEvent;
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterResetNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -221,6 +222,7 @@ step3:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterResetNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

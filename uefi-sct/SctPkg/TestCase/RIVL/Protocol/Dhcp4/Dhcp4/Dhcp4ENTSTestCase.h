@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Dhcp4.h>
 
 EFI_STATUS
+EFIAPI
 Dhcp4Config_EntsTest (
   VOID *ClientInterface
   )
@@ -52,6 +53,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -73,6 +75,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4Start_EntsTest (
   VOID *ClientInterface
   )
@@ -94,6 +97,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4RenewRebind_EntsTest (
   VOID *ClientInterface
   )
@@ -115,6 +119,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4Release_EntsTest (
   VOID *ClientInterface
   )
@@ -136,6 +141,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4Stop_EntsTest (
   VOID *ClientInterface
   )
@@ -157,6 +163,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4Build_EntsTest (
   VOID *ClientInterface
   )
@@ -178,6 +185,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4TransmitReceive_EntsTest (
   VOID *ClientInterface
   )
@@ -199,6 +207,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4Parse_EntsTest (
   VOID *ClientInterface
   )

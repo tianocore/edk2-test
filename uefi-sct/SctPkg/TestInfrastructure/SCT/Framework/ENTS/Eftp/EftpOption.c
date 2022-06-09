@@ -99,6 +99,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 EftpGetOptions (
   IN EFI_EFTP_PROTOCOL     *This,
   IN UINT32                PacketLen,
@@ -438,6 +439,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 EftpCheckOption (
   IN EFI_EFTP_OPTION             *OptionList,
   IN UINT32                      OptionCount,
@@ -504,6 +506,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 EftpExtractOptions (
   IN EFI_EFTP_PROTOCOL     *This,
   IN EFTP_OPTION           *Option,

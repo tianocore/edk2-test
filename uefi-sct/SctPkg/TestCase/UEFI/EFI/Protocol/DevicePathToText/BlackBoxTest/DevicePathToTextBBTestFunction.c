@@ -194,6 +194,7 @@ DevicePathCmp(
 // TDS 3.5.1
 //
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -343,6 +344,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
 // TDS 3.5.2
 //
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDevicePathToTextFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

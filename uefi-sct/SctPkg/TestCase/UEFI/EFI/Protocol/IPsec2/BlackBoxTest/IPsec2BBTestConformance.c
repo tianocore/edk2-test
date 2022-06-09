@@ -25,6 +25,7 @@ Abstract:
 #include "IPsec2BBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -34,6 +35,7 @@ BBTestProcessExtConformanceTestCheckpoint1 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestProcessExtConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +130,7 @@ BBTestProcessExtConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2

@@ -52,60 +52,70 @@ ReleaseDeviceHandle (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -115,6 +125,7 @@ BBTestGetPackageListHandleFunctionTestCheckpoint1 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -152,6 +163,7 @@ BBTestNewPackageListFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -189,6 +201,7 @@ BBTestRemovePackageListFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -226,6 +239,7 @@ BBTestUpdatePackageListFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -263,6 +277,7 @@ BBTestListPackageListsFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -302,6 +317,7 @@ BBTestExportPackageListsFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -339,6 +355,7 @@ BBTestRegisterPackageNotifyFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -376,6 +393,7 @@ BBTestUnregisterPackageNotifyFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -413,6 +431,7 @@ BBTestFindKeyboardLayoutsFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -450,6 +469,7 @@ BBTestGetKeyboardLayoutFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -487,6 +507,7 @@ BBTestSetKeyboardLayoutFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -528,6 +549,7 @@ BBTestGetPackageListHandleFunctionTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -581,6 +603,7 @@ BBTestNewPackageListFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -670,6 +693,7 @@ BBTestRemovePackageListFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -741,6 +765,7 @@ BBTestUpdatePackageListFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -842,6 +867,7 @@ BBTestListPackageListsFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -922,6 +948,7 @@ BBTestExportPackageListsFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1020,6 +1047,7 @@ BBTestExportPackageListsFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1105,6 +1133,7 @@ BBTestFindKeyboardLayoutsFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1196,6 +1225,7 @@ BBTestGetKeyboardLayoutFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase
@@ -1303,6 +1333,7 @@ BBTestSetKeyboardLayoutFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase

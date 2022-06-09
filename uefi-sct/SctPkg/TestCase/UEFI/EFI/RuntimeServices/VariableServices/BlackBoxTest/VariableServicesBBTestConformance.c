@@ -36,6 +36,7 @@ extern EFI_GUID gHwErrRecGuid;
 //
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -44,6 +45,7 @@ GetVariableConfTest (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -52,6 +54,7 @@ GetNextVariableNameConfTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -64,6 +67,7 @@ SetVariableConfTest (
 //
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -71,6 +75,7 @@ GetVariableConfTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -78,6 +83,7 @@ GetVariableConfTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -85,6 +91,7 @@ GetVariableConfTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -92,6 +99,7 @@ GetVariableConfTestSub4 (
   );
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub5 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -99,6 +107,7 @@ GetVariableConfTestSub5 (
   );
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub6 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -106,6 +115,7 @@ GetVariableConfTestSub6 (
   );
 
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -113,6 +123,7 @@ GetVariableConfTestSub7 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -120,6 +131,7 @@ GetNextVariableNameConfTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -127,6 +139,7 @@ GetNextVariableNameConfTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -134,6 +147,7 @@ GetNextVariableNameConfTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -141,6 +155,7 @@ GetNextVariableNameConfTestSub4 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub5 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -148,6 +163,7 @@ GetNextVariableNameConfTestSub5 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub6 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -155,6 +171,7 @@ GetNextVariableNameConfTestSub6 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -162,6 +179,7 @@ GetNextVariableNameConfTestSub7 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -169,6 +187,7 @@ SetVariableConfTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -176,6 +195,7 @@ SetVariableConfTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -183,6 +203,7 @@ SetVariableConfTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -191,6 +212,7 @@ SetVariableConfTestSub4 (
 
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
 EFI_STATUS
+EFIAPI
 QueryVariableInfoConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -273,6 +295,7 @@ QueryVariableInfoConfTestSub5 (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -353,6 +376,7 @@ GetVariableConfTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -432,6 +456,7 @@ GetNextVariableNameConfTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -501,6 +526,7 @@ SetVariableConfTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -582,6 +608,7 @@ GetVariableConfTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -663,6 +690,7 @@ GetVariableConfTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -791,6 +819,7 @@ GetVariableConfTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -921,6 +950,7 @@ GetVariableConfTestSub4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub5 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1190,6 +1220,7 @@ GetVariableConfTestSub5 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub6 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1319,6 +1350,7 @@ GetVariableConfTestSub6 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableConfTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1532,6 +1564,7 @@ GetVariableConfTestSub7 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1611,6 +1644,7 @@ GetNextVariableNameConfTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1690,6 +1724,7 @@ GetNextVariableNameConfTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1770,6 +1805,7 @@ GetNextVariableNameConfTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1903,6 +1939,7 @@ GetNextVariableNameConfTestSub4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub5 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2067,6 +2104,7 @@ GetNextVariableNameConfTestSub5 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub6 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2228,6 +2266,7 @@ GetNextVariableNameConfTestSub6 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameConfTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2430,6 +2469,7 @@ GetNextVariableNameConfTestSub7 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2514,6 +2554,7 @@ SetVariableConfTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2756,6 +2797,7 @@ SetVariableConfTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2836,6 +2878,7 @@ SetVariableConfTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableConfTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2988,6 +3031,7 @@ SetVariableConfTestSub4 (
 //  QueryVariableInfo test case
 //
 EFI_STATUS
+EFIAPI
 QueryVariableInfoConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3475,6 +3519,7 @@ QueryVariableInfoConfTestSub5 (
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)
 
 EFI_STATUS
+EFIAPI
 HardwareErrorRecordConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

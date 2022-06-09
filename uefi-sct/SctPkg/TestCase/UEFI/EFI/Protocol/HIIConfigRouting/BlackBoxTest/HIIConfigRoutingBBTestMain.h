@@ -47,6 +47,7 @@ InitializeBBTestHIIConfigRouting (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestHIIConfigRoutingProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -56,6 +57,7 @@ BBTestHIIConfigRoutingProtocolUnload (
 //
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -64,6 +66,7 @@ BBTestUnitAutoTest (
   );
 */
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -72,6 +75,7 @@ BBTestExtractConfigFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -80,6 +84,7 @@ BBTestExportConfigFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +93,7 @@ BBTestRouteConfigFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -96,6 +102,7 @@ BBTestBlockToConfigFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +111,7 @@ BBTestConfigToBlockFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,6 +120,7 @@ BBTestGetAltCfgFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -120,6 +129,7 @@ BBTestExtractConfigConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +138,7 @@ BBTestExportConfigConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -136,6 +147,7 @@ BBTestRouteConfigConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -144,6 +156,7 @@ BBTestBlockToConfigConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -152,6 +165,7 @@ BBTestConfigToBlockConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

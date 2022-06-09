@@ -30,6 +30,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 ResetFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -38,6 +39,7 @@ ResetFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -46,6 +48,7 @@ SetAttributesFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetControlFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -54,6 +57,7 @@ SetControlFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 GetControlFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -62,6 +66,7 @@ GetControlFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 WriteFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -70,6 +75,7 @@ WriteFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 ReadFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -82,6 +88,7 @@ ReadFuncTest (
 //
 
 EFI_STATUS
+EFIAPI
 ResetFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -89,6 +96,7 @@ ResetFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -96,6 +104,7 @@ SetAttributesFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -103,6 +112,7 @@ SetAttributesFuncTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -110,6 +120,7 @@ SetAttributesFuncTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 SetControlFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -117,6 +128,7 @@ SetControlFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 GetControlFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -124,6 +136,7 @@ GetControlFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 WriteFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -131,6 +144,7 @@ WriteFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 WriteFuncTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -138,6 +152,7 @@ WriteFuncTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 WriteFuncTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -145,6 +160,7 @@ WriteFuncTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -152,6 +168,7 @@ ReadFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadFuncTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -172,6 +189,7 @@ ReadFuncTestSub2 (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 ResetFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -221,6 +239,7 @@ ResetFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -289,6 +308,7 @@ SetAttributesFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetControlFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -338,6 +358,7 @@ SetControlFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetControlFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -387,6 +408,7 @@ GetControlFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -454,6 +476,7 @@ WriteFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -516,6 +539,7 @@ ReadFuncTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ResetFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -591,6 +615,7 @@ ResetFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -918,6 +943,7 @@ SetAttributesFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1029,6 +1055,7 @@ SetAttributesFuncTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1123,6 +1150,7 @@ SetAttributesFuncTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetControlFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1267,6 +1295,7 @@ SetControlFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetControlFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1460,6 +1489,7 @@ GetControlFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1625,6 +1655,7 @@ WriteFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteFuncTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1790,6 +1821,7 @@ WriteFuncTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteFuncTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1898,6 +1930,7 @@ WriteFuncTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadFuncTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2062,6 +2095,7 @@ ReadFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadFuncTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,

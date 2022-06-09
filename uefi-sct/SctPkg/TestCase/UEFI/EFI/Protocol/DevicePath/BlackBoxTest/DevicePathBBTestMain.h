@@ -52,6 +52,7 @@ BBTestDevicePathProtocolUnload (
 // Function Interface test declaration section
 //
 EFI_STATUS
+EFIAPI
 BBTestDevicePathNodeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

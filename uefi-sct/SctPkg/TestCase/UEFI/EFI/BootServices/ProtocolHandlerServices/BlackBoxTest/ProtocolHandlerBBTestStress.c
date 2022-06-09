@@ -164,6 +164,7 @@ EFI_GUID STRESS_TEST_NON_INTERFACE_PROTOCOL_39_GUID =
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest1 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -371,6 +372,7 @@ BBTestCombinationTest1 (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -440,6 +442,7 @@ BBTestCombinationTest2 (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest3 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1206,6 +1209,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -1349,6 +1353,7 @@ BBTestCombinationTest2CheckPoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -1503,6 +1508,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -1604,6 +1610,7 @@ BBTestCombinationTest2CheckPoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

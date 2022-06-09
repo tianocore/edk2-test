@@ -34,6 +34,7 @@ Abstract:
 #include <UEFI/Protocol/Dhcp6.h>
 
 EFI_STATUS
+EFIAPI
 Dhcp6Config_EntsTest (
   VOID *ClientInterface
   )
@@ -55,6 +56,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -76,6 +78,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6Start_EntsTest (
   VOID *ClientInterface
   )
@@ -97,6 +100,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6InfoRequest_EntsTest (
   VOID *ClientInterface
   )
@@ -118,6 +122,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6RenewRebind_EntsTest (
   VOID *ClientInterface
   )
@@ -139,6 +144,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6Decline_EntsTest (
   VOID *ClientInterface
   )
@@ -160,6 +166,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6Release_EntsTest (
   VOID *ClientInterface
   )
@@ -181,6 +188,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6Stop_EntsTest (
   VOID *ClientInterface
   )
@@ -202,6 +210,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp6Parse_EntsTest (
   VOID *ClientInterface
   )

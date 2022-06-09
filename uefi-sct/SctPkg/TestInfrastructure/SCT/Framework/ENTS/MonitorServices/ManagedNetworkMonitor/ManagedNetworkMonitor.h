@@ -87,6 +87,7 @@ typedef enum {
 #define MAX_PACKET_LENGTH 1492
 
 EFI_STATUS
+EFIAPI
 ManagedNetworkSaveContext (
   IN EFI_ENTS_MONITOR_PROTOCOL                 *This
   )
@@ -110,6 +111,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ManagedNetworkRestoreContext(
   IN EFI_ENTS_MONITOR_PROTOCOL                 *This
   )
@@ -136,6 +138,7 @@ Returns:
 // External functions declarations
 //
 EFI_STATUS
+EFIAPI
 ManagedNetworkListener (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This,
   IN OUT UINTN                     *Size,
@@ -162,6 +165,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ManagedNetworkSender (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This,
   IN CHAR16                        *Buffer
@@ -187,6 +191,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 InitManagedNetwork (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This
   ) /*++
@@ -208,6 +213,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ResetManagedNetwork (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This
   ) /*++

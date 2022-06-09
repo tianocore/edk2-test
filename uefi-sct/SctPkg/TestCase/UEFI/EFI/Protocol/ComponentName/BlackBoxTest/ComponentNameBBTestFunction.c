@@ -41,6 +41,7 @@ Abstract:
 // TDS 9.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -92,6 +93,7 @@ BBTestGetDriverNameBasicTest (
 // TDS 9.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -137,6 +139,7 @@ BBTestGetControllerNameBasicTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameBasicTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -188,6 +191,7 @@ BBTestGetDriverNameBasicTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameBasicTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -335,6 +339,7 @@ BBTestGetControllerNameBasicTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameBasicTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName

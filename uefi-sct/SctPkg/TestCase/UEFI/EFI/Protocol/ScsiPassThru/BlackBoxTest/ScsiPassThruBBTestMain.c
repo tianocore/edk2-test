@@ -194,6 +194,7 @@ InitializeBBTestScsiPassThru (
  *  @return EFI_SUCCESS unload successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestScsiPassThruProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   )

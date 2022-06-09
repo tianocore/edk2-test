@@ -44,6 +44,7 @@ InitializeTestDriver5 (
   );
 
 VOID
+EFIAPI
 TestDriver5GetNextStatusReport (
   IN EXTERNAL_DRIVER_PROTOCOL_1   *This,
   IN EFI_STATUS                   *NextStatus
@@ -248,6 +249,7 @@ Done:
 }
 
 VOID
+EFIAPI
 TestDriver5GetNextStatusReport (
   IN EXTERNAL_DRIVER_PROTOCOL_1   *This,
   IN EFI_STATUS                   *NextStatus

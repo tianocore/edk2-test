@@ -48,6 +48,7 @@ ENTS_ARG_FIELD    gIp4ConfigStartArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4ConfigStart_EntsTest (
   VOID *ClientInterface
   )
@@ -93,6 +94,7 @@ ENTS_ARG_FIELD    gIp4ConfigStopArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4ConfigStop_EntsTest (
   VOID *ClientInterface
   )
@@ -144,6 +146,7 @@ ENTS_ARG_FIELD                gIp4ConfigGetDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4ConfigGetData_EntsTest (
   VOID *ClientInterface
   )

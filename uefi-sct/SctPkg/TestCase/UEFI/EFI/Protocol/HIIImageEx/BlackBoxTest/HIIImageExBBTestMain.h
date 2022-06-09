@@ -93,6 +93,7 @@ InitializeHIIImageExBBTest (
   
   
 EFI_STATUS
+EFIAPI
 UnloadHIIImageExBBTest (
   IN EFI_HANDLE                   ImageHandle
   );
@@ -102,6 +103,7 @@ UnloadHIIImageExBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewImageExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +112,7 @@ BBTestNewImageExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetImageExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +121,7 @@ BBTestGetImageExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetImageExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +130,7 @@ BBTestSetImageExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +139,7 @@ BBTestDrawImageExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +148,7 @@ BBTestDrawImageIdExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +157,7 @@ BBTestGetImageInfoConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestNewImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -158,6 +166,7 @@ BBTestNewImageExFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -166,6 +175,7 @@ BBTestGetImageExFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -174,6 +184,7 @@ BBTestSetImageExFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +193,7 @@ BBTestDrawImageExFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -190,6 +202,7 @@ BBTestDrawImageIdExFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

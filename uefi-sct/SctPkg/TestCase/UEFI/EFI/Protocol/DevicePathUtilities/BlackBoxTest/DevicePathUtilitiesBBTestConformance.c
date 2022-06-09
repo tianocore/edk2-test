@@ -45,6 +45,7 @@ Abstract:
 // TDS 3.4.1
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesCreateDeviceNodeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +101,7 @@ DevicePathUtilitiesCreateDeviceNodeConformanceTest (
 // TDS 3.4.2
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDeviceNodeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -222,6 +224,7 @@ DevicePathUtilitiesAppendDeviceNodeConformanceTest (
 // TDS 3.4.3
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -355,6 +358,7 @@ DevicePathUtilitiesAppendDevicePathConformanceTest (
 // TDS 3.4.4
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathInstanceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -430,6 +434,7 @@ DevicePathUtilitiesAppendDevicePathInstanceConformanceTest (
 // TDS 3.4.5
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetNextDevicePathInstanceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -485,6 +490,7 @@ DevicePathUtilitiesGetNextDevicePathInstanceConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetDevicePathSizeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,
@@ -534,6 +540,7 @@ DevicePathUtilitiesGetDevicePathSizeConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesDuplicateDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,

@@ -171,6 +171,7 @@ InitializeHIIImageBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadHIIImageBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

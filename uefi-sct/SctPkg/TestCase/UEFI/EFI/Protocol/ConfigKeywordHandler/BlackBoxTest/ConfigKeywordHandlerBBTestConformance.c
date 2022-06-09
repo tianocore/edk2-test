@@ -29,6 +29,7 @@ Abstract:
 extern EFI_HANDLE       mImageHandle;
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -219,6 +220,7 @@ BBTestSetDataConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

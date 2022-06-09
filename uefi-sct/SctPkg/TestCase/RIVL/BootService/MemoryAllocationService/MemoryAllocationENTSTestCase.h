@@ -29,6 +29,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 BS_AllocatePages_EntsTest (
   VOID *ClientInterface
   )
@@ -50,6 +51,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_FreePages_EntsTest (
   VOID *ClientInterface
   )
@@ -71,6 +73,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_AllocatePool_EntsTest (
   VOID *ClientInterface
   )
@@ -92,6 +95,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_FreePool_EntsTest (
   VOID *ClientInterface
   )

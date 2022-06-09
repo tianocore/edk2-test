@@ -93,6 +93,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +105,7 @@ UsbHcResetBasicAutoTest (
 // TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -115,6 +117,7 @@ UsbHcGetStateBasicAutoTest (
 // TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +129,7 @@ UsbHcSetStateBasicAutoTest (
 // TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -137,6 +141,7 @@ UsbHcGetRootHubPortNumberBasicManualTest (
 // TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -148,6 +153,7 @@ UsbHcGetRootHubPortStatusBasicAutoTest (
 // TDS 4.1.6
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -159,6 +165,7 @@ UsbHcGetRootHubPortStatusBasicManualTest (
 // TDS 4.1.7
 //
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -170,6 +177,7 @@ UsbHcSetRootHubPortFeatureBasicAutoTest (
 // TDS 4.1.8
 //
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -181,6 +189,7 @@ UsbHcClearRootHubPortFeatureBasicAutoTest (
 // TDS 4.1.9
 //
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -192,6 +201,7 @@ UsbHcClearRootHubPortFeatureBasicManualTest (
 // TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 UsbHcResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -203,6 +213,7 @@ UsbHcResetConformanceAutoTest (
 // TDS 4.2.2
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -214,6 +225,7 @@ UsbHcGetStateConformanceAutoTest (
 // TDS 4.2.3
 //
 EFI_STATUS
+EFIAPI
 UsbHcSetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -225,6 +237,7 @@ UsbHcSetStateConformanceAutoTest (
 // TDS 4.2.4
 //
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -236,6 +249,7 @@ UsbHcControlTransferConformanceAutoTest (
 // TDS 4.2.5
 //
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -247,6 +261,7 @@ UsbHcBulkTransferConformanceAutoTest (
 // TDS 4.2.6
 //
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -258,6 +273,7 @@ UsbHcAsyncInterruptTransferConformanceAutoTest (
 // TDS 4.2.7
 //
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -269,6 +285,7 @@ UsbHcSyncInterruptTransferConformanceAutoTest (
 // TDS 4.x
 //
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -280,6 +297,7 @@ UsbHcAsyncIsochronousTransferConformanceAutoTest (
 // TDS 4.x
 //
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -291,6 +309,7 @@ UsbHcIsochronousTransferConformanceAutoTest (
 // TDS 4.2.8
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -302,6 +321,7 @@ UsbHcGetRootHubPortNumberConformanceAutoTest (
 // TDS 4.2.9
 //
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -313,6 +333,7 @@ UsbHcGetRootHubPortStatusConformanceAutoTest (
 // TDS 4.2.10
 //
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -324,6 +345,7 @@ UsbHcSetRootHubPortFeatureConformanceAutoTest (
 // TDS 4.2.11
 //
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -339,6 +361,7 @@ InitializeBBTestUsbHc (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUsbHcUnload (
   IN EFI_HANDLE           ImageHandle
   );

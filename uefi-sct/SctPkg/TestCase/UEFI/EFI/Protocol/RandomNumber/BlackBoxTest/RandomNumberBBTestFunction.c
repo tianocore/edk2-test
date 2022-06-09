@@ -70,6 +70,7 @@ EFI_GUID Algos[6] = {
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +119,7 @@ BBTestGetInfoFunctionTest (
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestGetRNGFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -161,6 +163,7 @@ BBTestGetRNGFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RNG_PROTOCOL                      *RandomNumber
@@ -287,6 +290,7 @@ BBTestGetInfoFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetRNGFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RNG_PROTOCOL                      *RandomNumber
@@ -415,6 +419,7 @@ BBTestGetRNGFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetRNGFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RNG_PROTOCOL                      *RandomNumber

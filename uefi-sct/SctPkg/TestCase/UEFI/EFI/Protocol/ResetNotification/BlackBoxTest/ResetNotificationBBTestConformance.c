@@ -26,6 +26,7 @@ Abstract:
 #include "ResetNotificationBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterResetNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -90,6 +91,7 @@ BBTestRegisterResetNotifyConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterResetNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

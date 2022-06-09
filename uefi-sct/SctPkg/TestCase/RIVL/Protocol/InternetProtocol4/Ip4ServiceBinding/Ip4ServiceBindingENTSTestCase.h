@@ -34,6 +34,7 @@ Abstract:
 typedef EFI_SERVICE_BINDING_PROTOCOL EFI_IP4_SERVICE_BINDING_PROTOCOL;
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -56,6 +57,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

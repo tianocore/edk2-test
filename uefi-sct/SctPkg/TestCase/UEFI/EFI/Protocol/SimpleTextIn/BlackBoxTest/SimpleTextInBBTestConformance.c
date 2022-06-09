@@ -40,6 +40,7 @@ Abstract:
 // TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -286,6 +287,7 @@ BBTestReadKeyStrokeConformanceManualTest (
 // TDS 4.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestWaitForKeyConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

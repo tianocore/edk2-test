@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gMnpCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -141,6 +142,7 @@ ENTS_ARG_FIELD    gMnpDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 MnpDestroyChild_EntsTest (
   VOID *ClientInterface
   )

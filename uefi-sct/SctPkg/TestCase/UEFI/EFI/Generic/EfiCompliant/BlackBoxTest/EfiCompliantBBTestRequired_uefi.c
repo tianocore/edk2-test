@@ -137,6 +137,7 @@ CheckGloballyDefinedVariables(
 //
 
 EFI_STATUS
+EFIAPI
 RequiredElementsBbTest (
   IN EFI_BB_TEST_PROTOCOL         *This,
   IN VOID                         *ClientInterface,

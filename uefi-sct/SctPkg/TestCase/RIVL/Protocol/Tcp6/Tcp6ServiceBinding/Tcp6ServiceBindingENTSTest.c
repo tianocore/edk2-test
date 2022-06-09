@@ -47,6 +47,7 @@ ENTS_INTERFACE    gTcp6ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gTcp6ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Tcp6ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -138,6 +139,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Tcp6ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

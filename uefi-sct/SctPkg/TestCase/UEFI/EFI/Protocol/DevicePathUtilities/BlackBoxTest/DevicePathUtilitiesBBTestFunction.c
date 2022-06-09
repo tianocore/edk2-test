@@ -45,6 +45,7 @@ Abstract:
 // TDS 3.3.1
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesCreateDeviceNodeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -133,6 +134,7 @@ DevicePathUtilitiesCreateDeviceNodeFunctionTest (
 // TDS 3.3.2
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDeviceNodeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -231,6 +233,7 @@ DevicePathUtilitiesAppendDeviceNodeFunctionTest (
 // TDS 3.3.3
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetDevicePathSizeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -304,6 +307,7 @@ DevicePathUtilitiesGetDevicePathSizeFunctionTest (
 // TDS 3.3.4
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesDuplicateDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -381,6 +385,7 @@ DevicePathUtilitiesDuplicateDevicePathFunctionTest (
 // TDS 3.3.5
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -474,6 +479,7 @@ DevicePathUtilitiesAppendDevicePathFunctionTest (
 // TDS 3.3.6
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathInstanceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -581,6 +587,7 @@ DevicePathUtilitiesAppendDevicePathInstanceFunctionTest (
 // TDS 3.3.7
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetNextDevicePathInstanceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -691,6 +698,7 @@ DevicePathUtilitiesGetNextDevicePathInstanceFunctionTest (
 // TDS 3.3.8
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesIsDevicePathMultiInstanceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

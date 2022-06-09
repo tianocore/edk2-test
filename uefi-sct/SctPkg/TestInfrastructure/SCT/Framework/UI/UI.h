@@ -489,21 +489,25 @@ DoIterEdit (
 //
 
 EFI_STATUS
+EFIAPI
 UpFunc (
   IN EFI_MENU_PAGE            *MenuPage
   );
 
 EFI_STATUS
+EFIAPI
 DownFunc (
   IN EFI_MENU_PAGE            *MenuPage
   );
 
 EFI_STATUS
+EFIAPI
 PageUpFunc (
   IN EFI_MENU_PAGE            *MenuPage
   );
 
 EFI_STATUS
+EFIAPI
 PageDownFunc (
   IN EFI_MENU_PAGE            *MenuPage
   );
@@ -514,11 +518,13 @@ SpaceFunc (
   );
 
 EFI_STATUS
+EFIAPI
 LeftArrowFunc (
   IN EFI_MENU_PAGE            *MenuPage
   );
 
 EFI_STATUS
+EFIAPI
 RightArrowFunc (
   IN EFI_MENU_PAGE            *MenuPage
   );

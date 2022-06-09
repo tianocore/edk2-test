@@ -43,6 +43,7 @@ ENTS_ARG_FIELD              gArpConfigArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpConfig_EntsTest (
   VOID *ClientInterface
   )
@@ -112,6 +113,7 @@ ENTS_ARG_FIELD    gArpAddArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpAdd_EntsTest (
   VOID *ClientInterface
   )
@@ -190,6 +192,7 @@ ENTS_ARG_FIELD            gArpFindArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpFind_EntsTest (
   VOID *ClientInterface
   )
@@ -249,6 +252,7 @@ ENTS_ARG_FIELD    gArpDeleteArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpDelete_EntsTest (
   VOID *ClientInterface
   )
@@ -294,6 +298,7 @@ ENTS_ARG_FIELD    gArpFlushArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpFlush_EntsTest (
   VOID *ClientInterface
   )
@@ -350,6 +355,7 @@ ENTS_ARG_FIELD    gArpRequestArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpRequest_EntsTest (
   VOID *ClientInterface
   )
@@ -406,6 +412,7 @@ ENTS_ARG_FIELD    gArpCancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 ArpCancel_EntsTest (
   VOID *ClientInterface
   )

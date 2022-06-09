@@ -102,6 +102,7 @@ UnloadSDMMCPassThruBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +111,7 @@ BBTestPassThruConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSlotConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +120,7 @@ BBTestGetNextSlotConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +129,7 @@ BBTestBuildDevicePathConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetSlotNumberConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +138,7 @@ BBTestGetSlotNumberConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -143,6 +148,7 @@ BBTestResetDeviceConformanceTest (
 
   
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -151,6 +157,7 @@ BBTestPassThruFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSlotFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -159,6 +166,7 @@ BBTestGetNextSlotFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -167,6 +175,7 @@ BBTestBuildDevicePathFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetSlotNumberFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -175,6 +184,7 @@ BBTestGetSlotNumberFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

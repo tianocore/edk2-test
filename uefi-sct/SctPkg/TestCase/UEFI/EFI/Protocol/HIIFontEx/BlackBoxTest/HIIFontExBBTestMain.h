@@ -94,6 +94,7 @@ InitializeHIIFontExBBTest (
   
   
 EFI_STATUS
+EFIAPI
 UnloadHIIFontExBBTest (
   IN EFI_HANDLE                   ImageHandle
   );
@@ -103,6 +104,7 @@ UnloadHIIFontExBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -111,6 +113,7 @@ BBTestStringToImageExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -119,6 +122,7 @@ BBTestStringIdToImageExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -127,6 +131,7 @@ BBTestGetGlyphExConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -135,6 +140,7 @@ BBTestGetFontInfoExConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -143,6 +149,7 @@ BBTestGetGlyphInfoConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -151,6 +158,7 @@ BBTestStringToImageExFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -159,6 +167,7 @@ BBTestStringIdToImageExFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -167,6 +176,7 @@ BBTestGetGlyphExFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -175,6 +185,7 @@ BBTestGetFontInfoExFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -106,6 +106,7 @@ UpdateInfoFileName (EFI_FILE_INFO **InfoBuffer, CHAR16* ChangeFileName)
 // TDS 5.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -180,6 +181,7 @@ BBTestOpenConformanceTest (
 // TDS 5.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestDeleteConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -229,6 +231,7 @@ BBTestDeleteConformanceTest (
 // TDS 5.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -297,6 +300,7 @@ BBTestWriteConformanceTest (
 // TDS 5.2.4
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -360,6 +364,7 @@ BBTestFlushConformanceTest (
 // TDS 5.2.5
 //
 EFI_STATUS
+EFIAPI
 BBTestSetPositionConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -410,6 +415,7 @@ BBTestSetPositionConformanceTest (
 // TDS 5.2.6
 //
 EFI_STATUS
+EFIAPI
 BBTestGetPositionConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -460,6 +466,7 @@ BBTestGetPositionConformanceTest (
 // TDS 5.2.7
 //
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -515,6 +522,7 @@ BBTestGetInfoConformanceTest (
 // TDS 5.2.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -588,6 +596,7 @@ BBTestSetInfoConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -677,6 +686,7 @@ BBTestOpenConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -799,6 +809,7 @@ BBTestOpenConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -988,6 +999,7 @@ CHAR16            UnacceptableFileName[][100] = {
                               };
 
 EFI_STATUS
+EFIAPI
 BBTestOpenConformanceTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1113,6 +1125,7 @@ BBTestOpenConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenConformanceTestCheckpoint5 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1211,6 +1224,7 @@ BBTestOpenConformanceTestCheckpoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDeleteConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1277,6 +1291,7 @@ BBTestDeleteConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestWriteConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1359,6 +1374,7 @@ BBTestWriteConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestWriteConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1461,6 +1477,7 @@ BBTestWriteConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestWriteConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1572,6 +1589,7 @@ BBTestWriteConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFlushConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1671,6 +1689,7 @@ BBTestFlushConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFlushConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1779,6 +1798,7 @@ BBTestFlushConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetPositionConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1858,6 +1878,7 @@ BBTestSetPositionConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetPositionConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1938,6 +1959,7 @@ BBTestGetPositionConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -2022,6 +2044,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -2172,6 +2195,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -2285,6 +2309,7 @@ BBTestSetInfoConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -2550,6 +2575,7 @@ NextLoop:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -2792,6 +2818,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -3224,6 +3251,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint5 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -3360,6 +3388,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint6 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -3663,6 +3692,7 @@ NextLoop:
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint7 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -3824,6 +3854,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoConformanceTestCheckpoint8 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem

@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gTcp6ServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gTcp6ServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

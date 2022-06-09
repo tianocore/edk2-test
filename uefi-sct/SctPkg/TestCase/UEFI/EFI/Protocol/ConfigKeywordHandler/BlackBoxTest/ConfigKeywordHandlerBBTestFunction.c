@@ -30,6 +30,7 @@ extern CONST EFI_STRING FullStr;
 extern EFI_HANDLE       mImageHandle;
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -233,6 +234,7 @@ BBTestSetDataFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

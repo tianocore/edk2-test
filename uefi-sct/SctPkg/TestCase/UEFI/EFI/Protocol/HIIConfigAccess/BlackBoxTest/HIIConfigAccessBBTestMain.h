@@ -69,6 +69,7 @@ InitializeHIIConfigAccessBBTest (
   
   
 EFI_STATUS
+EFIAPI
 UnloadHIIConfigAccessBBTest (
   IN EFI_HANDLE                   ImageHandle
   );
@@ -79,6 +80,7 @@ UnloadHIIConfigAccessBBTest (
 //
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -87,6 +89,7 @@ BBTestUnitTest (
   );
 */
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -95,6 +98,7 @@ BBTestExtractConfigConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -103,6 +107,7 @@ BBTestRouteConfigConformanceTest (
   );
 /*  
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -111,6 +116,7 @@ BBTestCallBackConformanceTest (
   );
 */  
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -119,6 +125,7 @@ BBTestExtractConfigFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -127,6 +134,7 @@ BBTestRouteConfigFunctionTest (
   );
 /*   
 EFI_STATUS
+EFIAPI
 BBTestCallBackFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

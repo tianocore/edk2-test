@@ -37,6 +37,7 @@ Abstract:
  */ 
 
 EFI_STATUS
+EFIAPI
 BBTestFpuControlWordTest (
     IN EFI_BB_TEST_PROTOCOL       *This, 
     IN VOID                       *ClientInterface,    
@@ -110,6 +111,7 @@ BBTestFpuControlWordTest (
  *  @return EFI_SUCCESS 
  */ 
 EFI_STATUS
+EFIAPI
 BBTestMxCsrTest (
     IN EFI_BB_TEST_PROTOCOL       *This, 
     IN VOID                       *ClientInterface,    

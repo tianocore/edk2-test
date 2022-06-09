@@ -151,6 +151,7 @@ InitializeHIIConfigAccessBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadHIIConfigAccessBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

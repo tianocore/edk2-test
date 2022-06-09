@@ -61,6 +61,7 @@ BBTestDevicePathUtilitiesProtocolUnload (
 // Function Interface test declaration section
 //
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesCreateDeviceNodeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -69,6 +70,7 @@ DevicePathUtilitiesCreateDeviceNodeFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDeviceNodeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -77,6 +79,7 @@ DevicePathUtilitiesAppendDeviceNodeFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetDevicePathSizeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -85,6 +88,7 @@ DevicePathUtilitiesGetDevicePathSizeFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesDuplicateDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -93,6 +97,7 @@ DevicePathUtilitiesDuplicateDevicePathFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -101,6 +106,7 @@ DevicePathUtilitiesAppendDevicePathFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathInstanceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -109,6 +115,7 @@ DevicePathUtilitiesAppendDevicePathInstanceFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetNextDevicePathInstanceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +124,7 @@ DevicePathUtilitiesGetNextDevicePathInstanceFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesIsDevicePathMultiInstanceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -125,6 +133,7 @@ DevicePathUtilitiesIsDevicePathMultiInstanceFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesCreateDeviceNodeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -133,6 +142,7 @@ DevicePathUtilitiesCreateDeviceNodeConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDeviceNodeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -141,6 +151,7 @@ DevicePathUtilitiesAppendDeviceNodeConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -149,6 +160,7 @@ DevicePathUtilitiesAppendDevicePathConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesAppendDevicePathInstanceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -157,6 +169,7 @@ DevicePathUtilitiesAppendDevicePathInstanceConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetNextDevicePathInstanceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -165,6 +178,7 @@ DevicePathUtilitiesGetNextDevicePathInstanceConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesGetDevicePathSizeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -173,6 +187,7 @@ DevicePathUtilitiesGetDevicePathSizeConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathUtilitiesDuplicateDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

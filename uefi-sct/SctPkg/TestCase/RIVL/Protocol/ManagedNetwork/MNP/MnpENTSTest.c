@@ -91,6 +91,7 @@ ENTS_INTERFACE    gMnpEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gMnpEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 MnpENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -173,6 +174,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 MnpENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

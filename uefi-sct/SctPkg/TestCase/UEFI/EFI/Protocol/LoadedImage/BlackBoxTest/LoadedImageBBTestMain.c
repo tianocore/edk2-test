@@ -108,6 +108,7 @@ InitializeBBTestLoadedImageProtocol (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BBTestLoadedImageProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   )
@@ -119,6 +120,7 @@ BBTestLoadedImageProtocolUnload (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLoadedImageTest1 (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -809,6 +811,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestLoadedImageTest2 (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

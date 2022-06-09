@@ -25,84 +25,98 @@ Abstract:
 #include "IPsecConfigBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -112,6 +126,7 @@ BBTestUnregisterDataNotifyFunctionTestCheckpoint1 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -159,6 +174,7 @@ BBTestSetDataFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -200,6 +216,7 @@ BBTestGetDataFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -241,6 +258,7 @@ BBTestGetNextSelectorFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -278,6 +296,7 @@ BBTestRegisterDataNotifyFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -319,6 +338,7 @@ BBTestUnregisterDataNotifyFunctionTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -469,6 +489,7 @@ BBTestSetDataFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -735,6 +756,7 @@ BBTestSetDataFunctionTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -858,6 +880,7 @@ BBTestSetDataFunctionTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1008,6 +1031,7 @@ BBTestSetDataFunctionTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1161,6 +1185,7 @@ BBTestSetDataFunctionTestCheckpoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1283,6 +1308,7 @@ BBTestSetDataFunctionTestCheckpoint6 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1460,6 +1486,7 @@ BBTestGetDataFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1815,6 +1842,7 @@ BBTestGetDataFunctionTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1978,6 +2006,7 @@ BBTestGetDataFunctionTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -2170,6 +2199,7 @@ BBTestGetNextSelectorFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -2357,6 +2387,7 @@ BBTestGetNextSelectorFunctionTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -2515,6 +2546,7 @@ BBTestGetNextSelectorFunctionTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -2678,6 +2710,7 @@ BBTestRegisterDataNotifyFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig

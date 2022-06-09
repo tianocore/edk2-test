@@ -43,6 +43,7 @@ Abstract:
 // TDS 6.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -163,6 +164,7 @@ BBTestResetStressAutoTest (
 // TDS 6.2
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -681,6 +683,7 @@ BBTestReadBlocksStressAutoTest (
 // TDS 6.3
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

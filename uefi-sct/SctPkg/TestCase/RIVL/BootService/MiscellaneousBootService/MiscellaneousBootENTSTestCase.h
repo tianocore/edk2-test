@@ -29,6 +29,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 BS_SetWatchdogTimer_EntsTest (
   VOID *ClientInterface
   )
@@ -50,6 +51,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_Stall_EntsTest (
   VOID *ClientInterface
   )
@@ -71,6 +73,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_CopyMem_EntsTest (
   VOID *ClientInterface
   )
@@ -92,6 +95,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_SetMem_EntsTest (
   VOID *ClientInterface
   )

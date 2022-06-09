@@ -301,6 +301,7 @@ UnloadHIIDatabaseBBTest (
 
 
 EFI_STATUS
+EFIAPI
 DoNothingPackageNotifyFn (
   IN UINT8                           PackageType,
   IN CONST EFI_GUID                  *PackageGuid,

@@ -41,6 +41,7 @@ extern UINT8 EnterEvent;
 // TDS 3.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceTypeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +118,7 @@ BBTestGetDeviceTypeConformanceAutoTest (
 // TDS 3.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceLocationConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -220,6 +222,7 @@ BBTestGetDeviceLocationConformanceAutoTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestExecuteScsiCommandConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

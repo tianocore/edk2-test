@@ -73,6 +73,7 @@ ComposeFileNameArray (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -82,6 +83,7 @@ BBTestOpenBasicTestCheckpoint1_Test1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -91,6 +93,7 @@ BBTestOpenBasicTestCheckpoint1_Test2 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -100,6 +103,7 @@ BBTestOpenBasicTestCheckpoint1_Test3 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -109,6 +113,7 @@ BBTestOpenBasicTestCheckpoint1_Test4 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test5 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -118,6 +123,7 @@ BBTestOpenBasicTestCheckpoint1_Test5 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -127,6 +133,7 @@ BBTestOpenBasicTestCheckpoint2_Test1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -136,6 +143,7 @@ BBTestOpenBasicTestCheckpoint2_Test2 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -145,6 +153,7 @@ BBTestOpenBasicTestCheckpoint2_Test3 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -154,6 +163,7 @@ BBTestOpenBasicTestCheckpoint2_Test4 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test5 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -182,6 +192,7 @@ InvertFileAttributes (
 // TDS 5.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenVolumeBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -232,6 +243,7 @@ BBTestOpenVolumeBasicTest (
 // TDS 5.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -288,6 +300,7 @@ BBTestOpenBasicTest (
 // TDS 5.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCloseBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -339,6 +352,7 @@ BBTestCloseBasicTest (
 // TDS 5.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestDeleteBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -399,6 +413,7 @@ BBTestDeleteBasicTest (
 // TDS 5.1.5
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -454,6 +469,7 @@ BBTestReadBasicTest (
 // TDS 5.1.6
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -504,6 +520,7 @@ BBTestWriteBasicTest (
 // TDS 5.1.7
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -559,6 +576,7 @@ BBTestFlushBasicTest (
 // TDS 5.1.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSetPositionBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -614,6 +632,7 @@ BBTestSetPositionBasicTest (
 // TDS 5.1.9
 //
 EFI_STATUS
+EFIAPI
 BBTestGetPositionBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -665,6 +684,7 @@ BBTestGetPositionBasicTest (
 // TDS 5.1.10
 //
 EFI_STATUS
+EFIAPI
 BBTestGetInfoBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -734,6 +754,7 @@ BBTestGetInfoBasicTest (
 // TDS 5.1.11
 //
 EFI_STATUS
+EFIAPI
 BBTestSetInfoBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1732,6 +1753,7 @@ BBTestReadOnlyTestCheckPoints (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenVolumeBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1991,6 +2013,7 @@ BBTestOpenVolumeBasicTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -2115,6 +2138,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2202,6 +2226,7 @@ BBTestOpenBasicTestCheckpoint1_Test1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2408,6 +2433,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2567,6 +2593,7 @@ DirClean:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2825,6 +2852,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint1_Test5 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -3113,6 +3141,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -3240,6 +3269,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -3545,6 +3575,7 @@ FileClean:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -3945,6 +3976,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -4296,6 +4328,7 @@ DirClean:
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -4730,6 +4763,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenBasicTestCheckpoint2_Test5 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -5197,6 +5231,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestCloseBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -5777,6 +5812,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDeleteBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -5891,6 +5927,7 @@ BBTestDeleteBasicTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDeleteBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -6005,6 +6042,7 @@ BBTestDeleteBasicTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDeleteBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -6151,6 +6189,7 @@ BBTestDeleteBasicTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestReadBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -6517,6 +6556,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -6797,6 +6837,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -7188,6 +7229,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFlushBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -7349,6 +7391,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFlushBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -7473,6 +7516,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetPositionBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -7754,6 +7798,7 @@ NextLoop:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetPositionBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -7846,6 +7891,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetPositionBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -8101,6 +8147,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -8319,6 +8366,7 @@ BBTestGetInfoBasicTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -8419,6 +8467,7 @@ BBTestGetInfoBasicTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -8666,6 +8715,7 @@ NextTpl:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -8820,6 +8870,7 @@ NextLoop:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -9195,6 +9246,7 @@ NextLoop:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -9398,6 +9450,7 @@ NextLoop:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetInfoBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem

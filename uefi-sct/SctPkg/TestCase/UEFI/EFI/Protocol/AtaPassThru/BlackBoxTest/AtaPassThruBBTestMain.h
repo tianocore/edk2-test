@@ -56,6 +56,7 @@ BBTestAtaPassThruProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextPortFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -64,6 +65,7 @@ BBTestGetNextPortFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -72,6 +74,7 @@ BBTestBuildDevicePathFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -80,6 +83,7 @@ BBTestGetDeviceFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetPortFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -88,6 +92,7 @@ BBTestResetPortFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -96,6 +101,7 @@ BBTestResetDeviceFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -104,6 +110,7 @@ BBTestGetNextDeviceFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -112,6 +119,7 @@ BBTestPassThruFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -120,6 +128,7 @@ BBTestModeConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextPortConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -128,6 +137,7 @@ BBTestGetNextPortConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -136,6 +146,7 @@ BBTestBuildDevicePathConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -144,6 +155,7 @@ BBTestGetDeviceConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -152,6 +164,7 @@ BBTestResetDeviceConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -160,6 +173,7 @@ BBTestGetNextDeviceConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

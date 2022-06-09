@@ -32,6 +32,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 ResetStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -40,6 +41,7 @@ ResetStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetAttributesStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -48,6 +50,7 @@ SetAttributesStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetControlStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -56,6 +59,7 @@ SetControlStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 GetControlStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -64,6 +68,7 @@ GetControlStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 WriteStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -72,6 +77,7 @@ WriteStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 ReadStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -84,6 +90,7 @@ ReadStressTest (
 //
 
 EFI_STATUS
+EFIAPI
 ResetStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -91,6 +98,7 @@ ResetStressTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetAttributesStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -98,6 +106,7 @@ SetAttributesStressTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetControlStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -105,6 +114,7 @@ SetControlStressTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 GetControlStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -112,6 +122,7 @@ GetControlStressTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 WriteStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -119,6 +130,7 @@ WriteStressTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 WriteStressTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -126,6 +138,7 @@ WriteStressTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 WriteStressTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -133,6 +146,7 @@ WriteStressTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -140,6 +154,7 @@ ReadStressTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadStressTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -147,6 +162,7 @@ ReadStressTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadStressTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -167,6 +183,7 @@ ReadStressTestSub3 (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 ResetStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -216,6 +233,7 @@ ResetStressTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -265,6 +283,7 @@ SetAttributesStressTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetControlStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -314,6 +333,7 @@ SetControlStressTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetControlStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -363,6 +383,7 @@ GetControlStressTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -430,6 +451,7 @@ WriteStressTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -501,6 +523,7 @@ ReadStressTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ResetStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -588,6 +611,7 @@ ResetStressTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -722,6 +746,7 @@ SetAttributesStressTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetControlStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -867,6 +892,7 @@ SetControlStressTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetControlStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1009,6 +1035,7 @@ GetControlStressTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1141,6 +1168,7 @@ WriteStressTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteStressTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1299,6 +1327,7 @@ WriteStressTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 WriteStressTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1438,6 +1467,7 @@ WriteStressTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadStressTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1586,6 +1616,7 @@ ReadStressTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadStressTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1763,6 +1794,7 @@ ReadStressTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadStressTestSub3 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,

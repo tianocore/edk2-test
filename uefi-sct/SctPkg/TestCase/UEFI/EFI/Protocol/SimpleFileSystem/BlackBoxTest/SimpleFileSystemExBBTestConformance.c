@@ -50,6 +50,7 @@ CreateRandomValueFileIo2 (
 // TDS 5.2.9.2.1
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -57,6 +58,7 @@ BBTestOpenExConformanceTestCheckpoint1 (
 // TDS 5.2.9.2.2
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -64,6 +66,7 @@ BBTestOpenExConformanceTestCheckpoint2 (
 // TDS 5.2.9.2.3
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -72,6 +75,7 @@ BBTestOpenExConformanceTestCheckpoint3 (
 // TDS 5.2.10.2.1
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -80,6 +84,7 @@ BBTestWriteExConformanceTestCheckpoint1 (
 // TDS 5.2.10.2.2
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -88,6 +93,7 @@ BBTestWriteExConformanceTestCheckpoint2 (
 // TDS 5.2.11.2.1
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -97,6 +103,7 @@ BBTestWriteExConformanceTestCheckpoint3 (
 // TDS 5.2.11.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -106,6 +113,7 @@ BBTestFlushExConformanceTestCheckpoint1 (
 // TDS 5.2.12.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -115,6 +123,7 @@ BBTestReadExConformanceTestCheckpoint1 (
 // TDS 5.2.12.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestReadExConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -135,6 +144,7 @@ BBTestReadExConformanceTestCheckpoint2 (
 // TDS 5.2.9
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL        *This,
   IN VOID                        *ClientInterface,
@@ -195,6 +205,7 @@ BBTestOpenExConformanceTest (
 // TDS 5.2.10
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL        *This,
   IN VOID                        *ClientInterface,
@@ -257,6 +268,7 @@ BBTestWriteExConformanceTest (
 // TDS 5.2.11
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL        *This,
   IN VOID                        *ClientInterface,
@@ -309,6 +321,7 @@ BBTestFlushExConformanceTest (
 // TDS 5.2.12
 //
 EFI_STATUS
+EFIAPI
 BBTestReadExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL        *This,
   IN VOID                        *ClientInterface,
@@ -351,6 +364,7 @@ BBTestReadExConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -535,6 +549,7 @@ BBTestOpenExConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -746,6 +761,7 @@ BBTestOpenExConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -945,6 +961,7 @@ BBTestOpenExConformanceTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1112,6 +1129,7 @@ BBTestWriteExConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1326,6 +1344,7 @@ BBTestWriteExConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExConformanceTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1525,6 +1544,7 @@ BBTestWriteExConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1737,6 +1757,7 @@ BBTestFlushExConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadExConformanceTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1957,6 +1978,7 @@ BBTestReadExConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadExConformanceTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem

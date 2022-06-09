@@ -151,7 +151,9 @@ prepareTapeTestEnd:
 
 
 *********************************************************/
-EFI_STATUS BBTestTapeFunctionRead(  
+EFI_STATUS
+EFIAPI
+BBTestTapeFunctionRead(  
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
   IN EFI_TEST_LEVEL                   TestLevel,
@@ -304,6 +306,7 @@ BBTestTapeFunctionReadEnd:
 
 ***********************************************************/
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionWrite (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -445,6 +448,7 @@ BBTestTapeFunctionWriteEnd:
 
 ***********************************************************/
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionRewind (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -529,6 +533,7 @@ BBTestTapeFunctionRewindEnd:
 
 ***********************************************************/
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionSpace (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -694,6 +699,7 @@ BBTestTapeFunctionSpaceEnd:
 
 ***********************************************************/
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionWriteFM (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -781,6 +787,7 @@ BBTestTapeFunctionWriteFMEnd:
 
 ***********************************************************/
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionReset (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,

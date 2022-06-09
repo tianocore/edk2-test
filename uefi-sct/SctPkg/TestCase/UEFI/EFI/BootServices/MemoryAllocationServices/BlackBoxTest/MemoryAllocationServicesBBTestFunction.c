@@ -82,6 +82,7 @@ EFI_MEMORY_TYPE AllocatePoolMemoryType[ALLOCATEPOOL_MEMORYTYPE_NUM] = {
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMemoryMapInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -337,6 +338,7 @@ BBTestGetMemoryMapInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePagesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1612,6 +1614,7 @@ BBTestAllocatePagesInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePagesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1729,6 +1732,7 @@ BBTestFreePagesInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePoolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1845,6 +1849,7 @@ BBTestAllocatePoolInterfaceTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePoolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

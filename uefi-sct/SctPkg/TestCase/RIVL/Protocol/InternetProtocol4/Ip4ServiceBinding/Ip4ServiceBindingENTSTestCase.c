@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gIp4ServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gIp4ServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

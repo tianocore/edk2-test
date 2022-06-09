@@ -31,18 +31,21 @@ Abstract:
 //checkpoint 
 //
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -50,6 +53,7 @@ BBTestReadExBasicTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -361,6 +365,7 @@ FileIoAsyncReadDir (
 // TDS 5.1.13
 //
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -413,6 +418,7 @@ BBTestReadExBasicTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -790,6 +796,7 @@ BBTestReadExBasicTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1055,6 +1062,7 @@ BBTestReadExBasicTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1445,6 +1453,7 @@ BBTestReadExBasicTestCheckpoint3 (
 
   
 EFI_STATUS
+EFIAPI
 BBTestReadExBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem

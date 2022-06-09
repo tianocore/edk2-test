@@ -49,6 +49,7 @@ ENTS_ARG_FIELD                tRTGetTimeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_GetTime_EntsTest (
   VOID *ClientInterface
   )
@@ -98,6 +99,7 @@ ENTS_ARG_FIELD    tRTSetTimeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_SetTime_EntsTest (
   VOID *ClientInterface
   )
@@ -154,6 +156,7 @@ ENTS_ARG_FIELD    tRTGetWakeupTimeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_GetWakeupTime_EntsTest (
   VOID *ClientInterface
   )
@@ -209,6 +212,7 @@ ENTS_ARG_FIELD    tRTSetWakeupTimeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_SetWakeupTime_EntsTest (
   VOID *ClientInterface
   )

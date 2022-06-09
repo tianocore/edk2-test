@@ -79,6 +79,7 @@ InitializeBBTestDriverConfiguration (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDriverConfigurationUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -91,6 +92,7 @@ BBTestDriverConfigurationUnload (
 // TDS 5.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -102,6 +104,7 @@ BBTestSetOptionsConformanceTest (
 // TDS 5.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestOptionsValidConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -113,6 +116,7 @@ BBTestOptionsValidConformanceTest (
 // TDS 5.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestForceDefaultsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +132,7 @@ BBTestForceDefaultsConformanceTest (
 // TDS 5.2.1.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -137,6 +142,7 @@ BBTestSetOptionsConformanceTestCheckpoint1 (
 // TDS 5.2.1.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -146,6 +152,7 @@ BBTestSetOptionsConformanceTestCheckpoint2 (
 // TDS 5.2.1.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestSetOptionsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -155,6 +162,7 @@ BBTestSetOptionsConformanceTestCheckpoint3 (
 // TDS 5.2.2.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestOptionsValidConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -164,6 +172,7 @@ BBTestOptionsValidConformanceTestCheckpoint1 (
 // TDS 5.2.2.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestOptionsValidConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -173,6 +182,7 @@ BBTestOptionsValidConformanceTestCheckpoint2 (
 // TDS 5.2.3.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestForceDefaultsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig
@@ -182,6 +192,7 @@ BBTestForceDefaultsConformanceTestCheckpoint1 (
 // TDS 5.2.3.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestForceDefaultsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_CONFIGURATION_PROTOCOL     *DriverConfig

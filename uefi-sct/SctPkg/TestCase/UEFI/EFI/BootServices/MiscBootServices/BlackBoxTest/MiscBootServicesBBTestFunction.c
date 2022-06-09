@@ -41,6 +41,7 @@ static EFI_TIME Epoch = { .Year = 1970, .Month = 1, .Day = 1 };
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWatchdogTimerInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -790,6 +791,7 @@ SetWatchdogTimerStep6:
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStallInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -896,6 +898,7 @@ BBTestStallInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCopyMemInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1267,6 +1270,7 @@ BBTestCopyMemInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetMemInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1460,6 +1464,7 @@ BBTestSetMemInterfaceTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextMonotonicCountInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1754,6 +1759,7 @@ GetNextMonotonicCountStep2:
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallConfigurationTableInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2121,6 +2127,7 @@ BBTestInstallConfigurationTableInterfaceTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestCalculateCrc32InterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

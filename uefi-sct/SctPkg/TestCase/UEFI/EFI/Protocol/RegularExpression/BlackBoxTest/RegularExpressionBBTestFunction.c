@@ -140,6 +140,7 @@ EFI_REGEX_CAPTURE  MatchStringGenericTestCaptures[2][4] = {
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestRegExGetInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -187,6 +188,7 @@ BBTestRegExGetInfoFunctionTest (
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestMatchStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -230,6 +232,7 @@ BBTestMatchStringFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegExGetInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -338,6 +341,7 @@ BBTestRegExGetInfoFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -568,6 +572,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
 //
 //REGULAR_EXPRESSION_PROTOCOL.MatchString() returns EFI_SUCCESS with default SyntaxType.
 EFI_STATUS
+EFIAPI
 BBTestMatchStringFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression

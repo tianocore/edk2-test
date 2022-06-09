@@ -41,6 +41,7 @@ extern volatile  UINTN InvokedPeriodicCallback;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestIsaFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +118,7 @@ BBTestIsaFunctionAutoTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMaximumProcessorIndexFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -204,6 +206,7 @@ TimerNotifyFunction1 (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterPeriodicCallbackFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

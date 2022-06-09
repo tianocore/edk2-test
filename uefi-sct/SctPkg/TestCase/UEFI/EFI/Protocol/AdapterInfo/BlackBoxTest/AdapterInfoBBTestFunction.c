@@ -28,6 +28,7 @@ Abstract:
 
   
 EFI_STATUS
+EFIAPI
 BBTestGetInformationFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo 
@@ -36,6 +37,7 @@ BBTestGetInformationFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -43,6 +45,7 @@ BBTestSetInformationFunctionTestCheckpoint1 (
   
 
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -54,6 +57,7 @@ BBTestGetSupportedTypesFunctionTestCheckpoint1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -93,6 +97,7 @@ BBTestGetInformationFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -131,6 +136,7 @@ BBTestSetInformationFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -174,6 +180,7 @@ BBTestGetSupportedTypesFunctionTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetInformationFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -279,6 +286,7 @@ BBTestGetInformationFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo
@@ -462,6 +470,7 @@ BBTestSetInformationFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo

@@ -63,6 +63,7 @@ ENTS_ARG_FIELD                          gTcp6GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -117,6 +118,7 @@ ENTS_ARG_FIELD              gTcp6ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -167,6 +169,7 @@ ENTS_ARG_FIELD                    gTcp6ConnectArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Connect_EntsTest (
   VOID *ClientInterface
   )
@@ -217,6 +220,7 @@ ENTS_ARG_FIELD                gTcp6AcceptArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Accept_EntsTest (
   VOID *ClientInterface
   )
@@ -267,6 +271,7 @@ ENTS_ARG_FIELD            gTcp6TransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -317,6 +322,7 @@ ENTS_ARG_FIELD            gTcp6ReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -367,6 +373,7 @@ ENTS_ARG_FIELD              gTcp6CloseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Close_EntsTest (
   VOID *ClientInterface
   )
@@ -417,6 +424,7 @@ ENTS_ARG_FIELD                    gTcp6CancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -462,6 +470,7 @@ ENTS_ARG_FIELD    gTcp6PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp6Poll_EntsTest (
   VOID *ClientInterface
   )

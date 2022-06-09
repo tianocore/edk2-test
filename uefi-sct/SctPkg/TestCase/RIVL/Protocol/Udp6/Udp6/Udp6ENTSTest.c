@@ -76,6 +76,7 @@ ENTS_INTERFACE    gUdp6EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gUdp6EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Udp6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -159,6 +160,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Udp6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

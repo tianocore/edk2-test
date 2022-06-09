@@ -41,6 +41,7 @@ Abstract:
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWatchdogTimerStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -160,6 +161,7 @@ BBTestSetWatchdogTimerStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStallStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -235,6 +237,7 @@ BBTestStallStressTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCopyMemStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -363,6 +366,7 @@ BBTestCopyMemStressTest (
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetMemStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -489,6 +493,7 @@ BBTestSetMemStressTest (
 // TDS 5.5
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextMonotonicCountStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

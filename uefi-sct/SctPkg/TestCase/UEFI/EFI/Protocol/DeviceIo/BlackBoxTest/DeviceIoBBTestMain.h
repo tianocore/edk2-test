@@ -40,6 +40,7 @@ Abstract:
 //TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 MemRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -51,6 +52,7 @@ MemRead_Func (
 //TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 MemWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -62,6 +64,7 @@ MemWrite_Func (
 //TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 IoRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -73,6 +76,7 @@ IoRead_Func (
 //TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 IoWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -85,6 +89,7 @@ IoWrite_Func (
 //TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 PciRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -96,6 +101,7 @@ PciRead_Func (
 //TDS 4.1.6
 //
 EFI_STATUS
+EFIAPI
 PciWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -108,6 +114,7 @@ PciWrite_Func (
 //TDS 4.1.7
 //
 EFI_STATUS
+EFIAPI
 Map_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -130,6 +137,7 @@ Unmap_Func (
 //TDS 4.1.9
 //
 EFI_STATUS
+EFIAPI
 AllocateBuffer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -141,6 +149,7 @@ AllocateBuffer_Func (
 //TDS 4.1.10
 //
 EFI_STATUS
+EFIAPI
 FreeBuffer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -152,6 +161,7 @@ FreeBuffer_Func (
 //TDS 4.1.11
 //
 EFI_STATUS
+EFIAPI
 Flush_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -287,6 +297,7 @@ InitializeBBTestDeviceIo (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDeviceIoUnload (
   IN EFI_HANDLE       ImageHandle
   );

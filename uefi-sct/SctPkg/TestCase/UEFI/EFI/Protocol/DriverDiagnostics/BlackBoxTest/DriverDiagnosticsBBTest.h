@@ -73,6 +73,7 @@ InitializeBBTestDriverDiagnostics (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDriverDiagnosticsUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -85,6 +86,7 @@ BBTestDriverDiagnosticsUnload (
 // TDS 7.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +102,7 @@ BBTestRunDiagnosticsConformanceTest (
 // TDS 7.2.1.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS_PROTOCOL       *DriverDiagnostics
@@ -109,6 +112,7 @@ BBTestRunDiagnosticsConformanceTestCheckpoint1 (
 // TDS 7.2.1.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS_PROTOCOL       *DriverDiagnostics
@@ -118,6 +122,7 @@ BBTestRunDiagnosticsConformanceTestCheckpoint2 (
 // TDS 7.2.1.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS_PROTOCOL       *DriverDiagnostics

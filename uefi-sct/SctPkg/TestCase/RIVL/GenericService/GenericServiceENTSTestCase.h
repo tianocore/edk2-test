@@ -28,6 +28,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 GS_MemCmp_EntsTest (
   VOID *ClientInterface
   )

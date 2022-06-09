@@ -27,6 +27,7 @@ Abstract:
 #include "NVMEPassThruBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextNamespaceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,6 +113,7 @@ BBTestGetNextNamespaceConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -214,6 +216,7 @@ BBTestBuildDevicePathConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNamespaceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -352,6 +355,7 @@ BBTestGetNamespaceConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

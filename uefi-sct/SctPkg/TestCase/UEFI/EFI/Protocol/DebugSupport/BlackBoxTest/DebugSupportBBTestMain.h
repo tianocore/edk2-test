@@ -46,6 +46,7 @@ InitializeBBTestDebugSupport (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDebugSupportProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -55,6 +56,7 @@ BBTestDebugSupportProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestIsaFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -63,6 +65,7 @@ BBTestIsaFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetMaximumProcessorIndexFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -71,6 +74,7 @@ BBTestGetMaximumProcessorIndexFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterPeriodicCallbackFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -79,6 +83,7 @@ BBTestRegisterPeriodicCallbackFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterExceptionCallbackFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -87,6 +92,7 @@ BBTestRegisterExceptionCallbackFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInvalidateInstructionCacheFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

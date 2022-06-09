@@ -42,6 +42,7 @@ EFI_GUID gBlackBoxEfiHash2AlgorithmSha256NoPadGuid = HASH2_SHA256_NOPAD_ALGO_GUI
 extern EFI_GUID gHashAlgorithmGuids[6];
 
 EFI_STATUS
+EFIAPI
 BBTestGetHashSizeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -128,6 +129,7 @@ BBTestGetHashSizeConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestHashConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -219,6 +221,7 @@ BBTestHashConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestHashInitConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -330,6 +333,7 @@ BBTestHashInitConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestHashUpdateConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -437,6 +441,7 @@ BBTestHashUpdateConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestHashFinalConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

@@ -54,6 +54,7 @@ BBTestPlatformDriverOverrideProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -62,6 +63,7 @@ BBTestGetDriverFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverPathFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -70,6 +72,7 @@ BBTestGetDriverPathFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDriverLoadedFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -78,6 +81,7 @@ BBTestDriverLoadedFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -86,6 +90,7 @@ BBTestGetDriverConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverPathConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +99,7 @@ BBTestGetDriverPathConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDriverLoadedConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

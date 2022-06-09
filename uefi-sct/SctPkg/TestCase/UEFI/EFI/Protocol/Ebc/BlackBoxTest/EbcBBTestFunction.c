@@ -38,6 +38,7 @@ Abstract:
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestCreateThunkBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -198,6 +199,7 @@ BBTestCreateThunkBasicTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -332,6 +334,7 @@ BBTestUnloadImageBasicTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterICacheFlushBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -485,6 +488,7 @@ BBTestRegisterICacheFlushBasicTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestGetVersionBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

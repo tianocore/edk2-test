@@ -224,6 +224,7 @@ ReleaseGlobalData ();
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -235,6 +236,7 @@ BBTestInstallProtocolInterfaceConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -246,6 +248,7 @@ BBTestUninstallProtocolInterfaceConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -257,6 +260,7 @@ BBTestReinstallProtocolInterfaceConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -268,6 +272,7 @@ BBTestRegisterProtocolNotifyConsistencyTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -279,6 +284,7 @@ BBTestInstallMultipleProtocolInterfacesConsistencyTest (
 // TDS 3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -290,6 +296,7 @@ BBTestUninstallMultipleProtocolInterfacesConsistencyTest (
 // TDS 3.7
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -301,6 +308,7 @@ BBTestLocateHandleConsistencyTest (
 // TDS 3.8
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -312,6 +320,7 @@ BBTestLocateHandleBufferConsistencyTest (
 // TDS 3.9
 //
 EFI_STATUS
+EFIAPI
 BBTestHandleProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -323,6 +332,7 @@ BBTestHandleProtocolConsistencyTest (
 // TDS 3.10
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -334,6 +344,7 @@ BBTestLocateProtocolConsistencyTest (
 // TDS 3.11
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateDevicePathConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -345,6 +356,7 @@ BBTestLocateDevicePathConsistencyTest (
 // TDS 3.12
 //
 EFI_STATUS
+EFIAPI
 BBTestProtocolsPerHandleConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -356,6 +368,7 @@ BBTestProtocolsPerHandleConsistencyTest (
 // TDS 3.13
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -367,6 +380,7 @@ BBTestOpenProtocolConsistencyTest (
 // TDS 3.14
 //
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -378,6 +392,7 @@ BBTestCloseProtocolConsistencyTest (
 // TDS 3.15
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInformationConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -389,6 +404,7 @@ BBTestOpenProtocolInformationConsistencyTest (
 // TDS 3.16
 //
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -400,6 +416,7 @@ BBTestConnectControllerConsistencyTest (
 // TDS 3.17
 //
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -416,6 +433,7 @@ BBTestDisconnectControllerConsistencyTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -427,6 +445,7 @@ BBTestInstallProtocolInterfaceInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -438,6 +457,7 @@ BBTestUninstallProtocolInterfaceInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -449,6 +469,7 @@ BBTestReinstallProtocolInterfaceInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -460,6 +481,7 @@ BBTestRegisterProtocolNotifyInterfaceTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -471,6 +493,7 @@ BBTestInstallMultipleProtocolInterfacesInterfaceTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -482,6 +505,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -493,6 +517,7 @@ BBTestLocateHandleInterfaceTest (
 // TDS 4.8
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -504,6 +529,7 @@ BBTestLocateHandleBufferInterfaceTest (
 // TDS 4.9
 //
 EFI_STATUS
+EFIAPI
 BBTestHandleProtocolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -515,6 +541,7 @@ BBTestHandleProtocolInterfaceTest (
 // TDS 4.10
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -526,6 +553,7 @@ BBTestLocateProtocolInterfaceTest (
 // TDS 4.11
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateDevicePathInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -537,6 +565,7 @@ BBTestLocateDevicePathInterfaceTest (
 // TDS 4.12
 //
 EFI_STATUS
+EFIAPI
 BBTestProtocolsPerHandleInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -548,6 +577,7 @@ BBTestProtocolsPerHandleInterfaceTest (
 // TDS 4.13
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -559,6 +589,7 @@ BBTestOpenProtocolInterfaceTest111 (
 // TDS 4.14
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -570,6 +601,7 @@ BBTestOpenProtocolInterfaceTest222 (
 // TDS 4.15
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -581,6 +613,7 @@ BBTestOpenProtocolInterfaceTest333 (
 // TDS 4.16
 //
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -592,6 +625,7 @@ BBTestCloseProtocolInterfaceTest (
 // TDS 4.17
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInformationInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -603,6 +637,7 @@ BBTestOpenProtocolInformationInterfaceTest (
 // TDS 4.18
 //
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -614,6 +649,7 @@ BBTestConnectControllerInterfaceTest (
 // TDS 4.19
 //
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -625,26 +661,31 @@ BBTestDisconnectControllerInterfaceTest (
 // Checkpoint Functions for InstallProtocolInterface()
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -654,51 +695,61 @@ BBTestInstallProtocolInterfaceInterfaceTestCheckPoint5 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -708,61 +759,73 @@ BBTestUninstallProtocolInterfaceInterfaceTestCheckPoint10 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint11 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint12 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -772,41 +835,49 @@ BBTestReinstallProtocolInterfaceInterfaceTestCheckPoint12 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -816,41 +887,49 @@ BBTestRegisterProtocolNotifyInterfaceTestCheckPoint8 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -860,51 +939,61 @@ BBTestInstallMultipleProtocolInterfacesInterfaceTestCheckPoint8 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -914,21 +1003,25 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTestCheckPoint10 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -938,16 +1031,19 @@ BBTestLocateHandleInterfaceTestCheckPoint4 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -957,6 +1053,7 @@ BBTestLocateHandleBufferInterfaceTestCheckPoint3 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestHandleProtocolInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -966,16 +1063,19 @@ BBTestHandleProtocolInterfaceTestCheckPoint1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -985,6 +1085,7 @@ BBTestLocateProtocolInterfaceTestCheckPoint3 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestLocateDevicePathInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -994,6 +1095,7 @@ BBTestLocateDevicePathInterfaceTestCheckPoint1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestProtocolsPerHandleInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1003,51 +1105,61 @@ BBTestProtocolsPerHandleInterfaceTestCheckPoint1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111CheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1057,36 +1169,43 @@ BBTestOpenProtocolInterfaceTest111CheckPoint10 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222CheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1096,16 +1215,19 @@ BBTestOpenProtocolInterfaceTest222CheckPoint7 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1115,36 +1237,43 @@ BBTestOpenProtocolInterfaceTest333CheckPoint3 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTestCheckPoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1154,6 +1283,7 @@ BBTestCloseProtocolInterfaceTestCheckPoint7 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1163,76 +1293,91 @@ BBTestOpenProtocolInformationInterfaceTestCheckPoint1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint7_13 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint9 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint10 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint11 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint12 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint14 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint15 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTestCheckPoint16 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1242,31 +1387,37 @@ BBTestConnectControllerInterfaceTestCheckPoint16 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTestCheckPoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -1280,6 +1431,7 @@ BBTestDisconnectControllerInterfaceTestCheckPoint6 (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest1 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1291,6 +1443,7 @@ BBTestCombinationTest1 (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1302,6 +1455,7 @@ BBTestCombinationTest2 (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest3 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1314,21 +1468,25 @@ BBTestCombinationTest3 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCombinationTest2CheckPoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );

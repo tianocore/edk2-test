@@ -34,6 +34,7 @@ Abstract:
 typedef EFI_SERVICE_BINDING_PROTOCOL EFI_UDP4_SERVICE_BINDING_PROTOCOL;
 
 EFI_STATUS
+EFIAPI
 Udp4ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -56,6 +57,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Udp4ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

@@ -95,6 +95,7 @@ InitializePartitionInfoBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadPartitionInfoBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

@@ -44,24 +44,28 @@ typedef struct {
 //CheckPoints
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -336,6 +340,7 @@ FileIoAsyncFlushDirData (
 // TDS 5.1.15
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -391,6 +396,7 @@ BBTestFlushExBasicTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -695,6 +701,7 @@ BBTestFlushExBasicTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -879,6 +886,7 @@ BBTestFlushExBasicTestCheckpoint2 (
   
   
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1145,6 +1153,7 @@ BBTestFlushExBasicTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFlushExBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem

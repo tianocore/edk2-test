@@ -137,6 +137,7 @@ Hash2ServiceBindingDestoryChild (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestGetHashSizeConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -145,6 +146,7 @@ BBTestGetHashSizeConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestHashConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -153,6 +155,7 @@ BBTestHashConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestHashInitConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -161,6 +164,7 @@ BBTestHashInitConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestHashUpdateConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -169,6 +173,7 @@ BBTestHashUpdateConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestHashFinalConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -177,6 +182,7 @@ BBTestHashFinalConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetHashSizeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -185,6 +191,7 @@ BBTestGetHashSizeFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestHashFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -193,6 +200,7 @@ BBTestHashFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestHashMultiBlocksFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

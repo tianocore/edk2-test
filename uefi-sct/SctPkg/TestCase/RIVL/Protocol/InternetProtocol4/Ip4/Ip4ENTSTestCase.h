@@ -30,6 +30,7 @@ Abstract:
 #include <UEFI/Protocol/Ip4.h>
 
 EFI_STATUS
+EFIAPI
 Ip4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -51,6 +52,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -72,6 +74,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -93,6 +96,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -114,6 +118,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -135,6 +140,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -156,6 +162,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -177,6 +184,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip4Poll_EntsTest (
   VOID *ClientInterface
   )

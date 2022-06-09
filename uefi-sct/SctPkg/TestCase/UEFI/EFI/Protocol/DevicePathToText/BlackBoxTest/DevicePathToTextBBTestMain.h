@@ -74,6 +74,7 @@ InitializeBBTestDevicePathToTextProtocol (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDevicePathToTextProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -82,6 +83,7 @@ BBTestDevicePathToTextProtocolUnload (
 // Function Interface test declaration section
 //
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -90,6 +92,7 @@ DevicePathToTextConvertDeviceNodeToTextFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDevicePathToTextFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -98,6 +101,7 @@ DevicePathToTextConvertDevicePathToTextFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDeviceNodeToTextConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -106,6 +110,7 @@ DevicePathToTextConvertDeviceNodeToTextConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDevicePathToTextConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -114,6 +119,7 @@ DevicePathToTextConvertDevicePathToTextConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -122,6 +128,7 @@ DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   );
 
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDevicePathToTextCoverageTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

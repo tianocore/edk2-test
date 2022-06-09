@@ -26,12 +26,14 @@ Abstract:
 #include "DriverDiagnostics2BBTest.h"
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFuncTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFuncTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
@@ -49,6 +51,7 @@ BBTestRunDiagnosticsFuncTestCheckpoint2 (
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -116,6 +119,7 @@ BBTestRunDiagnosticsFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFuncTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2
@@ -387,6 +391,7 @@ BBTestRunDiagnosticsFuncTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsFuncTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS2_PROTOCOL      *DriverDiagnostics2

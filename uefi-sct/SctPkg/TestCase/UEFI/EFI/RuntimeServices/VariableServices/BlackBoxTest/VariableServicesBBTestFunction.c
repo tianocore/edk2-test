@@ -30,6 +30,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 GetVariableFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -38,6 +39,7 @@ GetVariableFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -46,6 +48,7 @@ GetNextVariableNameFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -58,6 +61,7 @@ SetVariableFuncTest (
 //
 
 EFI_STATUS
+EFIAPI
 GetVariableFuncTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -65,6 +69,7 @@ GetVariableFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 GetNextVariableNameFuncTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -72,6 +77,7 @@ GetNextVariableNameFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -79,6 +85,7 @@ SetVariableFuncTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -86,6 +93,7 @@ SetVariableFuncTestSub2 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -93,6 +101,7 @@ SetVariableFuncTestSub3 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -100,6 +109,7 @@ SetVariableFuncTestSub4 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub5 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -107,6 +117,7 @@ SetVariableFuncTestSub5 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub6 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -115,6 +126,7 @@ SetVariableFuncTestSub6 (
   );
 
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -124,6 +136,7 @@ SetVariableFuncTestSub7 (
 
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
 EFI_STATUS
+EFIAPI
 QueryVariableInfoFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -164,6 +177,7 @@ EFI_GUID gHwErrRecGuid = EFI_HARDWARE_ERROR_VARIABLE;
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -214,6 +228,7 @@ GetVariableFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -264,6 +279,7 @@ GetNextVariableNameFuncTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -386,6 +402,7 @@ step8:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetVariableFuncTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -615,6 +632,7 @@ GetVariableFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetNextVariableNameFuncTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -773,6 +791,7 @@ GetNextVariableNameFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub1 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1020,6 +1039,7 @@ SetVariableFuncTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub2 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1400,6 +1420,7 @@ SetVariableFuncTestSub2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub3 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1783,6 +1804,7 @@ SetVariableFuncTestSub3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub4 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1944,6 +1966,7 @@ SetVariableFuncTestSub4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub5 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2108,6 +2131,7 @@ SetVariableFuncTestSub5 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub6 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2369,6 +2393,7 @@ step3:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetVariableFuncTestSub7 (
   IN EFI_RUNTIME_SERVICES                 *RT,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2609,6 +2634,7 @@ UnicodeStrLength (
 }
 
 EFI_STATUS
+EFIAPI
 QueryVariableInfoFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2829,6 +2855,7 @@ LoopEnd:
 
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)
 EFI_STATUS
+EFIAPI
 HardwareErrorRecordFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

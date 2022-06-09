@@ -64,6 +64,7 @@ ENTS_ARG_FIELD    tRTGetVariableArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_GetVariable_EntsTest (
   VOID *ClientInterface
   )
@@ -126,6 +127,7 @@ ENTS_ARG_FIELD    tRTGetNextVariableNameArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_GetNextVariableName_EntsTest (
   VOID *ClientInterface
   )
@@ -196,6 +198,7 @@ ENTS_ARG_FIELD    tRTSetVariableArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 RT_SetVariable_EntsTest (
   VOID *ClientInterface
   )

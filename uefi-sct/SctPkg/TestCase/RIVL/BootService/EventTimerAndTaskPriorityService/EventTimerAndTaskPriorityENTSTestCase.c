@@ -25,12 +25,14 @@ Abstract:
 #include "EventTimerAndTaskPriorityENTSTestCase.h"
 
 VOID
+EFIAPI
 BSNotifyFunction0 (
   EFI_EVENT Event,
   VOID      *Context
   );
 
 VOID
+EFIAPI
 BSNotifyFunction1 (
   EFI_EVENT Event,
   VOID      *Context
@@ -80,6 +82,7 @@ ENTS_ARG_FIELD          BSCreateEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_CreateEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -132,6 +135,7 @@ ENTS_ARG_FIELD    BSCloseEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_CloseEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -178,6 +182,7 @@ ENTS_ARG_FIELD    BSSignalEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_SignalEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -234,6 +239,7 @@ ENTS_ARG_FIELD    BSWaitForEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_WaitForEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -284,6 +290,7 @@ ENTS_ARG_FIELD    BSCheckEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_CheckEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -340,6 +347,7 @@ ENTS_ARG_FIELD          BSSetTimerArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_SetTimer_EntsTest (
   VOID *ClientInterface
   )
@@ -372,6 +380,7 @@ Returns:
 }
 
 VOID
+EFIAPI
 BSNotifyFunction0 (
   EFI_EVENT Event,
   VOID      *Context
@@ -397,6 +406,7 @@ Returns:
 }
 
 VOID
+EFIAPI
 BSNotifyFunction1 (
   EFI_EVENT Event,
   VOID      *Context

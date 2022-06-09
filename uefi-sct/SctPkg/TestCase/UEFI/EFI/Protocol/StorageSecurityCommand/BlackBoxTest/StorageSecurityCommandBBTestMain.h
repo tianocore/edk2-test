@@ -95,6 +95,7 @@ BBTestStorageSecurityCommandProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReceiveDataConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -103,6 +104,7 @@ BBTestReceiveDataConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSendDataConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

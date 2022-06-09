@@ -30,6 +30,7 @@ Abstract:
 #include "PxeBaseCodeBBTestSupport.h"
 
 EFI_STATUS
+EFIAPI
 BBTestTftpGetFileSize (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -40,6 +41,7 @@ BBTestTftpGetFileSize (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTftpReadFile  (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -51,6 +53,7 @@ BBTestTftpReadFile  (
 
 
 EFI_STATUS
+EFIAPI
 BBTestTftpWriteFile    (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -61,6 +64,7 @@ BBTestTftpWriteFile    (
 
 
 EFI_STATUS
+EFIAPI
 BBTestTftpGetDirectorySize (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -73,6 +77,7 @@ BBTestTftpGetDirectorySize (
 
 
 EFI_STATUS
+EFIAPI
 BBTestTftpReadDirectory (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -84,6 +89,7 @@ BBTestTftpReadDirectory (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpReadFile (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -95,6 +101,7 @@ BBTestMtftpReadFile (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpReadDirectory (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -105,6 +112,7 @@ BBTestMtftpReadDirectory (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpGetFileSize (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -115,6 +123,7 @@ BBTestMtftpGetFileSize (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetStationIp (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -126,6 +135,7 @@ BBTestSetStationIp (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncBasic (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -135,6 +145,7 @@ BBTestUdpWriteFuncBasic (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncFrag (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -144,6 +155,7 @@ BBTestUdpWriteFuncFrag (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncPrependHeader (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -153,6 +165,7 @@ BBTestUdpWriteFuncPrependHeader (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncThrGateway (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -162,6 +175,7 @@ BBTestUdpWriteFuncThrGateway (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncBasic (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -170,6 +184,7 @@ BBTestUdpReadFuncBasic (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncDesIpFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -178,6 +193,7 @@ BBTestUdpReadFuncDesIpFilter (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncDestPortFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -186,6 +202,7 @@ BBTestUdpReadFuncDestPortFilter (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncSrcIpFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -195,6 +212,7 @@ BBTestUdpReadFuncSrcIpFilter (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncSrcPortFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -212,6 +230,7 @@ BBTestUdpReadFuncSrcPortFilter (
  *  @return EFI_SUCCESS Finish the test successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestNewStartFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -959,6 +978,7 @@ BBTestNewStartFunctionTest (
  *  @return EFI_SUCCESS Finish the test successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestNewSetIpFilterFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1167,6 +1187,7 @@ BBTestNewSetIpFilterFunctionTest (
  *  @return EFI_SUCCESS Finish the test successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestNewStopFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1308,6 +1329,7 @@ BBTestNewStopFunctionTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestStartFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1677,6 +1699,7 @@ BBTestStartFunctionTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStopFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1748,6 +1771,7 @@ BBTestStopFunctionTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestDhcpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1881,6 +1905,7 @@ BBTestDhcpFunctionTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestDiscoverFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2018,6 +2043,7 @@ BBTestDiscoverFunctionTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestMtftpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2200,6 +2226,7 @@ BBTestMtftpFunctionTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2374,6 +2401,7 @@ BBTestUdpWriteFunctionTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2544,6 +2572,7 @@ BBTestUdpReadFunctionTest (
 // TDS 4.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSetIpFilterFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2652,6 +2681,7 @@ BBTestSetIpFilterFunctionTest (
 // TDS 4.9
 //
 EFI_STATUS
+EFIAPI
 BBTestArpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2897,6 +2927,7 @@ BBTestArpFunctionTest (
 // TDS 4.10
 //
 EFI_STATUS
+EFIAPI
 BBTestSetParametersFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3106,6 +3137,7 @@ BBTestSetParametersFunctionTest (
 // TDS 4.11
 //
 EFI_STATUS
+EFIAPI
 BBTestSetStationIpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3237,6 +3269,7 @@ BBTestSetStationIpFunctionTest (
 // TDS 4.12
 //
 EFI_STATUS
+EFIAPI
 BBTestSetPacketsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3457,6 +3490,7 @@ BBTestSetPacketsFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpGetInfoParam (
   IN EFI_INI_FILE_HANDLE              FileHandle,
   IN EFI_PXE_BASE_CODE_MTFTP_INFO    *Info
@@ -3491,6 +3525,7 @@ BBTestMtftpGetInfoParam (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestTftpGetFileSize (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -3590,6 +3625,7 @@ BBTestTftpGetFileSize (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestTftpReadFile  (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3737,6 +3773,7 @@ BBTestTftpReadFile  (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestTftpWriteFile    (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3868,6 +3905,7 @@ BBTestTftpWriteFile    (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestTftpReadDirectory (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3982,6 +4020,7 @@ BBTestTftpReadDirectory (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpGetFileSize (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4091,6 +4130,7 @@ BBTestMtftpGetFileSize (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpReadFile (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4221,6 +4261,7 @@ BBTestMtftpReadFile (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMtftpReadDirectory (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4354,6 +4395,7 @@ BBTestMtftpReadDirectory (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteGetConfPara (
   IN EFI_INI_FILE_HANDLE              FileHandle,
   IN EFI_IP_ADDRESS                  *DestIp,
@@ -4454,6 +4496,7 @@ BBTestUdpWriteGetConfPara (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncThrGateway (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4528,6 +4571,7 @@ BBTestUdpWriteFuncThrGateway (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncPrependHeader (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4603,6 +4647,7 @@ BBTestUdpWriteFuncPrependHeader (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncFrag (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4679,6 +4724,7 @@ BBTestUdpWriteFuncFrag (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFuncBasic (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4757,6 +4803,7 @@ BBTestUdpWriteFuncBasic (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetStationIp (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *This,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -4806,6 +4853,7 @@ BBTestSetStationIp (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncBasic (
   IN EFI_PXE_BASE_CODE_PROTOCOL          *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib,
@@ -4960,6 +5008,7 @@ BBTestUdpReadFuncBasic (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncDesIpFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -5100,6 +5149,7 @@ BBTestUdpReadFuncDesIpFilter (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncDestPortFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -5241,6 +5291,7 @@ BBTestUdpReadFuncDestPortFilter (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncSrcIpFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL         *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib,
@@ -5384,6 +5435,7 @@ BBTestUdpReadFuncSrcIpFilter (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFuncSrcPortFilter (
   IN EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,

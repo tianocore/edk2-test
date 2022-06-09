@@ -121,6 +121,7 @@ InitializeBBTestComponentName (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BBTestComponentNameUnload (
   IN EFI_HANDLE       ImageHandle
   )

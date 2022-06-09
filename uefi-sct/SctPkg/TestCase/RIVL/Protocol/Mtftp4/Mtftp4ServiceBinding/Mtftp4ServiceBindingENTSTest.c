@@ -46,6 +46,7 @@ ENTS_INTERFACE    gMtftp4ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gMtftp4ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Mtftp4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -137,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Mtftp4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

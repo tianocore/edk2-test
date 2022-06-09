@@ -52,6 +52,7 @@ ENTS_ARG_FIELD    gIp6ConfigSetDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigSetData_EntsTest (
   VOID *ClientInterface
   )
@@ -98,6 +99,7 @@ ENTS_ARG_FIELD                gIp6ConfigGetDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigGetData_EntsTest (
   VOID *ClientInterface
   )
@@ -139,6 +141,7 @@ ENTS_ARG_FIELD                gIp6ConfigRegisterDataNotifyArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigRegisterDataNotify_EntsTest (
   VOID *ClientInterface
   )
@@ -180,6 +183,7 @@ ENTS_ARG_FIELD                gIp6ConfigUnregisterDataNotifyArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigUnregisterDataNotify_EntsTest (
   VOID *ClientInterface
   )

@@ -352,6 +352,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpSetTimer (
   IN EFTP_IO_PRIVATE   *Private,
   UINTN                Sec,

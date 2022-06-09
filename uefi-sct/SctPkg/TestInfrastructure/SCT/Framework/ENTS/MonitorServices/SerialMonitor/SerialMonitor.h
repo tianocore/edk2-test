@@ -36,6 +36,7 @@ Abstract:
 // External functions declarations
 //
 EFI_STATUS
+EFIAPI
 SerialListener (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This,
   IN OUT UINTN                     *Size,
@@ -63,6 +64,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SerialSender (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This,
   IN CHAR16                        *Buffer
@@ -89,6 +91,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 InitSerial (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This
   )
@@ -111,6 +114,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ResetSerial (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This
   )

@@ -137,6 +137,7 @@ STATIC UINT8 mValidAuthVarDERCreate[] = {
 STATIC EFI_GUID mVarVendorGuid = {0x15EDF297, 0xE832, 0x4d30, {0x82, 0x00, 0xA5, 0x25, 0xA9, 0x31, 0xE3, 0x3E}};
 
 EFI_STATUS
+EFIAPI
 AuthVariableDERConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

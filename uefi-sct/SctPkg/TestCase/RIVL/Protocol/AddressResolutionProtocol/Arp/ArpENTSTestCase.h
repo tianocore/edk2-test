@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Arp.h>
 
 EFI_STATUS
+EFIAPI
 ArpConfig_EntsTest (
   VOID *ClientInterface
   )
@@ -52,6 +53,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpAdd_EntsTest (
   VOID *ClientInterface
   )
@@ -73,6 +75,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpFind_EntsTest (
   VOID *ClientInterface
   )
@@ -94,6 +97,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpDelete_EntsTest (
   VOID *ClientInterface
   )
@@ -115,6 +119,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpFlush_EntsTest (
   VOID *ClientInterface
   )
@@ -136,6 +141,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpRequest_EntsTest (
   VOID *ClientInterface
   )
@@ -157,6 +163,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpCancel_EntsTest (
   VOID *ClientInterface
   )

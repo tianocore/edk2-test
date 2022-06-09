@@ -40,6 +40,7 @@ CHAR8 *mUnsupportedOptions[EFTP_UNSUPPORTED_OPTIONS_COUNT] = {
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpInitReadHandler (
   IN EFTP_IO_PRIVATE   *Private,
   IN UINT16            OpCode
@@ -132,6 +133,7 @@ Returns:
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpInitWriteHandler (
   IN EFTP_IO_PRIVATE *Private
   )
@@ -224,6 +226,7 @@ Returns:
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpInitPrivate (
   IN EFI_EFTP_PROTOCOL   *This,
   IN EFI_EFTP_TOKEN      *Token,
@@ -813,6 +816,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 EftpSetTimer (
   IN EFTP_IO_PRIVATE   *Private,
   UINTN                Sec,

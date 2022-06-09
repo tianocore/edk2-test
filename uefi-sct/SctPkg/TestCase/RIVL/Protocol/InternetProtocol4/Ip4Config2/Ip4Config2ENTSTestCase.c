@@ -53,6 +53,7 @@ ENTS_ARG_FIELD    gIp4Config2SetDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Config2SetData_EntsTest (
   VOID *ClientInterface
   )
@@ -114,6 +115,7 @@ ENTS_ARG_FIELD    gIp4Config2GetDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Config2GetData_EntsTest (
   VOID *ClientInterface
   )
@@ -170,6 +172,7 @@ ENTS_ARG_FIELD                gIp4Config2RegisterDataNotifyArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Config2RegisterDataNotify_EntsTest (
   VOID *ClientInterface
   )
@@ -226,6 +229,7 @@ ENTS_ARG_FIELD                gIp4Config2UnregisterDataNotifyArgField[] = {
 
 
 EFI_STATUS
+EFIAPI
 Ip4Config2UnregisterDataNotify_EntsTest (
   VOID *ClientInterface
   )

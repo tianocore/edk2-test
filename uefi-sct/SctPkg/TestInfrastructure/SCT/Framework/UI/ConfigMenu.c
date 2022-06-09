@@ -55,16 +55,19 @@ DisplayConfigMenu (
   );
 
 EFI_STATUS
+EFIAPI
 ConfigMenuEscFunc (
   IN EFI_MENU_PAGE          *Page
   );
 
 EFI_STATUS
+EFIAPI
 ConfigMenuSetDefaultFunc (
   IN EFI_MENU_PAGE          *Page
   );
 
 EFI_STATUS
+EFIAPI
 ConfigMenuDescPrintFunc (
   IN EFI_MENU_ITEM          *MenuItem,
   IN VOID                   *Context,
@@ -524,6 +527,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 ConfigMenuSetDefaultFunc (
   IN EFI_MENU_PAGE          *MenuPage
   )
@@ -771,6 +775,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 ConfigMenuEscFunc (
   IN EFI_MENU_PAGE          *Page
   )
@@ -911,6 +916,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 ConfigMenuDescPrintFunc (
   IN EFI_MENU_ITEM          *MenuItem,
   IN VOID                   *Context,

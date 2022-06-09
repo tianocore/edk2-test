@@ -298,12 +298,14 @@ GetAlternateValueByFile (
   );
 
 VOID
+EFIAPI
 EventNotifyWriteMem (
   IN EFI_EVENT      Event,
   IN  VOID          *Context
   );
 
 VOID
+EFIAPI
 EventNotifyWriteIo (
   IN EFI_EVENT      Event,
   IN  VOID          *Context

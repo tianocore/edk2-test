@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestStriCollFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -170,6 +171,7 @@ BBTestStriCollFunctionAutoTest (
 // TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestMetaiMatchFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -310,6 +312,7 @@ BBTestMetaiMatchFunctionAutoTest (
 // TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestStrLwrFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -434,6 +437,7 @@ BBTestStrLwrFunctionAutoTest (
 // TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestStrUprFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -556,6 +560,7 @@ BBTestStrUprFunctionAutoTest (
 // TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFatToStrFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -729,6 +734,7 @@ BBTestFatToStrFunctionAutoTest (
 // TDS 4.1.6
 //
 EFI_STATUS
+EFIAPI
 BBTestStrToFatFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

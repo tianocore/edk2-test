@@ -506,6 +506,7 @@ KeyStatePrint (
 
 
 EFI_STATUS
+EFIAPI
 TestRegisterNotifyFunction (
   IN EFI_KEY_DATA *KeyData
 )
@@ -515,6 +516,7 @@ TestRegisterNotifyFunction (
 
 
 EFI_STATUS
+EFIAPI
 FunctionTestNotifyFunction (
   IN EFI_KEY_DATA *KeyData
 )

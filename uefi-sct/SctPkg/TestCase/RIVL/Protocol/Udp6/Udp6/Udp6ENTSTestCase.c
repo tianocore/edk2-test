@@ -58,6 +58,7 @@ ENTS_ARG_FIELD                          gUdp6GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -116,6 +117,7 @@ ENTS_ARG_FIELD                  gUdp6ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -176,6 +178,7 @@ ENTS_ARG_FIELD          gUdp6GroupsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -227,6 +230,7 @@ ENTS_ARG_FIELD    gUdp6PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6Poll_EntsTest (
   VOID *ClientInterface
   )
@@ -279,6 +283,7 @@ ENTS_ARG_FIELD                    gUdp6ReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -334,6 +339,7 @@ ENTS_ARG_FIELD                    gUdp6TransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -389,6 +395,7 @@ ENTS_ARG_FIELD                    gUdp6CancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -444,6 +451,7 @@ ENTS_ARG_FIELD                    gUdp6SignalRecycleEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6SignalRecycleEvent_EntsTest (
   VOID *ClientInterface
   )

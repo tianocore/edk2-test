@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -320,6 +321,7 @@ BBTestResetFunctionAutoTest (
 // TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1070,6 +1072,7 @@ AssertionPoints2:
 // TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetStateFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1361,6 +1364,7 @@ BBTestGetStateFunctionAutoTest (
 // TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestGetStateFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2100,6 +2104,7 @@ Step13:
 // TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 BBTestWaitForInputFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -42,6 +42,7 @@ UINT8 EnterEvent;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +139,7 @@ BBTestGetDriverFunctionAutoTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverPathFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -235,6 +237,7 @@ BBTestGetDriverPathFunctionAutoTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestDriverLoadedFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

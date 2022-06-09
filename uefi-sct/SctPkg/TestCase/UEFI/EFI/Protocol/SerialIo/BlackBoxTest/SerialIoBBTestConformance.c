@@ -30,6 +30,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 SetAttributesConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -38,6 +39,7 @@ SetAttributesConfTest (
   );
 
 EFI_STATUS
+EFIAPI
 SetControlConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -46,6 +48,7 @@ SetControlConfTest (
   );
 
 EFI_STATUS
+EFIAPI
 ReadConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -58,6 +61,7 @@ ReadConfTest (
 //
 
 EFI_STATUS
+EFIAPI
 SetAttributesConfTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -65,6 +69,7 @@ SetAttributesConfTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 SetControlConfTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -72,6 +77,7 @@ SetControlConfTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadConfTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -79,6 +85,7 @@ ReadConfTestSub1 (
   );
 
 EFI_STATUS
+EFIAPI
 ReadConfTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -99,6 +106,7 @@ ReadConfTestSub2 (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -148,6 +156,7 @@ SetAttributesConfTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetControlConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -202,6 +211,7 @@ SetControlConfTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -266,6 +276,7 @@ ReadConfTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetAttributesConfTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -395,6 +406,7 @@ SetAttributesConfTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 SetControlConfTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -493,6 +505,7 @@ SetControlConfTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadConfTestSub1 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -774,6 +787,7 @@ ReadConfTestSub1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 ReadConfTestSub2 (
   IN EFI_SERIAL_IO_PROTOCOL               *SerialIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,

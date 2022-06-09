@@ -29,6 +29,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 RT_GetTime_EntsTest (
   VOID *ClientInterface
   )
@@ -50,6 +51,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 RT_SetTime_EntsTest (
   VOID *ClientInterface
   )
@@ -71,6 +73,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 RT_GetWakeupTime_EntsTest (
   VOID *ClientInterface
   )
@@ -92,6 +95,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 RT_SetWakeupTime_EntsTest (
   VOID *ClientInterface
   )

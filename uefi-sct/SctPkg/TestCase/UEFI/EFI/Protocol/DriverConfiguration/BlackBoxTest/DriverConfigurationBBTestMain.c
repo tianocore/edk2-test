@@ -115,6 +115,7 @@ InitializeBBTestDriverConfiguration (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BBTestDriverConfigurationUnload (
   IN EFI_HANDLE       ImageHandle
   )

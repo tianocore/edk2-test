@@ -28,6 +28,7 @@ Abstract:
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimestampFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -99,6 +100,7 @@ BBTestGetTimestampFunctionAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetPropertiesFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -135,7 +137,8 @@ BBTestGetPropertiesFunctionAutoTest (
   
   if (Status != EFI_SUCCESS) {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
+  } else {
+
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   }
 

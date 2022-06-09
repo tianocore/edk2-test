@@ -34,6 +34,7 @@ Abstract:
 typedef EFI_SERVICE_BINDING_PROTOCOL EFI_MNP_SERVICE_BINDING_PROTOCOL;
 
 EFI_STATUS
+EFIAPI
 MnpCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -56,6 +57,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpDestroyChild_EntsTest (
   VOID *ClientInterface
   )

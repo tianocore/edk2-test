@@ -54,6 +54,7 @@ NotifyFunc (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1018,6 +1019,7 @@ BBTestReadBlocksExConformanceAutoTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1978,6 +1980,7 @@ BBTestWriteBlocksExConformanceAutoTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

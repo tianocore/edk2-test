@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallProtocolInterfaceInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -130,6 +131,7 @@ BBTestInstallProtocolInterfaceInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallProtocolInterfaceInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -243,6 +245,7 @@ BBTestUninstallProtocolInterfaceInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestReinstallProtocolInterfaceInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -371,6 +374,7 @@ BBTestReinstallProtocolInterfaceInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterProtocolNotifyInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -478,6 +482,7 @@ BBTestRegisterProtocolNotifyInterfaceTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestInstallMultipleProtocolInterfacesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -578,6 +583,7 @@ BBTestInstallMultipleProtocolInterfacesInterfaceTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUninstallMultipleProtocolInterfacesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -690,6 +696,7 @@ BBTestUninstallMultipleProtocolInterfacesInterfaceTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -763,6 +770,7 @@ BBTestLocateHandleInterfaceTest (
 // TDS 4.8
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateHandleBufferInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -828,6 +836,7 @@ BBTestLocateHandleBufferInterfaceTest (
 // TDS 4.9
 //
 EFI_STATUS
+EFIAPI
 BBTestHandleProtocolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -880,6 +889,7 @@ BBTestHandleProtocolInterfaceTest (
 // TDS 4.10
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateProtocolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -946,6 +956,7 @@ BBTestLocateProtocolInterfaceTest (
 // TDS 4.11
 //
 EFI_STATUS
+EFIAPI
 BBTestLocateDevicePathInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -998,6 +1009,7 @@ BBTestLocateDevicePathInterfaceTest (
 // TDS 4.12
 //
 EFI_STATUS
+EFIAPI
 BBTestProtocolsPerHandleInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1049,6 +1061,7 @@ BBTestProtocolsPerHandleInterfaceTest (
 // TDS 4.13
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest111 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1166,6 +1179,7 @@ BBTestOpenProtocolInterfaceTest111 (
 // TDS 4.14
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest222 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1261,6 +1275,7 @@ BBTestOpenProtocolInterfaceTest222 (
 // TDS 4.15
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInterfaceTest333 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1328,6 +1343,7 @@ BBTestOpenProtocolInterfaceTest333 (
 // TDS 4.16
 //
 EFI_STATUS
+EFIAPI
 BBTestCloseProtocolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1429,6 +1445,7 @@ BBTestCloseProtocolInterfaceTest (
 // TDS 4.17
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenProtocolInformationInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1481,6 +1498,7 @@ BBTestOpenProtocolInformationInterfaceTest (
 // TDS 4.18
 //
 EFI_STATUS
+EFIAPI
 BBTestConnectControllerInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1646,6 +1664,7 @@ BBTestConnectControllerInterfaceTest (
 // TDS 4.19
 //
 EFI_STATUS
+EFIAPI
 BBTestDisconnectControllerInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

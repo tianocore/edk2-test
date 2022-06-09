@@ -34,6 +34,7 @@ Abstract:
 #include <UEFI/Protocol/Tcp6.h>
 
 EFI_STATUS
+EFIAPI
 Tcp6ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -56,6 +57,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

@@ -41,6 +41,7 @@ Abstract:
 // TDS 6.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadDiskStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -597,6 +598,7 @@ FreeBuffer:
 // TDS 6.2
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

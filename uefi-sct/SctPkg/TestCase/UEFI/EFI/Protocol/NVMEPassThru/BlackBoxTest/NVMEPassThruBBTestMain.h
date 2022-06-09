@@ -126,6 +126,7 @@ UnloadNVMEPassThruBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +135,7 @@ BBTestPassThruConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetNextNamespaceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +144,7 @@ BBTestGetNextNamespaceConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +153,7 @@ BBTestBuildDevicePathConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetNamespaceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -158,6 +162,7 @@ BBTestGetNamespaceConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -166,6 +171,7 @@ BBTestPassThruFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextNamespaceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -174,6 +180,7 @@ BBTestGetNextNamespaceFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +189,7 @@ BBTestBuildDevicePathFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNamespaceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

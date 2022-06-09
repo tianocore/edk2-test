@@ -56,6 +56,7 @@ typedef struct {
 } BlockIO2_Batch_Task_Context;
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -63,6 +64,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint1(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -70,6 +72,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint2(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -77,6 +80,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint3(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint4(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -84,6 +88,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint4(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -91,6 +96,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint1(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -98,6 +104,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint2(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -105,6 +112,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint4(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -113,6 +121,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint4(
 
 
 EFI_STATUS
+EFIAPI
 BBTestFushBlocksExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO2_PROTOCOL                *BlockIo2
@@ -120,6 +129,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
 
 
 EFI_STATUS
+EFIAPI
 BBTestFushBlocksExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO2_PROTOCOL                *BlockIo2
@@ -1157,6 +1167,7 @@ BlockIo2AsyncBatchWrite (
 
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1267,6 +1278,7 @@ BBTestResetFunctionAutoTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1409,6 +1421,7 @@ BBTestReadBlocksExFunctionAutoTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -1757,6 +1770,7 @@ END_WAIT:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -1998,6 +2012,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -2315,6 +2330,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksExFunctionAutoTestCheckpoint4(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -2643,6 +2659,7 @@ END_WAIT:
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2785,6 +2802,7 @@ BBTestWriteBlocksExFunctionAutoTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -3277,6 +3295,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -3566,6 +3585,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -4015,6 +4035,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksExFunctionAutoTestCheckpoint4(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO_PROTOCOL                 *BlockIo,
@@ -4489,6 +4510,7 @@ END:
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4581,6 +4603,7 @@ BBTestFlushBlocksExFunctionAutoTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestFushBlocksExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO2_PROTOCOL                *BlockIo2
@@ -4705,6 +4728,7 @@ END:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFushBlocksExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_BLOCK_IO2_PROTOCOL                *BlockIo2
@@ -4730,6 +4754,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint2(
 // TDS 
 //
 EFI_STATUS
+EFIAPI
 BBTestMediaInfoCheckAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

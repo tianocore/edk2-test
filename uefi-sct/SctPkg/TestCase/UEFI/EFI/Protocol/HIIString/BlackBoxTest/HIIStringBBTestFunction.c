@@ -27,6 +27,7 @@ Abstract:
 extern UINT8 mPackageList1[];
 
 EFI_STATUS
+EFIAPI
 BBTestNewStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -34,6 +35,7 @@ BBTestNewStringFunctionTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -41,6 +43,7 @@ BBTestGetStringFunctionTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -48,6 +51,7 @@ BBTestSetStringFunctionTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -55,6 +59,7 @@ BBTestGetLanguagesFunctionTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -65,6 +70,7 @@ BBTestGetSecondaryLanguagesFunctionTestCheckpoint1 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -109,6 +115,7 @@ BBTestNewStringFunctionTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -153,6 +160,7 @@ BBTestGetStringFunctionTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestSetStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -197,6 +205,7 @@ BBTestSetStringFunctionTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -241,6 +250,7 @@ BBTestGetLanguagesFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -288,6 +298,7 @@ BBTestGetSecondaryLanguagesFunctionTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestNewStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -419,6 +430,7 @@ BBTestNewStringFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -532,6 +544,7 @@ BBTestGetStringFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -683,6 +696,7 @@ BBTestSetStringFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -768,6 +782,7 @@ BBTestGetLanguagesFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,

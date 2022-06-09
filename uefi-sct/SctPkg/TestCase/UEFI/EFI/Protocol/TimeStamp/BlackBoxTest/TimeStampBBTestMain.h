@@ -75,6 +75,7 @@ UnloadTimeStampBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimestampFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -83,6 +84,7 @@ BBTestGetTimestampFunctionAutoTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetPropertiesFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -92,6 +94,7 @@ BBTestGetPropertiesFunctionAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetPropertiesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

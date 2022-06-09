@@ -28,6 +28,7 @@ Abstract:
 // EFI Component Name Functions
 //
 EFI_STATUS
+EFIAPI
 EftpComponentNameGetDriverName (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
   IN  EFI_COMPONENT_NAME2_PROTOCOL *This,
@@ -39,6 +40,7 @@ EftpComponentNameGetDriverName (
   );
 
 EFI_STATUS
+EFIAPI
 EftpComponentNameGetControllerName (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
   IN  EFI_COMPONENT_NAME2_PROTOCOL                                       *This,
@@ -84,6 +86,7 @@ static SCT_UNICODE_STRING_TABLE mEftpDriverNameTable[] = {
 };
 
 EFI_STATUS
+EFIAPI
 EftpComponentNameGetDriverName (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
   IN  EFI_COMPONENT_NAME2_PROTOCOL *This,
@@ -133,6 +136,7 @@ EftpComponentNameGetDriverName (
 }
 
 EFI_STATUS
+EFIAPI
 EftpComponentNameGetControllerName (
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
   IN  EFI_COMPONENT_NAME2_PROTOCOL                                       *This,

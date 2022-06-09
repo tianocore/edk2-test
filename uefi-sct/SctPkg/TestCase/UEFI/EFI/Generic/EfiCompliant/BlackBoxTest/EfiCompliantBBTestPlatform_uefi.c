@@ -414,6 +414,7 @@ GenTestConfigContent (
 //
 
 EFI_STATUS
+EFIAPI
 PlatformSpecificElementsBbTest (
   IN EFI_BB_TEST_PROTOCOL         *This,
   IN VOID                         *ClientInterface,
@@ -440,7 +441,7 @@ Routine Description:
   EFI_FILE                            *Root;
   EFI_FILE                            *OldFile;
   CONFIG_ERROR_DATA                   *ErrorData;
-  UINT8                               Index;
+  UINT32                              Index;
   BOOLEAN                             GenConfigINI;
   CHAR16                              String[MAX_LENGTH];
   CHAR16                              *FilePath;

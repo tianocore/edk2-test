@@ -50,6 +50,7 @@ extern EFI_TPL TplArray[TPL_ARRAY_SIZE];
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMemoryMapConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -61,6 +62,7 @@ BBTestGetMemoryMapConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePagesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -72,6 +74,7 @@ BBTestAllocatePagesConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePagesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -83,6 +86,7 @@ BBTestFreePagesConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePoolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +98,7 @@ BBTestAllocatePoolConsistencyTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePoolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -105,6 +110,7 @@ BBTestFreePoolConsistencyTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMemoryMapInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -116,6 +122,7 @@ BBTestGetMemoryMapInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePagesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -127,6 +134,7 @@ BBTestAllocatePagesInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePagesInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +146,7 @@ BBTestFreePagesInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePoolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -149,6 +158,7 @@ BBTestAllocatePoolInterfaceTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePoolInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -160,6 +170,7 @@ BBTestFreePoolInterfaceTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMemoryMapStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -171,6 +182,7 @@ BBTestGetMemoryMapStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestPagesStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +194,7 @@ BBTestPagesStressTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestPoolStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

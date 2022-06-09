@@ -30,6 +30,7 @@ EFI_GUID gPartitionInfoEFISystemPartitionGuid              = EFI_SYSTEM_PARTITIO
 EFI_GUID gPartitionInfoEFIPartitionContainingLegacyMBRGuid = EFI_PARTITION_CONTAINING_LEGACY_MBR_GUID;
 
 EFI_STATUS
+EFIAPI
 BBTestPartitionInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

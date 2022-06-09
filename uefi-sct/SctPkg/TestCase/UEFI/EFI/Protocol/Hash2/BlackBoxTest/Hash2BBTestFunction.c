@@ -54,6 +54,7 @@ Hash2OutMD5
 UINTN Length[6] = {20, 28, 32, 48, 64, 16};
 
 EFI_STATUS
+EFIAPI
 BBTestGetHashSizeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -119,6 +120,7 @@ BBTestGetHashSizeFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestHashFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -190,6 +192,7 @@ BBTestHashFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestHashMultiBlocksFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

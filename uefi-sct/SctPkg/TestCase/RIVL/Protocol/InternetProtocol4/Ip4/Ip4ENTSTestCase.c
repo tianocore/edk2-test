@@ -53,6 +53,7 @@ ENTS_ARG_FIELD                          gIp4GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -104,6 +105,7 @@ ENTS_ARG_FIELD              gIp4ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -158,6 +160,7 @@ ENTS_ARG_FIELD          gIp4GroupsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -223,6 +226,7 @@ ENTS_ARG_FIELD          gIp4RoutesArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -275,6 +279,7 @@ ENTS_ARG_FIELD                  gIp4TransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -324,6 +329,7 @@ ENTS_ARG_FIELD                  gIp4ReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -373,6 +379,7 @@ ENTS_ARG_FIELD                  gIp4CancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -417,6 +424,7 @@ ENTS_ARG_FIELD    gIp4PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip4Poll_EntsTest (
   VOID *ClientInterface
   )

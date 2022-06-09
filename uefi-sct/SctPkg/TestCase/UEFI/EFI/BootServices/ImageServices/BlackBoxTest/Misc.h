@@ -124,12 +124,14 @@ ImageTestCopySimpleFileToMemory (
   );
 
 VOID
+EFIAPI
 ImageTestNotifyFunction (
   IN     EFI_EVENT Event,
   IN OUT VOID      *Context
   );
 
 VOID
+EFIAPI
 ImageTestNotifyFunctionForCombinationTest1 (
   IN     EFI_EVENT Event,
   IN OUT VOID      *Context

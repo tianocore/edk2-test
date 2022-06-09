@@ -32,6 +32,7 @@ Abstract:
 // TDS 3.8.1
 //
 EFI_STATUS
+EFIAPI
 DevicePathFromTextConvertTextToDeviceNodeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -183,6 +184,7 @@ DevicePathFromTextConvertTextToDeviceNodeFunctionTest (
 // TDS 3.8.2
 //
 EFI_STATUS
+EFIAPI
 DevicePathFromTextConvertTextToDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

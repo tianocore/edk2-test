@@ -26,6 +26,7 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting,
@@ -33,6 +34,7 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting,
@@ -40,6 +42,7 @@ BBTestExtractConfigFunctionTestCheckpoint2 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting,
@@ -47,6 +50,7 @@ BBTestRouteConfigFunctionTestCheckpoint1 (
   );
 /*
 EFI_STATUS
+EFIAPI
 BBTestCallBackFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -58,6 +62,7 @@ BBTestCallBackFunctionTestCheckpoint1 (
 //
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -107,6 +112,7 @@ BBTestUnitTest (
 */
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -155,6 +161,7 @@ BBTestExtractConfigFunctionTest (
   
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -202,6 +209,7 @@ BBTestRouteConfigFunctionTest (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestCallBackFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -243,6 +251,7 @@ BBTestCallBackFunctionTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting,
@@ -389,6 +398,7 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting,
@@ -467,6 +477,7 @@ BBTestExtractConfigFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting,
@@ -546,6 +557,7 @@ BBTestRouteConfigFunctionTestCheckpoint1 (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestCallBackFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess

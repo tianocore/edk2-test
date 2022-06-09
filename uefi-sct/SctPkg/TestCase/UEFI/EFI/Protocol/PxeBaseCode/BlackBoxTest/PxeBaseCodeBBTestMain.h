@@ -47,6 +47,7 @@ extern UINTN                gCallBackInvoked;
 
 
 EFI_STATUS
+EFIAPI
 BBTestNewStartFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -55,6 +56,7 @@ BBTestNewStartFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestNewStopFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -63,6 +65,7 @@ BBTestNewStopFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestNewSetIpFilterFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -71,6 +74,7 @@ BBTestNewSetIpFilterFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestNewStartConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -79,6 +83,7 @@ BBTestNewStartConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestNewStopConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -95,6 +100,7 @@ BBTestNewStopConformanceTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestStartFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -106,6 +112,7 @@ BBTestStartFunctionTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStopFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +124,7 @@ BBTestStopFunctionTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestDhcpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +136,7 @@ BBTestDhcpFunctionTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestDiscoverFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -139,6 +148,7 @@ BBTestDiscoverFunctionTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestMtftpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +160,7 @@ BBTestMtftpFunctionTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -161,6 +172,7 @@ BBTestUdpWriteFunctionTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestUdpReadFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -172,6 +184,7 @@ BBTestUdpReadFunctionTest (
 // TDS 4.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSetIpFilterFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -183,6 +196,7 @@ BBTestSetIpFilterFunctionTest (
 // TDS 4.9
 //
 EFI_STATUS
+EFIAPI
 BBTestArpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -194,6 +208,7 @@ BBTestArpFunctionTest (
 // TDS 4.10
 //
 EFI_STATUS
+EFIAPI
 BBTestSetParametersFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -205,6 +220,7 @@ BBTestSetParametersFunctionTest (
 // TDS 4.11
 //
 EFI_STATUS
+EFIAPI
 BBTestSetStationIpFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -216,6 +232,7 @@ BBTestSetStationIpFunctionTest (
 // TDS 4.12
 //
 EFI_STATUS
+EFIAPI
 BBTestSetPacketsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -231,6 +248,7 @@ BBTestSetPacketsFunctionTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestStartConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -242,6 +260,7 @@ BBTestStartConformanceTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStopConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -253,6 +272,7 @@ BBTestStopConformanceTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestDhcpConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -264,6 +284,7 @@ BBTestDhcpConformanceTest (
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 BBTestDiscoverConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -275,6 +296,7 @@ BBTestDiscoverConformanceTest (
 // TDS 5.5
 //
 EFI_STATUS
+EFIAPI
 BBTestMtftpConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -286,6 +308,7 @@ BBTestMtftpConformanceTest (
 // TDS 5.6
 //
 EFI_STATUS
+EFIAPI
 BBTestUdpWriteConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -297,6 +320,7 @@ BBTestUdpWriteConformanceTest (
 // TDS 5.7
 //
 EFI_STATUS
+EFIAPI
 BBTestUdpReadConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -308,6 +332,7 @@ BBTestUdpReadConformanceTest (
 // TDS 5.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSetIpFilterConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -319,6 +344,7 @@ BBTestSetIpFilterConformanceTest (
 //
 //
 EFI_STATUS
+EFIAPI
 BBTestArpConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -330,6 +356,7 @@ BBTestArpConformanceAutoTest (
 // TDS 5.9
 //
 EFI_STATUS
+EFIAPI
 BBTestArpConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -341,6 +368,7 @@ BBTestArpConformanceManualTest (
 // TDS 5.10
 //
 EFI_STATUS
+EFIAPI
 BBTestSetParametersConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -352,6 +380,7 @@ BBTestSetParametersConformanceTest (
 // TDS 5.11
 //
 EFI_STATUS
+EFIAPI
 BBTestSetStationIpConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -363,6 +392,7 @@ BBTestSetStationIpConformanceTest (
 // TDS 5.12
 //
 EFI_STATUS
+EFIAPI
 BBTestSetPacketsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -480,6 +510,7 @@ IsIpMaskEqual (
   );
 
 EFI_PXE_BASE_CODE_CALLBACK_STATUS
+EFIAPI
 NewCallBack (
   IN EFI_PXE_BASE_CODE_CALLBACK_PROTOCOL  *This,
   IN EFI_PXE_BASE_CODE_FUNCTION           Function,

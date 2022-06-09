@@ -53,6 +53,7 @@ InitializePartitionInfoBBTest (
   );
   
 EFI_STATUS
+EFIAPI
 UnloadPartitionInfoBBTest (
   IN EFI_HANDLE                   ImageHandle
   ); 
@@ -61,6 +62,7 @@ UnloadPartitionInfoBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestPartitionInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

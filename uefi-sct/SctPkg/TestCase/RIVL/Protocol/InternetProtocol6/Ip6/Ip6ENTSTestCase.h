@@ -34,6 +34,7 @@ Abstract:
 #include <UEFI/Protocol/Ip6.h>
 
 EFI_STATUS
+EFIAPI
 Ip6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -55,6 +56,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -76,6 +78,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -97,11 +100,13 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Neighbors_EntsTest (
   VOID *ClientInterface
   );
 
 EFI_STATUS
+EFIAPI
 Ip6Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -123,6 +128,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -144,6 +150,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -165,6 +172,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -186,6 +194,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Ip6Poll_EntsTest (
   VOID *ClientInterface
   )

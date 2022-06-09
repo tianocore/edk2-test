@@ -26,78 +26,91 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetDataConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -105,12 +118,14 @@ BBTestRegisterDataNotifyConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -120,6 +135,7 @@ BBTestUnregisterDataNotifyConformanceTestCheckpoint2 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestSetDataConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -157,6 +173,7 @@ BBTestSetDataConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -202,6 +219,7 @@ BBTestGetDataConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -247,6 +265,7 @@ BBTestGetNextSelectorConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -286,6 +305,7 @@ BBTestRegisterDataNotifyConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -329,6 +349,7 @@ BBTestUnregisterDataNotifyConformanceTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestSetDataConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -422,6 +443,7 @@ BBTestSetDataConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -471,6 +493,7 @@ BBTestGetDataConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -518,6 +541,7 @@ BBTestGetDataConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -722,6 +746,7 @@ BBTestGetDataConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1097,6 +1122,7 @@ BBTestGetDataConformanceTestCheckpoint4 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1274,6 +1300,7 @@ BBTestGetDataConformanceTestCheckpoint5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1320,6 +1347,7 @@ BBTestGetNextSelectorConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1394,6 +1422,7 @@ BBTestGetNextSelectorConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1544,6 +1573,7 @@ BBTestGetNextSelectorConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1698,6 +1728,7 @@ BBTestGetNextSelectorConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSelectorConformanceTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1824,6 +1855,7 @@ BBTestGetNextSelectorConformanceTestCheckpoint5 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1867,6 +1899,7 @@ BBTestRegisterDataNotifyConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterDataNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1931,6 +1964,7 @@ BBTestRegisterDataNotifyConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig
@@ -1974,6 +2008,7 @@ BBTestUnregisterDataNotifyConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterDataNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC_CONFIG_PROTOCOL                  *IPsecConfig

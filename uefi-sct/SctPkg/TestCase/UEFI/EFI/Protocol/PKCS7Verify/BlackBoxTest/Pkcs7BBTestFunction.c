@@ -37,6 +37,7 @@ extern EFI_SIGNATURE_LIST    *RevokedDb[3];
 extern EFI_SIGNATURE_LIST    *TimestampDb[3];
 
 EFI_STATUS
+EFIAPI
 BBTestVerifyBufferFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -238,6 +239,7 @@ BBTestVerifyBufferFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestVerifySignatureFunctionTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

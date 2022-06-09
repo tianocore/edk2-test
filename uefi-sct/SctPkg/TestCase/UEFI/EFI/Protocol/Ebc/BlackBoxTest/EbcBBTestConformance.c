@@ -38,6 +38,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestCreateThunkConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +151,7 @@ BBTestCreateThunkConformanceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -215,6 +217,7 @@ BBTestUnloadImageConformanceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetVersionConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

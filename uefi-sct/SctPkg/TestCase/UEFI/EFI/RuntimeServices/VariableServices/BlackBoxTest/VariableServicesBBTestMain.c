@@ -275,6 +275,7 @@ UnloadVariableServicesBbTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetTestSupportLibrary (
   IN EFI_HANDLE                           SupportHandle,
   OUT EFI_STANDARD_TEST_LIBRARY_PROTOCOL  **StandardLib,
@@ -330,6 +331,7 @@ GetTestSupportLibrary (
 
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)
 EFI_STATUS
+EFIAPI
 Myitox (
   IN UINTN        Num,
   OUT CHAR16      *StringNum

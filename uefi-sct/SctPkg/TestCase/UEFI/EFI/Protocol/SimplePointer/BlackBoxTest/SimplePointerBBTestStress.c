@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetClearanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -516,6 +517,7 @@ BBTestResetClearanceManualTest (
 // TDS 4.3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetStateExtensiveManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -39,6 +39,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -260,6 +261,7 @@ ResetSystemStep3:
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -410,6 +412,7 @@ ManualTestStep2:
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
 
 EFI_STATUS
+EFIAPI
 BBTestQueryCapsuleCapabilitiesTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

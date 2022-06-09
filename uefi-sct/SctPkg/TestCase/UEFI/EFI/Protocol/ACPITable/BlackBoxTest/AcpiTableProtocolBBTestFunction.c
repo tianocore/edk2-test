@@ -47,6 +47,7 @@ typedef struct {
 } EFI_ACPI_RSDP;
 
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -82,6 +83,7 @@ BBTestInstallAcpiTableFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallAcpiTableFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +119,7 @@ BBTestUninstallAcpiTableFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL               *AcpiTable
@@ -323,6 +326,7 @@ EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallAcpiTableFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL               *AcpiTable
