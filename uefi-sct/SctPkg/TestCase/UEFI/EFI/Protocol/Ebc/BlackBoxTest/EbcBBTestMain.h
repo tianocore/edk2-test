@@ -78,6 +78,7 @@ extern EFI_GUID gBlackBoxEfiEbcDriverProtocolGuid;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestCreateThunkBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -89,6 +90,7 @@ BBTestCreateThunkBasicTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +102,7 @@ BBTestUnloadImageBasicTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterICacheFlushBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -111,6 +114,7 @@ BBTestRegisterICacheFlushBasicTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestGetVersionBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +130,7 @@ BBTestGetVersionBasicTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestCreateThunkConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -137,6 +142,7 @@ BBTestCreateThunkConformanceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -148,6 +154,7 @@ BBTestUnloadImageConformanceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetVersionConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -173,12 +180,14 @@ ReadImageFile (
   );
 
 EFI_STATUS
+EFIAPI
 FlushICache (
   IN EFI_PHYSICAL_ADDRESS     Start,
   IN UINT64                   Length
   );
 
 EFI_STATUS
+EFIAPI
 TestFlushICache (
   IN EFI_PHYSICAL_ADDRESS     Start,
   IN UINT64                   Length

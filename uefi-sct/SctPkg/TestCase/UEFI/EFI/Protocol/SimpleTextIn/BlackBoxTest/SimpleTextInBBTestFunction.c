@@ -40,6 +40,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -270,6 +271,7 @@ BBTestResetFunctionAutoTest (
 // TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -528,6 +530,7 @@ BBTestResetFunctionManualTest (
 // TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -710,6 +713,7 @@ BBTestReadKeyStrokeFunctionManualTest (
 // TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestWaitForKeyFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -59,6 +59,7 @@ ENTS_ARG_FIELD    BSSetWatchdogTimerArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_SetWatchdogTimer_EntsTest (
   VOID *ClientInterface
   )
@@ -110,6 +111,7 @@ ENTS_ARG_FIELD    BSStallArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_Stall_EntsTest (
   VOID *ClientInterface
   )
@@ -161,6 +163,7 @@ ENTS_ARG_FIELD  BSCopyMemArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_CopyMem_EntsTest (
   VOID *ClientInterface
   )
@@ -216,6 +219,7 @@ ENTS_ARG_FIELD  BSSetMemArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_SetMem_EntsTest (
   VOID *ClientInterface
   )

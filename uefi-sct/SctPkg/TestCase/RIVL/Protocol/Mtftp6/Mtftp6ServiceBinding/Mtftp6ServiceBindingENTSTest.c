@@ -47,6 +47,7 @@ ENTS_INTERFACE    gMtftp6ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gMtftp6ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -138,6 +139,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

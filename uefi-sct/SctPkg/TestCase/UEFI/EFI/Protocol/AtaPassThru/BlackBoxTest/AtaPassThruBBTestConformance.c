@@ -68,6 +68,7 @@ IsPowerOfTwo (UINT32 Value)
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -154,6 +155,7 @@ BBTestModeConformanceAutoTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextPortConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -308,6 +310,7 @@ BBTestGetNextPortConformanceAutoTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -504,6 +507,7 @@ CheckPoint2:
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -693,6 +697,7 @@ BBTestGetDeviceConformanceAutoTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -851,6 +856,7 @@ BBTestResetDeviceConformanceAutoTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -1022,6 +1028,7 @@ BBTestGetNextDeviceConformanceAutoTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,

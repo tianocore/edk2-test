@@ -216,6 +216,7 @@ InitializeBBTestUsbHc (
  *  @return EFI_SUCCESS   The interface was uninstalled successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestUsbHcUnload (
   IN EFI_HANDLE       ImageHandle
   )

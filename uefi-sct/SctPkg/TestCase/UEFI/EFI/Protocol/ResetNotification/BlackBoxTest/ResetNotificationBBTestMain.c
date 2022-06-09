@@ -127,6 +127,7 @@ InitializeResetNotificationBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadResetNotificationBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

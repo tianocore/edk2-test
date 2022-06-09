@@ -96,6 +96,7 @@ BBTestPlatformToDriverConfigurationProtocolUnload (
 
 
 EFI_STATUS
+EFIAPI
 BBTestQueryFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +105,7 @@ BBTestQueryFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResponseFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -113,6 +115,7 @@ BBTestResponseFunctionAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestQueryConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -121,6 +124,7 @@ BBTestQueryConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResponseConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -130,6 +134,7 @@ BBTestResponseConformanceAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCLPCommandAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +143,7 @@ BBTestCLPCommandAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCLPReturnStringAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -146,6 +152,7 @@ BBTestCLPReturnStringAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCLPCmdStatusAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -154,6 +161,7 @@ BBTestCLPCmdStatusAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCLPErrorValueAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -162,6 +170,7 @@ BBTestCLPErrorValueAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCLPMessageCodeAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

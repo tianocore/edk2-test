@@ -71,6 +71,7 @@ ENTS_INTERFACE    gArpEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gArpEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 ArpENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -153,6 +154,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 ArpENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

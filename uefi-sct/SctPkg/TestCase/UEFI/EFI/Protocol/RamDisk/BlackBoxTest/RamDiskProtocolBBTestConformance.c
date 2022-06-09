@@ -48,6 +48,7 @@ WriteUnaligned64 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -101,6 +102,7 @@ BBTestRegisterRamDiskConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -152,6 +154,7 @@ BBTestRegisterRamDiskConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -205,6 +208,7 @@ BBTestRegisterRamDiskConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -272,6 +276,7 @@ BBTestRegisterRamDiskConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -312,6 +317,7 @@ BBTestRegisterRamDiskConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -387,6 +393,7 @@ BBTestUnregisterRamDiskConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -421,6 +428,7 @@ BBTestUnregisterRamDiskConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -479,6 +487,7 @@ BBTestUnregisterRamDiskConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

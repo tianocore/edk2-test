@@ -30,6 +30,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -37,6 +38,7 @@ UsbControlTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -44,6 +46,7 @@ UsbControlTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest3 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -51,6 +54,7 @@ UsbControlTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest4 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -58,6 +62,7 @@ UsbControlTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -65,6 +70,7 @@ UsbBulkTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -72,6 +78,7 @@ UsbBulkTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest3 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -79,6 +86,7 @@ UsbBulkTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest4 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -86,6 +94,7 @@ UsbBulkTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest5 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -93,6 +102,7 @@ UsbBulkTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbAsyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -100,6 +110,7 @@ UsbAsyncInterruptTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbAsyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -107,6 +118,7 @@ UsbAsyncInterruptTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -114,6 +126,7 @@ UsbSyncInterruptTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -121,6 +134,7 @@ UsbSyncInterruptTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -128,6 +142,7 @@ UsbSyncInterruptTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -135,6 +150,7 @@ UsbSyncInterruptTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbAsyncIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -142,6 +158,7 @@ UsbAsyncIsochronousTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -149,6 +166,7 @@ UsbIsochronousTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetDeviceDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -156,6 +174,7 @@ UsbGetDeviceDescriptorConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetConfigDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -163,6 +182,7 @@ UsbGetConfigDescriptorConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetInterfaceDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -170,6 +190,7 @@ UsbGetInterfaceDescriptorConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetEndpointDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -177,6 +198,7 @@ UsbGetEndpointDescriptorConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetEndpointDescriptorConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -184,6 +206,7 @@ UsbGetEndpointDescriptorConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbPortResetConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -191,6 +214,7 @@ UsbPortResetConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetStringDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -198,6 +222,7 @@ UsbGetStringDescriptorConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbGetStringDescriptorConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -223,6 +248,7 @@ GetUsbEndpointOfAttr (
   );
 
 EFI_STATUS
+EFIAPI
 UsbInterruptCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -231,6 +257,7 @@ UsbInterruptCallBack (
   );
 
 EFI_STATUS
+EFIAPI
 UsbIsochronousCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -242,6 +269,7 @@ UsbIsochronousCallBack (
 // Functions
 //
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -334,6 +362,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -431,6 +460,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbAsyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -513,6 +543,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -605,6 +636,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbAsyncIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -682,6 +714,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -759,6 +792,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetDeviceDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -836,6 +870,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetConfigDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -913,6 +948,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetInterfaceDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -990,6 +1026,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetEndpointDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1076,6 +1113,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbPortResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1153,6 +1191,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetStringDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1243,6 +1282,7 @@ Returns:
 // Sub functions
 //
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1364,6 +1404,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1445,6 +1486,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest3 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1536,6 +1578,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceSubTest4 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1630,6 +1673,7 @@ Returns:
 
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1862,6 +1906,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1975,6 +2020,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest3 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2087,6 +2133,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest4 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2200,6 +2247,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceSubTest5 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2563,6 +2611,7 @@ Returns:
 
 
 EFI_STATUS
+EFIAPI
 UsbAsyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2819,6 +2868,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbAsyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2971,6 +3021,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3228,6 +3279,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3345,6 +3397,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3461,6 +3514,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3579,6 +3633,7 @@ Returns:
 
 
 EFI_STATUS
+EFIAPI
 UsbAsyncIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3831,6 +3886,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4079,6 +4135,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetDeviceDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4154,6 +4211,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetConfigDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4229,6 +4287,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetInterfaceDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4304,6 +4363,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetEndpointDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4404,6 +4464,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetEndpointDescriptorConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4526,6 +4587,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbPortResetConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4648,6 +4710,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetStringDescriptorConformanceSubTest1 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4722,6 +4785,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbGetStringDescriptorConformanceSubTest2 (
   IN EFI_USB_IO_PROTOCOL                  *UsbIo,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4956,6 +5020,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbInterruptCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -4985,6 +5050,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 UsbIsochronousCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,

@@ -25,6 +25,7 @@ Abstract:
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpRrqSendAck (
   IN EFTP_IO_PRIVATE  *Private,
   IN UINT64           BlkNo
@@ -32,6 +33,7 @@ EftpRrqSendAck (
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpRrqSaveBlk (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFI_EFTP_PACKET  *Packet,
@@ -40,6 +42,7 @@ EftpRrqSaveBlk (
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpRrqFlushLostBlock (
   IN EFTP_IO_PRIVATE  *Private
   );
@@ -52,6 +55,7 @@ EftpListIntegrityCheck (
 
 STATIC
 VOID
+EFIAPI
 EftpRrqTxCallback (
   IN EFI_EVENT  Event,
   IN VOID       *Context
@@ -471,6 +475,7 @@ CleanUp:
 }
 
 EFI_STATUS
+EFIAPI
 EftpBuildRrq (
   IN EFTP_IO_PRIVATE  *Private,
   IN UINT16           OpCode
@@ -662,6 +667,7 @@ Returns:
 
 STATIC
 VOID
+EFIAPI
 EftpRrqTxCallback (
   IN EFI_EVENT  Event,
   IN VOID       *Context
@@ -736,7 +742,6 @@ Returns:
 //
 // The event process routines for EFTP_ROLE_INIT
 //
-STATIC
 EFI_STATUS
 EftpRrqInitRcvData (
   IN EFTP_IO_PRIVATE            *Private,
@@ -1072,8 +1077,8 @@ Returns:
 }
 #endif
 
-STATIC
 VOID
+EFIAPI
 EftpRrqInitTimer (
   IN EFI_EVENT  Event,
   IN VOID       *Context
@@ -1493,6 +1498,7 @@ Returns:
 
 STATIC
 VOID
+EFIAPI
 EftpRrqActiveTimer (
   IN EFI_EVENT  Event,
   IN VOID       *Context
@@ -1648,6 +1654,7 @@ Returns:
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpRrqSaveBlk (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFI_EFTP_PACKET  *Packet,
@@ -1833,6 +1840,7 @@ Returns:
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpRrqSendAck (
   IN EFTP_IO_PRIVATE  *Private,
   IN UINT64           BlkNo
@@ -1890,6 +1898,7 @@ Returns:
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpRrqFlushLostBlock (
   IN EFTP_IO_PRIVATE  *Private
   )

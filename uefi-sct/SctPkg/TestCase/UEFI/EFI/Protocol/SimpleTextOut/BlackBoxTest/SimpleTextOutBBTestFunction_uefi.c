@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -347,6 +348,7 @@ BBTestResetFunctionManualTest (
 // TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -645,6 +647,7 @@ BBTestResetFunctionAutoTest (
 // TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestOutputStringFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1260,6 +1263,7 @@ BBTestOutputStringFunctionAutoTest (
 
 }
 EFI_STATUS
+EFIAPI
 BBTestOutputStringFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2096,6 +2100,7 @@ RestoreEnvironment:
 // TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestTestStringFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2306,6 +2311,7 @@ BBTestTestStringFunctionAutoTest (
 // TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2558,6 +2564,7 @@ BBTestQueryModeFunctionAutoTest (
 // TDS 4.1.6
 //
 EFI_STATUS
+EFIAPI
 BBTestSetModeFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2813,6 +2820,7 @@ BBTestSetModeFunctionManualTest (
 // TDS 4.1.7
 //
 EFI_STATUS
+EFIAPI
 BBTestSetModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3042,6 +3050,7 @@ BBTestSetModeFunctionAutoTest (
 // TDS 4.1.8
 //
 EFI_STATUS
+EFIAPI
 BBTestSetAttributeFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3284,6 +3293,7 @@ BBTestSetAttributeFunctionManualTest (
 // TDS 4.1.9
 //
 EFI_STATUS
+EFIAPI
 BBTestSetAttributeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3529,6 +3539,7 @@ BBTestSetAttributeFunctionAutoTest (
 // TDS 4.1.10
 //
 EFI_STATUS
+EFIAPI
 BBTestClearScreenFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3747,6 +3758,7 @@ BBTestClearScreenFunctionManualTest (
 // TDS 4.1.11
 //
 EFI_STATUS
+EFIAPI
 BBTestClearScreenFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3977,6 +3989,7 @@ BBTestClearScreenFunctionAutoTest (
 // TDS 4.1.12
 //
 EFI_STATUS
+EFIAPI
 BBTestSetCursorPositionFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4265,6 +4278,7 @@ BBTestSetCursorPositionFunctionManualTest (
 // TDS 4.1.13
 //
 EFI_STATUS
+EFIAPI
 BBTestSetCursorPositionFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4539,6 +4553,7 @@ BBTestSetCursorPositionFunctionAutoTest (
 // TDS 4.1.14
 //
 EFI_STATUS
+EFIAPI
 BBTestEnableCursorFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4969,6 +4984,7 @@ BBTestEnableCursorFunctionManualTest (
 // TDS 4.1.15
 //
 EFI_STATUS
+EFIAPI
 BBTestEnableCursorFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -102,6 +102,7 @@ UnloadFirmwareManagementBBTest (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -115,6 +116,7 @@ BBTestUnitTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -123,6 +125,7 @@ BBTestGetImageInfoFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -131,6 +134,7 @@ BBTestGetImageFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -139,6 +143,7 @@ BBTestSetImageFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -147,6 +152,7 @@ BBTestCheckImageFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -155,6 +161,7 @@ BBTestGetPackageInfoFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -167,6 +174,7 @@ BBTestSetPackageInfoFunctionTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -175,6 +183,7 @@ BBTestGetImageInfoConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -183,6 +192,7 @@ BBTestGetImageConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -191,6 +201,7 @@ BBTestSetImageConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -199,6 +210,7 @@ BBTestCheckImageConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetPackageInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -207,6 +219,7 @@ BBTestGetPackageInfoConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

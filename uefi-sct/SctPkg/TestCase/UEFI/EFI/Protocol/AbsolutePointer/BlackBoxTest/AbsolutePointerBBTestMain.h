@@ -55,6 +55,7 @@ BBTestAbsolutePointerProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -63,6 +64,7 @@ BBTestResetFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -71,6 +73,7 @@ BBTestResetFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetStateFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -79,6 +82,7 @@ BBTestGetStateFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetStateFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -87,6 +91,7 @@ BBTestGetStateFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForInputFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -98,6 +103,7 @@ BBTestWaitForInputFunctionManualTest (
 // Conformance Test
 //
 EFI_STATUS
+EFIAPI
 BBTestWaitForInputConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -106,6 +112,7 @@ BBTestWaitForInputConformanceManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -114,6 +121,7 @@ BBTestResetConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -125,6 +133,7 @@ BBTestGetStateConformanceAutoTest (
 // Extensive Test
 //
 EFI_STATUS
+EFIAPI
 BBTestResetClearanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -133,6 +142,7 @@ BBTestResetClearanceManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetStateExtensiveManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

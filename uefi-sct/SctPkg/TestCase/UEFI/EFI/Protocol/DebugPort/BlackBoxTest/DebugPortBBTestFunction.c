@@ -40,6 +40,7 @@ Abstract:
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -114,6 +115,7 @@ BBTestResetFunctionAutoTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -231,6 +233,7 @@ BBTestWriteFunctionManualTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestReadFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -355,6 +358,7 @@ BBTestReadFunctionManualTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestPollFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

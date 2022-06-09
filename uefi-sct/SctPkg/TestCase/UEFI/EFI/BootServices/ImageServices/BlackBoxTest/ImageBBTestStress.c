@@ -37,6 +37,7 @@ Abstract:
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestImageServicesCombinationTest1 (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

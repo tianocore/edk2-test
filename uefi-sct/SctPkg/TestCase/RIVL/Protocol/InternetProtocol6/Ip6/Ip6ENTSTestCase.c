@@ -53,6 +53,7 @@ ENTS_ARG_FIELD                          gIp6GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -104,6 +105,7 @@ ENTS_ARG_FIELD              gIp6ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -158,6 +160,7 @@ ENTS_ARG_FIELD          gIp6GroupsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -223,6 +226,7 @@ ENTS_ARG_FIELD          gIp6RoutesArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -295,6 +299,7 @@ ENTS_ARG_FIELD gIp6NeighborsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Neighbors_EntsTest (
  VOID *ClientInterface
 )
@@ -333,6 +338,7 @@ ENTS_ARG_FIELD                  gIp6TransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -382,6 +388,7 @@ ENTS_ARG_FIELD                  gIp6ReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -431,6 +438,7 @@ ENTS_ARG_FIELD                  gIp6CancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -475,6 +483,7 @@ ENTS_ARG_FIELD    gIp6PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6Poll_EntsTest (
   VOID *ClientInterface
   )

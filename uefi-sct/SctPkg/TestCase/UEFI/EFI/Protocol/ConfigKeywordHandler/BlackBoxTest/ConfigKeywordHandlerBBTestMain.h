@@ -92,6 +92,7 @@ LoadedImageTestComposeSimpleFilePath (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestSetDataConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +101,7 @@ BBTestSetDataConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetDataConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -108,6 +110,7 @@ BBTestGetDataConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -116,6 +119,7 @@ BBTestSetDataFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

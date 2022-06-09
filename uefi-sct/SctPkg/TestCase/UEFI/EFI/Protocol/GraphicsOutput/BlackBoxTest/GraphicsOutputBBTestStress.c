@@ -37,6 +37,7 @@ Revision History
 // TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoFillStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -425,6 +426,7 @@ Returns:
 // TDS 4.3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoBltBufferStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -962,6 +964,7 @@ Returns:
 // TDS 4.3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoToVideoStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -1479,6 +1482,7 @@ Returns:
 // TDS 4.3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestVideoFillBufferToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2109,6 +2113,7 @@ Returns:
 // TDS 4.3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestVideoFillVideoToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2784,6 +2789,7 @@ Returns:
 // TDS 4.3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestVideoToBltBufferExtensiveAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

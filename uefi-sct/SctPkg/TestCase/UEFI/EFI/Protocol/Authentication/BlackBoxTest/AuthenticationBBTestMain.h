@@ -55,6 +55,7 @@ UnloadAuthenticationTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestAuthenticationFunctionTestA (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,
@@ -63,6 +64,7 @@ BBTestAuthenticationFunctionTestA (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestAuthenticationFunctionTestB(
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,

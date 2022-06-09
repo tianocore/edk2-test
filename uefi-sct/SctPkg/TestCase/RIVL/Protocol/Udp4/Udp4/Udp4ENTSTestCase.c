@@ -58,6 +58,7 @@ ENTS_ARG_FIELD                          gUdp4GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -116,6 +117,7 @@ ENTS_ARG_FIELD                  gUdp4ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -176,6 +178,7 @@ ENTS_ARG_FIELD          gUdp4GroupsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Groups_EntsTest (
   VOID *ClientInterface
   )
@@ -247,6 +250,7 @@ ENTS_ARG_FIELD          gUdp4RoutesArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -300,6 +304,7 @@ ENTS_ARG_FIELD    gUdp4PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Poll_EntsTest (
   VOID *ClientInterface
   )
@@ -352,6 +357,7 @@ ENTS_ARG_FIELD                    gUdp4ReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -407,6 +413,7 @@ ENTS_ARG_FIELD                    gUdp4TransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -462,6 +469,7 @@ ENTS_ARG_FIELD                    gUdp4CancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -517,6 +525,7 @@ ENTS_ARG_FIELD                    gUdp4SignalRecycleEventArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp4SignalRecycleEvent_EntsTest (
   VOID *ClientInterface
   )

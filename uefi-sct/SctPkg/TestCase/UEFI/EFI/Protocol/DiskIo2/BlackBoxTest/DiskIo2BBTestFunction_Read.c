@@ -28,6 +28,7 @@ Abstract:
 #include "DiskIo2BBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -36,6 +37,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint1(
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -45,6 +47,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint2(
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -54,6 +57,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint3(
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint4(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -563,6 +567,7 @@ EFIAPI DiskIo2FinishNotifyFunc (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCancelFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -641,6 +646,7 @@ BBTestCancelFunctionAutoTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -783,6 +789,7 @@ BBTestReadDiskExFunctionAutoTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint1(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -1262,6 +1269,7 @@ END_WAIT:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint2(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -1617,6 +1625,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint3(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,
@@ -2062,6 +2071,7 @@ END:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTestCheckpoint4(
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_DISK_IO_PROTOCOL                  *DiskIo,

@@ -42,6 +42,7 @@ extern UINT8 EnterEvent;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -132,6 +133,7 @@ BBTestGetNextDeviceFunctionAutoTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -229,6 +231,7 @@ BBTestBuildDevicePathFunctionAutoTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTargetLunFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -352,6 +355,7 @@ BBTestGetTargetLunFunctionAutoTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestResetChannelFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -427,6 +431,7 @@ BBTestResetChannelFunctionAutoTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestResetTargetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -522,6 +527,7 @@ BBTestResetTargetFunctionAutoTest (
 // TDS 3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionAutoTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

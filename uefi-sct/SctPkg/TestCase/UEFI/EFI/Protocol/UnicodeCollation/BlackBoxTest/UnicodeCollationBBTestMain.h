@@ -75,11 +75,13 @@ InitializeBBTestUnicodeCollation (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUnicodeCollationProtocolUnload (
   IN EFI_HANDLE           ImageHandle
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStriCollFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +90,7 @@ BBTestStriCollFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestMetaiMatchFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -96,6 +99,7 @@ BBTestMetaiMatchFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStrLwrFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +108,7 @@ BBTestStrLwrFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStrUprFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,6 +117,7 @@ BBTestStrUprFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFatToStrFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -120,6 +126,7 @@ BBTestFatToStrFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStrToFatFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +135,7 @@ BBTestStrToFatFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

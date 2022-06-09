@@ -39,6 +39,7 @@ ENTS_ARG_FIELD    gSimpleNetworkStartArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStart_EntsTest (
   VOID *ClientInterface
   )
@@ -86,6 +87,7 @@ ENTS_ARG_FIELD    gSimpleNetworkStopArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStop_EntsTest (
   VOID *ClientInterface
   )
@@ -144,6 +146,7 @@ ENTS_ARG_FIELD    gSimpleNetworkInitializeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkInitialize_EntsTest (
   VOID *ClientInterface
   )
@@ -194,6 +197,7 @@ ENTS_ARG_FIELD    gSimpleNetworkResetArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReset_EntsTest (
   VOID *ClientInterface
   )
@@ -238,6 +242,7 @@ ENTS_ARG_FIELD    gSimpleNetworkShutdownArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkShutdown_EntsTest (
   VOID *ClientInterface
   )
@@ -304,6 +309,7 @@ ENTS_ARG_FIELD          gSimpleNetworkReceiveFiltersArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReceiveFilters_EntsTest (
   VOID *ClientInterface
   )
@@ -362,6 +368,7 @@ ENTS_ARG_FIELD          gSimpleNetworkStationAddressArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStationAddress_EntsTest (
   VOID *ClientInterface
   )
@@ -422,6 +429,7 @@ ENTS_ARG_FIELD                gSimpleNetworkStatisticsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStatistics_EntsTest (
   VOID *ClientInterface
   )
@@ -483,6 +491,7 @@ ENTS_ARG_FIELD          gSimpleNetworkMCastIPToMACArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkMCastIPToMAC_EntsTest (
   VOID *ClientInterface
   )
@@ -549,6 +558,7 @@ ENTS_ARG_FIELD    gSimpleNetworkNvDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkNvData_EntsTest (
   VOID *ClientInterface
   )
@@ -606,6 +616,7 @@ ENTS_ARG_FIELD    gSimpleNetworkGetStatusArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkGetStatus_EntsTest (
   VOID *ClientInterface
   )
@@ -681,6 +692,7 @@ ENTS_ARG_FIELD          gSimpleNetworkTransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkTransmit_EntsTest (
   VOID *ClientInterface
   )
@@ -760,6 +772,7 @@ ENTS_ARG_FIELD          gSimpleNetworkReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReceive_EntsTest (
   VOID *ClientInterface
   )
@@ -809,6 +822,7 @@ ENTS_ARG_FIELD                  gSimpleNetworkModeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkMode_EntsTest (
   VOID *ClientInterface
   )
@@ -895,6 +909,7 @@ ENTS_ARG_FIELD          gSimpleNetworkTransmitPattern1ArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkTransmitPattern1_EntsTest (
   VOID *ClientInterface
   )
@@ -1095,6 +1110,7 @@ ENTS_ARG_FIELD          gSimpleNetworkTransmitPattern2ArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkTransmitPattern2_EntsTest (
   VOID *ClientInterface
   )
@@ -1286,6 +1302,7 @@ ENTS_ARG_FIELD          gSimpleNetworkReceivePattern1ArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReceivePattern1_EntsTest (
   VOID *ClientInterface
   )

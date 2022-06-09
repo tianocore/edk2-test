@@ -40,6 +40,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -171,6 +172,7 @@ BBTestGetDriverConformanceAutoTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverPathConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -302,6 +304,7 @@ BBTestGetDriverPathConformanceAutoTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestDriverLoadedConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

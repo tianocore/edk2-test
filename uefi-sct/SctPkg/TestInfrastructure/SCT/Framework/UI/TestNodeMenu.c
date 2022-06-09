@@ -55,26 +55,31 @@ DisplayTestNodeMenu (
 // Prototypes (internal)
 //
 EFI_STATUS
+EFIAPI
 TestNodeMenuEnterFunc (
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuEscFunc (
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuSpaceFunc(
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuF9Func(
   IN EFI_MENU_PAGE                *Page
   );
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuF8Func(
   IN EFI_MENU_PAGE                *Page
   );
@@ -102,6 +107,7 @@ UnSelectTestNode (
   );
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuDescPrintFunc (
   IN EFI_MENU_ITEM                *MenuItem,
   IN VOID                         *Context,
@@ -403,6 +409,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuEnterFunc (
   IN EFI_MENU_PAGE                *Page
   )
@@ -464,6 +471,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuEscFunc (
   IN EFI_MENU_PAGE           *Page
   )
@@ -601,6 +609,7 @@ Returns:
 
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuSpaceFunc(
   IN EFI_MENU_PAGE                *Page
   )
@@ -676,6 +685,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuF9Func(
   IN EFI_MENU_PAGE                *Page
   )
@@ -736,6 +746,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuF8Func(
   IN EFI_MENU_PAGE                *Page
   )
@@ -944,6 +955,7 @@ Arguments:
 }
 
 EFI_STATUS
+EFIAPI
 TestNodeMenuDescPrintFunc (
   IN EFI_MENU_ITEM          *MenuItem,
   IN VOID                   *Context,

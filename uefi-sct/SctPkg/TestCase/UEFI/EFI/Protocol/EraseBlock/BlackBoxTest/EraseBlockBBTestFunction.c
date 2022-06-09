@@ -29,6 +29,7 @@ Abstract:
 extern UINT8 EnterEvent;
 
 EFI_STATUS
+EFIAPI
 BBTestEraseBlocksFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

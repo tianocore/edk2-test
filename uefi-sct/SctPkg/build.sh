@@ -272,7 +272,8 @@ cp $EDK_TOOLS_PATH/Source/C/bin/GenBin $DEST_DIR/GenBin
 # Build the packages needed for the SCT
 # Set $DSC_EXTRA to any extra packages needed for the build
 #
-for DSC in SctPkg/UEFI/UEFI_SCT.dsc SctPkg/UEFI/IHV_SCT.dsc $DSC_EXTRA
+#for DSC in SctPkg/UEFI/UEFI_SCT.dsc SctPkg/UEFI/IHV_SCT.dsc $DSC_EXTRA
+for DSC in SctPkg/UEFI/UEFI_SCT.dsc $DSC_EXTRA
 do
 	build -p $DSC -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
 	# Check if there is any error
@@ -319,15 +320,15 @@ fi
 cd ../../../
 pwd
 
-cd Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}
-pwd
-../../../SctPkg/CommonGenFramework.sh ihv_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi
+#cd Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}
+#pwd
+#../../../SctPkg/CommonGenFramework.sh ihv_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi
 
-status=$?
-if test $status -ne 0
-then
-  echo Could not generate IHV SCT binary
-  exit -1
-else
-echo The IHV binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}"
-fi
+#status=$?
+#if test $status -ne 0
+#then
+#  echo Could not generate IHV SCT binary
+#  exit -1
+#else
+#echo The IHV binary "SctPackage${SCT_TARGET_ARCH}" is located at "$EFI_SOURCE/Build/IhvSct/${SCT_BUILD}_${TARGET_TOOLS}"
+#fi

@@ -63,6 +63,7 @@ ENTS_ARG_FIELD                          gTcp4GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -117,6 +118,7 @@ ENTS_ARG_FIELD              gTcp4ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -182,6 +184,7 @@ ENTS_ARG_FIELD          gTcp4RoutesArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -235,6 +238,7 @@ ENTS_ARG_FIELD                    gTcp4ConnectArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Connect_EntsTest (
   VOID *ClientInterface
   )
@@ -285,6 +289,7 @@ ENTS_ARG_FIELD                gTcp4AcceptArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Accept_EntsTest (
   VOID *ClientInterface
   )
@@ -335,6 +340,7 @@ ENTS_ARG_FIELD            gTcp4TransmitArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -385,6 +391,7 @@ ENTS_ARG_FIELD            gTcp4ReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -435,6 +442,7 @@ ENTS_ARG_FIELD              gTcp4CloseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Close_EntsTest (
   VOID *ClientInterface
   )
@@ -485,6 +493,7 @@ ENTS_ARG_FIELD                    gTcp4CancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -530,6 +539,7 @@ ENTS_ARG_FIELD    gTcp4PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Tcp4Poll_EntsTest (
   VOID *ClientInterface
   )

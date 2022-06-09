@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gHttpServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -97,7 +98,7 @@ Returns:
     Status = tBS->HandleProtocol (
                     HandleBuffer[HandleIndex],
                     &gEfiEntsProtocolGuid,
-                    &Interface
+                    (VOID **) &Interface
                     );
     if (EFI_ERROR (Status)) {
       goto Done;
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gHttpServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )
@@ -197,7 +199,7 @@ Returns:
     Status = tBS->HandleProtocol (
                     HandleBuffer[HandleIndex],
                     &gEfiEntsProtocolGuid,
-                    &Interface
+                    (VOID **) &Interface
                     );
     if (EFI_ERROR (Status)) {
       goto Done;

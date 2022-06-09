@@ -42,6 +42,7 @@ Abstract:
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestLengthParameterAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -115,6 +116,7 @@ BBTestLengthParameterAutoTest (
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestFirmwareVersionParameterAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

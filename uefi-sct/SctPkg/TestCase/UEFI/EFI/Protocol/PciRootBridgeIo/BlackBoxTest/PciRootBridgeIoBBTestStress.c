@@ -42,6 +42,7 @@ Abstract:
 //TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 SetAttributes_Stress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

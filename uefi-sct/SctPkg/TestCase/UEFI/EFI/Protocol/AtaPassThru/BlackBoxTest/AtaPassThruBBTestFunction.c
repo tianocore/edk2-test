@@ -42,6 +42,7 @@ extern UINT8 EnterEvent;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextPortFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -128,6 +129,7 @@ BBTestGetNextPortFunctionAutoTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -227,6 +229,7 @@ BBTestBuildDevicePathFunctionAutoTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -351,6 +354,7 @@ BBTestGetDeviceFunctionAutoTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestResetPortFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -458,6 +462,7 @@ BBTestResetPortFunctionAutoTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -555,6 +560,7 @@ BBTestResetDeviceFunctionAutoTest (
 // TDS 3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -660,6 +666,7 @@ BBTestGetNextDeviceFunctionAutoTest (
 // TDS 3.7
 //
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionAutoTest (
     IN EFI_BB_TEST_PROTOCOL    *This,
     IN VOID                    *ClientInterface,

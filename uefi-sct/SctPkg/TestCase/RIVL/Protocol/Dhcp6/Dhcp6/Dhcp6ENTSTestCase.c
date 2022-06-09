@@ -65,6 +65,7 @@ ENTS_ARG_FIELD               gDhcp6GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -311,6 +312,7 @@ ENTS_ARG_FIELD                gDhcp6ConfigArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6Config_EntsTest (
   VOID *ClientInterface
   )
@@ -362,6 +364,7 @@ ENTS_ARG_FIELD    gDhcp6StartArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6Start_EntsTest (
   VOID *ClientInterface
   )
@@ -502,6 +505,7 @@ ENTS_ARG_FIELD                gDhcp6InfoRequestArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6InfoRequest_EntsTest (
   VOID *ClientInterface
   )
@@ -564,6 +568,7 @@ ENTS_ARG_FIELD    gDhcp6RenewRebindArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6RenewRebind_EntsTest (
   VOID *ClientInterface
   )
@@ -618,6 +623,7 @@ ENTS_ARG_FIELD    gDhcp6DeclineArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6Decline_EntsTest (
   VOID *ClientInterface
   )
@@ -672,6 +678,7 @@ ENTS_ARG_FIELD    gDhcp6ReleaseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6Release_EntsTest (
   VOID *ClientInterface
   )
@@ -716,6 +723,7 @@ ENTS_ARG_FIELD    gDhcp6StopArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6Stop_EntsTest (
   VOID *ClientInterface
   )
@@ -773,6 +781,7 @@ ENTS_ARG_FIELD                  gDhcp6ParseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp6Parse_EntsTest (
   VOID *ClientInterface
   )

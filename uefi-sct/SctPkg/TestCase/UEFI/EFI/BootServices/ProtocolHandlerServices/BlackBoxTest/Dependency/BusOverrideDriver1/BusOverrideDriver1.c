@@ -90,6 +90,7 @@ InitializeDriverBinding (
   );
 
 EFI_STATUS
+EFIAPI
 BusOverrideDriver1GetDriver (
   IN     EFI_BUS_SPECIFIC_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN OUT EFI_HANDLE                                 *DriverImageHandle
@@ -354,6 +355,7 @@ InitializeDriverBinding (
 }
 
 EFI_STATUS
+EFIAPI
 BusOverrideDriver1GetDriver (
   IN     EFI_BUS_SPECIFIC_DRIVER_OVERRIDE_PROTOCOL  *This,
   IN OUT EFI_HANDLE                                 *DriverImageHandle

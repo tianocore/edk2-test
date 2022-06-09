@@ -30,6 +30,7 @@ Abstract:
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)
 
 EFI_STATUS
+EFIAPI
 BBTestUpdateCapsuleConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -216,6 +217,7 @@ BBTestUpdateCapsuleConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestQueryCapsuleCapabilitiesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

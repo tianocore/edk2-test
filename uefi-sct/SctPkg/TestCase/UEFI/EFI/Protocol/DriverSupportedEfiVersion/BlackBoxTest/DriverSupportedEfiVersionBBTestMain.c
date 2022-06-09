@@ -72,6 +72,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiVersionProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -107,6 +108,7 @@ InitializeBBTestDriverSupportedEfiVersion (
  *  @return EFI_SUCCESS unload successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestDriverSupportedEfiVersionProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   )

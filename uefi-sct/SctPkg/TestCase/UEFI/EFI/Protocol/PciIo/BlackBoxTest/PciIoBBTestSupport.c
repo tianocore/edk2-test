@@ -1699,6 +1699,7 @@ CheckBarAndRange (
  *  into the destinaiton address.
  */
 VOID
+EFIAPI
 EventNotifyWriteMem (
   IN EFI_EVENT      Event,
   IN  VOID          *Context
@@ -1774,6 +1775,7 @@ EventNotifyWriteMem (
  *  into the destinaiton address.
  */
 VOID
+EFIAPI
 EventNotifyWriteIo (
   IN EFI_EVENT      Event,
   IN  VOID          *Context

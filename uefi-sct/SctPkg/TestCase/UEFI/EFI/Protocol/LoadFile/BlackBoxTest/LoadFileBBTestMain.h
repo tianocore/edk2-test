@@ -54,6 +54,7 @@ UnloadLoadFileTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadFileFunctionTest (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,

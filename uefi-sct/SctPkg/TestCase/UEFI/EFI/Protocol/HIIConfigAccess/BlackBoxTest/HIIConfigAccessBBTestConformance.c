@@ -27,12 +27,14 @@ Abstract:
 EFI_BROWSER_ACTION  EFI_BROWSER_ACTION_UNSUPPORTED = 2;
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting,
@@ -40,6 +42,7 @@ BBTestExtractConfigConformanceTestCheckpoint2 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting,
@@ -47,18 +50,21 @@ BBTestExtractConfigConformanceTestCheckpoint3 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting,
@@ -66,30 +72,35 @@ BBTestRouteConfigConformanceTestCheckpoint2 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess
   );
 /*  
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
   );
   
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -97,6 +108,7 @@ BBTestCallBackConformanceTestCheckpoint4 (
 */
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -146,6 +158,7 @@ BBTestExtractConfigConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -195,6 +208,7 @@ BBTestRouteConfigConformanceTest (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTest (
   IN EFI_BB_TEST_PROTOCOL    *This,
   IN VOID                    *ClientInterface,
@@ -240,6 +254,7 @@ BBTestCallBackConformanceTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess
@@ -325,6 +340,7 @@ BBTestExtractConfigConformanceTestCheckpoint1 (
 }
  
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting,
@@ -403,6 +419,7 @@ BBTestExtractConfigConformanceTestCheckpoint2 (
 }
  
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting,
@@ -481,6 +498,7 @@ BBTestExtractConfigConformanceTestCheckpoint3 (
 
  
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -527,6 +545,7 @@ BBTestExtractConfigConformanceTestCheckpoint4 (
 
  
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -566,6 +585,7 @@ BBTestRouteConfigConformanceTestCheckpoint1 (
  }
  
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting,
@@ -642,6 +662,7 @@ BBTestRouteConfigConformanceTestCheckpoint2 (
 }
  
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -686,6 +707,7 @@ BBTestRouteConfigConformanceTestCheckpoint3 (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -741,6 +763,7 @@ BBTestCallBackConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -794,6 +817,7 @@ BBTestCallBackConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint3(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
@@ -850,6 +874,7 @@ BBTestCallBackConformanceTestCheckpoint3(
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCallBackConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess

@@ -94,6 +94,7 @@ extern CHAR16 *gStopBitsString[];
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 ResetFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -105,6 +106,7 @@ ResetFuncTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 SetAttributesFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -116,6 +118,7 @@ SetAttributesFuncTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 SetControlFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -127,6 +130,7 @@ SetControlFuncTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 GetControlFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +142,7 @@ GetControlFuncTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 WriteFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -149,6 +154,7 @@ WriteFuncTest (
 // TDS 3.6
 //
 EFI_STATUS
+EFIAPI
 ReadFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -160,6 +166,7 @@ ReadFuncTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 SetAttributesConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -171,6 +178,7 @@ SetAttributesConfTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 SetControlConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +190,7 @@ SetControlConfTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 WriteConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -193,6 +202,7 @@ WriteConfTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 ReadConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -204,6 +214,7 @@ ReadConfTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 ResetStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -215,6 +226,7 @@ ResetStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 SetAttributesStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -226,6 +238,7 @@ SetAttributesStressTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 SetControlStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -237,6 +250,7 @@ SetControlStressTest (
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 GetControlStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -248,6 +262,7 @@ GetControlStressTest (
 // TDS 5.5
 //
 EFI_STATUS
+EFIAPI
 WriteStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -259,6 +274,7 @@ WriteStressTest (
 // TDS 5.6
 //
 EFI_STATUS
+EFIAPI
 ReadStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -271,6 +287,7 @@ ReadStressTest (
 //
 
 EFI_STATUS
+EFIAPI
 GetTestSupportLibrary (
   IN EFI_HANDLE                           SupportHandle,
   OUT EFI_STANDARD_TEST_LIBRARY_PROTOCOL  **StandardLib,

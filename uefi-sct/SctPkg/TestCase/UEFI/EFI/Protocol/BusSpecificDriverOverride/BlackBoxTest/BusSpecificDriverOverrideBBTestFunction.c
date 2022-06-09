@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

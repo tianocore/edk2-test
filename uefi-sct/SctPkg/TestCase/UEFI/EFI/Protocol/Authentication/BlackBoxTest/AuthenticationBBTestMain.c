@@ -140,6 +140,7 @@ UnloadAuthenticationTest (
  *  @return EFI_SUCCESS Finish the test successfully.
  ********************************************************************************/
 EFI_STATUS
+EFIAPI
 BBTestAuthenticationFunctionTestA (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,
@@ -211,6 +212,7 @@ BBTestAuthenticationFunctionTestA (
  *  @return EFI_SUCCESS Finish the test successfully.
  ********************************************************************************/
 EFI_STATUS
+EFIAPI
 BBTestAuthenticationFunctionTestB (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,

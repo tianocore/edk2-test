@@ -63,24 +63,28 @@ InternalSetFileSizeFileIo2 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -390,6 +394,7 @@ FileIoAsyncWriteMultiFiles (
 // TDS 5.1.14
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -444,6 +449,7 @@ BBTestWriteExBasicTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -852,6 +858,7 @@ BBTestWriteExBasicTestCheckpoint1 (
 //CheckPoint2 --------Sync WriteEx
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1168,6 +1175,7 @@ BBTestWriteExBasicTestCheckpoint2 (
 //checkpoint3 ----Async Write Multi Files
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint3 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
@@ -1604,6 +1612,7 @@ BBTestWriteExBasicTestCheckpoint3 (
 //CheckPoint4 --------Sync WriteEx Multi Files
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteExBasicTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem

@@ -26,6 +26,7 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeExConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -99,6 +100,7 @@ BBTestReadKeyStrokeExConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetStateConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -177,6 +179,7 @@ BBTestSetStateConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterKeyNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -253,6 +256,7 @@ BBTestRegisterKeyNotifyConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterKeyNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -331,6 +335,7 @@ BBTestUnregisterKeyNotifyConformanceTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeExConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -391,6 +396,7 @@ BBTestReadKeyStrokeExConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeExConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -452,6 +458,7 @@ BBTestReadKeyStrokeExConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetStateConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -507,6 +514,7 @@ BBTestSetStateConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetStateConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -582,6 +590,7 @@ BBTestSetStateConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterKeyNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -640,6 +649,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterKeyNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -702,6 +712,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterKeyNotifyConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -762,6 +773,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterKeyNotifyConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -814,6 +826,7 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterKeyNotifyConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
@@ -898,6 +911,7 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterKeyNotifyConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx

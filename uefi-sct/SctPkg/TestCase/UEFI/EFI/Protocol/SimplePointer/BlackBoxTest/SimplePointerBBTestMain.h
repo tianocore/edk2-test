@@ -57,6 +57,7 @@ BBTestSimplePointerProtocolUnload (
 // Interface function
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -65,14 +66,16 @@ BBTestResetFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
   IN EFI_HANDLE                 SupportHandle
   );
-EFI_STATUS
 
+EFI_STATUS
+EFIAPI
 BBTestGetStateFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -81,6 +84,7 @@ BBTestGetStateFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetStateFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -89,6 +93,7 @@ BBTestGetStateFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForInputFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +105,7 @@ BBTestWaitForInputFunctionManualTest (
 // Conformance Test
 //
 EFI_STATUS
+EFIAPI
 BBTestWaitForInputConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,6 +118,7 @@ BBTestWaitForInputConformanceManualTest (
 // Extensive Test
 //
 EFI_STATUS
+EFIAPI
 BBTestResetClearanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -120,6 +127,7 @@ BBTestResetClearanceManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetStateExtensiveManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

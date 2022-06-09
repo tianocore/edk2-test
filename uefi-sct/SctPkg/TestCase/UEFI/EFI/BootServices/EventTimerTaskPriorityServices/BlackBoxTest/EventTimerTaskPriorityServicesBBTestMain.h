@@ -56,6 +56,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEvent_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -64,6 +65,7 @@ BBTestCreateEvent_Conf (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -72,6 +74,7 @@ BBTestCreateEvent_Func (
   );
 #if (EFI_SPECIFICATION_VERSION >= 0x00020000)	
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -80,6 +83,7 @@ BBTestCreateEventEx_Conf (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +92,7 @@ BBTestCreateEventEx_Func (
   );
 #endif
 EFI_STATUS
+EFIAPI
 BBTestCloseEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -96,6 +101,7 @@ BBTestCloseEvent_Func (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSignalEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +110,7 @@ BBTestSignalEvent_Func (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,6 +119,7 @@ BBTestWaitForEvent_Conf (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -120,6 +128,7 @@ BBTestWaitForEvent_Func (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Stress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +137,7 @@ BBTestWaitForEvent_Stress (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -136,6 +146,7 @@ BBTestCheckEvent_Conf (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -144,6 +155,7 @@ BBTestCheckEvent_Func (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -152,6 +164,7 @@ BBTestSetTimer_Conf (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -160,6 +173,7 @@ BBTestSetTimer_Func (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Stress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -168,6 +182,7 @@ BBTestSetTimer_Stress (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRaiseTPL_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -176,6 +191,7 @@ BBTestRaiseTPL_Func (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRestoreTPL_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -188,30 +204,35 @@ BBTestRestoreTPL_Func (
 //
 
 VOID
+EFIAPI
 NotifyFunction (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
   );
 
 VOID
+EFIAPI
 NotifyFunctionTpl (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
   );
 
 VOID
+EFIAPI
 NotifyFunctionTplEx (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
   );
 
 VOID
+EFIAPI
 NotifyFunctionSignal (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context
   );
 
 VOID
+EFIAPI
 NotifyFunctionNoSignal (
   IN EFI_EVENT                  Event,
   IN VOID                       *Context

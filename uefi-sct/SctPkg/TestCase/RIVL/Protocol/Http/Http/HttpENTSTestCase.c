@@ -43,6 +43,7 @@ ENTS_ARG_FIELD                          gHttpGetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpGetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -93,6 +94,7 @@ ENTS_ARG_FIELD              gHttpConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpConfigure_EntsTest (
   VOID *ClientInterface
   )
@@ -143,6 +145,7 @@ ENTS_ARG_FIELD          gHttpRequestArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpRequest_EntsTest (
   VOID *ClientInterface
   )
@@ -193,6 +196,7 @@ ENTS_ARG_FIELD            gHttpResponseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpResponse_EntsTest (
   VOID *ClientInterface
   )
@@ -243,6 +247,7 @@ ENTS_ARG_FIELD                    gHttpCancelArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpCancel_EntsTest (
   VOID *ClientInterface
   )
@@ -288,6 +293,7 @@ ENTS_ARG_FIELD    gHttpPollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 HttpPoll_EntsTest (
   VOID *ClientInterface
   )

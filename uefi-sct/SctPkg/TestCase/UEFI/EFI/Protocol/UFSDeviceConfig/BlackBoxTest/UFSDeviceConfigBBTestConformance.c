@@ -26,6 +26,7 @@ Abstract:
 #include "UFSDeviceConfigBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestRwUfsDescriptorConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -105,6 +106,7 @@ BBTestRwUfsDescriptorConfTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRwUfsFlagConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +184,7 @@ BBTestRwUfsFlagConfTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestRwUfsAttributeConfTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

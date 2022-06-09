@@ -200,6 +200,7 @@ ConvertStrToIPv6Addr (
 // TDS 3.7.1
 //
 EFI_STATUS
+EFIAPI
 DevicePathToTextConvertDeviceNodeToTextCoverageTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

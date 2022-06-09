@@ -307,6 +307,7 @@ Returns:
 // External functions implementations
 //
 EFI_STATUS
+EFIAPI
 InitIP4Network (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This
   )
@@ -415,6 +416,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 ResetIP4Network (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This
   )
@@ -569,6 +571,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 IP4NetworkSaveContext(
   EFI_ENTS_MONITOR_PROTOCOL     *This
   )
@@ -592,6 +595,7 @@ IP4NetworkSaveContext(
 }
 
 EFI_STATUS
+EFIAPI
 IP4NetworkRestoreContext(
   IN EFI_ENTS_MONITOR_PROTOCOL *This
   )
@@ -618,6 +622,7 @@ IP4NetworkRestoreContext(
 }
 
 EFI_STATUS
+EFIAPI
 IP4NetworkListener (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This,
   IN OUT UINTN                     *Size,
@@ -677,6 +682,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 IP4NetworkSender (
   IN EFI_ENTS_MONITOR_PROTOCOL     *This,
   IN CHAR16                        *Buffer

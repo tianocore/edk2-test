@@ -53,6 +53,7 @@ SoftwareBreak (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterExceptionCallbackFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

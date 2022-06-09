@@ -30,6 +30,7 @@ Revision History
 #include "iScsiInitiatorNameBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestGetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -143,6 +144,7 @@ BBTestGetFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

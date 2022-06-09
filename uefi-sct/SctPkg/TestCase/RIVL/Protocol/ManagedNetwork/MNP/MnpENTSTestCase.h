@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/ManagedNetwork.h>
 
 EFI_STATUS
+EFIAPI
 MnpConfig_EntsTest (
   VOID *ClientInterface
   )
@@ -52,6 +53,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpGetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -73,6 +75,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpMCastIpToMac_EntsTest (
   VOID *ClientInterface
   )
@@ -94,6 +97,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpGroup_EntsTest (
   VOID *ClientInterface
   )
@@ -115,6 +119,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpTransmit_EntsTest (
   VOID *ClientInterface
   )
@@ -136,6 +141,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpReceive_EntsTest (
   VOID *ClientInterface
   )
@@ -157,6 +163,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpPoll_EntsTest (
   VOID *ClientInterface
   )
@@ -178,6 +185,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpTransmitMultiPacket_EntsTest (
   VOID *ClientInterface
   )
@@ -200,6 +208,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpReceiveMultiPacket_EntsTest (
   VOID *ClientInterface
   )
@@ -221,6 +230,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpPollPattern1_EntsTest (
   VOID *ClientInterface
   )
@@ -242,6 +252,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 MnpCancel_EntsTest (
   VOID *ClientInterface
   )

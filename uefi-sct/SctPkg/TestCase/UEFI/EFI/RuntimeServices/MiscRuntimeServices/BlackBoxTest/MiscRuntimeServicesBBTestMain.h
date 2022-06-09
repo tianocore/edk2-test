@@ -67,6 +67,7 @@ extern EFI_GUID  mEfiCapsuleHeaderGuid;
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemInterfaceTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -78,6 +79,7 @@ BBTestResetSystemInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemManualTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -94,6 +96,7 @@ BBTestResetSystemManualTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemStressTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -105,6 +108,7 @@ BBTestResetSystemStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemManualStressTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -113,6 +117,7 @@ BBTestResetSystemManualStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestQueryCapsuleCapabilitiesTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -121,6 +126,7 @@ BBTestQueryCapsuleCapabilitiesTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUpdateCapsuleConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -129,6 +135,7 @@ BBTestUpdateCapsuleConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestQueryCapsuleCapabilitiesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

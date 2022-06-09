@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gPXEBaseCodeStartArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeStart_EntsTest (
   VOID *ClientInterface
   )
@@ -93,6 +94,7 @@ ENTS_ARG_FIELD    gPXEBaseCodeStopArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeStop_EntsTest (
   VOID *ClientInterface
   )
@@ -146,6 +148,7 @@ ENTS_ARG_FIELD    gPXEBaseCodeDhcpArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeDhcp_EntsTest (
   VOID *ClientInterface
   )
@@ -210,6 +213,7 @@ ENTS_ARG_FIELD                          gPXEBaseCodeDiscoverArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeDiscover_EntsTest (
   VOID *ClientInterface
   )
@@ -302,6 +306,7 @@ ENTS_ARG_FIELD                        gPXEBaseCodeMtftpArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeMtftp_EntsTest (
   VOID *ClientInterface
   )
@@ -404,6 +409,7 @@ ENTS_ARG_FIELD                    gPXEBaseCodeUdpWriteArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpWrite_EntsTest (
   VOID *ClientInterface
   )
@@ -502,6 +508,7 @@ ENTS_ARG_FIELD                    gPXEBaseCodeUdpReadArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpRead_EntsTest (
   VOID *ClientInterface
   )
@@ -559,6 +566,7 @@ ENTS_ARG_FIELD                      gPXEBaseCodeSetIpFilterArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetIpFilter_EntsTest (
   VOID *ClientInterface
   )
@@ -613,6 +621,7 @@ ENTS_ARG_FIELD          gPXEBaseCodeArpArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeArp_EntsTest (
   VOID *ClientInterface
   )
@@ -683,6 +692,7 @@ ENTS_ARG_FIELD    gPXEBaseCodeSetParametersArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetParameters_EntsTest (
   VOID *ClientInterface
   )
@@ -741,6 +751,7 @@ ENTS_ARG_FIELD        gPXEBaseCodeSetStationIpArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetStationIp_EntsTest (
   VOID *ClientInterface
   )
@@ -846,6 +857,7 @@ ENTS_ARG_FIELD                  gPXEBaseCodeSetPacketsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetPackets_EntsTest (
   VOID *ClientInterface
   )
@@ -901,6 +913,7 @@ ENTS_ARG_FIELD                gPXEBaseCodeModeArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeMode_EntsTest (
   VOID *ClientInterface
   )
@@ -998,6 +1011,7 @@ ENTS_ARG_FIELD                    gPXEBaseCodeUdpWritePattern1ArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpWritePattern1_EntsTest (
   VOID *ClientInterface
   )
@@ -1110,6 +1124,7 @@ ENTS_ARG_FIELD                    gPXEBaseCodeUdpReadPattern1ArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpReadPattern1_EntsTest (
   VOID *ClientInterface
   )

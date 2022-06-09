@@ -67,96 +67,112 @@ CheckForSupportSetPackageInfo (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -173,6 +189,7 @@ BBTestSetPackageInfoConformanceTestCheckpoint4 (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 Progress (
   IN UINTN                                       Completion
 )
@@ -489,6 +506,7 @@ CheckForSupportSetPackageInfo (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestUnitTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -505,6 +523,7 @@ BBTestUnitTest (
 // ****************************************************************************
  
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -546,6 +565,7 @@ BBTestGetImageInfoConformanceTest (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -598,6 +618,7 @@ BBTestGetImageConformanceTest (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -650,6 +671,7 @@ BBTestSetImageConformanceTest (
 // ****************************************************************************
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -700,6 +722,7 @@ BBTestCheckImageConformanceTest (
 // ****************************************************************************
  
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL                        *This,
   IN VOID                                        *ClientInterface,
@@ -764,6 +787,7 @@ BBTestSetPackageInfoConformanceTest (
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -871,6 +895,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -972,6 +997,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -1193,6 +1219,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -1391,6 +1418,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -1591,6 +1619,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -1808,6 +1837,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -2013,6 +2043,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -2237,6 +2268,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -2449,6 +2481,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -2672,6 +2705,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -2873,6 +2907,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestCheckImageConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -3101,6 +3136,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -3250,6 +3286,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -3375,6 +3412,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -3514,6 +3552,7 @@ Exit:
 **/
 
 EFI_STATUS
+EFIAPI
 BBTestSetPackageInfoConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement

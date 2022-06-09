@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -235,6 +236,7 @@ BBTestQueryModeConformanceAutoTest (
 // TDS 4.2.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetModeConformanceAutoTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -443,6 +445,7 @@ BBTestSetModeConformanceAutoTest (
 // TDS 4.2.5
 //
 EFI_STATUS
+EFIAPI
 BBTestSetAttributeConformanceAutoTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -645,6 +648,7 @@ BBTestSetAttributeConformanceAutoTest (
 // TDS 4.2.6
 //
 EFI_STATUS
+EFIAPI
 BBTestSetCursorPositionConformanceAutoTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

@@ -94,6 +94,7 @@ UnloadHIIFontBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestStringToImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -102,6 +103,7 @@ BBTestStringToImageConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +112,7 @@ BBTestStringIdToImageConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +121,7 @@ BBTestGetGlyphConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +130,7 @@ BBTestGetFontInfoConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestStringToImageFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +139,7 @@ BBTestStringToImageFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +148,7 @@ BBTestStringIdToImageFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +157,7 @@ BBTestGetGlyphFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

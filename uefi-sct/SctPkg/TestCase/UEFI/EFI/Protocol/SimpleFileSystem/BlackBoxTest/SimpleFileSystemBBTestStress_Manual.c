@@ -120,6 +120,7 @@ IsMediaReadOnly (
 // TDS 5.3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemExtensiveTest1 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -777,6 +778,7 @@ Done:
 // TDS 5.3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemExtensiveTest2 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1402,6 +1404,7 @@ Done:
 // TDS 5.3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemExtensiveTest3 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1706,6 +1709,7 @@ Done:
 // TDS 5.3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSytemExtensiveTest4 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

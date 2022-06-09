@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gMtftp6ServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gMtftp6ServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

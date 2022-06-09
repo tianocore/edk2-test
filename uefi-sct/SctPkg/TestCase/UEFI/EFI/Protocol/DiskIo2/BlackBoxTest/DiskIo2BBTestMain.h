@@ -64,6 +64,7 @@ BBTestDiskIo2ProtocolUnload (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -72,6 +73,7 @@ BBTestReadDiskExConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -80,6 +82,7 @@ BBTestFlushDiskExConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskExConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -91,6 +94,7 @@ BBTestWriteDiskExConformanceAutoTest (
 // Function Interface test declaration section
 //
 EFI_STATUS
+EFIAPI
 BBTestCancelFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -99,6 +103,7 @@ BBTestCancelFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -107,6 +112,7 @@ BBTestReadDiskExFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFlushDiskExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -115,6 +121,7 @@ BBTestFlushDiskExFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskExFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

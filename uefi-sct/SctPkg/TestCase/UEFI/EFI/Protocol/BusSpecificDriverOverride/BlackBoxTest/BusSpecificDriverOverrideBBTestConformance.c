@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

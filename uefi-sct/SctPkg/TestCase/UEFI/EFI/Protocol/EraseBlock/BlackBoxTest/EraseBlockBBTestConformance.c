@@ -27,6 +27,7 @@ Abstract:
 #include "EraseBlockBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestEraseBlocksConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

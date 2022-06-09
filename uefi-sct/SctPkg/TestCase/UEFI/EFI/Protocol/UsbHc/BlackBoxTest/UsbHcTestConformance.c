@@ -30,6 +30,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 UsbHcResetConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -37,6 +38,7 @@ UsbHcResetConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetStateConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -44,6 +46,7 @@ UsbHcGetStateConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -51,6 +54,7 @@ UsbHcSetStateConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -58,6 +62,7 @@ UsbHcControlTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -65,6 +70,7 @@ UsbHcControlTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -72,6 +78,7 @@ UsbHcControlTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -79,6 +86,7 @@ UsbHcControlTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -86,6 +94,7 @@ UsbHcControlTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -93,6 +102,7 @@ UsbHcBulkTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -100,6 +110,7 @@ UsbHcBulkTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -107,6 +118,7 @@ UsbHcBulkTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -114,6 +126,7 @@ UsbHcBulkTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -121,6 +134,7 @@ UsbHcBulkTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -128,6 +142,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -135,6 +150,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -142,6 +158,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -149,6 +166,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -156,6 +174,7 @@ UsbHcSyncInterruptTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -163,6 +182,7 @@ UsbHcSyncInterruptTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -170,6 +190,7 @@ UsbHcSyncInterruptTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -177,6 +198,7 @@ UsbHcSyncInterruptTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -184,6 +206,7 @@ UsbHcSyncInterruptTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -191,6 +214,7 @@ UsbHcSyncInterruptTransferConformanceSubTest6 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -198,6 +222,7 @@ UsbHcAsyncIsochronousTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -205,6 +230,7 @@ UsbHcAsyncIsochronousTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -212,6 +238,7 @@ UsbHcAsyncIsochronousTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -219,6 +246,7 @@ UsbHcIsochronousTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -226,6 +254,7 @@ UsbHcIsochronousTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -233,6 +262,7 @@ UsbHcIsochronousTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -240,6 +270,7 @@ UsbHcIsochronousTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -247,6 +278,7 @@ UsbHcGetRootHubPortNumberConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -254,6 +286,7 @@ UsbHcGetRootHubPortStatusConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -261,6 +294,7 @@ UsbHcSetRootHubPortFeatureConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -268,6 +302,7 @@ UsbHcSetRootHubPortFeatureConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -275,6 +310,7 @@ UsbHcClearRootHubPortFeatureConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -282,6 +318,7 @@ UsbHcClearRootHubPortFeatureConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcInterruptCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -290,6 +327,7 @@ UsbHcInterruptCallBack (
 );
 
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -311,6 +349,7 @@ UsbHcIsochronousCallBack (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -378,6 +417,7 @@ UsbHcResetConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -445,6 +485,7 @@ UsbHcGetStateConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -512,6 +553,7 @@ UsbHcSetStateConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -613,6 +655,7 @@ UsbHcControlTransferConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -711,6 +754,7 @@ UsbHcBulkTransferConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -801,6 +845,7 @@ UsbHcAsyncInterruptTransferConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -908,6 +953,7 @@ UsbHcSyncInterruptTransferConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -992,6 +1038,7 @@ UsbHcAsyncIsochronousTransferConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1083,6 +1130,7 @@ UsbHcIsochronousTransferConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1150,6 +1198,7 @@ UsbHcGetRootHubPortNumberConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1217,6 +1266,7 @@ UsbHcGetRootHubPortStatusConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1289,6 +1339,7 @@ UsbHcSetRootHubPortFeatureConformanceAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1363,6 +1414,7 @@ UsbHcClearRootHubPortFeatureConformanceAutoTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcResetConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1429,6 +1481,7 @@ UsbHcResetConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetStateConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1495,6 +1548,7 @@ UsbHcGetStateConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1586,6 +1640,7 @@ UsbHcSetStateConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1706,6 +1761,7 @@ UsbHcControlTransferConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1868,6 +1924,7 @@ UsbHcControlTransferConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1948,6 +2005,7 @@ UsbHcControlTransferConformanceSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2148,6 +2206,7 @@ UsbHcControlTransferConformanceSubTest4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcControlTransferConformanceSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2234,6 +2293,7 @@ UsbHcControlTransferConformanceSubTest5 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2315,6 +2375,7 @@ UsbHcBulkTransferConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2397,6 +2458,7 @@ UsbHcBulkTransferConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2479,6 +2541,7 @@ UsbHcBulkTransferConformanceSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2561,6 +2624,7 @@ UsbHcBulkTransferConformanceSubTest4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcBulkTransferConformanceSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2642,6 +2706,7 @@ UsbHcBulkTransferConformanceSubTest5 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2727,6 +2792,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2812,6 +2878,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2897,6 +2964,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3025,6 +3093,7 @@ UsbHcAsyncInterruptTransferConformanceSubTest4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3113,6 +3182,7 @@ UsbHcSyncInterruptTransferConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3200,6 +3270,7 @@ UsbHcSyncInterruptTransferConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3288,6 +3359,7 @@ UsbHcSyncInterruptTransferConformanceSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3425,6 +3497,7 @@ UsbHcSyncInterruptTransferConformanceSubTest4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3513,6 +3586,7 @@ UsbHcSyncInterruptTransferConformanceSubTest5 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSyncInterruptTransferConformanceSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3600,6 +3674,7 @@ UsbHcSyncInterruptTransferConformanceSubTest6 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3682,6 +3757,7 @@ UsbHcAsyncIsochronousTransferConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3765,6 +3841,7 @@ UsbHcAsyncIsochronousTransferConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcAsyncIsochronousTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3787,6 +3864,7 @@ UsbHcAsyncIsochronousTransferConformanceSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3869,6 +3947,7 @@ UsbHcIsochronousTransferConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3952,6 +4031,7 @@ UsbHcIsochronousTransferConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3974,6 +4054,7 @@ UsbHcIsochronousTransferConformanceSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousTransferConformanceSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4056,6 +4137,7 @@ UsbHcIsochronousTransferConformanceSubTest4 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4122,6 +4204,7 @@ UsbHcGetRootHubPortNumberConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4207,6 +4290,7 @@ UsbHcGetRootHubPortStatusConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4291,6 +4375,7 @@ UsbHcSetRootHubPortFeatureConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4386,6 +4471,7 @@ UsbHcSetRootHubPortFeatureConformanceSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4470,6 +4556,7 @@ UsbHcClearRootHubPortFeatureConformanceSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4552,6 +4639,7 @@ UsbHcClearRootHubPortFeatureConformanceSubTest2 (
 }
 
 EFI_STATUS
+EFIAPI
 UsbHcInterruptCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -4563,6 +4651,7 @@ UsbHcInterruptCallBack (
 }
 
 EFI_STATUS
+EFIAPI
 UsbHcIsochronousCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,

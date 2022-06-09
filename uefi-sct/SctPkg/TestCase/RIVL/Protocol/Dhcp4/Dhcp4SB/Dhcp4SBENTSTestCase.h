@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Dhcp4.h>
 
 EFI_STATUS
+EFIAPI
 Dhcp4CreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -53,6 +54,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Dhcp4DestroyChild_EntsTest (
   VOID *ClientInterface
   )

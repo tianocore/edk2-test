@@ -101,6 +101,7 @@ UnloadVlanConfigBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -109,6 +110,7 @@ BBTestSetConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +119,7 @@ BBTestFindConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemoveConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +129,7 @@ BBTestRemoveConformanceTest (
 
   
 EFI_STATUS
+EFIAPI
 BBTestSetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +138,7 @@ BBTestSetFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFindFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +147,7 @@ BBTestFindFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemoveFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

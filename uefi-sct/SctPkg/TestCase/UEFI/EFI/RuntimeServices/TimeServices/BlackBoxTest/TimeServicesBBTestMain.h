@@ -52,6 +52,7 @@ extern EFI_TPL TplArray[TPL_ARRAY_SIZE];
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimeConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -63,6 +64,7 @@ BBTestGetTimeConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestSetTimeConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -74,6 +76,7 @@ BBTestSetTimeConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetWakeupTimeConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -85,6 +88,7 @@ BBTestGetWakeupTimeConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWakeupTimeConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +104,7 @@ BBTestSetWakeupTimeConsistencyTest (
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -111,6 +116,7 @@ BBTestGetTimeInterfaceTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestSetTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -122,6 +128,7 @@ BBTestSetTimeInterfaceTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetWakeupTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -133,6 +140,7 @@ BBTestGetWakeupTimeInterfaceTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestSetWakeupTimeInterfaceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -148,6 +156,7 @@ BBTestSetWakeupTimeInterfaceTest (
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTimeStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -159,6 +168,7 @@ BBTestGetTimeStressTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetWakeupTimeStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

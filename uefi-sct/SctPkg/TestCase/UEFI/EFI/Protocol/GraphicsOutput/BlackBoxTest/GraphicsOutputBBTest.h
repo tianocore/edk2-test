@@ -552,6 +552,7 @@ extern EFI_GUID gBlackBoxEfiGraphicsOutputVideoToBufferExtensiveGuid;
 //   Individual test cases are specified by the Test Entry Field.
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputSpecialFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -579,6 +580,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputQueryModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -606,6 +608,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputSetModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -633,6 +636,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoFillFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -660,6 +664,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoBltBufferFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -687,6 +692,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoToVideoFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -717,6 +723,7 @@ Returns:
 // confomance functions
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -744,6 +751,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestBltConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -771,6 +779,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestSetModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -801,6 +810,7 @@ Returns:
 // stress test
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoFillStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -828,6 +838,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoBltBufferStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -855,6 +866,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestEfiGraphicsOutputBltVideoToVideoStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL   *This,
   IN VOID                   *ClientInterface,
@@ -882,6 +894,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestVideoFillBufferToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -909,6 +922,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestVideoFillVideoToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -936,6 +950,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BBTestVideoToBltBufferExtensiveAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

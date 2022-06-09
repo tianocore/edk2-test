@@ -54,6 +54,7 @@ BBTestScsiIoProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceTypeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -62,6 +63,7 @@ BBTestGetDeviceTypeFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceLocationFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -70,6 +72,7 @@ BBTestGetDeviceLocationFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetBusFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -78,6 +81,7 @@ BBTestResetBusFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -86,6 +90,7 @@ BBTestResetDeviceFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExecuteScsiCommandFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +99,7 @@ BBTestExecuteScsiCommandFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceTypeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -102,6 +108,7 @@ BBTestGetDeviceTypeConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceLocationConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +117,7 @@ BBTestGetDeviceLocationConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetBusConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +126,7 @@ BBTestResetBusConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +135,7 @@ BBTestResetDeviceConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExecuteScsiCommandConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

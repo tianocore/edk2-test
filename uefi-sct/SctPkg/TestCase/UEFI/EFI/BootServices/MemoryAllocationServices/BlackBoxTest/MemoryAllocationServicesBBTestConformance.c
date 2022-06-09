@@ -39,6 +39,7 @@ Abstract:
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetMemoryMapConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -307,6 +308,7 @@ BBTestGetMemoryMapConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePagesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -688,6 +690,7 @@ BBTestAllocatePagesConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePagesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -863,6 +866,7 @@ BBTestFreePagesConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestAllocatePoolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1092,6 +1096,7 @@ BBTestAllocatePoolConsistencyTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFreePoolConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

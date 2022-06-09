@@ -42,6 +42,7 @@ extern UINT8 EnterEvent;
 // TDS 3.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceTypeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +119,7 @@ BBTestGetDeviceTypeFunctionAutoTest (
 // TDS 3.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDeviceLocationFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -197,6 +199,7 @@ BBTestGetDeviceLocationFunctionAutoTest (
 // TDS 3.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestResetBusFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -272,6 +275,7 @@ BBTestResetBusFunctionAutoTest (
 // TDS 3.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -348,6 +352,7 @@ BBTestResetDeviceFunctionAutoTest (
 // TDS 3.1.5
 //
 EFI_STATUS
+EFIAPI
 BBTestExecuteScsiCommandFunctionAutoTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

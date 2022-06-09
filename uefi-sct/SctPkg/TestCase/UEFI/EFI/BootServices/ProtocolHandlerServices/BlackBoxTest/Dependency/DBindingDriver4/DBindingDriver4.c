@@ -79,7 +79,8 @@ DBindingDriver4BindingStop (
   IN  EFI_HANDLE                     *ChildHandleBuffer
   );
 
-void
+VOID
+EFIAPI
 DBindingDriver4GetNextStatusReport (
   IN EXTERNAL_DRIVER_PROTOCOL_1   *This,
   IN EFI_STATUS                   *NextStatus
@@ -355,7 +356,8 @@ DBindingDriver4BindingStop (
   return EFI_SUCCESS;
 }
 
-void
+VOID
+EFIAPI
 DBindingDriver4GetNextStatusReport (
   IN EXTERNAL_DRIVER_PROTOCOL_1   *This,
   IN EFI_STATUS                   *NextStatus

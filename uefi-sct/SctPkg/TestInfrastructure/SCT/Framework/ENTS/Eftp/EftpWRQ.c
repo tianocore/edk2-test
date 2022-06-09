@@ -23,8 +23,8 @@ Abstract:
 #include "Efi.h"
 #include "EftpMain.h"
 
-STATIC
 VOID
+EFIAPI
 EftpWrqTxCallback (
   IN EFI_EVENT  Event,
   IN VOID       *Context
@@ -32,6 +32,7 @@ EftpWrqTxCallback (
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqRcvAck (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFI_EFTP_PACKET  *Packet,
@@ -40,6 +41,7 @@ EftpWrqRcvAck (
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqRcvError (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFI_EFTP_PACKET  *Packet,
@@ -48,6 +50,7 @@ EftpWrqRcvError (
 
 STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqRcvOack (
   IN EFTP_IO_PRIVATE   *Private,
   IN EFI_EFTP_PACKET   *Packet,
@@ -98,6 +101,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 EftpBuildWrq (
   IN EFTP_IO_PRIVATE*Private
   )
@@ -259,7 +263,8 @@ Returns:
   if (EftpCkSum ((UINT16 *) Packet, PacketLen / 2) != 0) {
     EFTP_DEBUG_ERROR (
       (L"EftpRrqRxCallback: Get a packet with wrong checksum %d\n",
-      EftpCkSum ((UINT16 *) Packet,PacketLen / 2))
+      EftpCkSum ((UINT16 *) Packet,
+PacketLen / 2))
       );
 
 #ifdef _EFTP_STAT_
@@ -406,8 +411,8 @@ CleanUp:
 
 }
 
-STATIC
 VOID
+EFIAPI
 EftpWrqTxCallback (
   IN EFI_EVENT  Event,
   IN VOID       *Context
@@ -625,8 +630,8 @@ SilentShutdown:
 
 }
 
-STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqRcvAck (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFI_EFTP_PACKET  *Packet,
@@ -805,8 +810,8 @@ Returns:
 
 }
 
-STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqRcvError (
   IN EFTP_IO_PRIVATE  *Private,
   IN EFI_EFTP_PACKET  *Packet,
@@ -865,8 +870,8 @@ Returns:
   return EFI_ABORTED;
 }
 
-STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqRcvOack (
   IN EFTP_IO_PRIVATE   *Private,
   IN EFI_EFTP_PACKET   *Packet,
@@ -964,8 +969,8 @@ Returns:
   return EFI_ABORTED;
 }
 
-STATIC
 EFI_STATUS
+EFIAPI
 EftpWrqReadBlk (
   IN EFTP_IO_PRIVATE     *Private,
   IN EFTP_PACKET_BUFFER  *Buf,

@@ -53,11 +53,13 @@ InitializeBBTestSimpleTextOutput (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSimpleTextOutputProtocolUnload (
   IN EFI_HANDLE           ImageHandle
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -66,6 +68,7 @@ BBTestResetFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -74,6 +77,7 @@ BBTestResetFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOutputStringFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -82,6 +86,7 @@ BBTestOutputStringFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOutputStringFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -90,6 +95,7 @@ BBTestOutputStringFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTestStringFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -98,6 +104,7 @@ BBTestTestStringFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestQueryModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -106,6 +113,7 @@ BBTestQueryModeFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetModeFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -114,6 +122,7 @@ BBTestSetModeFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -122,6 +131,7 @@ BBTestSetModeFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetAttributeFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -130,6 +140,7 @@ BBTestSetAttributeFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetAttributeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +149,7 @@ BBTestSetAttributeFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestClearScreenFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -146,6 +158,7 @@ BBTestClearScreenFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestClearScreenFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -154,6 +167,7 @@ BBTestClearScreenFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetCursorPositionFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -162,6 +176,7 @@ BBTestSetCursorPositionFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetCursorPositionFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -170,6 +185,7 @@ BBTestSetCursorPositionFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEnableCursorFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -178,6 +194,7 @@ BBTestEnableCursorFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEnableCursorFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -189,6 +206,7 @@ BBTestEnableCursorFunctionAutoTest (
 // Conformance test function definition
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -197,6 +215,7 @@ BBTestQueryModeConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -205,6 +224,7 @@ BBTestSetModeConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetAttributeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -213,6 +233,7 @@ BBTestSetAttributeConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetCursorPositionConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

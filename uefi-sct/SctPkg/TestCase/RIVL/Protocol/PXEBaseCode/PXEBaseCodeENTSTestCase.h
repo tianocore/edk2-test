@@ -30,6 +30,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeStart_EntsTest (
   VOID *ClientInterface
   )
@@ -51,6 +52,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeStop_EntsTest (
   VOID *ClientInterface
   )
@@ -72,6 +74,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeDhcp_EntsTest (
   VOID *ClientInterface
   )
@@ -93,6 +96,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeDiscover_EntsTest (
   VOID *ClientInterface
   )
@@ -114,6 +118,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeMtftp_EntsTest (
   VOID *ClientInterface
   )
@@ -135,6 +140,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpWrite_EntsTest (
   VOID *ClientInterface
   )
@@ -156,6 +162,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpRead_EntsTest (
   VOID *ClientInterface
   )
@@ -177,6 +184,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetIpFilter_EntsTest (
   VOID *ClientInterface
   )
@@ -198,6 +206,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeArp_EntsTest (
   VOID *ClientInterface
   )
@@ -219,6 +228,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetParameters_EntsTest (
   VOID *ClientInterface
   )
@@ -240,6 +250,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetStationIp_EntsTest (
   VOID *ClientInterface
   )
@@ -261,6 +272,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeSetPackets_EntsTest (
   VOID *ClientInterface
   )
@@ -282,6 +294,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeMode_EntsTest (
   VOID *ClientInterface
   )
@@ -303,6 +316,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpWritePattern1_EntsTest (
   VOID *ClientInterface
   )
@@ -324,6 +338,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeUdpReadPattern1_EntsTest (
   VOID *ClientInterface
   )

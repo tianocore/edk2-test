@@ -59,6 +59,7 @@ ENTS_ARG_FIELD              BSAllocatePagesArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_AllocatePages_EntsTest (
   VOID *ClientInterface
   )
@@ -115,6 +116,7 @@ ENTS_ARG_FIELD              BSFreePagesArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_FreePages_EntsTest (
   VOID *ClientInterface
   )
@@ -174,6 +176,7 @@ ENTS_ARG_FIELD              BSAllocatePoolArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_AllocatePool_EntsTest (
   VOID *ClientInterface
   )
@@ -224,6 +227,7 @@ ENTS_ARG_FIELD    BSFreePoolArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 BS_FreePool_EntsTest (
   VOID *ClientInterface
   )

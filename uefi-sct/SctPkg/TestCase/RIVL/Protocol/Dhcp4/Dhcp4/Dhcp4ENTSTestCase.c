@@ -43,6 +43,7 @@ ENTS_ARG_FIELD              gDhcp4GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -76,7 +77,6 @@ Returns:
 //
 // Define Call Back Function
 //
-static
 EFI_STATUS
 Dhcp4CallBackFunc_Abort (
   IN EFI_DHCP4_PROTOCOL      * This,
@@ -104,7 +104,6 @@ static EFI_DHCP4_CALLBACK Dhcp4CallBackFuncList[] = {
   Dhcp4CallBackFunc_DoNothing
 };
 
-static
 EFI_STATUS
 Dhcp4CallBackFunc_Abort (
   IN EFI_DHCP4_PROTOCOL      * This,
@@ -126,7 +125,6 @@ Dhcp4CallBackFunc_Abort (
   return EFI_ABORTED;
 }
 
-static
 EFI_STATUS
 Dhcp4CallBackFunc_DoNothing (
   IN EFI_DHCP4_PROTOCOL      * This,
@@ -159,6 +157,7 @@ ENTS_ARG_FIELD                gDhcp4ConfigArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4Config_EntsTest (
   VOID *ClientInterface
   )
@@ -215,6 +214,7 @@ ENTS_ARG_FIELD    gDhcp4StartArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4Start_EntsTest (
   VOID *ClientInterface
   )
@@ -269,6 +269,7 @@ ENTS_ARG_FIELD    gDhcp4RenewRebindArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4RenewRebind_EntsTest (
   VOID *ClientInterface
   )
@@ -313,6 +314,7 @@ ENTS_ARG_FIELD    gDhcp4ReleaseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4Release_EntsTest (
   VOID *ClientInterface
   )
@@ -354,6 +356,7 @@ ENTS_ARG_FIELD    gDhcp4StopArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4Stop_EntsTest (
   VOID *ClientInterface
   )
@@ -426,6 +429,7 @@ ENTS_ARG_FIELD                  gDhcp4BuildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4Build_EntsTest (
   VOID *ClientInterface
   )
@@ -479,6 +483,7 @@ ENTS_ARG_FIELD                          gDhcp4TransmitReceiveArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4TransmitReceive_EntsTest (
   VOID *ClientInterface
   )
@@ -539,6 +544,7 @@ ENTS_ARG_FIELD                  gDhcp4ParseArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4Parse_EntsTest (
   VOID *ClientInterface
   )

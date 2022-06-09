@@ -274,6 +274,7 @@ Returns:
 
 
 EFI_STATUS
+EFIAPI
 BBTestDeviceIoUnload (
   IN EFI_HANDLE       ImageHandle
   )

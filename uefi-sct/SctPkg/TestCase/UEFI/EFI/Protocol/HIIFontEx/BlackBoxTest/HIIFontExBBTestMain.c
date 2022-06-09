@@ -172,6 +172,7 @@ InitializeHIIFontExBBTest (
 
 
 EFI_STATUS
+EFIAPI
 UnloadHIIFontExBBTest (
   IN EFI_HANDLE                   ImageHandle
   )

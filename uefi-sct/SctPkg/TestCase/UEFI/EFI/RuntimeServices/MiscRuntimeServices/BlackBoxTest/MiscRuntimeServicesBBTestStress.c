@@ -41,6 +41,7 @@ Abstract:
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemStressTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,
@@ -262,6 +263,7 @@ StressTestStep3:
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestResetSystemManualStressTest (
     IN EFI_BB_TEST_PROTOCOL       *This,
     IN VOID                       *ClientInterface,

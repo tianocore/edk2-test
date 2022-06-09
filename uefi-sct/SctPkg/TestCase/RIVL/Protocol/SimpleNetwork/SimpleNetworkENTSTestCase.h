@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/SimpleNetwork.h>
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStart_EntsTest (
   VOID *ClientInterface
   )
@@ -52,6 +53,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStop_EntsTest (
   VOID *ClientInterface
   )
@@ -73,6 +75,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkInitialize_EntsTest (
   VOID *ClientInterface
   )
@@ -94,6 +97,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReset_EntsTest (
   VOID *ClientInterface
   )
@@ -115,6 +119,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkShutdown_EntsTest (
   VOID *ClientInterface
   )
@@ -136,6 +141,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReceiveFilters_EntsTest (
   VOID *ClientInterface
   )
@@ -157,6 +163,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStationAddress_EntsTest (
   VOID *ClientInterface
   )
@@ -178,6 +185,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkStatistics_EntsTest (
   VOID *ClientInterface
   )
@@ -199,6 +207,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkMCastIPToMAC_EntsTest (
   VOID *ClientInterface
   )
@@ -220,6 +229,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkNvData_EntsTest (
   VOID *ClientInterface
   )
@@ -241,6 +251,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkGetStatus_EntsTest (
   VOID *ClientInterface
   )
@@ -262,6 +273,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkTransmit_EntsTest (
   VOID *ClientInterface
   )
@@ -283,6 +295,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReceive_EntsTest (
   VOID *ClientInterface
   )
@@ -304,6 +317,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkMode_EntsTest (
   VOID *ClientInterface
   )
@@ -325,6 +339,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkTransmitPattern1_EntsTest (
   VOID *ClientInterface
   )
@@ -346,6 +361,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkTransmitPattern2_EntsTest (
   VOID *ClientInterface
   )
@@ -367,6 +383,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkReceivePattern1_EntsTest (
   VOID *ClientInterface
   )

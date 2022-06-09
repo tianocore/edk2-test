@@ -88,6 +88,7 @@ TestCalculateCheckSum8 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -97,6 +98,7 @@ BBTestInstallAcpiTableConformanceTest (
   
   
 EFI_STATUS
+EFIAPI
 BBTestUninstallAcpiTableConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -106,6 +108,7 @@ BBTestUninstallAcpiTableConformanceTest (
   
   
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -115,6 +118,7 @@ BBTestInstallAcpiTableFunctionTest (
   
   
 EFI_STATUS
+EFIAPI
 BBTestUninstallAcpiTableFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -124,6 +128,7 @@ BBTestUninstallAcpiTableFunctionTest (
 
   
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL          *AcpiTable
@@ -131,6 +136,7 @@ BBTestInstallAcpiTableConformanceTestCheckpoint1 (
   
 
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL          *AcpiTable
@@ -138,6 +144,7 @@ BBTestInstallAcpiTableConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL          *AcpiTable
@@ -145,6 +152,7 @@ BBTestInstallAcpiTableConformanceTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUninstallAcpiTableConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL          *AcpiTable
@@ -152,6 +160,7 @@ BBTestUninstallAcpiTableConformanceTestCheckpoint1 (
   
   
 EFI_STATUS
+EFIAPI
 BBTestInstallAcpiTableFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL          *AcpiTable
@@ -159,6 +168,7 @@ BBTestInstallAcpiTableFunctionTestCheckpoint1 (
   
   
 EFI_STATUS
+EFIAPI
 BBTestUninstallAcpiTableFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_ACPI_TABLE_PROTOCOL          *AcpiTable

@@ -101,6 +101,7 @@ BOOLEAN
   );
 
 BOOLEAN
+EFIAPI
 IhvInterfaceFilter (
   IN VOID                       *ClientInterface,
   IN EFI_HANDLE                 SupportHandle,

@@ -40,6 +40,7 @@ Abstract:
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +151,7 @@ BBTestResetFunctionAutoTest (
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -403,6 +405,7 @@ BBTestReadBlocksFunctionAutoTest (
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -922,6 +925,7 @@ BBTestWriteBlocksFunctionAutoTest (
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -949,6 +953,7 @@ BBTestFlushBlocksFunctionAutoTest (
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 BBTestMediaInfoCheckAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1044,6 +1049,7 @@ BBTestMediaInfoCheckAutoTest (
 // TDS 5.5
 //
 EFI_STATUS
+EFIAPI
 BBTestMediaIntegrityManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

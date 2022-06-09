@@ -32,26 +32,31 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -61,6 +66,7 @@ BBTestWaitForEvent_Func_Sub2 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -102,6 +108,7 @@ BBTestWaitForEvent_Conf (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +149,7 @@ BBTestWaitForEvent_Func (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Stress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -157,6 +165,7 @@ BBTestWaitForEvent_Stress (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -229,6 +238,7 @@ BBTestWaitForEvent_Conf_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -288,6 +298,7 @@ BBTestWaitForEvent_Conf_Sub2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Conf_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -347,6 +358,7 @@ BBTestWaitForEvent_Conf_Sub3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -417,6 +429,7 @@ BBTestWaitForEvent_Func_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForEvent_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

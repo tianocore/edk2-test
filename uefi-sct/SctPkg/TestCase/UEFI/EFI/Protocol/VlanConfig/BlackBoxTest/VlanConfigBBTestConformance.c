@@ -26,48 +26,56 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemoveConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemoveConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -78,6 +86,7 @@ BBTestRemoveConformanceTestCheckpoint2 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +126,7 @@ BBTestSetConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -160,6 +170,7 @@ BBTestFindConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemoveConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -203,6 +214,7 @@ BBTestRemoveConformanceTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -246,6 +258,7 @@ BBTestSetConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -288,6 +301,7 @@ BBTestSetConformanceTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -333,6 +347,7 @@ BBTestFindConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -373,6 +388,7 @@ BBTestFindConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -413,6 +429,7 @@ BBTestFindConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestFindConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -480,6 +497,7 @@ BBTestFindConformanceTestCheckpoint4 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRemoveConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig
@@ -520,6 +538,7 @@ BBTestRemoveConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRemoveConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_VLAN_CONFIG_PROTOCOL                   *VlanConfig

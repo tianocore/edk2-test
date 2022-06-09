@@ -31,6 +31,7 @@ extern UINT8 mPackageList1[];
 #endif
 
 EFI_STATUS
+EFIAPI
 BBTestNewStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -38,6 +39,7 @@ BBTestNewStringConformanceTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -45,6 +47,7 @@ BBTestGetStringConformanceTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -52,6 +55,7 @@ BBTestGetStringConformanceTestCheckpoint2 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -59,6 +63,7 @@ BBTestGetStringConformanceTestCheckpoint3 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -66,6 +71,7 @@ BBTestGetStringConformanceTestCheckpoint4 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -73,6 +79,7 @@ BBTestSetStringConformanceTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -80,6 +87,7 @@ BBTestGetLanguagesConformanceTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -135,6 +143,7 @@ BBTestNewStringConformanceTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -186,6 +195,7 @@ BBTestGetStringConformanceTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestSetStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -230,6 +240,7 @@ BBTestSetStringConformanceTest (
 }
   
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -275,6 +286,7 @@ BBTestGetLanguagesConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -323,6 +335,7 @@ BBTestGetSecondaryLanguagesConformanceTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestNewStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -492,6 +505,7 @@ BBTestNewStringConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -621,6 +635,7 @@ BBTestGetStringConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -732,6 +747,7 @@ BBTestGetStringConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -902,6 +918,7 @@ BBTestGetStringConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -1099,6 +1116,7 @@ BBTestGetStringConformanceTestCheckpoint4 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -1312,6 +1330,7 @@ BBTestSetStringConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -1501,6 +1520,7 @@ BBTestGetLanguagesConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,

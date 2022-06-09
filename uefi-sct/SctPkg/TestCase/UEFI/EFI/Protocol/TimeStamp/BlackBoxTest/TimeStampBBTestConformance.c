@@ -25,6 +25,7 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetPropertiesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -58,7 +59,8 @@ BBTestGetPropertiesConformanceTest (
   
   if (Status == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-  } else {
+  } else {
+
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
 

@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Tcp4.h>
 
 EFI_STATUS
+EFIAPI
 Tcp4ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -53,6 +54,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

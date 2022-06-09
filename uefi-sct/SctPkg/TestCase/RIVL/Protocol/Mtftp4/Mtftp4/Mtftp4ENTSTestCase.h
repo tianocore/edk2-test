@@ -30,6 +30,7 @@ Abstract:
 #include <UEFI/Protocol/Mtftp4.h>
 
 EFI_STATUS
+EFIAPI
 Mtftp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -51,6 +52,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -72,6 +74,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4GetInfo_EntsTest (
   VOID *ClientInterface
   )
@@ -93,6 +96,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4ParseOptions_EntsTest (
   VOID *ClientInterface
   )
@@ -114,6 +118,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4ReadFile_EntsTest (
   VOID *ClientInterface
   )
@@ -135,6 +140,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4WriteFile_EntsTest (
   VOID *ClientInterface
   )
@@ -156,6 +162,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4ReadDirectory_EntsTest (
   VOID *ClientInterface
   )
@@ -177,6 +184,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp4Poll_EntsTest (
   VOID *ClientInterface
   )

@@ -36,6 +36,7 @@ extern UINT8 mSetNewImage[];
 #define Image2Length 1
 
 EFI_STATUS
+EFIAPI
 BBTestNewImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -43,6 +44,7 @@ BBTestNewImageExFunctionTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -50,6 +52,7 @@ BBTestGetImageExFunctionTestCheckpoint1 (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -57,12 +60,14 @@ BBTestSetImageExFunctionTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -70,6 +75,7 @@ BBTestDrawImageExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -77,6 +83,7 @@ BBTestDrawImageIdExFunctionTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -85,6 +92,7 @@ BBTestDrawImageIdExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -95,6 +103,7 @@ BBTestGetImageInfoFunctionTestCheckpoint1 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +147,7 @@ BBTestNewImageExFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -181,6 +191,7 @@ BBTestGetImageExFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -224,6 +235,7 @@ BBTestSetImageExFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -269,6 +281,7 @@ BBTestDrawImageExFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -321,6 +334,7 @@ BBTestDrawImageIdExFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -369,6 +383,7 @@ BBTestGetImageInfoFunctionTest (
 //Check Points
 //
 EFI_STATUS
+EFIAPI
 BBTestNewImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -473,6 +488,7 @@ BBTestNewImageExFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -601,6 +617,7 @@ BBTestGetImageExFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -770,6 +787,7 @@ BBTestSetImageExFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -843,6 +861,7 @@ BBTestDrawImageExFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_IMAGE_EX_PROTOCOL                  *HIIImageEx
@@ -945,6 +964,7 @@ BBTestDrawImageExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -1073,6 +1093,7 @@ BBTestDrawImageIdExFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestDrawImageIdExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -1258,6 +1279,7 @@ BBTestDrawImageIdExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetImageInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,

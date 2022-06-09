@@ -281,6 +281,7 @@ UnloadSerialIoBbTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 GetTestSupportLibrary (
   IN EFI_HANDLE                           SupportHandle,
   OUT EFI_STANDARD_TEST_LIBRARY_PROTOCOL  **StandardLib,

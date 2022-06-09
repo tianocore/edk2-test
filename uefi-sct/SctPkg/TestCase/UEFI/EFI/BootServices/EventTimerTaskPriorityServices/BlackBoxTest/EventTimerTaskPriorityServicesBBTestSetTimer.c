@@ -32,41 +32,49 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Conf_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -76,6 +84,7 @@ BBTestSetTimer_Func_Sub6 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -117,6 +126,7 @@ BBTestSetTimer_Conf (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +192,7 @@ BBTestSetTimer_Func (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Stress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -198,6 +209,7 @@ BBTestSetTimer_Stress (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -272,6 +284,7 @@ BBTestSetTimer_Conf_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Conf_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -346,6 +359,7 @@ BBTestSetTimer_Conf_Sub2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -414,6 +428,7 @@ BBTestSetTimer_Func_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -482,6 +497,7 @@ BBTestSetTimer_Func_Sub2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -560,6 +576,7 @@ BBTestSetTimer_Func_Sub3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -638,6 +655,7 @@ BBTestSetTimer_Func_Sub4 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -705,6 +723,7 @@ BBTestSetTimer_Func_Sub5 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestSetTimer_Func_Sub6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

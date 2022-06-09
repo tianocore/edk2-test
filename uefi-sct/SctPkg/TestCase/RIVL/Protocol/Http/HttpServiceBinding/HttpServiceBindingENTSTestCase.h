@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Http.h>
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -53,6 +54,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

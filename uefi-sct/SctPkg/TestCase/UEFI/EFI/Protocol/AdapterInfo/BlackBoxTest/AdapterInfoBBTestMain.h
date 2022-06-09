@@ -106,6 +106,7 @@ UnloadAdapterInfoBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestGetInformationConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -114,6 +115,7 @@ BBTestGetInformationConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetInformationConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -122,6 +124,7 @@ BBTestSetInformationConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -131,6 +134,7 @@ BBTestGetSupportedTypesConformanceTest (
 
   
 EFI_STATUS
+EFIAPI
 BBTestGetInformationFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -139,6 +143,7 @@ BBTestGetInformationFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetInformationFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -147,6 +152,7 @@ BBTestSetInformationFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetSupportedTypesFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

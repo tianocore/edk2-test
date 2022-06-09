@@ -28,6 +28,7 @@ Abstract:
 // Prototypes
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -35,6 +36,7 @@ Usb2HcGetCapabilityConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -42,6 +44,7 @@ Usb2HcGetCapabilityConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -49,6 +52,7 @@ Usb2HcGetCapabilityConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcResetConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -56,6 +60,7 @@ Usb2HcResetConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetStateConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -63,6 +68,7 @@ Usb2HcGetStateConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSetStateConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -70,6 +76,7 @@ Usb2HcSetStateConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -77,6 +84,7 @@ Usb2HcControlTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -84,6 +92,7 @@ Usb2HcControlTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -91,6 +100,7 @@ Usb2HcControlTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -98,6 +108,7 @@ Usb2HcControlTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -105,6 +116,7 @@ Usb2HcControlTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest6 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -112,6 +124,7 @@ Usb2HcControlTransferConformanceSubTest6 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -119,6 +132,7 @@ Usb2HcBulkTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -126,6 +140,7 @@ Usb2HcBulkTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -133,6 +148,7 @@ Usb2HcBulkTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -140,6 +156,7 @@ Usb2HcBulkTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -147,6 +164,7 @@ Usb2HcBulkTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -154,6 +172,7 @@ Usb2HcAsyncInterruptTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -161,6 +180,7 @@ Usb2HcAsyncInterruptTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -168,6 +188,7 @@ Usb2HcAsyncInterruptTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -175,6 +196,7 @@ Usb2HcAsyncInterruptTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -182,6 +204,7 @@ Usb2HcSyncInterruptTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -189,6 +212,7 @@ Usb2HcSyncInterruptTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -196,6 +220,7 @@ Usb2HcSyncInterruptTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -203,6 +228,7 @@ Usb2HcSyncInterruptTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -210,6 +236,7 @@ Usb2HcSyncInterruptTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest6 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -217,6 +244,7 @@ Usb2HcSyncInterruptTransferConformanceSubTest6 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -224,6 +252,7 @@ Usb2HcAsyncIsochronousTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -231,6 +260,7 @@ Usb2HcAsyncIsochronousTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -238,6 +268,7 @@ Usb2HcAsyncIsochronousTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -245,6 +276,7 @@ Usb2HcAsyncIsochronousTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -252,6 +284,7 @@ Usb2HcIsochronousTransferConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -259,6 +292,7 @@ Usb2HcIsochronousTransferConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -266,6 +300,7 @@ Usb2HcIsochronousTransferConformanceSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -273,6 +308,7 @@ Usb2HcIsochronousTransferConformanceSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -280,6 +316,7 @@ Usb2HcIsochronousTransferConformanceSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetRootHubPortStatusConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -287,6 +324,7 @@ Usb2HcGetRootHubPortStatusConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -294,6 +332,7 @@ Usb2HcSetRootHubPortFeatureConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -301,6 +340,7 @@ Usb2HcSetRootHubPortFeatureConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -308,6 +348,7 @@ Usb2HcClearRootHubPortFeatureConformanceSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -315,6 +356,7 @@ Usb2HcClearRootHubPortFeatureConformanceSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcInterruptCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -323,6 +365,7 @@ Usb2HcInterruptCallBack (
   );
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -336,6 +379,7 @@ Usb2HcIsochronousCallBack (
 
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -419,6 +463,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -493,6 +538,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -568,6 +614,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcSetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -643,6 +690,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -752,6 +800,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -829,6 +878,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -935,6 +985,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1033,6 +1084,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1146,6 +1198,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1244,6 +1297,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1349,6 +1403,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetRootHubPortStatusConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1424,6 +1479,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1504,6 +1560,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1586,6 +1643,7 @@ Returns:
 // Sub functions
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1662,6 +1720,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1738,6 +1797,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1814,6 +1874,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcResetConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1889,6 +1950,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcGetStateConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -1963,6 +2025,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcSetStateConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2061,6 +2124,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2191,6 +2255,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2363,6 +2428,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2452,6 +2518,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2664,6 +2731,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2760,6 +2828,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceSubTest6 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2793,6 +2862,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2885,6 +2955,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -2978,6 +3049,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3071,6 +3143,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3240,6 +3313,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3333,6 +3407,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceSubTest6 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3425,6 +3500,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3514,6 +3590,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3603,6 +3680,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3692,6 +3770,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3819,6 +3898,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -3911,6 +3991,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4002,6 +4083,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4094,6 +4176,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4267,6 +4350,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4359,6 +4443,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceSubTest6 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4451,6 +4536,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4539,6 +4625,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4628,6 +4715,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4791,6 +4879,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4880,6 +4969,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -4968,6 +5058,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5057,6 +5148,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest3 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5218,6 +5310,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest4 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5306,6 +5399,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceSubTest5 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5395,6 +5489,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcGetRootHubPortStatusConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5489,6 +5584,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5583,6 +5679,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5688,6 +5785,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureConformanceSubTest1 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5782,6 +5880,7 @@ Returns:
 }
  
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureConformanceSubTest2 (
   IN EFI_USB2_HC_PROTOCOL                  *Usb2Hc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -5882,6 +5981,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcInterruptCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,
@@ -5911,6 +6011,7 @@ Returns:
 }
 
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousCallBack (
   IN VOID     *Data,
   IN UINTN    DataLength,

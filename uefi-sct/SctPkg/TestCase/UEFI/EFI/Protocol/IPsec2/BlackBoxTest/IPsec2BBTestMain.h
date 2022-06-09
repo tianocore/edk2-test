@@ -80,6 +80,7 @@ UnloadIPsec2BBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestProcessExtConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +89,7 @@ BBTestProcessExtConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

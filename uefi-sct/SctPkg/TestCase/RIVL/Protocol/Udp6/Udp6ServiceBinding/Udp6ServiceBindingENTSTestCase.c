@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gUdp6ServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gUdp6ServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Udp6ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

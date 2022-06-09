@@ -46,6 +46,7 @@ ENTS_INTERFACE    gTcp4ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gTcp4ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Tcp4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -137,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Tcp4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

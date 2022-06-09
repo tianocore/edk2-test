@@ -46,11 +46,13 @@ InitializeBBTestDriverSupportedEfiVersion (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestDriverSupportedEfiVersionProtocolUnload (
   IN EFI_HANDLE           ImageHandle
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLengthParameterAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -59,6 +61,7 @@ BBTestLengthParameterAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestFirmwareVersionParameterAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

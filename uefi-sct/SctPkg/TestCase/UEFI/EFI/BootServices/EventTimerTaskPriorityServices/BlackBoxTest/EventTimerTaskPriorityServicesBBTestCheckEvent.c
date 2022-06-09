@@ -32,26 +32,31 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -61,6 +66,7 @@ BBTestCheckEvent_Func_Sub4 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -97,6 +103,7 @@ BBTestCheckEvent_Conf (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -154,6 +161,7 @@ BBTestCheckEvent_Func (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -212,6 +220,7 @@ BBTestCheckEvent_Conf_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -270,6 +279,7 @@ BBTestCheckEvent_Func_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -328,6 +338,7 @@ BBTestCheckEvent_Func_Sub2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -395,6 +406,7 @@ BBTestCheckEvent_Func_Sub3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCheckEvent_Func_Sub4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

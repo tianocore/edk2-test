@@ -39,6 +39,7 @@ Revision History
 #define ISCSI_INITIATORNAME_MAXIMUM_SIZE  224
 
 EFI_STATUS
+EFIAPI
 BBTestGetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -47,6 +48,7 @@ BBTestGetFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -55,6 +57,7 @@ BBTestSetFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -63,6 +66,7 @@ BBTestGetConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSetConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

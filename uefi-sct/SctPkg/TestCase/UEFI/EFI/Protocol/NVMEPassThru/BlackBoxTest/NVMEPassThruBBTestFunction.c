@@ -29,6 +29,7 @@ Abstract:
 extern UINT8 EnterEvent;
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextNamespaceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -105,6 +106,7 @@ BBTestGetNextNamespaceFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -180,6 +182,7 @@ BBTestBuildDevicePathFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetNamespaceFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -258,6 +261,7 @@ BBTestGetNamespaceFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

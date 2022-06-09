@@ -41,6 +41,7 @@ Abstract:
 // TDS 
 //
 EFI_STATUS
+EFIAPI
 BBTestReceiveDataConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -404,6 +405,7 @@ EXIT:
 // TDS 
 //
 EFI_STATUS
+EFIAPI
 BBTestSendDataConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

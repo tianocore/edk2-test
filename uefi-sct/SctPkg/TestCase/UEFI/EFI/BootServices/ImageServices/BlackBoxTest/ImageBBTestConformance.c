@@ -49,6 +49,7 @@ EFI_GUID gTestVendor1Guid = TEST_VENDOR1_GUID;
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestLoadImageConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -412,6 +413,7 @@ BBTestLoadImageConsistencyTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStartImageConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -534,6 +536,7 @@ BBTestStartImageConsistencyTest (
 // TDS 3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestUnloadImageConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -651,6 +654,7 @@ BBTestUnloadImageConsistencyTest (
 // TDS 3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestExitConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -771,6 +775,7 @@ BBTestExitConsistencyTest (
 // TDS 3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestExitBootServicesConsistencyTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

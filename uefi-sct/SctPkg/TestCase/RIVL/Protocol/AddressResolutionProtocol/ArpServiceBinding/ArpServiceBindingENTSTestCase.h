@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Arp.h>
 
 EFI_STATUS
+EFIAPI
 ArpServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -53,6 +54,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 ArpServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

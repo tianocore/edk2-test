@@ -37,6 +37,7 @@ CHAR16                      *mFilePath;
 // TestProtocol1 Functions
 //
 VOID
+EFIAPI
 InitializeTestProtocol1 (
   OUT TEST_PROTOCOL_1     *TestProtocol1
   )
@@ -47,6 +48,7 @@ InitializeTestProtocol1 (
 }
 
 EFI_STATUS
+EFIAPI
 TestProtocol1Func1 (
   IN TEST_PROTOCOL_1   *This
   )
@@ -60,6 +62,7 @@ TestProtocol1Func1 (
 // TestProtocol2 Functions
 //
 VOID
+EFIAPI
 InitializeTestProtocol2 (
   OUT TEST_PROTOCOL_2     *TestProtocol2
   )
@@ -70,6 +73,7 @@ InitializeTestProtocol2 (
 }
 
 EFI_STATUS
+EFIAPI
 TestProtocol2Func1 (
   IN TEST_PROTOCOL_2   *This
   )
@@ -83,6 +87,7 @@ TestProtocol2Func1 (
 // InterfaceFunctionTestProtocol1 Functions
 //
 VOID
+EFIAPI
 Protocol1ReportProtocolAttributes (
   IN  INTERFACE_FUNCTION_TEST_PROTOCOL_1   *This,
   OUT PROTOCOL_ATTRIBUTES                  *ProtocolAttributes
@@ -92,6 +97,7 @@ Protocol1ReportProtocolAttributes (
 }
 
 VOID
+EFIAPI
 InitializeInterfaceFunctionTestProtocol1 (
   OUT INTERFACE_FUNCTION_TEST_PROTOCOL_1     *InterfaceFunctionTestProtocol1
   )
@@ -107,6 +113,7 @@ InitializeInterfaceFunctionTestProtocol1 (
 //
 
 VOID
+EFIAPI
 Protocol2ReportProtocolAttributes (
   IN  INTERFACE_FUNCTION_TEST_PROTOCOL_2   *This,
   OUT PROTOCOL_ATTRIBUTES                  *ProtocolAttributes
@@ -116,6 +123,7 @@ Protocol2ReportProtocolAttributes (
 }
 
 VOID
+EFIAPI
 InitializeInterfaceFunctionTestProtocol2 (
   OUT INTERFACE_FUNCTION_TEST_PROTOCOL_2     *InterfaceFunctionTestProtocol2
   )
@@ -131,6 +139,7 @@ InitializeInterfaceFunctionTestProtocol2 (
 //
 
 VOID
+EFIAPI
 Protocol3ReportProtocolAttributes (
   IN  INTERFACE_FUNCTION_TEST_PROTOCOL_3   *This,
   OUT PROTOCOL_ATTRIBUTES                  *ProtocolAttributes
@@ -140,6 +149,7 @@ Protocol3ReportProtocolAttributes (
 }
 
 VOID
+EFIAPI
 InitializeInterfaceFunctionTestProtocol3 (
   OUT INTERFACE_FUNCTION_TEST_PROTOCOL_3     *InterfaceFunctionTestProtocol3
   )
@@ -155,6 +165,7 @@ InitializeInterfaceFunctionTestProtocol3 (
 //
 
 VOID
+EFIAPI
 Protocol4ReportProtocolAttributes (
   IN  INTERFACE_FUNCTION_TEST_PROTOCOL_4   *This,
   OUT PROTOCOL_ATTRIBUTES                  *ProtocolAttributes
@@ -164,6 +175,7 @@ Protocol4ReportProtocolAttributes (
 }
 
 VOID
+EFIAPI
 InitializeInterfaceFunctionTestProtocol4 (
   OUT INTERFACE_FUNCTION_TEST_PROTOCOL_4     *InterfaceFunctionTestProtocol4
   )
@@ -179,6 +191,7 @@ InitializeInterfaceFunctionTestProtocol4 (
 //
 
 VOID
+EFIAPI
 Protocol5ReportProtocolAttributes (
   IN  INTERFACE_FUNCTION_TEST_PROTOCOL_5   *This,
   OUT PROTOCOL_ATTRIBUTES                  *ProtocolAttributes
@@ -188,6 +201,7 @@ Protocol5ReportProtocolAttributes (
 }
 
 VOID
+EFIAPI
 InitializeInterfaceFunctionTestProtocol5 (
   OUT INTERFACE_FUNCTION_TEST_PROTOCOL_5     *InterfaceFunctionTestProtocol5
   )
@@ -209,6 +223,7 @@ InitializeInterfaceFunctionTestProtocol5 (
  *  @see ReleaseInvalidHandle.
  */
 VOID
+EFIAPI
 CreateInvalidHandle (
   OUT EFI_HANDLE  *InvalidHandle
   )
@@ -234,6 +249,7 @@ CreateInvalidHandle (
 }
 
 VOID
+EFIAPI
 ReleaseInvalidHandle (
   IN EFI_HANDLE    InvalidHandle
   )
@@ -250,6 +266,7 @@ ReleaseInvalidHandle (
 }
 
 VOID
+EFIAPI
 CreateVendorDevicePath (
   OUT EFI_DEVICE_PATH_PROTOCOL  **DevicePath,
   IN  EFI_GUID                  Guid
@@ -300,6 +317,7 @@ CreateVendorDevicePath (
 }
 
 VOID
+EFIAPI
 CreateVendorDevicePathNode (
   OUT EFI_DEVICE_PATH_PROTOCOL  **DevicePath,
   IN  EFI_GUID                  Guid
@@ -348,6 +366,7 @@ CreateVendorDevicePathNode (
 }
 
 VOID
+EFIAPI
 FreeVendorDevicePath (
   IN EFI_DEVICE_PATH_PROTOCOL  *DevicePath
   )
@@ -359,6 +378,7 @@ FreeVendorDevicePath (
 }
 
 VOID
+EFIAPI
 FreeVendorDevicePathNode (
   IN EFI_DEVICE_PATH_PROTOCOL  *DevicePathNode
   )
@@ -370,6 +390,7 @@ FreeVendorDevicePathNode (
 }
 
 VOID
+EFIAPI
 TestNotifyFunction0 (
   IN EFI_EVENT Event,
   IN VOID      *Context
@@ -382,6 +403,7 @@ TestNotifyFunction0 (
 }
 
 VOID
+EFIAPI
 TestNotifyFunction1 (
   IN     EFI_EVENT Event,
   IN OUT VOID      *Context
@@ -395,6 +417,7 @@ TestNotifyFunction1 (
 }
 
 VOID
+EFIAPI
 TestNotifyFunction2 (
   IN EFI_EVENT Event,
   IN VOID      *Context
@@ -445,6 +468,7 @@ IsNodeInDevicePath (
 
 ////////////////////////////
 EFI_STATUS
+EFIAPI
 LoadStartImage (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib,
   IN EFI_HANDLE                          CurrentImageHandle,
@@ -529,6 +553,7 @@ LoadStartImage (
 
 
 EFI_STATUS
+EFIAPI
 GetPlatformOverrideDriverImages (
   IN  EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib,
   IN  EFI_HANDLE                          CurrentImageHandle,
@@ -707,6 +732,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 AliasLocateHandleBuffer (
   IN EFI_GUID  *Guid
   )
@@ -733,6 +759,7 @@ AliasLocateHandleBuffer (
 }
 
 EFI_STATUS
+EFIAPI
 CheckForCleanEnvironment (
   OUT UINTN                               *Numbers
   )

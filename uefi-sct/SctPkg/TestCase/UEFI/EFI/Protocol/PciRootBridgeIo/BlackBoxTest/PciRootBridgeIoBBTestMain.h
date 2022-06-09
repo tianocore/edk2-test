@@ -43,6 +43,7 @@ Abstract:
 //TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 PollMem_Func_Manual (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -51,6 +52,7 @@ PollMem_Func_Manual (
   );
 
 EFI_STATUS
+EFIAPI
 PollMemCheckPoint (
   IN  EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL       *RootBridgeIo,
   IN  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -65,6 +67,7 @@ PollMemCheckPoint (
 //TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 PollMem_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -76,6 +79,7 @@ PollMem_Func (
 //TDS 4.2.3
 //
 EFI_STATUS
+EFIAPI
 PollIo_Func_Manual (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -84,6 +88,7 @@ PollIo_Func_Manual (
   );
 
 EFI_STATUS
+EFIAPI
 PollIoCheckPoint (
   IN  EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL       *RootBridgeIo,
   IN  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -98,6 +103,7 @@ PollIoCheckPoint (
 //TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 PollIo_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -109,6 +115,7 @@ PollIo_Func (
 //TDS 4.1.5
 //
 EFI_STATUS
+EFIAPI
 MemRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -120,6 +127,7 @@ MemRead_Func (
 //TDS 4.1.6
 //
 EFI_STATUS
+EFIAPI
 MemWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -131,6 +139,7 @@ MemWrite_Func (
 //TDS 4.1.7
 //
 EFI_STATUS
+EFIAPI
 IoRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +151,7 @@ IoRead_Func (
 //TDS 4.1.8
 //
 EFI_STATUS
+EFIAPI
 IoWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -153,6 +163,7 @@ IoWrite_Func (
 //TDS 4.1.9
 //
 EFI_STATUS
+EFIAPI
 PciRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -164,6 +175,7 @@ PciRead_Func (
 //TDS 4.1.10
 //
 EFI_STATUS
+EFIAPI
 PciWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -175,6 +187,7 @@ PciWrite_Func (
 //TDS 4.1.11
 //
 EFI_STATUS
+EFIAPI
 CopyMem_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -186,6 +199,7 @@ CopyMem_Func (
 //TDS 4.1.12
 //
 EFI_STATUS
+EFIAPI
 Map_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -208,6 +222,7 @@ Unmap_Func (
 //TDS 4.1.14
 //
 EFI_STATUS
+EFIAPI
 AllocateBuffer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -219,6 +234,7 @@ AllocateBuffer_Func (
 //TDS 4.1.15
 //
 EFI_STATUS
+EFIAPI
 FreeBuffer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -232,6 +248,7 @@ FreeBuffer_Func (
 //TDS 4.1.16
 //
 EFI_STATUS
+EFIAPI
 Flush_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -243,6 +260,7 @@ Flush_Func (
 //TDS 4.1.17
 //
 EFI_STATUS
+EFIAPI
 GetAttributes_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -254,6 +272,7 @@ GetAttributes_Func (
 //TDS 4.1.18
 //
 EFI_STATUS
+EFIAPI
 SetAttributes_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -264,6 +283,7 @@ SetAttributes_Func (
 //TDS 4.1.19
 //
 EFI_STATUS
+EFIAPI
 Configuration_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -275,6 +295,7 @@ Configuration_Func (
 //TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 PollMem_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -286,6 +307,7 @@ PollMem_Conf (
 //TDS 4.2.2
 //
 EFI_STATUS
+EFIAPI
 PollIo_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -297,6 +319,7 @@ PollIo_Conf (
 //TDS 4.2.3
 //
 EFI_STATUS
+EFIAPI
 MemRead_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -308,6 +331,7 @@ MemRead_Conf (
 //TDS 4.2.4
 //
 EFI_STATUS
+EFIAPI
 MemWrite_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -319,6 +343,7 @@ MemWrite_Conf (
 //TDS 4.2.5
 //
 EFI_STATUS
+EFIAPI
 IoRead_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -330,6 +355,7 @@ IoRead_Conf (
 //TDS 4.2.6
 //
 EFI_STATUS
+EFIAPI
 IoWrite_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -341,6 +367,7 @@ IoWrite_Conf (
 //TDS 4.2.7
 //
 EFI_STATUS
+EFIAPI
 PciRead_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -352,6 +379,7 @@ PciRead_Conf (
 //TDS 4.2.8
 //
 EFI_STATUS
+EFIAPI
 PciWrite_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -363,6 +391,7 @@ PciWrite_Conf (
 //TDS 4.2.9
 //
 EFI_STATUS
+EFIAPI
 CopyMem_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -374,6 +403,7 @@ CopyMem_Conf (
 //TDS 4.2.10
 //
 EFI_STATUS
+EFIAPI
 Map_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -386,6 +416,7 @@ Map_Conf (
 //TDS 4.2.11
 //
 EFI_STATUS
+EFIAPI
 AllocateBuffer_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -398,6 +429,7 @@ AllocateBuffer_Conf (
 //TDS 4.2.12
 //
 EFI_STATUS
+EFIAPI
 GetAttributes_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -410,6 +442,7 @@ GetAttributes_Conf (
 //TDS 4.2.13
 //
 EFI_STATUS
+EFIAPI
 SetAttributes_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -421,6 +454,7 @@ SetAttributes_Conf (
 //TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 SetAttributes_Stress (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

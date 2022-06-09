@@ -46,6 +46,7 @@ ENTS_INTERFACE    gUdp4ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gUdp4ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Udp4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -137,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Udp4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

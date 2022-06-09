@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadDiskConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -363,6 +364,7 @@ BBTestReadDiskConformanceAutoTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

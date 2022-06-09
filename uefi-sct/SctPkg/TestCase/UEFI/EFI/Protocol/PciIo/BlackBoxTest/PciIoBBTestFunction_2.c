@@ -45,6 +45,7 @@ Abstract:
 //TDS 4.1.9
 //
 EFI_STATUS
+EFIAPI
 PciRead_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -678,6 +679,7 @@ PciRead_Func (
 //TDS 4.1.10
 //
 EFI_STATUS
+EFIAPI
 PciWrite_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1309,6 +1311,7 @@ PciWrite_Func (
 //TDS 4.1.11
 //
 EFI_STATUS
+EFIAPI
 CopyMem_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2140,6 +2143,7 @@ CopyMem_Func (
 //TDS 4.1.12
 //
 EFI_STATUS
+EFIAPI
 Map_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2669,6 +2673,7 @@ Map_Func (
 //TDS 4.1.13
 //
 EFI_STATUS
+EFIAPI
 Unmap_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3137,6 +3142,7 @@ Unmap_Func (
 //TDS 4.1.14
 //
 EFI_STATUS
+EFIAPI
 AllocateBuffer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3276,6 +3282,7 @@ AllocateBuffer_Func (
 //TDS 4.1.15
 //
 EFI_STATUS
+EFIAPI
 FreeBuffer_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3417,6 +3424,7 @@ FreeBuffer_Func (
 //TDS 4.1.16
 //
 EFI_STATUS
+EFIAPI
 Flush_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3507,6 +3515,7 @@ Flush_Func (
 //TDS 4.1.17
 //
 EFI_STATUS
+EFIAPI
 GetLocation_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3664,6 +3673,7 @@ GetLocation_Func (
 //TDS 4.1.18
 //
 EFI_STATUS
+EFIAPI
 Attributes_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4175,6 +4185,7 @@ Attributes_Func (
 //TDS 4.1.19
 //
 EFI_STATUS
+EFIAPI
 GetBarAttributes_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4440,6 +4451,7 @@ GetBarAttributes_Func (
 //TDS 4.1.20
 //
 EFI_STATUS
+EFIAPI
 SetBarAttributes_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

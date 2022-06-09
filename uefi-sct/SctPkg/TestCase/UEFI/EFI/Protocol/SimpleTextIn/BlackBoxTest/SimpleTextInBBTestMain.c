@@ -130,6 +130,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
 
 EFI_STATUS
+EFIAPI
 BBTestSimpleTextInProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -168,6 +169,7 @@ InitializeBBTestSimpleTextIn (
  *  @return EFI_SUCCESS unload successfully.
  */
 EFI_STATUS
+EFIAPI
 BBTestSimpleTextInProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   )

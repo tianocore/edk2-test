@@ -68,6 +68,7 @@ InitializeBBTestSimpleTextIn (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestSimpleTextInProtocolUnload (
   IN EFI_HANDLE           ImageHandle
   );
@@ -77,6 +78,7 @@ BBTestSimpleTextInProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -86,6 +88,7 @@ BBTestReadKeyStrokeConformanceManualTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForKeyConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -97,6 +100,7 @@ BBTestWaitForKeyConformanceManualTest (
 // Interface function
 //
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -105,6 +109,7 @@ BBTestReadKeyStrokeFunctionManualTest (
 );
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -113,6 +118,7 @@ BBTestResetFunctionAutoTest (
 );
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -121,6 +127,7 @@ BBTestResetFunctionManualTest (
 );
 
 EFI_STATUS
+EFIAPI
 BBTestWaitForKeyFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -133,6 +140,7 @@ BBTestWaitForKeyFunctionManualTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReadKeyStrokeManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

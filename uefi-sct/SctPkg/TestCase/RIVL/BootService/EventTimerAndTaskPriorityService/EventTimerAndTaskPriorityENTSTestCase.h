@@ -28,6 +28,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 BS_CreateEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -49,6 +50,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_CloseEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -70,6 +72,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_SignalEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -91,6 +94,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_WaitForEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -112,6 +116,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_CheckEvent_EntsTest (
   VOID *ClientInterface
   )
@@ -133,6 +138,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 BS_SetTimer_EntsTest (
   VOID *ClientInterface
   )

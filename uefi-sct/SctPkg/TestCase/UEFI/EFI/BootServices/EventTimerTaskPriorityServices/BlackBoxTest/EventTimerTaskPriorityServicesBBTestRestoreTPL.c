@@ -32,6 +32,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 BBTestRestoreTPL_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -41,6 +42,7 @@ BBTestRestoreTPL_Func_Sub1 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestRestoreTPL_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -76,6 +78,7 @@ BBTestRestoreTPL_Func (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRestoreTPL_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

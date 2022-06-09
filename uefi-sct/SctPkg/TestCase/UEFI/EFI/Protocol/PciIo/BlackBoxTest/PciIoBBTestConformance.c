@@ -50,6 +50,7 @@ Abstract:
 //TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 PollMem_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -676,6 +677,7 @@ PollMem_Conf (
 //TDS 4.2.2
 //
 EFI_STATUS
+EFIAPI
 PollIo_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1303,6 +1305,7 @@ PollIo_Conf (
 //TDS 4.2.3
 //
 EFI_STATUS
+EFIAPI
 MemRead_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1866,6 +1869,7 @@ MemRead_Conf (
 //TDS 4.2.4
 //
 EFI_STATUS
+EFIAPI
 MemWrite_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2429,6 +2433,7 @@ MemWrite_Conf (
 //TDS 4.2.5
 //
 EFI_STATUS
+EFIAPI
 IoRead_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2990,6 +2995,7 @@ IoRead_Conf (
 //TDS 4.2.6
 //
 EFI_STATUS
+EFIAPI
 IoWrite_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3552,6 +3558,7 @@ IoWrite_Conf (
 //TDS 4.2.7
 //
 EFI_STATUS
+EFIAPI
 PciRead_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4001,6 +4008,7 @@ PciRead_Conf (
 //TDS 4.2.8
 //
 EFI_STATUS
+EFIAPI
 PciWrite_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4450,6 +4458,7 @@ PciWrite_Conf (
 //TDS 4.2.9
 //
 EFI_STATUS
+EFIAPI
 CopyMem_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -5155,6 +5164,7 @@ CopyMem_Conf (
 //TDS 4.2.10
 //
 EFI_STATUS
+EFIAPI
 Map_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -5475,6 +5485,7 @@ Map_Conf (
 //TDS 4.2.11
 //
 EFI_STATUS
+EFIAPI
 AllocateBuffer_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -5697,6 +5708,7 @@ AllocateBuffer_Conf (
 //TDS 4.2.12
 //
 EFI_STATUS
+EFIAPI
 GetLocation_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -5865,6 +5877,7 @@ GetLocation_Conf (
 //TDS 4.2.13
 //
 EFI_STATUS
+EFIAPI
 Attributes_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -6182,6 +6195,7 @@ Attributes_Conf (
 //TDS 4.2.14
 //
 EFI_STATUS
+EFIAPI
 GetBarAttributes_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -6319,6 +6333,7 @@ GetBarAttributes_Conf (
 //TDS 4.2.15
 //
 EFI_STATUS
+EFIAPI
 SetBarAttributes_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

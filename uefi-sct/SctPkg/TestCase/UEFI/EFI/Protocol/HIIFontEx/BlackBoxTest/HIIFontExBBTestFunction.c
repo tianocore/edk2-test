@@ -44,12 +44,14 @@ StrCpy (
     );
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx,
@@ -57,6 +59,7 @@ BBTestStringToImageExFunctionTestCheckpoint2 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx,
@@ -64,6 +67,7 @@ BBTestStringToImageExFunctionTestCheckpoint3 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -72,6 +76,7 @@ BBTestStringToImageExFunctionTestCheckpoint4 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx,
@@ -79,6 +84,7 @@ BBTestStringToImageExFunctionTestCheckpoint5 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -87,6 +93,7 @@ BBTestStringToImageExFunctionTestCheckpoint6 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -95,6 +102,7 @@ BBTestStringIdToImageExFunctionTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -104,24 +112,28 @@ BBTestStringIdToImageExFunctionTestCheckpoint2 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
@@ -129,6 +141,7 @@ BBTestGetGlyphInfoFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -206,6 +219,7 @@ BBTestStringToImageExFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -264,6 +278,7 @@ BBTestStringIdToImageExFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -303,6 +318,7 @@ BBTestGetGlyphExFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -343,6 +359,7 @@ BBTestGetFontInfoExFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -383,6 +400,7 @@ BBTestGetGlyphInfoFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
@@ -479,6 +497,7 @@ BBTestStringToImageExFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx,
@@ -580,6 +599,7 @@ BBTestStringToImageExFunctionTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx,
@@ -754,6 +774,7 @@ BBTestStringToImageExFunctionTestCheckpoint3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -999,6 +1020,7 @@ EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx,
@@ -1718,6 +1740,7 @@ EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringToImageExFunctionTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -2647,6 +2670,7 @@ EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -2794,6 +2818,7 @@ BBTestStringIdToImageExFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestStringIdToImageExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_DATABASE_PROTOCOL                  *HIIDatabase,
@@ -2948,6 +2973,7 @@ BBTestStringIdToImageExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
@@ -3003,6 +3029,7 @@ BBTestGetGlyphExFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
@@ -3078,6 +3105,7 @@ BBTestGetFontInfoExFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetFontInfoExFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx
@@ -3138,6 +3166,7 @@ BBTestGetFontInfoExFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetGlyphInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_FONT_EX_PROTOCOL                   *HIIFontEx

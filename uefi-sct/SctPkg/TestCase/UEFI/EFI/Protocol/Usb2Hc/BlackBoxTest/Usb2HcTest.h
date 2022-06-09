@@ -230,6 +230,7 @@ Abstract:
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -261,6 +262,7 @@ Returns:
 // TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcResetBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -292,6 +294,7 @@ Returns:
 // TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetStateBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -323,6 +326,7 @@ Returns:
 // TDS 4.4.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcSetStateBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -354,6 +358,7 @@ Returns:
 // TDS 4.5.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetRootHubPortStatusBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -385,6 +390,7 @@ Returns:
 // TDS 4.6.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetRootHubPortStatusBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -416,6 +422,7 @@ Returns:
 // TDS 4.7.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -447,6 +454,7 @@ Returns:
 // TDS 4.8.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -478,6 +486,7 @@ Returns:
 // TDS 4.9.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -509,6 +518,7 @@ Returns:
 // TDS 5.1.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetCapabilityConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -540,6 +550,7 @@ Returns:
 // TDS 5.2.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -571,6 +582,7 @@ Returns:
 // TDS 5.3.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -602,6 +614,7 @@ Returns:
 // TDS 5.4.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcSetStateConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -633,6 +646,7 @@ Returns:
 // TDS 5.5.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -664,6 +678,7 @@ Returns:
 // TDS 5.6.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcControlTransferConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -695,6 +710,7 @@ Returns:
 // TDS 5.7.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcBulkTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -726,6 +742,7 @@ Returns:
 // TDS 5.8.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -757,6 +774,7 @@ Returns:
 // TDS 5.9.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcSyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -788,6 +806,7 @@ Returns:
 // TDS 5.14.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcAsyncIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -819,6 +838,7 @@ Returns:
 // TDS 5.13.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -850,6 +870,7 @@ Returns:
 // TDS 5.10.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcGetRootHubPortStatusConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -881,6 +902,7 @@ Returns:
 // TDS 5.11.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcSetRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -912,6 +934,7 @@ Returns:
 // TDS 5.12.1
 //
 EFI_STATUS
+EFIAPI
 Usb2HcClearRootHubPortFeatureConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

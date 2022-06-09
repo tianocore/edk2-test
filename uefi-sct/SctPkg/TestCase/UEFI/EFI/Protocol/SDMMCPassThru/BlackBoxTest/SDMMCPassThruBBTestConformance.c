@@ -27,6 +27,7 @@ Abstract:
 #include "SDMMCPassThruBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +89,7 @@ BBTestPassThruConformanceTest (
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
                    L"SctAllocateZeroPooll - SctAllocateZeroPool fails",
+                   L" - %a:%d",
                    __FILE__,
                    (UINTN)__LINE__
                    );
@@ -249,6 +251,7 @@ BBTestPassThruConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextSlotConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -321,6 +324,7 @@ BBTestGetNextSlotConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestResetDeviceConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -393,6 +397,7 @@ BBTestResetDeviceConformanceTest (
 }  
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -486,6 +491,7 @@ BBTestBuildDevicePathConformanceTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetSlotNumberConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

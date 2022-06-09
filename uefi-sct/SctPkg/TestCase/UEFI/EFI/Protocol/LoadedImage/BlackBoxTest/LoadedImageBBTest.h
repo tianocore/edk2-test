@@ -80,6 +80,7 @@ InitializeBBTestLoadedImageProtocol (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestLoadedImageProtocolUnload (
   IN EFI_HANDLE       ImageHandle
   );
@@ -89,6 +90,7 @@ BBTestLoadedImageProtocolUnload (
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestLoadedImageTest1 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +102,7 @@ BBTestLoadedImageTest1 (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestLoadedImageTest2 (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Http.h>
 
 EFI_STATUS
+EFIAPI
 HttpGetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -52,6 +53,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 HttpConfigure_EntsTest (
   VOID *ClientInterface
   )
@@ -74,6 +76,7 @@ Returns:
 
 
 EFI_STATUS
+EFIAPI
 HttpRequest_EntsTest (
   VOID *ClientInterface
   )
@@ -95,6 +98,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 HttpCancel_EntsTest (
   VOID *ClientInterface
   )
@@ -116,6 +120,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 HttpResponse_EntsTest (
   VOID *ClientInterface
   )
@@ -137,6 +142,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 HttpPoll_EntsTest (
   VOID *ClientInterface
   )

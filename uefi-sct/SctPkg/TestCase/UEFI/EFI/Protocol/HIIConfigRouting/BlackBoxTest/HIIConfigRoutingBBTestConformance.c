@@ -26,102 +26,119 @@ Abstract:
 
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 /*
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint2 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 */
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint3 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint4 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint3( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint4( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint3( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint4( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
   );
 
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -165,6 +182,7 @@ BBTestExtractConfigConformanceAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestExportConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -202,6 +220,7 @@ BBTestExportConfigConformanceAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -241,6 +260,7 @@ BBTestRouteConfigConformanceAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -284,6 +304,7 @@ BBTestBlockToConfigConformanceAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -327,6 +348,7 @@ BBTestConfigToBlockConformanceAutoTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -373,6 +395,7 @@ BBTestGetAltCfgConformanceAutoTest (
 // Call ExtractConfig with Request or Progress being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint1 ( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -467,6 +490,7 @@ BBTestExtractConfigConformanceTestCheckpoint1 (
 // Call ExtractConfig with Illegal Syntax, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -577,6 +601,7 @@ BBTestExtractConfigConformanceTestCheckpoint2(
 // Call ExtractConfig with unknown driver, EFI_NOT_FOUND should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint3( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -622,6 +647,7 @@ BBTestExtractConfigConformanceTestCheckpoint3(
 // Call ExtractConfig with unknown name, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestExtractConfigConformanceTestCheckpoint4( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -707,6 +733,7 @@ BBTestExtractConfigConformanceTestCheckpoint4(
 // Call ExportConfig with Results being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestExportConfigConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -744,6 +771,7 @@ BBTestExportConfigConformanceTestCheckpoint1(
 // Call RouteConfig with Configuration being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -785,6 +813,7 @@ BBTestRouteConfigConformanceTestCheckpoint1(
 // Call RouteConfig with no found target for the routing data, EFI_NOT_FOUND should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestRouteConfigConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -827,6 +856,7 @@ BBTestRouteConfigConformanceTestCheckpoint2(
 // Call BlockToConfig with ConfigRequest being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -875,6 +905,7 @@ BBTestBlockToConfigConformanceTestCheckpoint1(
 // Call BlockToConfig with Block being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -925,6 +956,7 @@ BBTestBlockToConfigConformanceTestCheckpoint2(
 // Call BlockToConfig with ConfigRequest being not <BlockName> format, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint3( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -980,6 +1012,7 @@ BBTestBlockToConfigConformanceTestCheckpoint3(
 // Call BlockToConfig with not large Block, EFI_DEVICE_ERROR should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestBlockToConfigConformanceTestCheckpoint4( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -1033,6 +1066,7 @@ BBTestBlockToConfigConformanceTestCheckpoint4(
 // Call ConfigToBlock with ConfigResp being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -1078,6 +1112,7 @@ BBTestConfigToBlockConformanceTestCheckpoint1(
 // Call ConfigToBlock with Block being NULL, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint2( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -1125,6 +1160,7 @@ BBTestConfigToBlockConformanceTestCheckpoint2(
 // Call BlockToConfig with ConfigRequest being not <BlockName> format, EFI_INVALID_PARAMETER should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint3( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -1174,6 +1210,7 @@ BBTestConfigToBlockConformanceTestCheckpoint3(
 // Call ConfigToBlock with Block being not large enough, EFI_DEVICE_ERROR should be returned.
 //
 EFI_STATUS
+EFIAPI
 BBTestConfigToBlockConformanceTestCheckpoint4( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting
@@ -1219,6 +1256,7 @@ BBTestConfigToBlockConformanceTestCheckpoint4(
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetAltCfgConformanceTestCheckpoint1( 
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ROUTING_PROTOCOL            *HIIConfigRouting

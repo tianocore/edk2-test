@@ -41,6 +41,7 @@ Abstract:
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -202,6 +203,7 @@ BBTestQueryFunctionAutoTest (
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestResponseFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

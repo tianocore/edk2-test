@@ -86,6 +86,7 @@ EFI_GUID mTestNoInterfaceProtocol2Guid = TEST_NO_INTERFACE_PROTOCOL_2_GUID;
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -157,6 +158,7 @@ BBTestGetDriverNameConformanceTest (
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -223,6 +225,7 @@ BBTestGetControllerNameConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL          *ComponentName
@@ -337,6 +340,7 @@ BBTestGetDriverNameConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL          *ComponentName
@@ -464,6 +468,7 @@ BBTestGetDriverNameConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL          *ComponentName
@@ -631,6 +636,7 @@ BBTestGetControllerNameConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL          *ComponentName
@@ -778,6 +784,7 @@ BBTestGetControllerNameConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
@@ -979,6 +986,7 @@ BBTestGetControllerNameConformanceTestCheckpoint3 (
 
 /*
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName

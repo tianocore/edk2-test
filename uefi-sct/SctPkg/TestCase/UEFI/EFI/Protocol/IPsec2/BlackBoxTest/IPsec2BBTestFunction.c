@@ -31,48 +31,56 @@ static IP_PACKET IP6PacketBuffer[] = {
   };
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint3(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint4(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint7 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
   );
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint8 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -83,6 +91,7 @@ BBTestProcessExtFunctionTestCheckpoint8 (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -761,6 +770,7 @@ BBTestProcessExtFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -1098,6 +1108,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -1437,6 +1448,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint3(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -1856,6 +1868,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint4(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -2270,6 +2283,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint5 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -2643,6 +2657,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint6 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -3014,6 +3029,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint7(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2
@@ -3475,6 +3491,7 @@ FUNC_EXIT:
 
 
 EFI_STATUS
+EFIAPI
 BBTestProcessExtFunctionTestCheckpoint8(
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_IPSEC2_PROTOCOL                        *IPsec2

@@ -107,6 +107,7 @@ CHAR8     IsoLatinTable[][4] = {
 // TDS 9.3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -162,6 +163,7 @@ BBTestGetDriverNameConformanceTest (
 // TDS 9.3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -213,6 +215,7 @@ BBTestGetControllerNameConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -280,6 +283,7 @@ BBTestGetDriverNameConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -337,6 +341,7 @@ BBTestGetDriverNameConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -505,6 +510,7 @@ BBTestGetControllerNameConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -582,6 +588,7 @@ BBTestGetControllerNameConformanceTestCheckpoint2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName
@@ -732,6 +739,7 @@ BBTestGetControllerNameConformanceTestCheckpoint3 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME_PROTOCOL           *ComponentName

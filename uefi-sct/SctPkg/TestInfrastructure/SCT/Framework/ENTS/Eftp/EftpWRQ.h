@@ -103,6 +103,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpBuildWrq (
   IN EFTP_IO_PRIVATE*Private
   )

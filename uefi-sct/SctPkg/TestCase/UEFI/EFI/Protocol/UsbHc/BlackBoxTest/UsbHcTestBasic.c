@@ -29,6 +29,7 @@ Abstract:
 // Prototypes (internal)
 //
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -36,6 +37,7 @@ UsbHcResetBasicSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -44,6 +46,7 @@ UsbHcResetBasicSubTest2 (
 
 
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -51,6 +54,7 @@ UsbHcResetBasicSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -58,6 +62,7 @@ UsbHcGetStateBasicSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -65,6 +70,7 @@ UsbHcGetStateBasicSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -72,6 +78,7 @@ UsbHcGetStateBasicSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -79,6 +86,7 @@ UsbHcSetStateBasicSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -86,6 +94,7 @@ UsbHcSetStateBasicSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -93,6 +102,7 @@ UsbHcSetStateBasicSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -100,6 +110,7 @@ UsbHcSetStateBasicSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -107,6 +118,7 @@ UsbHcSetStateBasicSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -114,6 +126,7 @@ UsbHcSetStateBasicSubTest6 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest7 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -121,6 +134,7 @@ UsbHcSetStateBasicSubTest7 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest8 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -128,6 +142,7 @@ UsbHcSetStateBasicSubTest8 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest9 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -135,6 +150,7 @@ UsbHcSetStateBasicSubTest9 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -142,6 +158,7 @@ UsbHcGetRootHubPortNumberSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -149,6 +166,7 @@ UsbHcGetRootHubPortStatusSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -156,6 +174,7 @@ UsbHcGetRootHubPortStatusSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -163,6 +182,7 @@ UsbHcGetRootHubPortStatusSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -170,6 +190,7 @@ UsbHcGetRootHubPortStatusSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -177,6 +198,7 @@ UsbHcGetRootHubPortStatusSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -184,6 +206,7 @@ UsbHcGetRootHubPortStatusSubTest6 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest7 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -191,6 +214,7 @@ UsbHcGetRootHubPortStatusSubTest7 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -198,6 +222,7 @@ UsbHcSetRootHubPortFeatureSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -205,6 +230,7 @@ UsbHcSetRootHubPortFeatureSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -212,6 +238,7 @@ UsbHcSetRootHubPortFeatureSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -219,6 +246,7 @@ UsbHcSetRootHubPortFeatureSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -226,6 +254,7 @@ UsbHcClearRootHubPortFeatureSubTest1 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -233,6 +262,7 @@ UsbHcClearRootHubPortFeatureSubTest2 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -240,6 +270,7 @@ UsbHcClearRootHubPortFeatureSubTest3 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -247,6 +278,7 @@ UsbHcClearRootHubPortFeatureSubTest4 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -254,6 +286,7 @@ UsbHcClearRootHubPortFeatureSubTest5 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -261,6 +294,7 @@ UsbHcClearRootHubPortFeatureSubTest6 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest7 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -268,6 +302,7 @@ UsbHcClearRootHubPortFeatureSubTest7 (
   );
 
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest8 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -289,6 +324,7 @@ UsbHcClearRootHubPortFeatureSubTest8 (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -362,6 +398,7 @@ UsbHcResetBasicAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -435,6 +472,7 @@ UsbHcGetStateBasicAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -539,6 +577,7 @@ UsbHcSetStateBasicAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -602,6 +641,7 @@ UsbHcGetRootHubPortNumberBasicManualTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -681,6 +721,7 @@ UsbHcGetRootHubPortStatusBasicAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -755,6 +796,7 @@ UsbHcGetRootHubPortStatusBasicManualTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -833,6 +875,7 @@ UsbHcSetRootHubPortFeatureBasicAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureBasicAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -922,6 +965,7 @@ UsbHcClearRootHubPortFeatureBasicAutoTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureBasicManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -992,6 +1036,7 @@ UsbHcClearRootHubPortFeatureBasicManualTest (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1063,6 +1108,7 @@ UsbHcResetBasicSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1134,6 +1180,7 @@ UsbHcResetBasicSubTest2 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcResetBasicSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1205,6 +1252,7 @@ UsbHcResetBasicSubTest3 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1304,6 +1352,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1401,6 +1450,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetStateBasicSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1499,6 +1549,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1599,6 +1650,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1695,6 +1747,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1792,6 +1845,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1888,6 +1942,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -1985,6 +2040,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2081,6 +2137,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest7 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2177,6 +2234,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest8 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2272,6 +2330,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetStateBasicSubTest9 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2370,6 +2429,7 @@ record:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortNumberSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2443,6 +2503,7 @@ UsbHcGetRootHubPortNumberSubTest1 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2598,6 +2659,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2753,6 +2815,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -2909,6 +2972,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3057,6 +3121,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3185,6 +3250,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3205,6 +3271,7 @@ UsbHcGetRootHubPortStatusSubTest6 (
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcGetRootHubPortStatusSubTest7 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3330,6 +3397,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3474,6 +3542,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3615,6 +3684,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3760,6 +3830,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcSetRootHubPortFeatureSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -3903,6 +3974,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest1 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4044,6 +4116,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest2 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4187,6 +4260,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest3 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4328,6 +4402,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest4 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4468,6 +4543,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest5 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4615,6 +4691,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest6 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4761,6 +4838,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest7 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,
@@ -4886,6 +4964,7 @@ done:
  *  @return Other value   Something failed.
  */
 EFI_STATUS
+EFIAPI
 UsbHcClearRootHubPortFeatureSubTest8 (
   IN EFI_USB_HC_PROTOCOL                  *UsbHc,
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib,

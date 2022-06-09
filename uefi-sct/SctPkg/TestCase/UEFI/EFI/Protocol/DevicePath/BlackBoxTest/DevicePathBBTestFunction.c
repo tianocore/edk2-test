@@ -45,6 +45,7 @@ EFI_GUID  gBlackBoxEfiDevicePathMessagingSASGuid              = DEVICE_PATH_MESS
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestDevicePathNodeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

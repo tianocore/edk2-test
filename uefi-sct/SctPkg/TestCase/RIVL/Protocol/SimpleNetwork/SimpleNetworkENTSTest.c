@@ -120,6 +120,7 @@ ENTS_INTERFACE    gSimpleNetworkEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gSimpleNetworkEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -202,6 +203,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 SimpleNetworkENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

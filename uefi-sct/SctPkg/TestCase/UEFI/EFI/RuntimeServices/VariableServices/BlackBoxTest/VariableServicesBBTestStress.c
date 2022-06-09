@@ -32,6 +32,7 @@ Abstract:
 //
 
 EFI_STATUS
+EFIAPI
 MultipleStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -40,6 +41,7 @@ MultipleStressTest (
   );
 
 EFI_STATUS
+EFIAPI
 OverflowStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +96,7 @@ OverflowStressTestSub1 (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 MultipleStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -154,6 +157,7 @@ MultipleStressTest (
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 OverflowStressTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -155,6 +155,7 @@ ParseCLPCommandLine(
  */
 
 EFI_STATUS
+EFIAPI
 BBTestCLPCommandAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -413,6 +414,7 @@ BBTestCLPCommandAutoTest (
 // TDS 
 //
 EFI_STATUS
+EFIAPI
 BBTestCLPReturnStringAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -687,6 +689,7 @@ BBTestCLPReturnStringAutoTest (
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestCLPCmdStatusAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -906,6 +909,7 @@ BBTestCLPCmdStatusAutoTest (
 // TDS 
 //
 EFI_STATUS
+EFIAPI
 BBTestCLPErrorValueAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1168,6 +1172,7 @@ BBTestCLPErrorValueAutoTest (
 // TDS 
 //
 EFI_STATUS
+EFIAPI
 BBTestCLPMessageCodeAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

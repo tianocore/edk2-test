@@ -84,6 +84,7 @@ InitializeDriverBinding (
   );
 
 VOID
+EFIAPI
 Protocol9ReportProtocolAttributes(
   IN INTERFACE_FUNCTION_TEST_PROTOCOL_9   *This,
   OUT PROTOCOL_ATTRIBUTES   *ProtocolAttributes
@@ -259,6 +260,7 @@ InitializeDriverBinding (
 }
 
 VOID
+EFIAPI
 Protocol9ReportProtocolAttributes(
   IN INTERFACE_FUNCTION_TEST_PROTOCOL_9   *This,
   OUT PROTOCOL_ATTRIBUTES   *ProtocolAttributes

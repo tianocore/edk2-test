@@ -34,6 +34,7 @@ Abstract:
 // Function prototypes
 //
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionRead (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -42,6 +43,7 @@ BBTestTapeFunctionRead (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionWrite (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -50,6 +52,7 @@ BBTestTapeFunctionWrite (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionRewind (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -58,6 +61,7 @@ BBTestTapeFunctionRewind (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionSpace (
   IN EFI_BB_TEST_PROTOCOL             *_This,
   IN VOID                             *ClientInterface,
@@ -66,6 +70,7 @@ BBTestTapeFunctionSpace (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionWriteFM (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,
@@ -74,6 +79,7 @@ BBTestTapeFunctionWriteFM (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestTapeFunctionReset (
   IN EFI_BB_TEST_PROTOCOL             *This,
   IN VOID                             *ClientInterface,

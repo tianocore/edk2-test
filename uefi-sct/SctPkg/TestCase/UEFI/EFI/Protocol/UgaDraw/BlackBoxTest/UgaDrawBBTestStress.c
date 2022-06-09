@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestVideoFillBufferToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -875,6 +876,7 @@ BBTestVideoFillBufferToVideoManualTest (
 // TDS 4.3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestVideoFillVideoToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1770,6 +1772,7 @@ BBTestVideoFillVideoToVideoManualTest (
 // TDS 4.3.3
 //
 EFI_STATUS
+EFIAPI
 BBTestVideoToBltBufferAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2514,6 +2517,7 @@ BBTestVideoToBltBufferAutoTest (
 // TDS 4.3.4
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoFillStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3134,6 +3138,7 @@ BBTestEfiUgaVideoFillStressAutoTest (
 // TDS 4.3.5
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoBltBufferStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -4070,6 +4075,7 @@ BBTestEfiUgaVideoBltBufferStressAutoTest (
 // TDS 4.3.6
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoToVideoStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

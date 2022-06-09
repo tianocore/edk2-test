@@ -104,6 +104,7 @@ BBTestNewStringConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,6 +113,7 @@ BBTestGetStringConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -120,6 +122,7 @@ BBTestSetStringConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -128,6 +131,7 @@ BBTestGetLanguagesConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -136,6 +140,7 @@ BBTestGetSecondaryLanguagesConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestNewStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -144,6 +149,7 @@ BBTestNewStringFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -152,6 +158,7 @@ BBTestGetStringFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -160,6 +167,7 @@ BBTestSetStringFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetLanguagesFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -168,6 +176,7 @@ BBTestGetLanguagesFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetSecondaryLanguagesFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

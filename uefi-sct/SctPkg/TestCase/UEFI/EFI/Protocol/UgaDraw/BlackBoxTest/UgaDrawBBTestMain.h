@@ -80,12 +80,14 @@ InitializeBBTestUgaDraw (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestUgaDrawProtocolUnload (
   IN EFI_HANDLE           ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +96,7 @@ BBTestGetModeFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoFillFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -102,6 +105,7 @@ BBTestEfiUgaVideoFillFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoBltBufferFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +114,7 @@ BBTestEfiUgaVideoBltBufferFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoToVideoFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -121,6 +126,7 @@ BBTestEfiUgaVideoToVideoFunctionAutoTest (
 // Conformance function
 //
 EFI_STATUS
+EFIAPI
 BBTestGetModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -129,6 +135,7 @@ BBTestGetModeConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBltConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +149,7 @@ BBTestBltConformanceAutoTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestVideoFillBufferToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +158,7 @@ BBTestVideoFillBufferToVideoManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestVideoFillVideoToVideoManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -158,6 +167,7 @@ BBTestVideoFillVideoToVideoManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestVideoToBltBufferAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -166,6 +176,7 @@ BBTestVideoToBltBufferAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoFillStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -174,6 +185,7 @@ BBTestEfiUgaVideoFillStressAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoBltBufferStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -182,6 +194,7 @@ BBTestEfiUgaVideoBltBufferStressAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoToVideoStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

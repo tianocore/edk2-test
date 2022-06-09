@@ -135,6 +135,7 @@ UnloadHIIDatabaseBBTest (
   );
   
 EFI_STATUS
+EFIAPI
 DoNothingPackageNotifyFn (
   IN UINT8                           PackageType,
   IN CONST EFI_GUID                  *PackageGuid,
@@ -147,6 +148,7 @@ DoNothingPackageNotifyFn (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -155,6 +157,7 @@ BBTestNewPackageListConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -163,6 +166,7 @@ BBTestRemovePackageListConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -171,6 +175,7 @@ BBTestUpdatePackageListConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -179,6 +184,7 @@ BBTestListPackageListsConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -187,6 +193,7 @@ BBTestExportPackageListsConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -195,6 +202,7 @@ BBTestRegisterPackageNotifyConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -203,6 +211,7 @@ BBTestUnregisterPackageNotifyConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -211,6 +220,7 @@ BBTestFindKeyboardLayoutsConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -219,6 +229,7 @@ BBTestGetKeyboardLayoutConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -227,6 +238,7 @@ BBTestSetKeyboardLayoutConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -235,6 +247,7 @@ BBTestGetPackageListHandleConformanceTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestNewPackageListFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -243,6 +256,7 @@ BBTestNewPackageListFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestRemovePackageListFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -251,6 +265,7 @@ BBTestRemovePackageListFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUpdatePackageListFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -259,6 +274,7 @@ BBTestUpdatePackageListFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestListPackageListsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -267,6 +283,7 @@ BBTestListPackageListsFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestExportPackageListsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -275,6 +292,7 @@ BBTestExportPackageListsFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestRegisterPackageNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -283,6 +301,7 @@ BBTestRegisterPackageNotifyFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterPackageNotifyFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -291,6 +310,7 @@ BBTestUnregisterPackageNotifyFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestFindKeyboardLayoutsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -299,6 +319,7 @@ BBTestFindKeyboardLayoutsFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetKeyboardLayoutFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -307,6 +328,7 @@ BBTestGetKeyboardLayoutFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestSetKeyboardLayoutFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -315,6 +337,7 @@ BBTestSetKeyboardLayoutFunctionTest (
   );
   
 EFI_STATUS
+EFIAPI
 BBTestGetPackageListHandleFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

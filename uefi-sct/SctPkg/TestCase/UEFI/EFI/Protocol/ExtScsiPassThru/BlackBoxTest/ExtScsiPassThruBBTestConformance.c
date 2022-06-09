@@ -41,6 +41,7 @@ extern UINT8 EnterEvent;
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextTargetLunConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -202,6 +203,7 @@ BBTestGetNextTargetLunConformanceAutoTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -409,6 +411,7 @@ BBTestBuildDevicePathConformanceAutoTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestGetTargetLunConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -611,6 +614,7 @@ BBTestGetTargetLunConformanceAutoTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestResetTargetLunConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -780,6 +784,7 @@ BBTestResetTargetLunConformanceAutoTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestGetNextTargetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -914,6 +919,7 @@ BBTestGetNextTargetConformanceAutoTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

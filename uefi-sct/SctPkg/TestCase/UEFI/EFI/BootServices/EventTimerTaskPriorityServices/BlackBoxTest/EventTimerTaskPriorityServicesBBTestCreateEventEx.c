@@ -47,41 +47,48 @@ EFI_GUID gEfiEventMemoryMapChangeGuid   = { 0x78BEE926, 0x692F, 0x48FD, { 0x9E, 
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
   
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
   
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)	  
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 #endif
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
@@ -91,6 +98,7 @@ BBTestCreateEventEx_Func_Sub3 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -149,6 +157,7 @@ BBTestCreateEventEx_Conf (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -211,6 +220,7 @@ BBTestCreateEventEx_Func (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -297,6 +307,7 @@ BBTestCreateEventEx_Conf_Sub1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -394,6 +405,7 @@ BBTestCreateEventEx_Conf_Sub2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -477,6 +489,7 @@ BBTestCreateEventEx_Conf_Sub3 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Conf_Sub4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -572,6 +585,7 @@ BBTestCreateEventEx_Conf_Sub4 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func_Sub1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -727,6 +741,7 @@ BBTestCreateEventEx_Func_Sub1 (
 
 #if (EFI_SPECIFICATION_VERSION >= 0x0002000A)	
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func_Sub2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )
@@ -885,6 +900,7 @@ BBTestCreateEventEx_Func_Sub2 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestCreateEventEx_Func_Sub3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   )

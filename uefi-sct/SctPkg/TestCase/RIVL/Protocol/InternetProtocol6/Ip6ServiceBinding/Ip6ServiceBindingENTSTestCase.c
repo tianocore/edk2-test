@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gIp6ServiceBindingCreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +143,7 @@ ENTS_ARG_FIELD    gIp6ServiceBindingDestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Ip6ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

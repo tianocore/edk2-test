@@ -154,6 +154,7 @@ InternalGetInfoFileIo2 (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -163,6 +164,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -172,6 +174,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -181,6 +184,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -191,6 +195,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -201,6 +206,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -210,6 +216,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                                       *Root,
@@ -220,6 +227,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                                       *Root,
@@ -230,6 +238,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -241,6 +250,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -251,6 +261,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -260,6 +271,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -271,6 +283,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -282,6 +295,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -292,6 +306,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -302,6 +317,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -311,6 +327,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -320,6 +337,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -330,6 +348,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -340,6 +359,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -349,6 +369,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -356,6 +377,7 @@ BBTestOpenExBasicTestCheckpoint1 (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -696,6 +718,7 @@ FileIoAsyncOpenDir (
 // TDS 5.1.12
 //
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -743,6 +766,7 @@ BBTestOpenExBasicTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -961,6 +985,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -1176,6 +1201,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -1266,6 +1292,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Sync (
 
         
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -1687,6 +1714,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -1899,6 +1927,7 @@ Done:
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2177,6 +2206,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2325,6 +2355,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2690,6 +2721,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
         
         
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -2937,6 +2969,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -3338,6 +3371,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint1_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -3737,6 +3771,7 @@ FileIoAsyncOpenExistingFile (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem,
@@ -3953,6 +3988,7 @@ Done:
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -4513,6 +4549,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -4989,6 +5026,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -5657,6 +5695,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -6253,6 +6292,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -6849,6 +6889,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -7374,6 +7415,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -8114,6 +8156,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -8778,6 +8821,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Sync (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,
@@ -9558,6 +9602,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
 
 
 EFI_STATUS
+EFIAPI
 BBTestOpenExBasicTestCheckpoint2_Test5_Sync (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_FILE                              *Root,

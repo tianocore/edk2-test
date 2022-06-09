@@ -41,6 +41,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -684,6 +685,7 @@ BBTestReadBlocksConformanceAutoTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestReadBlocksConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1114,6 +1116,7 @@ FreeBuffer:
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1850,6 +1853,7 @@ BBTestWriteBlocksConformanceAutoTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestWriteBlocksConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2490,6 +2494,7 @@ FreeBuffer:
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2641,6 +2646,7 @@ BBTestFlushBlocksConformanceAutoTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestFlushBlocksConformanceManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

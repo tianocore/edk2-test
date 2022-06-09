@@ -55,6 +55,7 @@ BBTestDebugPortProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -63,6 +64,7 @@ BBTestResetFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -71,6 +73,7 @@ BBTestWriteFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -79,6 +82,7 @@ BBTestReadFunctionManualTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPollFunctionManualTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

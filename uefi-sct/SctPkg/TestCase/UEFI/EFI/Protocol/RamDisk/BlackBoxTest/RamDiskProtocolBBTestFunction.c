@@ -24,6 +24,7 @@ Abstract:
 #include "RamDiskProtocolBBTestMain.h"
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -87,6 +88,7 @@ BBTestRegisterRamDiskFunctionTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -121,6 +123,7 @@ BBTestRegisterRamDiskFunctionTest (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RAM_DISK_PROTOCOL                 *RamDisk
@@ -183,6 +186,7 @@ BBTestUnregisterRamDiskFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

@@ -43,6 +43,7 @@ EFI_GUID UnsupportedAlgoGuid = UNSUPPORTED_ALGO_GUID;
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -91,6 +92,7 @@ BBTestGetInfoConformanceTest (
  *  @return EFI_NOT_FOUND
  */
 EFI_STATUS
+EFIAPI
 BBTestGetRNGConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +136,7 @@ BBTestGetRNGConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RNG_PROTOCOL                      *RandomNumber
@@ -194,6 +197,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetRNGConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RNG_PROTOCOL                      *RandomNumber
@@ -386,6 +390,7 @@ BBTestGetRNGConformanceTestCheckpoint1 (
 }
 
 EFI_STATUS
+EFIAPI
 BBTestGetRNGConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_RNG_PROTOCOL                      *RandomNumber

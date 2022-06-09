@@ -54,6 +54,7 @@ BBTestExtScsiPassThruProtocolUnload (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextTargetLunFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -62,6 +63,7 @@ BBTestGetNextTargetLunFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -70,6 +72,7 @@ BBTestBuildDevicePathFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetTargetLunFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -78,6 +81,7 @@ BBTestGetTargetLunFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetChannelFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -86,6 +90,7 @@ BBTestResetChannelFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetTargetLunFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -94,6 +99,7 @@ BBTestResetTargetLunFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextTargetFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -102,6 +108,7 @@ BBTestGetNextTargetFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -110,6 +117,7 @@ BBTestPassThruFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextTargetLunConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -118,6 +126,7 @@ BBTestGetNextTargetLunConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestBuildDevicePathConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -126,6 +135,7 @@ BBTestBuildDevicePathConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetTargetLunConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -134,6 +144,7 @@ BBTestGetTargetLunConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestResetTargetLunConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -142,6 +153,7 @@ BBTestResetTargetLunConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetNextTargetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -150,6 +162,7 @@ BBTestGetNextTargetConformanceAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestPassThruConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

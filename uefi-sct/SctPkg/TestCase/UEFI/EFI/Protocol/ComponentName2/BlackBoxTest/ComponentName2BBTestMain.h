@@ -96,6 +96,7 @@ BBTestComponentName2Unload (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -104,6 +105,7 @@ BBTestGetDriverNameFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -112,24 +114,28 @@ BBTestGetControllerNameFuncTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameFuncTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameFuncTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameFuncTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +144,7 @@ BBTestGetDriverNameConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -146,36 +153,42 @@ BBTestGetControllerNameConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetDriverNameConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName
   );
 /*
 EFI_STATUS
+EFIAPI
 BBTestGetControllerNameConformanceTestCheckpoint4 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_COMPONENT_NAME2_PROTOCOL           *ComponentName

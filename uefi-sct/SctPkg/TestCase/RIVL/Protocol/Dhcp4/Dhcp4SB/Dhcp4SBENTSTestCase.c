@@ -43,6 +43,7 @@ ENTS_ARG_FIELD    gDhcp4CreateChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4CreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -143,6 +144,7 @@ ENTS_ARG_FIELD    gDhcp4DestroyChildArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Dhcp4DestroyChild_EntsTest (
   VOID *ClientInterface
   )

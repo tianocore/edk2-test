@@ -40,6 +40,7 @@ Abstract:
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -280,6 +281,7 @@ BBTestQueryConformanceAutoTest (
 // TDS
 //
 EFI_STATUS
+EFIAPI
 BBTestResponseConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

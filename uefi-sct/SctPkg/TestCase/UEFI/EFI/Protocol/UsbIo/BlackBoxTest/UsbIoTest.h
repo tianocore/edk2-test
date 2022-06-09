@@ -192,6 +192,7 @@ typedef struct {
 // TDS 5.1
 //
 EFI_STATUS
+EFIAPI
 UsbControlTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -223,6 +224,7 @@ Returns:
 // TDS 5.2
 //
 EFI_STATUS
+EFIAPI
 UsbBulkTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -254,6 +256,7 @@ Returns:
 // TDS 5.3
 //
 EFI_STATUS
+EFIAPI
 UsbAsyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -285,6 +288,7 @@ Returns:
 // TDS 5.4
 //
 EFI_STATUS
+EFIAPI
 UsbSyncInterruptTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -316,6 +320,7 @@ Returns:
 // TDS 5.x
 //
 EFI_STATUS
+EFIAPI
 UsbAsyncIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -347,6 +352,7 @@ Returns:
 // TDS 5.x
 //
 EFI_STATUS
+EFIAPI
 UsbIsochronousTransferConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -378,6 +384,7 @@ Returns:
 // TDS 5.5
 //
 EFI_STATUS
+EFIAPI
 UsbGetDeviceDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -409,6 +416,7 @@ Returns:
 // TDS 5.6
 //
 EFI_STATUS
+EFIAPI
 UsbGetConfigDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -440,6 +448,7 @@ Returns:
 // TDS 5.7
 //
 EFI_STATUS
+EFIAPI
 UsbGetInterfaceDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -471,6 +480,7 @@ Returns:
 // TDS 5.8
 //
 EFI_STATUS
+EFIAPI
 UsbGetEndpointDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -502,6 +512,7 @@ Returns:
 // TDS 5.9
 //
 EFI_STATUS
+EFIAPI
 UsbPortResetConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -533,6 +544,7 @@ Returns:
 // TDS 5.10
 //
 EFI_STATUS
+EFIAPI
 UsbGetStringDescriptorConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

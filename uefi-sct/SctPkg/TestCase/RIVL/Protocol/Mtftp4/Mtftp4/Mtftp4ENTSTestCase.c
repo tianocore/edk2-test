@@ -43,6 +43,7 @@ ENTS_ARG_FIELD  gMtftp4GetModeDataArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -98,6 +99,7 @@ ENTS_ARG_FIELD                gMtftp4ConfigureArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -183,6 +185,7 @@ ENTS_ARG_FIELD                  gMtftp4GetInfoArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4GetInfo_EntsTest (
   VOID *ClientInterface
   )
@@ -259,6 +262,7 @@ ENTS_ARG_FIELD            gMtftp4ParseOptionsArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4ParseOptions_EntsTest (
   VOID *ClientInterface
   )
@@ -435,6 +439,7 @@ ENTS_ARG_FIELD                      gMtftp4ReadFileArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4ReadFile_EntsTest (
   VOID *ClientInterface
   )
@@ -619,6 +624,7 @@ ENTS_ARG_FIELD                      gMtftp4WriteFileArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4WriteFile_EntsTest (
   VOID *ClientInterface
   )
@@ -812,6 +818,7 @@ ENTS_ARG_FIELD                      gMtftp4ReadDirectoryArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4ReadDirectory_EntsTest (
   VOID *ClientInterface
   )
@@ -882,6 +889,7 @@ ENTS_ARG_FIELD    gMtftp4PollArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 Mtftp4Poll_EntsTest (
   VOID *ClientInterface
   )

@@ -40,6 +40,7 @@ Abstract:
 // External functions declarations
 //
 EFI_STATUS
+EFIAPI
 EftpDispatchFileTransferComd (
   ENTS_CMD_TYPE Operation
   )

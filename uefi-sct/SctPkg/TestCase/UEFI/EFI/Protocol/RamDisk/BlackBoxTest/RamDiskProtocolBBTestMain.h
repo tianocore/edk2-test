@@ -68,6 +68,7 @@ UnloadBBTestRamDiskProtocol (
 // Prototypes: Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -77,6 +78,7 @@ BBTestRegisterRamDiskFunctionTest (
   
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -86,6 +88,7 @@ BBTestUnregisterRamDiskFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegisterRamDiskConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -95,6 +98,7 @@ BBTestRegisterRamDiskConformanceTest (
   
   
 EFI_STATUS
+EFIAPI
 BBTestUnregisterRamDiskConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

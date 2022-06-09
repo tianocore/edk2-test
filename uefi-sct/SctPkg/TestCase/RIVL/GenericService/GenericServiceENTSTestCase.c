@@ -53,6 +53,7 @@ ENTS_ARG_FIELD  gGSMemCmpArgField[] = {
 };
 
 EFI_STATUS
+EFIAPI
 GS_MemCmp_EntsTest (
   VOID *ClientInterface
   )

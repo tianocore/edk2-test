@@ -89,6 +89,7 @@ UnloadPkcs7VerifyBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestVerifyBufferConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -97,6 +98,7 @@ BBTestVerifyBufferConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestVerifySignatureConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -105,6 +107,7 @@ BBTestVerifySignatureConformanceTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestVerifyBufferFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -113,6 +116,7 @@ BBTestVerifyBufferFunctionTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestVerifySignatureFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

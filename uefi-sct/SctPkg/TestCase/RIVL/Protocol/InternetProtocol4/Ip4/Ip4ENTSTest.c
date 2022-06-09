@@ -76,6 +76,7 @@ ENTS_INTERFACE    gIp4EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gIp4EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Ip4ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -158,6 +159,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Ip4ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

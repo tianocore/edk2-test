@@ -29,6 +29,7 @@ Abstract:
 #include "Eas.h"
 
 EFI_STATUS
+EFIAPI
 RT_GetVariable_EntsTest (
   VOID *ClientInterface
   )
@@ -50,6 +51,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 RT_GetNextVariableName_EntsTest (
   VOID *ClientInterface
   )
@@ -71,6 +73,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 RT_SetVariable_EntsTest (
   VOID *ClientInterface
   )

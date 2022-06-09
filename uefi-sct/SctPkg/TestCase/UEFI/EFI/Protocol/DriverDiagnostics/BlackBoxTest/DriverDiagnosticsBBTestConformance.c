@@ -100,6 +100,7 @@ CHAR8     IsoLatinTable[][4] = {
 // TDS 7.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -157,6 +158,7 @@ BBTestRunDiagnosticsConformanceTest (
 // 7.2.1.2.1  Call RunDiagnostic() with invalid parameters
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS_PROTOCOL       *DriverDiagnostics
@@ -388,6 +390,7 @@ BBTestRunDiagnosticsConformanceTestCheckpoint1 (
 // 7.2.1.2.2  Call RunDiagnostic() with all unsupported languages
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS_PROTOCOL       *DriverDiagnostics
@@ -491,6 +494,7 @@ BBTestRunDiagnosticsConformanceTestCheckpoint2 (
 // 7.2.1.2.3  Call RunDiagnostic() with unsupported controller
 //
 EFI_STATUS
+EFIAPI
 BBTestRunDiagnosticsConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_DRIVER_DIAGNOSTICS_PROTOCOL       *DriverDiagnostics

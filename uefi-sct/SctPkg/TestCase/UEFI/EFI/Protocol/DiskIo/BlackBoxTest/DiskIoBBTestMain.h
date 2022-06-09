@@ -59,6 +59,7 @@ BBTestDiskIoProtocolUnload (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -68,6 +69,7 @@ BBTestReadDiskConformanceAutoTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -80,6 +82,7 @@ BBTestWriteDiskConformanceAutoTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -88,6 +91,7 @@ BBTestReadDiskFunctionAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -100,6 +104,7 @@ BBTestWriteDiskFunctionAutoTest (
 //
 
 EFI_STATUS
+EFIAPI
 BBTestReadDiskStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -108,6 +113,7 @@ BBTestReadDiskStressAutoTest (
   );
 
 EFI_STATUS
+EFIAPI
 BBTestWriteDiskStressAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

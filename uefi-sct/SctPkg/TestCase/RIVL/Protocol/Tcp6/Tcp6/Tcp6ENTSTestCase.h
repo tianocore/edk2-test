@@ -37,6 +37,7 @@ Abstract:
 #include <UEFI/Protocol/Tcp6.h>
 
 EFI_STATUS
+EFIAPI
 Tcp6GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -58,6 +59,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -79,6 +81,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Connect_EntsTest (
   VOID *ClientInterface
   )
@@ -100,6 +103,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Accept_EntsTest (
   VOID *ClientInterface
   )
@@ -121,6 +125,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -142,6 +147,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -163,6 +169,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Close_EntsTest (
   VOID *ClientInterface
   )
@@ -184,6 +191,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -205,6 +213,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp6Poll_EntsTest (
   VOID *ClientInterface
   )

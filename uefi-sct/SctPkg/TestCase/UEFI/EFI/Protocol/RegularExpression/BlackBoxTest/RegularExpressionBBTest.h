@@ -81,6 +81,7 @@ BBTestRegularExpressionUnload (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegExGetInfoFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -90,6 +91,7 @@ BBTestRegExGetInfoFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -99,6 +101,7 @@ BBTestMatchStringFunctionTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestRegExGetInfoFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -106,6 +109,7 @@ BBTestRegExGetInfoFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringFunctionTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -113,6 +117,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringFunctionTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -120,6 +125,7 @@ BBTestMatchStringFunctionTestCheckpoint2 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -129,6 +135,7 @@ BBTestGetInfoConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -138,6 +145,7 @@ BBTestMatchStringConformanceTest (
 
 
 EFI_STATUS
+EFIAPI
 BBTestGetInfoConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -145,6 +153,7 @@ BBTestGetInfoConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression
@@ -152,6 +161,7 @@ BBTestMatchStringConformanceTestCheckpoint1 (
 
 
 EFI_STATUS
+EFIAPI
 BBTestMatchStringConformanceTestCheckpoint2 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_REGULAR_EXPRESSION_PROTOCOL       *RegularExpression

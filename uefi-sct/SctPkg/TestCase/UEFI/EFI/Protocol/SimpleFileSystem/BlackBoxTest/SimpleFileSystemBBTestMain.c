@@ -429,6 +429,7 @@ InitializeBBTestSimpleFileSystem (
  *  @return EFI_SUCCESS Indicates the interface was Uninstalled
 */
 EFI_STATUS
+EFIAPI
 BBTestSimpleFileSystemUnload (
   IN EFI_HANDLE       ImageHandle
   )

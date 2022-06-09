@@ -81,6 +81,7 @@ BBTestExeModeUnload (
 // TDS 3.1
 //
 EFI_STATUS
+EFIAPI
 BBTestFpuControlWordTest (
     IN EFI_BB_TEST_PROTOCOL       *This, 
     IN VOID                       *ClientInterface,    
@@ -92,6 +93,7 @@ BBTestFpuControlWordTest (
 // TDS 3.2
 //
 EFI_STATUS
+EFIAPI
 BBTestMxCsrTest (
     IN EFI_BB_TEST_PROTOCOL       *This, 
     IN VOID                       *ClientInterface,    

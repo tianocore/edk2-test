@@ -134,6 +134,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 EftpBuildRrq (
   IN EFTP_IO_PRIVATE  *Private,
   IN UINT16           OpCode
@@ -198,7 +199,8 @@ Returns:
   None
 
 --*/
-;
+
+;
 
 VOID
 EftpRrqCleanUp (

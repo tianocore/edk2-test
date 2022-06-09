@@ -37,6 +37,7 @@ References:
 // TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 BBTestQueryModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -263,6 +264,7 @@ Returns:
 // TDS 4.2.3
 //
 EFI_STATUS
+EFIAPI
 BBTestBltConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -404,6 +406,7 @@ Returns:
 // TDS 4.2.2
 //
 EFI_STATUS
+EFIAPI
 BBTestSetModeConformanceAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

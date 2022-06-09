@@ -40,6 +40,7 @@ Abstract:
 // TDS 4.1
 //
 EFI_STATUS
+EFIAPI
 BBTestStartFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -147,6 +148,7 @@ BBTestStartFunctionTest (
 // TDS 4.2
 //
 EFI_STATUS
+EFIAPI
 BBTestStopFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -252,6 +254,7 @@ BBTestStopFunctionTest (
 // TDS 4.3
 //
 EFI_STATUS
+EFIAPI
 BBTestInitializeFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -392,6 +395,7 @@ BBTestInitializeFunctionTest (
 // TDS 4.4
 //
 EFI_STATUS
+EFIAPI
 BBTestResetFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -580,6 +584,7 @@ BBTestResetFunctionTest (
 // TDS 4.5
 //
 EFI_STATUS
+EFIAPI
 BBTestShutdownFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -687,6 +692,7 @@ BBTestShutdownFunctionTest (
 // TDS 4.6
 //
 EFI_STATUS
+EFIAPI
 BBTestReceiveFilterFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -947,6 +953,7 @@ BBTestReceiveFilterFunctionTest (
 // TDS 4.7
 //
 EFI_STATUS
+EFIAPI
 BBTestStationAddressFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1105,6 +1112,7 @@ BBTestStationAddressFunctionTest (
 // TDS 4.8
 //
 EFI_STATUS
+EFIAPI
 BBTestStatisticsFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1275,6 +1283,7 @@ BBTestStatisticsFunctionTest (
 // TDS 4.9
 //
 EFI_STATUS
+EFIAPI
 BBTestMCastIpToMacFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1409,6 +1418,7 @@ BBTestMCastIpToMacFunctionTest (
 // TDS 4.10
 //
 EFI_STATUS
+EFIAPI
 BBTestNVDataFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1647,6 +1657,7 @@ End:
 // TDS 4.11
 //
 EFI_STATUS
+EFIAPI
 BBTestGetStatusFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1944,6 +1955,7 @@ BBTestGetStatusFunctionTest (
 // TDS 4.12
 //
 EFI_STATUS
+EFIAPI
 BBTestTransmitFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2222,6 +2234,7 @@ BBTestTransmitFunctionTest (
 // TDS 4.13
 //
 EFI_STATUS
+EFIAPI
 BBTestReceiveFunctionTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

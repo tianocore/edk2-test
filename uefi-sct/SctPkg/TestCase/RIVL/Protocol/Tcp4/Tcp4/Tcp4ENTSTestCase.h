@@ -31,6 +31,7 @@ Abstract:
 #include <UEFI/Protocol/Tcp4.h>
 
 EFI_STATUS
+EFIAPI
 Tcp4GetModeData_EntsTest (
   VOID *ClientInterface
   )
@@ -52,6 +53,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Configure_EntsTest (
   VOID *ClientInterface
   )
@@ -73,6 +75,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Routes_EntsTest (
   VOID *ClientInterface
   )
@@ -94,6 +97,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Connect_EntsTest (
   VOID *ClientInterface
   )
@@ -115,6 +119,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Accept_EntsTest (
   VOID *ClientInterface
   )
@@ -136,6 +141,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Transmit_EntsTest (
   VOID *ClientInterface
   )
@@ -157,6 +163,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Receive_EntsTest (
   VOID *ClientInterface
   )
@@ -178,6 +185,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Close_EntsTest (
   VOID *ClientInterface
   )
@@ -199,6 +207,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Cancel_EntsTest (
   VOID *ClientInterface
   )
@@ -220,6 +229,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Tcp4Poll_EntsTest (
   VOID *ClientInterface
   )

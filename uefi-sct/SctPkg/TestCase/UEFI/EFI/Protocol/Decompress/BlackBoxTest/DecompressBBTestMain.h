@@ -40,6 +40,7 @@ Abstract:
 //TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 GetInfo_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -51,6 +52,7 @@ GetInfo_Func (
 //TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 Decompress_Func (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -62,6 +64,7 @@ Decompress_Func (
 //TDS 4.2.1
 //
 EFI_STATUS
+EFIAPI
 GetInfo_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -73,6 +76,7 @@ GetInfo_Conf (
 //TDS 4.2.2
 //
 EFI_STATUS
+EFIAPI
 Decompress_Conf (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

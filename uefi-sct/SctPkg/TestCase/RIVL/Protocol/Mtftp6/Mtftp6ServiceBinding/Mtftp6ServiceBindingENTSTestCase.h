@@ -34,6 +34,7 @@ Abstract:
 #include <UEFI/Protocol/Mtftp6.h>
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingCreateChild_EntsTest (
   VOID *ClientInterface
   )
@@ -56,6 +57,7 @@ Returns:
 ;
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingDestroyChild_EntsTest (
   VOID *ClientInterface
   )

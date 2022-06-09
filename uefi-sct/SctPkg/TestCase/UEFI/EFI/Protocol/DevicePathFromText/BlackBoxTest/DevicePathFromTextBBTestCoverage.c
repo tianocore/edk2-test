@@ -1458,7 +1458,7 @@ CreateiScsiDeviceNode (
                                                         );
   SctUnicodeToAscii (iSCSI->iSCSITargetName, NameStr, SctStrLen (NameStr));
   iSCSI->TargetPortalGroupTag = (UINT16) SctStrToUInt (PortalGroupStr);
-  StrToUInt8Array(LunStr, &LunNum);
+  StrToUInt8Array(LunStr, (UINT8 *)&LunNum);
   iSCSI->Lun = LunNum;
 
   Options = 0x0000;
@@ -1734,13 +1734,13 @@ CreateDNSDeviceNode (
   }
 
   if (DNS->IsIPv6 == 0) {
-    SctStrToIPv4Addr (&IpStr1, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH));
-    SctStrToIPv4Addr (&IpStr2, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS));
+    SctStrToIPv4Addr (&IpStr1, (EFI_IPv4_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH)));
+    SctStrToIPv4Addr (&IpStr2, (EFI_IPv4_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
   }
 
   if (DNS->IsIPv6 == 1) {
-    SctStrToIPv6Addr (&IpStr1, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH));
-    SctStrToIPv6Addr (&IpStr2, (UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS));
+    SctStrToIPv6Addr (&IpStr1, (EFI_IPv6_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH)));
+    SctStrToIPv6Addr (&IpStr2, (EFI_IPv6_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
   }
 
   return (EFI_DEVICE_PATH_PROTOCOL *) DNS;
@@ -2133,6 +2133,7 @@ CreateMediaRelativeOffsetRangeDeviceNode (
 // TDS 3.10.1
 //
 EFI_STATUS
+EFIAPI
 DevicePathFromTextConvertTextToDeviceNodeCoverageTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -3802,6 +3803,7 @@ CreateFloppyDevicePath (
 // TDS 3.10.2
 //
 EFI_STATUS
+EFIAPI
 DevicePathFromTextConvertTextToDevicePathCoverageTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

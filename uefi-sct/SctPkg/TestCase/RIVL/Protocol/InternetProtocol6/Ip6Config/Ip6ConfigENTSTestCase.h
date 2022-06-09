@@ -34,21 +34,25 @@ Abstract:
 #include <UEFI/Protocol/Ip6.h>
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigSetData_EntsTest (
   VOID *ClientInterface
   );
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigGetData_EntsTest (
   VOID *ClientInterface
   );
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigRegisterDataNotify_EntsTest (
   VOID *ClientInterface
   );
 
 EFI_STATUS
+EFIAPI
 Ip6ConfigUnregisterDataNotify_EntsTest (
   VOID *ClientInterface
   );

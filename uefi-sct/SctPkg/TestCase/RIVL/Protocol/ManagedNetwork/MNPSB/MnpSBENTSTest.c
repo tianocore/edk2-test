@@ -46,6 +46,7 @@ ENTS_INTERFACE    gMnpServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gMnpServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 MnpSBENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -137,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 MnpSBENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

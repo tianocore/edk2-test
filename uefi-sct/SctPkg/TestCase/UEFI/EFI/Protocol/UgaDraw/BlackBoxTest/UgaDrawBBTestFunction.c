@@ -45,6 +45,7 @@ UINTN                    DemoColorDepthMax ;
 // TDS 4.1.1
 //
 EFI_STATUS
+EFIAPI
 BBTestGetModeFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -726,6 +727,7 @@ BBTestGetModeFunctionAutoTest (
 // TDS 4.1.2
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoFillFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -1321,6 +1323,7 @@ BBTestEfiUgaVideoFillFunctionAutoTest (
 // TDS 4.1.3
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoBltBufferFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -2029,6 +2032,7 @@ BBTestEfiUgaVideoBltBufferFunctionAutoTest (
 // TDS 4.1.4
 //
 EFI_STATUS
+EFIAPI
 BBTestEfiUgaVideoToVideoFunctionAutoTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

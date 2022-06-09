@@ -81,6 +81,7 @@ ENTS_INTERFACE    gDhcp4EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gDhcp4EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Dhcp4ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
@@ -163,6 +164,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Dhcp4ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )
