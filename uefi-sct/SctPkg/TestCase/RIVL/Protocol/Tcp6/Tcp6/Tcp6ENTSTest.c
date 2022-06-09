@@ -81,12 +81,14 @@ ENTS_INTERFACE    gTcp6EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gTcp6EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Tcp6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 Tcp6ENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -163,6 +165,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Tcp6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

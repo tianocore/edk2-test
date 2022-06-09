@@ -39,6 +39,7 @@ Abstract:
 extern EFI_INSTRUCTION_SET_ARCHITECTURE PlatformIsa;
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestDebugSupport (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

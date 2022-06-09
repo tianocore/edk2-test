@@ -46,6 +46,7 @@ Abstract:
 //
 //
 EFI_STATUS
+EFIAPI
 InitializePartitionInfoBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable

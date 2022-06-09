@@ -46,6 +46,7 @@ extern   CHAR16                  *mAttribStr[];
 #define SIMPLE_TEXT_OUTPUT_PROTOCOL_TEST_REVISION 0x00010001
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestSimpleTextOutput (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

@@ -77,6 +77,7 @@ Abstract:
 //
 //
 EFI_STATUS
+EFIAPI
 InitializeHIIStringBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
@@ -84,6 +85,7 @@ InitializeHIIStringBBTest (
   
   
 EFI_STATUS
+EFIAPI
 UnloadHIIStringBBTest (
   IN EFI_HANDLE                   ImageHandle
   );
@@ -93,6 +95,7 @@ UnloadHIIStringBBTest (
 //Test Cases
 //
 EFI_STATUS
+EFIAPI
 BBTestNewStringConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,

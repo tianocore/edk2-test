@@ -52,6 +52,7 @@ MnpSBENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 MnpSBENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

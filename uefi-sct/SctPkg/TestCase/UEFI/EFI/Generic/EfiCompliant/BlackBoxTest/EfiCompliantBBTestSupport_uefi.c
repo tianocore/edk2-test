@@ -31,7 +31,7 @@ Abstract:
 // Module variables
 //
 
-UINT32  mCrcTable[256] = {
+STATIC UINT32  mCrcTable[256] = {
   0x00000000,
   0x77073096,
   0xEE0E612C,

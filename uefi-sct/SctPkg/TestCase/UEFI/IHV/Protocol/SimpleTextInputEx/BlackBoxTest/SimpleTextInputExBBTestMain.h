@@ -92,6 +92,7 @@ typedef enum {
 //
 //
 EFI_STATUS
+EFIAPI
 InitializeSimpleTextInputExBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable

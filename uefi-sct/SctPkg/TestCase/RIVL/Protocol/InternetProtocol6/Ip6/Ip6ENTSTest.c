@@ -82,12 +82,14 @@ ENTS_INTERFACE    gIp6EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gIp6EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Ip6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 Ip6ENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -163,6 +165,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Ip6ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

@@ -77,6 +77,7 @@ ArpENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 ArpENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

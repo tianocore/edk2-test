@@ -82,6 +82,7 @@ Ip4ENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 Ip4ENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

@@ -52,6 +52,7 @@ Udp4ServiceBindingENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 Udp4ServiceBindingENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

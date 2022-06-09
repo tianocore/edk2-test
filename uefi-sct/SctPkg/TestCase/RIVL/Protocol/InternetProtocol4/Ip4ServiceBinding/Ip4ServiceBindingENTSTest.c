@@ -46,12 +46,14 @@ ENTS_INTERFACE    gIp4ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gIp4ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -136,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Ip4ServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

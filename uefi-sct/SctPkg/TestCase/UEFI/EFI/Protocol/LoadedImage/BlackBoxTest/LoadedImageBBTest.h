@@ -73,6 +73,7 @@ typedef struct {
 // Functions definitions
 //
 EFI_STATUS
+EFIAPI
 InitializeBBTestLoadedImageProtocol (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

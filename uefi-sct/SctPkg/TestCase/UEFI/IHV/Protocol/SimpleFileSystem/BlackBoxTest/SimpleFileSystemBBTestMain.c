@@ -400,6 +400,7 @@ EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
  *  @return EFI_INVALID_PARAMETER: One of the parameters has an invalid value.
  */
 EFI_STATUS
+EFIAPI
 InitializeBBTestSimpleFileSystem (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
