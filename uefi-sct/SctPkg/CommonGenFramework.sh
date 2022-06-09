@@ -222,6 +222,10 @@ then
     cp $ProcessorType/PartitionInfoBBTest.efi                  $Framework/Test/ > NUL
     cp $ProcessorType/UFSDeviceConfigBBTest.efi                $Framework/Test/ > NUL
     cp $ProcessorType/ResetNotificationBBTest.efi              $Framework/Test/ > NUL
+    # Only include RiscVBootProtocolBBTest.efi if the file exists (true on RISCV64)
+    if [ -e $ProcessorType/RiscVBootProtocolBBTest.efi ]; then
+      cp $ProcessorType/RiscVBootProtocolBBTest.efi              $Framework/Test/ > NUL
+    fi
 
     # *********************************************
     # Copy ENTS binary
