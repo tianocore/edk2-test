@@ -257,6 +257,7 @@ BBTestSimpleTextOutputProtocolUnload (
  *  @return EFI_SUCCESS the driver is loaded successfully.
  */
 EFI_STATUS
+EFIAPI
 InitializeBBTestSimpleTextOutput (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

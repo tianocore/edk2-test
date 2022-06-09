@@ -75,12 +75,14 @@ ENTS_INTERFACE    gMtftp4EntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gMtftp4EntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Mtftp4ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 Mtftp4ENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -157,6 +159,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Mtftp4ENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

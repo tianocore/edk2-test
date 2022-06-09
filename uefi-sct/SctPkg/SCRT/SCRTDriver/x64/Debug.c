@@ -26,15 +26,6 @@ UINTN                 mHandOffPtr        =  0;
 EFI_PHYSICAL_ADDRESS  mIoPortSpaceAddress = 0;
 
 VOID
-EFIAPI
-MemoryFence (
-  VOID
-  )
-{
-  //TODO: Please implement me!
-}
-
-VOID
 UartReadWrite (
   IN BOOLEAN                 ReadFlag,
   IN EFI_PHYSICAL_ADDRESS    Address,

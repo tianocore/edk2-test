@@ -66,6 +66,7 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
 
 
 EFI_STATUS
+EFIAPI
 InitializePartitionInfoBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable

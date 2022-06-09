@@ -46,12 +46,14 @@ ENTS_INTERFACE    gHttpServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gHttpServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -136,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 HttpServiceBindingENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

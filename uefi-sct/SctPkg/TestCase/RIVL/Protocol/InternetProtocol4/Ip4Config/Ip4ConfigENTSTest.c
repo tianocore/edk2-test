@@ -52,12 +52,14 @@ ENTS_INTERFACE    gIp4ConfigEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gIp4ConfigEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Ip4ConfigENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 Ip4ConfigENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -133,6 +135,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Ip4ConfigENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

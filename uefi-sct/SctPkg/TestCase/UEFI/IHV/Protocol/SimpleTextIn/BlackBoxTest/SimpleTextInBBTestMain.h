@@ -64,6 +64,7 @@ extern   UINT8                  UnprintableKeyCheckingMap[][6];
 extern   CHAR16                 *UnprintableKeySymbol[];
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestSimpleTextIn (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

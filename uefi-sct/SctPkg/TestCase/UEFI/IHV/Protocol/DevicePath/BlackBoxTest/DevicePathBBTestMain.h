@@ -39,6 +39,7 @@ Abstract:
   { 0xac7b0fd0, 0x884d, 0x45a8, 0x9d, 0x90, 0x99, 0x2a, 0x41, 0xa7, 0x88, 0x09 }
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestDevicePath (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

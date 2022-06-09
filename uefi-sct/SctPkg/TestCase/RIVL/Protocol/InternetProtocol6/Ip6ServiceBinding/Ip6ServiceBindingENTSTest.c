@@ -54,6 +54,7 @@ Ip6ServiceBindingENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 Ip6ServiceBindingENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

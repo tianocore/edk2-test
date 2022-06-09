@@ -38,6 +38,7 @@ Abstract:
 #define DEVICE_PATH_PROTOCOL_TEST_REVISION  0x00010001
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestDevicePathFromTextProtocol (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

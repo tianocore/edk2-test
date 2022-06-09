@@ -67,6 +67,7 @@ typedef struct {
 
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestDevicePathToTextProtocol (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

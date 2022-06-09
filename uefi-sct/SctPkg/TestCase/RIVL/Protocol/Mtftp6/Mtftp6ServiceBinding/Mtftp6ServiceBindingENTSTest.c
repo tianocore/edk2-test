@@ -53,6 +53,7 @@ Mtftp6ServiceBindingENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 Mtftp6ServiceBindingENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

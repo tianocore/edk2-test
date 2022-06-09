@@ -46,6 +46,7 @@ extern   CHAR16                  *mAttribStr[];
   { 0x3395ddfa, 0xb843, 0x4fb2, 0xbc, 0x81, 0x10, 0xab, 0x95, 0xff, 0x87, 0x34 }
 
 EFI_STATUS
+EFIAPI
 InitializeBBTestSimpleTextOutput (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable

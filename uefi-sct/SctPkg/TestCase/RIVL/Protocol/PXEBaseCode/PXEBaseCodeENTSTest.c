@@ -110,12 +110,14 @@ ENTS_INTERFACE    gPXEBaseCodeEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gPXEBaseCodeEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -191,6 +193,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 PXEBaseCodeENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

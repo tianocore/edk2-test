@@ -46,12 +46,14 @@ ENTS_INTERFACE    gDhcp4ServiceBindingEntsInterfaceList[] = {
 EFI_ENTS_PROTOCOL *gDhcp4ServiceBindingEntsProtocolInterface = NULL;
 
 EFI_STATUS
+EFIAPI
 Dhcp4SBENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   );
 
 
 EFI_STATUS
+EFIAPI
 Dhcp4SBENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable
@@ -136,6 +138,7 @@ Error:
 }
 
 EFI_STATUS
+EFIAPI
 Dhcp4SBENTSTestUnload (
   IN EFI_HANDLE                ImageHandle
   )

@@ -87,6 +87,7 @@ Dhcp4ENTSTestUnload (
 
 
 EFI_STATUS
+EFIAPI
 Dhcp4ENTSTestMain (
   IN EFI_HANDLE                ImageHandle,
   IN EFI_SYSTEM_TABLE          *SystemTable

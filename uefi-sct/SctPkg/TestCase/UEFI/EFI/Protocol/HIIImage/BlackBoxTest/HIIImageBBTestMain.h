@@ -79,6 +79,7 @@ Abstract:
 //
 //
 EFI_STATUS
+EFIAPI
 InitializeHIIImageBBTest (
   IN EFI_HANDLE                   ImageHandle,
   IN EFI_SYSTEM_TABLE             *SystemTable
