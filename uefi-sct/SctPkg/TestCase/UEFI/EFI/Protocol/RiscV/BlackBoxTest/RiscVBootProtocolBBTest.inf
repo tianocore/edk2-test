@@ -1,0 +1,50 @@
+## @file
+#
+#  Copyright (c) 2022, Ventana Micro Systems Inc. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+#/*++
+#
+# Module Name:
+#
+#   RiscVBootProtocolBBTest.inf
+#
+# Abstract:
+#
+#   Component description file for RISC-V Boot Protocol Black-Box Test.
+#
+#--*/
+
+[defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = RiscVBootProtocolBBTest
+  FILE_GUID            = DC33F790-D1EE-41A7-A114-1DF84FF7110B
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeBBTestRiscVBootProtocol
+
+[sources.common]
+  RiscVBootProtocolBBTestConformance.c
+  RiscVBootProtocolBBTestFunction.c
+  RiscVBootProtocolBBTestMain.c
+  Guid.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SctLib
+  EfiTestLib
+
+[Protocols]
