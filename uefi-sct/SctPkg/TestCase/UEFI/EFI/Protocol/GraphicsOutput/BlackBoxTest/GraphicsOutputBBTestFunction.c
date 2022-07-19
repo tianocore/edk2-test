@@ -125,11 +125,20 @@ Returns:
     } else {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
       if (Info != NULL) {
-        if (SctCompareMem (
-            (void *) Info,
-            (void *) GraphicsOutput->Mode->Info,
-            sizeof (EFI_GRAPHICS_OUTPUT_MODE_INFORMATION)
-            ) != 0) {
+        //
+        // PixelInformation is checked only if PixelFormat is PixelBitMask
+        //
+        if ( Info->Version              != GraphicsOutput->Mode->Info->Version
+          || Info->HorizontalResolution != GraphicsOutput->Mode->Info->HorizontalResolution
+          || Info->VerticalResolution   != GraphicsOutput->Mode->Info->VerticalResolution
+          || Info->PixelFormat          != GraphicsOutput->Mode->Info->PixelFormat
+          || Info->PixelsPerScanLine    != GraphicsOutput->Mode->Info->PixelsPerScanLine
+          || ( Info->PixelFormat == PixelBitMask
+            && ( Info->PixelInformation.RedMask      != GraphicsOutput->Mode->Info->PixelInformation.RedMask
+              || Info->PixelInformation.GreenMask    != GraphicsOutput->Mode->Info->PixelInformation.GreenMask
+              || Info->PixelInformation.BlueMask     != GraphicsOutput->Mode->Info->PixelInformation.BlueMask
+              || Info->PixelInformation.ReservedMask != GraphicsOutput->Mode->Info->PixelInformation.ReservedMask)))
+        {
           AssertionType = EFI_TEST_ASSERTION_FAILED;
         }
       } else {
