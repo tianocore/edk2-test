@@ -827,7 +827,7 @@ BBTestStallInterfaceTest (
       StartTime = Epoch;
     OldTpl = gtBS->RaiseTPL (TplArray[Index]);
     Status = gtBS->Stall (
-                     10000000
+                     4000000
                      );
     gtBS->RestoreTPL (OldTpl);
     if (gtRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)

@@ -46,7 +46,7 @@ typedef struct _RESET_DATA {
  { 0xA6033499, 0xE4AF, 0x44f5, {0x9D, 0x16, 0x30, 0x78, 0xD8, 0x61, 0x32, 0x28 }}
 
 #define TPL_ARRAY_SIZE 3
-#define MAX_SECOND_MARGIN 2
+#define MAX_SECOND_MARGIN 1
 
 //
 // Change size from TPL_ARRAY_SIZE to TPL_ARRAY_SIZE + 1
