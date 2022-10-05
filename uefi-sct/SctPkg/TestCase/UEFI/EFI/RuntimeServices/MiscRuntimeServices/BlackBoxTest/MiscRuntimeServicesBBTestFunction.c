@@ -463,7 +463,7 @@ BBTestQueryCapsuleCapabilitiesTest (
 
   CapsuleHeaderArray[0] = (EFI_CAPSULE_HEADER *) AllocatedBuffer;
   CapsuleHeaderArray[1] = NULL;
-  CapsuleHeaderArray[0]->CapsuleGuid = mEfiCapsuleHeaderGuid;
+  CapsuleHeaderArray[0]->CapsuleGuid = gWindowsUxCapsuleGuid;
   CapsuleHeaderArray[0]->CapsuleImageSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[0]->HeaderSize = sizeof(EFI_CAPSULE_HEADER);
 
