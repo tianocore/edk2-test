@@ -827,7 +827,7 @@ BBTestStallInterfaceTest (
       StartTime = Epoch;
     OldTpl = gtBS->RaiseTPL (TplArray[Index]);
     Status = gtBS->Stall (
-                     4000000^M
+                     4000000
                      );
     gtBS->RestoreTPL (OldTpl);
     if (gtRT->GetTime (&EndTime, NULL) != EFI_SUCCESS)
@@ -845,7 +845,7 @@ BBTestStallInterfaceTest (
                    (Index == 1? \
                     gMiscBootServicesBBTestFunctionAssertionGuid021: \
                     gMiscBootServicesBBTestFunctionAssertionGuid022),
-                   L"BS.Stall - 4 seconds",^M
+                   L"BS.Stall - 4 seconds",
                    L"%a:%d:Status - %r, TPL - %d",
                    __FILE__,
                    (UINTN)__LINE__,
@@ -853,8 +853,8 @@ BBTestStallInterfaceTest (
                    TplArray[Index]
                    );
     SecondsElapsed = GetSecondsElapsed (&StartTime, &EndTime);
-    if ((SecondsElapsed <= 4 + MAX_SECOND_MARGIN) &&^M
-         (SecondsElapsed >= 4 - MAX_SECOND_MARGIN)) {^M
+    if ((SecondsElapsed <= 4 + MAX_SECOND_MARGIN) &&
+         (SecondsElapsed >= 4 - MAX_SECOND_MARGIN)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
