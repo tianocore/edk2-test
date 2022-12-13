@@ -3,6 +3,7 @@
 #  Copyright 2006 - 2016 Unified EFI, Inc.<BR>
 #  Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
 #  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
+#  Copyright (c) 2023, Loongson Technology Corporation Limited. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -43,6 +44,10 @@
 [sources.RISCV64]
   Riscv64/VirtualMemory.c
   Riscv64/GoVirtual.S | GCC
+
+[sources.LOONGARCH64]
+  LoongArch64/VirtualMemory.c
+  LoongArch64/GoVirtual.S | GCC
 
 [sources.ia32]
   ia32/VirtualMemory.c

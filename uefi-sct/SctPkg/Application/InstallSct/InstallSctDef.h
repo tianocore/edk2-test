@@ -4,6 +4,7 @@
   Copyright (c) 2010 - 2017, Intel Corporation. All rights reserved.<BR>
   Portions copyright (c) 2014, ARM Ltd. All rights reserved.<BR>
   (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
+  Copyright (c) 2023, Loongson Technology Corporation Limited. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -36,6 +37,9 @@
 #elif defined(EFIRISCV64)
   #define INSTALL_SCT_PLATFORM_SHORT_NAME   L"riscv64"
   #define INSTALL_SCT_PLATFORM_NAME         L"RISCV64"
+#elif defined(EFILOONGARCH64)
+  #define INSTALL_SCT_PLATFORM_SHORT_NAME   L"loongarch64"
+  #define INSTALL_SCT_PLATFORM_NAME         L"LOONGARCH64"
 #else
   #error "Architecture not supported"
 #endif
