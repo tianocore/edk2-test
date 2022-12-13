@@ -4,6 +4,7 @@
 #  Copyright (c) 2010 - 2012, Intel Corporation. All rights reserved.<BR>
 #  Copyright (c) 2019, ARM Ltd. All rights reserved.<BR>
 #  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
+#  Copyright (c) 2023, Loongson Technology Corporation Limited. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -72,6 +73,11 @@
   Riscv64/PlatformIsa.c
   Riscv64/DebugSupportBBTestExceptionCallbackFunction.c
   Riscv64/DebugSupportBBTestCacheFunction.c
+
+[sources.LOONGARCH64]
+  LoongArch64/PlatformIsa.c
+  LoongArch64/DebugSupportBBTestExceptionCallbackFunction.c
+  LoongArch64/DebugSupportBBTestCacheFunction.c
 
 [Packages]
   SctPkg/SctPkg.dec

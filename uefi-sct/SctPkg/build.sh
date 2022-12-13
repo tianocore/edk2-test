@@ -25,6 +25,8 @@ function get_build_arch
 	        BUILD_ARCH=AARCH64;;
 	    riscv64*)
 	        BUILD_ARCH=RISCV64;;
+	    loongarch64*)
+	        BUILD_ARCH=LOONGARCH64;;
 	    *)
 	        BUILD_ARCH=other;;
 	esac
@@ -55,6 +57,12 @@ function set_cross_compile
 	        TEMP_CROSS_COMPILE="$CROSS_COMPILE_64"
 	    else
 	        TEMP_CROSS_COMPILE=riscv64-unknown-elf-
+	    fi
+	elif [ "$SCT_TARGET_ARCH" == "LOONGARCH64" ]; then
+	    if [ X"$CROSS_COMPILE_64" != X"" ]; then
+	        TEMP_CROSS_COMPILE="$CROSS_COMPILE_64"
+	    else
+	        TEMP_CROSS_COMPILE=loongarch64-unknown-linux-gnu-
 	    fi
 	else
 	    echo "Unsupported target architecture '$SCT_TARGET_ARCH'!" >&2
@@ -119,7 +127,7 @@ PrintUsage() {
 	#Print Help
 	#
 	echo "Usage:"
-	echo "    $0 <architecture (ARM, AARCH64, X64, RISCV64, etc)> \
+	echo "    $0 <architecture (ARM, AARCH64, X64, RISCV64, LOONGARCH64, etc)> \
 <toolchain name (RVCT or ARMGCC or GCC*)> \
 [build type (RELEASE OR DEBUG, DEFAULT: DEBUG)]"
 }
