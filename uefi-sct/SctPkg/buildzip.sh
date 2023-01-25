@@ -53,8 +53,15 @@ cp Build/UefiSct/RELEASE_GCC5/SctPackage${TARGET_ARCH}/SctStartup.nsh ${TARGET_A
 mkdir -p ${TARGET_ARCH}_SCT/Mde
 cp Build/MdeModule/RELEASE_GCC5/${TARGET_ARCH}/CapsuleApp.efi ${TARGET_ARCH}_SCT/Mde
 
-# Copy the SCT Parser tool into the repo
-cp sct_parser/* ${TARGET_ARCH}_SCT/SCT/Sequence/
+# Check if user has cloned edk-test-parser and buildzip.sh can access
+if [ ! -d "${pwd}edk2-test-parser" ]
+then
+        echo "edk2-test-parser repo is missing from current directory, please clone and try again"
+        exit
+fi
+
+# Copy edk2-test-parser tool into the repo
+cp -r edk2-test-parser/* ${TARGET_ARCH}_SCT/SCT/Sequence/
 
 # Put some version information into the ESP directory
 cat > ./${TARGET_ARCH}_SCT/versions.txt << EOF
