@@ -226,6 +226,7 @@ then
     if [ -e $ProcessorType/RiscVBootProtocolBBTest.efi ]; then
       cp $ProcessorType/RiscVBootProtocolBBTest.efi              $Framework/Test/ > NUL
     fi
+    cp $ProcessorType/TCGMORBBTest.efi                         $Framework/Test/ > NUL
 
     # *********************************************
     # Copy ENTS binary
