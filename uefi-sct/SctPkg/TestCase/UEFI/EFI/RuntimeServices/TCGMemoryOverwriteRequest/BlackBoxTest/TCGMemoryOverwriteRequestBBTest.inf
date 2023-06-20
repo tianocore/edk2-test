@@ -17,26 +17,26 @@
 #
 # Module Name:
 #
-#   TCGMORBBTest.inf
+#   TCGMemoryOverwriteRequestBBTest.inf
 #
 # Abstract:
 #
-#   Component description file for TCG MOR Test.
+#   Component description file for TCG MemoryOverwriteRequest UEFI variables Test.
 #
 #--*/
 
 [defines]
   INF_VERSION          = 0x00010005
-  BASE_NAME            = TCGMORBBTest
+  BASE_NAME            = TCGMemoryOverwriteRequestBBTest
   FILE_GUID            = ACA989CD-4AEE-45A3-B80F-E9A523BB7164
   MODULE_TYPE          = UEFI_DRIVER
   VERSION_STRING       = 1.0
-  ENTRY_POINT          = InitializeTestTCGMOR
+  ENTRY_POINT          = InitializeTestTCGMemoryOverwriteRequest
 
 [sources.common]
-  TCGMORBBTestMain.c
-  TCGMORBBTestMain.h
-  TCGMORBBTestFunction.c
+  TCGMemoryOverwriteRequestBBTestMain.c
+  TCGMemoryOverwriteRequestBBTestMain.h
+  TCGMemoryOverwriteRequestBBTestFunction.c
   Guid.c
 
 [Packages]

@@ -20,21 +20,21 @@ Module Name:
 
 Abstract:
 
-    for EFI Driver TCG MOR Basic Test
+    for EFI Driver TCG MemoryOverwriteRequest Test
 
 --*/
 #include "SctLib.h"
-#include "TCGMORBBTestMain.h"
+#include "TCGMemoryOverwriteRequestBBTestMain.h"
 
 EFI_GUID gEfiMemoryOverwriteControlDataGuid = MEMORY_ONLY_RESET_CONTROL_GUID;
 
 EFI_GUID gEfiMemoryOverwriteRequestControlLockGuid = MEMORY_OVERWRITE_REQUEST_CONTROL_LOCK_GUID;
 
-EFI_BB_TEST_PROTOCOL_FIELD gEfiTCGMORTestProtField = {
+EFI_BB_TEST_PROTOCOL_FIELD gEfiTCGMemoryOverwriteRequestTestProtocolField = {
   TCG_MOR_TEST_REVISION,
   EFI_TCG_MOR_TEST_GUID,
-  L"TCG MOR Test",
-  L"TCG MOR EFI Variable Functionality Test"
+  L"TCG MemoryOverwriteRequest Test",
+  L"TCG MemoryOverwriteRequest Functionality Test"
 };
 
 EFI_GUID gSupportProtocolGuid1[2] = {
@@ -42,27 +42,27 @@ EFI_GUID gSupportProtocolGuid1[2] = {
   EFI_NULL_GUID
 };
 
-EFI_BB_TEST_ENTRY_FIELD gLoadTCGMOREntryField[] = {
+EFI_BB_TEST_ENTRY_FIELD gLoadTCGMemoryOverwriteRequestEntryField[] = {
 
   {
     EFI_TCG_MOR_TEST_ENTRY_GUID0101,
-    L"Test-TCG MOR Platform Reset Check",
-    L"Test for MemoryOverwriteRequestControl EFI variable in accordance with TCG spec",
+    L"Test MOR and MORLOCK",
+    L"Test for MOR and MORLOCK EFI variables in accordance with TCG spec",
     EFI_TEST_LEVEL_DEFAULT,
     gSupportProtocolGuid1,
     EFI_TEST_CASE_AUTO,
-    BBTestTCGMORFunctionTest
+    BBTestTCGMemoryOverwriteRequestFunctionTest
   },
-
 
   EFI_NULL_GUID
 };
 
-EFI_BB_TEST_PROTOCOL *gTCGMORTestProt;
+EFI_BB_TEST_PROTOCOL *gTCGMemoryOverwriteRequestTestProt;
+
 
 EFI_STATUS
 EFIAPI
-UnloadTCGMORTest (
+UnloadTCGMemoryOverwriteRequestTest (
   IN EFI_HANDLE       ImageHandle
   );
 
@@ -76,7 +76,7 @@ UnloadTCGMORTest (
  */
 EFI_STATUS
 EFIAPI
-InitializeTestTCGMOR (
+InitializeTestTCGMemoryOverwriteRequest (
   IN EFI_HANDLE           ImageHandle,
   IN EFI_SYSTEM_TABLE     *SystemTable
   )
@@ -89,23 +89,27 @@ InitializeTestTCGMOR (
 
   return EfiInitAndInstallBBTestInterface (
            &ImageHandle,
-           &gEfiTCGMORTestProtField,
-           gLoadTCGMOREntryField,
-           UnloadTCGMORTest,
-           &gTCGMORTestProt
+           &gEfiTCGMemoryOverwriteRequestTestProtocolField,
+           gLoadTCGMemoryOverwriteRequestEntryField,
+           UnloadTCGMemoryOverwriteRequestTest,
+           &gTCGMemoryOverwriteRequestTestProt
            );
 }
 
 
-
+/**
+ *  Unloads the BlackBox Interface and the Entry Point list.
+ *  @param ImageHandle    The image handle.
+ *  @return EFI_SUCCESS   The interface was uninstalled successfully.
+ */
 EFI_STATUS
 EFIAPI
-UnloadTCGMORTest (
+UnloadTCGMemoryOverwriteRequestTest (
   IN EFI_HANDLE       ImageHandle
   )
 {
   return EfiUninstallAndFreeBBTestInterface (
            ImageHandle,
-           gTCGMORTestProt
+           gTCGMemoryOverwriteRequestTestProt
            );
 }
