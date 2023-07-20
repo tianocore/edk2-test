@@ -4118,7 +4118,69 @@ AllocateBuffer_Func (
   UINTN                                        AttributesNum;
   EFI_PCI_ROOT_BRIDGE_IO_DEVICE                *RBDev;
   EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL              *RootBridgeIo;
+  EFI_MEMORY_DESCRIPTOR                        *MemoryMap;
+  EFI_MEMORY_DESCRIPTOR                        *Entry;
+  UINTN                                        MemoryMapSize;
+  UINTN                                        MapKey;
+  UINTN                                        DescriptorSize;
+  UINT32                                       DescriptorVersion;
+  UINTN                                        Iterator;
+  BOOLEAN                                      UsableMemoryBelow4G;
 
+  //
+  // Obtain the memory map size
+  //
+  MemoryMapSize = 0;
+  Status = gBS->GetMemoryMap (
+                  &MemoryMapSize,
+                  NULL,
+                  &MapKey,
+                  &DescriptorSize,
+                  &DescriptorVersion
+                  );
+  ASSERT (Status == EFI_BUFFER_TOO_SMALL);
+ //
+ //Allocating a buffer for the memory map will change
+ //the memory map, so we increase the size here just in case
+ //
+ MemoryMapSize += EFI_PAGE_SIZE;
+ Status = gBS->AllocatePool (
+                  EfiLoaderData,
+                  MemoryMapSize,
+                  (VOID **)&MemoryMap
+                  );
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+  //
+  // Get the actual memory map
+  //
+  Status = gBS->GetMemoryMap (
+                  &MemoryMapSize,
+                  MemoryMap,
+                  &MapKey,
+                  &DescriptorSize,
+                  &DescriptorVersion
+                  );
+  if (EFI_ERROR (Status)) {
+    gBS->FreePool (MemoryMap);
+  }
+
+  //
+  // Check each entry in the memory map for free memory below 4 GiB and set
+  // UsableMemoryBelow4G accordingly
+  //
+ UsableMemoryBelow4G = FALSE;
+ for (Iterator = 0; Iterator < MemoryMapSize; Iterator += DescriptorSize) {
+    Entry = (EFI_MEMORY_DESCRIPTOR *)((UINTN)MemoryMap + Iterator);
+    if ( Entry->PhysicalStart < (EFI_PHYSICAL_ADDRESS)SIZE_4GB
+      && ( Entry->Type == EfiConventionalMemory || Entry->Type == EfiPersistentMemory))
+    {
+      UsableMemoryBelow4G = TRUE;
+      break;
+    }
+  }
+  gBS->FreePool (MemoryMap);
 
   AllocateType = 0;
 
@@ -4188,7 +4250,14 @@ AllocateBuffer_Func (
 
   for (MemoryTypeNum = 0; MemoryTypeNum < 2; MemoryTypeNum++) {
     for (AttributesNum = 0; AttributesNum < 8; AttributesNum++) {
-
+      //
+      // If there is no usable memory below 4 GiB, skip 32-bit allocations
+      //
+      if ( !UsableMemoryBelow4G
+        && !(Attributes[AttributesNum] & EFI_PCI_ATTRIBUTE_DUAL_ADDRESS_CYCLE))
+      {
+        continue;
+      }
       Status = RootBridgeIo->AllocateBuffer (
                                RootBridgeIo,
                                AllocateType,
@@ -4298,7 +4367,69 @@ FreeBuffer_Func (
   UINTN                                        AttributesNum;
   EFI_PCI_ROOT_BRIDGE_IO_DEVICE                *RBDev;
   EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL              *RootBridgeIo;
+  EFI_MEMORY_DESCRIPTOR                        *MemoryMap;
+  EFI_MEMORY_DESCRIPTOR                        *Entry;
+  UINTN                                        MemoryMapSize;
+  UINTN                                        MapKey;
+  UINTN                                        DescriptorSize;
+  UINT32                                       DescriptorVersion;
+  UINTN                                        Iterator;
+  BOOLEAN                                      UsableMemoryBelow4G;
 
+  //
+  // Obtain the memory map size
+  //
+  MemoryMapSize = 0;
+  Status = gBS->GetMemoryMap (
+                  &MemoryMapSize,
+                  NULL,
+                  &MapKey,
+                  &DescriptorSize,
+                  &DescriptorVersion
+                  );
+  ASSERT (Status == EFI_BUFFER_TOO_SMALL);
+ //
+ //Allocating a buffer for the memory map will change
+ //the memory map, so we increase the size here just in case
+ //
+ MemoryMapSize += EFI_PAGE_SIZE;
+ Status = gBS->AllocatePool (
+                  EfiLoaderData,
+                  MemoryMapSize,
+                  (VOID **)&MemoryMap
+                  );
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+  //
+  // Get the actual memory map
+  //
+  Status = gBS->GetMemoryMap (
+                  &MemoryMapSize,
+                  MemoryMap,
+                  &MapKey,
+                  &DescriptorSize,
+                  &DescriptorVersion
+                  );
+  if (EFI_ERROR (Status)) {
+    gBS->FreePool (MemoryMap);
+  }
+
+  //
+  // Check each entry in the memory map for free memory below 4 GiB and set
+  // UsableMemoryBelow4G accordingly
+  //
+ UsableMemoryBelow4G = FALSE;
+ for (Iterator = 0; Iterator < MemoryMapSize; Iterator += DescriptorSize) {
+    Entry = (EFI_MEMORY_DESCRIPTOR *)((UINTN)MemoryMap + Iterator);
+    if ( Entry->PhysicalStart < (EFI_PHYSICAL_ADDRESS)SIZE_4GB
+      && ( Entry->Type == EfiConventionalMemory || Entry->Type == EfiPersistentMemory))
+    {
+      UsableMemoryBelow4G = TRUE;
+      break;
+    }
+  }
+  gBS->FreePool (MemoryMap);
 
   AllocateType = 0 ;
 
@@ -4368,7 +4499,14 @@ FreeBuffer_Func (
 
   for (MemoryTypeNum = 0; MemoryTypeNum < 2; MemoryTypeNum++) {
     for (AttributesNum = 0; AttributesNum < 8; AttributesNum++) {
-
+      //
+      // If there is no usable memory below 4 GiB, skip 32-bit allocations
+      //
+      if ( !UsableMemoryBelow4G
+        && !(Attributes[AttributesNum] & EFI_PCI_ATTRIBUTE_DUAL_ADDRESS_CYCLE))
+      {
+        continue;
+      }
       Status = RootBridgeIo->AllocateBuffer (
                                RootBridgeIo,
                                AllocateType,
