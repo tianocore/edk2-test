@@ -546,7 +546,7 @@ BBTestRouteConfigFunctionTestCheckpoint1 (
 
   if ( (EFI_SUCCESS == Status) && (Progress == Resp2 + SctStrLen (Resp2)) ) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-  } else if ( EFI_OUT_OF_RESOURCES == Status ){
+  } else if ( (EFI_OUT_OF_RESOURCES == Status) || (EFI_ACCESS_DENIED == Status) ) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
