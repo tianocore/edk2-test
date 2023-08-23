@@ -49,6 +49,36 @@ Abstract:
 #define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_008_GUID \
 { 0x5f0b42ef, 0x3cec, 0x46ad, {0xbc, 0x5b, 0xc3, 0x7a, 0x1d, 0x45, 0x41, 0x29 }}
 
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_009_GUID \
+{ 0x9665c8d9, 0x267c, 0x4393, {0xa4, 0x72, 0x10, 0x54, 0x43, 0x56, 0x20, 0x21 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_010_GUID \
+{ 0xce655812, 0xcc40, 0x42b0, {0x80, 0xd1, 0xa7, 0x26, 0xdb, 0x14, 0x9e, 0xa8 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_011_GUID \
+{ 0xd34348ad, 0x5d46, 0x4961, {0x91, 0x3e, 0xb1, 0xf2, 0xc5, 0xe7, 0x0f, 0x7d }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_012_GUID \
+{ 0x838311e0, 0x419a, 0x4c92, {0x90, 0x60, 0xbf, 0x94, 0x59, 0xd3, 0xc3, 0x59 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_013_GUID \
+{ 0x12998a9c, 0xc863, 0x4572, {0x80, 0x6c, 0xb6, 0x40, 0x97, 0x91, 0x89, 0x7f }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_014_GUID \
+{ 0xebd4ba26, 0x44c3, 0x464a, {0x88, 0xe3, 0x3b, 0x44, 0x94, 0x88, 0xbb, 0xb8 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_015_GUID \
+{ 0x00920c8e, 0x241d, 0x4da0, {0x8b, 0x59, 0xc3, 0xad, 0xe0, 0xd6, 0x4e, 0xc9 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_016_GUID \
+{ 0x169a43cc, 0x23fa, 0x4887, {0x8b, 0x4f, 0x11, 0xb2, 0xa0, 0x88, 0x4f, 0x63 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_017_GUID \
+{ 0x7c11d0ab, 0x7a84, 0x482b, {0xb7, 0x5a, 0xd7, 0x72, 0x6c, 0x3e, 0xae, 0x0e }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_018_GUID \
+{ 0xbbaa52b6, 0x5576, 0x4acd, {0xb9, 0x5f, 0x86, 0x22, 0x5e, 0xfc, 0xb0, 0x31 }}
+
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid001;
 
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid002;
@@ -64,3 +94,23 @@ extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid006;
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid007;
 
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid008;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid009;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid010;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid011;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid012;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid013;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid014;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid015;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid016;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid017;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid018;
