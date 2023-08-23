@@ -39,6 +39,8 @@ Abstract:
 
 #define LOCK_SET_VARIABLE_TEST      3
 
+#define LOCK_UNLOCKED_STATE_TEST    4
+
 
 /**
  *  Entry point for TCG Platform Reset Attack Mitigation MemoryOverwrite EFI Variables Function Test.
@@ -133,6 +135,15 @@ BBTestTCGMemoryOverwriteRequestFunctionTest (
     // Test Checkpoint CONTROL_SET_VARIABLE_TEST
     //
     Status = TCGMemoryOverwriteRequestControlSetVariable (StandardLib, RecoveryLib, ResetData); 
+    if(EFI_ERROR(Status)) {
+      return Status;
+    }
+  }
+  if (ResetData->CheckpointStep == LOCK_SET_VARIABLE_TEST) {
+    //
+    // Test Checkpoint LOCK_SET_VARIABLE_TEST
+    //
+    TCGMemoryOverwriteRequestControlLockSetVariable (StandardLib, RecoveryLib, ResetData);
     if(EFI_ERROR(Status)) {
       return Status;
     }
@@ -602,6 +613,400 @@ TCGMemoryOverwriteRequestControlSetVariable (
                   Result,
                   gTCGMemoryOverwriteRequestTestFunctionAssertionGuid008,
                   L"MemoryOverwriteRequestControl - SetVariable() with Attributes == NV variable value remains unchanged",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  return EFI_SUCCESS;
+}
+
+
+/**
+ *  MemoryOverwriteRequestControlLock SetVariable() with different variations
+ *  of only a single invalid parameter being passed, with the rest being valid parameters
+ *  @param StandardLib    A pointer to EFI_STANDARD_TEST_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @param RecoveryLib    A pointer to EFI_TEST_RECOVERY_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @param ResetData      A pointer to the ResetData buffer which is used throughout the
+ *                        test
+ *  @return EFI_SUCCESS   Successfully.
+ *  @return Other value   Something failed.
+ */
+EFI_STATUS
+TCGMemoryOverwriteRequestControlLockSetVariable (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
+  IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
+  IN RESET_DATA                               *ResetData
+  )
+{
+  EFI_STATUS                           Status;
+  EFI_TEST_ASSERTION                   Result;
+  UINTN                                DataSize;
+  UINT8                                MemoryOverwriteRequestControlLockData;
+  UINT32                               Attributes;
+
+   if (ResetData->Step == 0) {
+    goto INITIAL_RESET;
+  } else if (ResetData->Step == 1) {
+    goto MORLOCK_SET_VARIABLE;
+  }
+
+INITIAL_RESET:
+  //
+  // Reset MORLock variable by performing a cold reset
+  //
+
+  ResetData->Step = 1;
+  ResetData->CheckpointStep = LOCK_SET_VARIABLE_TEST;
+
+  Status = RecoveryLib->WriteResetRecord (
+                  RecoveryLib,
+                  sizeof (RESET_DATA),
+                  (UINT8*)ResetData
+                  );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"TestRecoveryLib - WriteResetRecord",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+    return Status;
+  }
+
+  SctPrint (L"System will cold reset after 1 second...");
+  gtBS->Stall (1000000);
+  gtRT->ResetSystem (
+                  EfiResetCold,
+                  EFI_SUCCESS,
+                  0,
+                  NULL
+                  );
+
+MORLOCK_SET_VARIABLE:
+  //
+  // reset step count and Update Checkpoint to LOCK_UNLOCKED_STATE_TEST
+  //
+
+  ResetData->Step = 0;
+  ResetData->CheckpointStep = LOCK_UNLOCKED_STATE_TEST;
+
+  Status = RecoveryLib->WriteResetRecord (
+                  RecoveryLib,
+                  sizeof (RESET_DATA),
+                  (UINT8*)ResetData
+                  );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"TestRecoveryLib - WriteResetRecord",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+    return Status;
+  }
+
+  // MORLOCK SetVariable to Locked without Key with valid GUID, variable name, Data, and DataSize
+  // except for invalid attributes value == 0
+  // verify SetVariable returns EFI_WRITE_PROTECTED and GetVariable returns a Data Value == 0
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = 0;
+  MemoryOverwriteRequestControlLockData = MOR_LOCK_DATA_LOCKED_WITHOUT_KEY;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  Attributes,                                  // Attributes
+                  DataSize,                                    // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (Status == EFI_WRITE_PROTECTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid009,
+                  L"MemoryOverwriteRequestControlLock - SetVariable() with Attributes == 0 returns EFI_WRITE_PROTECTED",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // now change attributes to valid before GetVariable to check that MORLOCK value is still 0x00 or unlocked
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  &Attributes,                                 // Attributes
+                  &DataSize,                                   // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (EFI_ERROR (Status) || (MemoryOverwriteRequestControlLockData != MOR_LOCK_DATA_UNLOCKED)) {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid010,
+                  L"MemoryOverwriteRequestControlLock - Lock value remains Unlocked",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // MORLOCK SetVariable with valid GUID, variable name, Data, and Attributes
+  // except for invalid DataSize == 0
+  // verify SetVariable returns EFI_WRITE_PROTECTED and GetVariable returns a Data Value == 0
+  DataSize = 0;
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+  MemoryOverwriteRequestControlLockData = MOR_LOCK_DATA_LOCKED_WITHOUT_KEY;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  Attributes,                                  // Attributes
+                  DataSize,                                    // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (Status == EFI_WRITE_PROTECTED) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid011,
+                  L"MemoryOverwriteRequestControlLock - SetVariable() with DataSize == 0 returns EFI_WRITE_PROTECTED",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // change datasize to valid value before GetVariable
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  // now check that MORLOCK value is still 0x00 or Unlocked
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  &Attributes,                                 // Attributes
+                  &DataSize,                                   // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (EFI_ERROR (Status) || (MemoryOverwriteRequestControlLockData != MOR_LOCK_DATA_UNLOCKED)) {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid012,
+                  L"MemoryOverwriteRequestControlLock - Lock value remains Unlocked",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // MORLOCK SetVariable with valid GUID, variable name, DataSize, and Attributes
+  // except for Data == NULL
+  // verify SetVariable returns EFI_INVALID_PARAMETER and GetVariable returns a Data Value == 0
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  Attributes,                                  // Attributes
+                  DataSize,                                    // DataSize
+                  NULL                                         // Data
+                  );
+  if (Status == EFI_INVALID_PARAMETER) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid013,
+                  L"MemoryOverwriteRequestControlLock - SetVariable() with Data parameter as NULL returns EFI_WRITE_PROTECTED",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // now check that MORLOCK value is still = 0x00 or Unlocked
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  &Attributes,                                 // Attributes
+                  &DataSize,                                   // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (EFI_ERROR (Status) || (MemoryOverwriteRequestControlLockData != MOR_LOCK_DATA_UNLOCKED)) {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid014,
+                  L"MemoryOverwriteRequestControlLock - Lock value remains Unlocked",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // MORLOCK SetVariable to Lock without key with valid GUID, variable name, Data, and DataSize
+  // except for invalid Attributes != NV+BS+RT
+  // this test will use invalid Attributes == NV + BS
+  // verify SetVariable returns EFI_INVALID_PARAMETER and GetVariable returns a Data Value == 0
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS;
+  MemoryOverwriteRequestControlLockData = MOR_LOCK_DATA_LOCKED_WITHOUT_KEY;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  Attributes,                                  // Attributes
+                  DataSize,                                    // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (Status == EFI_INVALID_PARAMETER) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid015,
+                  L"MemoryOverwriteRequestControlLock - SetVariable() with Attributes == NV returns EFI_INVALID_PARAMETER",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // change attributes value to valid NV+BS+RT for GetVariable
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  // now check that MORLOCK value is = 0x00 or unlocked
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  &Attributes,                                 // Attributes
+                  &DataSize,                                   // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (EFI_ERROR (Status) || (MemoryOverwriteRequestControlLockData != MOR_LOCK_DATA_UNLOCKED)) {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid016,
+                  L"MemoryOverwriteRequestControlLock - Lock value remains Unlocked",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // MORLOCK SetVariable to Locked without key with valid GUID, variable name, Data, and Attributes
+  // except for invalid DataSize != 1 && != 8
+  // this test will use invalid DataSize == 5
+  // verify SetVariable returns EFI_INVALID_PARAMETER and GetVariable returns a Data Value == 0
+  DataSize = 5;
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+  MemoryOverwriteRequestControlLockData = MOR_LOCK_DATA_LOCKED_WITHOUT_KEY;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  Attributes,                                  // Attributes
+                  DataSize,                                    // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (Status == EFI_INVALID_PARAMETER) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid017,
+                  L"MemoryOverwriteRequestControlLock - SetVariable() with DataSize == 5 returns EFI_INVALID_PARAMETER",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  // change datasize to valid value for GetVariable
+  DataSize = sizeof(MemoryOverwriteRequestControlLockData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  // now check that MORLOCK value is 0x00 or unlocked
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControlLock",        // VariableName
+                  &gEfiMemoryOverwriteRequestControlLockGuid,  // VendorGuid
+                  &Attributes,                                 // Attributes
+                  &DataSize,                                   // DataSize
+                  &MemoryOverwriteRequestControlLockData       // Data
+                  );
+  if (EFI_ERROR (Status) || (MemoryOverwriteRequestControlLockData != MOR_LOCK_DATA_UNLOCKED)) {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid018,
+                  L"MemoryOverwriteRequestControlLock - Lock value remains Unlocked",
                   L"%a:%d:Status - %r",
                   __FILE__,
                   (UINTN)__LINE__,
