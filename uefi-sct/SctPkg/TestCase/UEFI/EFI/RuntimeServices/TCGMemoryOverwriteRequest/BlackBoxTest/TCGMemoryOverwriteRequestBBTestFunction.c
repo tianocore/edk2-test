@@ -37,6 +37,8 @@ Abstract:
 
 #define CONTROL_SET_VARIABLE_TEST   2
 
+#define LOCK_SET_VARIABLE_TEST      3
+
 
 /**
  *  Entry point for TCG Platform Reset Attack Mitigation MemoryOverwrite EFI Variables Function Test.
@@ -122,6 +124,15 @@ BBTestTCGMemoryOverwriteRequestFunctionTest (
     // Status is returned in the event that the MOR/MORLOCK variables do not exist in occordance to spec,
     // or the WriteResetRecord returns EFI_ERROR, test ends prematurely
     //
+    if(EFI_ERROR(Status)) {
+      return Status;
+    }
+  }
+  if (ResetData->CheckpointStep == CONTROL_SET_VARIABLE_TEST) {
+    //
+    // Test Checkpoint CONTROL_SET_VARIABLE_TEST
+    //
+    Status = TCGMemoryOverwriteRequestControlSetVariable (StandardLib, RecoveryLib, ResetData); 
     if(EFI_ERROR(Status)) {
       return Status;
     }
@@ -405,6 +416,197 @@ MOR_BIT_CLEAR_ON_RESET:
   if (EFI_ERROR (Status)) {
     return Status;
   }
+
+  return EFI_SUCCESS;
+}
+
+
+/**
+ *  MemoryOverwriteRequestControl EFI variable SetVariable() requests with a single invalid parameter
+ *  @param StandardLib    A pointer to EFI_STANDARD_TEST_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @param RecoveryLib    A pointer to EFI_TEST_RECOVERY_LIBRARY_PROTOCOL
+ *                        instance.
+ *  @return EFI_SUCCESS   Successfully.
+ *  @return Other value   Something failed.
+ */
+EFI_STATUS
+TCGMemoryOverwriteRequestControlSetVariable (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
+  IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
+  IN RESET_DATA                               *ResetData
+  )
+{
+  EFI_STATUS                           Status;
+  EFI_TEST_ASSERTION                   Result;
+  UINTN                                DataSize;
+  UINT8                                MemoryOverwriteRequestControlData;
+  UINT8                                MemoryOverwriteRequestControlDataCached;
+  UINT32                               Attributes;
+
+  //
+  // Write reset record to initiate checkpoint LOCK_SET_VARIABLE_TEST after these assertions are complete
+  //
+  ResetData->Step = 0;
+  ResetData->CheckpointStep = LOCK_SET_VARIABLE_TEST;
+
+  Status = RecoveryLib->WriteResetRecord (
+                  RecoveryLib,
+                  sizeof (RESET_DATA),
+                  (UINT8*)ResetData
+                  );
+  if (EFI_ERROR(Status)) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gTestGenericFailureGuid,
+                  L"TestRecoveryLib - WriteResetRecord",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+    return Status;
+  }
+
+  //
+  //MOR SetVariable() with invalid DataSize == 0 returns EFI_INVALID_PARAMETER and value is unchanged
+  //using GetVariable() before and after SetVariable() to compare values of the data
+  //
+  DataSize = sizeof(MemoryOverwriteRequestControlData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControl",     // VariableName
+                  &gEfiMemoryOverwriteControlDataGuid,  // VendorGuid
+                  &Attributes,                          // Attributes
+                  &DataSize,                            // DataSize
+                  &MemoryOverwriteRequestControlData    // Data
+                  );
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  // caching variable for later comparison with second GetVariable() value
+  // SetVar with changed value and invalid DataSize == 0
+  MemoryOverwriteRequestControlDataCached = MemoryOverwriteRequestControlData;
+
+  DataSize = 0;
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+  MemoryOverwriteRequestControlData |= MOR_BIT_HIGH << MOR_CLEAR_MEMORY_BIT_OFFSET;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControl",     // VariableName
+                  &gEfiMemoryOverwriteControlDataGuid,  // VendorGuid
+                  Attributes,                           // Attributes
+                  DataSize,                             // DataSize
+                  &MemoryOverwriteRequestControlData    // Data
+                  );
+  if (Status == EFI_INVALID_PARAMETER) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid005,
+                  L"MemoryOverwriteRequestControl - SetVariable() with DataSize == 0 returns EFI_INVALID_PARAMETER",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  DataSize = sizeof(MemoryOverwriteRequestControlData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControl",     // VariableName
+                  &gEfiMemoryOverwriteControlDataGuid,  // VendorGuid
+                  &Attributes,                          // Attributes
+                  &DataSize,                            // DataSize
+                  &MemoryOverwriteRequestControlData    // Data
+                  );
+
+  // verifying that the variable has not been modified with SetVar
+  if (MemoryOverwriteRequestControlDataCached == MemoryOverwriteRequestControlData) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid006,
+                  L"MemoryOverwriteRequestControl - SetVariable() with DataSize == 0 variable value remains unchanged",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  //
+  // MOR SetVariable() with invalid Attributes == NV + BS returns EFI_INVALID_PARAMETER and value is unchanged
+  // SetVar with set bit 0, DataSize = 1 and invalid attributes = NV + BS
+  //
+  DataSize = sizeof(MemoryOverwriteRequestControlData);
+  Attributes = EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS;
+  MemoryOverwriteRequestControlData |= MOR_BIT_HIGH << MOR_CLEAR_MEMORY_BIT_OFFSET;
+
+  Status = gtRT->SetVariable (
+                  L"MemoryOverwriteRequestControl",     // VariableName
+                  &gEfiMemoryOverwriteControlDataGuid,  // VendorGuid
+                  Attributes,                           // Attributes
+                  DataSize,                             // DataSize
+                  &MemoryOverwriteRequestControlData    // Data
+                  );
+  if (Status == EFI_INVALID_PARAMETER) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid007,
+                  L"MemoryOverwriteRequestControl - SetVariable() with Attributes == NV returns EFI_INVALID_PARAMETER",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
+
+  DataSize = sizeof(MemoryOverwriteRequestControlData);
+  Attributes = TCG_MOR_VARIABLE_ATTRIBUTES;
+
+  Status = gtRT->GetVariable (
+                  L"MemoryOverwriteRequestControl",     // VariableName
+                  &gEfiMemoryOverwriteControlDataGuid,  // VendorGuid
+                  &Attributes,                          // Attributes
+                  &DataSize,                            // DataSize
+                  &MemoryOverwriteRequestControlData    // Data
+                  );
+  // verifying that the variable has not been modified with SetVar
+  if (MemoryOverwriteRequestControlDataCached == MemoryOverwriteRequestControlData) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                  StandardLib,
+                  Result,
+                  gTCGMemoryOverwriteRequestTestFunctionAssertionGuid008,
+                  L"MemoryOverwriteRequestControl - SetVariable() with Attributes == NV variable value remains unchanged",
+                  L"%a:%d:Status - %r",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  Status
+                  );
 
   return EFI_SUCCESS;
 }
