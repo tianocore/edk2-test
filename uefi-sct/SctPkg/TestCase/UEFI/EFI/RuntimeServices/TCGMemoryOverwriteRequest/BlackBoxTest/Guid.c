@@ -67,3 +67,28 @@ EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid018 = EFI_TEST_TCGMO
 EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid019 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_019_GUID;
 
 EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid020 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_020_GUID;
+<<<<<<< HEAD
+=======
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid021 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_021_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid022 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_022_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid023 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_023_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid024 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_024_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid025 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_025_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid026 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_026_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid027 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_027_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid028 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_028_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid029 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_029_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid030 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_030_GUID;
+
+EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid031 = EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_031_GUID;
+>>>>>>> 3542bef7c1d2 (uefi-sct/SctPkg: TCG MORLOCK Locked No Key State Test)
