@@ -100,6 +100,13 @@ TCGMemoryOverwriteRequestControlLockSetVariable (
   IN RESET_DATA                               *ResetData
   );
 
+EFI_STATUS
+TCGMemoryOverwriteRequestControlLockUnlockedState (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
+  IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
+  IN RESET_DATA                               *ResetData
+);
+
 // ****************************************************************************
 //   Entry GUIDs for Test
 // ****************************************************************************
