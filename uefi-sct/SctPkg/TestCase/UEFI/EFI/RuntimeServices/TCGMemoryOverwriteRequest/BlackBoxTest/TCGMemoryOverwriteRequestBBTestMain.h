@@ -49,6 +49,7 @@ typedef struct _RESET_DATA {
 #define MOR_BIT_HIGH                      0x1
 
 #define MOR_LOCK_DATA_UNLOCKED            0x0
+#define MOR_LOCK_DATA_LOCKED_WITHOUT_KEY  0x1
 
 
 //
@@ -87,6 +88,13 @@ TCGMemoryOverwriteRequestPlatformResetCheck (
 
 EFI_STATUS
 TCGMemoryOverwriteRequestControlSetVariable (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
+  IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
+  IN RESET_DATA                               *ResetData
+  );
+
+EFI_STATUS
+TCGMemoryOverwriteRequestControlLockSetVariable (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
   IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
   IN RESET_DATA                               *ResetData
