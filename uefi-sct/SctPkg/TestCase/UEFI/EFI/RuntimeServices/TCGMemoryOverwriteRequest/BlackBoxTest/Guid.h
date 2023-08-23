@@ -85,8 +85,6 @@ Abstract:
 #define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_020_GUID \
 { 0x2eba284a, 0xf701, 0x4c19, {0xbe, 0x5c, 0x39, 0x27, 0xb0, 0x68, 0x4f, 0xd7 }}
 
-<<<<<<< HEAD
-=======
 #define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_021_GUID \
 { 0x9a1b44ae, 0x08ce, 0x474c, {0xa5, 0x8e, 0xa6, 0xe2, 0xcf, 0xaf, 0x91, 0x2c }}
 
@@ -120,7 +118,60 @@ Abstract:
 #define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_031_GUID \
 { 0xe88b22ce, 0x3de6, 0x49b0, {0xb2, 0x46, 0x9e, 0x35, 0x98, 0x2b, 0x9b, 0x1c }}
 
->>>>>>> 3542bef7c1d2 (uefi-sct/SctPkg: TCG MORLOCK Locked No Key State Test)
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_032_GUID \
+{ 0xc8894201, 0x7a3a, 0x47d4, {0xa8, 0x8d, 0xdf, 0x4b, 0x03, 0xff, 0xde, 0x4f }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_033_GUID \
+{ 0x38a813ac, 0x8eb9, 0x46ce, {0xa8, 0x6b, 0x40, 0x8c, 0x07, 0x5f, 0xc7, 0xed }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_034_GUID \
+{ 0x919b8392, 0xcb78, 0x49ff, {0xa3, 0x18, 0x49, 0x78, 0x76, 0xe0, 0xf8, 0xf8 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_035_GUID \
+{ 0x219abaf2, 0x04a9, 0x407c, {0xb5, 0xde, 0xa0, 0x03, 0x6e, 0x65, 0xb0, 0xb9 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_036_GUID \
+{ 0x9a51640a, 0xff14, 0x402b, {0xb0, 0x57, 0xa0, 0xc4, 0xf7, 0x20, 0x8e, 0x44 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_037_GUID \
+{ 0x8ccd0dbb, 0x9b0a, 0x4bfb, {0xa0, 0x7e, 0xc6, 0x06, 0x8b, 0x91, 0x0d, 0xfb }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_038_GUID \
+{ 0xde6f4e17, 0xe375, 0x4dcb, {0x8f, 0x07, 0x77, 0x7e, 0x62, 0x49, 0xea, 0x2c }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_039_GUID \
+{ 0x4ab6927b, 0x5ee4, 0x4748, {0xa4, 0x9d, 0x2d, 0xf3, 0x70, 0x01, 0x41, 0xd5 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_040_GUID \
+{ 0x33142ecf, 0x0f92, 0x4625, {0xb7, 0xf6, 0x7f, 0x15, 0x25, 0x74, 0xd3, 0x03 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_041_GUID \
+{ 0xf73c04df, 0x2e42, 0x4174, {0x82, 0x18, 0x0f, 0x25, 0x46, 0x4a, 0x55, 0xe9 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_042_GUID \
+{ 0xd4eacf82, 0x55d1, 0x4ba1, {0xbe, 0x89, 0x6a, 0x2e, 0x44, 0x0f, 0xc7, 0xc0 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_043_GUID \
+{ 0xfd88fe63, 0x5ed4, 0x482a, {0x98, 0x44, 0x23, 0x90, 0xf9, 0x09, 0x1c, 0x20 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_044_GUID \
+{ 0x176f16cb, 0xf3a4, 0x4f12, {0x8f, 0x96, 0x4a, 0xc1, 0x8b, 0xdd, 0x6e, 0x3c }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_045_GUID \
+{ 0xf0d5e7b3, 0xdc0f, 0x4a18, {0xb9, 0x78, 0x09, 0x3b, 0x15, 0x55, 0x66, 0xbf }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_046_GUID \
+{ 0x9bf14c4b, 0x2950, 0x4c4e, {0x8b, 0xa3, 0x06, 0x46, 0xf1, 0x27, 0x8c, 0x05 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_047_GUID \
+{ 0xb0468dee, 0xb1d0, 0x4795, {0x9f, 0xbf, 0xbe, 0x3f, 0x40, 0x2f, 0x3d, 0x6f }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_048_GUID \
+{ 0x1f7dd903, 0xcd58, 0x4d6f, {0x80, 0xd6, 0x4f, 0x6d, 0xcb, 0x4a, 0xd6, 0xc9 }}
+
+#define EFI_TEST_TCGMORTESTFUNCTION_ASSERTION_049_GUID \
+{ 0x439179c2, 0x744d, 0x43bc, {0xb0, 0x67, 0x7b, 0x65, 0x60, 0x62, 0x6f, 0x5e }}
+
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid001;
 
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid002;
@@ -160,8 +211,6 @@ extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid018;
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid019;
 
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid020;
-<<<<<<< HEAD
-=======
 
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid021;
 
@@ -184,4 +233,39 @@ extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid029;
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid030;
 
 extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid031;
->>>>>>> 3542bef7c1d2 (uefi-sct/SctPkg: TCG MORLOCK Locked No Key State Test)
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid032;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid033;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid034;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid035;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid036;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid037;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid038;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid039;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid040;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid041;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid042;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid043;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid044;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid045;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid046;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid047;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid048;
+
+extern EFI_GUID gTCGMemoryOverwriteRequestTestFunctionAssertionGuid049;
