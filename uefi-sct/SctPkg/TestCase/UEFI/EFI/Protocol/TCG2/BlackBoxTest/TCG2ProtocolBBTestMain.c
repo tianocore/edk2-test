@@ -65,6 +65,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestHashLogExtendEventConformanceTest
   },
+  {
+    EFI_TCG2_PROTOCOL_TEST_ENTRY_GUID0104,
+    L"SubmitCommand_Conf",
+    L"Test the SubmitCommmand API",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid1,
+    EFI_TEST_CASE_AUTO,
+    BBTestSubmitCommandConformanceTest
+  },
   0
 };
 
