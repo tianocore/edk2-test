@@ -197,6 +197,56 @@ BBTestHashLogExtendEventConformanceTest (
   return EFI_SUCCESS;
 }
 
+/**
+ *  @brief Entrypoint for SubmitCommand() Function Test.
+ *         1 checkpoint will be tested.
+ *  @param This a pointer of EFI_BB_TEST_PROTOCOL
+ *  @param ClientInterface A pointer to the interface array under test
+ *  @param TestLevel Test "thoroughness" control
+ *  @param SupportHandle A handle containing protocols required
+ *  @return EFI_SUCCESS
+ *  @return EFI_NOT_FOUND
+ */
+
+EFI_STATUS
+BBTestSubmitCommandConformanceTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  )
+{
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
+  EFI_STATUS                            Status;
+  EFI_TCG2_PROTOCOL                     *TCG2;
+
+  //
+  // init
+  //
+  TCG2 = (EFI_TCG2_PROTOCOL*)ClientInterface;
+
+  // Ensure Protocol not NULL
+  if (TCG2 == NULL)
+    return EFI_UNSUPPORTED;
+
+  //
+  // Get the Standard Library Interface
+  //
+  Status = gtBS->HandleProtocol (
+                   SupportHandle,
+                   &gEfiStandardTestLibraryGuid,
+                   (VOID **) &StandardLib
+                   );
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  // Test GetRandom TPM Command
+  BBTestSubmitCommandConformanceTestCheckpoint1 (StandardLib, TCG2);
+
+  return EFI_SUCCESS;
+}
+
 EFI_STATUS
 BBTestGetCapabilityConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
@@ -998,6 +1048,129 @@ BBTestGetEventLogConformanceTestCheckpoint2 (
                  AssertionType,
                  gTcg2ConformanceTestAssertionGuid016,
                  L"TCG2_PROTOCOL.GetEventLog - verify that event log has expected entry from previous HashLogExtendEvent",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  return EFI_SUCCESS;
+}
+
+//  Expected SHA256 Hash of the string "The quick brown fox jumps over the lazy dog"
+UINT8 Tpm2HashOut[32] = {0xd7,0xa8,0xfb,0xb3,0x07,0xd7,0x80,0x94,0x69,0xca,0x9a,0xbc,0xb0,0x08,0x2e,0x4f, \
+0x8d,0x56,0x51,0xe4,0x6d,0x3c,0xdb,0x76,0x2d,0x02,0xd0,0xbf,0x37,0xc9,0xe5,0x92};
+
+EFI_STATUS
+BBTestSubmitCommandConformanceTestCheckpoint1 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  IN EFI_TCG2_PROTOCOL                     *TCG2
+  )
+{
+  EFI_TEST_ASSERTION                    AssertionType;
+  EFI_STATUS                            Status;
+  TPM2_HASH_RESPONSE                    CommandResponse;
+  TPM2_HASH_COMMAND                     CommandInput;
+  CHAR8 *Str ="The quick brown fox jumps over the lazy dog";
+
+  // Build TPM2 Hash command to hash test string
+  CommandInput.Tag = SctSwapBytes16(ST_NO_SESSIONS);
+  CommandInput.CommandSize = SctSwapBytes32(sizeof(TPM2_HASH_COMMAND));
+  CommandInput.CommandCode = SctSwapBytes32(TPM_CC_Hash);
+  CommandInput.data.size = SctSwapBytes16(SctAsciiStrLen(Str));
+  SctAsciiStrCpy((CHAR8 *)CommandInput.data.buffer, Str);
+  CommandInput.hashAlg = SctSwapBytes16(TPM_ALG_SHA256);
+  CommandInput.hierarchy = SctSwapBytes32(TPM_RH_NULL);
+
+  // allocate buffer for response
+  SctZeroMem(&CommandResponse, sizeof(TPM2_HASH_RESPONSE));
+
+  Status = TCG2->SubmitCommand (
+                           TCG2,
+                           sizeof(TPM2_HASH_COMMAND),
+                           (UINT8 *)&CommandInput,
+                           sizeof(TPM2_HASH_RESPONSE),
+                           (UINT8 *)&CommandResponse);
+
+
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+
+  // Verify SubmitCommand returns EFI_SUCCESS
+  if (Status != EFI_SUCCESS) {
+    StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"\r\nTCG2 Protocol SubmitCommand Test: SubmitCommand should return EFI_SUCCESS, Status = %r",
+                     Status
+                     );
+
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  // Verify SubmitCommand returns correct Response Tag
+  if (SctSwapBytes16(CommandResponse.Tag) != ST_NO_SESSIONS) {
+    StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"\r\nTCG2 Protocol SubmitCommand Test: SubmitCommand should return ST_NO_SESSIONS response Tag"
+                     );
+
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  // Verify SubmitCommand returns correct Response Code
+  if (SctSwapBytes32(CommandResponse.ResponseCode) != TPM_RC_SUCCESS) {
+    StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"\r\nTCG2 Protocol SubmitCommand Test: SubmitCommand should return Correct ResponseCode, ResponseCode = %x",
+                     SctSwapBytes32(CommandResponse.ResponseCode)
+                     );
+
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+
+  // Verify SubmitCommand returns correct Response Size
+  if (SctSwapBytes32(CommandResponse.ResponseSize) != sizeof(TPM2_HASH_RESPONSE)) {
+    StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"\r\nTCG2 Protocol SubmitCommand Test: SubmitCommand should return Correct ResponseSize, Size = %x",
+                     SctSwapBytes32(CommandResponse.ResponseSize)
+                     );
+
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  // Check that the size of the buffer returned is size of SHA256 hash
+  if (SctSwapBytes16(CommandResponse.data.size) != 32) {
+    StandardLib->RecordMessage (
+                     StandardLib,
+                     EFI_VERBOSE_LEVEL_DEFAULT,
+                     L"\r\nTCG2 Protocol SubmitCommand Test: SubmitCommand should return correct size digest for SHA256, Size = %x",
+                     SctSwapBytes16(CommandResponse.data.size)
+                     );
+
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  // Ensure Hash returned matches expected response for input
+  if (0 != SctCompareMem(Tpm2HashOut, CommandResponse.data.digest, SHA256_LENGTH) ) {
+    StandardLib->RecordMessage (
+                   StandardLib,
+                   EFI_VERBOSE_LEVEL_DEFAULT,
+                   L"\r\nTCG2 Protocol SubmitCommand Test: SubmitCommand should return expected Hash for data that was hashed."
+                   );
+
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gTcg2ConformanceTestAssertionGuid017,
+                 L"EFI_TCG2_PROTOCOL. SubmitComand() - SubmitCommand() shall populate the response buffer and return with a status of EFI_SUCCESS when valid command parameters are passed in.",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
