@@ -54,7 +54,8 @@ cp Build/MdeModule/RELEASE_GCC5/${TARGET_ARCH}/CapsuleApp.efi ${TARGET_ARCH}_SCT
 if [ ! -d "${pwd}edk2-test-parser" ]
 then
         echo "edk2-test-parser repo is missing from current directory, please clone and try again"
-        exit
+        echo "The URL for edk2-test-parser is https://git.gitlab.arm.com/systemready/edk2-test-parser.git"
+       exit
 fi
 
 # Copy edk2-test-parser tool into the repo
