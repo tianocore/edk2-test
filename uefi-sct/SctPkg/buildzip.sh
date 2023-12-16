@@ -32,9 +32,6 @@ esac
 # clear all positional parameters
 set --
 
-source ./edk2/edksetup.sh
-
-
 NUM_CPUS=$((`getconf _NPROCESSORS_ONLN` + 2))
 
 make -j"$NUM_CPUS" -C edk2/BaseTools/
