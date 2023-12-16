@@ -28,7 +28,7 @@ Descriptions of section entries:
 
 UEFI-SCT
 ------
-T: git - https://github.com/tianocore/edk2-test/uefi-sct
+T: git - https://github.com/tianocore/edk2-test
 
 
 Responsible Disclosure, Reporting Security Issues
