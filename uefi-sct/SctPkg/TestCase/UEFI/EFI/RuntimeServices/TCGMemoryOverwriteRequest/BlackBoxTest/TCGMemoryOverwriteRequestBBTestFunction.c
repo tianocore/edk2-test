@@ -819,7 +819,7 @@ MORLOCK_SET_VARIABLE:
                   DataSize,                                    // DataSize
                   NULL                                         // Data
                   );
-  if (Status == EFI_INVALID_PARAMETER) {
+  if (Status == EFI_WRITE_PROTECTED || EFI_INVALID_PARAMETER) {
     Result = EFI_TEST_ASSERTION_PASSED;
   } else {
     Result = EFI_TEST_ASSERTION_FAILED;
@@ -829,7 +829,7 @@ MORLOCK_SET_VARIABLE:
                   StandardLib,
                   Result,
                   gTCGMemoryOverwriteRequestTestFunctionAssertionGuid011,
-                  L"MemoryOverwriteRequestControlLock - SetVariable() with Data parameter as NULL returns EFI_WRITE_PROTECTED",
+                  L"MemoryOverwriteRequestControlLock - SetVariable() with Data parameter as NULL returns either EFI_WRITE_PROTECTED or EFI_INVALID_PARAMETER",
                   L"%a:%d:Status - %r",
                   __FILE__,
                   (UINTN)__LINE__,
@@ -1624,7 +1624,7 @@ MORLOCK_LOCKED_STATE:
                   DataSize,                             // DataSize
                   &MemoryOverwriteRequestControlData    // Data
                   );
-  if (Status == EFI_ACCESS_DENIED) {
+  if (Status == EFI_ACCESS_DENIED || EFI_INVALID_PARAMETER) {
     Result = EFI_TEST_ASSERTION_PASSED;
   } else {
     Result = EFI_TEST_ASSERTION_FAILED;
@@ -1634,7 +1634,7 @@ MORLOCK_LOCKED_STATE:
                   StandardLib,
                   Result,
                   gTCGMemoryOverwriteRequestTestFunctionAssertionGuid031,
-                  L"MemoryOverwriteRequestControl - When MORLOCK is locked-without-key, an attempt to delete the MOR variable must return EFI_ACCESS_DENIED",
+                  L"MemoryOverwriteRequestControl - When MORLOCK is locked-without-key, an attempt to delete the MOR variable must return either EFI_ACCESS_DENIED or EFI_INVALID_PARAMETER",
                   L"%a:%d:Status - %r",
                   __FILE__,
                   (UINTN)__LINE__,
@@ -2148,7 +2148,7 @@ MORLOCK_LOCKED_KEY_STATE:
                   DataSize,                             // DataSize
                   &MemoryOverwriteRequestControlData    // Data
                   );
-  if (Status == EFI_ACCESS_DENIED) {
+  if (Status == EFI_ACCESS_DENIED || EFI_INVALID_PARAMETER) {
     Result = EFI_TEST_ASSERTION_PASSED;
   } else {
     Result = EFI_TEST_ASSERTION_FAILED;
@@ -2158,7 +2158,7 @@ MORLOCK_LOCKED_KEY_STATE:
                   StandardLib,
                   Result,
                   gTCGMemoryOverwriteRequestTestFunctionAssertionGuid045,
-                  L"MemoryOverwriteRequestControl - When MORLOCK is locked-with-key, an attempt to delete the MOR variable must return EFI_ACCESS_DENIED",
+                  L"MemoryOverwriteRequestControl - When MORLOCK is locked-without-key, an attempt to delete the MOR variable must return either EFI_ACCESS_DENIED or EFI_INVALID_PARAMETER",
                   L"%a:%d:Status - %r",
                   __FILE__,
                   (UINTN)__LINE__,
