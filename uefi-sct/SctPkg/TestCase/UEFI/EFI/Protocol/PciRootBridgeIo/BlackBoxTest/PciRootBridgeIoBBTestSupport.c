@@ -1573,7 +1573,7 @@ EventNotifyWriteMem (
                                AssertionType,
                                gTestGenericFailureGuid,
                                L"EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL.Mem.Read - return status should be EFI_SUCCESS",
-                               L"%a:%d:status - %r,write value - %LXh, ReadValue - %LXh",
+                               L"%a:%d:status - %r,write value - %lXh, ReadValue - %lXh",
                                __FILE__,
                                (UINTN)__LINE__,
                                Status,

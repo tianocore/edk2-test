@@ -553,7 +553,7 @@ BBTestAllocatePagesInterfaceTest (
                         gMemoryAllocationServicesBBTestFunctionAssertionGuid021: \
                         gMemoryAllocationServicesBBTestFunctionAssertionGuid022),
                        L"BS.AllocatePages - AllocateMaxAddress return Address",
-                       L"%a:%d:TPL - %d, MemType - %d, PhysicalStart - 0x%LX, NumberOfPages - 0x%LX, Memory - 0x%LX",
+                       L"%a:%d:TPL - %d, MemType - %d, PhysicalStart - 0x%lX, NumberOfPages - 0x%lX, Memory - 0x%lX",
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
@@ -630,7 +630,7 @@ BBTestAllocatePagesInterfaceTest (
                         gMemoryAllocationServicesBBTestFunctionAssertionGuid027: \
                         gMemoryAllocationServicesBBTestFunctionAssertionGuid028),
                        L"BS.AllocatePages - AllocateMaxAddress return Address2",
-                       L"%a:%d:TPL - %d, MemType - %d, Memory2 - 0x%LX",
+                       L"%a:%d:TPL - %d, MemType - %d, Memory2 - 0x%lX",
                        __FILE__,
                        (UINTN)__LINE__,
                        TplArray[Index],
