@@ -1734,13 +1734,13 @@ CreateDNSDeviceNode (
   }
 
   if (DNS->IsIPv6 == 0) {
-    SctStrToIPv4Addr (&IpStr1, (EFI_IPv4_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH)));
-    SctStrToIPv4Addr (&IpStr2, (EFI_IPv4_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
+    SctStrToIPv4Addr (&IpStr1, (EFI_IPv4_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH)));
+    SctStrToIPv4Addr (&IpStr2, (EFI_IPv4_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
   }
 
   if (DNS->IsIPv6 == 1) {
-    SctStrToIPv6Addr (&IpStr1, (EFI_IPv6_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH)));
-    SctStrToIPv6Addr (&IpStr2, (EFI_IPv6_ADDRESS *)(DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
+    SctStrToIPv6Addr (&IpStr1, (EFI_IPv6_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH)));
+    SctStrToIPv6Addr (&IpStr2, (EFI_IPv6_ADDRESS *)((UINT8 *)DNS + sizeof (DNS_DEVICE_PATH) + sizeof(EFI_IP_ADDRESS)));
   }
 
   return (EFI_DEVICE_PATH_PROTOCOL *) DNS;
