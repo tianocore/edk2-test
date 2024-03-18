@@ -1161,6 +1161,12 @@ BBTestReadKeyStrokeExFunctionAutoTestCheckpoint1 (
   ValidState[6] = EFI_TOGGLE_STATE_VALID | EFI_KEY_STATE_EXPOSED | EFI_SCROLL_LOCK_ACTIVE |EFI_NUM_LOCK_ACTIVE | EFI_CAPS_LOCK_ACTIVE;
 
   //
+  // Set all bits to one (invalid values) for both KeyShiftState and KeyToggleState
+  //
+  Key.KeyState.KeyShiftState = 0xFFFFFFFF;
+  Key.KeyState.KeyToggleState = 0xFF;
+
+  //
   //Read next keystroke from the input device
   //
   Status = SimpleTextInputEx->ReadKeyStrokeEx (
@@ -1171,7 +1177,10 @@ BBTestReadKeyStrokeExFunctionAutoTestCheckpoint1 (
     return Status;
   }
 
-  if ((Key.KeyState.KeyToggleState & EFI_TOGGLE_STATE_VALID) == 0) {
+  if (((Key.KeyState.KeyToggleState & EFI_TOGGLE_STATE_VALID) == 0) || (Key.KeyState.KeyShiftState == 0xFFFFFFFF) || (Key.KeyState.KeyToggleState == 0xFF)) {
+    //
+    // Log the error here and return key states are not supported when high order bit of KeyToggleState is 0 or KeyState not touched
+    //
     return EFI_UNSUPPORTED;
   }
 
