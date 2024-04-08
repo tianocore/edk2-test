@@ -50,11 +50,13 @@ typedef struct _RESET_DATA {
 
 #define MOR_LOCK_DATA_UNLOCKED            0x0
 #define MOR_LOCK_DATA_LOCKED_WITHOUT_KEY  0x1
+#define MOR_LOCK_DATA_LOCKED_WITH_KEY     0x2
 
+#define MOR_LOCK_NO_KEY_SIZE              1
 #define MOR_LOCK_WITH_KEY_SIZE            8
 
 #define MOR_LOCK_TEST_KEY                 0x11111111
-
+#define MOR_LOCK_INVALID_TEST_KEY         0x22222222
 
 //
 // TEST GUID for TCG Platform Reset Attack Mitigation MemoryOverwriteRequest (MOR) Test
@@ -113,6 +115,13 @@ TCGMemoryOverwriteRequestControlLockUnlockedState (
 
 EFI_STATUS
 TCGMemoryOverwriteRequestControlLockLockedNoKeyState (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
+  IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
+  IN RESET_DATA                               *ResetData
+  );
+
+EFI_STATUS
+TCGMemoryOverwriteRequestControlLockLockedWithKeyState (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL       *StandardLib,
   IN EFI_TEST_RECOVERY_LIBRARY_PROTOCOL       *RecoveryLib,
   IN RESET_DATA                               *ResetData
