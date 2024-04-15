@@ -79,7 +79,6 @@ typedef struct {
   UINT8  buffer[TEST_STRING_LEN];
 } TPM2B_MAX_BUFFER;
 
-#pragma pack(1)
 // TPM2B_DIGEST as defined in Table 73 of TPM Library Spec Part 2: Structures
 typedef struct {
   UINT16 size;
@@ -110,7 +109,7 @@ typedef struct {
   TPM2B_DIGEST data;
   TPMT_TK_HASHCHECK validation;
 } TPM2_HASH_RESPONSE;
-#pragma
+#pragma pack()
 
 EFI_STATUS
 EFIAPI
