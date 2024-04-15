@@ -25,8 +25,7 @@ Abstract:
 --*/
 
 #include "TCG2ProtocolBBTest.h"
-
-#define offsetof(st, m) __builtin_offsetof(st, m)
+#include <Base.h>
 
 /**
  *  @brief Entrypoint for GetCapability() Function Test.
@@ -475,7 +474,7 @@ BBTestGetCapabilityConformanceTestCheckpoint4 (
 
   // set size of struct to be up to and including the ManufacturerID
   // (this acts like a client with a 1.0 version of the struct)
-  BootServiceCap.Size = offsetof(EFI_TCG2_BOOT_SERVICE_CAPABILITY, NumberOfPcrBanks);
+  BootServiceCap.Size = OFFSET_OF(EFI_TCG2_BOOT_SERVICE_CAPABILITY, NumberOfPcrBanks);
 
   Status = TCG2->GetCapability (
                            TCG2,
@@ -494,7 +493,7 @@ BBTestGetCapabilityConformanceTestCheckpoint4 (
   }
 
   // Verify returned Size equals the size of EFI_TCG2_BOOT_SERVICE_CAPABILITY up to and including the ManufacturerID field.
-  if (BootServiceCap.Size != offsetof(EFI_TCG2_BOOT_SERVICE_CAPABILITY, NumberOfPcrBanks)) {
+  if (BootServiceCap.Size != OFFSET_OF(EFI_TCG2_BOOT_SERVICE_CAPABILITY, NumberOfPcrBanks)) {
     StandardLib->RecordMessage (
                      StandardLib,
                      EFI_VERBOSE_LEVEL_DEFAULT,
