@@ -50,7 +50,12 @@ Abstract:
 
 #define EFI_TCG2_EVENT_LOG_FORMAT_TCG_2 0x00000002
 
-#define HASH_NUMBER 0x04
+#define HASH_NUMBER 0x05
+#define SHA1_DIGEST_SIZE    20
+#define SHA256_DIGEST_SIZE  32
+#define SHA384_DIGEST_SIZE  48
+#define SHA512_DIGEST_SIZE  64
+#define SM3_256_DIGEST_SIZE 32
 
 typedef struct _EFI_TCG2_PROTOCOL EFI_TCG2_PROTOCOL;
 
@@ -117,9 +122,17 @@ typedef struct tdEFI_TCG2_EVENT {
   UINT8 Event[];
 } EFI_TCG2_EVENT;
 
+typedef union {
+  UINT8 sha1[SHA1_DIGEST_SIZE];
+  UINT8 sha256[SHA256_DIGEST_SIZE];
+  UINT8 sm3_256[SM3_256_DIGEST_SIZE];
+  UINT8 sha384[SHA384_DIGEST_SIZE];
+  UINT8 sha512[SHA512_DIGEST_SIZE];
+} TPMU_HA;
+
 typedef struct {
   UINT16     hashAlg;
-  UINT8      digest[];
+  TPMU_HA    digest;
 } TPMT_HA;
 
 typedef struct tdTPML_DIGEST_VALUES {
