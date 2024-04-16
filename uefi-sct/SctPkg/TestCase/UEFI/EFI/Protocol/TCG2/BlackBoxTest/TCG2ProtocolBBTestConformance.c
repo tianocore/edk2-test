@@ -639,7 +639,7 @@ BBTestHashLogExtendEventConformanceTestCheckpoint1 (
   EFI_TCG2_EVENT                        *EfiTcgEvent;
   const CHAR8                           *EventData = "TCG2 Protocol Test";
   const CHAR8                           *Str = "The quick brown fox jumps over the lazy dog";
-  UINT32                                EfiTcgEventSize = sizeof(EFI_TCG2_EVENT) + SctAsciiStrLen(EventData);
+  UINT32                                EfiTcgEventSize = (UINT32)(sizeof(EFI_TCG2_EVENT) + SctAsciiStrLen(EventData));
 
   DataToHash =  (EFI_PHYSICAL_ADDRESS)Str;
   DataToHashLen = SctAsciiStrLen(Str);
@@ -654,7 +654,7 @@ BBTestHashLogExtendEventConformanceTestCheckpoint1 (
   EfiTcgEvent->Header.HeaderVersion = 1;
   EfiTcgEvent->Header.EventType = EV_POST_CODE;
   EfiTcgEvent->Header.PCRIndex = 16;
-  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + SctAsciiStrLen(EventData);
+  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + (UINT32)SctAsciiStrLen(EventData);
 
   // Ensure HashLogExtendEvent returns Invalid Parameter when passing in NULL DataToHash pointer
   // EFI Protocol Spec Section 6.6.5 #1
@@ -710,7 +710,7 @@ BBTestHashLogExtendEventConformanceTestCheckpoint1 (
 
   // Ensure HashLogExtendEvent returns Invalid Parameter when passed in EventSize < HeaderSize + sizeof(UINT32)
   // EFI Protocol Spec Section 6.6.5 #2
-  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + sizeof(UINT32) - 1;
+  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + (UINT32)sizeof(UINT32) - 1;
 
   Status = TCG2->HashLogExtendEvent (
                            TCG2,
@@ -739,7 +739,7 @@ BBTestHashLogExtendEventConformanceTestCheckpoint1 (
   // Ensure HashLogExtendEvent returns Invalid Parameter when passing in PCR Index > 23
   // EFI Protocol Spec Section 6.6.5 #3
   EfiTcgEvent->Header.PCRIndex = 24;
-  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + SctAsciiStrLen(EventData);
+  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + (UINT32)SctAsciiStrLen(EventData);
 
   Status = TCG2->HashLogExtendEvent (
                            TCG2,
@@ -782,7 +782,7 @@ BBTestHashLogExtendEventConformanceTestCheckpoint2 (
   UINT64                                DataToHashLen;
   const CHAR8                           *Str = "The quick brown fox jumps over the lazy dog";
   const CHAR8                           *EventData = "TCG2 Protocol Test";
-  UINT32 EfiTcgEventSize = sizeof(EFI_TCG2_EVENT) + SctAsciiStrLen(EventData);
+  UINT32 EfiTcgEventSize = (UINT32)(sizeof(EFI_TCG2_EVENT) + SctAsciiStrLen(EventData));
 
   DataToHash = (EFI_PHYSICAL_ADDRESS)Str;
   DataToHashLen = SctAsciiStrLen(Str);
@@ -797,7 +797,7 @@ BBTestHashLogExtendEventConformanceTestCheckpoint2 (
   EfiTcgEvent->Header.HeaderVersion = 1;
   EfiTcgEvent->Header.EventType = EV_POST_CODE;
   EfiTcgEvent->Header.PCRIndex = 16;
-  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + SctAsciiStrLen(EventData);
+  EfiTcgEvent->Size = EfiTcgEvent->Header.HeaderSize + (UINT32)SctAsciiStrLen(EventData);
 
   // Perform HashLogExtendEvent over test buffer to PCR 16
   Status = TCG2->HashLogExtendEvent (
@@ -991,9 +991,7 @@ BBTestGetEventLogConformanceTestCheckpoint2 (
   }
 
   // Verify EventLog Signature
-  Status = SctCompareMem(EventLogHeaderSpecEvent->signature, signature, sizeof(signature));
-
-  if (Status != EFI_SUCCESS) {
+  if (SctCompareMem(EventLogHeaderSpecEvent->signature, signature, sizeof(signature) != 0)) {
     StandardLib->RecordMessage (
                      StandardLib,
                      EFI_VERBOSE_LEVEL_DEFAULT,
@@ -1076,7 +1074,7 @@ BBTestSubmitCommandConformanceTestCheckpoint1 (
   CommandInput.Tag = SctSwapBytes16(ST_NO_SESSIONS);
   CommandInput.CommandSize = SctSwapBytes32(sizeof(TPM2_HASH_COMMAND));
   CommandInput.CommandCode = SctSwapBytes32(TPM_CC_Hash);
-  CommandInput.data.size = SctSwapBytes16(SctAsciiStrLen(Str));
+  CommandInput.data.size = SctSwapBytes16((UINT16)SctAsciiStrLen(Str));
   SctAsciiStrCpy((CHAR8 *)CommandInput.data.buffer, Str);
   CommandInput.hashAlg = SctSwapBytes16(TPM_ALG_SHA256);
   CommandInput.hierarchy = SctSwapBytes32(TPM_RH_NULL);
