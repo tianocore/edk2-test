@@ -124,7 +124,7 @@ BBTestExtractConfigFunctionTest (
   EFI_STATUS                            Status;
   EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess;
   EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting;
-  
+  UINT16                                *DevicePathStr;
   //
   // init
   //
@@ -141,7 +141,13 @@ BBTestExtractConfigFunctionTest (
   if (EFI_ERROR(Status)) {
     return Status;
   }
-
+  DevicePathStr = SctDevicePathStrFromProtocol (HIIConfigAccess, &gBlackBoxEfiHIIConfigAccessProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Get the Config Routing Protocol Interface
   //
@@ -173,7 +179,7 @@ BBTestRouteConfigFunctionTest (
   EFI_STATUS                            Status;
   EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess;
   EFI_HII_CONFIG_ROUTING_PROTOCOL       *HIIConfigRouting;
-
+  UINT16                                *DevicePathStr;
   //
   // init
   //
@@ -190,7 +196,13 @@ BBTestRouteConfigFunctionTest (
   if (EFI_ERROR(Status)) {
     return Status;
   }
-  
+  DevicePathStr = SctDevicePathStrFromProtocol (HIIConfigAccess, &gBlackBoxEfiHIIConfigAccessProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Get the Config Routing Protocol Interface
   //

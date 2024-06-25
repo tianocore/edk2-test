@@ -53,7 +53,7 @@ BBTestStartConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -71,7 +71,13 @@ BBTestStartConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStarted.
   // If not, change the state to EfiSimpleNetworkStarted.
@@ -160,7 +166,7 @@ BBTestStopConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -178,7 +184,13 @@ BBTestStopConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -266,7 +278,7 @@ BBTestInitializeConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -284,7 +296,13 @@ BBTestInitializeConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -377,7 +395,7 @@ BBTestResetConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -395,7 +413,13 @@ BBTestResetConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -488,7 +512,7 @@ BBTestShutdownConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -506,7 +530,13 @@ BBTestShutdownConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -594,7 +624,7 @@ BBTestReceiveFilterConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_MAC_ADDRESS                       MAC;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -612,7 +642,13 @@ BBTestReceiveFilterConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -840,7 +876,7 @@ BBTestStationAddressConformanceTest (
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -858,7 +894,13 @@ BBTestStationAddressConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -988,7 +1030,7 @@ BBTestStatisticsConformanceTest (
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
   EFI_NETWORK_STATISTICS                StatisticsTable;
   UINTN                                 StatisticsSize;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -1006,7 +1048,13 @@ BBTestStatisticsConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -1164,7 +1212,7 @@ BBTestMCastIpToMacConformanceTest (
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
   EFI_IP_ADDRESS                        IP;
   EFI_MAC_ADDRESS                       MAC;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -1182,7 +1230,13 @@ BBTestMCastIpToMacConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -1279,6 +1333,7 @@ BBTestNVDataConformanceTest (
   EFI_SIMPLE_NETWORK_STATE              State1, State2, State3;
   VOID                                  *Buffer;
   UINT32                                CheckPoint1State;
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -1296,7 +1351,13 @@ BBTestNVDataConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the network interface support NvData if not return
   //
@@ -1525,6 +1586,7 @@ BBTestGetStatusConformanceTest (
   EFI_SIMPLE_NETWORK_STATE              State1, State2;
   VOID                                  *TxBuf;
   UINT32                                InterruptStatus;
+  UINT16                                *DevicePathStr;
   //UINT32                                *pInterruptStatus;
 
   //
@@ -1544,7 +1606,13 @@ BBTestGetStatusConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -1717,7 +1785,7 @@ BBTestTransmitConformanceTest (
   EFI_MAC_ADDRESS                       SrcAddr;
   EFI_MAC_ADDRESS                       DestAddr;
   UINT16                                Protocol;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -1735,7 +1803,13 @@ BBTestTransmitConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.
@@ -1993,7 +2067,7 @@ BBTestReceiveConformanceTest (
   EFI_MAC_ADDRESS                       SrcAddr;
   EFI_MAC_ADDRESS                       DestAddr;
   UINT16                                Protocol;
-
+  UINT16                                *DevicePathStr;
   //
   // Get the Standard Library Interface
   //
@@ -2011,7 +2085,13 @@ BBTestReceiveConformanceTest (
   // Get the EFI_SIMPLE_NETWORK_PROTOCOL Protocol interface to be tested
   //
   SnpInterface = (EFI_SIMPLE_NETWORK_PROTOCOL *)ClientInterface;
-
+  DevicePathStr = SctDevicePathStrFromProtocol (SnpInterface, &gBlackBoxEfiSimpleNetworkProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   // Check whether the state of network interface is EfiSimpleNetworkStopped.
   // If not, change the state to EfiSimpleNetworkStopped.

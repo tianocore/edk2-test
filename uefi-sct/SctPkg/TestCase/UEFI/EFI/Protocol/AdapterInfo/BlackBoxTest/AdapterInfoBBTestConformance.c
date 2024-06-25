@@ -93,7 +93,7 @@ BBTestGetInformationConformanceTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo;
-
+  UINT16                                *DevicePathStr;
   //
   // init
   //
@@ -110,7 +110,13 @@ BBTestGetInformationConformanceTest (
   if ( EFI_ERROR(Status) ) {
     return Status;
   }
-
+  DevicePathStr = SctDevicePathStrFromProtocol (AdapterInfo, &gEfiAdapterInformationProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   //Call check points
   //
@@ -137,6 +143,7 @@ BBTestSetInformationConformanceTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo;
+  UINT16                                *DevicePathStr;
                                         
   //
   // init
@@ -154,7 +161,13 @@ BBTestSetInformationConformanceTest (
   if ( EFI_ERROR(Status) ) {
     return Status;
   }
-
+  DevicePathStr = SctDevicePathStrFromProtocol (AdapterInfo, &gEfiAdapterInformationProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   //Call check points
   //
@@ -178,6 +191,7 @@ BBTestGetSupportedTypesConformanceTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_ADAPTER_INFORMATION_PROTOCOL      *AdapterInfo;
+  UINT16                                *DevicePathStr;
                                         
   //
   // init
@@ -195,7 +209,13 @@ BBTestGetSupportedTypesConformanceTest (
   if ( EFI_ERROR(Status) ) {
     return Status;
   }
-
+  DevicePathStr = SctDevicePathStrFromProtocol (AdapterInfo, &gEfiAdapterInformationProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
   //
   //Call check points
   //
