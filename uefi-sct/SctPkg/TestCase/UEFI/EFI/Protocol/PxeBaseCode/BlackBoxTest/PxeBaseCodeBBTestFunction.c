@@ -242,6 +242,7 @@ BBTestNewStartFunctionTest (
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
 
   UINT32                                Index;
   CHAR8                                 *TempPointer;
@@ -265,6 +266,13 @@ BBTestNewStartFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Disable EFI_PXE_BASE_CODE_PROTOCOL Protocol interface
@@ -991,6 +999,7 @@ BBTestNewSetIpFilterFunctionTest (
   EFI_STATUS                             Status;
   EFI_TEST_ASSERTION                     AssertionType;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_PXE_BASE_CODE_IP_FILTER            BcIpFilter;
   UINT8                                  Index;
 
@@ -1014,6 +1023,13 @@ BBTestNewSetIpFilterFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Disable EFI_PXE_BASE_CODE_PROTOCOL Protocol interface
@@ -1198,7 +1214,8 @@ BBTestNewStopFunctionTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
 
   //
   // Get the Standard Library Interface
@@ -1217,6 +1234,13 @@ BBTestNewStopFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Disable EFI_PXE_BASE_CODE_PROTOCOL Protocol interface
@@ -1340,7 +1364,8 @@ BBTestStartFunctionTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
 
   //
   // Get the Standard Library Interface
@@ -1359,6 +1384,13 @@ BBTestStartFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   Status = ChangePxeState (BcInterface, FALSE, BcInterface->Mode->Started, FALSE);
   if (EFI_ERROR(Status)) {
@@ -1710,7 +1742,8 @@ BBTestStopFunctionTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
 
   //
   // Get the Standard Library Interface
@@ -1729,6 +1762,13 @@ BBTestStopFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Enable EFI_PXE_BASE_CODE_PROTOCOL if needed
@@ -1783,7 +1823,8 @@ BBTestDhcpFunctionTest (
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   BOOLEAN                               ret;
 
   //
@@ -1813,6 +1854,13 @@ BBTestDhcpFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   // Enable EFI_PXE_BASE_CODE_PROTOCOL if needed
   Status = ChangePxeState (BcInterface, FALSE, BcInterface->Mode->Started, TRUE);
@@ -1917,7 +1965,8 @@ BBTestDiscoverFunctionTest (
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   UINT16                                Layer;
 
   //
@@ -1947,6 +1996,13 @@ BBTestDiscoverFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   Status = ReInitPxeBaseCode (BcInterface);
   if (EFI_ERROR(Status))
@@ -2057,6 +2113,7 @@ BBTestMtftpFunctionTest (
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   UINTN                                  FileSize;
   EFI_TEST_ASSERTION                     AssertionType;
@@ -2096,6 +2153,13 @@ BBTestMtftpFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   // Enable EFI_PXE_BASE_CODE_PROTOCOL protocol if needed
   Status = ChangePxeState (BcInterface, FALSE, BcInterface->Mode->Started, TRUE);
@@ -2240,6 +2304,7 @@ BBTestUdpWriteFunctionTest (
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_TEST_ASSERTION                    AssertionType;
 
@@ -2288,6 +2353,13 @@ BBTestUdpWriteFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Enable EFI_PXE_BASE_CODE_PROTOCOL if needed
@@ -2415,6 +2487,7 @@ BBTestUdpReadFunctionTest (
   EFI_INI_FILE_HANDLE                    FileHandle;
   EFI_STATUS                             Status;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_PXE_BASE_CODE_IP_FILTER            BcIpFilter;
   EFI_SIMPLE_NETWORK_PROTOCOL           *SnpInterface;
   EFI_TEST_ASSERTION                     AssertionType;
@@ -2446,6 +2519,13 @@ BBTestUdpReadFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   // Re - initialize EFI_PXE_BASE_CODE_PROTOCOL
   Status = ReInitPxeBaseCode (BcInterface);
@@ -2585,6 +2665,7 @@ BBTestSetIpFilterFunctionTest (
   EFI_STATUS                             Status;
   EFI_TEST_ASSERTION                     AssertionType;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_PXE_BASE_CODE_IP_FILTER            BcIpFilter;
 
   //
@@ -2605,6 +2686,13 @@ BBTestSetIpFilterFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Enable EFI_PXE_BASE_CODE_PROTOCOL if needed
@@ -2696,6 +2784,7 @@ BBTestArpFunctionTest (
   EFI_STATUS                             Status;
   EFI_TEST_ASSERTION                     AssertionType;
   EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_IP_ADDRESS                         IpAddr;
   EFI_MAC_ADDRESS                        MacAddr;
   EFI_SIMPLE_NETWORK_PROTOCOL            *SnpInterface;
@@ -2727,6 +2816,13 @@ BBTestArpFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   Status = ReInitPxeBaseCode (BcInterface);
   if (EFI_ERROR(Status)){
@@ -2938,7 +3034,8 @@ BBTestSetParametersFunctionTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   BOOLEAN                               OrigAutoArp, NewAutoArp;
   UINT8                                 OrigTTL, NewTTL;
 
@@ -2960,6 +3057,13 @@ BBTestSetParametersFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Enable EFI_PXE_BASE_CODE_PROTOCOL if needed
@@ -3149,7 +3253,8 @@ BBTestSetStationIpFunctionTest (
   EFI_TEST_LOGGING_LIBRARY_PROTOCOL     *LoggingLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   EFI_IP_ADDRESS                        NewStationIp, NewSubnetMask;
 
   //
@@ -3179,6 +3284,13 @@ BBTestSetStationIpFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   //
   // Enable EFI_PXE_BASE_CODE_PROTOCOL if needed
@@ -3280,7 +3392,8 @@ BBTestSetPacketsFunctionTest (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib;
   EFI_STATUS                            Status;
   EFI_TEST_ASSERTION                    AssertionType;
-  EFI_PXE_BASE_CODE_PROTOCOL           *BcInterface;
+  EFI_PXE_BASE_CODE_PROTOCOL            *BcInterface;
+  UINT16                                *DevicePathStr;
   BOOLEAN                               NewDhcpDiscoverValid;
   BOOLEAN                               NewDhcpAckReceived;
   BOOLEAN                               NewProxyOfferReceived ;
@@ -3311,6 +3424,13 @@ BBTestSetPacketsFunctionTest (
   // Get the EFI_PXE_BASE_CODE_PROTOCOL Protocol interface to be tested
   //
   BcInterface = (EFI_PXE_BASE_CODE_PROTOCOL *)ClientInterface;
+  DevicePathStr = SctDevicePathStrFromProtocol (BcInterface, &gBlackBoxEfiPxeBaseCodeProtocolGuid);
+  StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Device Path: %s\r\n",
+                DevicePathStr
+                );
 
   // Re-initialize the EFI_PXE_BASE_CODE_PROTOCOL
   Status = ReInitPxeBaseCode (BcInterface);

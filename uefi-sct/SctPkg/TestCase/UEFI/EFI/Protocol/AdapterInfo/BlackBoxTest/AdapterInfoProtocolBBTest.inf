@@ -49,3 +49,4 @@
   EfiTestLib
 
 [Protocols]
+  gEfiAdapterInformationProtocolGuid
