@@ -24,6 +24,7 @@ Abstract:
 
 --*/
 
+#include "SctLib.h"
 #include "AdapterInfoBBTestMain.h"
 
 

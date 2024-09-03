@@ -160,12 +160,4 @@ BBTestGetSupportedTypesFunctionTest (
   IN EFI_HANDLE                 SupportHandle
   );
 
-
-VOID
-SctInitializeLib (
-  IN EFI_HANDLE                 ImageHandle,
-  IN EFI_SYSTEM_TABLE           *SystemTable
-  );
-
-
 #endif
