@@ -1,0 +1,14 @@
+myst-parser==3.0.1
+pydata-sphinx-theme==0.15.4
+Sphinx==7.4.7
+sphinx-book-theme==1.1.3
+sphinx-bootstrap-theme==0.8.1
+sphinx-markdown-tables==0.0.17
+sphinx-rtd-theme==2.0.0
+sphinxcontrib-applehelp==1.0.8
+sphinxcontrib-devhelp==1.0.6
+sphinxcontrib-htmlhelp==2.0.6
+sphinxcontrib-jquery==4.1
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==1.0.8
+sphinxcontrib-serializinghtml==1.1.10
