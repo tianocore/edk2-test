@@ -2201,3 +2201,68 @@ No test case is designed to verify these functions in the EFI SCT.
 
 This function may only be available in Runtime. No test case is designed
 to verify it.
+
+## Secure Boot Runtime Services Test
+
+**Reference Document:**
+
+_UEFI Specification_, SecureBoot Runtime Services Section.
+
+**SecureBoot Runtime Services Functions**
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| SecureBootStates | Runtime | Verifies Secure Boot state transitions. |
+| VariableUpdate | Runtime | Verifies updates to Secure Boot variables. |
+
+The Secure Boot tests require a set of keys generated for PK, KEK, db, dbx.
+
+### SecureBootState()
+
+This test verifies the secure boot state transitions defined in the UEFI specification that can be tested without platform specific mechanisms:
+
+![state-transitions](images/sbstates.png)
+
+This test assumes the system is in SetupMode.
+
+
+| **Number** | **GUID** | **Assertion** | **Test Description** |
+| --- | --- | --- | --- |
+| 4.5.1.1 | 0xc35a351c, 0x053f, 0x4531, 0xb7, 0xde, 0x26, 0x33, 0xd1, 0x4e, 0x07, 0x02 | **SecureBoot** - Transition from Setup Mode to User mode. | Enroll PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li>DeployedMode=0<li>SetupMode=0<li>SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT<li>SetupMode is read-only</ol> |
+| 4.5.1.2 | 0x3250ca46, 0x4b36, 0x4478, 0x90, 0x9f, 0x44, 0x84, 0xf8, 0x67, 0x37, 0xd1 | **SecureBoot** - Transition from User Mode to Setup Mode. | Clear PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=0<li> SetupMode=1<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT<li>SetupMode is read-only<li>DeployedMode is read-only</ol> |
+| 4.5.1.3 | 0x3741bfab, 0x8991, 0x4376, 0xa8, 0x1f, 0xed, 0x13, 0x64, 0xe6, 0x43, 0x92 | **SecureBoot** - Transition from Setup Mode to User Mode. | Enroll PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=0<li> SetupMode=0<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.4 | 0x48b9af5b, 0xda19, 0x4cbf, 0x9d, 0xff, 0xf0, 0x8c, 0xe6, 0xb7, 0x8d, 0x1d | **SecureBoot** - Transition from User Mode to Deployed Mode. | Set DeployedMode=1 using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=1<li> SetupMode=0<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT<li>SetupMode is read-only<li>DeployedMode is read-only<li>AuditMode is read-only</ol> |
+| 4.5.1.5 | 0x5f66a939, 0x4466, 0x4942, 0xa1, 0xa7, 0xff, 0xa8, 0xb9, 0xa5, 0x35, 0xff | **SecureBoot** - Transition from Deployed Mode to Setup Mode. | Clear PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=0<li> SetupMode=1<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.6 | 0xe4357130, 0xd4c9, 0x49b6, 0x8b, 0x22, 0x7f, 0xff, 0x9b, 0xe2, 0xf9, 0x91 | **SecureBoot** - Transition from Setup Mode to User Mode. | Enroll PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=0<li> SetupMode=0<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.7 | 0xb218db38, 0x122c, 0x4d90, 0x89, 0xd0, 0x1a, 0x6b, 0xfe, 0x88, 0x38, 0xeb | **SecureBoot** - Transition from User Mode to Audit Mode. | Set AuditMode=1 using SetVariable(). Verify:<ol type="a"><li>PK is clear<li> AuditMode=1<li> DeployedMode=0<li> SetupMode=1<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT<li>SetupMode is read-only<li>DeployedMode is read-only<li>AuditMode is read-only</ol> |
+| 4.5.1.8 | 0x267b0177, 0xa24a, 0x427f, 0xa1, 0xab, 0x0e, 0x49, 0x4a, 0x4e, 0x26, 0x36 | **SecureBoot** - Transition from Audit Mode to Deployed Mode. | Enroll PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=1<li> SetupMode=0<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.9 | 0x0ab53752, 0xdd97, 0x4289, 0xb6, 0x19, 0xd7, 0xbd, 0x8a, 0xc8, 0x6e, 0x78 | **SecureBoot** - Transition from Deployed Mode to Setup Mode. | Clear PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=0<li> SetupMode=1<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.10 | 0x566d8c07, 0x6c13, 0x41dd, 0x8f, 0xad, 0xfc, 0xf5, 0x0a, 0x91, 0xc7, 0xf5 | **SecureBoot** - Transition from Setup Mode to Audit Mode.  | Set AuditMode=1 using SetVariable(). Verify:<ol type="a"><li>PK is clear<li> AuditMode=1<li> DeployedMode=0<li> SetupMode=1<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.11 | 0xc57ab7e0, 0x78c0, 0x448b, 0x94, 0x2e, 0xff, 0xfb, 0x12, 0x37, 0x48, 0x03 | **SecureBoot** - Transition from Audit Mode to Deployed Mode. | Enroll PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=1<li> SetupMode=0<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+| 4.5.1.12 | 0x068ed119, 0x401e, 0x46a0, 0x9c, 0x56, 0xd5, 0x65, 0x3a, 0xb3, 0x7b, 0x3d | **SecureBoot** - Transition from Deployed Mode to Setup Mode. | Clear PK using SetVariable(). Verify:<ol type="a"><li>AuditMode=0<li> DeployedMode=0<li> SetupMode=1<li> SecureBoot=0<li>Attributes of AuditMode,SetupMode,DeployedMode,SecureBoot are BS,RT</ol> |
+
+### VariableUpdates()
+
+The test infrastructure must transition the firmware to User Mode (with PK enrolled):
+- Verify SetupMode=1
+- Use SetVariable() to initialize PK to a test certificate
+- Verify SetupMode=0
+
+After the tests are complete the test infrastructure must
+- Clear PK to return to Setup Mode, clear KEK,db,dbx
+
+| **Number** | **GUID** | **Assertion** | **Test Description** |
+| --- | --- | --- | --- |
+| 4.5.2.1 | 0x68054c5f, 0x011e, 0x42c5, 0x9f, 0x9d, 0x23, 0xc4, 0xba, 0x0e, 0x37, 0x42 | **SecureBoot** - Verify create operation on secure boot variables, authorized by PK. | For each variable (KEK,db,dbx), use SetVariable to set to data (authorized by PK)<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
+| 4.5.2.2 | 0x743ca7ad, 0x8dc3, 0x4d29, 0x80, 0xed, 0xd2, 0x69, 0xcc, 0x9b, 0x1d, 0x8d | **SecureBoot** - Verify the attributes for PK and KEK are as defined by 3.3 Globally Defined Variables in the UEFI spec. | For each variable (PK,KEK), use GetVariable to get the variable attributes<ol type="a"><li>Verify the variable attributes for PK/KEK.  Attributes should be NV,BS,RT,AT.</ol> |
+| 4.5.2.3 | 0x3dd97680, 0xfd18, 0x4b33, 0xaa, 0x9c, 0xdb, 0xf0, 0x81, 0x60, 0xfb, 0x57 | **SecureBoot** - Verify delete operation on secure boot variables, authorized by PK. | For each variable (KEK,db,dbx), use SetVariable to set to null (authorized by PK)<ol type="a"><li>Verify that function returns EFI\_SUCCESS.<li>Verify that GetVariable() returns EFI\_NOT\_FOUND.</ol> |
+| 4.5.2.4 | 0xf6778756, 0xf6f8, 0x42fe, 0x8e, 0x66, 0x0c, 0x28, 0x95, 0x71, 0x77, 0x45 | **SecureBoot** - Verify delete operation on secure boot variables with mismatched attributes. | For each variable (KEK,db,dbx), use SetVariable to set to null (authorized by PK), but with attributes that don't match existing ones.<ol type="a"><li>Verify that function returns EFI\_INVALID\_PARAMETER.</ol> |
+| 4.5.2.5 | 0x97bc750e, 0x84c9, 0x4416, 0x9e, 0x27, 0x49, 0xc8, 0x66, 0x2c, 0xef, 0xb6 | **SecureBoot** - Verify signed update of secure boot variables with unauthorized signer. | For each variable (KEK,db,dbx), use SetVariable to set to data<ol type="a"><li>Verify that function returns EFI\_SECURITY\_VIOLATION.</ol> |
+| 4.5.2.6 | 0xe280f1b0, 0x0d4c, 0x42d4, 0x9a, 0xc3, 0xa1, 0xff, 0xc6, 0xaa, 0xba, 0xba | **SecureBoot** - Test update of secure boot variables with unsigned data. | For each variable (KEK,db,dbx), use SetVariable with unsigned data.<ol type="a"><li>Verify that function returns EFI\_SECURITY\_VIOLATION.</ol> |
+| 4.5.2.7 | 0x6c63399e, 0xf8ab, 0x4257, 0xa0, 0x6e, 0x69, 0x10, 0x92, 0xaf, 0x69, 0x94 | **SecureBoot** - Test update of secure boot variables with non-zero Pad1, Nanosecond, TimeZone, Daylight and Pad2 fields in the timestamp. | For db use SetVariable with signed data with non-zero Pad1, Nanosecond, TimeZone, Daylight and Pad2 fields in the timestamp.<ol type="a"><li>Verify that function returns EFI\_SECURITY\_VIOLATION.</ol> |
+| 4.5.2.8 | 0x1cb15937, 0x3916, 0x4dac, 0x87, 0xc4, 0x26, 0xd2, 0xc8, 0xa4, 0x4b, 0x65 | **SecureBoot** - Test update of secure boot variables that already exist with data authorized by PK. | For each variable (KEK,db,dbx), use SetVariable with data authorized by PK.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
+| 4.5.2.9 | 0xcc1d50fa, 0xa46c, 0x4a61, 0x8a, 0x98, 0x5e, 0x25, 0xb5, 0x2b, 0x72, 0x05 | **SecureBoot** - Test update of db,dbx with data authorized by KEK. | For each variable (db,dbx), use SetVariable with data authorized by KEK.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
+| 4.5.2.10 | 0x00158dd8, 0xcfca, 0x42fc, 0x85, 0x19, 0xa9, 0x20, 0x4e, 0x19, 0x36, 0x3c | **SecureBoot** - Verify update of db,dbx wth data authorized by second signature in KEK signature list. | Invoke SetVariable to set db to signature list authorized by second signature in KEK signature list.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
+| 4.5.2.11 | 0xab969f35, 0xfe3e, 0x4408, 0xad, 0xd8, 0xe0, 0xe3, 0xe4, 0x83, 0x2c, 0x74 | **SecureBoot** - Verify append to KEK with data authorized by PK. | Invoke SetVariable to append signature list to KEK.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol>|
+| 4.5.2.12 | 0x16f5a492, 0x3946, 0x4514, 0xba, 0xe5, 0x0b, 0xa1, 0xf0, 0x83, 0xcb, 0xcc | **SecureBoot** - Verify append to db,dbx with data authorized by signature appended to KEK in 4.5.2.9. | Invoke SetVariable to append a db,dbx signature list authorized by the signature appended to KEK in 4.5.2.9.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol>|
+| 4.5.2.13 | 0x0729b175, 0x5975, 0x4849, 0xab, 0x50, 0x92, 0x85, 0xf1, 0xef, 0xcf, 0x61 | **SecureBoot** - Attempt to perform unsigned delete on secure boot variables. | For each variable (PK,KEK,db,dbx), use SetVariable with unsigned null data to do a delete.<ol type="a"><li>Verify that function returns EFI\_SECURITY\_VIOLATION.</ol> |
+
