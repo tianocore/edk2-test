@@ -119,7 +119,8 @@ BBTestRaiseTPL_Func_Sub1 (
     //
     Tpl1 = gtBS->RaiseTPL (CheckTpls[Index]);
     Tpl2 = gtBS->RaiseTPL (TPL_HIGH_LEVEL);
-    gtBS->RestoreTPL (OldTpl);
+    gtBS->RestoreTPL (Tpl1 );
+    gtBS->RestoreTPL (Tpl2 );
 
     if ((Tpl1 == OldTpl) && (Tpl2 == CheckTpls[Index])) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
