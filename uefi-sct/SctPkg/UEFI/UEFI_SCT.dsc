@@ -136,18 +136,6 @@
 
   MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
 
-[Libraries.ARM]
-  ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[Libraries.AARCH64]
-  ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[Libraries.RISCV64]
-  ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[Libraries.LOONGARCH64]
-  ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
 !include MdePkg/MdeLibs.dsc.inc
 
 [LibraryClasses.common]
@@ -165,24 +153,12 @@
   PrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
   UefiLib|MdePkg/Library/UefiLib/UefiLib.inf
   DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
-  
+
   SctLib|SctPkg/Library/SctLib/SctLib.inf
   NetLib|SctPkg/Library/NetLib/NetLib.inf
   EntsLib|SctPkg/TestInfrastructure/SCT/Framework/ENTS/EasLib/EntsLib.inf
   EasLib|SctPkg/TestInfrastructure/SCT/Framework/ENTS/EasDispatcher/Eas.inf
   EfiTestLib|SctPkg/Library/EfiTestLib/EfiTestLib.inf
-
-[LibraryClasses.ARM]
-  NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[LibraryClasses.AARCH64]
-  NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[LibraryClasses.RISCV64]
-  NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
-
-[LibraryClasses.LOONGARCH64]
-  NULL|ArmPkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
 
 ###############################################################################
 #
