@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Self Certification Test (SCT) II'
-copyright = '2024, Prachotan Bathi'
+copyright = '2010-2017, 2024, Unified EFI Forum, Inc. All Rights Reserved.'
 author = 'Prachotan Bathi'
 
 # -- General configuration ---------------------------------------------------
