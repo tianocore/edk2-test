@@ -1870,7 +1870,7 @@ BBTestGetStatusFunctionTest (
     StatCode = gtBS->SetTimer (
                        TimeoutEvent,
                        TimerRelative,
-                       50000);  /* 5 milliseconds */
+                       5000000);  /* 500 milliseconds. This value is increased from old value 5 milliseconds to due false positives on some platforms */
     if (EFI_ERROR(StatCode)) {
       StandardLib->RecordAssertion (
                      StandardLib,
@@ -2196,7 +2196,7 @@ BBTestTransmitFunctionTest (
     StatCode = gtBS->SetTimer (
         TimeoutEvent,
         TimerRelative,
-        50000);  /* 5 milliseconds */
+        5000000);  /* 500 milliseconds. This value is increased from old value 5 milliseconds to due false positives on some platforms */
     if (EFI_ERROR(StatCode)) {
       StandardLib->RecordAssertion (
                      StandardLib,
