@@ -8,6 +8,12 @@ built-in UEFI Compliance Tests, as well as for integrating
 user-defined tests that were developed using the
 UEFI SCT open source code.
 
+Refer to [UEFI SCT Test Case Specification](https://uefi-sct-testcasespec.readthedocs.io/en/latest/) for detailed information for each assertion in the UEFI SCT fundamental service and protocol tests.
+The source of the test case specification is maintained here: [Doc/TestCaseSpec](Doc/TestCaseSpec)
+
+UEFI SCT verifies UEFI Specification version 2.7 (Errata A).
+There are tests developed that additionally cover supplementary features. For details, refer to the "New Features" on the [edk2-test Releases](https://github.com/tianocore/edk2-test/releases) page.
+
 Contributions to the UEFI-SCT open source project are covered by the
 TianoCore Contribution Agreement 1.1.
 
