@@ -21,6 +21,7 @@ Abstract:
     for EFI Adapter Information Protocol's conformance Test
 
 --*/
+#include "SctLib.h"
 #include "AdapterInfoBBTestMain.h"
 
 
