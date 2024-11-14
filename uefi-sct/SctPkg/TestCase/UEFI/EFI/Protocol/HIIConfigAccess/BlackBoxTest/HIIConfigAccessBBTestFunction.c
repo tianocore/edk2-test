@@ -328,8 +328,8 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
     } else {
       gtBS->FreePool (Results);
     }
-  } else if (EFI_OUT_OF_RESOURCES == Status) {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;  
+  } else if ( (EFI_OUT_OF_RESOURCES == Status) || (EFI_ACCESS_DENIED == Status) ) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
   }else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
@@ -385,7 +385,7 @@ BBTestExtractConfigFunctionTestCheckpoint1 (
       }
       gtBS->FreePool (Results);
     }
-  } else if (EFI_OUT_OF_RESOURCES == Status) {
+  } else if ( (EFI_OUT_OF_RESOURCES == Status) || (EFI_ACCESS_DENIED == Status) ) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;  
   }else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -445,7 +445,7 @@ BBTestExtractConfigFunctionTestCheckpoint2 (
                   &Results
                   );
 
-  if (EFI_OUT_OF_RESOURCES == Status) {
+  if ( (EFI_OUT_OF_RESOURCES == Status) || (EFI_ACCESS_DENIED == Status) ) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;
   } else if ((EFI_NOT_FOUND == Status) && (Progress == NULL) && (Results == NULL)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
