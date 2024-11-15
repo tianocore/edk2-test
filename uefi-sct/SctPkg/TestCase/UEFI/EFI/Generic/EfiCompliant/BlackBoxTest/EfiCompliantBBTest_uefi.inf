@@ -51,6 +51,10 @@
   UefiDriverEntryPoint
   SctLib
   EfiTestLib
+  UefiLib
+
+[Guids]
+  gEfiRtPropertiesTableGuid
 
 [Protocols]
   gEfiDebugPortProtocolGuid

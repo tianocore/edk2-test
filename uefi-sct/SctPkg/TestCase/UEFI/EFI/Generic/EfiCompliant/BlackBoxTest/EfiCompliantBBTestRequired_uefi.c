@@ -29,6 +29,8 @@ Abstract:
 //
 
 #include "SctLib.h"
+#include <Library/UefiLib.h>
+#include <Guid/RtPropertiesTable.h>
 #include "EfiCompliantBbTestMain_uefi.h"
 #include EFI_PROTOCOL_DEFINITION (LoadedImage)
 #include EFI_PROTOCOL_DEFINITION (DevicePath)
@@ -39,6 +41,11 @@ EFI_GUID gGlobalVariableGuid = EFI_GLOBAL_VARIABLE;
 
 #define  GlobalVariableNum    40
 #define  MAX_BUFFER_SIZE      1024
+
+typedef struct _RUNTIME_SERVICE_CHECK {
+  VOID      *Function;
+  UINT32    Flag;
+} RUNTIME_SERVICE_CHECK;
 
 typedef struct _VARIABLE_PAIR {
   CHAR16    Name[30];
@@ -104,6 +111,11 @@ CheckBootServices (
 
 EFI_STATUS
 CheckRuntimeServices (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  );
+
+EFI_STATUS
+CheckRuntimePropertiesTable (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
   );
 
@@ -182,6 +194,11 @@ Routine Description:
   // Check the EFI Runtime Services
   //
   CheckRuntimeServices (StandardLib);
+
+  //
+  // Check the EFI Runtime Properties Table
+  //
+  CheckRuntimePropertiesTable (StandardLib);
 
   //
   // Check the LOADED_IMAGE Protocol
@@ -708,6 +725,101 @@ CheckRuntimeServices (
                    L"  UpdateCapsule             : Not available\n"
                    );
   }
+  //
+  // Done
+  //
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+CheckRuntimePropertiesTable (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
+  )
+{
+  EFI_TEST_ASSERTION       AssertionType;
+  EFI_RT_PROPERTIES_TABLE  *RtPropertiesTable               = NULL;
+  UINT32                   ExpectedRuntimeServicesSupported = 0u;
+  EFI_STATUS               Status                           = EFI_NOT_STARTED;
+
+  RUNTIME_SERVICE_CHECK    RuntimeServices[] = {
+    { (VOID *)gtRT->GetTime, EFI_RT_SUPPORTED_GET_TIME },
+    { (VOID *)gtRT->SetTime, EFI_RT_SUPPORTED_SET_TIME },
+    { (VOID *)gtRT->GetWakeupTime, EFI_RT_SUPPORTED_GET_WAKEUP_TIME },
+    { (VOID *)gtRT->SetWakeupTime, EFI_RT_SUPPORTED_SET_WAKEUP_TIME },
+    { (VOID *)gtRT->GetVariable, EFI_RT_SUPPORTED_GET_VARIABLE },
+    { (VOID *)gtRT->GetNextVariableName, EFI_RT_SUPPORTED_GET_NEXT_VARIABLE_NAME },
+    { (VOID *)gtRT->SetVariable, EFI_RT_SUPPORTED_SET_VARIABLE },
+    { (VOID *)gtRT->SetVirtualAddressMap, EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP },
+    { (VOID *)gtRT->ConvertPointer, EFI_RT_SUPPORTED_CONVERT_POINTER },
+    { (VOID *)gtRT->GetNextHighMonotonicCount, EFI_RT_SUPPORTED_GET_NEXT_HIGH_MONOTONIC_COUNT },
+    { (VOID *)gtRT->ResetSystem, EFI_RT_SUPPORTED_RESET_SYSTEM },
+    { (VOID *)gtRT->UpdateCapsule, EFI_RT_SUPPORTED_UPDATE_CAPSULE },
+    { (VOID *)gtRT->QueryCapsuleCapabilities, EFI_RT_SUPPORTED_QUERY_CAPSULE_CAPABILITIES },
+    { (VOID *)gtRT->QueryVariableInfo, EFI_RT_SUPPORTED_QUERY_VARIABLE_INFO }
+  };
+
+  //
+  // Check the EFI Runtime Services Table
+  //
+  Status = EfiGetSystemConfigurationTable (&gEfiRtPropertiesTableGuid, (VOID **)&RtPropertiesTable);
+  if (EFI_ERROR (Status)) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestRequiredAssertionGuid004,
+                 L"UEFI Compliant - EFI Runtime Properties Table must be implemented",
+                 L"%a:%d:Status - %r, Expected - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 EFI_SUCCESS
+                 );
+
+  //
+  // Record the entire EFI Runtime Properties Table
+  //
+  StandardLib->RecordMessage (
+                 StandardLib,
+                 EFI_VERBOSE_LEVEL_DEFAULT,
+                 L"  Version                  : %X\n"
+                 L"  Length                   : %X\n"
+                 L"  RuntimeServicesSupported : %X\n",
+                 RtPropertiesTable->Version,
+                 RtPropertiesTable->Length,
+                 RtPropertiesTable->RuntimeServicesSupported
+                 );
+
+  //
+  // Check RuntimeServicesSupported variable introduced by UEFI spec
+  //
+  for (int i = 0; i < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); i++) {
+    if (RuntimeServices[i].Function != NULL) {
+      ExpectedRuntimeServicesSupported |= RuntimeServices[i].Flag;
+    }
+  }
+
+  if (RtPropertiesTable->RuntimeServicesSupported == ExpectedRuntimeServicesSupported) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gEfiCompliantBbTestRequiredAssertionGuid003,
+                 L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported variable must be implemented",
+                 L"%a:%d:RuntimeServicesSupported - 0x%x, Expected - 0x%x",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 RtPropertiesTable->RuntimeServicesSupported,
+                 ExpectedRuntimeServicesSupported
+                 );
   //
   // Done
   //
