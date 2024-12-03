@@ -49,14 +49,14 @@ BBTestSetDataFunctionTest (
   EFI_STRING                             Progress = NULL;
   UINT32                                 ProgressErr = 0;
 
-  EFI_STRING    KeywordString1     = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=01&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortDisable:1&VALUE=01";
-  EFI_STRING    ValidPartOfString1 = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=01&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400";
+  EFI_STRING    KeywordString1          = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=00&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortEnable:1&VALUE=01";
+  EFI_STRING    RequestOfKeywordString1 = L"PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortEnable:1";
 
-  EFI_STRING    KeywordString2       = L"PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable";
-  EFI_STRING    RespOfKeywordString2 = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=00";
+  EFI_STRING    KeywordString2     = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=01&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortDisable:1&VALUE=01";
+  EFI_STRING    ValidPartOfString2 = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=01&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400";
 
-  EFI_STRING    KeywordString3          = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=00&NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortEnable:1&VALUE=01";
-  EFI_STRING    RequestOfKeywordString3 = L"PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=ChipsetSATAPortEnable:1";
+  EFI_STRING    KeywordString3       = L"PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable";
+  EFI_STRING    RespOfKeywordString3 = L"NAMESPACE=x-UEFI-ns&PATH=01041400f4274aa000df424db55239511302113d7fff0400&KEYWORD=iSCSIBootEnable&VALUE=00";
 
   ConfigKeywordHandler = (EFI_CONFIG_KEYWORD_HANDLER_PROTOCOL*)ClientInterface;
   if (ConfigKeywordHandler == NULL)
@@ -151,46 +151,7 @@ BBTestSetDataFunctionTest (
   }
 
   Status = ConfigKeywordHandler->SetData (ConfigKeywordHandler, KeywordString1, &Progress, &ProgressErr);
-  if (EFI_NOT_FOUND != Status || ProgressErr != KEYWORD_HANDLER_KEYWORD_NOT_FOUND || Progress != KeywordString1 + SctStrLen(ValidPartOfString1))
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  else
-  	AssertionType = EFI_TEST_ASSERTION_PASSED;
-
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gConfigKeywordHandlerBBTestFunctionAssertionGuid001 ,
-                 L"CONFIG_KEYWORD_HANDLER_PROTOCOL.SetData - SetData() returns EFI_NOT_FOUND when an element of the KeywordString was not found and Progress points to the most recent '&' before the first failing string element.",
-                 L"%a:%d: Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );
-
-  Status = ConfigKeywordHandler->GetData (ConfigKeywordHandler, NULL, KeywordString2, &Progress, &ProgressErr, &Results);
-  if (Status == EFI_SUCCESS && Progress == KeywordString2 + SctStrLen(KeywordString2) && ProgressErr == KEYWORD_HANDLER_NO_ERROR && 0 == SctStrCmp(RespOfKeywordString2, Results))
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  else
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gConfigKeywordHandlerBBTestFunctionAssertionGuid002 ,
-                 L"CONFIG_KEYWORD_HANDLER_PROTOCOL.SetData - SetData() the system storage associated with earlier keywords is not modified when an EFI_NOT_FOUND error is generated during processing the second or later keyword element.",
-                 L"%a:%d: Status - %r",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 Status
-                 );  
-
-  if (Results) {
-    SctFreePool (Results);
-    Results = NULL;
-  }
-
-  Status = ConfigKeywordHandler->SetData (ConfigKeywordHandler, KeywordString3, &Progress, &ProgressErr);
-  if (Status == EFI_SUCCESS && Progress == KeywordString3 + SctStrLen(KeywordString3) && ProgressErr == KEYWORD_HANDLER_NO_ERROR)
+  if (Status == EFI_SUCCESS && Progress == KeywordString1 + SctStrLen(KeywordString1) && ProgressErr == KEYWORD_HANDLER_NO_ERROR)
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
     AssertionType = EFI_TEST_ASSERTION_FAILED;  
@@ -198,7 +159,7 @@ BBTestSetDataFunctionTest (
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gConfigKeywordHandlerBBTestFunctionAssertionGuid003 ,
+                 gConfigKeywordHandlerBBTestFunctionAssertionGuid001 ,
                  L"CONFIG_KEYWORD_HANDLER_PROTOCOL.SetData - SetData() should be successful and with correct behavior and Progress points to the request string's NULL terminator.",
                  L"%a:%d: Status - %r",
                  __FILE__,
@@ -206,21 +167,60 @@ BBTestSetDataFunctionTest (
                  Status
                  );
 
-  Status = ConfigKeywordHandler->GetData (ConfigKeywordHandler, NULL, RequestOfKeywordString3, &Progress, &ProgressErr, &Results);
-  if (Status == EFI_SUCCESS && Progress == RequestOfKeywordString3 + SctStrLen(RequestOfKeywordString3) && ProgressErr == KEYWORD_HANDLER_NO_ERROR && 0 != SctStrStr(FullStr, Results))
+  Status = ConfigKeywordHandler->GetData (ConfigKeywordHandler, NULL, RequestOfKeywordString1, &Progress, &ProgressErr, &Results);
+  if (Status == EFI_SUCCESS && Progress == RequestOfKeywordString1 + SctStrLen(RequestOfKeywordString1) && ProgressErr == KEYWORD_HANDLER_NO_ERROR && 0 != SctStrStr(FullStr, Results))
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   else
     AssertionType = EFI_TEST_ASSERTION_FAILED;  
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
-                 gConfigKeywordHandlerBBTestFunctionAssertionGuid004 ,
+                 gConfigKeywordHandlerBBTestFunctionAssertionGuid002 ,
                  L"CONFIG_KEYWORD_HANDLER_PROTOCOL.SetData - SetData() should save the data correctly.",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
                  Status
                  );
+
+  if (Results) {
+    SctFreePool (Results);
+    Results = NULL;
+  }
+
+  Status = ConfigKeywordHandler->SetData (ConfigKeywordHandler, KeywordString2, &Progress, &ProgressErr);
+  if (EFI_NOT_FOUND != Status || ProgressErr != KEYWORD_HANDLER_KEYWORD_NOT_FOUND || Progress != KeywordString2 + SctStrLen(ValidPartOfString2))
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  else
+  	AssertionType = EFI_TEST_ASSERTION_PASSED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gConfigKeywordHandlerBBTestFunctionAssertionGuid003 ,
+                 L"CONFIG_KEYWORD_HANDLER_PROTOCOL.SetData - SetData() returns EFI_NOT_FOUND when an element of the KeywordString was not found and Progress points to the most recent '&' before the first failing string element.",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  Status = ConfigKeywordHandler->GetData (ConfigKeywordHandler, NULL, KeywordString3, &Progress, &ProgressErr, &Results);
+  if (Status == EFI_SUCCESS && Progress == KeywordString3 + SctStrLen(KeywordString3) && ProgressErr == KEYWORD_HANDLER_NO_ERROR && 0 == SctStrCmp(RespOfKeywordString3, Results))
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  else
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gConfigKeywordHandlerBBTestFunctionAssertionGuid004 ,
+                 L"CONFIG_KEYWORD_HANDLER_PROTOCOL.SetData - SetData() the system storage associated with earlier keywords is not modified when an EFI_NOT_FOUND error is generated during processing the second or later keyword element.",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );  
 
   if (Results) {
     SctFreePool (Results);
