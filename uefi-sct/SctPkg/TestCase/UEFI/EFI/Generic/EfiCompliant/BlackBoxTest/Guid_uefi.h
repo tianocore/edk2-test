@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2024 HP Development Company, L.P. <BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -204,4 +205,9 @@ extern EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid008;
 { 0xf6334f9b, 0xb930, 0x4adb, {0xa5, 0x3b, 0x76, 0xfa, 0x7b, 0x4c, 0x27, 0x62 }}
 
 extern EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid009;
+
+#define EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_010_GUID \
+{ 0xe6c7861f, 0x350e, 0x4a4c, {0xbe, 0x57, 0xcb, 0xde, 0xfd, 0xbb, 0x56, 0x89 }}
+
+extern EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid010;
 
