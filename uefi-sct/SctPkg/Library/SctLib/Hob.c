@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2010 Unified EFI, Inc.<BR>
   Copyright (c) 2010, Intel Corporation. All rights reserved.<BR>
+  (c) Copyright 2024 HP Development Company, L.P.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -385,7 +386,7 @@ Returns:
 
   *BaseAddress  = FirmwareVolumeHob.FirmwareVolume2->BaseAddress;
   *Length       = FirmwareVolumeHob.FirmwareVolume2->Length;
-  EfiCommonLibCopyMem(FileName,&FirmwareVolumeHob.FirmwareVolume2->FileName,sizeof(EFI_GUID));
+  SctCopyMem(FileName,&FirmwareVolumeHob.FirmwareVolume2->FileName,sizeof(EFI_GUID));
 
   *HobStart     = GET_NEXT_HOB (FirmwareVolumeHob);
 
