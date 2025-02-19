@@ -1197,7 +1197,7 @@ Returns:
   EFI_FILE_HANDLE         Handle;
   UINTN                   BufferSize;
   UINTN                   BufferUnicodeSize;
-  CHAR8                   Buffer[MAX_LINE_LEN * 10];
+  CHAR8                   Buffer[MAX_LINE_LEN * 10] = {'\0'};
   CHAR16                  BufferUnicode[MAX_LINE_LEN * 10 * sizeof(CHAR16)];
   CHAR8                   Line[MAX_LINE_LEN * 2];
 
