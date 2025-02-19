@@ -560,7 +560,7 @@ BBTestOpenExConformanceTestCheckpoint2 (
   EFI_STATUS                StatusAsync;
   EFI_FILE                  *Root;
   EFI_TEST_ASSERTION        AssertionType;
-  UINT32                    RandomValue;
+  UINT32                    RandomValue = 0;
   CHAR16                    RandomChars[100];
   CHAR16                    BaseDirName[100];
   CHAR16                    NewDirName[100];

@@ -464,7 +464,7 @@ BBTestSetStateConformanceTestCheckpoint1 (
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   )
 {
-  EFI_STATUS            Status;
+  EFI_STATUS            Status = EFI_SUCCESS;
   EFI_TEST_ASSERTION    AssertionType;
   EFI_TPL               OldTpl;
 
@@ -520,7 +520,7 @@ BBTestSetStateConformanceTestCheckpoint2 (
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   )
 {
-  EFI_STATUS            Status;
+  EFI_STATUS            Status = EFI_SUCCESS;
   EFI_TEST_ASSERTION    AssertionType;
   UINTN                 Index;
   EFI_TPL               OldTpl;
@@ -596,7 +596,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint1 (
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   )
 {
-  EFI_STATUS            Status;
+  EFI_STATUS            Status = EFI_SUCCESS;
   EFI_TEST_ASSERTION    AssertionType;
   VOID                  *NotifyHandle;
   EFI_TPL               OldTpl;
@@ -718,7 +718,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint3 (
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   )
 {
-  EFI_STATUS            Status;
+  EFI_STATUS            Status = EFI_SUCCESS;
   EFI_TEST_ASSERTION    AssertionType;
   EFI_KEY_DATA          Key;
   EFI_TPL               OldTpl;

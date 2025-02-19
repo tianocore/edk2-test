@@ -1168,7 +1168,7 @@ BBTestConfigToBlockConformanceTestCheckpoint3(
 {
   EFI_STATUS            Status;
   EFI_STRING            ConfigResp;
-  UINT8                 Block[TESTBLOCKZISE];
+  UINT8                 Block[TESTBLOCKZISE] = {0};
   UINTN                 BlockSize;
   EFI_STRING            Progress;
   EFI_TEST_ASSERTION    AssertionType;
