@@ -19,5 +19,5 @@ are listed in [Maintainers.txt](Maintainers.txt) under each sub project.
 * [EDK II](https://github.com/tianocore/tianocore.github.io/wiki/EDK-II)
 * [Getting Started with EDK II](https://github.com/tianocore/tianocore.github.io/wiki/Getting-Started-with-EDK-II)
 * [Mailing Lists](https://github.com/tianocore/tianocore.github.io/wiki/Mailing-Lists)
-* [TianoCore Bugzilla](https://bugzilla.tianocore.org)
+* [EDK II Test Issue List](https://github.com/tianocore/edk2-test/issues)
 * [How To Contribute](https://github.com/tianocore/tianocore.github.io/wiki/How-To-Contribute)

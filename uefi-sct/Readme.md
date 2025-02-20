@@ -31,4 +31,4 @@ are listed in [Maintainers.txt](Maintainers.txt).
 * [TianoCore](http://www.tianocore.org)
 * [Getting Started with UEFI-SCT](https://github.com/tianocore/tianocore.github.io/wiki/UEFI-SCT)
 * [Mailing List](mailto:devel@edk2.groups.io?subject=[edk2-test])
-* [UEFI-SCT BugTracker](https://bugzilla.tianocore.org/)
+* [UEFI-SCT Issue Tracker](https://github.com/tianocore/edk2-test/issues)
