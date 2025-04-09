@@ -25,7 +25,7 @@ Abstract:
 --*/
 
 #include "AdapterInfoBBTestMain.h"
-
+#include "SctLib.h"
 
 //
 // Global variables
