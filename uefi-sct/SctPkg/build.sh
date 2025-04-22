@@ -27,6 +27,8 @@ function get_build_arch
 	        BUILD_ARCH=RISCV64;;
 	    loongarch64*)
 	        BUILD_ARCH=LOONGARCH64;;
+	    x86_64*)
+	        BUILD_ARCH=X64;;
 	    *)
 	        BUILD_ARCH=other;;
 	esac
@@ -40,6 +42,12 @@ function set_cross_compile
 	echo "Build: $BUILD_ARCH"
 	if [ "$SCT_TARGET_ARCH" = "$BUILD_ARCH" ]; then
 	    TEMP_CROSS_COMPILE=
+	elif [ "$SCT_TARGET_ARCH" == "X64" ]; then
+	    if [ X"$CROSS_COMPILE_64" != X"" ]; then
+	        TEMP_CROSS_COMPILE="$CROSS_COMPILE_64"
+	    else
+	        TEMP_CROSS_COMPILE=x86_64-linux-gnu-
+	    fi
 	elif [ "$SCT_TARGET_ARCH" == "AARCH64" ]; then
 	    if [ X"$CROSS_COMPILE_64" != X"" ]; then
 	        TEMP_CROSS_COMPILE="$CROSS_COMPILE_64"
