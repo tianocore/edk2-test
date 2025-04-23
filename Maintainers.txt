@@ -5,14 +5,25 @@ This file provides information about the primary maintainers for
 UEFI-SCT.
 
 In general, you should not privately email the maintainer. You should
-email the edk2-devel list, but you can also Cc the maintainer.
+email the edk2-devel list, and Cc the package maintainers and
+reviewers.
+
+If the package maintainer wants to hand over the role to other people,
+the package maintainer should send the patch to update Maintainers.txt
+with new maintainer, and the new maintainer should follow up with
+an Acked-by or a Reviewed-by.
 
 Descriptions of section entries:
 
-  L: Mailing list that is relevant to this area (default is utwg)
+  L: Mailing list that is relevant to this area (default is edk2-devel)
      Patches and questions should be sent to the email list.
-  M: Cc address for patches and questions (ie, the maintainer)
-  R: Cc address for patches (ie, the reviewer)
+  M: Package Maintainer: Cc address for patches and questions. Responsible
+     for reviewing and pushing package changes to source control.
+  R: Package Reviewer: Cc address for patches and questions. Reviewers help
+     maintainers review code, but don't have push access. A designated Package
+     Reviewer is reasonably familiar with the Package (or some modules
+     thereof), and/or provides testing or regression testing for the Package
+     (or some modules thereof), in certain platforms and environments.
   W: Web-page with status/info
   T: SCM tree type and location.  Type is one of: git, svn.
   S: Status, one of the following:
@@ -20,11 +31,26 @@ Descriptions of section entries:
      Maintained: Someone actually looks after it.
      Odd Fixes:  It has a maintainer but they don't have time to do
                  much other than throw the odd patch in. See below.
-     Orphan:     No current maintainer [but maybe you could take the
-                 role as you write your new code].
      Obsolete:   Old code. Something tagged obsolete generally means
                  it has been replaced by a better system and you
                  should be using that.
+  F: Files and directories with wildcard patterns.
+     A trailing slash includes all files and subdirectory files.
+     F:   MdeModulePkg/   all files in and below MdeModulePkg
+     F:   MdeModulePkg/*  all files in MdeModulePkg, but not below
+     F:   */Pci/*         all files in a directory called Pci, at any depth in
+                          the hierarchy, but not below
+     One pattern per line.  Multiple F: lines per section acceptable.
+  X: Files and directories that are NOT maintained, same rules as F:
+     Files exclusions are tested after file matches.
+     Can be useful for excluding a specific subdirectory, for instance:
+     F:   NetworkPkg/
+     X:   NetworkPkg/Ip6Dxe/
+     matches all files in and below NetworkPkg excluding NetworkPkg/Ip6Dxe/
+  Filenames not caught by any F: rule get matched as being located in the top-
+  level directory. (Internally, the script looks for a match called '<default>',
+  so please don't add a file called that in the top-level directory.)
+
 
 UEFI-SCT
 ------
@@ -35,18 +61,37 @@ Responsible Disclosure, Reporting Security Issues
 -------------------------------------------------
 W: https://github.com/tianocore/tianocore.github.io/wiki/Reporting-Security-Issues
 
+All patches CC:d here
+L: devel@edk2.groups.io
+F: *
+F: */
 
-UEFI-SCT:
-----------------
 
-M: G Edhaya Chandran <Edhaya.Chandran@arm.com>
-M: Barton Gao <gaojie@byosoft.com.cn>
-M: Carolyn Gjertsen <Carolyn.Gjertsen@amd.com>
+EDKII Test Stewards
+------------------
+F: *
+M: G Edhaya Chandran <edhaya.chandran@arm.com> [edhay]
+M: Carolyn Gjertsen <Carolyn.Gjertsen@amd.com> [cgjertsen]
+M: Barton Gao <gaojie@byosoft.com.cn> [gaojiebyo]
+R: Sunny Wang <sunny.wang@arm.com> [sunnywang-arm]
+R: Ann Cheng <ann.cheng@arm.com> [anncheng-arm]
 
-R: Samer El-Haj-Mahmoud <Samer.El-Haj-Mahmoud@arm.com>
-R: Eric Jin <eric.jin@intel.com>
-R: Arvin Chen <arvinx.chen@intel.com>
-R: Supreeth Venkatesh <Supreeth.Venkatesh@amd.com>
+
+EDK2-Test Protocols
+-------------------
+
+TCG2
+F: */TCG2/
+R: Stuart Yoder <stuart.yoder@arm.com> [stuyod01]
+
+
+EDK2-Test Architectures
+-----------------------
+
+RISC V
+F: */RiscV/
+R: Heinrich Schuchardt <heinrich.schuchardt@canonical.com> [xypron]
+
 
 General questions on UEFI-SCT with the subject [edk2-test] can be sent to
 L: edk2-devel <devel@edk2.groups.io>
