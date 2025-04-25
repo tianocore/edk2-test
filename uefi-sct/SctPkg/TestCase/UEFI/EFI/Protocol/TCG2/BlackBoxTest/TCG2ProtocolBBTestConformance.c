@@ -39,6 +39,7 @@ Abstract:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetCapabilityConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -98,6 +99,7 @@ BBTestGetCapabilityConformanceTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetActivePcrBanksConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -151,6 +153,7 @@ BBTestGetActivePcrBanksConformanceTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestHashLogExtendEventConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -208,6 +211,7 @@ BBTestHashLogExtendEventConformanceTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestSubmitCommandConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
