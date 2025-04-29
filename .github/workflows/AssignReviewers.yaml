@@ -14,6 +14,9 @@ on:
       - master
     types: [opened, ready_for_review, reopened, synchronize]
 
+on:
+  workflow_dispatch:
+
 env:
   GET_MAINTAINER_REL_PATH: "uefi-sct/HowToBuild/scripts/GetMaintainer.py"
 

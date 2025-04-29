@@ -14,6 +14,14 @@ the following components that are covered by additional licenses:
 The EDK II Test Project is composed of sub projects.  The maintainers for each sub project
 are listed in [Maintainers.txt](Maintainers.txt) under each sub project.
 
+## How to contribute
+
+* Raise a new issue in the [EDK II Test Issue List](https://github.com/tianocore/edk2-test/issues)
+* Submit the solution patch as a new GitHub pull request<br>
+    Refer to the [TianoCore Code Style](https://github.com/tianocore/tianocore.github.io/wiki/Code-Style)<br>
+    Refer to the [TianoCore Commit Message Format](https://github.com/tianocore/tianocore.github.io/wiki/Commit-Message-Format)<br>
+* Cross reference the pull request or corresponding commit, in the Issue thread.
+
 # Resources
 * [TianoCore](http://www.tianocore.org)
 * [EDK II](https://github.com/tianocore/tianocore.github.io/wiki/EDK-II)

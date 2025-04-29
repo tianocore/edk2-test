@@ -37,63 +37,6 @@ To make a contribution to a TianoCore project, follow these steps.
    Contributions using other licenses might be accepted, but further
    review will be required.
 
-=====================================================
-= Change Description / Commit Message / Patch Email =
-=====================================================
-
-Your change description should use the standard format for a
-commit message, and must include your "Signed-off-by" signature
-and the "Contributed-under" message.
-
-== Sample Change Description / Commit Message =
-
-=== Start of sample patch email message ===
-
-From: Contributor Name <contributor@example.com>
-Subject: [Repository/Branch PATCH] Module: Brief-single-line-summary
-
-Full-commit-message
-
-Contributed-under: TianoCore Contribution Agreement 1.1
-Signed-off-by: Contributor Name <contributor@example.com>
----
-
-An extra message for the patch email which will not be considered part
-of the commit message can be added here.
-
-Patch content inline or attached
-
-=== End of sample patch email message ===
-
-=== Notes for sample patch email ===
-
-* The first line of commit message is taken from the email's subject
-  line following [Repository/Branch PATCH]. The remaining portion of the
-  commit message is the email's content until the '---' line.
-* git format-patch is one way to create this format
-
-=== Definitions for sample patch email ===
-
-* "Repository" is the identifier of the repository the patch applies.
-  This identifier should only be provided for repositories other than
-  'edk2'. For example 'edk2-BuildSpecification' or 'staging'.
-* "Branch" is the identifier of the branch the patch applies. This
-  identifier should only be provided for branches other than 'edk2/master'.
-  For example 'edk2/UDK2015', 'edk2-BuildSpecification/release/1.27', or
-  'staging/edk2-test'.
-* "Module" is a short identifier for the affected code or documentation. For
-  example 'MdePkg', 'MdeModulePkg/UsbBusDxe', 'Introduction', or
-  'EDK II INF File Format'.
-* "Brief-single-line-summary" is a short summary of the change.
-* The entire first line should be less than ~70 characters.
-* "Full-commit-message" a verbose multiple line comment describing
-  the change.  Each line should be less than ~70 characters.
-* "Contributed-under" explicitly states that the contribution is
-  made under the terms of the contribution agreement. This
-  agreement is included below in this document.
-* "Signed-off-by" is the contributor's signature identifying them
-  by their real/legal name and their email address.
-
 ========================================
 = TianoCore Contribution Agreement 1.1 =
 ========================================
