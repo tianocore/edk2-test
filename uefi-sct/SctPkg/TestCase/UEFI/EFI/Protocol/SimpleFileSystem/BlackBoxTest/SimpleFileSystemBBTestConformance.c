@@ -45,7 +45,7 @@ STATIC
 EFI_STATUS
 UpdateInfoFileName (EFI_FILE_INFO **InfoBuffer, CHAR16* ChangeFileName)
 {
-  EFI_STATUS    Status;
+  EFI_STATUS    Status = EFI_SUCCESS;
   UINTN         Size;
   EFI_FILE_INFO *FileInfo;
 
@@ -695,7 +695,7 @@ BBTestOpenConformanceTestCheckpoint2 (
   EFI_STATUS                Status;
   EFI_FILE                  *Root;
   EFI_TEST_ASSERTION        AssertionType;
-  UINT32                    RandomValue;
+  UINT32                    RandomValue = 0;
   CHAR16                    RandomChars[100];
   CHAR16                    BaseDirName[100];
   CHAR16                    NewDirName[100];
