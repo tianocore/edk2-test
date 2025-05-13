@@ -46,7 +46,7 @@ return <strong>EFI_SUCCESS</strong>.</p>
 <p>EFI_BUFFER_TOO_SMALL</p></td>
 <td>Call function with valid parameters, except <em>*ImageInfoSize</em>
 = 1. The function should return <strong>EFI_BUFFER_TOO_SMALL</strong>
-and <em>*ImageInfoSize</em> &gt; 1.</td>
+and <em>*ImageInfoSize</em> > 1.</td>
 </tr>
 <tr class="even">
 <td>32.1.2.1.2</td>
@@ -58,9 +58,26 @@ and <em>*ImageInfoSize</em> &gt; 1.</td>
 is NULL. The function should return
 <strong>EFI_INVALID_PARAMETER</strong>.</td>
 </tr>
+<tr class="odd">
+<td>32.1.2.1.3</td>
+<td>0x2c6aa8e6, 0x3356, 0x43f4, 0xbc, 0xca, 0xf7, 0xdc, 0x4d, 0x20, 0xbb, 0xf3</td>
+<td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_BUFFER_TOO_SMALL and ImageInfoSize > 1</p></td>
+<td>Call function with valid parameters with <em>ImageInfo = NULL</em> and <em>ImageInfoSize = 0</em>. 
+The function should return
+<strong>EFI_BUFFER_TOO_SMALL</strong> with <strong>ImageInfoSize > 1</strong>.</td>
+</tr>
+<tr class="even">
+<td>32.1.2.1.4</td>
+<td>0x8ee98eb3, 0xee5d, 0x4182, 0xa2, 0x97, 0x2a, 0x00, 0x82, 0xc5, 0xe9, 0x52</td>
+<td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_INVALID_PARAMETER</p></td>
+<td>Call function with with invalid parameters, <em>ImageInfo = NULL</em> and <em>ImageInfoSize = "Not too small"</em>. 
+The function should return
+<strong>EFI_INVALID_PARAMETER</strong>.</td>
+</tr>
 </tbody>
 </table>
-
 
 ### GetImage()
 
@@ -100,7 +117,7 @@ is NULL. The function should return
 <p>Authentication not required.</p>
 <p>Call function with valid parameters, except <em>*ImageSize</em> = 1.
 The function, if supported, should return
-<strong>EFI_BUFFER_TOO_SMALL</strong> and <em>*ImageSize</em> &gt;
+<strong>EFI_BUFFER_TOO_SMALL</strong> and <em>*ImageSize</em> >
 1.</p></td>
 </tr>
 <tr class="even">
@@ -143,7 +160,6 @@ dummy authentication data. The function should return
 </tr>
 </tbody>
 </table>
-
 
 ### SetImage()
 
@@ -216,8 +232,6 @@ should return <strong>EFI_INVALID_PARAMETER</strong> or
 </tbody>
 </table>
 
-
-
 ### CheckImage()
 
 <table>
@@ -261,7 +275,6 @@ dummy authentication data. The function should return
 </tbody>
 </table>
 
-
 ### GetPackageInfo()
 
 <table>
@@ -294,8 +307,6 @@ return <strong>EFI_SUCCESS</strong> or
 </tr>
 </tbody>
 </table>
-
-
 
 ### SetPackageInfo()
 
@@ -364,4 +375,3 @@ dummy authentication data. The function should return
 </tr>
 </tbody>
 </table>
-
