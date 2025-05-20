@@ -47,7 +47,6 @@ Abstract:
 #include EFI_PROTOCOL_DEFINITION (PciRootBridgeIo)
 #include EFI_PROTOCOL_DEFINITION (PciIo)
 #include EFI_PROTOCOL_DEFINITION (DeviceIo)
-#include EFI_PROTOCOL_DEFINITION (UsbHostController)
 #include EFI_PROTOCOL_DEFINITION (UsbIo)
 #include EFI_PROTOCOL_DEFINITION (ScsiPassThru)
 #include EFI_PROTOCOL_DEFINITION (DebugSupport)

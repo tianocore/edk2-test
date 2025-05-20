@@ -82,6 +82,20 @@ BBTestGetImageInfoConformanceTestCheckpoint2 (
 
 EFI_STATUS
 EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint3 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint4 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -556,6 +570,8 @@ BBTestGetImageInfoConformanceTest (
 
   BBTestGetImageInfoConformanceTestCheckpoint1 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint2 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint3 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint4 (StandardLib, FirmwareManagement);
 
   return EFI_SUCCESS;
 }
@@ -986,6 +1002,207 @@ Exit:
   return EFI_SUCCESS;
 }
 
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 3
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with valid parameters, to accept ImageInfoSize = 0 and ImageInfo = NULL.
+      The function should return EFI_BUFFER_TOO_SMALL and ImageInfoSize > 1.
+**/
+
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint3 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT32                                         DescriptorVersion;
+  UINT8                                          DescriptorCount;
+  UINTN                                          DescriptorSize;
+  UINT32                                         PackageVersion;
+  CHAR16                                         *PackageVersionName;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid017;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #3";
+  ResultMessageData = L"correctly returned EFI_BUFFER_TOO_SMALL.";
+
+
+  PackageVersionName = NULL;
+
+  //This is a valid combination
+  ImageInfoSize = 0;
+  ImageInfo = NULL;
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo (
+                                 FirmwareManagement,
+                                 &ImageInfoSize,
+                                 ImageInfo,
+                                 &DescriptorVersion,
+                                 &DescriptorCount,
+                                 &DescriptorSize,
+                                 &PackageVersion,
+                                 &PackageVersionName
+                                 );
+
+  if (Status != EFI_BUFFER_TOO_SMALL) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_BUFFER_TOO_SMALL.";
+    goto Exit;
+  }
+  if (ImageInfoSize <= 0) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to update *ImageInfoSize.";
+  }
+
+  //
+  // Report the checkpoint result
+  //
+
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (PackageVersionName != NULL) {
+    gtBS->FreePool (PackageVersionName);
+  }
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 4
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with invalid parameters, ImageInfo = NULL and ImageInfoSize not too small.
+      The function should return EFI_INVALID_PARAMETER.
+**/
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint4 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT32                                         DescriptorVersion;
+  UINT8                                          DescriptorCount;
+  UINTN                                          DescriptorSize;
+  UINT32                                         PackageVersion;
+  CHAR16                                         *PackageVersionName;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid018;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #4";
+  ResultMessageData = L"correctly returned EFI_INVALID_PARAMETER.";
+
+
+  PackageVersionName = NULL;
+
+  //Set to "Not too small"
+  ImageInfoSize = (sizeof (EFI_FIRMWARE_IMAGE_DESCRIPTOR)) * 20;
+
+  //Invalid case
+  ImageInfo = NULL;
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo (
+                                 FirmwareManagement,
+                                 &ImageInfoSize, // &ImageInfoSize
+                                 ImageInfo,
+                                 &DescriptorVersion,
+                                 &DescriptorCount,
+                                 &DescriptorSize,
+                                 &PackageVersion,
+                                 &PackageVersionName
+                                 );
+
+  if (Status != EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_INVALID_PARAMETER.";
+  }
+
+  //
+  // Report the checkpoint result
+  //
+
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (PackageVersionName != NULL) {
+    gtBS->FreePool (PackageVersionName);
+  }
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+
 // ****************************************************************************
 //   Checkpoint: GetImage, 1
 // ****************************************************************************
@@ -1058,7 +1275,7 @@ BBTestGetImageConformanceTestCheckpoint1 (
     goto Exit;
   }
 
-  Status = FirmwareManagement->GetImageInfo ( 
+  Status = FirmwareManagement->GetImageInfo (
                                  FirmwareManagement,
                                  &ImageInfoSize,
                                  ImageInfo,
