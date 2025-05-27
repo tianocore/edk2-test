@@ -131,6 +131,18 @@ guid, check the variable name is in the pre-defined globally variable
 list.</p>
 <p>2. Check the variable attribute.</p></td>
 </tr>
+<tr class="even">
+<td>5.22.1.1.9</td>
+<td>0xeb66918a, 0x7eef, 0x402a, 0x84, 0x2e, 0x93, 0x1d, 0x21, 0xc3,
+0x8a, 0xe9</td>
+<td><p>UEFI-Compliant</p>
+<p>Check for <strong>EFI RT PROPERTIES TABLE</strong> table implementation.</p></td>
+<td><p>1. If the EFI RT Properties Table does not exist then <em>all</em> RunTime functions should be implemented.</p>
+<p>2. If the table exists then the <em>version</em> field should be 0x1.</p>
+<p>3. The <em>RuntimeServicesSupported</em> field in EFI RT Properties Table should correctly indicate
+ the RunTime functions supported in the platform</p>
+</td>
+</tr>
 </tbody>
 </table>
 
