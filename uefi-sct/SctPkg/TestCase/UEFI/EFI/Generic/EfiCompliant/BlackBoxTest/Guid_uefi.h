@@ -2,7 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2019, Intel Corporation. All rights reserved.<BR>
-  Copyright (c) 2024 HP Development Company, L.P. <BR>
+  Copyright (c) 2024 - 2025 HP Development Company, L.P. <BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
