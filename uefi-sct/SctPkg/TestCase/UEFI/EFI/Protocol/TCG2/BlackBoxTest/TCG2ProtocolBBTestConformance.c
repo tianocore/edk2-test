@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright (c) 2021 - 2023, Arm Inc. All rights reserved.<BR>
+  Copyright (c) 2021 - 2023, 2025 Arm Inc. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -39,6 +39,7 @@ Abstract:
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetCapabilityConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -98,6 +99,7 @@ BBTestGetCapabilityConformanceTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestGetActivePcrBanksConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -151,6 +153,7 @@ BBTestGetActivePcrBanksConformanceTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestHashLogExtendEventConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -208,6 +211,7 @@ BBTestHashLogExtendEventConformanceTest (
  */
 
 EFI_STATUS
+EFIAPI
 BBTestSubmitCommandConformanceTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
@@ -346,7 +350,10 @@ BBTestGetCapabilityConformanceTestCheckpoint2 (
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
 
-  if (!(BootServiceCap.HashAlgorithmBitmap & EFI_TCG2_BOOT_HASH_ALG_SHA256)) {
+  // Verify if system supports SHA256, SHA384, or SHA512 hashing algorithm
+  EFI_TCG2_EVENT_ALGORITHM_BITMAP HashAlgoSupportBitmap = EFI_TCG2_BOOT_HASH_ALG_SHA256 | EFI_TCG2_BOOT_HASH_ALG_SHA384 | EFI_TCG2_BOOT_HASH_ALG_SHA512;
+
+  if (!(BootServiceCap.HashAlgorithmBitmap & HashAlgoSupportBitmap)) {
     StandardLib->RecordMessage (
                      StandardLib,
                      EFI_VERBOSE_LEVEL_DEFAULT,

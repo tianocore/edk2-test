@@ -1,0 +1,116 @@
+## @file
+# Assign reviewers from a REVIEWERS file using CODEOWNERS syntax
+#
+# Copyright 2006 - 2016 Unified EFI, Inc.<BR>
+# Copyright (c) 2025, Arm Inc. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Add Pull Request Reviewers
+
+on:
+  pull_request_target:
+    branches:
+      - master
+    types: [opened, ready_for_review, reopened, synchronize]
+  workflow_dispatch:
+
+env:
+  GET_MAINTAINER_REL_PATH: "uefi-sct/HowToBuild/scripts/GetMaintainer.py"
+
+jobs:
+  sanity-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm Workflow Trigger
+        run: |
+          echo "Sanity Check: Workflow was triggered."
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "PR Number: ${{ github.event.number || 'N/A' }}"
+          echo "PR Draft Status: ${{ github.event.pull_request.draft || 'N/A' }}"
+
+  auto-request-review:
+    name: Add Pull Request Reviewers
+    # Do not run on draft PRs and only run on PRs in the tianocore organization
+    if: ${{ github.event.pull_request.draft == false && github.repository_owner == 'tianocore' }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Print Workflow Trigger Information
+        run: |
+          echo "Triggering event: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "PR draft status: ${{ github.event.pull_request.draft }}"
+          echo "Repository owner: ${{ github.repository_owner }}"
+
+
+
+      - name: Generate Token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.TIANOCORE_ASSIGN_REVIEWERS_APPLICATION_ID }}
+          private-key: ${{ secrets.TIANOCORE_ASSIGN_REVIEWERS_APPLICATION_PRIVATE_KEY }}
+        continue-on-error: false
+
+      - name: Debug Token Step
+        run: |
+          if [ -z "${{ steps.generate-token.outputs.token }}" ]; then
+            echo "Error: Token generation failed."
+            exit 1
+          else
+            echo "Token successfully generated."
+          fi
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            .github
+            uefi-sct/HowToBuild/scripts/
+            Maintainers.txt
+        continue-on-error: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: '.github/scripts/requirements.txt'
+
+      - name: Debug Python Setup
+        run: |
+          python --version || echo "Python setup failed."
+          pip --version || echo "PIP setup failed."
+
+      - name: Install PIP Modules
+        run: |
+          echo "Starting PIP module installation..."
+          pip install -r .github/scripts/requirements.txt --upgrade || echo "PIP installation failed."
+
+      - name: Debug Installed PIP Modules
+        run: pip list
+
+      - name: Add Reviewers to Pull Request
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          ORG_NAME: ${{ github.repository_owner }}
+          PR_NUMBER: ${{ github.event.number }}
+          REPO_NAME: ${{ github.event.pull_request.base.repo.name }}
+          TARGET_BRANCH: ${{ github.event.pull_request.base.ref }}
+          WORKSPACE_PATH: ${{ github.workspace }}
+        run: |
+          echo "Starting Add Reviewers step..."
+          python .github/scripts/RequestPrReviewers.py || echo "Failed to add reviewers."
+        
+      - name: Final Debug Message
+        run: echo "Workflow execution completed."

@@ -682,7 +682,7 @@ BBTestDevicePathNodeConformanceAutoTest (
     //
     else if ((Type == 3) && (SubType == 20)) {
       Vlan = (VLAN_DEVICE_PATH *) DevicePath;
-      if (Vlan->VlanId > 4094 || Vlan->VlanId) {
+      if (Vlan->VlanId > 4094 || Vlan->VlanId < 1) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
       } else {
         AssertionType = EFI_TEST_ASSERTION_PASSED;

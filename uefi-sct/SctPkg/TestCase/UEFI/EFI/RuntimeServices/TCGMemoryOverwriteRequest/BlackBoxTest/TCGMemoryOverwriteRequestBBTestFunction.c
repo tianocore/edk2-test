@@ -56,6 +56,7 @@ Abstract:
  *  @return Other value     Something failed.
  */
 EFI_STATUS
+EFIAPI
 BBTestTCGMemoryOverwriteRequestFunctionTest (
   IN EFI_BB_TEST_PROTOCOL              *This,
   IN VOID                              *ClientInterface,

@@ -22,7 +22,7 @@ Abstract:
 
 --*/
 #include "AdapterInfoBBTestMain.h"
-
+#include "SctLib.h"
 
 EFI_STATUS
 EFIAPI
