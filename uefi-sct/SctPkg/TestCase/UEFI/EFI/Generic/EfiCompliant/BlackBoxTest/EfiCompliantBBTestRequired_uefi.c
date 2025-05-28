@@ -2,7 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
-  Copyright (c) 2024 HP Development Company, L.P. <BR>
+  Copyright (c) 2024 - 2025 HP Development Company, L.P. <BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -741,6 +741,7 @@ CheckRuntimePropertiesTable (
   EFI_RT_PROPERTIES_TABLE  *RtPropertiesTable               = NULL;
   UINT32                   ExpectedRuntimeServicesSupported = 0u;
   EFI_STATUS               Status                           = EFI_NOT_STARTED;
+  BOOLEAN                  bRtPropertiesTableSupported      = FALSE;
 
   RUNTIME_SERVICE_CHECK    RuntimeServices[] = {
     { (VOID *)gtRT->GetTime, EFI_RT_SUPPORTED_GET_TIME },
@@ -764,8 +765,9 @@ CheckRuntimePropertiesTable (
   //
   Status = EfiGetSystemConfigurationTable (&gEfiRtPropertiesTableGuid, (VOID **)&RtPropertiesTable);
   if (EFI_ERROR (Status)) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
   } else {
+    bRtPropertiesTableSupported = TRUE;
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   }
 
@@ -773,7 +775,8 @@ CheckRuntimePropertiesTable (
                  StandardLib,
                  AssertionType,
                  gEfiCompliantBbTestRequiredAssertionGuid010,
-                 L"UEFI Compliant - EFI Runtime Properties Table must be implemented",
+                 (AssertionType == EFI_TEST_ASSERTION_PASSED) ? L"UEFI Compliant - EFI Runtime Properties Table is implemented" :
+                 L"UEFI Compliant - EFI Runtime Properties Table is not implemented",
                  L"%a:%d:Status - %r, Expected - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -781,46 +784,49 @@ CheckRuntimePropertiesTable (
                  EFI_SUCCESS
                  );
 
-  //
-  // Record the entire EFI Runtime Properties Table
-  //
-  StandardLib->RecordMessage (
-                 StandardLib,
-                 EFI_VERBOSE_LEVEL_DEFAULT,
-                 L"  Version                  : %X\n"
-                 L"  Length                   : %X\n"
-                 L"  RuntimeServicesSupported : %X\n",
-                 RtPropertiesTable->Version,
-                 RtPropertiesTable->Length,
-                 RtPropertiesTable->RuntimeServicesSupported
-                 );
+  if (bRtPropertiesTableSupported)
+  {
+    //
+    // Record the entire EFI Runtime Properties Table
+    //
+    StandardLib->RecordMessage (
+                  StandardLib,
+                  EFI_VERBOSE_LEVEL_DEFAULT,
+                  L"  Version                  : %X\n"
+                  L"  Length                   : %X\n"
+                  L"  RuntimeServicesSupported : %X\n",
+                  RtPropertiesTable->Version,
+                  RtPropertiesTable->Length,
+                  RtPropertiesTable->RuntimeServicesSupported
+                  );
 
-  //
-  // Check RuntimeServicesSupported variable introduced by UEFI spec
-  //
-  for (int i = 0; i < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); i++) {
-    if (RuntimeServices[i].Function != NULL) {
-      ExpectedRuntimeServicesSupported |= RuntimeServices[i].Flag;
+    //
+    // Check RuntimeServicesSupported variable introduced by UEFI spec
+    //
+    for (int i = 0; i < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); i++) {
+      if (RuntimeServices[i].Function != NULL) {
+        ExpectedRuntimeServicesSupported |= RuntimeServices[i].Flag;
+      }
     }
-  }
 
-  if (RtPropertiesTable->RuntimeServicesSupported == ExpectedRuntimeServicesSupported) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
+    if (RtPropertiesTable->RuntimeServicesSupported == ExpectedRuntimeServicesSupported) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
-  StandardLib->RecordAssertion (
-                 StandardLib,
-                 AssertionType,
-                 gEfiCompliantBbTestRequiredAssertionGuid010,
-                 L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported variable must be implemented",
-                 L"%a:%d:RuntimeServicesSupported - 0x%x, Expected - 0x%x",
-                 __FILE__,
-                 (UINTN)__LINE__,
-                 RtPropertiesTable->RuntimeServicesSupported,
-                 ExpectedRuntimeServicesSupported
-                 );
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  AssertionType,
+                  gEfiCompliantBbTestRequiredAssertionGuid010,
+                  L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported variable is implemented",
+                  L"%a:%d:RuntimeServicesSupported - 0x%x, Expected - 0x%x",
+                  __FILE__,
+                  (UINTN)__LINE__,
+                  RtPropertiesTable->RuntimeServicesSupported,
+                  ExpectedRuntimeServicesSupported
+                  );
+  }
   //
   // Done
   //
