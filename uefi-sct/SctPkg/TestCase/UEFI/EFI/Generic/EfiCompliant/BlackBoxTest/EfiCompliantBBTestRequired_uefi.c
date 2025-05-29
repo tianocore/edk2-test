@@ -742,6 +742,7 @@ CheckRuntimePropertiesTable (
   UINT32                   ExpectedRuntimeServicesSupported = 0u;
   EFI_STATUS               Status                           = EFI_NOT_STARTED;
   BOOLEAN                  bRtPropertiesTableSupported      = FALSE;
+  BOOLEAN                  bFuncNotImplementedFound         = FALSE;
 
   RUNTIME_SERVICE_CHECK    RuntimeServices[] = {
     { (VOID *)gtRT->GetTime, EFI_RT_SUPPORTED_GET_TIME },
@@ -761,7 +762,7 @@ CheckRuntimePropertiesTable (
   };
 
   //
-  // Check the EFI Runtime Services Table
+  // Check if the EFI Runtime Services Table is implemented
   //
   Status = EfiGetSystemConfigurationTable (&gEfiRtPropertiesTableGuid, (VOID **)&RtPropertiesTable);
   if (EFI_ERROR (Status)) {
@@ -801,15 +802,9 @@ CheckRuntimePropertiesTable (
                   );
 
     //
-    // Check RuntimeServicesSupported variable introduced by UEFI spec
+    // Check if the EFI Runtime Properties Table is at version 0x1
     //
-    for (int i = 0; i < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); i++) {
-      if (RuntimeServices[i].Function != NULL) {
-        ExpectedRuntimeServicesSupported |= RuntimeServices[i].Flag;
-      }
-    }
-
-    if (RtPropertiesTable->RuntimeServicesSupported == ExpectedRuntimeServicesSupported) {
+    if (RtPropertiesTable->Version == EFI_RT_PROPERTIES_TABLE_VERSION) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -819,12 +814,74 @@ CheckRuntimePropertiesTable (
                   StandardLib,
                   AssertionType,
                   gEfiCompliantBbTestRequiredAssertionGuid010,
-                  L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported variable is implemented",
-                  L"%a:%d:RuntimeServicesSupported - 0x%x, Expected - 0x%x",
+                  L"UEFI Compliant - EFI Runtime Properties Table must be at version 0x1",
+                  L"%a:%d:EFI_RT_PROPERTIES_TABLE Version - 0x%x, Expected - 0x%x",
                   __FILE__,
                   (UINTN)__LINE__,
-                  RtPropertiesTable->RuntimeServicesSupported,
-                  ExpectedRuntimeServicesSupported
+                  RtPropertiesTable->Version,
+                  EFI_RT_PROPERTIES_TABLE_VERSION
+                  );
+  }
+
+  //
+  // Check RuntimeServicesSupported variable introduced by UEFI spec
+  //
+  for (int i = 0; i < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); i++) {
+    if (RuntimeServices[i].Function != NULL) {
+      ExpectedRuntimeServicesSupported |= RuntimeServices[i].Flag;
+    }
+    else
+    {
+      // Set Flag if at least one Runtime function is not implemented
+      bFuncNotImplementedFound = TRUE;
+    }
+  }
+
+  if (bRtPropertiesTableSupported)
+  {
+    //
+    // The RuntimeServicesSupported field in EFI RT Properties Table should
+    // correctly indicate the RunTime functions supported in the platform
+    //
+    if (RtPropertiesTable->RuntimeServicesSupported == ExpectedRuntimeServicesSupported) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestRequiredAssertionGuid010,
+                   L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported field matches the expected value",
+                   L"%a:%d:RuntimeServicesSupported - 0x%x, Expected - 0x%x",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   RtPropertiesTable->RuntimeServicesSupported,
+                   ExpectedRuntimeServicesSupported
+                  );
+  }
+  else
+  {
+    //
+    // If the RT Properties Table is not supported, then all Runtime Function should be implemented.
+    //
+    if (bFuncNotImplementedFound)  {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gEfiCompliantBbTestRequiredAssertionGuid010,
+                   L"UEFI Compliant - EFI Runtime functions should all be implemented if EFI Runtime Properties Table is not supported",
+                   L"%a:%d:All Runtime Functions Supported - %s, Expected - %s",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   bFuncNotImplementedFound ? L"FALSE" : L"TRUE",
+                   L"TRUE"
                   );
   }
   //
