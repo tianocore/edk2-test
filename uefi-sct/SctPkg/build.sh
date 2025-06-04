@@ -136,7 +136,7 @@ PrintUsage() {
 	#
 	echo "Usage:"
 	echo "    $0 <architecture (ARM, AARCH64, X64, RISCV64, LOONGARCH64, etc)> \
-<toolchain name (RVCT or ARMGCC or GCC*)> \
+<toolchain name (RVCT or ARMGCC or CLANGDWARF or GCC*)> \
 [build type (RELEASE OR DEBUG, DEFAULT: DEBUG)]"
 }
 
@@ -176,6 +176,10 @@ case `uname` in
 			TARGET_TOOLS=ARMGCC
 		;;
 		
+		CLANGDWARF | clangdwarf)
+			TARGET_TOOLS=CLANGDWARF
+		;;
+
 		GCC* | gcc*)
 			set_cross_compile
 			CROSS_COMPILE="$TEMP_CROSS_COMPILE"
