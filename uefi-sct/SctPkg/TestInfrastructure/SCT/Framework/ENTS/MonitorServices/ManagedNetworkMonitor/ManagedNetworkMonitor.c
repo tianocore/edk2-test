@@ -850,7 +850,7 @@ Returns:
   }
 
   IsOver = FALSE;
-  FragFlag.LLFlag ^= FragFlag.LLFlag;
+  FragFlag.LLFlag = 0;
   FragFlag.Flag.SeqId   = HTONL (Sequence);
   FragFlag.Flag.OpCode  = LINK_OPERATION_DATA;
   BufferSize            = Size;
@@ -879,7 +879,7 @@ Returns:
     //
     // Build App Flag
     //
-    AppFlag.LLFlag ^= AppFlag.LLFlag;
+    AppFlag.LLFlag = 0;
     AppSequence = AppSequenceSavedForResend;
     AppFlag.Flag.SeqId = HTONL(AppSequence);
     //
@@ -1174,7 +1174,7 @@ Returns:
   }
 
   IsOver = FALSE;
-  FragFlag.LLFlag ^= FragFlag.LLFlag;
+  FragFlag.LLFlag = 0;
 
   RxData = RxToken.Packet.RxData;
   if (RxData->DataLength < sizeof (EAS_MNP_FRAG_FLAG)) {
@@ -1519,7 +1519,7 @@ Returns:
     return EFI_OUT_OF_RESOURCES;
   }
 
-  FragFlag.LLFlag       ^= FragFlag.LLFlag;
+  FragFlag.LLFlag       = 0;
   FragFlag.Flag.SeqId   = HTONL (SeqId);
   FragFlag.Flag.OpCode  = Type;
 
