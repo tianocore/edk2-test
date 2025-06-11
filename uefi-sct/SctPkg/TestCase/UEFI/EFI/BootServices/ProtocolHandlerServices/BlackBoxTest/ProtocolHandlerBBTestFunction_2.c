@@ -8147,8 +8147,8 @@ BBTestRegisterProtocolNotifyInterfaceTestCheckPoint6 (
   EFI_STATUS            Status1, Status2;
   UINTN                 EventIndex;
   NOTIFY_CONTEXT_2      NotifyContextArray[2];
-  NOTIFY_CONTEXT_2      FirstNotifyContextArray[2] = {{EFI_SUCCESS, 0}};
-  NOTIFY_CONTEXT_2      SecondNotifyContextArray[2] = {{EFI_SUCCESS, 0}};
+  NOTIFY_CONTEXT_2      FirstNotifyContextArray[2] = {{EFI_SUCCESS, 0}, {EFI_SUCCESS, 0}};
+  NOTIFY_CONTEXT_2      SecondNotifyContextArray[2] = {{EFI_SUCCESS, 0}, {EFI_SUCCESS, 0}};
   EFI_TEST_ASSERTION    AssertionType;
   EFI_TEST_ASSERTION    AssertionTypeGuid292 = EFI_TEST_ASSERTION_FAILED;
   EFI_TEST_ASSERTION    AssertionTypeArrayForGuid293[2] = {EFI_TEST_ASSERTION_FAILED, \
@@ -8183,11 +8183,6 @@ BBTestRegisterProtocolNotifyInterfaceTestCheckPoint6 (
   gtBS->SetMem (NotifyContextArray, 2 * sizeof (NOTIFY_CONTEXT_2), 0);
   NotifyContextArray[0].Status = 0x5a;
   NotifyContextArray[1].Status = 0x5a;
-
-  FirstNotifyContextArray[0].Status = EFI_SUCCESS;
-  FirstNotifyContextArray[1].Status = EFI_SUCCESS;
-  FirstNotifyContextArray[0].NoHandles = 0;
-  FirstNotifyContextArray[1].NoHandles = 0;
 
   Status1 = gtBS->CreateEvent (
                     EVT_NOTIFY_SIGNAL,
@@ -8485,8 +8480,8 @@ BBTestRegisterProtocolNotifyInterfaceTestCheckPoint7 (
   EFI_TEST_ASSERTION    AssertionTypeForGuid124;
   EFI_TEST_ASSERTION    AssertionTypeArrayForGuid125[2] = {EFI_TEST_ASSERTION_PASSED, \
                                                            EFI_TEST_ASSERTION_PASSED};
-  NOTIFY_CONTEXT_2      FirstNotifyContextArray[2] = {{EFI_SUCCESS, 0}};
-  NOTIFY_CONTEXT_2      SecondNotifyContextArray[2] = {{EFI_SUCCESS, 0}};
+  NOTIFY_CONTEXT_2      FirstNotifyContextArray[2]  = {{EFI_SUCCESS, 0}, {EFI_SUCCESS, 0}};
+  NOTIFY_CONTEXT_2      SecondNotifyContextArray[2] = {{EFI_SUCCESS, 0}, {EFI_SUCCESS, 0}};
 
   UINTN                 Numbers;
 
