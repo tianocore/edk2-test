@@ -1179,7 +1179,6 @@ BBTestGetImageInfoConformanceTestCheckpoint4 (
   // Report the checkpoint result
   //
 
-Exit:
   StandardLib->RecordAssertion (
                  StandardLib,
                  AssertionType,
