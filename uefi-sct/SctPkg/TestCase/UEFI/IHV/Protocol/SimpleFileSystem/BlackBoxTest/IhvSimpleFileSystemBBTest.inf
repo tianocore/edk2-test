@@ -64,5 +64,6 @@ ENTRY_POINT          = InitializeBBTestSimpleFileSystem
   gBlackBoxEfiFileSystemVolumeLabelInfoIdGuid
 
 [Protocols]
-
-
+  gBlackBoxEfiDevicePathProtocolGuid
+  gBlackBoxEfiSimpleFileSystemProtocolGuid
+  gBlackBoxEfiBlockIoProtocolGuid
