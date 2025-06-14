@@ -26,6 +26,7 @@ Abstract:
 
 #include "Misc.h"
 #include "SctLib.h"
+#include <Library/EfiTestLib.h>
 
 EFI_FILE_HANDLE                         RootFs;
 EFI_DEVICE_PATH_PROTOCOL                *mLoadFileDevicePath = NULL;
