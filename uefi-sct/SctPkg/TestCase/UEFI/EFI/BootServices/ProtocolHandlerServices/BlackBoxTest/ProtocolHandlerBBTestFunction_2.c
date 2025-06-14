@@ -7609,7 +7609,7 @@ BBTestRegisterProtocolNotifyInterfaceTestCheckPoint4 (
   EFI_TEST_ASSERTION    AssertionTypeArrayForGuid108[2] = {EFI_TEST_ASSERTION_PASSED, \
                                                            EFI_TEST_ASSERTION_PASSED};
   EFI_TEST_ASSERTION    AssertionTypeForGuid109;
-  EFI_TEST_ASSERTION    AssertionTypeArrayForGuid110[2] = {EFI_TEST_ASSERTION_PASSED, \ 
+  EFI_TEST_ASSERTION    AssertionTypeArrayForGuid110[2] = {EFI_TEST_ASSERTION_PASSED, \
                                                            EFI_TEST_ASSERTION_PASSED};
   UINTN                 FirstNotifiedTimesArray[2] = {0};
   UINTN                 SecondNotifiedTimesArray[2] = {0};
