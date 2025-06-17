@@ -216,7 +216,7 @@ TimeFieldsValid (
   IN EFI_TIME *Time
   )
 {
-  if (Time->Year < 1998 || Time->Year > 2099) {
+  if (Time->Year < 1900 || Time->Year > 9999) {
     return FALSE;
   }
 
