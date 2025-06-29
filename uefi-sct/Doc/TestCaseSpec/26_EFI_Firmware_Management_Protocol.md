@@ -63,7 +63,7 @@ is NULL. The function should return
 <td>0x2c6aa8e6, 0x3356, 0x43f4, 0xbc, 0xca, 0xf7, 0xdc, 0x4d, 0x20, 0xbb, 0xf3</td>
 <td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
 <p>EFI_BUFFER_TOO_SMALL and ImageInfoSize > 1</p></td>
-<td>Call function with valid parameters with <em>ImageInfo = NULL</em> and <em>ImageInfoSize = 0</em>. 
+<td>Call function with valid parameters with <em>ImageInfo = NULL</em> and <em>*ImageInfoSize = 0</em>.
 The function should return
 <strong>EFI_BUFFER_TOO_SMALL</strong> with <strong>ImageInfoSize > 1</strong>.</td>
 </tr>
@@ -72,7 +72,50 @@ The function should return
 <td>0x8ee98eb3, 0xee5d, 0x4182, 0xa2, 0x97, 0x2a, 0x00, 0x82, 0xc5, 0xe9, 0x52</td>
 <td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
 <p>EFI_INVALID_PARAMETER</p></td>
-<td>Call function with with invalid parameters, <em>ImageInfo = NULL</em> and <em>ImageInfoSize = "Not too small"</em>. 
+<td>Call function with with invalid parameters, <em>ImageInfo = NULL</em> and <em>*ImageInfoSize = "Not too small"</em>.
+The function should return
+<strong>EFI_INVALID_PARAMETER</strong>.</td>
+</tr>
+<tr class="odd">
+<td>32.1.2.1.5</td>
+<td>0xafc04f2e, 0x782e, 0x4c18, 0x9e, 0x37, 0x11, 0x1b, 0x5a, 0x3b, 0x56, 0xdd</td>
+<td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_INVALID_PARAMETER</p></td>
+<td>Call function with with invalid parameters, <em>ImageInfo = valid</em>, <em>*ImageInfoSize = "Non zero"</em> and <em>DescriptorVersion = NULL </em>.
+The function should return
+<strong>EFI_INVALID_PARAMETER</strong>.</td>
+</tr>
+<tr class="even">
+<td>32.1.2.1.6</td>
+<td>0x606a7440, 0x9cfa, 0x4ffc, 0x8b, 0x3d, 0xc9, 0x39, 0x3a, 0x8e, 0xe7, 0x0a</td><td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_INVALID_PARAMETER</p></td>
+<td>Call function with with invalid parameters, <em>ImageInfo = valid</em>, <em>*ImageInfoSize = "Non zero"</em> and <em>DescriptorCount = NULL </em>.
+The function should return
+<strong>EFI_INVALID_PARAMETER</strong>.</td>
+</tr>
+</tr>
+<tr class="odd">
+<td>32.1.2.1.7</td>
+<td>0x2a9eddac, 0x83b5, 0x49b7, 0xa1, 0xe5, 0x71, 0x8d, 0x28, 0x2a, 0x45, 0x2f</td><td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_INVALID_PARAMETER</p></td>
+<td>Call function with with invalid parameters, <em>ImageInfo = valid</em>, <em>*ImageInfoSize = "Non zero"</em> and <em>DescriptorSize = NULL </em>.
+The function should return
+<strong>EFI_INVALID_PARAMETER</strong>.</td>
+</tr>
+<tr class="even">
+<td>32.1.2.1.8</td>
+<td>0x9beab447, 0x86dd, 0x4e15, 0x9a, 0x23, 0x56, 0x25, 0xde, 0xf4, 0x24, 0x20</td><td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_INVALID_PARAMETER</p></td>
+<td>Call function with with invalid parameters, <em>ImageInfo = valid</em>, <em>*ImageInfoSize = "Non zero"</em> and <em>PackageVersion = NULL </em>.
+The function should return
+<strong>EFI_INVALID_PARAMETER</strong>.</td>
+</tr>
+<tr class="odd">
+<td>32.1.2.1.9</td>
+<td>0xefa17cde, 0x25c4, 0x4398, 0x8a, 0xff, 0x1b, 0x6b, 0x9d, 0x4c, 0x5a, 0x67</td><td><p>
+<strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImageInfo()</strong> returns</p>
+<p>EFI_INVALID_PARAMETER</p></td>
+<td>Call function with with invalid parameters, <em>ImageInfo = valid</em>, <em>*ImageInfoSize = "Non zero"</em> and <em>PackageVersionName = NULL </em>.
 The function should return
 <strong>EFI_INVALID_PARAMETER</strong>.</td>
 </tr>
@@ -375,3 +418,4 @@ dummy authentication data. The function should return
 </tr>
 </tbody>
 </table>
+
