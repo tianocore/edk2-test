@@ -39,9 +39,6 @@ STATIC UINTN                        mRealFileSize         = 0;
 STATIC VOID                         *mRealFileBuffer      = NULL;
 STATIC UINT64                       mTransferSize         = 0;
 
-STATIC EFI_MANAGED_NETWORK_PROTOCOL *TmpMnp               = NULL;
-STATIC EFI_SERVICE_BINDING_PROTOCOL *TmpMnpSb             = NULL;
-STATIC EFI_HANDLE                   TmpMnpInstanceHandle  = NULL;
 STATIC EFI_EFTP_PROTOCOL            *EftpIo               = NULL;
 STATIC EFI_SERVICE_BINDING_PROTOCOL *TmpEftpSb            = NULL;
 STATIC EFI_HANDLE                   TmpEftpInstanceHandle = NULL;
