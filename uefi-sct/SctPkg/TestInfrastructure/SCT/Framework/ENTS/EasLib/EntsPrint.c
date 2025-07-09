@@ -1278,13 +1278,12 @@ EntsAvSPrint (
   )
 {
   UINTN   Index;
-  CHAR16  UnicodeFormat[320];
-  CHAR16  UnicodeResult[320];
+  CHAR16  UnicodeFormat[321] = {L'\0'};
+  CHAR16  UnicodeResult[321] = {L'\0'};
 
   for (Index = 0; Index < 320 && FormatString[Index] != '\0'; Index++) {
     UnicodeFormat[Index] = (CHAR16) FormatString[Index];
   }
-  UnicodeFormat[Index]  = L'\0';
 
   Index                 = EntsVSPrint (UnicodeResult, 320, UnicodeFormat, Marker);
 
