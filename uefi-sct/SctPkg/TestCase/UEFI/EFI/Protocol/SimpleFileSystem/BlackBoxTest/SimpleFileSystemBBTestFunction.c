@@ -9890,12 +9890,12 @@ ComposeFileNameArray (
   for (FileBaseNameNum = sizeof (ValidFileBaseName) / sizeof (*ValidFileBaseName);
         FileBaseNameNum > 0;FileBaseNameNum --) {
 
-    FileBaseNameLength = sizeof (ValidFileBaseName[FileBaseNameNum - 1]);
+    FileBaseNameLength = sizeof (ValidFileBaseName[FileBaseNameNum - 1]) / sizeof(ValidFileBaseName[0][0]);
 
     for (ExtensionNameNum = sizeof (ValidExtensionName) / sizeof (*ValidExtensionName);
           ExtensionNameNum > 0; ExtensionNameNum --){
 
-      ExtensionNameLength = sizeof (ValidExtensionName[ExtensionNameNum - 1]);
+      ExtensionNameLength = sizeof (ValidExtensionName[ExtensionNameNum - 1]) / sizeof(ValidExtensionName[0][0]);
       TempIndex = 0;
 
       for (Loop = 0;Loop < FileBaseNameLength;Loop++){

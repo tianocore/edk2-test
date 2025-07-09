@@ -1773,7 +1773,7 @@ BBTestCombinationTest2CheckPoint4 (
 
   MisMatch = FALSE;
   TempInfo = OpenInfo;
-  for (Index = 0; Index < 4; Index++) {
+  for (Index = 0; Index < TPL_ARRAY_SIZE; Index++) {
 
     if ((TempInfo->AgentHandle != mImageHandle)
         || (TempInfo->ControllerHandle != ChildHandle)
@@ -1792,7 +1792,7 @@ BBTestCombinationTest2CheckPoint4 (
 
       TempInfo = OpenInfo;
       Found = FALSE;
-      for (Index = 0; Index < 4; Index++) {
+      for (Index = 0; Index < TPL_ARRAY_SIZE; Index++) {
 
         if (TempInfo->Attributes == Attributes[AttributesIndex]) {
           Found = TRUE;
@@ -1813,7 +1813,12 @@ BBTestCombinationTest2CheckPoint4 (
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
+  } 
+  
+  if (Index == TPL_ARRAY_SIZE){
+    Index -= 1;
   }
+
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
