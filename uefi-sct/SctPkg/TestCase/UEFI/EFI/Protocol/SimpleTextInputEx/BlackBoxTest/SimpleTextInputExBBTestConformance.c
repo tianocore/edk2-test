@@ -655,7 +655,7 @@ BBTestRegisterKeyNotifyConformanceTestCheckpoint2 (
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   )
 {
-  EFI_STATUS            Status;
+  EFI_STATUS            Status = EFI_SUCCESS;
   EFI_TEST_ASSERTION    AssertionType;
   EFI_KEY_DATA          Key;
   VOID                  *NotifyHandle;
@@ -779,7 +779,7 @@ BBTestUnregisterKeyNotifyConformanceTestCheckpoint1 (
   IN EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL          *SimpleTextInputEx
   )
 {
-  EFI_STATUS            Status;
+  EFI_STATUS            Status = EFI_SUCCESS;
   EFI_TEST_ASSERTION    AssertionType;
   EFI_TPL               OldTpl;
 
