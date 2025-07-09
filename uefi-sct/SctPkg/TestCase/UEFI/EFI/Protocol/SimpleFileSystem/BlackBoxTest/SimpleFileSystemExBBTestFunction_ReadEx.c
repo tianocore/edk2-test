@@ -1729,7 +1729,7 @@ BBTestReadExBasicTestCheckpoint4 (
       //
       // read
       //
-      BufferSize = ReadLength[Index];
+      BufferSize = ReadLength[Index-5];
       //
       // Sync Token Init
       //
