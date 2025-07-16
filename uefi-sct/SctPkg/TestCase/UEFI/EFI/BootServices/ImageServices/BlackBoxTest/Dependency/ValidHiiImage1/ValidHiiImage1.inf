@@ -50,8 +50,5 @@
   SctLib
   EfiTestLib
 
-[Guids]
-  gTestGenericFailureGuid
-
 [Protocols]
   gEfiTestProfileLibraryGuid
