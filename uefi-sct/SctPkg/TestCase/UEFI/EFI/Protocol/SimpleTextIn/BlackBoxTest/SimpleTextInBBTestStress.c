@@ -53,7 +53,7 @@ BBTestReadKeyStrokeManualTest (
 
   EFI_TEST_ASSERTION                   AssertionType;
   EFI_INPUT_KEY                        Key;
-  CHAR16                               KeyBuffer[MAX_KEY_BUFFER_SIZE];
+  CHAR16                               KeyBuffer[MAX_KEY_BUFFER_SIZE + 1];
 
   EFI_DEVICE_PATH_PROTOCOL             *DevicePath;
   CHAR16                               *DevicePathStr;
