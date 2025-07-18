@@ -1508,6 +1508,10 @@ Returns:
     return EFI_INVALID_PARAMETER;
   }
 
+  if (*maxLength == 0) {
+    return EFI_INVALID_PARAMETER;
+  }
+
   Private = EFI_INI_FILE_PRIVATE_DATA_FROM_THIS (This);
 
   //
@@ -1851,6 +1855,10 @@ Returns:
   _alltrim (tmpEntry);
 
   if (SctAsciiStrLen (tmpSection) == 0 || SctAsciiStrLen (tmpEntry) == 0) {
+    return EFI_INVALID_PARAMETER;
+  }
+
+  if (*maxLength == 0) {
     return EFI_INVALID_PARAMETER;
   }
 
