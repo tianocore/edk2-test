@@ -124,7 +124,7 @@ EFI_MANAGED_NETWORK_RECEIVE_DATA            mMnpRxDataTemplate = {
   NULL                    // PacketData
 };
 
-CHAR8                                       MnpBufferIn[MNP_BUFFER_IN_MAX];
+CHAR8                                       MnpBufferIn[MNP_BUFFER_IN_MAX + 1];
 CHAR8                                       *MnpBufferOut;
 UINTN                                       MnpBufferOutSize;
 
