@@ -13,3 +13,11 @@ $ sudo apt-get install build-essential uuid-dev python3-distutils gcc-aarch64-li
    4) git clone --recursive https://github.com/tianocore/edk2.git
    5) ln -s edk2-test/uefi-sct/SctPkg/ SctPkg
    6) SctPkg/build.sh AARCH64 GCC RELEASE
+      SctPkg/build.sh AARCH64 GCC RELEASE ENABLE_SECUREBOOT_TESTS (For SecureBoot Tests)
+
+Note:
+To generate and set up keys and certificates for SecureBoot testing, follow the steps mentioned in the below document:
+uefi-sct/Doc/UserGuide/SecureBootTestKeyGenerationAndSetupGuide.md
+
+To configure and run SecureBoot tests, follow the steps mentioned in the below document:
+uefi-sct/Doc/UserGuide/SecureBootConfigurationGuide.md
