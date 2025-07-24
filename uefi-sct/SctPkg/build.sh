@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-#  Copyright (c) 2011 - 2020, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2011 - 2020, 2025, ARM Ltd. All rights reserved.<BR>
 #  (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR>
 #
 #  This program and the accompanying materials
@@ -13,6 +13,16 @@
 #  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 # 
 ##
+
+
+#Check SecureBoot Commandline Option
+SECUREBOOT_ENABLE=0
+for arg in "$@"; do
+    if [[ "$arg" == "ENABLE_SECUREBOOT_TESTS" ]]; then
+        SECUREBOOT_ENABLE=1
+        echo "✅ Secure Boot Tests Enabled"
+    fi
+done
 
 SctpackageDependencyList=(SctPkg BaseTools)
 
@@ -287,7 +297,20 @@ cp $EDK_TOOLS_PATH/Source/C/bin/GenBin $DEST_DIR/GenBin
 #for DSC in SctPkg/UEFI/UEFI_SCT.dsc SctPkg/UEFI/IHV_SCT.dsc $DSC_EXTRA
 for DSC in SctPkg/UEFI/UEFI_SCT.dsc $DSC_EXTRA
 do
-	build -p $DSC -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
+	if [ $SECUREBOOT_ENABLE -eq 1 ]
+	then
+		echo "Building Dependency Packages for Secure Boot.."
+		SOURCE_TARGET=$WORKSPACE/SctPkg/TestCase/UEFI/EFI/RuntimeServices/SecureBoot/BlackBoxTest/Dependency/Images
+		SECURE_APP1=$SOURCE_TARGET/SampleAppForSecureBootTest1/SampleAppForSecureBootTest1.inf
+		SECURE_APP2=$SOURCE_TARGET/SampleAppForSecureBootTest2/SampleAppForSecureBootTest2.inf
+		SECURE_APP3=$SOURCE_TARGET/SampleAppForSecureBootTest3/SampleAppForSecureBootTest3.inf
+		build -p $DSC -m $SECURE_APP1 -D ENABLE_SECUREBOOT_TESTS=TRUE -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
+		build -p $DSC -m $SECURE_APP2 -D ENABLE_SECUREBOOT_TESTS=TRUE -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
+		build -p $DSC -m $SECURE_APP3 -D ENABLE_SECUREBOOT_TESTS=TRUE -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
+		build -p $DSC -D ENABLE_SECUREBOOT_TESTS=TRUE -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
+	else
+		build -p $DSC -a $SCT_TARGET_ARCH -t $TARGET_TOOLS -b $SCT_BUILD $@
+	fi
 	# Check if there is any error
 	status=$?
 	if test $status -ne 0
@@ -318,7 +341,12 @@ pwd
 #
 # Run a script to generate Sct binary for the target architecture
 #
-../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi
+if [ $SECUREBOOT_ENABLE -eq 1 ]
+then
+	../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi ENABLE_SECUREBOOT_TESTS
+else
+	../../../SctPkg/CommonGenFramework.sh uefi_sct $SCT_TARGET_ARCH Install$SCT_TARGET_ARCH.efi
+fi
 
 status=$?
 if test $status -ne 0
