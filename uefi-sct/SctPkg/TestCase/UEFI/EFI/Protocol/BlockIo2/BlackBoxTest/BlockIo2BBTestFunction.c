@@ -4609,8 +4609,9 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
   EFI_BLOCK_IO2_PROTOCOL                *BlockIo2
   )
 {
+  UINTN                                BlockIo2TokenBufferSize = 4;
   EFI_TEST_ASSERTION                   AssertionType;
-  EFI_BLOCK_IO2_TOKEN                  BlockIo2TokenBuffer[4];
+  EFI_BLOCK_IO2_TOKEN                  BlockIo2TokenBuffer[BlockIo2TokenBufferSize];
   BOOLEAN                              MediaPresent;
   BOOLEAN                              ReadOnly;
   BOOLEAN                              WriteCaching;
@@ -4673,7 +4674,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
               &TimerEvent,
               &WaitIndex
               );
-      for (IndexI = 0; AsyncFlushFinished[IndexI] == 1 && IndexI < 4; IndexI++) {
+      for (IndexI = 0; IndexI < 4 && AsyncFlushFinished[IndexI] == 1; IndexI++) {
         ;
       }
       if (IndexI == 4) {
@@ -4699,6 +4700,10 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
     } else {
        AssertionType = EFI_TEST_ASSERTION_FAILED;
     } 
+
+    if(IndexI == BlockIo2TokenBufferSize){
+      IndexI -= 1;
+    }
     
     StandardLib->RecordAssertion (
                    StandardLib,
