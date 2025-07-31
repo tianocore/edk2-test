@@ -96,6 +96,41 @@ BBTestGetImageInfoConformanceTestCheckpoint4 (
 
 EFI_STATUS
 EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint5 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint6 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint7 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint8 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint9 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  );
+
+EFI_STATUS
+EFIAPI
 BBTestGetImageConformanceTestCheckpoint1 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
   IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
@@ -572,6 +607,11 @@ BBTestGetImageInfoConformanceTest (
   BBTestGetImageInfoConformanceTestCheckpoint2 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint3 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint4 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint5 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint6 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint7 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint8 (StandardLib, FirmwareManagement);
+  BBTestGetImageInfoConformanceTestCheckpoint9 (StandardLib, FirmwareManagement);
 
   return EFI_SUCCESS;
 }
@@ -1200,6 +1240,510 @@ BBTestGetImageInfoConformanceTestCheckpoint4 (
   return EFI_SUCCESS;
 }
 
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 5
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with valid parameters, with DescriptorVersion = NULL.
+      The function should return EFI_INVALID_PARAMETER.
+**/
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint5 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT8                                          DescriptorCount;
+  UINTN                                          DescriptorSize;
+  UINT32                                         PackageVersion;
+  CHAR16                                         *PackageVersionName;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid019;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #5";
+  ResultMessageData = L"correctly returned EFI_INVALID_PARAMETER.";
+
+  ImageInfo = NULL;
+  PackageVersionName = NULL;
+
+  ImageInfoSize = (sizeof (EFI_FIRMWARE_IMAGE_DESCRIPTOR)) * 20;
+  Status = gtBS->AllocatePool (
+                   EfiBootServicesData,
+                   ImageInfoSize,
+                   (VOID **) &ImageInfo
+                   );
+  if (EFI_ERROR (Status)) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"test case initialization failure.";
+    goto Exit;
+  }
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo ( 
+                                 FirmwareManagement,
+                                 &ImageInfoSize,
+                                 ImageInfo,
+                                 NULL, //DescriptorVersion
+                                 &DescriptorCount,
+                                 &DescriptorSize,
+                                 &PackageVersion,
+                                 &PackageVersionName
+                                 );
+
+  if (Status != EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_INVALID_PARAMETER.";
+  }
+
+  //
+  // Report the checkpoint result
+  // 
+ 
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (PackageVersionName != NULL) {
+    gtBS->FreePool (PackageVersionName);
+  }
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 6
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with valid parameters, with DescriptorCount = NULL.
+      The function should return EFI_INVALID_PARAMETER.
+**/
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint6 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT32                                         DescriptorVersion;
+  UINTN                                          DescriptorSize;
+  UINT32                                         PackageVersion;
+  CHAR16                                         *PackageVersionName;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid020;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #6";
+  ResultMessageData = L"correctly returned EFI_INVALID_PARAMETER.";
+
+  ImageInfo = NULL;
+  PackageVersionName = NULL;
+
+  ImageInfoSize = (sizeof (EFI_FIRMWARE_IMAGE_DESCRIPTOR)) * 20;
+  Status = gtBS->AllocatePool (
+                   EfiBootServicesData,
+                   ImageInfoSize,
+                   (VOID **) &ImageInfo
+                   );
+  if (EFI_ERROR (Status)) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"test case initialization failure.";
+    goto Exit;
+  }
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo ( 
+                                 FirmwareManagement,
+                                 &ImageInfoSize,
+                                 ImageInfo,
+                                 &DescriptorVersion,
+                                 NULL, //DescriptorCount
+                                 &DescriptorSize,
+                                 &PackageVersion,
+                                 &PackageVersionName
+                                 );
+
+  if (Status != EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_INVALID_PARAMETER.";
+  }
+
+  //
+  // Report the checkpoint result
+  // 
+ 
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (PackageVersionName != NULL) {
+    gtBS->FreePool (PackageVersionName);
+  }
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 7
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with valid parameters, with DescriptorSize = NULL.
+      The function should return EFI_INVALID_PARAMETER.
+**/
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint7 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT32                                         DescriptorVersion;
+  UINT8                                          DescriptorCount;
+  UINT32                                         PackageVersion;
+  CHAR16                                         *PackageVersionName;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid021;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #7";
+  ResultMessageData = L"correctly returned EFI_INVALID_PARAMETER.";
+
+  ImageInfo = NULL;
+  PackageVersionName = NULL;
+
+  ImageInfoSize = (sizeof (EFI_FIRMWARE_IMAGE_DESCRIPTOR)) * 20;
+  Status = gtBS->AllocatePool (
+                   EfiBootServicesData,
+                   ImageInfoSize,
+                   (VOID **) &ImageInfo
+                   );
+  if (EFI_ERROR (Status)) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"test case initialization failure.";
+    goto Exit;
+  }
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo ( 
+                                 FirmwareManagement,
+                                 &ImageInfoSize,
+                                 ImageInfo,
+                                 &DescriptorVersion,
+                                 &DescriptorCount,
+                                 NULL, //DescriptorSize
+                                 &PackageVersion,
+                                 &PackageVersionName
+                                 );
+
+  if (Status != EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_INVALID_PARAMETER.";
+  }
+
+  //
+  // Report the checkpoint result
+  // 
+ 
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (PackageVersionName != NULL) {
+    gtBS->FreePool (PackageVersionName);
+  }
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 8
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with valid parameters, with PackageVersion = NULL.
+      The function should return EFI_INVALID_PARAMETER.
+**/
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint8 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT32                                         DescriptorVersion;
+  UINT8                                          DescriptorCount;
+  UINTN                                          DescriptorSize;
+  CHAR16                                         *PackageVersionName;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid022;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #8";
+  ResultMessageData = L"correctly returned EFI_INVALID_PARAMETER.";
+
+  ImageInfo = NULL;
+  PackageVersionName = NULL;
+
+  ImageInfoSize = (sizeof (EFI_FIRMWARE_IMAGE_DESCRIPTOR)) * 20;
+  Status = gtBS->AllocatePool (
+                   EfiBootServicesData,
+                   ImageInfoSize,
+                   (VOID **) &ImageInfo
+                   );
+  if (EFI_ERROR (Status)) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"test case initialization failure.";
+    goto Exit;
+  }
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo ( 
+                                 FirmwareManagement,
+                                 &ImageInfoSize,
+                                 ImageInfo,
+                                 &DescriptorVersion,
+                                 &DescriptorCount,
+                                 &DescriptorSize,
+                                 NULL, //PackageVersion
+                                 &PackageVersionName
+                                 );
+
+  if (Status != EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_INVALID_PARAMETER.";
+  }
+
+  //
+  // Report the checkpoint result
+  // 
+ 
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (PackageVersionName != NULL) {
+    gtBS->FreePool (PackageVersionName);
+  }
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
+
+
+// ****************************************************************************
+//   Checkpoint: GetImageInfo, 9
+// ****************************************************************************
+
+/**
+  This routine:
+    - Calls function with valid parameters, with PackageVersion = NULL.
+      The function should return EFI_INVALID_PARAMETER.
+**/
+
+EFI_STATUS
+EFIAPI
+BBTestGetImageInfoConformanceTestCheckpoint9 (
+  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL          *StandardLib,
+  IN EFI_FIRMWARE_MANAGEMENT_PROTOCOL            *FirmwareManagement
+  )
+{
+  EFI_STATUS                                     Status;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_GUID                                       TestGuid;
+  CHAR16                                         *ResultMessageLabel;
+  CHAR16                                         *ResultMessageData;
+
+  UINTN                                          ImageInfoSize;
+  EFI_FIRMWARE_IMAGE_DESCRIPTOR                  *ImageInfo;
+  UINT32                                         DescriptorVersion;
+  UINT8                                          DescriptorCount;
+  UINTN                                          DescriptorSize;
+  UINT32                                         PackageVersion;
+
+  //
+  // Init
+  //
+
+  Status = EFI_SUCCESS;
+  AssertionType = EFI_TEST_ASSERTION_PASSED;
+  TestGuid = gFirmwareManagementBBTestConformanceAssertionGuid023;
+  ResultMessageLabel = L"GetImageInfo, conformance checkpoint #9";
+  ResultMessageData = L"correctly returned EFI_INVALID_PARAMETER.";
+
+  ImageInfo = NULL;
+
+  ImageInfoSize = (sizeof (EFI_FIRMWARE_IMAGE_DESCRIPTOR)) * 20;
+  Status = gtBS->AllocatePool (
+                   EfiBootServicesData,
+                   ImageInfoSize,
+                   (VOID **) &ImageInfo
+                   );
+  if (EFI_ERROR (Status)) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"test case initialization failure.";
+    goto Exit;
+  }
+
+  //
+  // Check the data returned by the function
+  //
+
+  Status = FirmwareManagement->GetImageInfo ( 
+                                 FirmwareManagement,
+                                 &ImageInfoSize,
+                                 ImageInfo,
+                                 &DescriptorVersion,
+                                 &DescriptorCount,
+                                 &DescriptorSize,
+                                 &PackageVersion,
+                                 NULL
+                                 );
+
+  if (Status != EFI_INVALID_PARAMETER) {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+    ResultMessageData = L"failed to return EFI_INVALID_PARAMETER.";
+  }
+
+  //
+  // Report the checkpoint result
+  // 
+ 
+Exit:
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 TestGuid,
+                 ResultMessageLabel,
+                 L"Result - %s\n%a:%d: Status - %r",
+                 ResultMessageData,
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+  if (ImageInfo != NULL) {
+    gtBS->FreePool (ImageInfo);
+  }
+
+  return EFI_SUCCESS;
+}
 
 
 // ****************************************************************************
