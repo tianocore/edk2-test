@@ -166,3 +166,27 @@ extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid017;
 
 extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid018;
 
+#define EFI_TEST_FIRMWAREMANAGEMENTBBTESTCONFORMANCE_ASSERTION_019_GUID \
+{ 0xc91fa8ed, 0x4f6f, 0x421c, { 0x99, 0x84, 0xb9, 0x2c, 0xb4, 0x0a, 0xc9, 0x99 } }
+
+extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid019;
+
+#define EFI_TEST_FIRMWAREMANAGEMENTBBTESTCONFORMANCE_ASSERTION_020_GUID \
+{ 0x6fb85d06, 0x085e, 0x40f4, { 0x80, 0xef, 0xa8, 0x63, 0x69, 0xed, 0x71, 0x4b } }
+
+extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid020;
+
+#define EFI_TEST_FIRMWAREMANAGEMENTBBTESTCONFORMANCE_ASSERTION_021_GUID \
+{ 0xb7166593, 0x58f1, 0x4820, { 0x9e, 0x65, 0x97, 0xb8, 0xbf, 0x0c, 0x90, 0xc1 } }
+
+extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid021;
+
+#define EFI_TEST_FIRMWAREMANAGEMENTBBTESTCONFORMANCE_ASSERTION_022_GUID \
+{ 0xfd460d76, 0xfc8a, 0x4f2a, { 0x83, 0xfb, 0xb3, 0x65, 0x45, 0xcd, 0xb5, 0x73 } }
+
+extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid022;
+
+#define EFI_TEST_FIRMWAREMANAGEMENTBBTESTCONFORMANCE_ASSERTION_023_GUID \
+{ 0xcf079f9e, 0xd0c2, 0x4ad2, { 0x9a, 0x50, 0x12, 0x55, 0x53, 0x08, 0x99, 0x1a } }
+
+extern EFI_GUID gFirmwareManagementBBTestConformanceAssertionGuid023;
