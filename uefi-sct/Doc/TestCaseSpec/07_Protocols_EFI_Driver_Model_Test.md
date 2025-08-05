@@ -1200,9 +1200,27 @@ GetInformation()</strong> returns
 InformationBlockSize, the return status should be
 <strong>EFI_INVALID_PARAMETERS</strong>.</td>
 </tr>
+<tr class="odd">
+<td>5.5.11.1.6</td>
+<td><p>0x2b35c5e2,</p>
+<p>0xa25b,</p>
+<p>0x48f3,0xab,</p>
+<p>0xf7,0xbf,</p>
+<p>0x32,0xd2,</p>
+<p>0x17,0x1b,</p>
+<p>0x93</p></td>
+<td><p><strong>EFI_ADAPTER_INFORMATION_PROTOCOL.GetInformation -
+GetInformation()</strong> returns
+<strong>EFI_NOT_FOUND</strong></p>
+<p>for an InformationType that is supported but information is unavailable </p> and returns
+<strong>EFI_SUCCESS</strong> for an InformationType that is supported and information is available</td>
+<td>Call <strong>GetInformation ()</strong> with all known InformationTypes in a loop,
+the return status should be either
+<strong>EFI_NOT_FOUND</strong> or <strong>EFI_SUCCESS</strong>.
+In case of EFI_NOT_FOUND is returned, check for InformationBlockSize to be set to 0</td>
+</tr>
 </tbody>
 </table>
-
 
 ### SetInformation()
 
