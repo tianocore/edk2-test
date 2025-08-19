@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #  Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-#  Copyright (c) 2011 - 2019, ARM Ltd. All rights reserved.<BR>
+#  Copyright (c) 2011 - 2019, 2025, ARM Ltd. All rights reserved.<BR>
 #  Copyright (c) 2014 - 2018, Intel Corporation. All rights reserved.<CR>
 #  (C) Copyright 2017 Hewlett Packard Enterprise Development LP<BR>
 #  Copyright (c) 2019,Microchip Technology Inc.<BR>
@@ -28,6 +28,12 @@
 export ProcessorType=$2
 export Installer=$3
 export Framework=SctPackage$ProcessorType/$ProcessorType
+export SECUREBOOT_ENABLE=0
+for arg in "$@"; do
+    if [ "$arg" = "ENABLE_SECUREBOOT_TESTS" ]; then
+        export SECUREBOOT_ENABLE=1
+    fi
+done
 # *********************************************
 # Create target directory
 # *********************************************
@@ -69,6 +75,20 @@ cp $ProcessorType/StallForKey.efi      $Framework/            > NUL
 # *********************************************
 
 cp ../../../SctPkg/Config/Data/Category.ini       $Framework/Data/       > NUL
+  if [ $SECUREBOOT_ENABLE -eq 1 ]; then
+        echo "🔐 Adding Secure Boot test category to Category.ini..."
+        cat <<EOF >> $Framework/Data/Category.ini
+
+[Category Data]
+Revision      = 0x00010000
+CategoryGuid  = CBADA58E-A1AA-45DF-BDDF-F9BA1292F887
+InterfaceGuid = AFF115FB-387B-4C18-8C41-6AFC7F03BB90
+Name          = RuntimeServicesTest\SecureBootTest
+Description   =
+EOF
+
+    echo "✅ Category.ini updated with Secure Boot test section."
+  fi
 cp ../../../SctPkg/Config/Data/GuidFile.txt       $Framework/Data/       > NUL
 
 # *********************************************
@@ -92,6 +112,11 @@ CopyDependency()
     ls -h $ProcessorType/$1_Invalid*       > temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.efi   >> temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.ini   >> temp.txt 2>NUL
+  if [ $SECUREBOOT_ENABLE -eq 1 ]; then
+    ls -h $ProcessorType/$1_*.bin  >> temp.txt 2>NUL
+    ls -h $ProcessorType/$1_*.der  >> temp.txt 2>NUL
+    ls -h $ProcessorType/$1_*.auth  >> temp.txt 2>NUL
+  fi
     ls -h $ProcessorType/$1_*.cmp   >> temp.txt 2>NUL
     ls -h $ProcessorType/$1_*.ucmp  >> temp.txt 2>NUL
 
@@ -130,7 +155,11 @@ then
     cp $ProcessorType/ProtocolHandlerServicesBBTest.efi        $Framework/Test/ > NUL
     cp $ProcessorType/ImageServicesBBTest.efi                  $Framework/Test/ > NUL
     cp $ProcessorType/MiscBootServicesBBTest.efi               $Framework/Test/ > NUL
-    
+
+  if [ $SECUREBOOT_ENABLE -eq 1 ]; then
+    cp $ProcessorType/SecureBootBBTest.efi                     $Framework/Test/ > NUL
+  fi
+
     cp $ProcessorType/VariableServicesBBTest.efi               $Framework/Test/ > NUL
     cp $ProcessorType/TimeServicesBBTest.efi                   $Framework/Test/ > NUL
     cp $ProcessorType/MiscRuntimeServicesBBTest.efi            $Framework/Test/ > NUL
@@ -273,6 +302,9 @@ then
     CopyDependency PciRootBridgeIo
     CopyDependency PxeBaseCode
     CopyDependency ConfigKeywordHandler
+  if [ $SECUREBOOT_ENABLE -eq 1 ]; then
+    CopyDependency SecureBoot
+  fi
 fi
 
 # *********************************************
