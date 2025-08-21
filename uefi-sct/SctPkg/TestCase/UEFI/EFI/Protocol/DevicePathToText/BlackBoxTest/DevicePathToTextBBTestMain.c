@@ -1062,7 +1062,7 @@ BuildAcpiExpDeviceNode (
   	goto InValidText;
   }
 
-  CIDStr    = L"0";
+  CIDStr    = L'\0';
   UIDSTRStr = L"\0";
 
   for (OptionalParamIndex = 0; OptionalParamIndex < 2; OptionalParamIndex++) {
