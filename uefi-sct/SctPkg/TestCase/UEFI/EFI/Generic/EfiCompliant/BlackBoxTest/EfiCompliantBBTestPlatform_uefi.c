@@ -34,7 +34,6 @@ Abstract:
 #include EFI_PROTOCOL_DEFINITION (SimpleTextInEx)
 #include EFI_PROTOCOL_DEFINITION (SimpleTextOut)
 #include EFI_PROTOCOL_DEFINITION (UgaDraw)
-#include EFI_PROTOCOL_DEFINITION (UgaIo)
 #include EFI_PROTOCOL_DEFINITION (SimplePointer)
 #include EFI_PROTOCOL_DEFINITION (BlockIo)
 #include EFI_PROTOCOL_DEFINITION (DiskIo)
