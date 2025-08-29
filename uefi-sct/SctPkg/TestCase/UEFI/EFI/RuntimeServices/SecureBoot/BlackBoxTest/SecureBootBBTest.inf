@@ -1,0 +1,57 @@
+## @file
+#
+#  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
+#  Copyright 2025, Arm LTD.
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at 
+#  http://opensource.org/licenses/bsd-license.php
+# 
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+# 
+##
+#/*++
+#
+# Module Name:
+#
+#   SecureBootBBTest.inf
+#
+# Abstract:
+#
+#   Component description file for Secure Boot Black-Box Test.
+#
+#--*/
+
+[Defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = SecureBootBBTest
+  FILE_GUID            = 6d74244a-802a-475f-bdcc-cd315110b512
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeSecureBootBbTest
+
+[Sources.common]
+  SecureBootBBTestMain.h
+  SecureBootBBTestMain.c
+  SecureBootBBTestSupport.c
+  VariableAttributesBBTest.c
+  VariableUpdatesBBTest.c
+  ImageLoadingBBTest.c
+  Guid.h
+  Guid.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SctLib
+  EfiTestLib
+
+[Protocols]
+  gEfiTestLoggingLibraryGuid
+  gEfiTestProfileLibraryGuid

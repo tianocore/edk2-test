@@ -1,0 +1,38 @@
+## @file
+#
+#  Copyright 2006 - 2015 Unified EFI, Inc.<BR>
+#  Copyright (c) 2021, 2025, ARM Ltd. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at 
+#  http://opensource.org/licenses/bsd-license.php
+# 
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+# 
+##
+#/*++
+#
+# Module Name:
+#
+#   SecureBootImages.inf
+#
+# Abstract:
+#
+#   Component description file for creating the Secure Boot test keys.
+#
+#--*/
+
+[defines]
+BASE_NAME            = SecureBootTestKeys
+FILE_GUID            = 0B1412C0-1AB8-49AB-BC65-F81E368A0AC2
+MODULE_TYPE          = UEFI_DRIVER
+CUSTOM_MAKEFILE      = MSFT| makefile
+CUSTOM_MAKEFILE      = GCC | GNUmakefile
+
+[sources.common]
+
+[nmake.common]
+
+[includes.common]
