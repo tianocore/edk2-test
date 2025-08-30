@@ -483,7 +483,7 @@ Returns:
 
     }
 
-    for (Index2 = 0; Index2 < EFTP_OPTION_MAX; Index2++) {
+    for (Index2 = 0; Index2 < 4; Index2++) {
       if (NetAsciiStrCaseCmp (mOptionObjs[Index2].Name, OptionList[Index1].OptionStr) != 0) {
         continue;
       }

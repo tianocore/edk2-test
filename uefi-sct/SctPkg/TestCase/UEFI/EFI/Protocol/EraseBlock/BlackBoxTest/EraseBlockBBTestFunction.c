@@ -76,9 +76,11 @@ BBTestEraseBlocksFunctionTest (
 
   EFI_ERASE_BLOCK_TOKEN                 Token;
   EFI_BLOCK_IO2_TOKEN                   BlockIo2Token;
-
+  
   EraseBlock = (EFI_ERASE_BLOCK_PROTOCOL*)ClientInterface;
 
+  Token.Event = NULL;
+  
   //
   // Get the Standard Library Interface
   //

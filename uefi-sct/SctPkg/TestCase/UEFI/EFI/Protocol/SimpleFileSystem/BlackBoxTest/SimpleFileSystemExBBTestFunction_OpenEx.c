@@ -10345,12 +10345,12 @@ ComposeFileNameArrayFileIo2 (
   for (FileBaseNameNum = sizeof (ValidFileBaseNameFileIo2) / sizeof (*ValidFileBaseNameFileIo2);
         FileBaseNameNum > 0; FileBaseNameNum --) {
 
-    FileBaseNameLength = sizeof (ValidFileBaseNameFileIo2[FileBaseNameNum - 1]);
+    FileBaseNameLength = sizeof (ValidFileBaseNameFileIo2[FileBaseNameNum - 1]) / sizeof (ValidFileBaseNameFileIo2[0][0]);
 
     for (ExtensionNameNum = sizeof (ValidExtensionNameFileIo2) / sizeof (*ValidExtensionNameFileIo2);
           ExtensionNameNum > 0; ExtensionNameNum --){
 
-      ExtensionNameLength = sizeof (ValidExtensionNameFileIo2[ExtensionNameNum - 1]);
+      ExtensionNameLength = sizeof (ValidExtensionNameFileIo2[ExtensionNameNum - 1]) / sizeof (ValidExtensionNameFileIo2[0][0]);
       TempIndex = 0;
 
       for (Loop = 0; Loop < FileBaseNameLength; Loop++){
