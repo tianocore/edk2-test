@@ -151,6 +151,8 @@ EFI_GUID STRESS_TEST_NON_INTERFACE_PROTOCOL_38_GUID =
 EFI_GUID STRESS_TEST_NON_INTERFACE_PROTOCOL_39_GUID =
   { 0x169370a, 0xbc3d, 0x4326, {0x8a, 0x7, 0xa, 0x6c, 0x25, 0x73, 0x20, 0xd9 }};
 
+#define OPENINFO_LEVELS 3
+
 /**
  *  @brief
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL
@@ -1773,7 +1775,7 @@ BBTestCombinationTest2CheckPoint4 (
 
   MisMatch = FALSE;
   TempInfo = OpenInfo;
-  for (Index = 0; Index < TPL_ARRAY_SIZE; Index++) {
+  for (Index = 0; Index < OPENINFO_LEVELS; Index++) {
 
     if ((TempInfo->AgentHandle != mImageHandle)
         || (TempInfo->ControllerHandle != ChildHandle)
@@ -1905,4 +1907,5 @@ BBTestCombinationTest2CheckPoint4 (
                    );
   }
   return EFI_SUCCESS;
+
 }
