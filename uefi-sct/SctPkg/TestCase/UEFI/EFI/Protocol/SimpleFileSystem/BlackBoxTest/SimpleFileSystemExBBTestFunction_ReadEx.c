@@ -1690,7 +1690,7 @@ BBTestReadExBasicTestCheckpoint4 (
     //
     // second: before read,file position is at the end of the directory file
     //
-    for (Index = 5; Index < 10; Index++) {
+    for (Index = 5; Index < 9; Index++) {
       Status = DirHandle->SetPosition (DirHandle, 0);
       if (EFI_ERROR (Status)) {
         StandardLib->RecordAssertion (
@@ -1729,7 +1729,7 @@ BBTestReadExBasicTestCheckpoint4 (
       //
       // read
       //
-      BufferSize = ReadLength[Index-5];
+      BufferSize = ReadLength[Index];
       //
       // Sync Token Init
       //

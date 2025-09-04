@@ -735,7 +735,7 @@ _LibMemoryMap (
   )
 {
   EFI_STATUS            Status;
-  EFI_MEMORY_DESCRIPTOR *Buffer;
+  EFI_MEMORY_DESCRIPTOR *Buffer = NULL;
   UINTN                 BufferSize;
 
   ASSERT (NoEntries != NULL);
@@ -745,7 +745,6 @@ _LibMemoryMap (
   //
   // Initialize for GrowBuffer loop
   BufferSize  = sizeof (EFI_MEMORY_DESCRIPTOR);
-  Buffer      = __AllocatePool(BufferSize);
 
 Retry:
   Status = gntBS->GetMemoryMap (
