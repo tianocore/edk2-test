@@ -29,7 +29,7 @@ Abstract:
 #include "BlockIo2BBTestMain.h"
 
 #define BIO2ENTITY_SIGNATURE         EFI_SIGNATURE_32('b','i','o','2')
-
+#define BLOCKIO2TOKENBUFFERSIZE 4
 
 //
 // record every Block IO 2 Async call status
@@ -4609,9 +4609,8 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
   EFI_BLOCK_IO2_PROTOCOL                *BlockIo2
   )
 {
-  UINTN                                BlockIo2TokenBufferSize = 4;
   EFI_TEST_ASSERTION                   AssertionType;
-  EFI_BLOCK_IO2_TOKEN                  BlockIo2TokenBuffer[BlockIo2TokenBufferSize];
+  EFI_BLOCK_IO2_TOKEN                  BlockIo2TokenBuffer[BLOCKIO2TOKENBUFFERSIZE];
   BOOLEAN                              MediaPresent;
   BOOLEAN                              ReadOnly;
   BOOLEAN                              WriteCaching;
@@ -4627,7 +4626,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
   //
   // BlockIo2Token initialization
   //
-  for (IndexI = 0; IndexI < 4; IndexI++) {
+  for (IndexI = 0; IndexI < BLOCKIO2TOKENBUFFERSIZE; IndexI++) {
     AsyncFlushFinished[IndexI] = 0;
     BlockIo2TokenBuffer[IndexI].Event = NULL;
     BlockIo2TokenBuffer[IndexI].TransactionStatus = EFI_NOT_READY;
@@ -4656,7 +4655,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
     //
     // Perform Async Flush Ex
     //
-    for (IndexI = 0; IndexI < 4; IndexI++){
+    for (IndexI = 0; IndexI < BLOCKIO2TOKENBUFFERSIZE; IndexI++){
       BlockIo2->FlushBlocksEx (BlockIo2, &BlockIo2TokenBuffer[IndexI]);
     }
 
@@ -4674,7 +4673,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
               &TimerEvent,
               &WaitIndex
               );
-      for (IndexI = 0; IndexI < 4 && AsyncFlushFinished[IndexI] == 1; IndexI++) {
+      for (IndexI = 0; IndexI < BLOCKIO2TOKENBUFFERSIZE && AsyncFlushFinished[IndexI] == 1; IndexI++) {
         ;
       }
       if (IndexI == 4) {
@@ -4689,9 +4688,9 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
     //
     // check all events have been siganaled & status been changed
     //
-    if (IndexI == 4) {
+    if (IndexI == BLOCKIO2TOKENBUFFERSIZE ) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
-      for (IndexI = 0; IndexI < 4; IndexI++){
+      for (IndexI = 0; IndexI < BLOCKIO2TOKENBUFFERSIZE; IndexI++){
         if (BlockIo2TokenBuffer[IndexI].TransactionStatus != EFI_SUCCESS) {
            AssertionType = EFI_TEST_ASSERTION_FAILED;
           break;
@@ -4701,7 +4700,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
        AssertionType = EFI_TEST_ASSERTION_FAILED;
     } 
 
-    if(IndexI == BlockIo2TokenBufferSize){
+    if(IndexI == BLOCKIO2TOKENBUFFERSIZE){
       IndexI -= 1;
     }
     
@@ -4713,7 +4712,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
                    L"%a:%d: %d Events have been successfully signaled Status:=%r TransactionStatus:=%r returned",
                    __FILE__,
                    (UINTN)__LINE__,
-                   4,
+                   BLOCKIO2TOKENBUFFERSIZE,
                    EFI_SUCCESS,
                    BlockIo2TokenBuffer[IndexI].TransactionStatus
                    );
@@ -4723,7 +4722,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
 
   
 END:
-  for (IndexI = 0; IndexI < 4; IndexI++) {
+  for (IndexI = 0; IndexI < BLOCKIO2TOKENBUFFERSIZE; IndexI++) {
     if (BlockIo2TokenBuffer[IndexI].Event != NULL) {
       gtBS->CloseEvent (BlockIo2TokenBuffer[IndexI].Event);
     }
