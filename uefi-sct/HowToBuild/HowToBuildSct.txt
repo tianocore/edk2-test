@@ -42,7 +42,7 @@ Build Instructions for UEFI SCTII X64 (Windows)
 	12) cd ..\..\..\..\
 	13) xcopy ..\edk2-test\uefi-sct\SctPkg /E .\SctPkg\
 	14) build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2019
-	15) cd Build\UefiSct\DEBUG_VS2015x86
+	15) cd Build\UefiSct\DEBUG_VS2019
 	16) ..\..\..\SctPkg\CommonGenFramework.bat uefi_sct X64 InstallX64.efi
 
 The target subdirectory named as SctPackageX64 which includes test cases and UEFI SCT II applications will be generated in sct_workspace\edk2\Build\UefiSct\DEBUG_VS2015x86
