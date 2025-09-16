@@ -606,7 +606,9 @@ BBTestGetImageInfoConformanceTest (
   BBTestGetImageInfoConformanceTestCheckpoint1 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint2 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint3 (StandardLib, FirmwareManagement);
-  BBTestGetImageInfoConformanceTestCheckpoint4 (StandardLib, FirmwareManagement);
+  //This test is temporarily disabled due to clarification pending in the 
+  //UEFI Specification
+  //BBTestGetImageInfoConformanceTestCheckpoint4 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint5 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint6 (StandardLib, FirmwareManagement);
   BBTestGetImageInfoConformanceTestCheckpoint7 (StandardLib, FirmwareManagement);
