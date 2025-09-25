@@ -72,9 +72,9 @@ EDKII Test Stewards
 F: *
 M: G Edhaya Chandran <edhaya.chandran@arm.com> [edhay]
 M: Carolyn Gjertsen <Carolyn.Gjertsen@amd.com> [cgjertsen]
-M: Barton Gao <gaojie@byosoft.com.cn> [gaojiebyo]
 R: Sunny Wang <sunny.wang@arm.com> [sunnywang-arm]
 R: Ann Cheng <ann.cheng@arm.com> [anncheng-arm]
+R: Shelly Kishore <shelly.kishore@intel.com> [shellyki-intel]
 
 
 EDK2-Test Protocols
