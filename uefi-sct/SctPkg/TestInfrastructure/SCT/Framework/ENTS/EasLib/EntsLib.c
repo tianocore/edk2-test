@@ -75,7 +75,6 @@ EFI_GUID                        gtEfiBlockIoProtocolGuid          = EFI_BLOCK_IO
 EFI_GUID                        gtEfiDiskIoProtocolGuid           = EFI_DISK_IO_PROTOCOL_GUID;
 EFI_GUID                        gtEfiSimpleFileSystemProtocolGuid = EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
 EFI_GUID                        gtEfiLoadFileProtocolGuid         = LOAD_FILE_PROTOCOL_GUID;
-EFI_GUID                        gtEfiDeviceIoProtocolGuid         = EFI_DEVICE_IO_PROTOCOL_GUID;
 EFI_GUID                        gtEfiUnicodeCollationProtocolGuid = EFI_UNICODE_COLLATION_PROTOCOL_GUID;
 EFI_GUID                        gtEfiSerialIoProtocolGuid         = EFI_SERIAL_IO_PROTOCOL_GUID;
 EFI_GUID                        gtEfiSimpleNetworkProtocolGuid    = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
