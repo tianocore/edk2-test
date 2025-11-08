@@ -30,7 +30,6 @@ Abstract:
 #include EFI_GUID_DEFINITION (Gpt)
 
 #include EFI_PROTOCOL_DEFINITION (BlockIo)
-#include EFI_PROTOCOL_DEFINITION (DeviceIo)
 #include EFI_PROTOCOL_DEFINITION (DevicePath)
 #include EFI_PROTOCOL_DEFINITION (DiskIo)
 #if (EFI_SPECIFICATION_VERSION >= 0x00020028)
@@ -112,7 +111,6 @@ struct {
   { &gEfiDiskIoProtocolGuid,            L"diskio" },
   { &gEfiSimpleFileSystemProtocolGuid,  L"fs" },
   { &gEfiLoadFileProtocolGuid,          L"load" },
-  { &gEfiDeviceIoProtocolGuid,          L"DevIo" },
 
   { &gEfiFileInfoGuid,                   L"GenFileInfo" },
   { &gEfiFileSystemInfoGuid,            L"FileSysInfo" },
