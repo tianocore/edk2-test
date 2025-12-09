@@ -59,7 +59,7 @@ BBTestQueryFunctionAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize;
   EFI_CONFIGURE_CLP_PARAMETER_BLK                                           *ParameterClpBlock;
   
   //
@@ -95,11 +95,11 @@ BBTestQueryFunctionAutoTest (
   // Get all the handles in the system.
   SctLocateHandle (AllHandles, NULL, NULL, &CtrlerHandleNo, &CtrlerHandles);
 
-  *ParameterTypeGuid =gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
-  *ParameterBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
+  ParameterTypeGuid = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
+  ParameterBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&ParameterClpBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&ParameterClpBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -149,7 +149,7 @@ BBTestQueryFunctionAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &ParameterClpBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
         Status = PlatformToDriverConfiguration->Response (
@@ -159,7 +159,7 @@ BBTestQueryFunctionAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &ParameterClpBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );			
         Instance++;
@@ -221,7 +221,7 @@ BBTestResponseFunctionAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance=0;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize;
   EFI_CONFIGURE_CLP_PARAMETER_BLK                                           *ParameterClpBlock;
   EFI_PLATFORM_CONFIGURATION_ACTION                         ConfigurationAction;
 
@@ -258,11 +258,11 @@ BBTestResponseFunctionAutoTest (
   // Get all the handles in the system.
   SctLocateHandle (AllHandles, NULL, NULL, &CtrlerHandleNo, &CtrlerHandles);
 
-  *ParameterTypeGuid = gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
-  *ParameterBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
+  ParameterTypeGuid = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
+  ParameterBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
   ChildHandle =NULL;
 
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&ParameterClpBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&ParameterClpBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -312,7 +312,7 @@ BBTestResponseFunctionAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &ParameterClpBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
 	  
       ConfigurationAction = EfiPlatformConfigurationActionNone;
@@ -324,7 +324,7 @@ BBTestResponseFunctionAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &ParameterClpBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          ConfigurationAction
                                          );			
         Instance++;
