@@ -58,7 +58,7 @@ BBTestQueryConformanceAutoTest (
   //EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid;
-  UINTN                                          *ParameterClpBlockSize=NULL;
+  UINTN                                          ParameterClpBlockSize;
   EFI_CONFIGURE_CLP_PARAMETER_BLK                                           *ParameterClpBlock;
 
   //
@@ -90,9 +90,9 @@ BBTestQueryConformanceAutoTest (
   SctLocateHandle (AllHandles, NULL, NULL, &CtrlerHandleNo, &CtrlerHandles);
   
   ParameterTypeGuid = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
-  *ParameterClpBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
+  ParameterClpBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
 
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterClpBlockSize,(VOID **)&ParameterClpBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterClpBlockSize,(VOID **)&ParameterClpBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -142,7 +142,7 @@ BBTestQueryConformanceAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &ParameterClpBlock,
-                                         ParameterClpBlockSize
+                                         &ParameterClpBlockSize
                                          );
     if(Status == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -242,7 +242,7 @@ BBTestQueryConformanceAutoTest (
                                          NULL,
                                          &ParameterTypeGuid,
                                          (VOID **) &ParameterClpBlock,
-                                         ParameterClpBlockSize
+                                         &ParameterClpBlockSize
                                          );
   if(Status == EFI_INVALID_PARAMETER) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -299,7 +299,7 @@ BBTestResponseConformanceAutoTest (
  // EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid;
-  UINTN                                          *ParameterClpBlockSize=NULL;
+  UINTN                                          ParameterClpBlockSize;
   EFI_CONFIGURE_CLP_PARAMETER_BLK                                           *ParameterClpBlock;
   EFI_PLATFORM_CONFIGURATION_ACTION                         ConfigurationAction;
 
@@ -332,9 +332,9 @@ BBTestResponseConformanceAutoTest (
   SctLocateHandle (AllHandles, NULL, NULL, &CtrlerHandleNo, &CtrlerHandles);
   
   ParameterTypeGuid = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
-  *ParameterClpBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
+  ParameterClpBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterClpBlockSize,(VOID **)&ParameterClpBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterClpBlockSize,(VOID **)&ParameterClpBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -384,7 +384,7 @@ BBTestResponseConformanceAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &ParameterClpBlock,
-                                         ParameterClpBlockSize
+                                         &ParameterClpBlockSize
                                          );
     if(Status == EFI_INVALID_PARAMETER) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -410,7 +410,7 @@ BBTestResponseConformanceAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          ParameterClpBlock,
-                                         *ParameterClpBlockSize,
+                                         ParameterClpBlockSize,
                                          ConfigurationAction
                                          );
     if(Status == EFI_INVALID_PARAMETER) {
@@ -471,7 +471,7 @@ BBTestResponseConformanceAutoTest (
                                          0,
                                          ParameterTypeGuid,
                                          ParameterClpBlock,
-                                         *ParameterClpBlockSize,
+                                         ParameterClpBlockSize,
                                          ConfigurationAction
                                          );
     if(Status == EFI_INVALID_PARAMETER) {

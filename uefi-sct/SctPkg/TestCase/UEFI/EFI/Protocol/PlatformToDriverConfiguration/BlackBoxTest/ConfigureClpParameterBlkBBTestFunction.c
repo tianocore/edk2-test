@@ -174,7 +174,7 @@ BBTestCLPCommandAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize=0;
   CLP_CMD                                      *CLPCmd;
   UINTN                                          Index,Index1;
 
@@ -235,10 +235,10 @@ BBTestCLPCommandAutoTest (
   }
 
   //*ParameterTypeGuid =EFI_NULL_GUID;
-  *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
+  ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -266,7 +266,7 @@ BBTestCLPCommandAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &EfiClpParameterBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
         Status = PlatformToDriverConfiguation->Response (
@@ -276,7 +276,7 @@ BBTestCLPCommandAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &EfiClpParameterBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );			
         Instance++;
@@ -305,18 +305,7 @@ BBTestCLPCommandAutoTest (
   // Verify the ParameterTypeGuid is the EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_BLOCK
   //
 
-  if(ParameterTypeGuid->Data1==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data1
-  	&&ParameterTypeGuid->Data2==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data2
-  	&&ParameterTypeGuid->Data3==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data3
-  	&&ParameterTypeGuid->Data4[0]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[0]
-  	&&ParameterTypeGuid->Data4[1]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[1]
-  	&&ParameterTypeGuid->Data4[2]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[2]
-  	&&ParameterTypeGuid->Data4[3]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[3]
-  	&&ParameterTypeGuid->Data4[4]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[4]
-  	&&ParameterTypeGuid->Data4[5]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[5]
-  	&&ParameterTypeGuid->Data4[6]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[6]
-  	&&ParameterTypeGuid->Data4[7]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[7]
-  	) 
+  if(ParameterTypeGuid != NULL && SctCompareGuid (ParameterTypeGuid, &gBlackBoxEfiPlatformToDriverConfigurationClpGuid) == 0) 
   {
     //
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPCommand is correct.
@@ -433,7 +422,7 @@ BBTestCLPReturnStringAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize;
   CLP_CMD                                    *CLPCmd;
   UINTN                                           Index;
   //
@@ -492,10 +481,10 @@ BBTestCLPReturnStringAutoTest (
   }
   
   //*ParameterTypeGuid =EFI_NULL_GUID;
-  *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
+  ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -525,7 +514,7 @@ BBTestCLPReturnStringAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &EfiClpParameterBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
         Status = PlatformToDriverConfiguation->Response (
@@ -535,7 +524,7 @@ BBTestCLPReturnStringAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &EfiClpParameterBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );			
         Instance++;
@@ -566,7 +555,7 @@ BBTestCLPReturnStringAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &EfiClpParameterBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );
     if(Status == EFI_SUCCESS) {
@@ -592,18 +581,7 @@ BBTestCLPReturnStringAutoTest (
   // Verify the ParameterTypeGuid is the EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_BLOCK
   //
 
-  if(ParameterTypeGuid->Data1==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data1
-  	&&ParameterTypeGuid->Data2==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data2
-  	&&ParameterTypeGuid->Data3==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data3
-  	&&ParameterTypeGuid->Data4[0]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[0]
-  	&&ParameterTypeGuid->Data4[1]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[1]
-  	&&ParameterTypeGuid->Data4[2]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[2]
-  	&&ParameterTypeGuid->Data4[3]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[3]
-  	&&ParameterTypeGuid->Data4[4]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[4]
-  	&&ParameterTypeGuid->Data4[5]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[5]
-  	&&ParameterTypeGuid->Data4[6]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[6]
-  	&&ParameterTypeGuid->Data4[7]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[7]
-  	) 
+  if(ParameterTypeGuid != NULL && SctCompareGuid (ParameterTypeGuid, &gBlackBoxEfiPlatformToDriverConfigurationClpGuid) == 0) 
   {
     //
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPReturnString is correct.
@@ -708,7 +686,7 @@ BBTestCLPCmdStatusAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize;
   CHAR16                                        Status_Tag;
   //
   // Get the Standard Library Interface
@@ -766,10 +744,10 @@ BBTestCLPCmdStatusAutoTest (
   }
   
   //*ParameterTypeGuid =EFI_NULL_GUID;
-  *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
+  ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -799,7 +777,7 @@ BBTestCLPCmdStatusAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &EfiClpParameterBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
         Status = PlatformToDriverConfiguation->Response (
@@ -809,7 +787,7 @@ BBTestCLPCmdStatusAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &EfiClpParameterBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );			
         Instance++;
@@ -838,18 +816,7 @@ BBTestCLPCmdStatusAutoTest (
   // Verify the ParameterTypeGuid is the EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_BLOCK
   //
 
-  if(ParameterTypeGuid->Data1==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data1
-  	&&ParameterTypeGuid->Data2==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data2
-  	&&ParameterTypeGuid->Data3==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data3
-  	&&ParameterTypeGuid->Data4[0]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[0]
-  	&&ParameterTypeGuid->Data4[1]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[1]
-  	&&ParameterTypeGuid->Data4[2]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[2]
-  	&&ParameterTypeGuid->Data4[3]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[3]
-  	&&ParameterTypeGuid->Data4[4]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[4]
-  	&&ParameterTypeGuid->Data4[5]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[5]
-  	&&ParameterTypeGuid->Data4[6]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[6]
-  	&&ParameterTypeGuid->Data4[7]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[7]
-  	) 
+  if(ParameterTypeGuid != NULL && SctCompareGuid (ParameterTypeGuid, &gBlackBoxEfiPlatformToDriverConfigurationClpGuid) == 0) 
   {
     //
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPCmdStatus is correct.
@@ -928,7 +895,7 @@ BBTestCLPErrorValueAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize;
 //  UINT8                                          Index;
   UINT16                                        Error_Tag;
   //
@@ -987,10 +954,10 @@ BBTestCLPErrorValueAutoTest (
   }
   
   //*ParameterTypeGuid =EFI_NULL_GUID;
-  *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
+  ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -1020,7 +987,7 @@ BBTestCLPErrorValueAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &EfiClpParameterBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
         Status = PlatformToDriverConfiguation->Response (
@@ -1030,7 +997,7 @@ BBTestCLPErrorValueAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &EfiClpParameterBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );			
         Instance++;
@@ -1059,18 +1026,7 @@ BBTestCLPErrorValueAutoTest (
   // Verify the ParameterTypeGuid is the EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_BLOCK
   //
 
-  if(ParameterTypeGuid->Data1==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data1
-  	&&ParameterTypeGuid->Data2==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data2
-  	&&ParameterTypeGuid->Data3==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data3
-  	&&ParameterTypeGuid->Data4[0]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[0]
-  	&&ParameterTypeGuid->Data4[1]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[1]
-  	&&ParameterTypeGuid->Data4[2]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[2]
-  	&&ParameterTypeGuid->Data4[3]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[3]
-  	&&ParameterTypeGuid->Data4[4]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[4]
-  	&&ParameterTypeGuid->Data4[5]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[5]
-  	&&ParameterTypeGuid->Data4[6]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[6]
-  	&&ParameterTypeGuid->Data4[7]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[7]
-  	) 
+  if(ParameterTypeGuid != NULL && SctCompareGuid (ParameterTypeGuid, &gBlackBoxEfiPlatformToDriverConfigurationClpGuid) == 0) 
   {
     //
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPErrorValue is correct.
@@ -1191,7 +1147,7 @@ BBTestCLPMessageCodeAutoTest (
   EFI_HANDLE                                         ChildHandle;
   UINTN                                          *Instance;
   EFI_GUID                                     *ParameterTypeGuid=NULL;
-  UINTN                                          *ParameterBlockSize=0;
+  UINTN                                          ParameterBlockSize;
   UINT16                                         MsgCodeValue;
   //
   // Get the Standard Library Interface
@@ -1249,10 +1205,10 @@ BBTestCLPMessageCodeAutoTest (
   }
   
   //*ParameterTypeGuid =EFI_NULL_GUID;
-  *ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
+  ParameterBlockSize = sizeof(EFI_CONFIGURE_CLP_PARAMETER_BLK);
   ChildHandle =NULL;
   
-  Status = gtBS->AllocatePool (EfiBootServicesData,*ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
+  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterBlockSize,(VOID **)&EfiClpParameterBlock);
   if(EFI_ERROR(Status)){
      StandardLib->RecordAssertion (
                    StandardLib,
@@ -1282,7 +1238,7 @@ BBTestCLPMessageCodeAutoTest (
                                          Instance,
                                          &ParameterTypeGuid,
                                          (VOID **) &EfiClpParameterBlock,
-                                         ParameterBlockSize
+                                         &ParameterBlockSize
                                          );
       if(Status == EFI_SUCCESS){
         Status = PlatformToDriverConfiguation->Response (
@@ -1292,7 +1248,7 @@ BBTestCLPMessageCodeAutoTest (
                                          Instance,
                                          ParameterTypeGuid,
                                          &EfiClpParameterBlock,
-                                         *ParameterBlockSize,
+                                         ParameterBlockSize,
                                          EfiPlatformConfigurationActionNone
                                          );			
         Instance++;
@@ -1321,18 +1277,7 @@ BBTestCLPMessageCodeAutoTest (
   // Verify the ParameterTypeGuid is the EFI_PLATFORM_TO_DRIVER_CONFIGURATION_CLP_BLOCK
   //
 
-  if(ParameterTypeGuid->Data1==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data1
-  	&&ParameterTypeGuid->Data2==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data2
-  	&&ParameterTypeGuid->Data3==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data3
-  	&&ParameterTypeGuid->Data4[0]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[0]
-  	&&ParameterTypeGuid->Data4[1]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[1]
-  	&&ParameterTypeGuid->Data4[2]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[2]
-  	&&ParameterTypeGuid->Data4[3]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[3]
-  	&&ParameterTypeGuid->Data4[4]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[4]
-  	&&ParameterTypeGuid->Data4[5]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[5]
-  	&&ParameterTypeGuid->Data4[6]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[6]
-  	&&ParameterTypeGuid->Data4[7]==gBlackBoxEfiPlatformToDriverConfigurationClpGuid.Data4[7]
-  	) 
+  if(ParameterTypeGuid != NULL && SctCompareGuid (ParameterTypeGuid, &gBlackBoxEfiPlatformToDriverConfigurationClpGuid) == 0) 
   {
     //
     // Suppose the EfiClpParameterBlock had been produced,verify the CLPMsgCode is in the scope of the Probable Cause Value.
