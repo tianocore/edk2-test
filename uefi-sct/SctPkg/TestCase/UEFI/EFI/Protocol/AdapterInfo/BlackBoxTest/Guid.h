@@ -58,7 +58,10 @@ extern EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid006;
 
 extern EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid007;
 
+#define EFI_TEST_ADAPTER_INFO_BBTESTCONFORMANCE_ASSERTION_008_GUID \
+{ 0xd2f04552, 0xbc76, 0x421b, { 0x8a, 0x91, 0x26, 0x7a, 0x0b, 0xa1, 0x01, 0xba } }
 
+extern EFI_GUID gAdapterInfoBBTestConformanceAssertionGuid008;
 
 
 
