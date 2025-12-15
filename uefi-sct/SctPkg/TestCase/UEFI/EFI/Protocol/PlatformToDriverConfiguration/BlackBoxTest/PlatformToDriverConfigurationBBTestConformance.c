@@ -5,12 +5,12 @@
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
-  which accompanies this distribution.  The full text of the license may be found at 
+  which accompanies this distribution.  The full text of the license may be found at
   http://opensource.org/licenses/bsd-license.php
- 
+
   THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
   WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
- 
+
 **/
 /*++
 
@@ -23,7 +23,6 @@ Abstract:
   Conformance Test Cases of Platform To Driver Configuration Protocol
 
 --*/
-
 
 #include "SctLib.h"
 #include "PlatformToDriverConfigurationBBTestMain.h"
@@ -42,24 +41,24 @@ Abstract:
 EFI_STATUS
 EFIAPI
 BBTestQueryConformanceAutoTest (
-  IN EFI_BB_TEST_PROTOCOL       *This,
-  IN VOID                       *ClientInterface,
-  IN EFI_TEST_LEVEL             TestLevel,
-  IN EFI_HANDLE                 SupportHandle
+  IN EFI_BB_TEST_PROTOCOL  *This,
+  IN VOID                  *ClientInterface,
+  IN EFI_TEST_LEVEL        TestLevel,
+  IN EFI_HANDLE            SupportHandle
   )
 {
-  EFI_STANDARD_TEST_LIBRARY_PROTOCOL     *StandardLib;
-  EFI_STATUS                             Status;
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
+  EFI_STATUS                                     Status;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguration;
-  EFI_TEST_ASSERTION                     AssertionType;
-  EFI_HANDLE                                         *CtrlerHandles;
-  UINTN                                                  CtrlerHandleNo;
-  UINTN                                                  CtrlerHandleIndex;
-  //EFI_HANDLE                                         ChildHandle;
-  UINTN                                          *Instance;
-  EFI_GUID                                     *ParameterTypeGuid;
-  UINTN                                          ParameterClpBlockSize;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                                           *ParameterClpBlock;
+  EFI_TEST_ASSERTION                             AssertionType;
+  EFI_HANDLE                                     *CtrlerHandles;
+  UINTN                                          CtrlerHandleNo;
+  UINTN                                          CtrlerHandleIndex;
+  // EFI_HANDLE                                         ChildHandle;
+  UINTN                            *Instance;
+  EFI_GUID                         *ParameterTypeGuid;
+  UINTN                            ParameterClpBlockSize;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK  *ParameterClpBlock;
 
   //
   // Get the Standard Library Interface
@@ -67,10 +66,10 @@ BBTestQueryConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   (VOID **) &StandardLib
+                   (VOID **)&StandardLib
                    );
 
-  if (EFI_ERROR(Status)) {
+  if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
@@ -85,16 +84,16 @@ BBTestQueryConformanceAutoTest (
   }
 
   PlatformToDriverConfiguration = (EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL *)ClientInterface;
-  
+
   // Get all the handles in the system.
   SctLocateHandle (AllHandles, NULL, NULL, &CtrlerHandleNo, &CtrlerHandles);
-  
-  ParameterTypeGuid = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
-  ParameterClpBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
 
-  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterClpBlockSize,(VOID **)&ParameterClpBlock);
-  if(EFI_ERROR(Status)){
-     StandardLib->RecordAssertion (
+  ParameterTypeGuid     = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
+  ParameterClpBlockSize = sizeof (EFI_CONFIGURE_CLP_PARAMETER_BLK);
+
+  Status = gtBS->AllocatePool (EfiBootServicesData, ParameterClpBlockSize, (VOID **)&ParameterClpBlock);
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
@@ -106,17 +105,17 @@ BBTestQueryConformanceAutoTest (
                    );
     return Status;
   }
-  
+
   //
-  //retrieve the protocol Instance
+  // retrieve the protocol Instance
   //
   Status = gtBS->LocateProtocol (
-                         &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
-                         NULL,
-                         (VOID **) &Instance
-                         );
-  if( EFI_ERROR(Status) ){
-     StandardLib->RecordAssertion (
+                   &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
+                   NULL,
+                   (VOID **)&Instance
+                   );
+  if ( EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
@@ -128,39 +127,40 @@ BBTestQueryConformanceAutoTest (
                    );
     return Status;
   }
-  
-  //Assertion Point
- 
-  //check point 1
+
+  // Assertion Point
+
+  // check point 1
   // EFI_INVALID_PARAMETER returned with ContrllerHandle invalid
   //
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
     Status = PlatformToDriverConfiguration->Query (
-                                         PlatformToDriverConfiguration,
-                                         NULL,
-                                         NULL,
-                                         Instance,
-                                         &ParameterTypeGuid,
-                                         (VOID **) &ParameterClpBlock,
-                                         &ParameterClpBlockSize
-                                         );
-    if(Status == EFI_INVALID_PARAMETER) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+                                              PlatformToDriverConfiguration,
+                                              NULL,
+                                              NULL,
+                                              Instance,
+                                              &ParameterTypeGuid,
+                                              (VOID **)&ParameterClpBlock,
+                                              &ParameterClpBlockSize
+                                              );
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-       AssertionType = EFI_TEST_ASSERTION_FAILED;
-       }
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
     StandardLib->RecordAssertion (
-             StandardLib,
-             AssertionType,
-             gPlatformToDriverConfigurationBBTestConformanceAssertionGuid001,
-             L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid controller handle",
-             L"%a:%d:Status - %r",
-             __FILE__,
-             __LINE__,
-             Status
-             );
+                   StandardLib,
+                   AssertionType,
+                   gPlatformToDriverConfigurationBBTestConformanceAssertionGuid001,
+                   L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid controller handle",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   __LINE__,
+                   Status
+                   );
   }
+
   /*
   // check point 2
   // EFI_DEVICE_ERROR returned with ParameterClpBlock invalid
@@ -226,7 +226,7 @@ BBTestQueryConformanceAutoTest (
              );
   }
 */
-  
+
   //
   // Check Point 4
   // Invoke Query() with invalide Instance=NULL
@@ -234,32 +234,31 @@ BBTestQueryConformanceAutoTest (
   //
 
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
-
-   Status = PlatformToDriverConfiguration->Query (
-                                         PlatformToDriverConfiguration,
-                                         CtrlerHandles[CtrlerHandleIndex],
-                                         NULL,
-                                         NULL,
-                                         &ParameterTypeGuid,
-                                         (VOID **) &ParameterClpBlock,
-                                         &ParameterClpBlockSize
-                                         );
-  if(Status == EFI_INVALID_PARAMETER) {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
+    Status = PlatformToDriverConfiguration->Query (
+                                              PlatformToDriverConfiguration,
+                                              CtrlerHandles[CtrlerHandleIndex],
+                                              NULL,
+                                              NULL,
+                                              &ParameterTypeGuid,
+                                              (VOID **)&ParameterClpBlock,
+                                              &ParameterClpBlockSize
+                                              );
+    if (Status == EFI_INVALID_PARAMETER) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
-       AssertionType = EFI_TEST_ASSERTION_FAILED;
-       }
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
-  StandardLib->RecordAssertion (
-             StandardLib,
-             AssertionType,
-             gPlatformToDriverConfigurationBBTestConformanceAssertionGuid004,
-             L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid Instance",
-             L"%a:%d:Status - %r",
-             __FILE__,
-             __LINE__,
-             Status
-             );
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gPlatformToDriverConfigurationBBTestConformanceAssertionGuid004,
+                   L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid Instance",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   __LINE__,
+                   Status
+                   );
   }
 
   if (CtrlerHandles) {
@@ -283,25 +282,25 @@ BBTestQueryConformanceAutoTest (
 EFI_STATUS
 EFIAPI
 BBTestResponseConformanceAutoTest (
-  IN EFI_BB_TEST_PROTOCOL       *This,
-  IN VOID                       *ClientInterface,
-  IN EFI_TEST_LEVEL             TestLevel,
-  IN EFI_HANDLE                 SupportHandle
+  IN EFI_BB_TEST_PROTOCOL  *This,
+  IN VOID                  *ClientInterface,
+  IN EFI_TEST_LEVEL        TestLevel,
+  IN EFI_HANDLE            SupportHandle
   )
 {
-  EFI_STANDARD_TEST_LIBRARY_PROTOCOL     *StandardLib;
-  EFI_STATUS                             Status;
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
+  EFI_STATUS                                     Status;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguration;
-  EFI_TEST_ASSERTION                     AssertionType,RAssertionType;
-  EFI_HANDLE                                         *CtrlerHandles;
-  UINTN                                                  CtrlerHandleNo;
-  UINTN                                                  CtrlerHandleIndex;
- // EFI_HANDLE                                         ChildHandle;
-  UINTN                                          *Instance;
-  EFI_GUID                                     *ParameterTypeGuid;
-  UINTN                                          ParameterClpBlockSize;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                                           *ParameterClpBlock;
-  EFI_PLATFORM_CONFIGURATION_ACTION                         ConfigurationAction;
+  EFI_TEST_ASSERTION                             AssertionType, RAssertionType;
+  EFI_HANDLE                                     *CtrlerHandles;
+  UINTN                                          CtrlerHandleNo;
+  UINTN                                          CtrlerHandleIndex;
+  // EFI_HANDLE                                         ChildHandle;
+  UINTN                              *Instance;
+  EFI_GUID                           *ParameterTypeGuid;
+  UINTN                              ParameterClpBlockSize;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK    *ParameterClpBlock;
+  EFI_PLATFORM_CONFIGURATION_ACTION  ConfigurationAction;
 
   //
   // Get the Standard Library Interface
@@ -309,10 +308,10 @@ BBTestResponseConformanceAutoTest (
   Status = gtBS->HandleProtocol (
                    SupportHandle,
                    &gEfiStandardTestLibraryGuid,
-                   (VOID **) &StandardLib
+                   (VOID **)&StandardLib
                    );
 
-  if (EFI_ERROR(Status)) {
+  if (EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
@@ -330,13 +329,13 @@ BBTestResponseConformanceAutoTest (
 
   // Get all the handles in the system.
   SctLocateHandle (AllHandles, NULL, NULL, &CtrlerHandleNo, &CtrlerHandles);
-  
-  ParameterTypeGuid = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
-  ParameterClpBlockSize = sizeof( EFI_CONFIGURE_CLP_PARAMETER_BLK );
-  
-  Status = gtBS->AllocatePool (EfiBootServicesData,ParameterClpBlockSize,(VOID **)&ParameterClpBlock);
-  if(EFI_ERROR(Status)){
-     StandardLib->RecordAssertion (
+
+  ParameterTypeGuid     = &gBlackBoxEfiPlatformToDriverConfigurationClpGuid;
+  ParameterClpBlockSize = sizeof (EFI_CONFIGURE_CLP_PARAMETER_BLK);
+
+  Status = gtBS->AllocatePool (EfiBootServicesData, ParameterClpBlockSize, (VOID **)&ParameterClpBlock);
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
@@ -348,17 +347,17 @@ BBTestResponseConformanceAutoTest (
                    );
     return Status;
   }
-  
+
   //
-  //retrieve the protocol Instance
+  // retrieve the protocol Instance
   //
   Status = gtBS->LocateProtocol (
-                         &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
-                         NULL,
-                         (VOID **) &Instance
-                         );
-  if( EFI_ERROR(Status) ){
-     StandardLib->RecordAssertion (
+                   &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
+                   NULL,
+                   (VOID **)&Instance
+                   );
+  if ( EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
                    StandardLib,
                    EFI_TEST_ASSERTION_FAILED,
                    gTestGenericFailureGuid,
@@ -370,128 +369,130 @@ BBTestResponseConformanceAutoTest (
                    );
     return Status;
   }
- // Assertion Point
- 
-  //check point 1
-  //invalide controller handle and ChildHandle is NULL
-  //return EFI_INVALID_PARAMETER
+
+  // Assertion Point
+
+  // check point 1
+  // invalide controller handle and ChildHandle is NULL
+  // return EFI_INVALID_PARAMETER
   //
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
     Status = PlatformToDriverConfiguration->Query (
-                                         PlatformToDriverConfiguration,
-                                         NULL,
-                                         NULL,
-                                         Instance,
-                                         &ParameterTypeGuid,
-                                         (VOID **) &ParameterClpBlock,
-                                         &ParameterClpBlockSize
-                                         );
-    if(Status == EFI_INVALID_PARAMETER) {
+                                              PlatformToDriverConfiguration,
+                                              NULL,
+                                              NULL,
+                                              Instance,
+                                              &ParameterTypeGuid,
+                                              (VOID **)&ParameterClpBlock,
+                                              &ParameterClpBlockSize
+                                              );
+    if (Status == EFI_INVALID_PARAMETER) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
-      } else {
-         AssertionType = EFI_TEST_ASSERTION_FAILED;
-         }
+    } else {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
     StandardLib->RecordAssertion (
-             StandardLib,
-             AssertionType,
-             gPlatformToDriverConfigurationBBTestConformanceAssertionGuid005,
-             L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid controller handle",
-             L"%a:%d:Status - %r",
-             __FILE__,
-             __LINE__,
-             Status
-             );
+                   StandardLib,
+                   AssertionType,
+                   gPlatformToDriverConfigurationBBTestConformanceAssertionGuid005,
+                   L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid controller handle",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   __LINE__,
+                   Status
+                   );
     ConfigurationAction = EfiPlatformConfigurationActionNone;
-    Status = PlatformToDriverConfiguration->Response(
-                                         PlatformToDriverConfiguration,
-                                         NULL,
-                                         NULL,
-                                         Instance,
-                                         ParameterTypeGuid,
-                                         ParameterClpBlock,
-                                         ParameterClpBlockSize,
-                                         ConfigurationAction
-                                         );
-    if(Status == EFI_INVALID_PARAMETER) {
+    Status              = PlatformToDriverConfiguration->Response (
+                                                           PlatformToDriverConfiguration,
+                                                           NULL,
+                                                           NULL,
+                                                           Instance,
+                                                           ParameterTypeGuid,
+                                                           ParameterClpBlock,
+                                                           ParameterClpBlockSize,
+                                                           ConfigurationAction
+                                                           );
+    if (Status == EFI_INVALID_PARAMETER) {
       RAssertionType = EFI_TEST_ASSERTION_PASSED;
-      } else {
-         RAssertionType = EFI_TEST_ASSERTION_FAILED;
-         }
+    } else {
+      RAssertionType = EFI_TEST_ASSERTION_FAILED;
+    }
 
     StandardLib->RecordAssertion (
-             StandardLib,
-             RAssertionType,
-             gPlatformToDriverConfigurationBBTestConformanceAssertionGuid006,
-             L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Response - Invoke Response() with invalid controller handle",
-             L"%a:%d:Status - %r",
-             __FILE__,
-             __LINE__,
-             Status
-             );
+                   StandardLib,
+                   RAssertionType,
+                   gPlatformToDriverConfigurationBBTestConformanceAssertionGuid006,
+                   L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Response - Invoke Response() with invalid controller handle",
+                   L"%a:%d:Status - %r",
+                   __FILE__,
+                   __LINE__,
+                   Status
+                   );
   }
-/*
-  //
-  // Check Point 2
-  // Invoke Response() with Instance=0 
-  //
 
-  for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
-    Status = PlatformToDriverConfiguration->Query (
-                                         PlatformToDriverConfiguration,
-                                         CtrlerHandles[CtrlerHandleIndex],
-                                         NULL,
-                                         NULL,
-                                         &ParameterTypeGuid,
-                                         &ParameterClpBlock,
-                                         ParameterClpBlockSize
-                                         );
-    if(Status == EFI_INVALID_PARAMETER) {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
-      } else {
-         AssertionType = EFI_TEST_ASSERTION_FAILED;
-         }
+  /*
+    //
+    // Check Point 2
+    // Invoke Response() with Instance=0
+    //
 
-    StandardLib->RecordAssertion (
-             StandardLib,
-             AssertionType,
-             gPlatformToDriverConfigurationBBTestConformanceAssertionGuid007,
-             L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid instance",
-             L"%a:%d:Status - %r",
-             __FILE__,
-             __LINE__,
-             Status
-             );
-  
-    ConfigurationAction = EfiPlatformConfigurationActionNone;
-    Status = PlatformToDriverConfiguration->Response(
-                                         PlatformToDriverConfiguration,
-                                         CtrlerHandles[CtrlerHandleIndex],
-                                         NULL,
-                                         0,
-                                         ParameterTypeGuid,
-                                         ParameterClpBlock,
-                                         ParameterClpBlockSize,
-                                         ConfigurationAction
-                                         );
-    if(Status == EFI_INVALID_PARAMETER) {
-      RAssertionType = EFI_TEST_ASSERTION_PASSED;
-      } else {
-         RAssertionType = EFI_TEST_ASSERTION_FAILED;
-         }
-	  
-    StandardLib->RecordAssertion (
-             StandardLib,
-             RAssertionType,
-             gPlatformToDriverConfigurationBBTestConformanceAssertionGuid008,
-             L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Response - Invoke Response() with instance value is zero",
-             L"%a:%d:Status - %r",
-             __FILE__,
-             __LINE__,
-             Status
-             );
-  }
-*/
+    for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
+      Status = PlatformToDriverConfiguration->Query (
+                                           PlatformToDriverConfiguration,
+                                           CtrlerHandles[CtrlerHandleIndex],
+                                           NULL,
+                                           NULL,
+                                           &ParameterTypeGuid,
+                                           &ParameterClpBlock,
+                                           ParameterClpBlockSize
+                                           );
+      if(Status == EFI_INVALID_PARAMETER) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+        } else {
+           AssertionType = EFI_TEST_ASSERTION_FAILED;
+           }
+
+      StandardLib->RecordAssertion (
+               StandardLib,
+               AssertionType,
+               gPlatformToDriverConfigurationBBTestConformanceAssertionGuid007,
+               L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Query - Invoke Query() with invalid instance",
+               L"%a:%d:Status - %r",
+               __FILE__,
+               __LINE__,
+               Status
+               );
+
+      ConfigurationAction = EfiPlatformConfigurationActionNone;
+      Status = PlatformToDriverConfiguration->Response(
+                                           PlatformToDriverConfiguration,
+                                           CtrlerHandles[CtrlerHandleIndex],
+                                           NULL,
+                                           0,
+                                           ParameterTypeGuid,
+                                           ParameterClpBlock,
+                                           ParameterClpBlockSize,
+                                           ConfigurationAction
+                                           );
+      if(Status == EFI_INVALID_PARAMETER) {
+        RAssertionType = EFI_TEST_ASSERTION_PASSED;
+        } else {
+           RAssertionType = EFI_TEST_ASSERTION_FAILED;
+           }
+
+      StandardLib->RecordAssertion (
+               StandardLib,
+               RAssertionType,
+               gPlatformToDriverConfigurationBBTestConformanceAssertionGuid008,
+               L"EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL.Response - Invoke Response() with instance value is zero",
+               L"%a:%d:Status - %r",
+               __FILE__,
+               __LINE__,
+               Status
+               );
+    }
+  */
   if (CtrlerHandles) {
     SctFreePool (CtrlerHandles);
   }
