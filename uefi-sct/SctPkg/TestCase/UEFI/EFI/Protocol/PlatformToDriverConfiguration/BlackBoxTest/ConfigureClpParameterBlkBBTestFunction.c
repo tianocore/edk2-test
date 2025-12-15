@@ -164,17 +164,18 @@ BBTestCLPCommandAutoTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
   EFI_STATUS                                     Status;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock = NULL;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguation;
   EFI_TEST_ASSERTION                             AssertionType;
-  EFI_HANDLE                                     *CtrlerHandles;
+  EFI_HANDLE                                     *CtrlerHandles = NULL;
   UINTN                                          CtrlerHandleNo;
   UINTN                                          CtrlerHandleIndex;
   EFI_HANDLE                                     ChildHandle;
-  UINTN                                          *Instance;
+  VOID                                           *ProtocolInstance = NULL;
+  UINTN                                          Instance = 0;
   EFI_GUID                                       *ParameterTypeGuid = NULL;
   UINTN                                          ParameterBlockSize = 0;
-  CLP_CMD                                        *CLPCmd;
+  CLP_CMD                                        *CLPCmd = NULL;
   UINTN                                          Index, Index1;
 
   //
@@ -197,7 +198,7 @@ BBTestCLPCommandAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   PlatformToDriverConfiguation = (EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL *)ClientInterface;
@@ -216,7 +217,7 @@ BBTestCLPCommandAutoTest (
   Status = gtBS->LocateProtocol (
                    &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                    NULL,
-                   (VOID **)&Instance
+                   (VOID **)&ProtocolInstance
                    );
   if ( EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -229,7 +230,7 @@ BBTestCLPCommandAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   // *ParameterTypeGuid =EFI_NULL_GUID;
@@ -248,7 +249,7 @@ BBTestCLPCommandAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   //
@@ -256,12 +257,14 @@ BBTestCLPCommandAutoTest (
   //
   Status = EFI_SUCCESS;
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
+    Instance = 0;
+    Status   = EFI_SUCCESS;
     while (!EFI_ERROR (Status)) {
       Status = PlatformToDriverConfiguation->Query (
                                                PlatformToDriverConfiguation,
                                                CtrlerHandles[CtrlerHandleIndex],
                                                ChildHandle,
-                                               Instance,
+                                               &Instance,
                                                &ParameterTypeGuid,
                                                (VOID **)&EfiClpParameterBlock,
                                                &ParameterBlockSize
@@ -271,9 +274,9 @@ BBTestCLPCommandAutoTest (
                                                  PlatformToDriverConfiguation,
                                                  CtrlerHandles[CtrlerHandleIndex],
                                                  ChildHandle,
-                                                 Instance,
+                                                 &Instance,
                                                  ParameterTypeGuid,
-                                                 &EfiClpParameterBlock,
+                                                 EfiClpParameterBlock,
                                                  ParameterBlockSize,
                                                  EfiPlatformConfigurationActionNone
                                                  );
@@ -320,7 +323,7 @@ BBTestCLPCommandAutoTest (
                      (UINTN)__LINE__,
                      Status
                      );
-      return Status;
+      goto OnExit;
     }
 
     Status = ParseCLPCommandLine (EfiClpParameterBlock, CLPCmd);
@@ -377,14 +380,26 @@ BBTestCLPCommandAutoTest (
                    (CHAR16 *)CLPCmd->CLPCmdVerb,
                    EFI_SUCCESS
                    );
+    Status = EFI_SUCCESS;
   } else {
-    gtBS->FreePool (EfiClpParameterBlock);
-    return EFI_UNSUPPORTED;
+    Status = EFI_UNSUPPORTED;
+    goto OnExit;
   }
 
-  gtBS->FreePool (CLPCmd);
-  gtBS->FreePool (EfiClpParameterBlock);
-  return EFI_SUCCESS;
+OnExit:
+  if (CtrlerHandles) {
+    SctFreePool (CtrlerHandles);
+  }
+
+  if (CLPCmd) {
+    gtBS->FreePool (CLPCmd);
+  }
+
+  if (EfiClpParameterBlock) {
+    gtBS->FreePool (EfiClpParameterBlock);
+  }
+
+  return Status;
 }
 
 /**
@@ -409,17 +424,18 @@ BBTestCLPReturnStringAutoTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
   EFI_STATUS                                     Status;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock = NULL;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguation;
   EFI_TEST_ASSERTION                             AssertionType;
-  EFI_HANDLE                                     *CtrlerHandles;
+  EFI_HANDLE                                     *CtrlerHandles = NULL;
   UINTN                                          CtrlerHandleNo;
   UINTN                                          CtrlerHandleIndex;
   EFI_HANDLE                                     ChildHandle;
-  UINTN                                          *Instance;
+  VOID                                           *ProtocolInstance  = NULL;
+  UINTN                                          Instance           = 0;
   EFI_GUID                                       *ParameterTypeGuid = NULL;
   UINTN                                          ParameterBlockSize;
-  CLP_CMD                                        *CLPCmd;
+  CLP_CMD                                        *CLPCmd = NULL;
   UINTN                                          Index;
 
   //
@@ -442,7 +458,7 @@ BBTestCLPReturnStringAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   PlatformToDriverConfiguation = (EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL *)ClientInterface;
@@ -461,7 +477,7 @@ BBTestCLPReturnStringAutoTest (
   Status = gtBS->LocateProtocol (
                    &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                    NULL,
-                   (VOID **)&Instance
+                   (VOID **)&ProtocolInstance
                    );
   if ( EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -474,7 +490,7 @@ BBTestCLPReturnStringAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   // *ParameterTypeGuid =EFI_NULL_GUID;
@@ -493,7 +509,7 @@ BBTestCLPReturnStringAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   //
@@ -501,12 +517,14 @@ BBTestCLPReturnStringAutoTest (
   //
   Status = EFI_SUCCESS;
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
+    Instance = 0;
+    Status   = EFI_SUCCESS;
     while (!EFI_ERROR (Status)) {
       Status = PlatformToDriverConfiguation->Query (
                                                PlatformToDriverConfiguation,
                                                CtrlerHandles[CtrlerHandleIndex],
                                                ChildHandle,
-                                               Instance,
+                                               &Instance,
                                                &ParameterTypeGuid,
                                                (VOID **)&EfiClpParameterBlock,
                                                &ParameterBlockSize
@@ -516,9 +534,9 @@ BBTestCLPReturnStringAutoTest (
                                                  PlatformToDriverConfiguation,
                                                  CtrlerHandles[CtrlerHandleIndex],
                                                  ChildHandle,
-                                                 Instance,
+                                                 &Instance,
                                                  ParameterTypeGuid,
-                                                 &EfiClpParameterBlock,
+                                                 EfiClpParameterBlock,
                                                  ParameterBlockSize,
                                                  EfiPlatformConfigurationActionNone
                                                  );
@@ -548,9 +566,9 @@ BBTestCLPReturnStringAutoTest (
                                            PlatformToDriverConfiguation,
                                            CtrlerHandles[CtrlerHandleIndex],
                                            ChildHandle,
-                                           Instance,
+                                           &Instance,
                                            ParameterTypeGuid,
-                                           &EfiClpParameterBlock,
+                                           EfiClpParameterBlock,
                                            ParameterBlockSize,
                                            EfiPlatformConfigurationActionNone
                                            );
@@ -594,7 +612,7 @@ BBTestCLPReturnStringAutoTest (
                      (UINTN)__LINE__,
                      Status
                      );
-      return Status;
+      goto OnExit;
     }
 
     //
@@ -641,13 +659,27 @@ BBTestCLPReturnStringAutoTest (
                      EFI_SUCCESS
                      );
     }
+
+    Status = EFI_SUCCESS;
   } else {
-    gtBS->FreePool (EfiClpParameterBlock);
-    return EFI_UNSUPPORTED;
+    Status = EFI_UNSUPPORTED;
+    goto OnExit;
   }
 
-  gtBS->FreePool (EfiClpParameterBlock);
-  return EFI_SUCCESS;
+OnExit:
+  if (CtrlerHandles) {
+    SctFreePool (CtrlerHandles);
+  }
+
+  if (CLPCmd) {
+    gtBS->FreePool (CLPCmd);
+  }
+
+  if (EfiClpParameterBlock) {
+    gtBS->FreePool (EfiClpParameterBlock);
+  }
+
+  return Status;
 }
 
 /**
@@ -672,14 +704,15 @@ BBTestCLPCmdStatusAutoTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
   EFI_STATUS                                     Status;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock = NULL;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguation;
   EFI_TEST_ASSERTION                             AssertionType;
-  EFI_HANDLE                                     *CtrlerHandles;
+  EFI_HANDLE                                     *CtrlerHandles = NULL;
   UINTN                                          CtrlerHandleNo;
   UINTN                                          CtrlerHandleIndex;
   EFI_HANDLE                                     ChildHandle;
-  UINTN                                          *Instance;
+  VOID                                           *ProtocolInstance  = NULL;
+  UINTN                                          Instance           = 0;
   EFI_GUID                                       *ParameterTypeGuid = NULL;
   UINTN                                          ParameterBlockSize;
   CHAR16                                         Status_Tag;
@@ -704,7 +737,7 @@ BBTestCLPCmdStatusAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   PlatformToDriverConfiguation = (EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL *)ClientInterface;
@@ -723,7 +756,7 @@ BBTestCLPCmdStatusAutoTest (
   Status = gtBS->LocateProtocol (
                    &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                    NULL,
-                   (VOID **)&Instance
+                   (VOID **)&ProtocolInstance
                    );
   if ( EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -736,7 +769,7 @@ BBTestCLPCmdStatusAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   // *ParameterTypeGuid =EFI_NULL_GUID;
@@ -755,7 +788,7 @@ BBTestCLPCmdStatusAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   //
@@ -763,12 +796,14 @@ BBTestCLPCmdStatusAutoTest (
   //
   Status = EFI_SUCCESS;
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
+    Instance = 0;
+    Status   = EFI_SUCCESS;
     while (!EFI_ERROR (Status)) {
       Status = PlatformToDriverConfiguation->Query (
                                                PlatformToDriverConfiguation,
                                                CtrlerHandles[CtrlerHandleIndex],
                                                ChildHandle,
-                                               Instance,
+                                               &Instance,
                                                &ParameterTypeGuid,
                                                (VOID **)&EfiClpParameterBlock,
                                                &ParameterBlockSize
@@ -778,9 +813,9 @@ BBTestCLPCmdStatusAutoTest (
                                                  PlatformToDriverConfiguation,
                                                  CtrlerHandles[CtrlerHandleIndex],
                                                  ChildHandle,
-                                                 Instance,
+                                                 &Instance,
                                                  ParameterTypeGuid,
-                                                 &EfiClpParameterBlock,
+                                                 EfiClpParameterBlock,
                                                  ParameterBlockSize,
                                                  EfiPlatformConfigurationActionNone
                                                  );
@@ -851,10 +886,20 @@ BBTestCLPCmdStatusAutoTest (
                    EFI_SUCCESS
                    );
   } else {
-    return EFI_UNSUPPORTED;
+    Status = EFI_UNSUPPORTED;
+    goto OnExit;
   }
 
-  return EFI_SUCCESS;
+OnExit:
+  if (CtrlerHandles) {
+    SctFreePool (CtrlerHandles);
+  }
+
+  if (EfiClpParameterBlock) {
+    gtBS->FreePool (EfiClpParameterBlock);
+  }
+
+  return Status;
 }
 
 /**
@@ -879,14 +924,15 @@ BBTestCLPErrorValueAutoTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
   EFI_STATUS                                     Status;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock = NULL;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguation;
   EFI_TEST_ASSERTION                             AssertionType;
-  EFI_HANDLE                                     *CtrlerHandles;
+  EFI_HANDLE                                     *CtrlerHandles = NULL;
   UINTN                                          CtrlerHandleNo;
   UINTN                                          CtrlerHandleIndex;
   EFI_HANDLE                                     ChildHandle;
-  UINTN                                          *Instance;
+  VOID                                           *ProtocolInstance  = NULL;
+  UINTN                                          Instance           = 0;
   EFI_GUID                                       *ParameterTypeGuid = NULL;
   UINTN                                          ParameterBlockSize;
   //  UINT8                                          Index;
@@ -912,7 +958,7 @@ BBTestCLPErrorValueAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   PlatformToDriverConfiguation = (EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL *)ClientInterface;
@@ -931,7 +977,7 @@ BBTestCLPErrorValueAutoTest (
   Status = gtBS->LocateProtocol (
                    &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                    NULL,
-                   (VOID **)&Instance
+                   (VOID **)&ProtocolInstance
                    );
   if ( EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -944,7 +990,7 @@ BBTestCLPErrorValueAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   // *ParameterTypeGuid =EFI_NULL_GUID;
@@ -963,7 +1009,7 @@ BBTestCLPErrorValueAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   //
@@ -971,12 +1017,14 @@ BBTestCLPErrorValueAutoTest (
   //
   Status = EFI_SUCCESS;
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
+    Instance = 0;
+    Status   = EFI_SUCCESS;
     while (!EFI_ERROR (Status)) {
       Status = PlatformToDriverConfiguation->Query (
                                                PlatformToDriverConfiguation,
                                                CtrlerHandles[CtrlerHandleIndex],
                                                ChildHandle,
-                                               Instance,
+                                               &Instance,
                                                &ParameterTypeGuid,
                                                (VOID **)&EfiClpParameterBlock,
                                                &ParameterBlockSize
@@ -986,9 +1034,9 @@ BBTestCLPErrorValueAutoTest (
                                                  PlatformToDriverConfiguation,
                                                  CtrlerHandles[CtrlerHandleIndex],
                                                  ChildHandle,
-                                                 Instance,
+                                                 &Instance,
                                                  ParameterTypeGuid,
-                                                 &EfiClpParameterBlock,
+                                                 EfiClpParameterBlock,
                                                  ParameterBlockSize,
                                                  EfiPlatformConfigurationActionNone
                                                  );
@@ -1102,10 +1150,23 @@ BBTestCLPErrorValueAutoTest (
                    EFI_SUCCESS
                    );
 
-    return EFI_SUCCESS;
+    Status = EFI_SUCCESS;
+    goto OnExit;
   }
 
-  return EFI_UNSUPPORTED;
+  Status = EFI_UNSUPPORTED;
+  goto OnExit;
+
+OnExit:
+  if (CtrlerHandles) {
+    SctFreePool (CtrlerHandles);
+  }
+
+  if (EfiClpParameterBlock) {
+    gtBS->FreePool (EfiClpParameterBlock);
+  }
+
+  return Status;
 }
 
 /**
@@ -1130,16 +1191,17 @@ BBTestCLPMessageCodeAutoTest (
 {
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL             *StandardLib;
   EFI_STATUS                                     Status;
-  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock;
+  EFI_CONFIGURE_CLP_PARAMETER_BLK                *EfiClpParameterBlock = NULL;
   EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL  *PlatformToDriverConfiguation;
   EFI_TEST_ASSERTION                             AssertionType;
-  EFI_HANDLE                                     *CtrlerHandles;
+  EFI_HANDLE                                     *CtrlerHandles = NULL;
   UINTN                                          CtrlerHandleNo;
   UINTN                                          CtrlerHandleIndex;
   EFI_HANDLE                                     ChildHandle;
-  UINTN                                          *Instance;
+  VOID                                           *ProtocolInstance  = NULL;
+  UINTN                                          Instance           = 0;
   EFI_GUID                                       *ParameterTypeGuid = NULL;
-  UINTN                                          ParameterBlockSize;
+  UINTN                                          ParameterBlockSize = 0;
   UINT16                                         MsgCodeValue;
 
   //
@@ -1162,7 +1224,7 @@ BBTestCLPMessageCodeAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   PlatformToDriverConfiguation = (EFI_PLATFORM_TO_DRIVER_CONFIGURATION_PROTOCOL *)ClientInterface;
@@ -1181,7 +1243,7 @@ BBTestCLPMessageCodeAutoTest (
   Status = gtBS->LocateProtocol (
                    &gBlackBoxEfiPlatformToDriverConfigurationProtocolGuid,
                    NULL,
-                   (VOID **)&Instance
+                   (VOID **)&ProtocolInstance
                    );
   if ( EFI_ERROR (Status)) {
     StandardLib->RecordAssertion (
@@ -1194,7 +1256,7 @@ BBTestCLPMessageCodeAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   // *ParameterTypeGuid =EFI_NULL_GUID;
@@ -1213,7 +1275,7 @@ BBTestCLPMessageCodeAutoTest (
                    (UINTN)__LINE__,
                    Status
                    );
-    return Status;
+    goto OnExit;
   }
 
   //
@@ -1221,12 +1283,14 @@ BBTestCLPMessageCodeAutoTest (
   //
   Status = EFI_SUCCESS;
   for (CtrlerHandleIndex = 0; CtrlerHandleIndex < CtrlerHandleNo; CtrlerHandleIndex++) {
+    Instance = 0;
+    Status   = EFI_SUCCESS;
     while (!EFI_ERROR (Status)) {
       Status = PlatformToDriverConfiguation->Query (
                                                PlatformToDriverConfiguation,
                                                CtrlerHandles[CtrlerHandleIndex],
                                                ChildHandle,
-                                               Instance,
+                                               &Instance,
                                                &ParameterTypeGuid,
                                                (VOID **)&EfiClpParameterBlock,
                                                &ParameterBlockSize
@@ -1236,9 +1300,9 @@ BBTestCLPMessageCodeAutoTest (
                                                  PlatformToDriverConfiguation,
                                                  CtrlerHandles[CtrlerHandleIndex],
                                                  ChildHandle,
-                                                 Instance,
+                                                 &Instance,
                                                  ParameterTypeGuid,
-                                                 &EfiClpParameterBlock,
+                                                 EfiClpParameterBlock,
                                                  ParameterBlockSize,
                                                  EfiPlatformConfigurationActionNone
                                                  );
@@ -1276,7 +1340,8 @@ BBTestCLPMessageCodeAutoTest (
     MsgCodeValue = EfiClpParameterBlock->CLPMsgCode;
     if (MsgCodeValue & 0x8000) {
       // Bit15=1, Message Code is OEM Specific,ignore it
-      return EFI_UNSUPPORTED;
+      Status = EFI_UNSUPPORTED;
+      goto OnExit;
     } else {
       if ((EfiClpParameterBlock->CLPMsgCode <= 130) && (EfiClpParameterBlock->CLPMsgCode >= 0)) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
@@ -1296,9 +1361,20 @@ BBTestCLPMessageCodeAutoTest (
                    EfiClpParameterBlock->CLPMsgCode,
                    EFI_SUCCESS
                    );
+    Status = EFI_SUCCESS;
   } else {
-    return EFI_UNSUPPORTED;
+    Status = EFI_UNSUPPORTED;
+    goto OnExit;
   }
 
-  return EFI_SUCCESS;
+OnExit:
+  if (CtrlerHandles) {
+    SctFreePool (CtrlerHandles);
+  }
+
+  if (EfiClpParameterBlock) {
+    gtBS->FreePool (EfiClpParameterBlock);
+  }
+
+  return Status;
 }
