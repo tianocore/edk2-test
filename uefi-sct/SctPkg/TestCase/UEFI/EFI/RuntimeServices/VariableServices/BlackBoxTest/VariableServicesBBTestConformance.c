@@ -1362,6 +1362,7 @@ GetVariableConfTestSub7 (
   UINTN                 DataIndex;
   UINTN                 DataSize;
   UINT8                 Data[MAX_BUFFER_SIZE];
+  UINT32                Attributes = 0;
 
   //
   // Trace ...
@@ -1524,6 +1525,48 @@ GetVariableConfTestSub7 (
                  L"DataSize=%d, Expected=%d\n",
                  DataSize,    10
                  );
+
+  //
+  // GetVariable should succeed when DataSize is 0, Data is NULL and attributes is valid
+  // It should correctly return the original attribute of the variable set
+  //
+  DataSize = 0;
+  Status = RT->GetVariable (
+                 L"TestVariable",         // VariableName
+                 &gTestVendor1Guid,       // VendorGuid
+                 &Attributes,             // Attributes
+                 &DataSize,               // DataSize
+                 NULL                     // Data
+                 );
+  if ((Status   == EFI_BUFFER_TOO_SMALL) &&
+      (Attributes == EFI_VARIABLE_BOOTSERVICE_ACCESS )) {
+    Result = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    Result = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  //
+  // Record assertion & message
+  //
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gVariableServicesBbTestConformanceAssertionGuid025,
+                 L"RT.GetVariable - With DataSize = 0, Data = NULL and Attribute is valid",
+                 L"%a:%d:Status - %r, Expected - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status,
+                 EFI_BUFFER_TOO_SMALL
+                 );
+
+  StandardLib->RecordMessage (
+                 StandardLib,
+                 EFI_VERBOSE_LEVEL_DEFAULT,
+                 L"DataSize=%d, Expected=%d\n",
+                 DataSize,    10
+                 );
+
 
   //
   // Delete the variable (restore environment)
