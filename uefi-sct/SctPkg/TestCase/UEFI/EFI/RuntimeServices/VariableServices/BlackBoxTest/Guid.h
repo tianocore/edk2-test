@@ -177,6 +177,10 @@ extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid023;
 
 extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid024;
 
+#define EFI_TEST_VARIABLESERVICESBBTESTCONFORMANCE_ASSERTION_025_GUID \
+{ 0x74d73827, 0xadfe, 0x4c4f, { 0xac, 0xc0, 0x51, 0x2b, 0xb9, 0x1f, 0x01, 0x7f }}
+
+extern EFI_GUID gVariableServicesBbTestConformanceAssertionGuid025;
 
 #define EFI_TEST_VARIABLESERVICESBBTESTFUNCTION_ASSERTION_001_GUID \
 { 0xaa35cc00, 0xc55c, 0x42d8, {0xa6, 0xd4, 0x1e, 0xb4, 0x9d, 0xe3, 0xd7, 0x54 }}
