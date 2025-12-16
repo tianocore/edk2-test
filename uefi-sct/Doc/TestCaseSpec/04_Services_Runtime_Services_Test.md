@@ -293,6 +293,31 @@ returned <em>Attributes</em>, <em>Data
 same as the data written
 before.</td>
 </tr>
+<tr class="odd">
+<td id="section-4" class="unnumbered">5.2.1.1.14</td>
+<td
+id="0x74d73827-0xadfe-0x4c4f-0xac-0xc0-0x51-0x2b-0xb9-0x1f-0x01-0x7f"
+class="unnumbered">0x74d73827, 
+0xadfe, 0x4c4f,
+0xac, 0xc0, 
+0x51, 0x2b, 0xb9, 0x1f, 0x01, 0x7f</td>
+<td
+id="rt.getvariable-getvariable-gets-the-existiing-variable-attributes-with-null-data-and-datasize."
+class="unnumbered">RT.GetVariable –
+GetVariable() gets the attributes of the
+existing variable with null Data and DataSize = 0 
+at EFI_TPL_CALLBACK.</td>
+<td
+id="call-setvariable-service-to-insert-a-test-variable.-2.-call-getvariable-service-to-get-the-test-variable-with-attributes.-the-returned-status-must-be-efi_success-and-the-returned-attributes-written-before.-1"
+class="unnumbered">1. Call SetVariable()
+service to insert a test
+variable.
+2. Call GetVariable()
+service with Data = NULL and DataSize =0. 
+The returned status must be EFI_BUFFER_TOO_SMALL and the returned Attributes 
+ must match the attributes set before. <em>Attributes</em> must be
+same as the attributes set before.</td>
+</tr>
 </tbody>
 </table>
 
