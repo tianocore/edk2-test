@@ -194,12 +194,12 @@ should return <strong>EFI_INVALID_PARAMETER</strong> or
 <td>0xd6a77629, 0x5afd, 0x4854, 0x87, 0xc8, 0xee, 0x9f, 0xc5, 0x3d,
 0xbe, 0x3d</td>
 <td><p><strong>EFI_FIRMWARE_MANAGEMENT_PROTOCOL.GetImage()</strong>returns</p>
-<p><strong>EFI_SECURITY_VIOLATION</strong></p></td>
+<p><strong>EFI_SUCCESS</strong></p></td>
 <td><p>Function is supported.</p>
 <p>Authentication required.</p>
 <p>Call function with valid parameters, except <em>Image</em> has a
 dummy authentication data. The function should return
-<strong>EFI_SECURITY_VIOLATION</strong>.</p></td>
+<strong>EFI_SUCCESS</strong>. Any other return values is a test failure.</p></td>
 </tr>
 </tbody>
 </table>
