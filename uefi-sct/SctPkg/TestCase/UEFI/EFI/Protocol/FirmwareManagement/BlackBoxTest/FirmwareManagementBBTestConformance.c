@@ -2547,11 +2547,19 @@ BBTestGetImageConformanceTestCheckpoint4 (
     // Report the checkpoint result
     //
 
-    if (Status != EFI_SECURITY_VIOLATION) {
+    if (Status == EFI_SECURITY_VIOLATION) {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
-      ResultMessageData = L"failed to return EFI_SECURITY_VIOLATION.";
+      ResultMessageData = L"GetImage should not return EFI_SECURITY_VIOLATION as per UEFI v2.11 or later.";
       goto Exit;  
     }
+
+
+    if (Status != EFI_SUCCESS) {
+      AssertionType = EFI_TEST_ASSERTION_FAILED;
+      ResultMessageData = L"GetImage did not return the expected status of EFI_SUCCESS";
+      goto Exit;  
+    }
+
   }
 
   if (FunctionTested == 0) {
