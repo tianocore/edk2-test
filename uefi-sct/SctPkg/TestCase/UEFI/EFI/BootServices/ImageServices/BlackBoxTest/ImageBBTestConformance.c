@@ -181,7 +181,7 @@ BBTestLoadImageConsistencyTest (
                    0,
                    &ImageHandle
                    );
-  if (Status == EFI_INVALID_PARAMETER) {
+  if (Status == EFI_NOT_FOUND) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
