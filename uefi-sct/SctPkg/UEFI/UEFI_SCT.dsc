@@ -4,6 +4,7 @@
 #  Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>
 #  (C) Copyright 2017 - 2021 Hewlett Packard Enterprise Development LP<BR>
 #  Copyright (c) 2023, Loongson Technology Corporation Limited. All rights reserved.<BR>
+#  Copyright (c) 2025, ARM Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -138,6 +139,9 @@
 
 !include MdePkg/MdeLibs.dsc.inc
 
+[LibraryClasses.RISCV64]
+  NULL|MdePkg/Library/CompilerIntrinsicsLib/CompilerIntrinsicsLib.inf
+
 [LibraryClasses.common]
   UefiApplicationEntryPoint|MdePkg/Library/UefiApplicationEntryPoint/UefiApplicationEntryPoint.inf
   UefiDriverEntryPoint|MdePkg/Library/UefiDriverEntryPoint/UefiDriverEntryPoint.inf
@@ -212,6 +216,9 @@ SctPkg/TestCase/UEFI/EFI/RuntimeServices/MiscRuntimeServices/BlackBoxTest/MiscRu
 SctPkg/TestCase/UEFI/EFI/RuntimeServices/TimeServices/BlackBoxTest/TimeServicesBBTest.inf
 SctPkg/TestCase/UEFI/EFI/RuntimeServices/VariableServices/BlackBoxTest/VariableServicesBBTest.inf
 SctPkg/TestCase/UEFI/EFI/RuntimeServices/TCGMemoryOverwriteRequest/BlackBoxTest/TCGMemoryOverwriteRequestBBTest.inf
+!if $(ENABLE_SECUREBOOT_TESTS) == TRUE
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/SecureBoot/BlackBoxTest/SecureBootBBTest.inf
+!endif
 
 SctPkg/TestCase/UEFI/EFI/Protocol/GraphicsOutput/BlackBoxTest/GraphicsOutputBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/Bis/BlackBoxTest/BisBBTest.inf
@@ -426,6 +433,14 @@ SctPkg/TestCase/UEFI/EFI/Protocol/PxeBaseCode/BlackBoxTest/Dependency/Config/Con
 #
 SctPkg/TestCase/UEFI/EFI/Protocol/ConfigKeywordHandler/BlackBoxTest/Dependency/SampleDriver/DriverSampleDxe.inf
 
+# Dependency files for Secure Boot Test^M
+#^M
+!if $(ENABLE_SECUREBOOT_TESTS) == TRUE
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/SecureBoot/BlackBoxTest/Dependency/Images/SampleAppForSecureBootTest1/SampleAppForSecureBootTest1.inf
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/SecureBoot/BlackBoxTest/Dependency/Images/SampleAppForSecureBootTest2/SampleAppForSecureBootTest2.inf
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/SecureBoot/BlackBoxTest/Dependency/Images/SampleAppForSecureBootTest3/SampleAppForSecureBootTest3.inf
+SctPkg/TestCase/UEFI/EFI/RuntimeServices/SecureBoot/BlackBoxTest/Dependency/Images/SecureBootImages.inf
+!endif
 #
 # Support Files
 #

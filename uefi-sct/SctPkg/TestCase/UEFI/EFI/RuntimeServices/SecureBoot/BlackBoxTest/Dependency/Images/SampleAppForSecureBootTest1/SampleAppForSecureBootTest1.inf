@@ -1,0 +1,45 @@
+## @file
+#
+#  Copyright (c) 2025, ARM Ltd. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at 
+#  http://opensource.org/licenses/bsd-license.php
+# 
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+# 
+##
+#/*++
+#
+# Module Name:
+#
+#   SampleAppForSecureBootTest1.inf
+#
+# Abstract:
+#
+#   Dependency component for Secure Boot Black-Box Test.
+#
+#--*/
+
+[defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = SampleAppForSecureBootTest1
+  FILE_GUID            = F90FAF72-56D0-450C-8B62-E08058C58B75
+  MODULE_TYPE          = UEFI_APPLICATION
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeEfiSampleAppForSecureBootTest1
+
+[sources.common]
+  SampleAppForSecureBootTest1.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  SctLib
+  EfiTestLib

@@ -107,7 +107,6 @@
   gEfiDriverConfiguration2ProtocolGuid
   gEfiDriverDiagnostics2ProtocolGuid
   gEfiBlockIoProtocolGuid
-  gEfiDeviceIoProtocolGuid
   gEfiDevicePathProtocolGuid
   gEfiDiskIoProtocolGuid
   gEfiLoadFileProtocolGuid

@@ -87,7 +87,6 @@
   gEfiDhcp4ServiceBindingProtocolGuid
   gEfiTcp4ServiceBindingProtocolGuid
   gEfiUdp4ServiceBindingProtocolGuid
-  gEfiIp4ConfigProtocolGuid
   gEfiManagedNetworkProtocolGuid
   gEfiArpProtocolGuid
   gEfiIp4ProtocolGuid

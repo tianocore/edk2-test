@@ -151,6 +151,8 @@ EFI_GUID STRESS_TEST_NON_INTERFACE_PROTOCOL_38_GUID =
 EFI_GUID STRESS_TEST_NON_INTERFACE_PROTOCOL_39_GUID =
   { 0x169370a, 0xbc3d, 0x4326, {0x8a, 0x7, 0xa, 0x6c, 0x25, 0x73, 0x20, 0xd9 }};
 
+#define OPENINFO_ENTRY_COUNT 4
+
 /**
  *  @brief
  *  @param This a pointer of EFI_BB_TEST_PROTOCOL
@@ -1773,7 +1775,7 @@ BBTestCombinationTest2CheckPoint4 (
 
   MisMatch = FALSE;
   TempInfo = OpenInfo;
-  for (Index = 0; Index < 4; Index++) {
+  for (Index = 0; Index < OPENINFO_ENTRY_COUNT; Index++) {
 
     if ((TempInfo->AgentHandle != mImageHandle)
         || (TempInfo->ControllerHandle != ChildHandle)
@@ -1792,7 +1794,7 @@ BBTestCombinationTest2CheckPoint4 (
 
       TempInfo = OpenInfo;
       Found = FALSE;
-      for (Index = 0; Index < 4; Index++) {
+      for (Index = 0; Index < OPENINFO_ENTRY_COUNT;  Index++) {
 
         if (TempInfo->Attributes == Attributes[AttributesIndex]) {
           Found = TRUE;
@@ -1813,17 +1815,17 @@ BBTestCombinationTest2CheckPoint4 (
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
-  }
+  } 
+  
   StandardLib->RecordAssertion (
                 StandardLib,
                 AssertionType,
                 gProtocolHandlerServicesCombinationTestAssertionGuid025,
                 L"BS.CombinationTest2 - Checkpoint4 - OpenProtocol stress",
-                L"%a:%d:MisMatch is - %d, TPL - %d",
+                L"%a:%d:MisMatch is - %d",
                 __FILE__,
                 (UINTN)__LINE__,
-                MisMatch,
-                TplArray[Index]
+                MisMatch
                 );
 
   if (OpenInfo != NULL) {
@@ -1900,4 +1902,5 @@ BBTestCombinationTest2CheckPoint4 (
                    );
   }
   return EFI_SUCCESS;
+
 }

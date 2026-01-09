@@ -13,3 +13,36 @@ $ sudo apt-get install build-essential uuid-dev python3-distutils gcc-aarch64-li
    4) git clone --recursive https://github.com/tianocore/edk2.git
    5) ln -s edk2-test/uefi-sct/SctPkg/ SctPkg
    6) SctPkg/build.sh AARCH64 GCC RELEASE
+      SctPkg/build.sh AARCH64 GCC RELEASE ENABLE_SECUREBOOT_TESTS (For SecureBoot Tests)
+
+Note:
+To generate and set up keys and certificates for SecureBoot testing, follow the steps mentioned in the below document:
+uefi-sct/Doc/UserGuide/SecureBootTestKeyGenerationAndSetupGuide.md
+
+To configure and run SecureBoot tests, follow the steps mentioned in the below document:
+uefi-sct/Doc/UserGuide/SecureBootConfigurationGuide.md
+
+Build Instructions for UEFI SCTII X64 (Windows)
+	
+	1) mkdir sct_workspace
+	2) cd sct_workspace
+	3) git clone https://github.com/tianocore/edk2-test.git
+		a. Make sure to match tag hash
+	4) git clone https://github.com/tianocore/edk2
+		a. Make sure to match tag hash
+	5) Use this command update submodules in edk2 clone: git submodule update --init
+	6) Install Nasm.exe  (v2.15 or newer)
+	7) open "Developer Command Prompt for VS2019"
+		a. cd edk2
+		b. set NASM_PREFIX in dev cmd prompt if NASM is installed in c:\nasm folder, then use the command: set NASM_PREFIX=C:\nasm\
+	8) edksetup.bat Rebuild
+	9) xcopy ..\edk2-test\uefi-sct\SctPkg\Tools\Source\GenBin BaseTools\Source\C\GenBin\
+	10) cd BaseTools\Source\C\GenBin
+	11) nmake
+	12) cd ..\..\..\..\
+	13) xcopy ..\edk2-test\uefi-sct\SctPkg /E .\SctPkg\
+	14) build -p SctPkg\UEFI\UEFI_SCT.dsc -a X64 -t VS2019
+	15) cd Build\UefiSct\DEBUG_VS2019
+	16) ..\..\..\SctPkg\CommonGenFramework.bat uefi_sct X64 InstallX64.efi
+
+The target subdirectory named as SctPackageX64 which includes test cases and UEFI SCT II applications will be generated in sct_workspace\edk2\Build\UefiSct\DEBUG_VS2015x86

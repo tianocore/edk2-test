@@ -68,7 +68,6 @@ Abstract:
 #include EFI_PROTOCOL_DEFINITION (Udp4)
 #include EFI_PROTOCOL_DEFINITION (Dhcp4)
 #include EFI_PROTOCOL_DEFINITION (Mtftp4)
-#include EFI_PROTOCOL_DEFINITION (Ip4Config)
 #include EFI_PROTOCOL_DEFINITION (Ebc)
 #include EFI_PROTOCOL_DEFINITION (HiiConfigAccess)
 #include EFI_PROTOCOL_DEFINITION (HiiConfigRouting)

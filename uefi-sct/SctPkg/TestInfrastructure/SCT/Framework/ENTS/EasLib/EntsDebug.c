@@ -735,7 +735,7 @@ _LibMemoryMap (
   )
 {
   EFI_STATUS            Status;
-  EFI_MEMORY_DESCRIPTOR *Buffer;
+  EFI_MEMORY_DESCRIPTOR *Buffer = NULL;
   UINTN                 BufferSize;
 
   ASSERT (NoEntries != NULL);
@@ -744,8 +744,6 @@ _LibMemoryMap (
   ASSERT (DescriptorVersion != NULL);
   //
   // Initialize for GrowBuffer loop
-  //
-  Buffer      = (EFI_MEMORY_DESCRIPTOR *)&Buffer;
   BufferSize  = sizeof (EFI_MEMORY_DESCRIPTOR);
 
 Retry:
