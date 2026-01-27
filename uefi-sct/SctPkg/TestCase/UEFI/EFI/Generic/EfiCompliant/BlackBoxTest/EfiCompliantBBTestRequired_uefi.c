@@ -33,6 +33,7 @@ Abstract:
 #include <Library/UefiLib.h>
 #include <Guid/RtPropertiesTable.h>
 #include "EfiCompliantBbTestMain_uefi.h"
+#include <Guid/ConformanceProfiles.h>
 #include EFI_PROTOCOL_DEFINITION (LoadedImage)
 #include EFI_PROTOCOL_DEFINITION (DevicePath)
 #include EFI_PROTOCOL_DEFINITION (Decompress)
@@ -1687,5 +1688,210 @@ CheckGloballyDefinedVariables(
   //
   // Done
   //
+  return EFI_SUCCESS;
+}
+
+
+EFI_STATUS
+EFIAPI
+ConformanceProfilesTableBbTest (
+  IN EFI_BB_TEST_PROTOCOL              *This,
+  IN VOID                              *ClientInterface,
+  IN EFI_TEST_LEVEL                    TestLevel,
+  IN EFI_HANDLE                        SupportHandle
+  )
+{
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL *StandardLib;
+  EFI_STATUS                         Status;
+  EFI_CONFIGURATION_TABLE            *ConfigTable;
+  UINTN                              Index;
+  BOOLEAN                            Found;
+
+  EFI_GUID                           ConformanceProfilesTableGuid = EFI_CONFORMANCE_PROFILES_TABLE_GUID;
+  EFI_GUID                           UefiSpecProfileGuid          = EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID;
+
+  EFI_CONFORMANCE_PROFILES_TABLE     *Table;
+  UINTN                              Count = 0;
+  EFI_GUID                           *Profiles;
+
+  BOOLEAN                            HasUefiSpecProfile;
+  UINTN                              i, j;
+
+  //
+  // Locate Standard Test Library (if your module already has StandardLib as a global, use it instead)
+  //
+  Status = gBS->LocateProtocol (
+                  &gEfiStandardTestLibraryGuid,
+                  NULL,
+                  (VOID **)&StandardLib
+                  );
+  if (EFI_ERROR (Status) || (StandardLib == NULL)) {
+    return EFI_ABORTED;
+  }
+
+
+  //
+  // Find EFI_CONFORMANCE_PROFILES_TABLE in system configuration tables
+  //
+  Found = FALSE;
+  ConfigTable = gST->ConfigurationTable;
+
+  for (Index = 0; Index < gST->NumberOfTableEntries; Index++) {
+    if (SctCompareGuid (&ConfigTable[Index].VendorGuid, &ConformanceProfilesTableGuid) == 0) {
+      Found = TRUE;
+      break;
+    }
+  }
+
+  //
+  // Spec: Absence of this table indicates UEFI-spec conformance (equivalent to publishing with UEFI_SPEC profile GUID)
+  //
+  if (!Found) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_PASSED,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"Conformance Profiles Table is absent as UEFI 2.11 Section 4.6.4, absence indicates UEFI-spec conformance. No more checks can be executed"
+                  );
+    return EFI_SUCCESS;
+  }
+
+  //
+  // Validate VendorTable pointer
+  //
+  if (ConfigTable[Index].VendorTable == NULL) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"EFI_CONFORMANCE_PROFILES_TABLE_GUID is present but VendorTable is NULL."
+                  );
+    return EFI_SUCCESS;
+  }
+
+  Table = (EFI_CONFORMANCE_PROFILES_TABLE *)ConfigTable[Index].VendorTable;
+
+  //
+  // Version must be 0x1 (UEFI 2.11 §4.6.4)
+  //
+  if (Table->Version != EFI_CONFORMANCE_PROFILES_TABLE_VERSION) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"Table->Version is 0x%04x, expected 0x%04x.",
+                  Table->Version,
+                  EFI_CONFORMANCE_PROFILES_TABLE_VERSION
+                  );
+    return EFI_SUCCESS;
+  }
+
+  Count = (UINTN)Table->NumberOfProfiles;
+
+  //
+  // Guardrails: avoid excessive reads if firmware reports nonsense
+  //
+  if (Count > 256) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_FAILED,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"NumberOfProfiles=%u is unreasonably large or invalid, refusing to iterate to avoid invalid memory access.",
+                  (UINT32)Count
+                  );
+    return EFI_SUCCESS;
+  }
+
+  if (Count == 0) {
+    //
+    // Table exists but no profiles; spec doesn’t explicitly forbid, but it defeats the intent of “advertise conformance”.
+    //
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_WARNING,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"NumberOfProfiles is 0. Consider omitting the table (absence already implies UEFI-spec conformance) or publishing at least EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID."
+                  );
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_PASSED,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"Table present and Version is valid."
+                  );
+    return EFI_SUCCESS;
+  }
+
+  Profiles = (EFI_GUID *)((UINT8 *)Table + sizeof (UINT16) + sizeof (UINT16));
+
+  HasUefiSpecProfile = FALSE;
+
+  for (i = 0; i < Count; i++) {
+    //
+    // Validate GUID array: non-zero GUID, no duplicates; also track UEFI-spec profile presence
+    //
+    if (SctCompareGuid (&Profiles[i], &gEfiNullGuid) == 0) {
+        StandardLib->RecordAssertion (
+                    StandardLib,
+                    EFI_TEST_ASSERTION_FAILED,
+                    gEfiCompliantBbTestRequiredAssertionGuid011,
+                    L"UEFI-Compliant - Conformance Profiles Table",
+                    L"ConformanceProfiles[%u] is all-zero GUID (invalid).",
+                    (UINT32)i
+                    );
+      return EFI_SUCCESS;
+    }
+
+    if (SctCompareGuid (&Profiles[i], &UefiSpecProfileGuid) == 0) {
+      HasUefiSpecProfile = TRUE;
+    }
+
+    for (j = i + 1; j < Count; j++) {
+      if (SctCompareGuid (&Profiles[i], &Profiles[j]) == 0) {
+        StandardLib->RecordAssertion (
+                      StandardLib,
+                      EFI_TEST_ASSERTION_FAILED,
+                      gEfiCompliantBbTestRequiredAssertionGuid011,
+                      L"UEFI-Compliant - Conformance Profiles Table",
+                      L"Duplicate profile GUID found at indices %u and %u.",
+                      (UINT32)i,
+                      (UINT32)j
+                      );
+        return EFI_SUCCESS;
+      }
+    }
+  }
+
+  //
+  // Structural checks passed
+  //
+  StandardLib->RecordAssertion (
+                StandardLib,
+                EFI_TEST_ASSERTION_PASSED,
+                gEfiCompliantBbTestRequiredAssertionGuid011,
+                L"UEFI-Compliant - Conformance Profiles Table",
+                L"Table present; Version=0x%04x; NumberOfProfiles=%d; GUID list is well-formed.",
+                Table->Version,
+                (UINT32)Count
+                );
+
+  //
+  // Recommended informational check
+  //
+  if (!HasUefiSpecProfile) {
+    StandardLib->RecordAssertion (
+                  StandardLib,
+                  EFI_TEST_ASSERTION_WARNING,
+                  gEfiCompliantBbTestRequiredAssertionGuid011,
+                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"Table does not include EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID. Absence of the table is equivalent to publishing that profile; consider including it for clarity."
+                  );
+  }
+
   return EFI_SUCCESS;
 }

@@ -211,3 +211,8 @@ extern EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid009;
 
 extern EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid010;
 
+#define EFI_TEST_EFICOMPLIANTBBTESTREQUIRED_ASSERTION_011_GUID \
+{ 0xf46d2265, 0x2f2c, 0x472f, {0xbb, 0xc7, 0x9f, 0x5a, 0x45, 0x2b, 0x42, 0x05 }}
+
+extern EFI_GUID gEfiCompliantBbTestRequiredAssertionGuid011;
+

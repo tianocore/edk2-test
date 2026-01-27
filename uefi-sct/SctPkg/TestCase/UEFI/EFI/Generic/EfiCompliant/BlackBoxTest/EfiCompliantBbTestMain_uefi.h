@@ -86,6 +86,15 @@ DriverSpecificElementsBbTest (
   IN EFI_HANDLE                   SupportHandle
   );
 
+EFI_STATUS
+EFIAPI
+ConformanceProfilesTableBbTest (
+  IN EFI_BB_TEST_PROTOCOL              *This,
+  IN VOID                              *ClientInterface,
+  IN EFI_TEST_LEVEL                    TestLevel,
+  IN EFI_HANDLE                        SupportHandle
+  );
+
 //
 // Support services
 //
@@ -119,5 +128,9 @@ CloseIniFile (
 // {EED18069-2B1F-47c0-9C3C-20D5B070B84C}
 #define DRIVER_SPECIFIC_ELEMENTS_BB_TEST_GUID         \
   { 0xeed18069, 0x2b1f, 0x47c0, {0x9c, 0x3c, 0x20, 0xd5, 0xb0, 0x70, 0xb8, 0x4c }}
+
+// {dd286014-7684-49fe-b653-9cf073ccd45a}
+#define CONFORMANCE_PROFILES_TABLE_BB_TEST_GUID  \
+  { 0xdd286014, 0x7684, 0x49fe, { 0xb6, 0x53, 0x9c, 0xf0, 0x73, 0xcc, 0xd4, 0x5a }}
 
 #endif

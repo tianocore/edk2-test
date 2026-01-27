@@ -78,6 +78,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     DriverSpecificElementsBbTest
   },
   */
+  {
+    CONFORMANCE_PROFILES_TABLE_BB_TEST_GUID,
+    L"Conformance Profiles Table BB Test",
+    L"Check the Conformance Profiles Table defined in the UEFI Spec Section 4.6.4",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    ConformanceProfilesTableBbTest
+  },
   EFI_NULL_GUID
 };
 
