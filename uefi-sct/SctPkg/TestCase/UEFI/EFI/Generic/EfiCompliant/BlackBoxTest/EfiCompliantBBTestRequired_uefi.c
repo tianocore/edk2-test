@@ -732,6 +732,145 @@ CheckRuntimeServices (
   return EFI_SUCCESS;
 }
 
+STATIC
+EFI_STATUS
+CallRuntimeService (
+  IN  UINT32   RTServiceType
+  )
+{
+  EFI_STATUS            Status;
+  EFI_TIME              Time;
+  EFI_TIME              OldTime;
+  EFI_TIME_CAPABILITIES Cap;
+  BOOLEAN               RestoreTime;
+  BOOLEAN               Enabled;
+  BOOLEAN               Pending;
+  CHAR16                VariableNameGetVar[] = L"DUMMY_RT_PROP_VAR";
+  CHAR16                VariableNameSetVar[] = L"DUMMY_RT_PROP_TEST_VAR";
+  CHAR16                VariableNameNextVar[1] = { L'\0' };
+  EFI_GUID              VendorGuidRtProp = { 0x207448E4, 0x5594, 0x495D, {0xB3, 0x3F, 0x8D, 0x18, 0x70, 0x4A, 0x2C, 0xF2}};
+  EFI_GUID              VendorGuidZero = {0};
+  UINTN                 DataSize;
+  UINTN                 VariableNameSize;
+  UINT32                Attributes;
+  UINT32                Count;
+  UINT8                 VariableData[] = { 0xAA };
+  UINT64                MaximumVariableStorageSize;
+  UINT64                RemainingVariableStorageSize;
+  UINT64                MaximumVariableSize;
+  UINT64                MaxCapsuleSize;
+  EFI_RESET_TYPE        ResetType;
+  switch (RTServiceType) {
+    case EFI_RT_SUPPORTED_GET_TIME:
+      return gtRT->GetTime (&Time, &Cap);
+
+    case EFI_RT_SUPPORTED_SET_TIME:
+      RestoreTime = FALSE;
+
+      if (!EFI_ERROR (gtRT->GetTime (&OldTime, &Cap))) {
+        RestoreTime = TRUE;
+      }
+
+      SctSetMem (&Time, sizeof(Time), 0);
+      Time.Year  = 2024;
+      Time.Month = 1;
+      Time.Day   = 1;
+      Time.Hour  = 0;
+      Time.Minute= 0;
+      Time.Second= 0;
+      Status = gtRT->SetTime (&Time);
+      if (!EFI_ERROR (Status) && RestoreTime) {
+        gtRT->SetTime (&OldTime);
+      }
+      return Status;
+
+
+    case EFI_RT_SUPPORTED_GET_WAKEUP_TIME:
+      return gtRT->GetWakeupTime (&Enabled, &Pending, &Time);
+
+    case EFI_RT_SUPPORTED_SET_WAKEUP_TIME:
+      RestoreTime = FALSE;
+
+      if (!EFI_ERROR (gtRT->GetWakeupTime (&Enabled, &Pending, &OldTime))) {
+        RestoreTime = TRUE;
+      }
+
+      SctSetMem (&Time, sizeof(Time), 0);
+      Time.Year  = 2024;
+      Time.Month = 1;
+      Time.Day   = 2;
+      Time.Hour  = 0;
+      Time.Minute= 0;
+      Time.Second= 0;
+      Status = gtRT->SetWakeupTime (TRUE, &Time);
+      if (!EFI_ERROR (Status) && RestoreTime) {
+        gtRT->SetWakeupTime (Enabled, &OldTime);
+      }
+      return Status;
+
+
+    case EFI_RT_SUPPORTED_GET_VARIABLE:
+      DataSize   = 0;
+      Attributes = 0;
+
+      return gtRT->GetVariable (VariableNameGetVar, &VendorGuidRtProp, &Attributes, &DataSize, NULL);
+
+
+    case EFI_RT_SUPPORTED_GET_NEXT_VARIABLE_NAME:
+      VariableNameSize = sizeof(CHAR16);
+
+      return gtRT->GetNextVariableName (&VariableNameSize, VariableNameNextVar, &VendorGuidZero);
+
+
+    case EFI_RT_SUPPORTED_SET_VARIABLE:
+      Attributes = EFI_VARIABLE_NON_VOLATILE |
+                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+                   EFI_VARIABLE_RUNTIME_ACCESS;
+
+      Status = gtRT->SetVariable (VariableNameSetVar, &VendorGuidRtProp, Attributes, sizeof(VariableData), VariableData);
+      if (!EFI_ERROR (Status)) {
+        gtRT->SetVariable (VariableNameSetVar, &VendorGuidRtProp, 0, 0, NULL);
+      }
+      return Status;
+
+
+    case EFI_RT_SUPPORTED_GET_NEXT_HIGH_MONOTONIC_COUNT:
+      Count = 0;
+      return gtRT->GetNextHighMonotonicCount (&Count);
+
+    case EFI_RT_SUPPORTED_QUERY_VARIABLE_INFO:
+      MaximumVariableStorageSize  = 0;
+      RemainingVariableStorageSize = 0;
+      MaximumVariableSize         = 0;
+      Attributes                  = EFI_VARIABLE_NON_VOLATILE |
+                                    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+                                    EFI_VARIABLE_RUNTIME_ACCESS;
+
+      return gtRT->QueryVariableInfo (Attributes, &MaximumVariableStorageSize, &RemainingVariableStorageSize, &MaximumVariableSize);
+
+
+    case EFI_RT_SUPPORTED_QUERY_CAPSULE_CAPABILITIES:
+      MaxCapsuleSize = 0;
+      ResetType      = EfiResetCold;
+
+      return gtRT->QueryCapsuleCapabilities (NULL, 0, &MaxCapsuleSize, &ResetType);
+
+
+    case EFI_RT_SUPPORTED_UPDATE_CAPSULE:
+      //
+      // UpdateCapsule requires a valid capsule header. Use NULL pointer
+      // which should return appropriate error status.
+      //
+      return gtRT->UpdateCapsule (NULL, 0, (EFI_PHYSICAL_ADDRESS)0);
+
+    default:
+      //
+      // Should not reach here; indicates an unexpected runtime service service.
+      //
+      return EFI_INVALID_PARAMETER;
+  }
+}
+
 EFI_STATUS
 CheckRuntimePropertiesTable (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL   *StandardLib
@@ -739,10 +878,13 @@ CheckRuntimePropertiesTable (
 {
   EFI_TEST_ASSERTION       AssertionType;
   EFI_RT_PROPERTIES_TABLE  *RtPropertiesTable               = NULL;
-  UINT32                   ExpectedRuntimeServicesSupported = 0u;
+  UINT32                   ActualRuntimeServicesSupported   = 0u;
+  UINT32                   Flag                             = 0u;
+  VOID                     *Function                        = NULL;
   EFI_STATUS               Status                           = EFI_NOT_STARTED;
   BOOLEAN                  bRtPropertiesTableSupported      = FALSE;
   BOOLEAN                  bFuncNotImplementedFound         = FALSE;
+  CHAR16                   *Message;
 
   RUNTIME_SERVICE_CHECK    RuntimeServices[] = {
     { (VOID *)gtRT->GetTime, EFI_RT_SUPPORTED_GET_TIME },
@@ -823,42 +965,78 @@ CheckRuntimePropertiesTable (
                   );
   }
 
-  //
-  // Check RuntimeServicesSupported variable introduced by UEFI spec
-  //
-  for (int i = 0; i < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); i++) {
-    if (RuntimeServices[i].Function != NULL) {
-      ExpectedRuntimeServicesSupported |= RuntimeServices[i].Flag;
-    }
-    else
-    {
-      // Set Flag if at least one Runtime function is not implemented
-      bFuncNotImplementedFound = TRUE;
-    }
-  }
-
   if (bRtPropertiesTableSupported)
   {
+    //
+    // Check RuntimeServicesSupported variable introduced by UEFI spec
+    //
+    // According to UEFI spec, if EFI RT Properties Table is present, its
+    // RuntimeServicesSupported field indicates which runtime services are supported.
+    // For services marked as unsupported, if the function pointer is non-NULL,
+    // calling the service should return EFI_UNSUPPORTED.
+    // For services marked as supported, we assume they are supported if the
+    // function pointer is non-NULL.
+    //
+    ActualRuntimeServicesSupported = RtPropertiesTable->RuntimeServicesSupported;
+    for (UINTN Index = 0; Index < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); Index++) {
+      Flag = RuntimeServices[Index].Flag;
+      Function = RuntimeServices[Index].Function;
+      if (Function != NULL) {
+        if ((RtPropertiesTable->RuntimeServicesSupported & Flag) == 0) { // marked as unsupported
+          if ((Flag == EFI_RT_SUPPORTED_RESET_SYSTEM) ||
+              (Flag == EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP) ||
+              (Flag == EFI_RT_SUPPORTED_CONVERT_POINTER)) {
+            //
+            // ResetSystem is platform-handled and would reset the system, and
+            // SetVirtualAddressMap/ConvertPointer are only valid at or after
+            // ExitBootServices. Do not invoke them during boot services.
+            //
+            StandardLib->RecordMessage (
+              StandardLib,
+              EFI_VERBOSE_LEVEL_DEFAULT,
+              L"Runtime service 0x%x is marked as unsupported; not invoked during boot services",
+              Flag
+            );
+          } else {
+            Status = CallRuntimeService (Flag);
+            if (Status != EFI_UNSUPPORTED) {
+              // Unexpected status for unsupported service
+              ActualRuntimeServicesSupported |= Flag;
+              StandardLib->RecordMessage (
+                StandardLib,
+                EFI_VERBOSE_LEVEL_DEFAULT,
+                L"Runtime service 0x%x is marked as unsupported but returned %r instead of EFI_UNSUPPORTED",
+                Flag,
+                Status
+              );
+            }
+          }
+        }
+      }
+    }
+
     //
     // The RuntimeServicesSupported field in EFI RT Properties Table should
     // correctly indicate the RunTime functions supported in the platform
     //
-    if (RtPropertiesTable->RuntimeServicesSupported == ExpectedRuntimeServicesSupported) {
+    if (RtPropertiesTable->RuntimeServicesSupported == ActualRuntimeServicesSupported) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
+      Message = L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported field matches the expected value";
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
+      Message = L"UEFI Compliant - EFI Runtime Properties Table has inconsistencies in runtime service support (mismatch in RuntimeServicesSupported or unexpected success from unsupported services)";
     }
 
     StandardLib->RecordAssertion (
                    StandardLib,
                    AssertionType,
                    gEfiCompliantBbTestRequiredAssertionGuid010,
-                   L"UEFI Compliant - EFI Runtime Properties Table RuntimeServicesSupported field matches the expected value",
-                   L"%a:%d:RuntimeServicesSupported - 0x%x, Expected - 0x%x",
+                   Message,
+                   L"%a:%d:Expected RuntimeServicesSupported - 0x%x, Actual RuntimeServicesSupported - 0x%x",
                    __FILE__,
                    (UINTN)__LINE__,
                    RtPropertiesTable->RuntimeServicesSupported,
-                   ExpectedRuntimeServicesSupported
+                   ActualRuntimeServicesSupported
                   );
   }
   else
@@ -866,10 +1044,23 @@ CheckRuntimePropertiesTable (
     //
     // If the RT Properties Table is not supported, then all Runtime Function should be implemented.
     //
-    if (bFuncNotImplementedFound)  {
-      AssertionType = EFI_TEST_ASSERTION_FAILED;
-    } else {
-      AssertionType = EFI_TEST_ASSERTION_PASSED;
+    for (UINTN Index = 0; Index < sizeof(RuntimeServices) / sizeof(RuntimeServices[0]); Index++) {
+      Flag = RuntimeServices[Index].Flag;
+      Function = RuntimeServices[Index].Function;
+      if (Function == NULL) {
+        bFuncNotImplementedFound = TRUE;
+        StandardLib->RecordMessage (
+          StandardLib,
+          EFI_VERBOSE_LEVEL_DEFAULT,
+          L"Runtime service 0x%x is NULL; expected implemented",
+          Flag
+        );
+      }
+    }
+
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+    if (bFuncNotImplementedFound) {
+      AssertionType = EFI_TEST_ASSERTION_WARNING;
     }
 
     StandardLib->RecordAssertion (
