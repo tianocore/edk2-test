@@ -27,10 +27,6 @@ Abstract:
 #include "SctLib.h"
 #include "MiscRuntimeServicesBBTestMain.h"
 
-#if (EFI_SPECIFICATION_VERSION >= 0x00020000)
-EFI_GUID mEfiCapsuleHeaderGuid = EFI_CAPSULE_GUID;
-#endif
-
 EFI_TPL TplArray [TPL_ARRAY_SIZE] = {
   TPL_APPLICATION,
   TPL_CALLBACK,
