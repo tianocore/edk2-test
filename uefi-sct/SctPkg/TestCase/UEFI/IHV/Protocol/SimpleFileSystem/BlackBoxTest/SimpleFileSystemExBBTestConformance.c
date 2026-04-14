@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2013 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -65,6 +66,14 @@ BBTestOpenExConformanceTestCheckpoint2 (
 
 EFI_STATUS
 BBTestOpenExConformanceTestCheckpoint3 (
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
+  );
+
+// TDS 5.2.9.2.4
+
+EFI_STATUS
+BBTestOpenExConformanceTestCheckpoint4 (
   EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
   );
@@ -177,6 +186,12 @@ BBTestOpenExConformanceTest (
   // 5.2.9.2.3  Call OpenEx() with invalid OpenMode.
   //
   BBTestOpenExConformanceTestCheckpoint3 (StandardLib, SimpleFileSystem);
+
+  //
+  // 5.2.9.2.4  OpenEx() returns EFI_NO_MEDIA when no medium is present.
+  //            Per UEFI 2.10A Mantis 2368.
+  //
+  BBTestOpenExConformanceTestCheckpoint4 (StandardLib, SimpleFileSystem);
 
   return EFI_SUCCESS;
 }
@@ -502,9 +517,11 @@ BBTestOpenExConformanceTestCheckpoint1 (
       if ((EFI_MEDIA_CHANGED == StatusSync)
         || (EFI_WRITE_PROTECTED == StatusSync)
         || (EFI_VOLUME_FULL == StatusSync)
+        || (EFI_NO_MEDIA == StatusSync)
         || (EFI_MEDIA_CHANGED == StatusAsync)
         || (EFI_WRITE_PROTECTED == StatusAsync)
-        || (EFI_VOLUME_FULL == StatusAsync)) {
+        || (EFI_VOLUME_FULL == StatusAsync)
+        || (EFI_NO_MEDIA == StatusAsync)) {
         AssertionType = EFI_TEST_ASSERTION_WARNING;
       }
       
@@ -715,9 +732,11 @@ BBTestOpenExConformanceTestCheckpoint2 (
       if ((EFI_MEDIA_CHANGED == StatusSync)
         || (EFI_WRITE_PROTECTED == StatusSync)
         || (EFI_VOLUME_FULL == StatusSync)
+        || (EFI_NO_MEDIA == StatusSync)
         || (EFI_MEDIA_CHANGED == StatusAsync)
         || (EFI_WRITE_PROTECTED == StatusAsync)
-        || (EFI_VOLUME_FULL == StatusAsync)) {
+        || (EFI_VOLUME_FULL == StatusAsync)
+        || (EFI_NO_MEDIA == StatusAsync)) {
     
         AssertionType = EFI_TEST_ASSERTION_WARNING;
       }
@@ -942,6 +961,122 @@ BBTestOpenExConformanceTestCheckpoint3 (
 }
 
 
+EFI_STATUS
+BBTestOpenExConformanceTestCheckpoint4 (
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL       *SimpleFileSystem
+  )
+{
+  EFI_STATUS                Status;
+  EFI_STATUS                StatusSync;
+  EFI_FILE                  *Root;
+  EFI_TEST_ASSERTION        AssertionType;
+  EFI_FILE                  *FileHandle;
+  EFI_FILE_IO_TOKEN         FileIoTokenSync;
+
+  Root   = NULL;
+  Status = SimpleFileSystem->OpenVolume (SimpleFileSystem, &Root);
+
+  //
+  // Per UEFI 2.10A Mantis 2368: OpenVolume or OpenEx should return
+  // EFI_NO_MEDIA when no medium is present on the device.
+  //
+  if (Status == EFI_NO_MEDIA) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleFileSystemExConformanceTestAssertionGuid010,
+                   L"OpenEx() Conformance Test - checkpoint4 - EFI_NO_MEDIA correctly returned",
+                   L"%a:%d: OpenVolume Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    return EFI_SUCCESS;
+  }
+
+  if (EFI_ERROR (Status)) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"OpenVolume fail",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   Status
+                   );
+    return Status;
+  }
+
+  if (Root->Revision != EFI_FILE_PROTOCOL_REVISION2) {
+    Root->Close(Root);
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_FAILED,
+                   gTestGenericFailureGuid,
+                   L"Async File IO is not supported",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   EFI_UNSUPPORTED
+                   );
+    return EFI_UNSUPPORTED;
+  }
+
+  //
+  // Sync Token Init
+  //
+  FileIoTokenSync.Event  = NULL;
+  FileIoTokenSync.Status = EFI_NOT_READY;
+
+  FileHandle = NULL;
+  StatusSync = Root->OpenEx (
+                       Root,
+                       &FileHandle,
+                       L"BBTestOpenExConformanceTestCheckpoint4_File",
+                       EFI_FILE_MODE_READ,
+                       0,
+                       &FileIoTokenSync
+                       );
+
+  if (StatusSync == EFI_NO_MEDIA) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleFileSystemExConformanceTestAssertionGuid010,
+                   L"OpenEx() Conformance Test - checkpoint4 - EFI_NO_MEDIA returned when no media present",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   StatusSync
+                   );
+  } else {
+    //
+    // Media is present; EFI_NO_MEDIA condition cannot be tested.
+    //
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   AssertionType,
+                   gSimpleFileSystemExConformanceTestAssertionGuid010,
+                   L"OpenEx() Conformance Test - checkpoint4 - Media present, EFI_NO_MEDIA not testable",
+                   L"%a:%d: Status - %r",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   StatusSync
+                   );
+  }
+
+  if (FileHandle != NULL) {
+    FileHandle->Close (FileHandle);
+  }
+
+  Root->Close(Root);
+  return EFI_SUCCESS;
+}
 
 
 EFI_STATUS
