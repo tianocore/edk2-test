@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2015, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -29,8 +30,14 @@ Abstract:
 #ifndef _EFI_H_
 #define _EFI_H_
 
-// If we use the new build system
-#ifndef __BASE_H__
+// If we use the new build system.
+// Note: older edk2 Base.h used #define __BASE_H__ as its include guard;
+// modern edk2 uses #pragma once, so __BASE_H__ is no longer defined.
+// Check for MDE_CPU_* from ProcessorBind.h (always included by Base.h)
+// as a reliable indicator of the modern build system.
+#if !defined(__BASE_H__) && !defined(MDE_CPU_IA32) && !defined(MDE_CPU_X64) && \
+    !defined(MDE_CPU_EBC) && !defined(MDE_CPU_ARM) && !defined(MDE_CPU_AARCH64) && \
+    !defined(MDE_CPU_RISCV64) && !defined(MDE_CPU_LOONGARCH64)
   #include "Tiano.h"
   #include "PeiHob.h"
 
