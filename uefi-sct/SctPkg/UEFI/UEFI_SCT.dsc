@@ -298,6 +298,7 @@ SctPkg/TestCase/UEFI/EFI/Protocol/SDMMCPassThru/BlackBoxTest/SDMMCPassThruBBTest
 SctPkg/TestCase/UEFI/EFI/Protocol/PartitionInfo/BlackBoxTest/PartitionInfoBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/UFSDeviceConfig/BlackBoxTest/UFSDeviceConfigBBTest.inf
 SctPkg/TestCase/UEFI/EFI/Protocol/ResetNotification/BlackBoxTest/ResetNotificationBBTest.inf
+SctPkg/TestCase/UEFI/EFI/Protocol/RedfishDiscover/BlackBoxTest/RedfishDiscoverBBTest.inf
 #
 # Dependency files for UEFI/EFI Compliant Test
 #
