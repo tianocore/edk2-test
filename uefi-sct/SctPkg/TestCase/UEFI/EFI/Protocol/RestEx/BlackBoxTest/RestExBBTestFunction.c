@@ -23,7 +23,8 @@ Abstract:
   Function test cases for EFI_REST_EX_PROTOCOL
 
   Covers all seven protocol functions per UEFI 2.8 (Mantis 1834) with
-  clarifications from Mantis 1879.
+  clarifications from Mantis 1879 and AsyncSendReceive updates from
+  Mantis 1924.
 
 --*/
 
@@ -285,7 +286,7 @@ BBTestSendReceiveFunctionTest (
              Status == EFI_TIMEOUT) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
 
   StandardLib->RecordAssertion (
@@ -378,6 +379,11 @@ BBTestAyncSendReceiveFunctionTest (
   EFI_REST_EX_TOKEN                     Token;
   EFI_HTTP_MESSAGE                      RequestMessage;
   EFI_HTTP_REQUEST_DATA                 RequestData;
+  EFI_REST_EX_TOKEN                     TimeoutToken;
+  EFI_HTTP_MESSAGE                      TimeoutReqMsg;
+  EFI_HTTP_REQUEST_DATA                 TimeoutReqData;
+  UINTN                                 TimeoutMs;
+  EFI_REST_EX_TOKEN                     CancelToken;
 
   RestEx = (EFI_REST_EX_PROTOCOL *)ClientInterface;
 
@@ -404,7 +410,7 @@ BBTestAyncSendReceiveFunctionTest (
   RequestMessage.Body         = NULL;
 
   //
-  // Checkpoint 1: AyncSendReceive() with valid parameters.
+  // Checkpoint 1: AyncSendReceive() with valid parameters and no timeout.
   // EFI_UNSUPPORTED is acceptable if the driver does not support async.
   // EFI_NOT_READY is acceptable if not yet configured (Mantis 1879).
   //
@@ -418,7 +424,7 @@ BBTestAyncSendReceiveFunctionTest (
              Status == EFI_TIMEOUT) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
 
   StandardLib->RecordAssertion (
@@ -426,6 +432,81 @@ BBTestAyncSendReceiveFunctionTest (
                  AssertionType,
                  gRestExBBTestFunctionAssertionGuid008,
                  L"REST_EX.AyncSendReceive - AyncSendReceive() establishes async request",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Checkpoint 2 (Mantis 1924): AyncSendReceive() with TimeOutInMilliSeconds.
+  // Per UEFI 2.8, a non-NULL TimeOutInMilliSeconds specifies the duration
+  // after which the driver should signal EFI_TIMEOUT via the token if no
+  // response has been received. A very short timeout is used here to
+  // exercise the timeout path.
+  //
+  SctZeroMem (&TimeoutToken, sizeof (EFI_REST_EX_TOKEN));
+  SctZeroMem (&TimeoutReqMsg, sizeof (EFI_HTTP_MESSAGE));
+  SctZeroMem (&TimeoutReqData, sizeof (EFI_HTTP_REQUEST_DATA));
+
+  TimeoutReqData.Method = HttpMethodGet;
+  TimeoutReqData.Url    = L"/";
+  TimeoutReqMsg.Data.Request = &TimeoutReqData;
+  TimeoutReqMsg.HeaderCount  = 0;
+  TimeoutReqMsg.Headers      = NULL;
+  TimeoutReqMsg.BodyLength   = 0;
+  TimeoutReqMsg.Body         = NULL;
+
+  TimeoutMs = 1;
+
+  Status = RestEx->AyncSendReceive (RestEx, &TimeoutReqMsg, &TimeoutToken, &TimeoutMs);
+
+  if (Status == EFI_SUCCESS || Status == EFI_TIMEOUT) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else if (Status == EFI_UNSUPPORTED ||
+             Status == EFI_NOT_READY ||
+             Status == EFI_DEVICE_ERROR) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gRestExBBTestFunctionAssertionGuid010,
+                 L"REST_EX.AyncSendReceive - AyncSendReceive() with TimeOutInMilliSeconds (Mantis 1924)",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Checkpoint 3 (Mantis 1924): AyncSendReceive() cancellation via NULL
+  // RequestMessage. Per UEFI 2.8, setting RequestMessage to NULL cancels
+  // the previous asynchronous request associated with the RestExToken
+  // and must return EFI_ABORTED.
+  //
+  SctZeroMem (&CancelToken, sizeof (EFI_REST_EX_TOKEN));
+
+  Status = RestEx->AyncSendReceive (RestEx, NULL, &CancelToken, NULL);
+
+  if (Status == EFI_ABORTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else if (Status == EFI_UNSUPPORTED ||
+             Status == EFI_NOT_READY ||
+             Status == EFI_NOT_FOUND) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gRestExBBTestFunctionAssertionGuid011,
+                 L"REST_EX.AyncSendReceive - NULL RequestMessage cancels previous request, returns EFI_ABORTED (Mantis 1924)",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,
@@ -490,7 +571,7 @@ BBTestEventServiceFunctionTest (
              Status == EFI_DEVICE_ERROR) {
     AssertionType = EFI_TEST_ASSERTION_WARNING;
   } else {
-    AssertionType = EFI_TEST_ASSERTION_WARNING;
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
 
   StandardLib->RecordAssertion (

@@ -25,6 +25,8 @@ Abstract:
   Covers all seven protocol functions per UEFI 2.8 (Mantis 1834) with
   clarifications from Mantis 1879: all functions except GetService() must
   return EFI_NOT_READY when Configure() has not been called.
+  Includes AsyncSendReceive updates from Mantis 1924: cancellation via
+  NULL RequestMessage and timeout handling.
 
 --*/
 
@@ -351,6 +353,11 @@ BBTestAyncSendReceiveConformanceTest (
   EFI_REST_EX_PROTOCOL                  *RestEx;
   EFI_TEST_ASSERTION                    AssertionType;
   EFI_REST_EX_TOKEN                     Token;
+  EFI_REST_EX_TOKEN                     CancelToken;
+  EFI_REST_EX_TOKEN                     TimeoutToken;
+  EFI_HTTP_MESSAGE                      TimeoutReqMsg;
+  EFI_HTTP_REQUEST_DATA                 TimeoutReqData;
+  UINTN                                 ZeroTimeout;
 
   RestEx = (EFI_REST_EX_PROTOCOL *)ClientInterface;
 
@@ -411,6 +418,90 @@ BBTestAyncSendReceiveConformanceTest (
                  AssertionType,
                  gRestExBBTestConformanceAssertionGuid008,
                  L"REST_EX.AyncSendReceive - AyncSendReceive() before Configure() returns EFI_NOT_READY",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Checkpoint 3 (Mantis 1924): AyncSendReceive() with NULL RequestMessage
+  // and a valid RestExToken should cancel any outstanding async request
+  // and return EFI_ABORTED. When no previous request exists, EFI_NOT_FOUND
+  // or EFI_UNSUPPORTED are acceptable.
+  //
+  // Must configure first — per Mantis 1879, unconfigured returns EFI_NOT_READY,
+  // which would mask the cancellation behavior under test.
+  //
+  {
+    EFI_REST_EX_HTTP_CONFIG_DATA  HttpConfigData;
+    SctZeroMem (&HttpConfigData, sizeof (HttpConfigData));
+    RestEx->Configure (RestEx, (EFI_REST_EX_CONFIG_DATA)&HttpConfigData);
+  }
+
+  SctZeroMem (&CancelToken, sizeof (EFI_REST_EX_TOKEN));
+
+  Status = RestEx->AyncSendReceive (RestEx, NULL, &CancelToken, NULL);
+
+  if (Status == EFI_ABORTED) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else if (Status == EFI_UNSUPPORTED ||
+             Status == EFI_NOT_READY ||
+             Status == EFI_NOT_FOUND) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gRestExBBTestConformanceAssertionGuid014,
+                 L"REST_EX.AyncSendReceive - NULL RequestMessage cancels async request, returns EFI_ABORTED (Mantis 1924)",
+                 L"%a:%d: Status - %r",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 Status
+                 );
+
+  //
+  // Checkpoint 4 (Mantis 1924): AyncSendReceive() with a zero-value
+  // TimeOutInMilliSeconds. Per the revised spec, the driver should signal
+  // the token with EFI_TIMEOUT when the timeout expires. With a zero
+  // timeout, the function itself should return EFI_TIMEOUT.
+  //
+  SctZeroMem (&TimeoutToken, sizeof (EFI_REST_EX_TOKEN));
+  SctZeroMem (&TimeoutReqMsg, sizeof (EFI_HTTP_MESSAGE));
+  SctZeroMem (&TimeoutReqData, sizeof (EFI_HTTP_REQUEST_DATA));
+
+  TimeoutReqData.Method = HttpMethodGet;
+  TimeoutReqData.Url    = L"/";
+  TimeoutReqMsg.Data.Request = &TimeoutReqData;
+  TimeoutReqMsg.HeaderCount  = 0;
+  TimeoutReqMsg.Headers      = NULL;
+  TimeoutReqMsg.BodyLength   = 0;
+  TimeoutReqMsg.Body         = NULL;
+
+  ZeroTimeout = 0;
+
+  Status = RestEx->AyncSendReceive (RestEx, &TimeoutReqMsg, &TimeoutToken, &ZeroTimeout);
+
+  if (Status == EFI_TIMEOUT) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else if (Status == EFI_UNSUPPORTED ||
+             Status == EFI_NOT_READY ||
+             Status == EFI_SUCCESS ||
+             Status == EFI_DEVICE_ERROR) {
+    AssertionType = EFI_TEST_ASSERTION_WARNING;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
+  }
+
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 AssertionType,
+                 gRestExBBTestConformanceAssertionGuid015,
+                 L"REST_EX.AyncSendReceive - zero TimeOutInMilliSeconds returns EFI_TIMEOUT (Mantis 1924)",
                  L"%a:%d: Status - %r",
                  __FILE__,
                  (UINTN)__LINE__,

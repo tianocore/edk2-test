@@ -106,6 +106,18 @@ extern EFI_GUID gRestExBBTestConformanceAssertionGuid012;
 
 extern EFI_GUID gRestExBBTestConformanceAssertionGuid013;
 
+// AyncSendReceive() cancellation via NULL RequestMessage returns EFI_ABORTED (Mantis 1924)
+#define EFI_TEST_REST_EX_BBTESTCONFORMANCE_ASSERTION_014_GUID \
+{ 0x07e8f91a, 0x2b3c, 0x4648, { 0x59, 0x6a, 0xdb, 0xec, 0xf7, 0x08, 0x19, 0x2b } }
+
+extern EFI_GUID gRestExBBTestConformanceAssertionGuid014;
+
+// AyncSendReceive() with zero timeout returns EFI_TIMEOUT (Mantis 1924)
+#define EFI_TEST_REST_EX_BBTESTCONFORMANCE_ASSERTION_015_GUID \
+{ 0x18f90a2b, 0x3c4d, 0x4759, { 0x6a, 0x7b, 0xec, 0xfd, 0x08, 0x19, 0x2a, 0x3c } }
+
+extern EFI_GUID gRestExBBTestConformanceAssertionGuid015;
+
 //
 // Function Assertion GUIDs
 //
@@ -163,3 +175,15 @@ extern EFI_GUID gRestExBBTestFunctionAssertionGuid008;
 { 0x3a1b2c4d, 0x5e6f, 0x487b, { 0x8c, 0x9d, 0x0e, 0x1f, 0x2a, 0x3b, 0x4c, 0x5e } }
 
 extern EFI_GUID gRestExBBTestFunctionAssertionGuid009;
+
+// AyncSendReceive() with timeout parameter (Mantis 1924)
+#define EFI_TEST_REST_EX_BBTESTFUNCTION_ASSERTION_010_GUID \
+{ 0x4b2c3d5e, 0x6f70, 0x498c, { 0x9d, 0xae, 0x1f, 0x20, 0x3b, 0x4c, 0x5d, 0x6f } }
+
+extern EFI_GUID gRestExBBTestFunctionAssertionGuid010;
+
+// AyncSendReceive() cancellation via NULL RequestMessage returns EFI_ABORTED (Mantis 1924)
+#define EFI_TEST_REST_EX_BBTESTFUNCTION_ASSERTION_011_GUID \
+{ 0x5c3d4e6f, 0x7081, 0x4a9d, { 0xae, 0xbf, 0x20, 0x31, 0x4c, 0x5d, 0x6e, 0x80 } }
+
+extern EFI_GUID gRestExBBTestFunctionAssertionGuid011;
