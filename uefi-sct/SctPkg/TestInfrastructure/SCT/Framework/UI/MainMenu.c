@@ -275,7 +275,70 @@ Returns:
              (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
              Page
              );
-#endif  
+#elif (EFI_SPECIFICATION_VERSION == 0x00020032)
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI2.5 Self Certification Test is a toolkit to check an UEFI2.5 "
+             L"implementation is UEFI2.5 Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#elif (EFI_SPECIFICATION_VERSION == 0x0002003C)
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI2.6 Self Certification Test is a toolkit to check an UEFI2.6 "
+             L"implementation is UEFI2.6 Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#elif (EFI_SPECIFICATION_VERSION == 0x00020046)
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI2.7 Self Certification Test is a toolkit to check an UEFI2.7 "
+             L"implementation is UEFI2.7 Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#elif (EFI_SPECIFICATION_VERSION == 0x00020050)
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI2.8 Self Certification Test is a toolkit to check an UEFI2.8 "
+             L"implementation is UEFI2.8 Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#elif (EFI_SPECIFICATION_VERSION == 0x0002005A)
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI2.9 Self Certification Test is a toolkit to check an UEFI2.9 "
+             L"implementation is UEFI2.9 Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#elif (EFI_SPECIFICATION_VERSION == 0x00020064)
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI2.10 Self Certification Test is a toolkit to check an UEFI2.10 "
+             L"implementation is UEFI2.10 Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#else
+  Status = AddSimpleMenuItem (
+             EFI_ITEM_HAVE_SUBITEMS,
+             L"Help",
+             L"UEFI Self Certification Test is a toolkit to check an UEFI "
+             L"implementation is UEFI Specification compliant or not.",
+             (VOID *)(UINTN)EFI_MENU_ITEM_UTILITY,
+             Page
+             );
+#endif
   if (EFI_ERROR(Status)) {
     DestroyMenuPage (Page);
     return Status;

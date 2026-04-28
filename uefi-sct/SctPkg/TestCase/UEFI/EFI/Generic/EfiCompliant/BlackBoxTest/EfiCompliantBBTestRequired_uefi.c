@@ -259,7 +259,7 @@ CheckSystemTable (
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     if ((gtST->Hdr.Signature       == EFI_SYSTEM_TABLE_SIGNATURE      ) &&
-        (gtST->Hdr.Revision        >= 0x00020000                      ) &&
+        (gtST->Hdr.Revision        >= EFI_2_00_SYSTEM_TABLE_REVISION  ) &&
         (gtST->Hdr.Reserved        == 0x00000000                      ) &&
         (gtST->RuntimeServices     != NULL                            ) &&
         (gtST->BootServices        != NULL                            ) &&
@@ -359,7 +359,7 @@ CheckBootServices (
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     if ((gtBS->Hdr.Signature                       == EFI_BOOT_SERVICES_SIGNATURE) &&
-        (gtBS->Hdr.Revision                        >= 0x00020000                 ) &&
+        (gtBS->Hdr.Revision                        >= EFI_2_00_SYSTEM_TABLE_REVISION) &&
         (gtBS->Hdr.Reserved                        == 0x00000000                 ) &&
         (gtBS->RaiseTPL                            != NULL                       ) &&
         (gtBS->RestoreTPL                          != NULL                       ) &&
@@ -572,7 +572,7 @@ CheckBootServices (
   //
   // Check new boot service introduced by UEFI spec
   //
-  if (gtBS->Hdr.Revision >= 0x00020000) {
+  if (gtBS->Hdr.Revision >= EFI_2_00_SYSTEM_TABLE_REVISION) {
     StandardLib->RecordMessage (
                    StandardLib,
                    EFI_VERBOSE_LEVEL_DEFAULT,
@@ -616,7 +616,7 @@ CheckRuntimeServices (
     AssertionType = EFI_TEST_ASSERTION_FAILED;
   } else {
     if ((gtRT->Hdr.Signature             == EFI_RUNTIME_SERVICES_SIGNATURE) &&
-        (gtRT->Hdr.Revision              >= 0x00020000                    ) &&
+        (gtRT->Hdr.Revision              >= EFI_2_00_SYSTEM_TABLE_REVISION ) &&
         (gtRT->Hdr.Reserved              == 0x00000000                    ) &&
         (gtRT->GetTime                   != NULL                          ) &&
         (gtRT->SetTime                   != NULL                          ) &&
@@ -707,7 +707,7 @@ CheckRuntimeServices (
   //
   // Check new runtime service introduced by UEFI spec
   //
-  if (gtRT->Hdr.Revision >= 0x00020000) {
+  if (gtRT->Hdr.Revision >= EFI_2_00_SYSTEM_TABLE_REVISION) {
     StandardLib->RecordMessage (
                    StandardLib,
                    EFI_VERBOSE_LEVEL_DEFAULT,
