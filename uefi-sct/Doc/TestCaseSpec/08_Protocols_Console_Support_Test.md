@@ -959,6 +959,18 @@ The return code should be <strong>EFI_TIME_OUT</strong>,
 </tbody>
 </table>
 
+### DeviceTypeGuid()
+
+**Reference:** UEFI 2.8, Mantis 1832 — EFI_SERIAL_IO_PROTOCOL revision 1.1
+
+| Number | GUID | Assertion | Test Description |
+|--------|------|-----------|------------------|
+| 5.6.5.7.1 | 0xb1c2d3e4, 0xf506, 0x4718, 0x92, 0xa3, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09 | **EFI_SERIAL_IO_PROTOCOL.DeviceTypeGuid – Revision ≥ 1.1 device exposes DeviceTypeGuid field** | 1. Check `Revision` ≥ `EFI_SERIAL_IO_PROTOCOL_REVISION1p1`. 2. Verify `DeviceTypeGuid` pointer is non-NULL and readable. Return **PASS**. |
+| 5.6.5.7.2 | 0xc2d3e4f5, 0x0617, 0x4829, 0xa3, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09, 0x1a | **EFI_SERIAL_IO_PROTOCOL.DeviceTypeGuid – Non-NULL DeviceTypeGuid matches known terminal GUID** | 1. If `DeviceTypeGuid` is non-NULL, compare against `EFI_SERIAL_TERMINAL_DEVICE_TYPE_GUID`. 2. If match, return **PASS**; if no match, return **WARNING** (platform vendors may define custom GUIDs). |
+| 5.6.5.7.3 | 0xd3e4f506, 0x1728, 0x493a, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09, 0x1a, 0x2b | **EFI_SERIAL_IO_PROTOCOL.DeviceTypeGuid – Revision < 1.1, test skipped (informational)** | 1. Check `Revision` < `EFI_SERIAL_IO_PROTOCOL_REVISION1p1`. 2. Record **WARNING** ("DeviceTypeGuid not available on revision < 1.1") and skip remaining checks. |
+
+> **Note (Mantis 1832):** UEFI 2.8 extended `EFI_SERIAL_IO_PROTOCOL` to revision 1.1, adding a `DeviceTypeGuid` pointer for identifying the device connected to the serial port. The test uses WARNING (not FAIL) for unrecognized GUIDs since platform vendors may define custom device type GUIDs beyond `EFI_SERIAL_TERMINAL_DEVICE_TYPE_GUID`.
+
 
 ## EFI_GRAPHICS_OUTPUT_PROTOCOL Test
 
