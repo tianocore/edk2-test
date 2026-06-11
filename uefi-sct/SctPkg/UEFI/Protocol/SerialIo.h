@@ -38,6 +38,10 @@ typedef struct _EFI_SERIAL_IO_PROTOCOL EFI_SERIAL_IO_PROTOCOL;;
   { 0xBB25CF6F, 0xF1D4, 0x11D2, {0x9A, 0x0C, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0xFD }}
 
 #define SERIAL_IO_INTERFACE_REVISION    0x00010000
+#define EFI_SERIAL_IO_PROTOCOL_REVISION1p1  0x00010001
+
+#define EFI_SERIAL_TERMINAL_DEVICE_TYPE_GUID \
+  { 0x6ad9a60f, 0x5815, 0x4c7c, {0x8a, 0x10, 0x50, 0x53, 0xd2, 0xbf, 0x7a, 0x1b } }
 
 //***********************************************
 // SERIAL_IO_MODE
@@ -153,6 +157,8 @@ struct _EFI_SERIAL_IO_PROTOCOL {
   EFI_SERIAL_READ              Read;
 
   EFI_SERIAL_IO_MODE           *Mode;
+
+  CONST EFI_GUID               *DeviceTypeGuid; // Revision 1.1
 };
 
 extern EFI_GUID  gBlackBoxEfiSerialIoProtocolGuid;

@@ -214,3 +214,25 @@ extern EFI_GUID gSerialIoBbTestStressAssertionGuid009;
 { 0xa62ef0c5, 0xd411, 0x421d, 0xbc, 0xaa, 0x0d, 0x8e, 0x18, 0x5d, 0xf6, 0xe3 }
 
 extern EFI_GUID gSerialIoBbTestStressAssertionGuid010;
+
+//
+// DeviceTypeGuid functional test assertions (Mantis 1832 / revision 1.1)
+//
+
+// Revision 1.1: DeviceTypeGuid field is accessible (non-NULL or NULL both valid)
+#define EFI_TEST_SERIALIOBBTESTFUNCTION_ASSERTION_020_GUID \
+{ 0xb1c2d3e4, 0xf506, 0x4718, 0x92, 0xa3, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09 }
+
+extern EFI_GUID gSerialIoBbTestFunctionAssertionGuid020;
+
+// Revision 1.1: DeviceTypeGuid matches known terminal type GUID when non-NULL
+#define EFI_TEST_SERIALIOBBTESTFUNCTION_ASSERTION_021_GUID \
+{ 0xc2d3e4f5, 0x0617, 0x4829, 0xa3, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09, 0x1a }
+
+extern EFI_GUID gSerialIoBbTestFunctionAssertionGuid021;
+
+// Revision < 1.1: test skipped (informational)
+#define EFI_TEST_SERIALIOBBTESTFUNCTION_ASSERTION_022_GUID \
+{ 0xd3e4f506, 0x1728, 0x493a, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09, 0x1a, 0x2b }
+
+extern EFI_GUID gSerialIoBbTestFunctionAssertionGuid022;

@@ -97,6 +97,15 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     ReadFuncTest
   },
   {
+    DEVICE_TYPE_GUID_FUNC_TEST_GUID,
+    L"DeviceTypeGuid_Func",
+    L"Validate DeviceTypeGuid on revision 1.1 Serial IO implementations.",
+    EFI_TEST_LEVEL_DEFAULT,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    DeviceTypeGuidFuncTest
+  },
+  {
     SET_ATTRIBUTES_CONF_TEST_GUID,
     L"SetAttributes_Conf",
     L"Perform the consistency check of SetAttributes() service.",
