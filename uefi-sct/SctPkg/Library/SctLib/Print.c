@@ -62,8 +62,8 @@ typedef struct _pstate {
     UINTN       AttrHighlight;
     UINTN       AttrError;
 
-    INTN        (*Output)(VOID *context, CONST CHAR16 *str);
-    INTN        (*SetAttr)(VOID *context, UINTN attr);
+    INTN        (EFIAPI *Output)(VOID *context, CONST CHAR16 *str);
+    INTN        (EFIAPI *SetAttr)(VOID *context, UINTN attr);
     VOID        *Context;
 
     // Current item being formatted
@@ -90,12 +90,14 @@ static SctPrint_MODE mPrintMode;
 
 STATIC
 UINTN
+EFIAPI
 _Print (
     IN SCT_PRINT_STATE   *ps
     );
 
 STATIC
 UINTN
+EFIAPI
 _IPrint (
     IN UINTN                            Column,
     IN UINTN                            Row,
@@ -107,6 +109,7 @@ _IPrint (
 
 STATIC
 INTN
+EFIAPI
 _DbgOut (
     IN VOID     *Context,
     IN CONST CHAR16   *Buffer
@@ -114,18 +117,21 @@ _DbgOut (
 
 STATIC
 VOID
+EFIAPI
 PFLUSH (
     IN OUT SCT_PRINT_STATE *ps
     );
 
 STATIC
 VOID
+EFIAPI
 FlushWithPageBreak (
   IN OUT SCT_PRINT_STATE   *ps
   );
 
 STATIC
 VOID
+EFIAPI
 PPUTC (
     IN OUT SCT_PRINT_STATE *ps,
     IN CONST CHAR16        c
@@ -133,18 +139,21 @@ PPUTC (
 
 STATIC
 VOID
+EFIAPI
 PITEM (
     IN OUT SCT_PRINT_STATE  *ps
     );
 
 STATIC
 CHAR16
+EFIAPI
 PGETC (
     IN POINTER      *p
     );
 
 STATIC
 VOID
+EFIAPI
 PSETATTR (
     IN OUT SCT_PRINT_STATE *ps,
     IN UINTN               Attr
@@ -155,6 +164,7 @@ PSETATTR (
 //
 
 INTN
+EFIAPI
 DbgPrint (
     IN INTN      mask,
     IN CHAR8     *fmt,
@@ -206,7 +216,7 @@ Returns:
     if (DbgOut) {
         ps.Attr = DbgOut->Mode->Attribute;
         ps.Context = DbgOut;
-        ps.SetAttr = (INTN (*)(VOID *, UINTN))  DbgOut->SetAttribute;
+        ps.SetAttr = (INTN (EFIAPI *)(VOID *, UINTN)) DbgOut->SetAttribute;
     }
 
     SavedAttribute = ps.Attr;
@@ -248,6 +258,7 @@ Returns:
 
 STATIC
 INTN
+EFIAPI
 _DbgOut (
     IN VOID         *Context,
     IN CONST CHAR16 *Buffer
@@ -269,6 +280,7 @@ _DbgOut (
 }
 
 INTN
+EFIAPI
 _SPrint (
     IN VOID           *Context,
     IN CONST CHAR16   *Buffer
@@ -312,6 +324,7 @@ _SPrint (
 
 // Append string worker for PoolPrint and CatPrint
 INTN
+EFIAPI
 _PoolPrint (
     IN VOID         *Context,
     IN CONST CHAR16 *Buffer
@@ -357,11 +370,12 @@ _PoolPrint (
 
 // Dispath function for SctSPrint, PoolPrint, and CatPrint
 VOID
+EFIAPI
 _PoolCatPrint (
   IN CONST CHAR16     *fmt,
   IN VA_LIST          args,
   IN OUT SCT_POOL_PRINT   *spc,
-  IN INTN             (*Output)(VOID *context, CONST CHAR16 *str)
+  IN INTN             (EFIAPI *Output)(VOID *context, CONST CHAR16 *str)
   )
 {
   SCT_PRINT_STATE      ps;
@@ -398,6 +412,7 @@ Returns:
 
 --*/
 UINTN
+EFIAPI
 SctSPrint (
     OUT CHAR16  *Str,
     IN UINTN    StrSize,
@@ -437,6 +452,7 @@ Returns:
 
 --*/
 UINTN
+EFIAPI
 SctVSPrint (
   OUT CHAR16        *Str,
   IN UINTN          StrSize,
@@ -455,6 +471,7 @@ SctVSPrint (
 }
 
 UINTN
+EFIAPI
 SctAVSPrint (
   OUT CHAR8         *Buffer,
   IN  UINTN         BufferSize,
@@ -485,6 +502,7 @@ SctAVSPrint (
 
 
 UINTN
+EFIAPI
 SctASPrint (
   OUT CHAR8   *Str,
   IN UINTN    StrSize,
@@ -521,6 +539,7 @@ Returns:
 
 --*/
 CHAR16 *
+EFIAPI
 SctPoolPrint (
   IN CONST CHAR16     *fmt,
   ...
@@ -559,6 +578,7 @@ Returns:
 
 --*/
 CHAR16 *
+EFIAPI
 SctCatPrint (
   IN OUT SCT_POOL_PRINT   *Str,
   IN CONST CHAR16     *fmt,
@@ -589,6 +609,7 @@ Returns:
 
 --*/
 UINTN
+EFIAPI
 SctPrint (
   IN CONST CHAR16   *fmt,
   ...
@@ -619,6 +640,7 @@ Returns:
 
 --*/
 UINTN
+EFIAPI
 SctPrintAt (
   IN UINTN           Column,
   IN UINTN           Row,
@@ -635,6 +657,7 @@ SctPrintAt (
 
 // Display string worker for: SctPrint, SctPrintAt
 UINTN
+EFIAPI
 _IPrint (
   IN UINTN                            Column,
   IN UINTN                            Row,
@@ -652,8 +675,8 @@ _IPrint (
 
   SctZeroMem (&ps, sizeof(ps));
   ps.Context = Out;
-  ps.Output  = (INTN (*)(VOID *, CONST CHAR16 *)) Out->OutputString;
-  ps.SetAttr = (INTN (*)(VOID *, UINTN))  Out->SetAttribute;
+  ps.Output  = (INTN (EFIAPI *)(VOID *, CONST CHAR16 *)) Out->OutputString;
+  ps.SetAttr = (INTN (EFIAPI *)(VOID *, UINTN)) Out->SetAttribute;
   ASSERT(NULL != Out->Mode);
   ps.Attr = Out->Mode->Attribute;
 
@@ -700,6 +723,7 @@ Returns:
 
 --*/
 UINTN
+EFIAPI
 SctAPrint (
   IN CHAR8    *fmt,
   ...
@@ -714,6 +738,7 @@ SctAPrint (
 
 STATIC
 VOID
+EFIAPI
 PFLUSH (
     IN OUT SCT_PRINT_STATE     *ps
     )
@@ -729,6 +754,7 @@ PFLUSH (
 
 STATIC
 VOID
+EFIAPI
 PSETATTR (
     IN OUT SCT_PRINT_STATE *ps,
     IN UINTN               Attr
@@ -746,6 +772,7 @@ PSETATTR (
 
 STATIC
 VOID
+EFIAPI
 PPUTC (
   IN OUT SCT_PRINT_STATE *ps,
   IN CONST CHAR16        c
@@ -781,6 +808,7 @@ PPUTC (
 
 STATIC
 CHAR16
+EFIAPI
 PGETC (
   IN POINTER      *p
   )
@@ -796,6 +824,7 @@ PGETC (
 
 STATIC
 VOID
+EFIAPI
 PITEM (
   IN OUT SCT_PRINT_STATE  *ps
   )
@@ -855,6 +884,7 @@ PITEM (
 
 STATIC
 VOID
+EFIAPI
 TimeToString (
   OUT CHAR16      *Buffer,
   IN EFI_TIME     *Time
@@ -889,6 +919,7 @@ TimeToString (
 
 STATIC
 VOID
+EFIAPI
 ValueToString (
   IN CHAR16   *Buffer,
   IN BOOLEAN  Comma,
@@ -977,6 +1008,7 @@ Returns:
 --*/
 STATIC
 UINTN
+EFIAPI
 _Print (
   IN SCT_PRINT_STATE     *ps
   )
@@ -1253,6 +1285,7 @@ GetPageBreak (
 
 STATIC
 BOOLEAN
+EFIAPI
 SetPageBreak (
   IN OUT SCT_PRINT_STATE     *ps
   )
@@ -1313,6 +1346,7 @@ SetPageBreak (
 
 STATIC
 VOID
+EFIAPI
 FlushWithPageBreak (
   IN OUT SCT_PRINT_STATE     *ps
   )
