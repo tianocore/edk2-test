@@ -508,6 +508,7 @@ typedef struct {
 } SCT_POOL_PRINT;
 
 UINTN
+EFIAPI
 SctPrintAt (
   IN UINTN                          Column,
   IN UINTN                          Row,
@@ -516,18 +517,21 @@ SctPrintAt (
   );
 
 UINTN
+EFIAPI
 SctPrint (
   IN CONST CHAR16                   *fmt,
   ...
   );
 
 UINTN
+EFIAPI
 SctAPrint (
   IN CHAR8                          *fmt,
   ...
   );
 
 UINTN
+EFIAPI
 SctSPrint (
   OUT CHAR16  *Str,
   IN UINTN    StrSize,
@@ -536,6 +540,7 @@ SctSPrint (
   );
 
 UINTN
+EFIAPI
 SctVSPrint (
   OUT CHAR16                        *Str,
   IN UINTN                          StrSize,
@@ -544,6 +549,7 @@ SctVSPrint (
   );
 
 UINTN
+EFIAPI
 SctAVSPrint (
   OUT CHAR8         *Buffer,
   IN  UINTN         BufferSize,
@@ -552,6 +558,7 @@ SctAVSPrint (
   );
 
 UINTN
+EFIAPI
 SctASPrint (
   OUT CHAR8   *Str,
   IN UINTN    StrSize,
@@ -560,12 +567,14 @@ SctASPrint (
   );
 
 CHAR16 *
+EFIAPI
 SctPoolPrint (
   IN CONST CHAR16                   *fmt,
   ...
   );
 
 CHAR16 *
+EFIAPI
 SctCatPrint (
     IN OUT SCT_POOL_PRINT   *Str,
     IN CONST CHAR16     *fmt,
