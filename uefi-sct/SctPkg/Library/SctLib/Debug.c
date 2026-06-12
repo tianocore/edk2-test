@@ -36,58 +36,6 @@ Abstract:
 UINTN    EfiDebugMask    = EFI_DBUG_MASK;
 
 /**
-  Prints a debug message to the debug output device if the specified error level is enabled.
-
-  If Format is NULL, then ASSERT().
-
-  @param  ErrorLevel  The error level of the debug message.
-  @param  Format      The format string for the debug message to print.
-  @param  ...         The variable argument list whose contents are accessed
-                      based on the format string specified by Format.
-
-**/
-  VOID
-EfiDebugPrint (
-  IN  UINTN   ErrorLevel,
-  IN  CHAR8  *Format,
-  ...
-  )
-{
-  CHAR16   Buffer[MAX_DEBUG_MESSAGE_LENGTH];
-  VA_LIST  Marker;
-  CHAR16   *FormatUnicode;
-
-  //
-  // If Format is NULL, then ASSERT().
-  //
-  ASSERT (Format != NULL);
-
-  //
-  // Check driver debug mask value and global mask
-  //
-  if ((ErrorLevel & EfiDebugMask) == 0) {
-    return;
-}
-
-//
-  // Convert the DEBUG() message to a Unicode String
-//
-  VA_START (Marker, Format);
-  FormatUnicode = SctAllocatePool(SctAsciiStrSize (Format) * sizeof (CHAR16));
-  SctAsciiToUnicode (FormatUnicode, Format, SctAsciiStrSize (Format));
-  SctVSPrint (Buffer, MAX_DEBUG_MESSAGE_LENGTH, FormatUnicode, Marker);
-  VA_END (Marker);
-
-  //
-  // Send the print string to the Standard Error device
-  //
-  if ((tST != NULL) && (tST->StdErr != NULL)) {
-    tST->StdErr->OutputString (tST->StdErr, Buffer);
-  }
-}
-
-
-/**
   Prints an assert message containing a filename, line number, and description.
   This may be followed by a breakpoint or a dead loop.
 
