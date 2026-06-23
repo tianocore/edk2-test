@@ -193,7 +193,11 @@ case `uname` in
 		GCC* | gcc*)
 			set_cross_compile
 			CROSS_COMPILE="$TEMP_CROSS_COMPILE"
-			export TARGET_TOOLS=`get_gcc_version "$CROSS_COMPILE"gcc`
+
+			# Latest edk2 uses GCC as the GCC toolchain tag.
+			# old GCC5 and below versions are deprecated and are removed from
+			# tools_def.txt in edk2
+			export TARGET_TOOLS=GCC
 		;;
 
 		*)
