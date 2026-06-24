@@ -50,14 +50,7 @@ typedef struct _RESET_DATA {
 
 #define TPL_ARRAY_SIZE 3
 
-#ifndef EFI_CAPSULE_GUID
-#define EFI_CAPSULE_GUID \
-  { 0x3B6686BD, 0x0D76, 0x4030, {0xB7, 0x0E, 0xB5, 0x51, 0x9E, 0x2F, 0xC5, 0xA0 }}
-#endif
-
 extern EFI_TPL TplArray[TPL_ARRAY_SIZE];
-
-extern EFI_GUID  mEfiCapsuleHeaderGuid;
 
 //
 // Prototypes of Interface Test
