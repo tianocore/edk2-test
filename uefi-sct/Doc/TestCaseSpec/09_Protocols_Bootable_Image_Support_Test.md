@@ -5577,18 +5577,29 @@ available port and <em>PortMultiplierPort</em> being invalid.</p>
 <td><p><strong>EFI_ATA_PASS_THRU_PROTOCOL.GetNextDevice –</strong>
 <strong>GetNextDevice()</strong></p>
 <p>could iterate all available</p>
-<p>devices on one port.</p></td>
+<p>devices on one port (accepts dual terminal behavior per Mantis 2359).</p></td>
 <td><p>1.<strong>GetNextPort()</strong> with <em>Port</em> as</p>
 <p><strong>0xFFFF</strong>to start iterate ports.</p>
 <p>2. Call <strong>GetNextPort()</strong> with <em>Port</em></p>
 <p>as one available port and</p>
 <p><em>PortMultiplierPort</em> as 0xFFFF to</p>
 <p>start iterate devicess.</p>
-<p>3. The iteration should ended up with a return code
-<strong>EFI_NOT_FOUND</strong>.</p></td>
+<p>3. The iteration should end with either:</p>
+<p>(a) A return code of <strong>EFI_NOT_FOUND</strong>, or</p>
+<p>(b) <strong>EFI_SUCCESS</strong> with <em>PortMultiplierPort</em>
+set to <strong>0xFFFF</strong> (broadcast address indicating no port
+multiplier connected, per Mantis 2359).</p>
+<p>Both behaviors are spec-compliant per UEFI 2.10 Errata A.</p></td>
 </tr>
 </tbody>
 </table>
+
+**Note (Mantis 2359):** UEFI 2.10 Errata A clarified that when a port
+multiplier is not connected, **GetNextDevice()** may return either
+**EFI_NOT_FOUND** or **EFI_SUCCESS** with *PortMultiplierPort* set to
+**0xFFFF**. Both behaviors are now accepted. The conformance test
+checkpoints 1 and 2 (5.7.8.6.1 and 5.7.8.6.2) record **WARNING** and
+skip when no devices are enumerable, rather than hard-failing.
 
 ### PassThru()
 
