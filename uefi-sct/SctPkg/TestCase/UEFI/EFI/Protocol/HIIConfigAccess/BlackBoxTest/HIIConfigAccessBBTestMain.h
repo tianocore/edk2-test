@@ -58,6 +58,9 @@ Abstract:
 #define EFI_HII_CONFIG_ACCESS_PROTOCOL_TEST_ENTRY_GUID0202 \
 { 0x495c99f3, 0x231, 0x45a5, { 0xaf, 0xfa, 0xd2, 0x5c, 0x6f, 0x9a, 0x19, 0x1c } }
 
+#define EFI_HII_CONFIG_ACCESS_PROTOCOL_TEST_ENTRY_GUID0203 \
+{ 0xd7e5b91a, 0x2fc3, 0x4e86, { 0xb5, 0x42, 0x93, 0xa7, 0x1e, 0x6f, 0xd8, 0xc0 } }
+
 
 
 EFI_STATUS
@@ -105,7 +108,6 @@ BBTestRouteConfigConformanceTest (
   IN EFI_TEST_LEVEL             TestLevel,
   IN EFI_HANDLE                 SupportHandle
   );
-/*  
 EFI_STATUS
 EFIAPI
 BBTestCallBackConformanceTest (
@@ -113,8 +115,7 @@ BBTestCallBackConformanceTest (
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
   IN EFI_HANDLE                 SupportHandle
-  );
-*/  
+  );  
 EFI_STATUS
 EFIAPI
 BBTestExtractConfigFunctionTest (

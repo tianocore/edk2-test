@@ -21,6 +21,7 @@ Module Name:
 Abstract:
 
   HII Configuration Access Protocol from the UEFI 2.1 specification.
+  Updated for UEFI 2.8 (Mantis 1956): EFI_BROWSER_ACTION_REQUEST_RECONNECT
 
 --*/
 
@@ -33,15 +34,31 @@ Abstract:
 #define EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID \
   {0x330d4706, 0xf2a0, 0x4e4f, {0xa3, 0x69, 0xb6, 0x6f, 0xa8, 0xd5, 0x43, 0x85 }}
 
-typedef struct _EFI_HII_CONFIG_ACCESS_PROTOCOL EFI_HII_CONFIG_ACCESS_PROTOCOL;;
+typedef struct _EFI_HII_CONFIG_ACCESS_PROTOCOL EFI_HII_CONFIG_ACCESS_PROTOCOL;
 
-#define EFI_BROWSER_ACTION_REQUEST_NONE    0
-#define EFI_BROWSER_ACTION_REQUEST_RESET   1
-#define EFI_BROWSER_ACTION_REQUEST_SUBMIT  2
-#define EFI_BROWSER_ACTION_REQUEST_EXIT    3
+//
+// EFI_BROWSER_ACTION_REQUEST values returned via CallBack() ActionRequest
+//
+#define EFI_BROWSER_ACTION_REQUEST_NONE               0
+#define EFI_BROWSER_ACTION_REQUEST_RESET              1
+#define EFI_BROWSER_ACTION_REQUEST_SUBMIT             2
+#define EFI_BROWSER_ACTION_REQUEST_EXIT               3
+#define EFI_BROWSER_ACTION_REQUEST_FORM_SUBMIT_EXIT   4
+#define EFI_BROWSER_ACTION_REQUEST_FORM_DISCARD_EXIT  5
+#define EFI_BROWSER_ACTION_REQUEST_FORM_APPLY         6
+#define EFI_BROWSER_ACTION_REQUEST_FORM_DISCARD       7
+#define EFI_BROWSER_ACTION_REQUEST_RECONNECT          8
+#define EFI_BROWSER_ACTION_REQUEST_QUESTION_APPLY     9
 
-#define EFI_BROWSER_ACTION_REQUEST_CHANGING  0
-#define EFI_BROWSER_ACTION_REQUEST_CHANGED   1
+//
+// EFI_BROWSER_ACTION values passed to CallBack() Action parameter
+//
+#define EFI_BROWSER_ACTION_CHANGING               0
+#define EFI_BROWSER_ACTION_CHANGED                1
+#define EFI_BROWSER_ACTION_RETRIEVE               2
+#define EFI_BROWSER_ACTION_FORM_OPEN              3
+#define EFI_BROWSER_ACTION_FORM_CLOSE             4
+#define EFI_BROWSER_ACTION_SUBMITTED              5
 
 typedef UINTN   EFI_BROWSER_ACTION;
 typedef UINT16  EFI_QUESTION_ID;
@@ -70,10 +87,10 @@ typedef
 EFI_STATUS
 (EFIAPI *EFI_HII_ACCESS_FORM_CALLBACK) (
 IN CONST EFI_HII_CONFIG_ACCESS_PROTOCOL    *This,
-IN EFI_BROWSER_ACTION                      *Action,
+IN EFI_BROWSER_ACTION                      Action,
 IN EFI_QUESTION_ID                         QuestionId,
 IN UINT8                                   Type,
-IN EFI_IFR_TYPE_VALUE                      *Value,
+IN OUT EFI_IFR_TYPE_VALUE                  *Value,
 OUT EFI_BROWSER_ACTION_REQUEST             *ActionRequest
 );
 
