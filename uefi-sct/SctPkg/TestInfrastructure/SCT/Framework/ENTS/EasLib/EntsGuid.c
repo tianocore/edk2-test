@@ -74,12 +74,11 @@ EntsKnownGuids[] = {
   { &gtEfiDiskIoProtocolGuid, L"diskio"},
   { &gtEfiSimpleFileSystemProtocolGuid, L"fs"},
   { &gtEfiLoadFileProtocolGuid, L"load"},
-  { &gtEfiDeviceIoProtocolGuid, L"DevIo"},
+
 
   { &tGenericFileInfo, L"GenFileInfo"},
   { &gtEfiFileSystemInfoGuid, L"FileSysInfo"},
 
-  { &gtEfiUnicodeCollationProtocolGuid, L"UnicodeCollation"},
   { &gtEfiSerialIoProtocolGuid, L"serialio"},
   { &gtEfiSimpleNetworkProtocolGuid, L"net"},
   { &gtEfiNetworkInterfaceIdentifierProtocolGuid, L"nii"},

@@ -43,20 +43,6 @@ EFI_RUNTIME_SERVICES            *gntRT  = NULL;
 //
 EFI_MEMORY_TYPE                 EntsPoolAllocationType = EfiBootServicesData;
 
-//
-// Unicode collation functions that are in use
-//
-EFI_UNICODE_COLLATION_PROTOCOL  EntsLibStubUnicodeInterface = {
-  EntsLibStubStriCmp,
-  EntsLibStubMetaiMatch,
-  EntsLibStubStrLwrUpr,
-  EntsLibStubStrLwrUpr,
-  NULL, // FatToStr
-  NULL, // StrToFat
-  NULL  // SupportedLanguages
-};
-
-EFI_UNICODE_COLLATION_PROTOCOL  *EntsUnicodeInterface = &EntsLibStubUnicodeInterface;
 
 //
 // EFI IDs
