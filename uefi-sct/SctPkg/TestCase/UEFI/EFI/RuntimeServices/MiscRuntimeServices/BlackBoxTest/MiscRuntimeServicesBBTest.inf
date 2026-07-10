@@ -52,3 +52,6 @@
 
 [Protocols]
   gEfiTestRecoveryLibraryGuid
+
+[Guids]
+  gWindowsUxCapsuleGuid

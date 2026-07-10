@@ -82,7 +82,7 @@ BBTestUpdateCapsuleConformanceTest (
   }
 
   CapsuleHeaderArray[0] = (EFI_CAPSULE_HEADER *) (UINTN)AllocatedBuffer;
-  CapsuleHeaderArray[0]->CapsuleGuid = mEfiCapsuleHeaderGuid;
+  CapsuleHeaderArray[0]->CapsuleGuid = gWindowsUxCapsuleGuid;
   CapsuleHeaderArray[0]->HeaderSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[0]->CapsuleImageSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[1] = NULL;
@@ -117,7 +117,7 @@ BBTestUpdateCapsuleConformanceTest (
   //
 
   CapsuleHeaderArray[0] = (EFI_CAPSULE_HEADER *) (UINTN)AllocatedBuffer;
-  CapsuleHeaderArray[0]->CapsuleGuid = mEfiCapsuleHeaderGuid;
+  CapsuleHeaderArray[0]->CapsuleGuid = gWindowsUxCapsuleGuid;
   CapsuleHeaderArray[0]->HeaderSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[0]->CapsuleImageSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[1] = NULL;
@@ -151,7 +151,7 @@ BBTestUpdateCapsuleConformanceTest (
   // CAPSULE_FLAGS_PERSIST_ACROSS_RESET set in its header as well.
   //
   CapsuleHeaderArray[0] = (EFI_CAPSULE_HEADER *) (UINTN)AllocatedBuffer;
-  CapsuleHeaderArray[0]->CapsuleGuid = mEfiCapsuleHeaderGuid;
+  CapsuleHeaderArray[0]->CapsuleGuid = gWindowsUxCapsuleGuid;
   CapsuleHeaderArray[0]->HeaderSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[0]->CapsuleImageSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[1] = NULL;
@@ -183,7 +183,7 @@ BBTestUpdateCapsuleConformanceTest (
   // CAPSULE_FLAGS_PERSIST_ACROSS_RESET set in its header as well.
   //
   CapsuleHeaderArray[0] = (EFI_CAPSULE_HEADER *) (UINTN)AllocatedBuffer;
-  CapsuleHeaderArray[0]->CapsuleGuid = mEfiCapsuleHeaderGuid;
+  CapsuleHeaderArray[0]->CapsuleGuid = gWindowsUxCapsuleGuid;
   CapsuleHeaderArray[0]->HeaderSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[0]->CapsuleImageSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[1] = NULL;
@@ -270,7 +270,7 @@ BBTestQueryCapsuleCapabilitiesConformanceTest (
   }
 
   CapsuleHeaderArray[0] = (EFI_CAPSULE_HEADER *) (UINTN)AllocatedBuffer;
-  CapsuleHeaderArray[0]->CapsuleGuid = mEfiCapsuleHeaderGuid;
+  CapsuleHeaderArray[0]->CapsuleGuid = gWindowsUxCapsuleGuid;
   CapsuleHeaderArray[0]->HeaderSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[0]->CapsuleImageSize = sizeof(EFI_CAPSULE_HEADER);
   CapsuleHeaderArray[1] = NULL;
