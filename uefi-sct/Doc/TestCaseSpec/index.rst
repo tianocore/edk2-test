@@ -68,6 +68,7 @@ Copyright  2010-2017, 2024, Unified EFI Forum, Inc. All Rights Reserved.
    30_Protocols_String_Services_Test
    31_TCG2_Protocol
    32_TCG_Platform_Reset_Attack_Mitigation
+   33_REST_EX_Protocol
    Appendix_A_Format_of_Test_Profiles
    Apx_B_Deprecated_Protocols
    Revision_History
