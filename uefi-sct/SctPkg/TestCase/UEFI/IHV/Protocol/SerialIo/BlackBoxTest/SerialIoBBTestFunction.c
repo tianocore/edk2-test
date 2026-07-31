@@ -77,6 +77,14 @@ ReadFuncTest (
   IN EFI_HANDLE                 SupportHandle
   );
 
+EFI_STATUS
+DeviceTypeGuidFuncTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
 //
 // Prototypes (internal)
 //
@@ -2204,12 +2212,146 @@ ReadFuncTestSub2 (
     LoggingLib->ExitFunction (
                   LoggingLib,
                   L"ReadFuncTestSub2",
-                  L"TDS 3.6.2.2"
-                  );
+                 L"TDS 3.6.2.2"
+                 );
   }
 
   //
   // Done
   //
+  return EFI_SUCCESS;
+}
+
+
+/**
+ *  TDS 3.7 - Entry Point for SerialIo DeviceTypeGuid Function Test.
+ *  @param This             A pointer to the EFI_BB_TEST_PROTOCOL instance.
+ *  @param ClientInterface  A pointer to the interface to be tested.
+ *  @param TestLevel        Test "thoroughness" control.
+ *  @param SupportHandle    A handle containing support protocols.
+ *  @return EFI_SUCCESS     Successfully.
+ *  @return Other value     Something failed.
+ */
+EFI_STATUS
+DeviceTypeGuidFuncTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  )
+{
+  EFI_STATUS                          Status;
+  EFI_STANDARD_TEST_LIBRARY_PROTOCOL  *StandardLib;
+  EFI_TEST_LOGGING_LIBRARY_PROTOCOL   *LoggingLib;
+  EFI_SERIAL_IO_PROTOCOL              *SerialIo;
+  EFI_TEST_ASSERTION                  Result;
+  EFI_GUID                            TerminalTypeGuid = EFI_SERIAL_TERMINAL_DEVICE_TYPE_GUID;
+
+  //
+  // Get test support library
+  //
+  Status = GetTestSupportLibrary (
+             SupportHandle,
+             &StandardLib,
+             &LoggingLib
+             );
+  if (EFI_ERROR(Status)) {
+    return Status;
+  }
+
+  SerialIo = (EFI_SERIAL_IO_PROTOCOL *)ClientInterface;
+
+  if (LoggingLib != NULL) {
+    LoggingLib->EnterFunction (
+                  LoggingLib,
+                  L"DeviceTypeGuidFuncTest",
+                  L"TDS 3.7"
+                  );
+  }
+
+  //
+  // Check protocol revision
+  //
+  if (SerialIo->Revision < EFI_SERIAL_IO_PROTOCOL_REVISION1p1) {
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   EFI_TEST_ASSERTION_WARNING,
+                   gSerialIoBbTestFunctionAssertionGuid022,
+                   L"SerialIo.DeviceTypeGuid - Revision < 1.1, skipping",
+                   L"%a:%d: Revision=0x%08x, Required >= 0x%08x",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   SerialIo->Revision,
+                   EFI_SERIAL_IO_PROTOCOL_REVISION1p1
+                   );
+
+    if (LoggingLib != NULL) {
+      LoggingLib->ExitFunction (
+                    LoggingLib,
+                    L"DeviceTypeGuidFuncTest",
+                    L"TDS 3.7 - revision < 1.1"
+                    );
+    }
+    return EFI_SUCCESS;
+  }
+
+  //
+  // Revision 1.1+: DeviceTypeGuid field exists.
+  // Per spec, it may be NULL (no platform device info) or point to a
+  // valid GUID identifying the attached device type.
+  //
+  Result = EFI_TEST_ASSERTION_PASSED;
+  StandardLib->RecordAssertion (
+                 StandardLib,
+                 Result,
+                 gSerialIoBbTestFunctionAssertionGuid020,
+                 L"SerialIo.DeviceTypeGuid - Revision 1.1 device provides DeviceTypeGuid field",
+                 L"%a:%d: Revision=0x%08x, DeviceTypeGuid=%p",
+                 __FILE__,
+                 (UINTN)__LINE__,
+                 SerialIo->Revision,
+                 SerialIo->DeviceTypeGuid
+                 );
+
+  //
+  // If DeviceTypeGuid is non-NULL, verify it is a well-known terminal GUID
+  //
+  if (SerialIo->DeviceTypeGuid != NULL) {
+    if (SctCompareGuid ((EFI_GUID *)SerialIo->DeviceTypeGuid, &TerminalTypeGuid) == 0) {
+      Result = EFI_TEST_ASSERTION_PASSED;
+    } else {
+      Result = EFI_TEST_ASSERTION_WARNING;
+    }
+
+    StandardLib->RecordAssertion (
+                   StandardLib,
+                   Result,
+                   gSerialIoBbTestFunctionAssertionGuid021,
+                   L"SerialIo.DeviceTypeGuid - Check DeviceTypeGuid value",
+                   L"%a:%d: DeviceTypeGuid={%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
+                   __FILE__,
+                   (UINTN)__LINE__,
+                   SerialIo->DeviceTypeGuid->Data1,
+                   SerialIo->DeviceTypeGuid->Data2,
+                   SerialIo->DeviceTypeGuid->Data3,
+                   SerialIo->DeviceTypeGuid->Data4[0],
+                   SerialIo->DeviceTypeGuid->Data4[1],
+                   SerialIo->DeviceTypeGuid->Data4[2],
+                   SerialIo->DeviceTypeGuid->Data4[3],
+                   SerialIo->DeviceTypeGuid->Data4[4],
+                   SerialIo->DeviceTypeGuid->Data4[5],
+                   SerialIo->DeviceTypeGuid->Data4[6],
+                   SerialIo->DeviceTypeGuid->Data4[7]
+                   );
+  }
+
+  if (LoggingLib != NULL) {
+    LoggingLib->ExitFunction (
+                  LoggingLib,
+                  L"DeviceTypeGuidFuncTest",
+                  L"TDS 3.7"
+                  );
+  }
+
   return EFI_SUCCESS;
 }
