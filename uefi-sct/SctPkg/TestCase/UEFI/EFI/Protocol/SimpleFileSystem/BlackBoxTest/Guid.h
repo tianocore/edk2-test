@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -259,6 +260,11 @@ extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid008;
 { 0x12bc7ab7, 0x4ac5, 0x4cf3, {0xa5, 0x54, 0x6b, 0x34, 0xc9, 0x5d, 0xc, 0xea }}
 
 extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid009;
+
+#define EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_010_GUID \
+{ 0x7d3a9e2f, 0x1c6b, 0x4a85, {0xb2, 0x0d, 0xe3, 0x4f, 0x8a, 0x16, 0x5c, 0x72 }}
+
+extern EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid010;
 
 
 #define EFI_TEST_SIMPLEFILESYSTEMEXTENSIVETEST_AUTO_ASSERTION_001_GUID \
