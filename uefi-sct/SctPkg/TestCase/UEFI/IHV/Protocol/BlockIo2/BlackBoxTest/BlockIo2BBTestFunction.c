@@ -1513,7 +1513,7 @@ END_WAIT:
     //
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for all Async Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for all Async Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
     
@@ -2149,7 +2149,7 @@ BBTestReadBlocksExFunctionAutoTestCheckpoint3(
     // Busy Waiting for BatchReadToken signal
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for Async Batch Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for Async Batch Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
     
@@ -2416,7 +2416,7 @@ END_WAIT:
     //
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for all Async Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for all Async Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
     
@@ -2973,7 +2973,7 @@ END_WAIT:
       //
       // Busy waiting 120s on all the execute entity being moved to finished queue
       //  
-      SctPrint (L"Wait maximumly 120s for all Async Write events signaled\n\n");
+      SctPrint (L"Wait maximally 120s for all Async Write events signaled\n\n");
       Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
       IndexI = 0;
       
@@ -3798,7 +3798,7 @@ BBTestWriteBlocksExFunctionAutoTestCheckpoint3(
     // Busy Waiting BathWriteToken signal
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for Async Batch Write events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for Async Batch Write events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     
     IndexI = 0;
@@ -4196,7 +4196,7 @@ END_WAIT:
       //
       // Busy waiting 120s on all the execute entity being moved to finished queue
       //  
-      SctPrint (L"Wait maximumly 120s for all Async Write events signaled\n\n");
+      SctPrint (L"Wait maximally 120s for all Async Write events signaled\n\n");
       Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
       IndexI = 0;
       
@@ -4641,7 +4641,7 @@ BBTestFushBlocksExFunctionAutoTestCheckpoint1(
     //
     // Busy waiting for all the flush blocks event signaled
     //
-    SctPrint (L"Wait maximumly 60s for all Async Flush events signaled\n\n");
+    SctPrint (L"Wait maximally 60s for all Async Flush events signaled\n\n");
     
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     Time = 0;

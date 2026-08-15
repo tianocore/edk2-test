@@ -1035,7 +1035,7 @@ END_WAIT:
     //
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for all Async Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for all Async Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
     
@@ -1908,7 +1908,7 @@ BBTestReadDiskExFunctionAutoTestCheckpoint3(
     // Busy Waiting for AsyncBatchReadToken signal
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for Async Batch Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for Async Batch Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
     
@@ -2301,7 +2301,7 @@ END_WAIT:
     //
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for all Async Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for all Async Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
     

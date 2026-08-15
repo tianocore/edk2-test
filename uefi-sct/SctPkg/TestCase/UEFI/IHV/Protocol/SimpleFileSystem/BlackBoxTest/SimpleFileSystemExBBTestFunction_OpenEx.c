@@ -1013,7 +1013,7 @@ BBTestOpenExBasicTestCheckpoint1_Test1_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -1380,7 +1380,7 @@ BBTestOpenExBasicTestCheckpoint1_Test2_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
         
@@ -2005,7 +2005,7 @@ BBTestOpenExBasicTestCheckpoint1_Test3_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -2518,7 +2518,7 @@ BBTestOpenExBasicTestCheckpoint1_Test4_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -3157,7 +3157,7 @@ BBTestOpenExBasicTestCheckpoint1_Test5_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -4256,7 +4256,7 @@ BBTestOpenExBasicTestCheckpoint2_Test1_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -5399,7 +5399,7 @@ BBTestOpenExBasicTestCheckpoint2_Test2_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -6594,7 +6594,7 @@ BBTestOpenExBasicTestCheckpoint2_Test3_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -7849,7 +7849,7 @@ BBTestOpenExBasicTestCheckpoint2_Test4_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       
@@ -9303,7 +9303,7 @@ BBTestOpenExBasicTestCheckpoint2_Test5_Async (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Open events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Open events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
       

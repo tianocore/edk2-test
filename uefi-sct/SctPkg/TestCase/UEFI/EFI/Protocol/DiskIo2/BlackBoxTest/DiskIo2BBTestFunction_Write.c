@@ -846,7 +846,7 @@ END_WAIT:
       //
       // Busy waiting 120s on all the execute entity being moved to finished queue
       //  
-      SctPrint (L"Wait maximumly 120s for all Async Write events signaled\n\n");
+      SctPrint (L"Wait maximally 120s for all Async Write events signaled\n\n");
       Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
       IndexI = 0;
       IndexI = 0;
@@ -1953,7 +1953,7 @@ BBTestWriteDiskExFunctionAutoTestCheckpoint3(
     // Busy Waiting BathWriteToken signal
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for Async Batch Write events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for Async Batch Write events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
      
     IndexI = 0;
