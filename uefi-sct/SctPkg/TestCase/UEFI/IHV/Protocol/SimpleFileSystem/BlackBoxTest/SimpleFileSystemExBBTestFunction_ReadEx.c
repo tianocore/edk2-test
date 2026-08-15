@@ -602,7 +602,7 @@ BBTestReadExBasicTestCheckpoint1 (
     //
     // Busy waiting 120s on all the execute entity being moved to finished queue
     //  
-    SctPrint (L"Wait maximumly 120s for all Async Read events signaled\n\n");
+    SctPrint (L"Wait maximally 120s for all Async Read events signaled\n\n");
     Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
     IndexI = 0;
       
@@ -1234,7 +1234,7 @@ BBTestReadExBasicTestCheckpoint3 (
   //
   // Busy waiting 120s on all the execute entity being moved to finished queue
   //  
-  SctPrint (L"Wait maximumly 120s for all Async Read events signaled\n\n");
+  SctPrint (L"Wait maximally 120s for all Async Read events signaled\n\n");
   Status = gtBS->SetTimer (TimerEvent, TimerPeriodic, 10000000);
   IndexI = 0;
     
