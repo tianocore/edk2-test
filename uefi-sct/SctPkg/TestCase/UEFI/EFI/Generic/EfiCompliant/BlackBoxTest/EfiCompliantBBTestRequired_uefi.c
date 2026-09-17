@@ -1942,7 +1942,7 @@ ConformanceProfilesTableBbTest (
                   StandardLib,
                   EFI_TEST_ASSERTION_PASSED,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table Presence",
                   L"Conformance Profiles Table is absent as UEFI 2.11 Section 4.6.4, absence indicates UEFI-spec conformance. No more checks can be executed"
                   );
     return EFI_SUCCESS;
@@ -1956,7 +1956,7 @@ ConformanceProfilesTableBbTest (
                   StandardLib,
                   EFI_TEST_ASSERTION_FAILED,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table Vendor Table",
                   L"EFI_CONFORMANCE_PROFILES_TABLE_GUID is present but VendorTable is NULL."
                   );
     return EFI_SUCCESS;
@@ -1972,7 +1972,7 @@ ConformanceProfilesTableBbTest (
                   StandardLib,
                   EFI_TEST_ASSERTION_FAILED,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table Version",
                   L"Table->Version is 0x%04x, expected 0x%04x.",
                   Table->Version,
                   EFI_CONFORMANCE_PROFILES_TABLE_VERSION
@@ -1990,7 +1990,7 @@ ConformanceProfilesTableBbTest (
                   StandardLib,
                   EFI_TEST_ASSERTION_FAILED,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table Profile Count Validity",
                   L"NumberOfProfiles=%u is unreasonably large or invalid, refusing to iterate to avoid invalid memory access.",
                   (UINT32)Count
                   );
@@ -2005,14 +2005,14 @@ ConformanceProfilesTableBbTest (
                   StandardLib,
                   EFI_TEST_ASSERTION_WARNING,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table Empty Profile List",
                   L"NumberOfProfiles is 0. Consider omitting the table (absence already implies UEFI-spec conformance) or publishing at least EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID."
                   );
     StandardLib->RecordAssertion (
                   StandardLib,
                   EFI_TEST_ASSERTION_PASSED,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table Version Validation",
                   L"Table present and Version is valid."
                   );
     return EFI_SUCCESS;
@@ -2031,7 +2031,7 @@ ConformanceProfilesTableBbTest (
                     StandardLib,
                     EFI_TEST_ASSERTION_FAILED,
                     gEfiCompliantBbTestRequiredAssertionGuid011,
-                    L"UEFI-Compliant - Conformance Profiles Table",
+                    L"UEFI-Compliant - Conformance Profiles Table Profile GUID",
                     L"ConformanceProfiles[%u] is all-zero GUID (invalid).",
                     (UINT32)i
                     );
@@ -2048,7 +2048,7 @@ ConformanceProfilesTableBbTest (
                       StandardLib,
                       EFI_TEST_ASSERTION_FAILED,
                       gEfiCompliantBbTestRequiredAssertionGuid011,
-                      L"UEFI-Compliant - Conformance Profiles Table",
+                      L"UEFI-Compliant - Conformance Profiles Table Profile GUID Uniqueness",
                       L"Duplicate profile GUID found at indices %u and %u.",
                       (UINT32)i,
                       (UINT32)j
@@ -2065,7 +2065,7 @@ ConformanceProfilesTableBbTest (
                 StandardLib,
                 EFI_TEST_ASSERTION_PASSED,
                 gEfiCompliantBbTestRequiredAssertionGuid011,
-                L"UEFI-Compliant - Conformance Profiles Table",
+                L"UEFI-Compliant - Conformance Profiles Table Structure",
                 L"Table present; Version=0x%04x; NumberOfProfiles=%d; GUID list is well-formed.",
                 Table->Version,
                 (UINT32)Count
@@ -2079,7 +2079,7 @@ ConformanceProfilesTableBbTest (
                   StandardLib,
                   EFI_TEST_ASSERTION_WARNING,
                   gEfiCompliantBbTestRequiredAssertionGuid011,
-                  L"UEFI-Compliant - Conformance Profiles Table",
+                  L"UEFI-Compliant - Conformance Profiles Table UEFI Spec Profile",
                   L"Table does not include EFI_CONFORMANCE_PROFILES_UEFI_SPEC_GUID. Absence of the table is equivalent to publishing that profile; consider including it for clarity."
                   );
   }
