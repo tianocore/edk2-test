@@ -47,14 +47,18 @@ Abstract:
 #define EFI_RNG_ALGORITHM_RAW \
 { 0xe43176d7, 0xb6e8, 0x4827, {0xb7, 0x84, 0x7f, 0xfd, 0xc4, 0xb6, 0x85, 0x61 }}
 
+#define EFI_RNG_ALGORITHM_ARM_RNDR \
+{ 0x43d2fde3, 0x9d4e, 0x4d79, {0x02, 0x96, 0xa8, 0x9b, 0xca, 0x78, 0x08, 0x41 }}
 
-EFI_GUID Algos[6] = {
+
+EFI_GUID Algos[] = {
     EFI_RNG_ALGORITHM_SP800_90_HASH_256_GUID, 
     EFI_RNG_ALGORITHM_SP800_90_HMAC_256_GUID, 
     EFI_RNG_ALGORITHM_SP800_90_CTR_256_GUID,
     EFI_RNG_ALGORITHM_X9_31_3DES_GUID, 
     EFI_RNG_ALGORITHM_X9_31_AES_GUID, 
-    EFI_RNG_ALGORITHM_RAW
+    EFI_RNG_ALGORITHM_RAW,
+    EFI_RNG_ALGORITHM_ARM_RNDR
     };
 
 
@@ -263,7 +267,7 @@ BBTestGetInfoFunctionTestCheckpoint1 (
   for (IndexI = 0; IndexI < RNGAlgorithmListSize/sizeof(EFI_RNG_ALGORITHM); IndexI++) {
   	
     AssertionType = EFI_TEST_ASSERTION_FAILED;
-	for (IndexJ = 0; IndexJ < 6; IndexJ++) {
+	for (IndexJ = 0; IndexJ < sizeof (Algos) / sizeof (Algos[0]); IndexJ++) {
       if (SctCompareGuid (RNGAlgorithmList3, &Algos[IndexJ]) == 0) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
         break;
