@@ -549,7 +549,7 @@ BBTestMatchStringFunctionTestCheckpoint1 (
                       MatchStringTestData[IndexJ].Result,
                       CapturesCount,
                       MatchStringTestData[IndexJ].CapturesCount,
-                      *RegExSyntaxTypeList3
+                      RegExSyntaxTypeList3
                     );
        } else { //If unable to free the Captures or CapturePtr, mark test as FAIL.
            StandardLib->RecordAssertion (
@@ -731,7 +731,7 @@ BBTestMatchStringFunctionTestCheckpoint2 (
                  MatchStringGenericTestData[0].Result,
                  CapturesCount1,
                  MatchStringGenericTestData[0].CapturesCount,
-                 *RegExSyntaxTypeList2
+                 RegExSyntaxTypeList2
                );
   
   gtBS->FreePool (RegExSyntaxTypeList2);
