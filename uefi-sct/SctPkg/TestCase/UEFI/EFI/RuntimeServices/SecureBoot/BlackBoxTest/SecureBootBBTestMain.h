@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
-  Copyright 2025, Arm Ltd.
+  Copyright 2025 - 2026, Arm Ltd.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -66,6 +66,9 @@ typedef struct {
   { 0xBA4A8DD9, 0x2D6A, 0x43A6, {0x96, 0xCF, 0x79, 0x47, 0x89, 0x2B, 0x73, 0x59 }}
 
 
+#define SECURE_BOOT_AUTH_VARIABLE_PERSISTENCE_TEST_GUID \
+  { 0x3a719204, 0x9f8c, 0x4b97, { 0x98, 0x55, 0x14, 0xe5, 0x85, 0xee, 0xc9, 0x7a } }
+
 #define EFI_TEST_GENERIC_FAILURE(Title, Status)             \
   StandardLib->RecordAssertion (                            \
                  StandardLib,                               \
@@ -103,6 +106,14 @@ ImageLoadingTest(
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
   IN EFI_HANDLE                 SupportHandle
+  );
+
+EFI_STATUS
+SecureBootAuthVariablePersistenceTest (
+  IN EFI_BB_TEST_PROTOCOL  *This,
+  IN VOID                 *ClientInterface,
+  IN EFI_TEST_LEVEL       TestLevel,
+  IN EFI_HANDLE           SupportHandle
   );
 
 //

@@ -1,7 +1,7 @@
 ## @file
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
-#  Copyright (c) 2025, Arm Ltd. All rights reserved.<BR>
+#  Copyright (c) 2025 - 2026, Arm Ltd. All rights reserved.<BR>
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -34,8 +34,23 @@ FUTURE_DATE2=$(shell date --rfc-3339=date -d "+1 day")
 FUTURE_DATE3=$(shell date --rfc-3339=date -d "+2 day")
 # Date string 3 days in the future
 FUTURE_DATE4=$(shell date --rfc-3339=date -d "+3 day")
+# Timestamps later than the existing Secure Boot update fixtures.
+PERSISTENCE_TIME_T1:=$(shell date -u -d "+4 days" "+%Y-%m-%d %H:%M:%S")
+PERSISTENCE_TIME_T2:=$(shell date -u -d "$(PERSISTENCE_TIME_T1) UTC + 1 minute" "+%Y-%m-%d %H:%M:%S")
+PERSISTENCE_TIME_T3:=$(shell date -u -d "$(PERSISTENCE_TIME_T1) UTC + 2 minutes" "+%Y-%m-%d %H:%M:%S")
 # Date string 1 year in the past (used to simulate expired keys or legacy signatures)
 PAST_DATE=$(shell date --rfc-3339=date -d "-1 year")
+
+TEST_KEK4_KEY=$(TARGET)_TestKEK4.key
+TEST_KEK4_CRT=$(TARGET)_TestKEK4.crt
+TEST_KEK4_ESL=$(TARGET)_TestKEK4.esl
+TEST_KEK4_T1_AUTH=$(TARGET)_TestKEK4T1.auth
+TEST_KEK4_T2_AUTH=$(TARGET)_TestKEK4T2.auth
+TEST_KEK1_T3_AUTH=$(TARGET)_TestKEK1T3.auth
+TEST_KEK1_RESTORE_ESL=$(TARGET)_TestKEK1Restore.esl
+PERSISTENCE_OUTPUTS=$(TEST_KEK4_KEY) $(TEST_KEK4_CRT) $(TEST_KEK4_ESL) \
+                    $(TEST_KEK4_T1_AUTH) $(TEST_KEK4_T2_AUTH) \
+                    $(TEST_KEK1_T3_AUTH) $(TEST_KEK1_RESTORE_ESL)
 
 ifdef KEYS_DIR
 $(info Using KEYS_DIR: $(KEYS_DIR))
@@ -53,7 +68,7 @@ exit 0;
 endif
 
 # Build all required certificates, signature lists, images, and .auth files for Secureboot test scenarios
-all: TestKEK2 TestKEK3 KEKSigList1.auth KEKSigList3.auth TestImage1.bin TestImage2.bin TestImage3.bin TestImage4.bin TestImage5.bin TestImage6.bin TestImage7.bin TestImage8.bin TestImage9.bin TestImage10.bin NullKEK.auth NullDB.auth NullDBX.auth TestKEK1.auth TestDB1.auth TestDBX1.auth SignCert1 dbSigList1.auth SignCert2 SignCert3 SignCert4 SignCert5 RevokedCert1 RevokedCert2 RevokedCert3 RevokedCert4 dbSigList2.auth dbSigList3.auth dbSigList4.auth dbxRevokedList1.auth dbSigList5.auth unsignedKeyUpdate Image19ACert Image19BCert TestImage19.bin Image20ACert Image20BCert TestImage20.bin Image19BCert.auth
+all: TestKEK2 TestKEK3 TestKEK4Persistence KEKSigList1.auth KEKSigList3.auth TestImage1.bin TestImage2.bin TestImage3.bin TestImage4.bin TestImage5.bin TestImage6.bin TestImage7.bin TestImage8.bin TestImage9.bin TestImage10.bin NullKEK.auth NullDB.auth NullDBX.auth TestKEK1.auth TestDB1.auth TestDBX1.auth SignCert1 dbSigList1.auth SignCert2 SignCert3 SignCert4 SignCert5 RevokedCert1 RevokedCert2 RevokedCert3 RevokedCert4 dbSigList2.auth dbSigList3.auth dbSigList4.auth dbxRevokedList1.auth dbSigList5.auth unsignedKeyUpdate Image19ACert Image19BCert TestImage19.bin Image20ACert Image20BCert TestImage20.bin Image19BCert.auth
 
 #Image that is not signed
 TestImage1.bin:
@@ -123,6 +138,21 @@ TestKEK2:
 # Generate a new RSA KEK certificate (KEK3) with a long validity
 TestKEK3:
 	openssl req -x509 -sha256 -newkey rsa:2048 -subj /CN=ACS_TEST_KEK3/ -keyout $(TARGET)_$(@).key -out $(TARGET)_$(@).crt -nodes -days 4000
+
+# Generate one fixture set, including a newer T3 request restoring TestKEK1.
+# ESLs are signing inputs; only the three .auth files are runtime dependencies.
+# Grouped targets (GNU Make >= 4.3) regenerate the entire set if any output is
+# missing, and keep parallel/repeated builds from producing mismatched fixtures.
+.PHONY: TestKEK4Persistence
+TestKEK4Persistence: $(PERSISTENCE_OUTPUTS)
+
+$(PERSISTENCE_OUTPUTS) &: $(TEST_PK1_CRT) $(TEST_PK1_KEY) $(TEST_KEK1_CRT) $(lastword $(MAKEFILE_LIST))
+	openssl req -x509 -sha256 -newkey rsa:2048 -subj /CN=UEFI_SCT_TestKEK4/ -keyout $(TEST_KEK4_KEY) -out $(TEST_KEK4_CRT) -nodes -days 4000
+	cert-to-efi-sig-list $(TEST_KEK4_CRT) $(TEST_KEK4_ESL)
+	sign-efi-sig-list -t "$(PERSISTENCE_TIME_T1)" -c $(TEST_PK1_CRT) -k $(TEST_PK1_KEY) KEK $(TEST_KEK4_ESL) $(TEST_KEK4_T1_AUTH)
+	sign-efi-sig-list -t "$(PERSISTENCE_TIME_T2)" -c $(TEST_PK1_CRT) -k $(TEST_PK1_KEY) KEK $(TEST_KEK4_ESL) $(TEST_KEK4_T2_AUTH)
+	cert-to-efi-sig-list $(TEST_KEK1_CRT) $(TEST_KEK1_RESTORE_ESL)
+	sign-efi-sig-list -t "$(PERSISTENCE_TIME_T3)" -c $(TEST_PK1_CRT) -k $(TEST_PK1_KEY) KEK $(TEST_KEK1_RESTORE_ESL) $(TEST_KEK1_T3_AUTH)
 
 # Generate certificate 1 for TestImage2
 SignCert1:
@@ -282,3 +312,5 @@ clean:
 	$(RM) $(BIN_DIR)/$(TARGET)_*.key
 	$(RM) $(BIN_DIR)/$(TARGET)_*.crt
 	$(RM) $(BIN_DIR)/$(TARGET)_*.der
+	$(RM) $(BIN_DIR)/$(TARGET)_*.esl
+	$(RM) $(BIN_DIR)/$(TARGET)_*.auth

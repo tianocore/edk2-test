@@ -1,7 +1,7 @@
 ## @file
 #
 #  Copyright 2006 - 2012 Unified EFI, Inc.<BR>
-#  Copyright 2025, Arm LTD.
+#  Copyright 2025 - 2026, Arm LTD.
 #
 #  This program and the accompanying materials
 #  are licensed and made available under the terms and conditions of the BSD License
@@ -39,6 +39,7 @@
   VariableAttributesBBTest.c
   VariableUpdatesBBTest.c
   ImageLoadingBBTest.c
+  AuthVariablePersistenceBBTest.c
   Guid.h
   Guid.c
 
@@ -53,5 +54,6 @@
   EfiTestLib
 
 [Protocols]
+  gEfiTestRecoveryLibraryGuid
   gEfiTestLoggingLibraryGuid
   gEfiTestProfileLibraryGuid

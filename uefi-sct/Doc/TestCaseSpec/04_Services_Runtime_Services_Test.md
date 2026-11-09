@@ -2238,6 +2238,7 @@ _UEFI Specification_, SecureBoot Runtime Services Section.
 | --- | --- | --- |
 | SecureBootStates | Runtime | Verifies Secure Boot state transitions. |
 | VariableUpdate | Runtime | Verifies updates to Secure Boot variables. |
+| AuthVariablePersistence | Runtime | Verifies authenticated KEK persistence and replay protection across a cold reset. |
 
 The Secure Boot tests require a set of keys generated for PK, KEK, db, dbx.
 
@@ -2378,4 +2379,42 @@ After the tests are complete the test infrastructure must
 | 4.5.4.8 | 0xead975e5, 0x0a13, 0x45a6, 0xac, 0xdd, 0xb3, 0xee, 0x23, 0x64, 0x30, 0x57 | **SecureBoot** - Verify signed db update data signed by TESTKEK2. | For db variable, use SetVariable to set to data signed by KEK2.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
 | 4.5.4.9 | 0x6f4fe39c, 0xdaa0, 0x4a4e, 0xbf, 0x44, 0xca, 0xfb, 0x05, 0x37, 0x2b, 0x53 | **SecureBoot** - Verify signed KEK append update. | For KEK append variable update, use SetVariable to set to signed data.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
 | 4.5.4.10 | 0x63ba72d3, 0x9089, 0xac63, 0xf0, 0x89, 0xad, 0x90, 0x24, 0x67, 0xdb, 0xd3 | **SecureBoot** - Verify signed DB append update. | For db append variable update, use SetVariable to set to data signed by KEK3.<ol type="a"><li>Verify that function returns EFI\_SUCCESS.</ol> |
+
+### AuthVariablePersistence()
+
+The AuthVariablePersistence() test verifies authenticated KEK updates, payload and attribute persistence, and replay protection across one cold reset using SetVariable(), GetVariable(), and ResetSystem().
+
+#### Secure Boot Test Dependencies
+
+Build with `ENABLE_SECUREBOOT_TESTS` and set `KEYS_DIR` to the keys matching the enrolled `TestPK1` and `TestKEK1`. See the [Secure Boot Test Key Generation Guide](../UserGuide/SecureBootTestKeyGenerationAndSetupGuide.md) for key preparation.
+
+The dependency `Images/GNUmakefile` generates the following requests, all signed by `TestPK1`:
+
+| **File** | **Payload** | **Purpose** |
+| --- | --- | --- |
+| `TestKEK4T1.auth` | TestKEK4 EFI signature list (ESL) | Initial authenticated KEK update at T1 and replay attempt after reset. |
+| `TestKEK4T2.auth` | Same TestKEK4 ESL | Newer authenticated KEK update at T2. |
+| `TestKEK1T3.auth` | TestKEK1 ESL | Restore the enrolled test KEK at T3. |
+
+The timestamps must satisfy `T1 < T2 < T3`, with T1 newer than the firmware's stored KEK timestamp. The test extracts the expected ESL payloads from these requests; separate ESL files are not runtime dependencies.
+
+#### Test Setup and Recovery
+
+- Start in User Mode with `SetupMode=0`, `SecureBoot=1`, and `TestPK1` enrolled. The initial KEK must match the TestKEK1 payload embedded in `TestKEK1T3.auth`.
+- All KEK checks require the exact expected payload and attributes NV, BS, RT, AT (non-volatile, boot service access, runtime access, and time-based authenticated write access).
+- Install the three `.auth` files in `Dependency/SecureBootBBTest`. Keep the SCT media writable for the `AuthVariablePersistence.rec` recovery journal.
+- Allow the test to issue `ResetSystem(EfiResetCold, ...)` and resume the same SCT package after reset. Retain the same fixtures and recovery journal until cleanup succeeds.
+
+On failure or interruption, the test attempts to restore TestKEK1 and clear recovery state. If cleanup remains pending, rerun with the same fixtures; an interrupted run cannot pass even if cleanup succeeds. Unrecognized recovery state or changed fixtures cause a failure without modifying KEK or the records. All PASS assertions are deferred until restoration and recovery-state cleanup succeed.
+
+After successful T3 restoration, the same T1/T2 requests are older than the stored KEK timestamp. Before a fresh run, force regeneration of the complete fixture set with T1 newer than the stored T3 and `T1 < T2 < T3`, or reset and re-enroll the test keys using the platform's supported procedure. Do not replace fixtures while recovery or cleanup is pending.
+
+#### Test Cases
+
+| **Number** | **GUID** | **Assertion** | **Test Description** | **Implementation Status** |
+| --- | --- | --- | --- | --- |
+| 4.5.5.1 | 0xcfe95f50, 0x67a1, 0x4e56, 0x8f, 0x2a, 0xef, 0x2f, 0xdd, 0xa3, 0x2e, 0x4f | **SecureBoot** - Verify KEK persistence across a cold reset after unsigned-update rejection. | Use SetVariable() to install `TestKEK4T1.auth`.<ol type="a"><li>Verify EFI\_SUCCESS and the expected TestKEK4 payload and attributes.<li>Submit the unsigned TestKEK1 ESL with the authenticated KEK attributes; verify EFI\_SECURITY\_VIOLATION and unchanged KEK.<li>Save recovery state and issue a cold reset.<li>After resuming, use GetVariable() to verify the same TestKEK4 payload and attributes.</ol> | Yes |
+| 4.5.5.2 | 0x9a29f30e, 0xaedb, 0x448c, 0x81, 0x9f, 0xf2, 0x75, 0x03, 0x12, 0xa3, 0x19 | **SecureBoot** - Verify KEK replay protection after reset. | Replay `TestKEK4T1.auth` using SetVariable().<ol type="a"><li>Verify EFI\_SECURITY\_VIOLATION.<li>Verify KEK retains the TestKEK4 payload and attributes.</ol> | Yes |
+| 4.5.5.3 | 0x455cda62, 0xb441, 0x45d6, 0xbb, 0xc3, 0x57, 0x3a, 0x03, 0xec, 0x7f, 0x55 | **SecureBoot** - Verify acceptance of a newer authenticated KEK update. | Submit `TestKEK4T2.auth` using SetVariable().<ol type="a"><li>Verify EFI\_SUCCESS.<li>Verify the expected TestKEK4 payload and attributes.</ol> | Yes |
+| 4.5.5.4 | 0xbffbe5cc, 0x6a80, 0x484a, 0xb8, 0x2c, 0x33, 0x61, 0xd9, 0xe1, 0xb5, 0xeb | **SecureBoot** - Verify KEK restoration and recovery-state cleanup. | Restore KEK using `TestKEK1T3.auth` when TestKEK1 is not already restored.<ol type="a"><li>Verify EFI\_SUCCESS for any restoration write and the expected TestKEK1 payload and attributes.<li>Clear the SCT reset record and recovery journal.<li>Report PASS only after all test checks, restoration, and cleanup succeed.</ol> | Yes |
 

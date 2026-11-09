@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2025, Arm Ltd. All rights reserved.
+  Copyright (c) 2025 - 2026, Arm Ltd. All rights reserved.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -25,9 +25,11 @@ Abstract:
 --*/
 
 // defined in the UEFI spec
+#ifndef EFI_IMAGE_SECURITY_DATABASE_GUID
 #define EFI_IMAGE_SECURITY_DATABASE_GUID \
 { 0xd719b2cb, 0x3d3a, 0x4596, \
 { 0xa3, 0xbc, 0xda, 0xd0, 0x0e, 0x67, 0x65, 0x6f }}
+#endif
 
 extern EFI_GUID gEfiImageSecurityDatabaseGuid;
 
@@ -233,3 +235,23 @@ extern EFI_GUID gSecureBootImageLoadingBbTestAssertionGuid028;
 { 0x523e5c4b, 0x789b, 0x4283, {0xb9, 0x5e, 0x04, 0x1f, 0x28, 0x70, 0x3a, 0x30}}
 
 extern EFI_GUID gSecureBootImageLoadingBbTestAssertionGuid036;
+
+#define EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_001_GUID \
+{ 0xcfe95f50, 0x67a1, 0x4e56, { 0x8f, 0x2a, 0xef, 0x2f, 0xdd, 0xa3, 0x2e, 0x4f } }
+
+extern EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid001;
+
+#define EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_002_GUID \
+{ 0x9a29f30e, 0xaedb, 0x448c, { 0x81, 0x9f, 0xf2, 0x75, 0x03, 0x12, 0xa3, 0x19 } }
+
+extern EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid002;
+
+#define EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_003_GUID \
+{ 0x455cda62, 0xb441, 0x45d6, { 0xbb, 0xc3, 0x57, 0x3a, 0x03, 0xec, 0x7f, 0x55 } }
+
+extern EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid003;
+
+#define EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_004_GUID \
+{ 0xbffbe5cc, 0x6a80, 0x484a, { 0xb8, 0x2c, 0x33, 0x61, 0xd9, 0xe1, 0xb5, 0xeb } }
+
+extern EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid004;
