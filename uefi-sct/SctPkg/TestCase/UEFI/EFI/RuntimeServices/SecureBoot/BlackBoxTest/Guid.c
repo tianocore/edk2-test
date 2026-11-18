@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2015 Unified EFI, Inc.<BR>
-  Copyright (c) 2025, Arm Ltd. All rights reserved.
+  Copyright (c) 2025 - 2026, Arm Ltd. All rights reserved.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -109,3 +109,15 @@ EFI_GUID gSecureBootImageLoadingBbTestAssertionGuid027 = EFI_TEST_SECUREBOOTIMAG
 EFI_GUID gSecureBootImageLoadingBbTestAssertionGuid028 = EFI_TEST_SECUREBOOTIMAGELOADING_ASSERTION_028_GUID;
 
 EFI_GUID gSecureBootImageLoadingBbTestAssertionGuid036 = EFI_TEST_SECUREBOOTIMAGELOADING_ASSERTION_036_GUID;
+
+EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid001 =
+  EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_001_GUID;
+
+EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid002 =
+  EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_002_GUID;
+
+EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid003 =
+  EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_003_GUID;
+
+EFI_GUID gSecureBootAuthVariablePersistenceBbTestAssertionGuid004 =
+  EFI_TEST_SECUREBOOTVARIABLEPERSISTENCEBBTEST_ASSERTION_004_GUID;

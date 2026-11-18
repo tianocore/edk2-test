@@ -30,6 +30,11 @@ Secure Boot is a key security mechanism that ensures a system boots only with fi
 ### 3. `VariableUpdates`
 - Tests runtime update paths for Secure Boot variables to ensure UEFI-enforced access control policies are in place.
 
+### 4. `AuthVariablePersistence`
+
+- Verifies authenticated KEK persistence and replay protection across a cold reset, then restores TestKEK1.
+- See [AuthVariablePersistence()](../TestCaseSpec/04_Services_Runtime_Services_Test.md#authvariablepersistence) for dependencies, test cases, recovery, and rerun requirements.
+
 ---
 
 ## Pre-requisites

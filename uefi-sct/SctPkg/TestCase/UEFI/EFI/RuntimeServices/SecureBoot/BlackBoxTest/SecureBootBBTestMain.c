@@ -1,7 +1,7 @@
 /** @file
 
   Copyright 2006 - 2017 Unified EFI, Inc.<BR>
-  Copyright 2025, Arm LTD.
+  Copyright 2025 - 2026, Arm LTD.
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -44,6 +44,7 @@ EFI_BB_TEST_PROTOCOL_FIELD gBBTestProtocolField = {
 EFI_GUID gSupportProtocolGuid[] = {
   EFI_STANDARD_TEST_LIBRARY_GUID,
   EFI_TEST_RECOVERY_LIBRARY_GUID,
+  EFI_TEST_PROFILE_LIBRARY_GUID,
   EFI_NULL_GUID
 };
 
@@ -75,8 +76,17 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     ImageLoadingTest
   },
+  {
+    SECURE_BOOT_AUTH_VARIABLE_PERSISTENCE_TEST_GUID,
+    L"AuthVariablePersistence",
+    L"Verifies authenticated KEK persistence and replay protection across a cold reset.",
+    EFI_TEST_LEVEL_MINIMAL,
+    gSupportProtocolGuid,
+    EFI_TEST_CASE_AUTO,
+    SecureBootAuthVariablePersistenceTest
+  },
 
-  0
+  { EFI_NULL_GUID, NULL, NULL, 0, NULL, 0, NULL }
 };
 
 EFI_BB_TEST_PROTOCOL *gBBTestProtocolInterface;
