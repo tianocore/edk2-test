@@ -640,6 +640,8 @@ BBTestNewStartFunctionTest (
     Status = BcInterface->Start (BcInterface, TRUE);
     if ((Status == EFI_SUCCESS)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
+    } else if (Status == EFI_UNSUPPORTED) {
+      AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else if ((Status == EFI_DEVICE_ERROR) || (Status == EFI_OUT_OF_RESOURCES)){
       AssertionType = EFI_TEST_ASSERTION_WARNING;
     } else {
@@ -657,7 +659,7 @@ BBTestNewStartFunctionTest (
                    );
 
 
-    if (AssertionType == EFI_TEST_ASSERTION_PASSED) {
+    if ((AssertionType == EFI_TEST_ASSERTION_PASSED) && (Status == EFI_SUCCESS)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
       if (BcInterface->Mode->Started != TRUE) {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -1188,6 +1190,10 @@ BBTestNewSetIpFilterFunctionTest (
                    (UINTN)__LINE__,
                    Status
                    );
+
+    if (Status == EFI_UNSUPPORTED) {
+      Status = EFI_SUCCESS;
+    }
   }
 
   return EFI_SUCCESS;

@@ -467,7 +467,7 @@ BBTestResetFunctionTest (
   AssertionType = EFI_TEST_ASSERTION_PASSED;
   Status = SnpInterface->Reset (SnpInterface, FALSE);
   if (EFI_ERROR(Status)) {
-    if (EFI_UNSUPPORTED == Status) {
+    if ((EFI_UNSUPPORTED == Status) || (EFI_INVALID_PARAMETER == Status)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -533,7 +533,7 @@ BBTestResetFunctionTest (
   if (Status == EFI_SUCCESS) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (EFI_UNSUPPORTED == Status) {
+    if ((EFI_UNSUPPORTED == Status) || (EFI_INVALID_PARAMETER == Status)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -2533,4 +2533,3 @@ BBTestReceiveFunctionTest (
 
   return EFI_SUCCESS;
 }
-

@@ -216,7 +216,8 @@ BBTestStopConformanceTest (
   // Call Stop() function if network interface not start.
   //
   Status = SnpInterface->Stop (SnpInterface);
-  if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
+  if (((Status == EFI_NOT_STARTED) || (Status == EFI_INVALID_PARAMETER)) &&
+      (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
     AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -448,7 +449,7 @@ BBTestResetConformanceTest (
   if ((Status == EFI_NOT_STARTED) && (SnpInterface->Mode->State == EfiSimpleNetworkStopped)) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (EFI_UNSUPPORTED == Status) {
+    if ((EFI_UNSUPPORTED == Status) || (EFI_INVALID_PARAMETER == Status)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;

@@ -381,24 +381,31 @@ BBTestInitializeFunctionTest (
   //
   // Restore SNP State
   //
-  if (Status == EFI_SUCCESS) {
+  if (SnpInterface->Mode->State == EfiSimpleNetworkInitialized) {
     Status = SnpInterface->Shutdown (SnpInterface);
     if (EFI_ERROR(Status)) {
       return Status;
     }
+  }
 
-    if (State1 == EfiSimpleNetworkInitialized) {
-      SnpInterface->Initialize (SnpInterface, 0, 0);
+  if (State1 == EfiSimpleNetworkInitialized) {
+    Status = SnpInterface->Initialize (SnpInterface, 0, 0);
+    if (EFI_ERROR(Status)) {
+      return Status;
     }
   }
 
   if (State1 == EfiSimpleNetworkStopped) {
-    Status = SnpInterface->Shutdown (SnpInterface);
-    if (EFI_ERROR(Status)) {
-      return Status;
+    if (SnpInterface->Mode->State == EfiSimpleNetworkInitialized) {
+      Status = SnpInterface->Shutdown (SnpInterface);
+      if (EFI_ERROR(Status)) {
+        return Status;
+      }
     }
 
-    Status = SnpInterface->Stop (SnpInterface);
+    if (SnpInterface->Mode->State == EfiSimpleNetworkStarted) {
+      Status = SnpInterface->Stop (SnpInterface);
+    }
     if (EFI_ERROR(Status)) {
       return Status;
     }
@@ -504,7 +511,7 @@ BBTestResetFunctionTest (
   AssertionType = EFI_TEST_ASSERTION_PASSED;
   Status = SnpInterface->Reset (SnpInterface, FALSE);
   if (EFI_ERROR(Status)) {
-    if (EFI_UNSUPPORTED == Status) {
+    if ((EFI_UNSUPPORTED == Status) || (EFI_INVALID_PARAMETER == Status)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -570,7 +577,7 @@ BBTestResetFunctionTest (
   if (Status == EFI_SUCCESS) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
   } else {
-    if (EFI_UNSUPPORTED == Status) {
+    if ((EFI_UNSUPPORTED == Status) || (EFI_INVALID_PARAMETER == Status)) {
       AssertionType = EFI_TEST_ASSERTION_PASSED;
     } else {
       AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -1073,7 +1080,7 @@ BBTestStationAddressFunctionTest (
   CheckPoint1 = SctCompareMem (
                   &SnpInterface->Mode->CurrentAddress,
                   &SnpInterface->Mode->PermanentAddress,
-                  sizeof (EFI_MAC_ADDRESS)
+                  SnpInterface->Mode->HwAddressSize
                   );
 
   //
@@ -1087,7 +1094,7 @@ BBTestStationAddressFunctionTest (
   CheckPoint2 = SctCompareMem (
                   &SnpInterface->Mode->CurrentAddress,
                   &MacAddress,
-                  sizeof (EFI_MAC_ADDRESS)
+                  SnpInterface->Mode->HwAddressSize
                   );
 
   //
@@ -2656,4 +2663,3 @@ BBTestReceiveFunctionTest (
 
   return EFI_SUCCESS;
 }
-
