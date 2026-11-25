@@ -1017,12 +1017,13 @@ BBTestStationAddressFunctionTest (
   //
   SctCopyMem (&BackMacAddress, &SnpInterface->Mode->CurrentAddress, sizeof (EFI_MAC_ADDRESS));
 
-  SctSetMem (&MacAddress, sizeof (EFI_MAC_ADDRESS), 0x2);
+  SctSetMem (&MacAddress, sizeof (EFI_MAC_ADDRESS), 0x0);
+  SctSetMem (&MacAddress, SnpInterface->Mode->HwAddressSize, 0x2);
   StatusBuf[1] = SnpInterface->StationAddress (SnpInterface, FALSE, &MacAddress);
   CheckPoint2 = SctCompareMem (
                   &SnpInterface->Mode->CurrentAddress,
                   &MacAddress,
-                  sizeof (EFI_MAC_ADDRESS)
+                  SnpInterface->Mode->HwAddressSize
                   );
 
   //
