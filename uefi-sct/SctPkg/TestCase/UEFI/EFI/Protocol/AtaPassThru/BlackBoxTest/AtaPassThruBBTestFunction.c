@@ -631,7 +631,14 @@ BBTestGetNextDeviceFunctionAutoTest (
         }
       }
 
+      //
+      // Per UEFI 2.10A (Mantis 2359): when no port multiplier is connected,
+      // GetNextDevice() may either return EFI_NOT_FOUND or return EFI_SUCCESS
+      // with PortMultiplierPort set to 0xFFFF.
+      //
       if (Status == EFI_NOT_FOUND) {
+        AssertionType = EFI_TEST_ASSERTION_PASSED;
+      } else if ((Status == EFI_SUCCESS) && (PortMultiplierPort == 0xFFFF)) {
         AssertionType = EFI_TEST_ASSERTION_PASSED;
       } else {
         AssertionType = EFI_TEST_ASSERTION_FAILED;
@@ -642,10 +649,11 @@ BBTestGetNextDeviceFunctionAutoTest (
                      AssertionType,
                      gAtaPassThruBBTestFunctionAssertionGuid006,
                      L"EFI_ATA_PASS_THRU_PROTOCOL.GetNextDevice - Invoke GetNextDevice() and verify interface correctness within test case",
-                     L"%a:%d:Status - %r",
+                     L"%a:%d:Status - %r, PortMultiplierPort - 0x%x",
                      __FILE__,
                      (UINTN)__LINE__,
-                     Status
+                     Status,
+                     PortMultiplierPort
                      );
     }
   } 
