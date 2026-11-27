@@ -57,6 +57,9 @@ Abstract:
 #define READ_FUNC_TEST_GUID                         \
   { 0x58bb756a, 0x7cf6, 0x4965, { 0xbe, 0x19, 0x31, 0xc1, 0x4e, 0x81, 0x7b, 0xf4 } }
 
+#define DEVICE_TYPE_GUID_FUNC_TEST_GUID             \
+  { 0xa7b8c9d0, 0xe1f2, 0x4354, { 0x87, 0x69, 0xab, 0xcd, 0xef, 0x01, 0x23, 0x45 } }
+
 #define SET_ATTRIBUTES_CONF_TEST_GUID               \
   { 0x92c07cca, 0x9d78, 0x4f1d, { 0x8b, 0x5e, 0x52, 0x80, 0x4f, 0x67, 0x1f, 0xbb } }
 #define SET_CONTROL_CONF_TEST_GUID                  \
@@ -156,6 +159,18 @@ WriteFuncTest (
 EFI_STATUS
 EFIAPI
 ReadFuncTest (
+  IN EFI_BB_TEST_PROTOCOL       *This,
+  IN VOID                       *ClientInterface,
+  IN EFI_TEST_LEVEL             TestLevel,
+  IN EFI_HANDLE                 SupportHandle
+  );
+
+//
+// TDS 3.7
+//
+EFI_STATUS
+EFIAPI
+DeviceTypeGuidFuncTest (
   IN EFI_BB_TEST_PROTOCOL       *This,
   IN VOID                       *ClientInterface,
   IN EFI_TEST_LEVEL             TestLevel,
