@@ -106,7 +106,6 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestRouteConfigConformanceTest
   },
-  /*
   {
     EFI_HII_CONFIG_ACCESS_PROTOCOL_TEST_ENTRY_GUID0203,
     L"CallBackConformance",
@@ -116,7 +115,6 @@ EFI_BB_TEST_ENTRY_FIELD gBBTestEntryField[] = {
     EFI_TEST_CASE_AUTO,
     BBTestCallBackConformanceTest
   },
-  */
   0
 };
 

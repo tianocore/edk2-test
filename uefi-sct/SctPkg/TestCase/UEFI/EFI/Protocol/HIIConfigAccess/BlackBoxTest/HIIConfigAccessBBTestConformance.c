@@ -24,7 +24,7 @@ Abstract:
 
 #include "HIIConfigAccessBBTestMain.h"
 
-EFI_BROWSER_ACTION  EFI_BROWSER_ACTION_UNSUPPORTED = 2;
+EFI_BROWSER_ACTION  EFI_BROWSER_ACTION_UNSUPPORTED = 0xFFFF;
 
 EFI_STATUS
 EFIAPI
@@ -77,7 +77,7 @@ BBTestRouteConfigConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL    *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL        *HIIConfigAccess
   );
-/*  
+// CallBack conformance test checkpoints
 EFI_STATUS
 EFIAPI
 BBTestCallBackConformanceTestCheckpoint1 (
@@ -99,13 +99,6 @@ BBTestCallBackConformanceTestCheckpoint3 (
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
   );
 
-EFI_STATUS
-EFIAPI
-BBTestCallBackConformanceTestCheckpoint4 (
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
-  );
-*/
 
 EFI_STATUS
 EFIAPI
@@ -218,7 +211,7 @@ BBTestRouteConfigConformanceTest (
   return EFI_SUCCESS;
 }
 
-/*
+
 EFI_STATUS
 EFIAPI
 BBTestCallBackConformanceTest (
@@ -255,11 +248,10 @@ BBTestCallBackConformanceTest (
   BBTestCallBackConformanceTestCheckpoint1( StandardLib, HIIConfigAccess );
   BBTestCallBackConformanceTestCheckpoint2( StandardLib, HIIConfigAccess );
   BBTestCallBackConformanceTestCheckpoint3( StandardLib, HIIConfigAccess );
-  BBTestCallBackConformanceTestCheckpoint4( StandardLib, HIIConfigAccess );
   
   return EFI_SUCCESS;
 }
-*/
+
 
 //
 //Check Points
@@ -717,7 +709,6 @@ BBTestRouteConfigConformanceTestCheckpoint3 (
   return EFI_SUCCESS;
 }
 
-/*
 EFI_STATUS
 EFIAPI
 BBTestCallBackConformanceTestCheckpoint1 (
@@ -727,52 +718,48 @@ BBTestCallBackConformanceTestCheckpoint1 (
 {
   EFI_STATUS                                     Status;
   EFI_TEST_ASSERTION                             AssertionType;
-  
+
+  EFI_BROWSER_ACTION                             Action;
   EFI_QUESTION_ID                                QuestionId;
   UINT8                                          Type;
   EFI_IFR_TYPE_VALUE                             Value;
-  EFI_BROWSER_ACTION_REQUEST                     ActionRequest;
-  
-  //init the parameter
-  QuestionId=0x1234;
-  Type=EFI_IFR_TYPE_NUM_SIZE_8;
 
- 
+  Action = EFI_BROWSER_ACTION_CHANGING;
+  QuestionId = 0x1234;
+  Type = EFI_IFR_TYPE_NUM_SIZE_8;
+
   //
-  // Call CallBack with the Action been NULL
+  // Call CallBack with ActionRequest been NULL
   //
   Status = HIIConfigAccess->CallBack (
                   HIIConfigAccess,
-                  NULL,
+                  Action,
                   QuestionId,
-				  Type,
-				  &Value,
-				  &ActionRequest
+                  Type,
+                  &Value,
+                  NULL
                   );
-  
-  if ( EFI_INVALID_PARAMETER != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
 
-	//check the output ActionRequest
-  if ((EFI_BROWSER_ACTION_REQUEST_NONE || EFI_BROWSER_ACTION_REQUEST_RESET || EFI_BROWSER_ACTION_REQUEST_SUBMIT || EFI_BROWSER_ACTION_REQUEST_EXIT) != ActionRequest)
-	AssertionType = EFI_TEST_ASSERTION_FAILED;
-	
+  if (EFI_INVALID_PARAMETER == Status) {
+    AssertionType = EFI_TEST_ASSERTION_PASSED;
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
+
   StandardLib->RecordAssertion (
            StandardLib,
            AssertionType,
-           gHIIConfigAccessBBTestConformanceAssertionGuid009,
-           L"HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack() returns EFI_INVALID_PARAMETER with Action been NULL .",
+           gHIIConfigAccessBBTestConformanceAssertionGuid0010,
+           L"HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack() returns EFI_INVALID_PARAMETER with ActionRequest been NULL.",
            L"%a:%d: Status - %r",
            __FILE__,
            (UINTN)__LINE__,
            Status
            );
- return EFI_SUCCESS;
-  
+
+  return EFI_SUCCESS;
 }
+
 
 EFI_STATUS
 EFIAPI
@@ -783,94 +770,34 @@ BBTestCallBackConformanceTestCheckpoint2 (
 {
   EFI_STATUS                                     Status;
   EFI_TEST_ASSERTION                             AssertionType;
-  
-  EFI_BROWSER_ACTION                             *Action;
-  EFI_QUESTION_ID                                QuestionId;
-  UINT8                                          Type;
-  EFI_IFR_TYPE_VALUE                             Value;
 
-  
-  //init the parameter
-  Action=EFI_BROWSER_ACTION_REQUEST_CHANGING;
-  QuestionId=0x1234;
-  Type=EFI_IFR_TYPE_NUM_SIZE_8;
-
- 
-  //
-  // Call CallBack with the ActionRequest been NULL
-  //
-  Status = HIIConfigAccess->CallBack (
-                  HIIConfigAccess,
-                  Action,
-                  QuestionId,
-				  Type,
-				  &Value,
-				  NULL
-                  );
-  
-  if ( EFI_INVALID_PARAMETER != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
-    AssertionType = EFI_TEST_ASSERTION_PASSED;
-	
-  }
-  StandardLib->RecordAssertion (
-           StandardLib,
-           AssertionType,
-           gHIIConfigAccessBBTestConformanceAssertionGuid0010,
-           L"HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack() returns EFI_INVALID_PARAMETER with QuestionId been NULL.",
-           L"%a:%d: Status - %r",
-           __FILE__,
-           (UINTN)__LINE__,
-           Status
-           );
- return EFI_SUCCESS;
-  
-}
-
-EFI_STATUS
-EFIAPI
-BBTestCallBackConformanceTestCheckpoint3(
-  IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
-  IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
-  )
-{
-  EFI_STATUS                                     Status;
-  EFI_TEST_ASSERTION                             AssertionType;
-  
-  EFI_BROWSER_ACTION                             *Action;
+  EFI_BROWSER_ACTION                             Action;
   EFI_QUESTION_ID                                QuestionId;
   UINT8                                          Type;
   EFI_BROWSER_ACTION_REQUEST                     ActionRequest;
-  
-  //init the parameter
-  Action = EFI_BROWSER_ACTION_REQUEST_CHANGING;
+
+  Action = EFI_BROWSER_ACTION_CHANGING;
   QuestionId = 0x1234;
   Type = EFI_IFR_TYPE_NUM_SIZE_8;
 
- 
   //
-  // Call CallBack with the Value been NULL
+  // Call CallBack with Value been NULL
   //
   Status = HIIConfigAccess->CallBack (
                   HIIConfigAccess,
                   Action,
                   QuestionId,
-				  Type,
-				  NULL,
-				  &ActionRequest
+                  Type,
+                  NULL,
+                  &ActionRequest
                   );
-  
-  if ( EFI_INVALID_PARAMETER != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
+
+  if (EFI_INVALID_PARAMETER == Status) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-	
-	//check the output ActionRequest
-  if ((EFI_BROWSER_ACTION_REQUEST_NONE || EFI_BROWSER_ACTION_REQUEST_RESET || EFI_BROWSER_ACTION_REQUEST_SUBMIT || EFI_BROWSER_ACTION_REQUEST_EXIT) != ActionRequest)
-	AssertionType = EFI_TEST_ASSERTION_FAILED;
-	
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
+
   StandardLib->RecordAssertion (
            StandardLib,
            AssertionType,
@@ -881,65 +808,62 @@ BBTestCallBackConformanceTestCheckpoint3(
            (UINTN)__LINE__,
            Status
            );
- return EFI_SUCCESS;
-  
+
+  return EFI_SUCCESS;
 }
+
 
 EFI_STATUS
 EFIAPI
-BBTestCallBackConformanceTestCheckpoint4 (
+BBTestCallBackConformanceTestCheckpoint3 (
   IN EFI_STANDARD_TEST_LIBRARY_PROTOCOL         *StandardLib,
   IN EFI_HII_CONFIG_ACCESS_PROTOCOL             *HIIConfigAccess
   )
 {
   EFI_STATUS                                     Status;
   EFI_TEST_ASSERTION                             AssertionType;
-  
-  EFI_BROWSER_ACTION                             *Action;
+
+  EFI_BROWSER_ACTION                             Action;
   EFI_QUESTION_ID                                QuestionId;
   UINT8                                          Type;
   EFI_IFR_TYPE_VALUE                             Value;
   EFI_BROWSER_ACTION_REQUEST                     ActionRequest;
-  
-  //init the parameter
-  Action=&EFI_BROWSER_ACTION_UNSUPPORTED;
-  QuestionId=0x1234;
-  Type=EFI_IFR_TYPE_NUM_SIZE_8;
 
-  
+  Action = EFI_BROWSER_ACTION_UNSUPPORTED;
+  QuestionId = 0x1234;
+  Type = EFI_IFR_TYPE_NUM_SIZE_8;
+
   //
-  // Call CallBack with  the specified action not supported by the callback
+  // Call CallBack with an action value not supported by the callback.
+  // Per UEFI 2.8 (Mantis 1956), valid ActionRequest values now include
+  // EFI_BROWSER_ACTION_REQUEST_RECONNECT (8). The callback should return
+  // EFI_UNSUPPORTED for an unrecognized action.
   //
   Status = HIIConfigAccess->CallBack (
                   HIIConfigAccess,
                   Action,
                   QuestionId,
-				  Type,
-				  &Value,
-				  &ActionRequest
+                  Type,
+                  &Value,
+                  &ActionRequest
                   );
-  
-  if ( EFI_UNSUPPORTED != Status ) {
-    AssertionType = EFI_TEST_ASSERTION_FAILED;
-  } else {
+
+  if (EFI_UNSUPPORTED == Status) {
     AssertionType = EFI_TEST_ASSERTION_PASSED;
-	
-	//check the output ActionRequest
-  if ((EFI_BROWSER_ACTION_REQUEST_NONE || EFI_BROWSER_ACTION_REQUEST_RESET || EFI_BROWSER_ACTION_REQUEST_SUBMIT || EFI_BROWSER_ACTION_REQUEST_EXIT) != ActionRequest)
-	AssertionType = EFI_TEST_ASSERTION_FAILED;
-	
+  } else {
+    AssertionType = EFI_TEST_ASSERTION_FAILED;
   }
+
   StandardLib->RecordAssertion (
            StandardLib,
            AssertionType,
            gHIIConfigAccessBBTestConformanceAssertionGuid0012,
-           L"HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack() returns EFI_ UNSUPPORTED with  the specified action not supported by the callback .",
+           L"HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack() returns EFI_UNSUPPORTED with the specified action not supported by the callback.",
            L"%a:%d: Status - %r",
            __FILE__,
            (UINTN)__LINE__,
            Status
            );
- return EFI_SUCCESS;
-  
+
+  return EFI_SUCCESS;
 }
-*/

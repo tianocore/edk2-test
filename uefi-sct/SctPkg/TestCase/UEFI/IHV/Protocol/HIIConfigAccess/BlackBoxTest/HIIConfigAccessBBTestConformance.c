@@ -25,7 +25,7 @@ Abstract:
 
 #include "HIIConfigAccessBBTestMain.h"
 
-EFI_BROWSER_ACTION  EFI_BROWSER_ACTION_UNSUPPORTED = 2;
+EFI_BROWSER_ACTION  EFI_BROWSER_ACTION_UNSUPPORTED = 0xFFFF;
 
 EFI_STATUS
 BBTestExtractConfigConformanceTestCheckpoint1 (
