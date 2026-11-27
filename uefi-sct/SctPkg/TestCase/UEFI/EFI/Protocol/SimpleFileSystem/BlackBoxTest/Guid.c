@@ -2,6 +2,7 @@
 
   Copyright 2006 - 2016 Unified EFI, Inc.<BR>
   Copyright (c) 2010 - 2016, Intel Corporation. All rights reserved.<BR>
+  Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved.<BR>
 
   This program and the accompanying materials
   are licensed and made available under the terms and conditions of the BSD License
@@ -14,13 +15,13 @@
 **/
 /*++
 
-Module Name:
+ Module Name:
 
-  Guid.c
+   Guid.c
 
-Abstract:
+ Abstract:
 
-  GUIDs auto-generated for EFI test assertion.
+   GUIDs auto-generated for EFI test assertion.
 
 --*/
 
@@ -123,6 +124,8 @@ EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid007 = EFI_TEST_SIMPLEFIL
 EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid008 = EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_008_GUID;
 
 EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid009 = EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_009_GUID;
+
+EFI_GUID gSimpleFileSystemExConformanceTestAssertionGuid010 = EFI_TEST_SIMPLEFILESYSTEMEXCONFORMANCETEST_ASSERTION_010_GUID;
 
 
 EFI_GUID gSimpleFileSystemExtensiveTest_AutoAssertionGuid001 = EFI_TEST_SIMPLEFILESYSTEMEXTENSIVETEST_AUTO_ASSERTION_001_GUID;
