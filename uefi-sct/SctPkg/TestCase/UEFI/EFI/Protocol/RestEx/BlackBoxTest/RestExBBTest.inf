@@ -1,0 +1,52 @@
+## @file
+#
+#  Copyright 2006 - 2026 Unified EFI, Inc.<BR>
+#  Copyright (c) 2026, AMD Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+#/*++
+#
+# Module Name:
+#
+#   RestExBBTest.inf
+#
+# Abstract:
+#
+#   Component description file for REST EX Protocol Black-Box Test.
+#
+#--*/
+
+[defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = RestExBBTest
+  FILE_GUID            = 7A2D8B6E-3F4C-4E91-A5D0-B8C72E1F9A3D
+  MODULE_TYPE          = UEFI_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = InitializeRestExBBTest
+
+[sources.common]
+  RestExBBTestConformance.c
+  RestExBBTestFunction.c
+  RestExBBTestMain.c
+  Guid.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SctPkg/SctPkg.dec
+  SctPkg/UEFI/UEFI.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SctLib
+  EfiTestLib
+
+[Protocols]
+  gEfiRestExProtocolGuid
