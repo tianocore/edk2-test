@@ -735,7 +735,7 @@ Routine Description:
     //
     // Black-box test file
     //
-    Status = ExecuteBbTestCase (ExecuteInfo, NULL);
+    Status = ExecuteBbTestCase (ExecuteInfo, IhvInterfaceFilter);
     if (EFI_ERROR (Status)) {
       EFI_SCT_DEBUG ((EFI_SCT_D_ERROR, L"Execute BB test case - %r", Status));
       return Status;
