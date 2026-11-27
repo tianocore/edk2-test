@@ -1492,6 +1492,19 @@ Name.</p>
 | 5.18.6.2.4 | 0x603e52f0, 0x2ce3, 0x4e7a, 0xa7, 0x2e, 0xdf, 0x8c, 0xa3, 0xfd, 0xb2, 0x0d | **HII_CONFIG_ACCESS_PROTOCOL. RouteConfig - RouteConfig()**returns **EFI_SUCCESS** with valid parameters and and **Progress** points to the **Configuration**’s **NULL** terminator**.** | Call **RouteConfig()**with valid parameters. The return status should be **EFI_SUCCESS** and the **Progress** should point to **Configuration**’s **NULL** terminator. |
 
 
+### CallBack()
+
+**Reference:** UEFI 2.8, Mantis 1956 — EFI_HII_CONFIG_ACCESS_PROTOCOL.CallBack() conformance
+
+| Number | GUID | Assertion | Test Description |
+|----|----|----|----|
+| 5.18.6.3.1 | 0x22ee938e, 0xa9ad, 0x4cb9, 0x8d, 0x6d, 0x06, 0xe4, 0xfa, 0xb3, 0x72, 0xe7 | **HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack()** returns **EFI_INVALID_PARAMETER** with **ActionRequest** been **NULL**. | Call **CallBack()** with valid parameters except **ActionRequest** being **NULL**. The return status should be **EFI_INVALID_PARAMETER**. |
+| 5.18.6.3.2 | 0x2053d3e0, 0xeebe, 0x4391, 0x84, 0x7d, 0xf4, 0x60, 0x1b, 0x30, 0x4e, 0x03 | **HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack()** returns **EFI_INVALID_PARAMETER** with **Value** been **NULL**. | Call **CallBack()** with valid parameters except **Value** being **NULL**. The return status should be **EFI_INVALID_PARAMETER**. |
+| 5.18.6.3.3 | 0x81c5d7b7, 0x7ebe, 0x44e1, 0x8a, 0x1f, 0xcc, 0x47, 0x9c, 0x2d, 0xfe, 0x4f | **HII_CONFIG_ACCESS_PROTOCOL.CallBack - CallBack()** returns **EFI_UNSUPPORTED** with the specified action not supported by the callback. | Call **CallBack()** with **Action** set to an unsupported value (0xFFFF). The return status should be **EFI_UNSUPPORTED**. |
+
+> **Note (Mantis 1956):** UEFI 2.8 extended the `EFI_BROWSER_ACTION_REQUEST` values to include `EFI_BROWSER_ACTION_REQUEST_FORM_SUBMIT_EXIT` (4) through `EFI_BROWSER_ACTION_REQUEST_RECONNECT` (8) and `EFI_BROWSER_ACTION_REQUEST_QUESTION_APPLY` (9). The `EFI_BROWSER_ACTION` parameter was corrected from pointer to value type, and `EFI_BROWSER_ACTION_UNSUPPORTED` was changed from 2 to 0xFFFF since value 2 is now `EFI_BROWSER_ACTION_RETRIEVE`. These tests were previously disabled and are now enabled with corrected parameter types and validation logic.
+
+
 ## EFI_CONFIG_KEYWORD_HANDLER_PROTOCOL Test
 
 **Reference Document:**
